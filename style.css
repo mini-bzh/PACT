@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Archivo";
+    src: url("polices/Archivo/Archivo-Regular.woff2");
+}
+@font-face {
+    font-family: "Archivo";
+    src: url("polices/Archivo/Archivo-Italic.woff2");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Archivo";
+    src: url("polices/Archivo/Archivo-Bold.woff2");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Archivo";
+    src: url("polices/Archivo/Archivo-BoldItalic.woff2");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Luciole";
+    src: url("polices/Luciole/Luciole-Regular.woff2");
+}
+
