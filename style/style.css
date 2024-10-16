@@ -42,6 +42,10 @@ p{
     background-color: var(--fontPro);
 }
 
+
+/*-------------/ apercu offre PC /--------------*/
+
+
 .apercuOffrePC{
     margin: 100px;
     width: 600px;
@@ -49,7 +53,7 @@ p{
 
     border-radius: 20px;
     background-color: white;
-    padding: 40px;
+    padding: 20px 40px;
 
     overflow: hidden;
 }
@@ -57,6 +61,7 @@ p{
 .apercuOffrePC .conteneurSVGtexte{
     display: flex;
     align-items: center;
+    margin: 10px 0px;
 }
 .apercuOffrePC .conteneurSVGtexte img{
     width: 25px;
@@ -67,13 +72,13 @@ p{
     font-size: 16px;
 }
 
-.conteneurElementGaucheDroite{            /*un conteneur qui contient 2 éléments, le 1er est aligné à gauche du conteneur, l'autre à droite*/
+.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
     display: flex;
     justify-content: space-between;
 }
 
-.conteneurElementGaucheDroite .ouvert{
-    color: var(--vertNormal);
+.conteneurSpaceBetween .ouvert{
+    color: var(--accent);
 }
 
 .apercuOffrePC img{
@@ -90,4 +95,54 @@ p{
 .etoiles img{
     width: 20px;
     height: 20px;
+}
+
+.etoileMoitiePleine{
+    position: relative;
+}
+
+/*-------------/ HEADER /--------------*/
+
+nav,ul,a{
+    display: flex;
+}
+
+a > img {
+    width: 63px;
+    height: 63px;
+}
+
+nav > img {
+    width: 135px;
+    height: 75px;
+}
+
+li {
+    padding: 12px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+
+
+/*-------------/ MAIN /--------------*/
+
+rect{
+    fill: var(--secondary);
+}
+
+
+
+
+
+
+
+/* -------------/  CLASSES  /------------- */
+
+.rectangleTitre{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 30%;
+    justify-content: space-between;
+    
 }

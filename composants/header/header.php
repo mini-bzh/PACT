@@ -1,4 +1,8 @@
-<header>
+ 
+<?php  
+echo
+?>
+    <header>
         <nav>
             <img src="images/logo/logo_grand.png" alt="logo PACT">
             <ul>
@@ -29,3 +33,6 @@
             </ul>
         </nav>
     </header>
+<?php
+;
+?>

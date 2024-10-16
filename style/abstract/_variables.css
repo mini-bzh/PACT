@@ -2,16 +2,16 @@
 
     /* Couleurs */
 
-    --bleuNormal : #004AAD;
-    --bleuSombre : #1F2B3A;
-    --bleuClair : #357FE1;
+    --primary : #004AAD;
+    --primaryDark : #1F2B3A;
+    --primaryLight : #357FE1;
 
-    --orangeNormal : #E88C2F;
-    --orangeSombre : #A85706;
+    --secondary : #E88C2F;
+    --secondaryLight : #A85706;
 
-    --vertNormal : #6C9243;
-    --vertSombre : #41700E;
-    --vertClair : #8CCF42;
+    --accent : #6C9243;
+    --accentDark : #41700E;
+    --accentLight : #8CCF42;
 
     --fondVisiteurMembre : #CADFFB;
     --fondPro : #F1BA82;
