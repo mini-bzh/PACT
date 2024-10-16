@@ -40,3 +40,46 @@
 
     --grisClair  : #D9D9D9;
 }
+
+h1{
+    font-family: "Luciole";
+    font-size: 64px;
+}
+
+h2{
+    font-family: "Luciole";
+    font-size: 50px;
+}
+
+h3{
+    font-family: "Luciole";
+    font-size: 45px;
+}
+
+h4{
+    font-family: "Luciole";
+    font-size: 32px;
+}
+
+h5{
+    font-family: "Luciole";
+    font-size: 21px;
+}
+
+.fondVisiteur{
+    background-color: var(--fondVisiteurMembre);
+}
+
+.fondPro{
+    background-color: var(--fondPro);
+}
+
+.apercuOffrePC{
+    width: 600px;
+    height: 550px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+
+}
+

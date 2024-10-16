@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des offres</title>
 </head>
-<body>
-    
-</body>
+    <body>
+        
+    </body>
 </html>
