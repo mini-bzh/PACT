@@ -4,7 +4,7 @@ echo
 ?>
     <header>
         <nav>
-            <img src="images/logo/logo_grand.png" alt="logo PACT">
+            <img src="logo_grand.png" alt="logo PACT">
             <ul>
                 <li class="btAccueil">
                     <a href="">
@@ -32,7 +32,7 @@ echo
                 </li>
             </ul>
         </nav>
-    </header>
+    </header> 
 <?php
 ;
 ?>

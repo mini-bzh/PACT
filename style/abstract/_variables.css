@@ -28,6 +28,7 @@
     --typescale-h3: 2.813rem;
     --typescale-h4: 2rem;
     --typescale-h5: 1.313;
+    --typescale-large-text: 2.125rem; /* 34px */
     --typescale-text: 1.5rem;
     --typescale-small-text: 1rem;
 }
