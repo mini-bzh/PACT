@@ -1,2 +1,72 @@
-@import "fonts.css";
-@import "variables.css";
+@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
+
+@import "fonts/fonts.css";
+@import "abstract/variables.css";
+
+h1{
+    font-family: "Luciole";
+    font-size: var(--typescale-h1);
+}
+
+h2{
+    font-family: "Luciole";
+    font-size: var(--typescale-h2);
+}
+
+h3{
+    font-family: "Luciole";
+    font-size: var(--typescale-h3);
+}
+
+h4{
+    font-family: "Luciole";
+    font-size: var(--typescale-h4);
+}
+
+h5{
+    font-family: "Luciole";
+    font-size: var(--typescale-h5);
+}
+
+p{
+    font-family: "Archivo";
+    font-size: var(--typescale-text);
+}
+
+.fondVisiteur{
+    background-color: var(--fondVisiteurMembre);
+
+}
+
+.apercuOffrePC{
+    margin: 100px;
+    width: 600px;
+    height: 550px;
+
+    border-radius: 20px;
+    background-color: white;
+    padding: 40px;
+}
+
+.apercuOffrePC .conteneurPro{
+    display: flex;
+    align-items: center;
+}
+.apercuOffrePC .conteneurPro img{
+    width: 25px;
+    height: 25px;
+}
+
+.apercuOffrePC .conteneurPro p{
+    font-size: 16px;
+}
+
+.apercuOffrePC .conteneurCategorieOuvert{
+    display: flex;
+
+}
+
+.apercuOffrePC .conteneurCategorieOuvert .ouvert{
+    display: flex;
+    justify-content: center;
+}
