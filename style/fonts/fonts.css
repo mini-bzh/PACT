@@ -1,3 +1,5 @@
+/* Archivo */
+
 @font-face {
     font-family: "Archivo";
     src: url("../polices/Archivo/Archivo-Regular.woff2");
@@ -18,6 +20,11 @@
     font-weight: bold;
     font-style: italic;
 }
+
+
+
+/* Luciole */
+
 @font-face {
     font-family: "Luciole";
     src: url("../polices/Luciole/Luciole-Regular.woff2");

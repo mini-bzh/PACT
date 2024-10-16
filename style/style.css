@@ -1,7 +1,7 @@
 @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
 
 @import "fonts/fonts.css";
-@import "abstract/variables.css";
+@import "abstract/_variables.css";
 
 h1{
     font-family: "Luciole";
@@ -38,6 +38,10 @@ p{
 
 }
 
+.fondPro{
+    background-color: var(--fontPro);
+}
+
 .apercuOffrePC{
     margin: 100px;
     width: 600px;
@@ -46,27 +50,44 @@ p{
     border-radius: 20px;
     background-color: white;
     padding: 40px;
+
+    overflow: hidden;
 }
 
-.apercuOffrePC .conteneurPro{
+.apercuOffrePC .conteneurSVGtexte{
     display: flex;
     align-items: center;
 }
-.apercuOffrePC .conteneurPro img{
+.apercuOffrePC .conteneurSVGtexte img{
     width: 25px;
     height: 25px;
 }
 
-.apercuOffrePC .conteneurPro p{
+.apercuOffrePC .conteneurSVGtexte p{
     font-size: 16px;
 }
 
-.apercuOffrePC .conteneurCategorieOuvert{
+.conteneurElementGaucheDroite{            /*un conteneur qui contient 2 éléments, le 1er est aligné à gauche du conteneur, l'autre à droite*/
     display: flex;
-
+    justify-content: space-between;
 }
 
-.apercuOffrePC .conteneurCategorieOuvert .ouvert{
+.conteneurElementGaucheDroite .ouvert{
+    color: var(--vertNormal);
+}
+
+.apercuOffrePC img{
+    width: 525px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.etoiles{
     display: flex;
-    justify-content: center;
+    align-items: center;
+}
+
+.etoiles img{
+    width: 20px;
+    height: 20px;
 }
