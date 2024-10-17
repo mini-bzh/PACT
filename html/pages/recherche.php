@@ -6,7 +6,7 @@
     <title>Recherche</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
-    <body>
-        
-    </body>
+<body>
+    <h1>Recherche !</h1>
+</body>
 </html>

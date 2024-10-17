@@ -6,7 +6,7 @@
     <title>Gestion des offres</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
-    <body>
-        
-    </body>
+<body>
+    <h1>Gestion des offres !</h1>
+</body>
 </html>

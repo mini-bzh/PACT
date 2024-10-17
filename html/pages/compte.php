@@ -7,6 +7,6 @@
     <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-    
+    <h1>Compte !</h1>
 </body>
 </html>

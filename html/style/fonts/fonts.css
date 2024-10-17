@@ -29,3 +29,8 @@
     font-family: "Luciole";
     src: url("../polices/Luciole/Luciole-Regular.woff2");
 }
+
+@font-face {
+    font-family: "Luciole-bold";
+    src: url("../polices/Luciole/Luciole-Bold.woff2");
+}

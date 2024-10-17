@@ -7,6 +7,6 @@
     <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-    
+    <h1>Avis !</h1>
 </body>
 </html>
