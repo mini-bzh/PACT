@@ -84,67 +84,70 @@ p{
 
 
 /* boutons */
-.coMembre{
-    width: 385.12px;
-    height: 100px;
-    margin-left: 2%;
-    border-radius: 10px;
-    border: var(--primaryDark) solid 4px;
-    background-color: var(--primary);
-    color: white;
-}
 
-.coMembre > div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
+@media screen and (max-width : 500px){
+    .coMembre{
+        width: 385.12px;
+        height: 100px;
+        margin-left: 2%;
+        border-radius: 10px;
+        border: var(--primaryDark) solid 4px;
+        background-color: var(--primary);
+        color: white;
+    }
 
-.coMembre > div > div{
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-}
+    .coMembre > div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
 
-.coPro{
-    width: 385.12px;
-    height: 100px;
-    margin-left: 2%;
-    border-radius: 10px;
-    border: var(--secondaryDark) solid 4px;
-    background-color: var(--secondary);
-    color: white;
-}
+    .coMembre > div > div{
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+    }
 
-.coPro > div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
+    .coPro{
+        width: 385.12px;
+        height: 100px;
+        margin-left: 2%;
+        border-radius: 10px;
+        border: var(--secondaryDark) solid 4px;
+        background-color: var(--secondary);
+        color: white;
+    }
 
-.coPro > div > div{
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-}
+    .coPro > div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
 
-.nouvCompte{
-    width: 385.12px;
-    height: 100px;
-    margin-left: 2%;
-    border-radius: 10px;
-    border: var(--accentDark) solid 4px;
-    background-color: var(--accent);
-    color: white;
-}
+    .coPro > div > div{
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+    }
 
-.nouvCompte > div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    .nouvCompte{
+        width: 385.12px;
+        height: 100px;
+        margin-left: 2%;
+        border-radius: 10px;
+        border: var(--accentDark) solid 4px;
+        background-color: var(--accent);
+        color: white;
+    }
+
+    .nouvCompte > div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
 }
 
 /* filtre */
@@ -245,7 +248,7 @@ p{
     border: 5px solid rgb(255, 219, 90);
 }
 
-@media screen and (max-width : 500px){
+@media screen and (max-width : 428px){
     .apercuOffre{
         width: 185px;
         height: 240px;
