@@ -10,6 +10,7 @@
         $idOffre =$_GET["user"];
     }
 
+    $test = 0;
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +21,9 @@
     <title>détail offre</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
-    <body  class=<?php
-            if ($user = "pro") 
+    <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($user == "pro")
             {
-                
                 echo "fondPro";
             }
             else
@@ -51,8 +51,54 @@
                             <img src="../icones/logoUserSVG.svg" alt="pro">
                             <p>Famille Jouons-les-Longrais</p>
                         </div>
-                        <div class="imageChangeante">
-                            <img src="../images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
+                    </div>
+
+                    <div class="imgChg">
+                        <img src="../images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
+                    </div>
+                    <div class="resumePrixDetailOffre">
+                        <p>Le chateau de la roche, Fort la Latte, situé à Plévenon cap Fréhel</p>
+                        <hr>
+                        <p>À partir de 7.50€/pers</p>
+                    </div>
+
+                    <p id="descriptionOffre">
+                    Le Fort La Latte, construit au XIVe siècle, est un château fort majestueux situé en Bretagne, sur une falaise face à 
+                    la mer. Entouré de remparts et de tours, il surplombe la Côte d'Émeraude et offre des panoramas spectaculaires. Ce 
+                    lieu emblématique attire de nombreux visiteurs pour son histoire et son cadre pittoresque.
+                    </p>
+                
+                    <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
+                        <div id="partieTags">
+                            <div class="conteneurSVGtexte">
+                                <img src="../icones/tagSVG.svg" alt="icone tag">
+                                <h4>Tags</h4>
+                            </div>
+                            <hr>
+                            <div id="conteneurTagsOffre">
+                                <p class="tagOffre">Culturel</p>
+                                <p class="tagOffre">Histoire</p>
+                                <p class="tagOffre">Patrimoine</p>
+                                <p class="tagOffre">Famille</p>
+
+
+                            </div>
+                        </div>
+                        <div id="partieHoraires">
+                            <div class="conteneurSVGtexte">
+                                <img src="../icones/horairesSVG.svg" alt="icone horaires">
+                                <h4>Horaires</h4>
+                            </div>
+                            <hr>
+                            <div id="conteneurJoursOffre">
+                                <p class="jour jourOuvert">L</p>
+                                <p class="jour jourOuvert">Ma</p>
+                                <p class="jour jourOuvert">Me</p>
+                                <p class="jour jourOuvert">J</p>
+                                <p class="jour jourOuvert">V</p>
+                                <p class="jour jourFerme">S</p>
+                                <p class="jour jourFerme">D</p>
+                            </div>
                         </div>
                     </div>
                 </article>
