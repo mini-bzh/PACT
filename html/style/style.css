@@ -39,7 +39,7 @@ p{
 }
 
 .fondPro{
-    background-color: var(--fontPro);
+    background-color: var(--fondPro);
 }
 
 /* -------------/  CLASSES  /------------- */
@@ -161,6 +161,7 @@ p{
     width: fit-content;
     height: fit-content;
     margin: 5px;
+    text-decoration: none;
 }
 .apercuOffre{
     width: 600px;
@@ -190,6 +191,8 @@ p{
 .conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
 }
 
 .conteneurSpaceBetween .ouvert{
@@ -312,6 +315,45 @@ p{
         font-size: 0.55em;
     }
 }
+
+/*-------------/ page détail offre /--------------*/
+.conteneurOffre{
+    display: flex;
+    justify-content: center;
+}
+
+.offre{
+    margin: 20px;
+    background-color: white;
+    border-radius: 40px;
+    width: 1000px;
+    height: fit-content;
+    padding: 20px;
+}
+
+.offre .conteneurSVGtexte{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+}
+.offre .conteneurSVGtexte img{
+    width: 40px;
+    height: 40px;
+}
+
+.noteDetailOffre{
+    display: flex;
+    justify-content: center;
+}
+
+.noteDetailOffre p{
+    margin-left: 20px;
+}
+
+.noteDetailOffre .etoiles p{
+    margin-left: 0px;
+}
+
 
 /*-------------/ HEADER /--------------*/
 
