@@ -44,6 +44,7 @@ p{
 
 /* -------------/  CLASSES  /------------- */
 
+/* textes */
 .texteLarge{
     font-size: var(--typescale-large-text);
 }
@@ -52,9 +53,16 @@ p{
     font-size: var(--typescale-small-text);
 }
 
-.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
-    display: flex;
-    justify-content: space-between;
+.bold{
+    font-family: "Archivo-bold";
+}
+
+.bold{
+    font-family: "Archivo-bold";
+}
+
+.bold{
+    font-family: "Archivo-bold";
 }
 
 
@@ -71,6 +79,13 @@ p{
 }
 
 
+/* boutons */
+.coMembre{
+    width: 385.12px;
+    height: 100px;
+}
+
+
 /* filtre */
 .filtrer{
 
@@ -78,13 +93,9 @@ p{
 
 /*-------------/ apercu offre PC /--------------*/
 
-.lienApercuOffre{
-    width: fit-content;
-    height: fit-content;
-    margin: 100px;
-}
 
-.apercuOffre{
+.apercuOffrePC{
+    margin: 100px;
     width: 600px;
     height: 550px;
 
@@ -95,21 +106,24 @@ p{
     overflow: hidden;
 }
 
-.apercuOffre .conteneurSVGtexte{
+.apercuOffrePC .conteneurSVGtexte{
     display: flex;
     align-items: center;
     margin: 10px 0px;
 }
-.apercuOffre .conteneurSVGtexte img{
+.apercuOffrePC .conteneurSVGtexte img{
     width: 25px;
     height: 25px;
 }
 
-.apercuOffre .conteneurSVGtexte p{
+.apercuOffrePC .conteneurSVGtexte p{
     font-size: 16px;
 }
 
-
+.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
+    display: flex;
+    justify-content: space-between;
+}
 
 .conteneurSpaceBetween .ouvert{
     color: var(--accent);
@@ -123,14 +137,14 @@ p{
     color: var(--rouge);
 }
 
-.apercuOffre img{
+.apercuOffrePC img{
     width: 525px;
     height: 200px;
     object-fit: cover;
     display: block;
 }
 
-.apercuOffre .conteneurImage{
+.apercuOffrePC .conteneurImage{
     position: relative;
     display: inline-block;
 }
@@ -165,27 +179,6 @@ p{
 
 .miseEnExergue{
     border: 5px solid rgb(255, 219, 90);
-}
-
-
-@media screen and (max-width : 450px){
-    .apercuOffre{
-        width: 185;
-        height: 240px;
-    
-        border-radius: 20px;
-        background-color: white;
-        padding: 20px 40px;
-    
-        overflow: hidden;
-    }
-
-    .apercuOffre img{
-        width: 90px;
-        height: 160px;
-        object-fit: cover;
-        display: block;
-    }
 }
 
 /*-------------/ HEADER /--------------*/

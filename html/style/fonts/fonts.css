@@ -5,17 +5,17 @@
     src: url("../polices/Archivo/Archivo-Regular.woff2");
 }
 @font-face {
-    font-family: "Archivo";
+    font-family: "Archivo-italic";
     src: url("../polices/Archivo/Archivo-Italic.woff2");
     font-style: italic;
 }
 @font-face {
-    font-family: "Archivo";
+    font-family: "Archivo-bold";
     src: url("../polices/Archivo/Archivo-Bold.woff2");
     font-weight: bold;
 }
 @font-face {
-    font-family: "Archivo";
+    font-family: "Archivo-bold-italic";
     src: url("../polices/Archivo/Archivo-BoldItalic.woff2");
     font-weight: bold;
     font-style: italic;
