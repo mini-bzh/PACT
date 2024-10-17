@@ -44,12 +44,25 @@ p{
 
 /* -------------/  CLASSES  /------------- */
 
+/* textes */
 .texteLarge{
     font-size: var(--typescale-large-text);
 }
 
 .texteSmall{
     font-size: var(--typescale-small-text);
+}
+
+.bold{
+    font-family: "Archivo-bold";
+}
+
+.bold{
+    font-family: "Archivo-bold";
+}
+
+.bold{
+    font-family: "Archivo-bold";
 }
 
 
@@ -63,6 +76,13 @@ p{
 
 .rectangleTitre > h2{
     margin-left: 1%;
+}
+
+
+/* boutons */
+.coMembre{
+    width: 385.12px;
+    height: 100px;
 }
 
 
