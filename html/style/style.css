@@ -152,11 +152,14 @@ p{
 
 }
 
-/*-------------/ apercu offre PC /--------------*/
+/*-------------/ apercu offre /--------------*/
 
-
-.apercuOffrePC{
-    margin: 100px;
+.lienApercuOffre{
+    width: fit-content;
+    height: fit-content;
+    margin: 5px;
+}
+.apercuOffre{
     width: 600px;
     height: 550px;
 
@@ -167,17 +170,17 @@ p{
     overflow: hidden;
 }
 
-.apercuOffrePC .conteneurSVGtexte{
+.apercuOffre .conteneurSVGtexte{
     display: flex;
     align-items: center;
     margin: 10px 0px;
 }
-.apercuOffrePC .conteneurSVGtexte img{
+.apercuOffre .conteneurSVGtexte img{
     width: 25px;
     height: 25px;
 }
 
-.apercuOffrePC .conteneurSVGtexte p{
+.apercuOffre .conteneurSVGtexte p{
     font-size: 16px;
 }
 
@@ -198,14 +201,14 @@ p{
     color: var(--rouge);
 }
 
-.apercuOffrePC img{
+.apercuOffre img{
     width: 525px;
     height: 200px;
     object-fit: cover;
     display: block;
 }
 
-.apercuOffrePC .conteneurImage{
+.apercuOffre .conteneurImage{
     position: relative;
     display: inline-block;
 }
@@ -240,6 +243,71 @@ p{
 
 .miseEnExergue{
     border: 5px solid rgb(255, 219, 90);
+}
+
+@media screen and (max-width : 500px){
+    .apercuOffre{
+        width: 185px;
+        height: 240px;
+    
+        border-radius: 20px;
+        background-color: white;
+        padding: 5px 10px;
+    
+        overflow: hidden;
+    }
+
+    .apercuOffre .conteneurSVGtexte{
+        margin: 5px 0px;
+    }
+
+
+    .apercuOffre h3{
+        font-size: 1em;
+    }
+
+    .apercuOffre .conteneurSVGtexte img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .apercuOffre .conteneurSVGtexte p{
+        font-size: 10px;
+    }
+
+    .apercuOffre p{
+        font-size: 10px;
+    }
+
+    .apercuOffre img{
+        width: 170px;
+        height: 90px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .text-overlay {
+        font-family: "Archivo";
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        padding: 5px;
+        background-color: var(--primaryDark);
+        color: white; 
+        font-size: 0.7em;
+        z-index: 10;
+        width: 70px;
+        height: 20px;
+      }
+
+      .etoiles img{
+        width: 10px;
+        height: 10px;
+    }
+
+    .apercuOffre .resumeApercu{
+        font-size: 0.55em;
+    }
 }
 
 /*-------------/ HEADER /--------------*/
@@ -301,6 +369,61 @@ rect{
 
 
 /*-------------/ FOOTER /--------------*/
+
+.footer {
+    background-color: #fff;
+    color: #333;
+    padding: 40px 0;
+    border-top: 1px solid #ddd;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    max-height: 200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 20px;
+}
+
+.footer-section h4 {
+    color: #f39c12;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-section a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    color: #777;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
 
 
 
