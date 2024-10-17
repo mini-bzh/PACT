@@ -52,6 +52,11 @@ p{
     font-size: var(--typescale-small-text);
 }
 
+.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
+    display: flex;
+    justify-content: space-between;
+}
+
 
 /* rectangle */
 .rectangleTitre{
@@ -73,9 +78,13 @@ p{
 
 /*-------------/ apercu offre PC /--------------*/
 
-
-.apercuOffrePC{
+.lienApercuOffre{
+    width: fit-content;
+    height: fit-content;
     margin: 100px;
+}
+
+.apercuOffre{
     width: 600px;
     height: 550px;
 
@@ -86,24 +95,21 @@ p{
     overflow: hidden;
 }
 
-.apercuOffrePC .conteneurSVGtexte{
+.apercuOffre .conteneurSVGtexte{
     display: flex;
     align-items: center;
     margin: 10px 0px;
 }
-.apercuOffrePC .conteneurSVGtexte img{
+.apercuOffre .conteneurSVGtexte img{
     width: 25px;
     height: 25px;
 }
 
-.apercuOffrePC .conteneurSVGtexte p{
+.apercuOffre .conteneurSVGtexte p{
     font-size: 16px;
 }
 
-.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
-    display: flex;
-    justify-content: space-between;
-}
+
 
 .conteneurSpaceBetween .ouvert{
     color: var(--accent);
@@ -117,14 +123,14 @@ p{
     color: var(--rouge);
 }
 
-.apercuOffrePC img{
+.apercuOffre img{
     width: 525px;
     height: 200px;
     object-fit: cover;
     display: block;
 }
 
-.apercuOffrePC .conteneurImage{
+.apercuOffre .conteneurImage{
     position: relative;
     display: inline-block;
 }
@@ -159,6 +165,27 @@ p{
 
 .miseEnExergue{
     border: 5px solid rgb(255, 219, 90);
+}
+
+
+@media screen and (max-width : 450px){
+    .apercuOffre{
+        width: 185;
+        height: 240px;
+    
+        border-radius: 20px;
+        background-color: white;
+        padding: 20px 40px;
+    
+        overflow: hidden;
+    }
+
+    .apercuOffre img{
+        width: 90px;
+        height: 160px;
+        object-fit: cover;
+        display: block;
+    }
 }
 
 /*-------------/ HEADER /--------------*/
