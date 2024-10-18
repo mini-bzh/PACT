@@ -117,5 +117,5 @@
             echo file_get_contents("../composants/footer/footer.php");
         ?>
     </body>
-    <script src="../../js/scriptImageChangeante.js"></script>
+    <script src="../js/scriptImageChangeante.js"></script>
 </html>

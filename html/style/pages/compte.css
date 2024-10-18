@@ -1,0 +1,47 @@
+/* CHOIX DU MOYEN DE CONNEXION */
+
+body{
+    background-color: var(--fondVisiteurMembre);
+}
+
+.textBulle{
+    width: 450px;
+    height: 120px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    background-color: white;
+    margin: 3%;
+}
+
+.textBulle > p{
+    font-size: var(--typescale-large-text);
+}
+
+.textBulle + div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+div:has(> .fakeDiv){
+    position: relative;
+    bottom: 100px;
+}
+
+.fakeDiv{
+    width: 541px;
+    height: 159px;
+    margin-left: 2%;
+    stroke-width: 6px;
+}
+
+.pageChoixCo > hr{
+    width: 1257px;
+    height: 6px;
+    background-color: black;
+    border-radius: 100px;
+    margin: 2% 0;
+}
