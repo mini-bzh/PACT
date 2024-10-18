@@ -353,7 +353,8 @@ p{
 
 .headerPC-Tab{
     background-color: #fff;
-
+    position: sticky;
+    top: 0;
 }
 
 .navHeader,.ulHeader,.aHeader{
