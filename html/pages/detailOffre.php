@@ -1,11 +1,11 @@
 <?php
     $idOffre = null;
     $user = null;
-    if(in_array("idOffre", $_GET))
+    if(key_exists("idOffre", $_GET))
     {
         $idOffre =$_GET["idOffre"];
     }
-    if(in_array("user", $_GET))
+    if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
     }
