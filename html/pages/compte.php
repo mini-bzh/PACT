@@ -11,7 +11,7 @@
 
 <!------ HEADER  ------>
 <?php
-    echo file_get_contents('../composants/header/headerPC-Tab.php');
+    echo file_get_contents('../composants/header/header.php');
 ?>
 
 
@@ -19,7 +19,7 @@
 <main>
 
     <div class="pageChoixCo">
-        <div class="textBulle">
+        <div class="textBulle decaleBulleGauche">
             <p>Veuillez séléctionner une option de connexion</p>
         </div>
 
@@ -33,7 +33,7 @@
         <hr>
 
         <div class="textBulle">
-            <p>Pas encore de compte ?<br>
+            <p><span>Pas encore de compte ?</span><br>
                Créez le !</p>
         </div>
 

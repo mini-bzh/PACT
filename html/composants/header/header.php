@@ -6,7 +6,10 @@
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
                     <a class="aHeader" href="">
-                    <img src="../../icones/homeSVG.svg" alt="icone home">
+<?php
+                    echo file_get_contents('../../icones/homeSVG.svg');
+?>
+                    <!-- <img src="../../icones/homeSVG.svg" alt="icone home"> -->
                     <h3>Accueil</h3>
                     </a>
                 </li>
