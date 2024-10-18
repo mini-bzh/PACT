@@ -19,7 +19,7 @@
 
     <div>
         <h2>Création d'une offre</h2>
-        <div id="test">
+        <div>
             <form name="test" action="http://localhost:8888/import.php" method="get">
 
                 <div class="champTexte">

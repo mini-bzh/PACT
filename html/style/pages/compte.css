@@ -14,6 +14,7 @@ body{
     padding-left: 2%;
     background-color: white;
     margin: 3%;
+    position: relative;
 }
 
 .textBulle > p{
@@ -43,5 +44,56 @@ div:has(> .fakeDiv){
     height: 6px;
     background-color: black;
     border-radius: 100px;
-    margin: 2% 0;
+    margin: 3% auto;
+}
+
+@media screen and (max-width : 428px){
+
+    .textBulle + div{
+        flex-direction: column;
+    }
+
+    .pageChoixCo > hr{
+        width: 330px;
+        height: 7px;
+        margin: 10% auto;
+    }
+
+    .textBulle > p{
+        font-size: var(--typescale-text);
+    }
+
+    .textBulle span{
+        font-size: var(--typescale-small-text);
+    }
+
+    .textBulle{
+        width: 353px;
+        height: 99px;
+        padding: 2% 2% 2% 10%;
+        margin: 3%;
+    }
+
+    hr + div{
+        position: relative;
+        right: -100px;
+    }
+
+    .decaleBulleGauche{
+        position: relative;
+        left: -30px;
+    }
+
+    .fakeDiv{
+        display: none;
+    }
+
+    div:has(> .fakeDiv){
+        position: static;
+    }
+    
+    .pageChoixCo a{
+        margin: 3% auto;
+    }
+
 }
