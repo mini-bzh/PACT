@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>détail offre</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/pages/detailOffre.css">
 </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($user == "pro")
@@ -35,21 +35,22 @@
             <div class="conteneurOffre">
                 <article class="offre">
                     <h2>Fort la Latte</h2>
+                    <p>Visite</p>
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
                                 <p>4.7</p>
-                                <img src="../icones/etoilePleineSVG.svg" alt="">
-                                <img src="../icones/etoilePleineSVG.svg" alt="">
-                                <img src="../icones/etoilePleineSVG.svg" alt="">
-                                <img src="../icones/etoilePleineSVG.svg" alt="">
-                                <img src="../icones/etoileMoitiePleineSVG.svg" alt="">
+                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
+                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
+                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
+                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
+                                <img src="../icones/etoileMoitiePleineSVG.svg" alt="etoile moitié pleine">
                             </div>
                             <p>38 avis</p>
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
-                            <p>Famille Jouons-les-Longrais</p>
+                            <p>Fort la Latte</p>
                         </div>
                     </div>
 
@@ -112,6 +113,9 @@
                 </article>
             </div>
         </main>
+        <?php                                                   //footer
+            echo file_get_contents("../composants/footer/footer.php");
+        ?>
     </body>
     <script src="../../js/scriptImageChangeante.js"></script>
 </html>

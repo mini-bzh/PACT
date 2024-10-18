@@ -349,157 +349,6 @@ p{
     }
 }
 
-/*-------------/ page détail offre /--------------*/
-.conteneurOffre{
-    display: flex;
-    justify-content: center;
-}
-
-.offre{
-    margin: 20px;
-    background-color: white;
-    border-radius: 40px;
-    width: 1000px;
-    height: fit-content;
-    padding: 40px;
-}
-
-.offre .conteneurSVGtexte{
-    display: flex;
-    align-items: center;
-    margin: 10px 0px;
-}
-.offre .conteneurSVGtexte img{
-    width: 40px;
-    height: 40px;
-}
-
-.offre .noteDetailOffre{
-    display: flex;
-    justify-content: center;
-}
-
-.offre .noteDetailOffre p{
-    margin-left: 20px;
-}
-
-.offre .noteDetailOffre .etoiles p{
-    margin-left: 0px;
-}
-
-.offre .imgChg{
-    margin: 0px;
-    padding: 0px;
-    height: 390px;
-}
-
-.offre .imgChg img{
-    border-radius: 15px 15px 0px 0px;
-    width: 920px;
-    height: 390px;
-    object-fit: cover;
-    margin: 0px;
-}
-
-.offre .resumePrixDetailOffre{
-    margin: 0px;
-    width: 920px;
-    padding: 15px;
-    height: fit-content;
-    border-radius: 0px 0px 15px 15px;
-    background-color: var(--primaryDark);
-    text-align: center;
-}
-
-.offre .resumePrixDetailOffre hr{
-    margin: 10px 15px;
-}
-
-.offre .resumePrixDetailOffre p{
-    font-size: 1em;
-    color: white;
-}
-
-.offre #descriptionOffre{
-    margin: 30px 0px;
-}
-
-.offre #partieTags img{
-    margin-right: 10px;
-}
-
-.offre #partieTags #conteneurTagsOffre{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px 0px;
-}
-
-.offre #partieTags{
-    width: 450px;
-}
-
-.offre #conteneurTagsHoraires{
-    align-items: baseline;
-}
-
-.offre .conteneurSpaceBetween hr{
-    height: 3px;
-    background-color: black;
-}
-
-.offre .tagOffre{
-    padding: 10px 10px 7px;               /* ça rends moins bien si je mets juste 10px partout */
-    font-size: 1.3em;
-    border: 1px solid black;
-    border-radius: 70px;
-    margin: 0px 10px 10px;
-}
-
-.offre #partieHoraires{
-    width: 400px;
-}
-.offre #conteneurJoursOffre{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px 0px;
-}
-
-.offre .jour{
-    border: 2px solid black;
-    border-radius: 100px;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    padding: 8px 0px;
-    margin: 0px 5px;
-}
-
-.offre .jourOuvert{
-    border-color: var(--primaryDark);
-    background-color: var(--primaryDark);
-    color: white;
-}
-
-.offre #conteneurPlagesHoraires{
-    margin: 30px 10px;
-}
-
-.offre #conteneurPlagesHoraires .horaireEncadre{
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 8px 8px 7px;
-}
-
-.offre #itineraire{
-    width: fit-content;
-    text-decoration: none;
-    background-color: var(--primaryDark);
-    border-radius: 30px;
-    padding: 15px;
-    color: white;
-}
-
-
 /*-------------/ HEADER /--------------*/
 
 .navHeader{
@@ -618,7 +467,12 @@ rect{
 
 }
 
+@media screen and (max-width : 428px){
 
+    .footer {
+        display: none;
+    }
+}
 
 
 
