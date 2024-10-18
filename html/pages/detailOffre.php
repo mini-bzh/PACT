@@ -31,8 +31,10 @@
                 echo "fondVisiteur";
             }
         ?>>
-        <main>
-            <div class="conteneurOffre">
+        <?php
+            //echo file_get_contents("../composants/header/header.php");
+        ?>
+        <main class="conteneurOffre">
                 <article class="offre">
                     <h2>Fort la Latte</h2>
                     <p>Visite</p>
@@ -111,7 +113,6 @@
                         <p>Itinéraire</p>
                     </a>
                 </article>
-            </div>
         </main>
         <?php                                                   //footer
             echo file_get_contents("../composants/footer/footer.php");
