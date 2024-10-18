@@ -99,8 +99,16 @@
                                 <p class="jour jourFerme">S</p>
                                 <p class="jour jourFerme">D</p>
                             </div>
+                                <div id="conteneurPlagesHoraires">
+                                    <p class="plageHoraire">De <span class="horaireEncadre">07h30</span> à <span class="horaireEncadre">19h00</span></p>
+                            </div>
                         </div>
                     </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Fort%20La%20Latte%20-%20Ch%C3%A2teau%20de%20la%20Roche%20Goyon"
+                    class="conteneurSVGtexte" id="itineraire" target="_blank">
+                        <img src="../icones/adresseSVGblanc.svg" alt="icone adresse">
+                        <p>Itinéraire</p>
+                    </a>
                 </article>
             </div>
         </main>

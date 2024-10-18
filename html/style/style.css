@@ -518,6 +518,26 @@ p{
     color: white;
 }
 
+.offre #conteneurPlagesHoraires{
+    margin: 30px 10px;
+}
+
+.offre #conteneurPlagesHoraires .horaireEncadre{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px 8px 7px;
+}
+
+.offre #itineraire{
+    width: fit-content;
+    text-decoration: none;
+    background-color: var(--primaryDark);
+    border-radius: 30px;
+    padding: 15px;
+    color: white;
+}
+
+
 /*-------------/ HEADER /--------------*/
 
 .navHeader{
