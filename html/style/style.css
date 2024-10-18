@@ -505,7 +505,12 @@ rect{
 
 }
 
+@media screen and (max-width : 428px){
 
+    .footer {
+        display: none;
+    }
+}
 
 
 
