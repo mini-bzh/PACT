@@ -86,22 +86,21 @@ p{
 /* boutons */
 
 .coMembre, .coPro, .nouvCompte{
+    display: block;
     width: 541px;
     height: 159px;
     margin-left: 2%;
     border-radius: 15px;
+    text-decoration: none;
 }
-
 .coMembre p, .coMembre h3, .coPro p, .coPro h3, .nouvCompte p, .nouvCompte h3{
     color: white;
 }
-
 .coMembre svg, .coPro svg, .nouvCompte svg{
     width: 100px;
     height: 100px;
     stroke-width: 6px;
 }
-
 .coMembre hr, .coPro hr, .nouvCompte hr{
     rotate: 90deg;
     width: 101px;
@@ -109,19 +108,15 @@ p{
     border: none;
     border-radius: 25px;
 }
-
 .coMembre hr{
     background-color: var(--primaryDark);
 }
-
 .coPro hr{
     background-color: var(--secondaryDark);    
 }
-
 .nouvCompte hr{
     background-color: var(--accentDark);
 }
-
 .coMembre > div, .coPro > div, .nouvCompte > div{
     display: flex;
     flex-direction: row;
@@ -130,94 +125,61 @@ p{
     width: 100%;
     height: 100%;
 }
-
 .coMembre > div > div, .coPro > div > div, .nouvCompte > div > div{
     display: flex;
     flex-direction: column;
     text-align: start;
 }
-
 .coMembre > div > div + div, .coPro > div > div + div, .nouvCompte > div > div + div{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-
 .coMembre{
     border: var(--primaryDark) solid 6px;
     background-color: var(--primary);
 }
-
 .coPro{
     border: var(--secondaryDark) solid 6px;
     background-color: var(--secondary);
 }
-
 .nouvCompte{
     border: var(--accentDark) solid 6px;
     background-color: var(--accent);
     padding-right: 2%;
+    padding-left: 1%;
 }
 
 
+@media screen and (max-width : 428px){
 
-@media screen and (max-width : 1440px){
-    .coMembre{
+    .coMembre, .coPro, .nouvCompte{
         width: 385.12px;
         height: 100px;
         margin-left: 2%;
         border-radius: 10px;
-        border: var(--primaryDark) solid 4px;
-        background-color: var(--primary);
-        color: white;
+        border-width: 4px;
     }
 
-    .coMembre > div, .coPro > div{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
+    .coMembre h3, .coPro h3, .nouvCompte h3{
+        font-size: var(--typescale-h4);
     }
 
-    .coMembre > div > div{
-        display: flex;
-        flex-direction: column;
-        text-align: start;
+    .coMembre p, .coPro p, .nouvCompte p{
+        font-size: var(--typescale-small-text);
     }
 
-    .coPro{
-        width: 385.12px;
-        height: 100px;
-        margin-left: 2%;
-        border-radius: 10px;
-        border: var(--secondaryDark) solid 4px;
-        background-color: var(--secondary);
-        color: white;
+    .coMembre svg, .coPro svg, .nouvCompte svg{
+        width: 80px;
+        height: 80px;
+        stroke-width: 5px;
     }
 
-    .coPro > div > div{
-        display: flex;
-        flex-direction: column;
-        text-align: start;
+    .coMembre hr, .coPro hr, .nouvCompte hr{
+        display: none;
     }
 
-    .nouvCompte{
-        width: 385.12px;
-        height: 100px;
-        margin-left: 2%;
-        border-radius: 10px;
-        border: var(--accentDark) solid 4px;
-        background-color: var(--accent);
-        color: white;
-    }
-
-    .nouvCompte > div{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-    }
 }
 
 /* filtre */
