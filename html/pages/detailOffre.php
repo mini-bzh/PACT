@@ -7,10 +7,8 @@
     }
     if(in_array("user", $_GET))
     {
-        $idOffre =$_GET["user"];
+        $user =$_GET["user"];
     }
-
-    $test = 0;
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +30,7 @@
             }
         ?>>
         <?php
-            //echo file_get_contents("../composants/header/header.php");
+            echo file_get_contents("../composants/header/header.php");
         ?>
         <main class="conteneurOffre">
                 <article class="offre">

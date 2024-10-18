@@ -395,6 +395,14 @@ p{
     padding-right: 12px;
 }
 
+.fontVisiteur .li:hover{
+    background: linear-gradient(white, var(--primaryLight));
+}
+
+.fondPro .li:hover{
+    background: linear-gradient(white, var(--secondaryLight));
+}
+
 .aHeader {
     outline: none;
     text-decoration: none;
