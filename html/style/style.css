@@ -521,7 +521,8 @@ p{
 /*-------------/ HEADER /--------------*/
 
 .navHeader{
-    width: 1440px;
+    min-width: 1440px;
+    background-color: #fff;
 }
 
 .navHeader,.ulHeader,.aHeader{
@@ -575,13 +576,12 @@ rect{
 }
 
 
-
 /*-------------/ FOOTER /--------------*/
 
 .footer {
     background-color: #fff;
     color: #333;
-    padding: 40px 0;
+    padding: 20px 0;
     border-top: 1px solid #ddd;
 }
 
@@ -607,7 +607,9 @@ rect{
     list-style-type: none;
     padding: 0;
 }
-
+.footer-section p {
+    font-size: 14px;
+}
 .footer-section ul li a {
     color: #333;
     text-decoration: none;
@@ -631,6 +633,7 @@ rect{
 
 .footer-bottom p {
     margin: 0;
+
 }
 
 
