@@ -366,6 +366,7 @@ p{
     background-color: #fff;
     position: sticky;
     top: 0;
+    z-index: 2;
 }
 
 .navHeader,.ulHeader,.aHeader{
@@ -442,6 +443,7 @@ p{
     bottom: 0;
     right: 0;
     left: 0;
+    z-index: 2;
 }
 
 .ulHeaderMobile{
