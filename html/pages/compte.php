@@ -11,7 +11,7 @@
 
 <!------ HEADER  ------>
 <?php
-    include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/html/composants/header/header.php';
+    include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/composants/header/header.php';
 ?>
 
 <div class="titrePortable">
@@ -35,7 +35,7 @@
     </svg>
 
     <div>
-        <img src="/html/images/logo/logo_petit.png" alt="logo petit">
+        <img src="/images/logo/logo_petit.png" alt="logo petit">
         <h3>Connexion</h3>
     </div>
 

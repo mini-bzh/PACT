@@ -37,11 +37,11 @@
 
             <section id="conteneurOffres">
                 <article>
-                    <a href="/html/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre">
+                    <a href="/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre">
                         <article class="apercuOffre">
                             <h3>fort la Latte</h3>
                             <div class="conteneurSVGtexte">
-                                <img src="/html/icones/logoUserSVG.svg" alt="pro">
+                                <img src="/icones/logoUserSVG.svg" alt="pro">
                                 <p>Fort la Latte</p>
                             </div>
                             <div class="conteneurSpaceBetween">
@@ -58,17 +58,17 @@
                             falaise face à la mer.</p>
                 
                             <div class="conteneurSVGtexte">
-                                <img src="/html/icones/adresseSVG.svg" alt="adresse">
+                                <img src="/icones/adresseSVG.svg" alt="adresse">
                                 <p>Cap Fréhel</p>
                             </div>
                             <div class="conteneurSpaceBetween">
                                 <div class="etoiles">
                                     <p>4.7</p>
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoileMoitiePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
                                 </div>
                                 <p>439 avis</p>
                             </div>
@@ -78,7 +78,7 @@
                         <article class="apercuOffre">
                             <h3>Manoir de Lan Kerellec</h3>
                             <div class="conteneurSVGtexte">
-                                <img src="/html/icones/logoUserSVG.svg" alt="pro">
+                                <img src="/icones/logoUserSVG.svg" alt="pro">
                                 <p>Famille Daubé</p>
                             </div>
                             <div class="conteneurSpaceBetween">
@@ -87,24 +87,24 @@
                             </div>
                 
                             <div class="conteneurImage">
-                                <img src="/html/images/images_illsutration_tempo/manoir/carrou_manoir1.jpeg" alt="manoir">
+                                <img src="/images/images_illsutration_tempo/manoir/carrou_manoir1.jpeg" alt="manoir">
                                 <div class="text-overlay">€€€</div>
                             </div>
                             
                             <p class="resumeApercu">Hôtel familial avec chambres raffinées, restaurant élégant, jardins paysagers avec vue sur mer.</p>
                 
                             <div class="conteneurSVGtexte">
-                                <img src="/html/icones/adresseSVG.svg" alt="adresse">
+                                <img src="/icones/adresseSVG.svg" alt="adresse">
                                 <p>Trébeurden</p>
                             </div>
                             <div class="conteneurSpaceBetween">
                                 <div class="etoiles">
                                     <p>4.6</p>
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoilePleineSVG.svg" alt="">
-                                    <img src="/html/icones/etoileMoitiePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
                                 </div>
                                 <p>360 avis</p>
                             </div>
@@ -114,8 +114,7 @@
             </section>
         </main>
         <?php
-        include "../composants/footer/footer.php";
+            include "../composants/footer/footer.php";
         ?>
-
     </body>
 </html>
