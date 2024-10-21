@@ -1,18 +1,32 @@
 /* corps de la page */
 
-div {
+main {
     background-color: lightgray;
-    padding: 10px;
-    margin: 10px;
+    padding: 2em;
+    margin: 1em;
     border-radius: 15px;
 }
 
 label {
     display: block;
-    font-size: 34px;
+    font-size: var(--typescale-large-text);
     margin-bottom: 10px;
     margin-right: 10px;
     margin-top: 10px;
+}
+
+input{
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 15px;
+    font-size: var(--typescale-small-text);
+}
+
+select{
+    border-radius: 15px;
 }
 
 textarea {
@@ -23,7 +37,7 @@ textarea {
     border: 1px solid #ccc;
     resize: none;
 }
-
+/* 
 .champTexte > input{
     padding: 5px;
     max-width: 100%;
@@ -37,7 +51,4 @@ textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-
-
+} */

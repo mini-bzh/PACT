@@ -1,4 +1,8 @@
 <?php
+// V1.1
+
+
+
 // php -S localhost:8888
 // http://localhost:8888/PACT/html/pages/CreaOffrePro.php
 ?>
@@ -15,28 +19,33 @@
 </head>
 
 <body>
-    <h1></h1>
+    <!-- HEADER -->
+    <?php
+    echo file_get_contents('../composants/header/header.php');
+    ?>
 
-    <div>
-        <h2>Création d'une offre</h2>
+    <main>
+
         <div>
-            <form name="test" action="http://localhost:8888/import.php" method="get">
+            <h2>Création d'une offre</h2>
+            <div id="test">
+                <!-- <form name="test" action="http://localhost:8888/import.php" method="get"> -->
 
                 <div class="champTexte">
-                    <label for="titre">Titre :</label>
-                    <input type="text" id="titre" name="titre" required />
+                    <label for="titre">Titre : <input type="text" id="titre" name="titre" size="20" /></label>
                     <br />
                 </div>
 
                 <div class="champTexte">
-                    <label for="categorie">Catégorie :</label>
-                    <select id="categorie" name="categorie">
-                        <option value="restauration">Restauration</option>
-                        <option value="visite">Visite</option>
-                        <option value="spectacle">Spectacle</option>
-                        <option value="parcDatraction">Parc d'attraction</option>
-                        <option value="activite">Activité</option>
-                    </select>
+                    <label for="categorie">Catégorie :
+                        <select id="categorie" name="categorie">
+                            <option value="restauration">Restauration</option>
+                            <option value="visite">Visite</option>
+                            <option value="spectacle">Spectacle</option>
+                            <option value="parcDatraction">Parc d'attraction</option>
+                            <option value="activite">Activité</option>
+                        </select>
+                    </label>
                     <br />
                 </div>
 
@@ -45,31 +54,37 @@
                 ?>
                 <div class="champTexte">
                     <!-- Liste déroulante -->
-                    <label for="tags">Tags :</label>
-                    <select id="tags" name="tags">
-                        <option value="FR">Française</option>
-                        <option value="hotel">Hotel</option>
-                        <option value="chateau">Chateau</option>
-                        <option value="musee">Musée</option>
-                        <option value="visite">Visite</option>
-                        <option value="chambrehote">Chambre d'hôtes</option>
-                        <option value="autre">Autre</option>
-                    </select>
+                    <label for="tags">Tags :
+                        <select id="tags" name="tags">
+                            <option value="FR">Française</option>
+                            <option value="hotel">Hotel</option>
+                            <option value="chateau">Chateau</option>
+                            <option value="musee">Musée</option>
+                            <option value="visite">Visite</option>
+                            <option value="chambrehote">Chambre d'hôtes</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </label>
                     <br />
                 </div>
-        </div>
-        <div>
-            <label for="resume">Résumé :</label>
-            <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Résumé de votre offre"></textarea>
-            <br />
+            </div>
+            <div>
+                <label for="resume">Résumé :</label>
+                <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Résumé de votre offre"></textarea>
+                <br />
 
-            <label for="descripDetail">Description détaillé :</label>
-            <textarea id="resume" name="resume" rows="10" cols="60" placeholder="Description détaillé de votre offre"></textarea>
-            <br />
-        </div>
+                <label for="descripDetail">Description détaillé :</label>
+                <textarea id="resume" name="resume" rows="10" cols="60" placeholder="Description détaillé de votre offre"></textarea>
+                <br />
+            </div>
 
-        </form>
-    </div>
+            <!-- </form> -->
+        </div>
+    </main>
+    <!-- footer -->
+    <?php
+    echo file_get_contents('../composants/footer/footer.php');
+    ?>
 </body>
 
 </html>
