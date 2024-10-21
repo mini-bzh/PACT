@@ -1,0 +1,14 @@
+@import "../style.css";
+
+main{
+    padding: 60px;
+}
+h1{
+    border-left: 20px solid var(--secondary);
+    padding-left: 20px;
+}
+
+.conteneurOffres{
+    display: flex;
+}
+

@@ -351,6 +351,10 @@ p{
 
 /*-------------/ HEADER PC-TAB /--------------*/
 
+header{
+    z-index: 10;
+}
+
 @media screen and (min-width : 428px){
 
 .headerMobile{

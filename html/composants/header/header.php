@@ -9,7 +9,7 @@
     <header class="headerPC-Tab <?php
         if($user == "pro")
         {
-            echo "navBarPro";
+            echo "navBarPro";               //classe qui réduit la police (car il y a une brique de navigation de plus)
         }
     ?>">
         <nav class="navHeader">
@@ -36,9 +36,8 @@
                 <li class="liHeader" id="btOffres"    <?php 
                     if($user != "pro")
                     {
-                        echo "hidden";
+                        echo "hidden";                          //cache la brique "mes offres" si l'utilisateur n'est pas un professionnel
                     }
-
                 ?>>
                     <a class="aHeader" href="">
                     <img src="/html/icones/offreSVG.svg" alt="icone offres">
