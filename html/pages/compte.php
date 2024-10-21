@@ -1,3 +1,10 @@
+<?php
+    $user = null;
+    if(key_exists("user", $_GET))
+    {
+        $user =$_GET["user"];
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,15 +14,20 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/compte.css">
 </head>
-<body>
+<body class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($user == "pro")
+            {
+                echo "fondPro";
+            }
+            else
+            {
+                echo "fondVisiteur";
+            }
+        ?>>
 
 <!------ HEADER  ------>
 <?php
-<<<<<<< Updated upstream
-    include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/composants/header/header.php';
-=======
-    include '/html/composants/header/header.php';
->>>>>>> Stashed changes
+    include "../composants/header/header.php";
 ?>
 
 <div class="titrePortable">
@@ -85,7 +97,7 @@
 <!------ FOOTER  ------>
 
 <?php
-    include '../composants/footer/footer.php';
+    include "../composants/footer/footer.php";
 ?>
 
 </body>

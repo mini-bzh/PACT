@@ -110,6 +110,42 @@
                             </div>
                         </article>
                     </a>
+                    <a href="" class="lienApercuOffre">
+                        <article class="apercuOffre">
+                            <h3>Armoripark</h3>
+                            <div class="conteneurSVGtexte">
+                                <img src="/icones/logoUserSVG.svg" alt="pro">
+                                <p>Armoripark</p>
+                            </div>
+                            <div class="conteneurSpaceBetween">
+                                <p>Parc de loisirs</p>
+                                <p class="ferme">Fermé</p>
+                            </div>
+                
+                            <div class="conteneurImage">
+                                <img src="/images/images_illsutration_tempo/armoripark/riviere.jpg" alt="armoripark">
+                                <div class="text-overlay">des 5€/pers</div>
+                            </div>
+                            
+                            <p class="resumeApercu">Parc de loisirs en plein air dans les Côtes d'Armor, à Bégard.</p>
+                
+                            <div class="conteneurSVGtexte">
+                                <img src="/icones/adresseSVG.svg" alt="adresse">
+                                <p>Bégard</p>
+                            </div>
+                            <div class="conteneurSpaceBetween">
+                                <div class="etoiles">
+                                    <p>4.1</p>
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoilePleineSVG.svg" alt="">
+                                    <img src="/icones/etoileVideSVG.svg" alt="">
+                                </div>
+                                <p>294 avis</p>
+                            </div>
+                        </article>
+                    </a>
                 </article>
             </section>
         </main>

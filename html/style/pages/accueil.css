@@ -16,10 +16,11 @@ h1{
 
 #conteneurOffres>article{
     display: flex;
+    flex-wrap: wrap;
 }
 
 #conteneurOffres .lienApercuOffre{
-    margin: 0px 50px;
+    margin: 50px;
 }
 
 
