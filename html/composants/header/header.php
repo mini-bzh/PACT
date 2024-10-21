@@ -9,7 +9,7 @@
 <?php
                     echo file_get_contents('../../icones/homeSVG.svg');
 ?>
-                    <!-- <img src="../../icones/homeSVG.svg" alt="icone home"> -->
+                    <img src="/html/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>
                 </li>
