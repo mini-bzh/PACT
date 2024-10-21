@@ -1,4 +1,4 @@
-<footer class="footer"> 
+<footer class="footer">
         <div class="footer-container">
             
             <div class="footer-section">
@@ -27,10 +27,9 @@
             
             <div class="footer-section">
                 <h4>Suivez-nous</h4>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com"> <img src="images/Réseaux/facebook.png" /> </a>
+                <a href="https://www.instagram.com"> <img src="images/Réseaux/instagram.png" /> </a>
+                <a href="https://www.youtube.com"><img src="images/Réseaux/youtube.png" />
             </div>
         </div>
         <div class="footer-bottom">
