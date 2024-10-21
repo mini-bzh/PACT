@@ -30,7 +30,7 @@
             }
         ?>>
         <?php
-            echo file_get_contents("../composants/header/header.php");
+            include "../composants/header/header.php";
         ?>
         <main class="conteneurOffre">
                 <article class="offre">

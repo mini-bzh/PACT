@@ -1,14 +1,22 @@
- 
+<?php
+    $user = null;
+    if(key_exists("user", $_GET))
+    {
+        $user =$_GET["user"];
+    }
+?>
 
-    <header class="headerPC-Tab">
+    <header class="headerPC-Tab <?php
+        if($user == "pro")
+        {
+            echo "navBarPro";
+        }
+    ?>">
         <nav class="navHeader">
             <img class="logoHeader" src="/html/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
                     <a class="aHeader" href="">
-<?php
-                    echo file_get_contents('../../icones/homeSVG.svg');
-?>
                     <img src="/html/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>
@@ -25,7 +33,13 @@
                     <h3>Mes avis</h3>
                     </a>
                 </li>
-                <li class="liHeader" id="btOffres" hidden>
+                <li class="liHeader" id="btOffres"    <?php 
+                    if($user != "pro")
+                    {
+                        echo "hidden";
+                    }
+
+                ?>>
                     <a class="aHeader" href="">
                     <img src="/html/icones/offreSVG.svg" alt="icone offres">
                     <h3>Mes offres</h3>

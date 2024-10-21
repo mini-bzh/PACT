@@ -357,6 +357,10 @@ p{
     display: none;
 }
 
+.navBarPro h3{
+    font-size: 37px;
+}
+
 .headerPC-Tab{
     display: block;
     background-color: #fff;
