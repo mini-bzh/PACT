@@ -152,10 +152,6 @@ p{
 }
 
 
-main{
-    padding-bottom: 1000px;
-}
-
 @media screen and (max-width : 428px){
 
     .coMembre, .coPro, .nouvCompte{
@@ -508,13 +504,6 @@ main{
 }
 
 /*-------------/ MAIN /--------------*/
-
-/* @media screen and (max-width : 428px){
-    main{
-        padding-bottom: 40%;
-    }
-} */
-
 
 rect{
     fill: var(--secondary);

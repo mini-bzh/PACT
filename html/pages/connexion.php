@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/compte.css">
+    <link rel="stylesheet" href="../style/pages/connexion.css">
 </head>
-<body>
+<body class=
+<?php
+    if ($_GET['user'] == 'pro') {
+        echo 'fondPro';
+    } else {
+        echo 'fondVisiteur';
+    }
+?>
+>
 
 <!------ HEADER  ------>
 <?php
-<<<<<<< Updated upstream
-    include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/composants/header/header.php';
-=======
-    include '/html/composants/header/header.php';
->>>>>>> Stashed changes
+    include "../composants/header/header.php";
 ?>
 
 <div class="titrePortable">
@@ -39,54 +43,21 @@
     </svg>
 
     <div>
-        <img src="/images/logo/logo_petit.png" alt="logo petit">
-        <h3>Connexion</h3>
+        <img src="/html/images/logo/logo_petit.png" alt="logo petit">
+        <h3>Connexion compte professionnel</h3>
     </div>
-
 </div>
 
 
-
 <!------ MAIN  ------>
+
 <main>
 
-    <div class="pageChoixCo">
-        <div class="textBulle decaleBulleGauche">
-            <p>Veuillez séléctionner une option de connexion</p>
-        </div>
-
-        <div>
-<?php
-            include '../composants/btnConnexion/btnCoMembre.php';
-            include '../composants/btnConnexion/btnCoPro.php';
-?>
-        </div>
-
-        <hr>
-
-        <div class="textBulle">
-            <p><span>Pas encore de compte ?</span><br>
-               Créez le !</p>
-        </div>
-
-        <div>
-            <div class="fakeDiv"></div>
-<?php
-            include '../composants/btnConnexion/btnNouvCo.php';
-?>
-        </div>
-
-    </div>
+<div class=textBulle>
+    <p class="texteLarge">Connexion à un compte professionnel :</p>
+</div>
 
 
 </main>
 
-
-<!------ FOOTER  ------>
-
-<?php
-    include '../composants/footer/footer.php';
-?>
-
-</body>
-</html>
+</div>  
