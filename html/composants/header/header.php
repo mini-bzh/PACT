@@ -16,7 +16,7 @@
             <img class="logoHeader" src="/html/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="/html/pages/accueil.php?user=<?php echo $user?>">
                     <img src="/html/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>
@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="liHeader" id="btCompte">
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="/html/pages/compte.php?user=<?php echo $user; ?>">
                     <img src="/html/icones/compteSVG.svg" alt="icone compte">
                     <h3>Mon compte</h3>
                     </a>
@@ -64,7 +64,7 @@
         <nav class="navHeaderMobile">
             <ul class="ulHeaderMobile">
                 <li class="liHeaderMobile" id="btAccueilMobile">
-                    <a class="aHeaderMobile" href="">
+                    <a class="aHeaderMobile" href="/html/pages/accueil.php?user=<?php echo $user?>">
                     <img src="../../icones/homeSVG.svg" alt="icone home">
                     <div class="trait" hidden></div>
                     </a>
@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btCompteMobile">
-                    <a class="aHeaderMobile" href="">
+                    <a class="aHeaderMobile" href="/html/pages/compte.php?user=<?php echo $user; ?>">
                     <img src="../../icones/compteSVG.svg" alt="icone compte">
                     <div class="trait" hidden></div>
                     </a>
