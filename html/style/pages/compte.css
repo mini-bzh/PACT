@@ -74,8 +74,9 @@ div:has(> .fakeDiv){
         margin: 3%;
     }
 
-    hr + div{
+    hr + .textBulle{
         position: relative;
+        border-right: none;
         right: -100px;
     }
 

@@ -161,7 +161,7 @@ main{
     .coMembre, .coPro, .nouvCompte{
         width: 385.12px;
         height: 100px;
-        margin-left: 2%;
+        margin-left: 0;
         border-radius: 10px;
         border-width: 4px;
     }
@@ -186,10 +186,34 @@ main{
 
 }
 
-/* filtre */
-/* .filtrer{
+.titrePortable{
+    display: none;
+}
 
-} */
+
+@media screen and (max-width : 428px){
+
+    .titrePortable{
+        display: block;
+    }
+
+    .titrePortable div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        left: 1%;
+        top: 4%;
+    }
+
+    .titrePortable img{
+        width: 85px;
+        height: 85px;
+    }
+
+}
+
+
 
 /*-------------/ apercu offre /--------------*/
 
@@ -389,6 +413,7 @@ header{
     width: 100%;
     justify-content: space-between;
     padding-right: 0;
+    border-bottom: var(--primary) solid 2px;
 }
 
 .logoHeader{
@@ -420,15 +445,15 @@ header{
 .aHeader {
     outline: none;
     text-decoration: none;
-  }
+}
   
 .aHeader:link {
     color: #000000;
-  }
+}
   
 .aHeader:visited {
     color: #000000;
-  }
+}
 
 .aHeader > h3 {
     margin: 0;
@@ -440,49 +465,58 @@ header{
 
 @media screen and (max-width : 428px){
 
-.headerPC-Tab{
-    display: none;
-}
+    .headerPC-Tab{
+        display: none;
+    }
 
-.headerMobile{
-    display: block;
-    background-color: var(--primaryDark);
-    height: 104px;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 2;
-}
+    .headerMobile{
+        display: block;
+        background-color: var(--primaryDark);
+        position: fixed;
+        width: 428px;
+        height: 104px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+    }
 
-.ulHeaderMobile{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 104px;
-}
+    .ulHeaderMobile{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 104px;
+    }
 
-.trait{
-    background-color: #fff;
-    width: 52px;
-    height: 7px;
-    border-radius: 3px;
-}
+    .trait{
+        background-color: #fff;
+        width: 52px;
+        height: 7px;
+        border-radius: 3px;
+    }
 
-.aHeaderMobile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .aHeaderMobile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.aHeaderMobile > img {
-    width: 69px;
-    height: 69px;
-    filter: brightness(0) invert(1);
-}
+    .aHeaderMobile > img {
+        width: 69px;
+        height: 69px;
+        filter: brightness(0) invert(1);
+    }
 
 }
 
 /*-------------/ MAIN /--------------*/
+
+/* @media screen and (max-width : 428px){
+    main{
+        padding-bottom: 40%;
+    }
+} */
+
 
 rect{
     fill: var(--secondary);
