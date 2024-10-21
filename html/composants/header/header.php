@@ -65,25 +65,25 @@
             <ul class="ulHeaderMobile">
                 <li class="liHeaderMobile" id="btAccueilMobile">
                     <a class="aHeaderMobile" href="/html/pages/accueil.php?user=<?php echo $user?>">
-                    <img src="../../icones/homeSVG.svg" alt="icone home">
+                    <img src="/html/icones/homeSVG.svg" alt="icone home">
                     <div class="trait" hidden></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btRechMobile">
                     <a class="aHeaderMobile" href="">
-                    <img src="../../icones/rechercherSVG.svg" alt="icone rechercher">
+                    <img src="/html/icones/rechercherSVG.svg" alt="icone rechercher">
                     <div class="trait"></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btAvisMobile">
                     <a class="aHeaderMobile" href="">
-                    <img src="../../icones/commentSVG.svg" alt="icone commentaires">
+                    <img src="/html/icones/commentSVG.svg" alt="icone commentaires">
                     <div class="trait" hidden></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btCompteMobile">
                     <a class="aHeaderMobile" href="/html/pages/compte.php?user=<?php echo $user; ?>">
-                    <img src="../../icones/compteSVG.svg" alt="icone compte">
+                    <img src="/html/icones/compteSVG.svg" alt="icone compte">
                     <div class="trait" hidden></div>
                     </a>
                 </li>

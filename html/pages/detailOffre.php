@@ -113,7 +113,7 @@
                 </article>
         </main>
         <?php                                                   //footer
-            echo file_get_contents("../composants/footer/footer.php");
+            include "../composants/footer/footer.php";
         ?>
     </body>
     <script src="../js/scriptImageChangeante.js"></script>

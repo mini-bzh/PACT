@@ -21,3 +21,14 @@ h1{
 #conteneurOffres .lienApercuOffre{
     margin: 0px 50px;
 }
+
+
+@media screen and (max-width : 428px)
+{
+    #conteneurOffres>article{
+        display: block;
+    }
+    #conteneurOffres .lienApercuOffre{
+        margin: 10px;
+    }
+}

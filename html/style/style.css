@@ -380,9 +380,6 @@ main{
 
 /*-------------/ HEADER PC-TAB /--------------*/
 
-header{
-    z-index: 10;
-}
 
 @media screen and (min-width : 428px){
 
@@ -400,6 +397,7 @@ header{
     position: sticky;
     top: 0;
     z-index: 2;
+    border-bottom: 1px solid black;
 }
 
 .navHeader,.ulHeader,.aHeader{
@@ -557,6 +555,11 @@ rect{
 .footer-section p {
     font-size: 14px;
 }
+
+.footer-section ul li{
+    font-family: "Archivo";
+}
+
 .footer-section ul li a {
     color: #333;
     text-decoration: none;

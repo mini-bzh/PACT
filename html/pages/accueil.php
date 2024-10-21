@@ -50,7 +50,7 @@
                             </div>
                 
                             <div class="conteneurImage">
-                                <img src="/html/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="fort la latte">
+                                <img src="/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="fort la latte">
                                 <div class="text-overlay">dès 7€/pers</div>
                             </div>
                             
@@ -113,7 +113,9 @@
                 </article>
             </section>
         </main>
-
+        <?php
+        include "../composants/footer/footer.php";
+        ?>
 
     </body>
 </html>
