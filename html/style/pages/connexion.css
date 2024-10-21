@@ -1,0 +1,6 @@
+.textBulle{
+    background-color: white;
+    width: 674px;
+    height: 82px;
+    border: var(--primaryLight) solid 2px;
+}

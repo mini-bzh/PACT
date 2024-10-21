@@ -1,4 +1,4 @@
-<a href="pages/compte.php?connexion=membre" class="coMembre">
+<a href="connexion.php?user=membre" class="coMembre">
     <div>
         <div>
             <h3 class="texteLarge boldArchivo">Connexion</h3>
