@@ -31,7 +31,6 @@
                 <a href="https://www.instagram.com"> <img src="/images/Réseaux/instagram.png" /> </a>
                 <a href="https://www.youtube.com"><img src="/images/Réseaux/youtube.png" />
             </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2024 PACT. Tous droits réservés.</p>
         </div>
