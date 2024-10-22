@@ -1,14 +1,24 @@
 <?php
+    // reccuperation des parametre de connection a la BdD
+    include('../connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
     $idOffre = null;
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
-        $idOffre =$_GET["idOffre"];
+        $idOffre =$_GET["idOffre"]; // reccuperation de id de l offre
+        
+        // reccuperation du contenu de l offre
+        $contentOffre = $dbh->query("select * from tripskell._offre where idoffre=" +$idOffre+ ";")->fetchAll();          
     }
     if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +44,8 @@
         ?>
         <main class="conteneurOffre">
                 <article class="offre">
-                    <h2>Fort la Latte</h2>
+                    
+                    <h2><?php echo $contentOffre["titreoffre"];?></h2>
                     <p>Visite</p>
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
@@ -118,3 +129,5 @@
     </body>
     <script src="../js/scriptImageChangeante.js"></script>
 </html>
+
+<?php $dbh = null; // on ferme la connexion  ?>
