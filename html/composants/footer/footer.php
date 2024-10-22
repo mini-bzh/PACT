@@ -1,3 +1,11 @@
+<?php
+    $user = null;
+    if(key_exists("user", $_GET))
+    {
+        $user =$_GET["user"];
+    }
+?>
+
 <footer class="footer">
         <div class="footer-container">
             
@@ -10,10 +18,18 @@
             <div class="footer-section">
                 <h4>Liens utiles</h4>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Recherche</a></li>
-                    <li><a href="#">Avis</a></li>
-                    <li><a href="#">Profil</a></li>
+                    <li><a href="accueil.php">Accueil</a></li>
+                    <li><a href="recherche.php">Recherche</a></li>
+                    <li><a href="avis.php">Avis</a></li>
+                    <li><a href="<?php
+                        if($user)
+                        {
+                            echo "compte.php";              
+                        }else {
+                            echo "connexion.php";
+                        }
+                    ?>"
+                    >Profil</a></li>
                 </ul>
             </div>
             
