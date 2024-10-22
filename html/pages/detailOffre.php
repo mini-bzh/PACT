@@ -55,7 +55,7 @@
                                     for ($i = 1; $i < intval($contentOffre["note"]); $i++) {
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
                                     }
-                                    if(intfloat($contentOffre["note"]) - intval($contentOffre["note"]) >= 0.5) {
+                                    if(floatval($contentOffre["note"]) - intval($contentOffre["note"]) >= 0.5) {
                                         ?><img src="../icones/etoileMoitiePleineSVG.svg" alt="etoile moitié pleine"><?php
                                         $i++;
                                     }
