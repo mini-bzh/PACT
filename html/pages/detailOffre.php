@@ -68,7 +68,7 @@
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
-                            <p><?php $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                     </div>
 
