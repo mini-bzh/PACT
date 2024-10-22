@@ -9,7 +9,7 @@
 </head>
 <body class=
 <?php
-    if ($_GET['user'] == 'pro') {
+    if ($_GET['user-tempo'] == 'pro') {
         echo 'fondPro';
     } else {
         echo 'fondVisiteur';
@@ -57,6 +57,25 @@
     <p class="texteLarge">Connexion à un compte professionnel :</p>
 </div>
 
+
+<form action="acceuil.php" method="post">
+
+    <div>
+        <label for="userName"><p class="texteLarge">Nom d'entreprise :</p></label><br>
+        <input type="text" id="userName" name="userName" maxlength="40" required>
+    </div>
+
+    <div>
+        <label for="userPSW"><p class="texteLarge">Mot de passe :</p></label><br>
+        <input type="password" id="userPSW" name="userPSW" minlength="12" required>
+    </div>
+
+</form>
+
+<div>
+    <input type="checkbox" id="souvenir" name="souvenir">
+    <p class="texteLarge">Se souvenir de moi</p>
+</div>
 
 </main>
 

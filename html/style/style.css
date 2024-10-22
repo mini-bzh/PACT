@@ -102,7 +102,7 @@ p{
     border-radius: 15px;
     text-decoration: none;
 }
-.coMembre p, .coMembre h3, .coPro p, .coPro h3, .nouvCompte p, .nouvCompte h3{
+.coMembre p, .coMembre h4, .coPro p, .coPro h4, .nouvCompte p, .nouvCompte h4{
     color: white;
 }
 .coMembre svg, .coPro svg, .nouvCompte svg{

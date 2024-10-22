@@ -1,8 +1,8 @@
-<a href="connexion.php?user=pro" class="coPro">
+<a href="connexion.php?user-tempo=pro" class="coPro">
     <div>
         <div>
-            <h3 class="texteLarge boldArchivo">Connexion</h3>
-            <p>Compte professionnel</p>
+            <p>Connexion</p>
+            <h4 class="texteLarge boldArchivo">Professionnel</h4>
         </div>
         <div>
             <hr>
