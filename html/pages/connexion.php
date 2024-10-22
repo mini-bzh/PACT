@@ -81,14 +81,14 @@
     <a href="compte.php" class="btnAnnuler">
         <p class="texteLarge boldArchivo">Annuler</p>
 <?php
-        include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/html/icones/croixSVG.svg';
+        include 'html/icones/croixSVG.svg';
 ?>
     </a>
 
     <a href="#" class="btnConfirmer">
         <p class="texteLarge boldArchivo">Confirmer</p>
 <?php
-        include 'C:/Users/amazi/OneDrive/Documents/IUT/Semestre_3/PACT/html/icones/okSVG.svg';
+        include 'html/icones/okSVG.svg';
 ?>
     </a>
 </div>
