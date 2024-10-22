@@ -52,7 +52,7 @@
                             <div class="etoiles">
                                 <p><?php echo $contentOffre["note"];?></p>
                                 <?php
-                                    for ($i = 1; $i < intval($contentOffre["note"]); $i++) {
+                                    for ($i = 0; $i < intval($contentOffre["note"]); $i++) {
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
                                     }
                                     if(floatval($contentOffre["note"]) - intval($contentOffre["note"]) >= 0.5) {
@@ -63,11 +63,6 @@
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
                                     }
                                 ?>
-                                
-                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
-                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
-                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
-                                <img src="../icones/etoileMoitiePleineSVG.svg" alt="etoile moitié pleine">
                             </div>
                             <p>38 avis</p>
                         </div>
@@ -83,7 +78,7 @@
                     <div class="resumePrixDetailOffre">
                         <p><?php echo $contentOffre["resume"];?></p>
                         <hr>
-                        <p>À partir de <?php echo $contentOffre["tarifminimal"];?>/pers</p>
+                        <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
 
                     <p id="descriptionOffre">
