@@ -3,4 +3,52 @@
     width: 674px;
     height: 82px;
     border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 3%;
+    position: relative;
+    left: -30px;
+    top: 40px;
+    margin: 0 0 80px 0;
+}
+
+form input{
+    width: 847px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    padding: 0 2%;
+    font-size: var(--typescale-text);
+}
+
+form{
+    margin: 0 auto;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+form div{
+    margin-top: 3%;
+}
+
+main > div{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 25%;
+    margin-top: 3%;
+}
+
+input[type="checkbox"]{
+    width: 35px;
+    height: 35px;
+    margin-right: 1%;
+    /* -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    border: white solid 3px;
+    border-radius: 10px; */
 }

@@ -1,7 +1,7 @@
 <a href="connexion.php?user=nouv" class="nouvCompte">
     <div>
         <div>
-            <h3 class="texteLarge boldArchivo">Nouveau compte</h3>
+            <h4 class="texteLarge boldArchivo">Nouveau compte</h4>
         </div>
         <div>
             <hr>

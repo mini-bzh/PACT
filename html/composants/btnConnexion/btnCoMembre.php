@@ -1,8 +1,8 @@
-<a href="connexion.php?user=membre" class="coMembre">
+<a href="connexion.php?user-tempo=membre" class="coMembre">
     <div>
         <div>
-            <h3 class="texteLarge boldArchivo">Connexion</h3>
-            <p>Compte membre</p>
+            <p>Connexion</p>
+            <h4 class="texteLarge boldArchivo">Membre</h4>
         </div>
         <div>
             <hr>
