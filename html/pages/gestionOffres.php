@@ -9,6 +9,26 @@
     {
         $user =$_GET["user"];
     }
+
+
+    /*echo "HW";
+
+    $driver = "pgsql";
+
+    $server = "postgresdb";
+    $dbname = "postgres";
+
+    $user = "sae";
+    $pass = "ashton-izzY-c0mplet";
+
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
+
+    foreach($dbh->query("SELECT * from tripskell._compte") as $row) {
+            echo "<pre>"; // pour la version navigateur (présentation brute)
+            print_r($row);
+            echo "</pre>";
+    }*/
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +57,7 @@
         </h1>
         <main id="mainGestionOffres">
         <section id="conteneurBtnOffres">
-        <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre">
+        <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
                         <img src="../icones/ajouterSVG.svg" alt="ajouter offre">
                         <h3>Ajouter une offre</h3>
@@ -116,7 +136,7 @@
                         </div>
                     </div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Fort%20La%20Latte%20-%20Ch%C3%A2teau%20de%20la%20Roche%20Goyon"
-                    class="conteneurSVGtexte" id="itineraire" target="_blank">
+                    class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
                         <img src="../icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
                     </a>
@@ -124,10 +144,16 @@
                     <div id="conteneurGestion">
                         <h4>Statut : <span class="enLigne">en ligne</span></h4>
                         <div id="conteneurBtnGestion">
-                            <div class="btnGestionOffre">
-                                
+                            <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="ChangerBtnLigne()">
+                                <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
+                                <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
+                            </div>
+                            <div class="btnGestionOffre grossisQuandHover">
+                                <img src="../icones/crayonSVG.svg" alt="">
+                                <p>Modifier l'offre</p>
                             </div>
                         </div>
+                     
                     </div>
                 </article>
         </section>
@@ -137,5 +163,6 @@
             include "../composants/footer/footer.php";
         ?>
     </body>
-    <script src="../js/scriptImageChangeante.js"></script>
+    <!--<script src="../js/scriptImageChangeante.js"></script>-->
+    <script src="../js/gestionOffre.js"></script>
 </html>

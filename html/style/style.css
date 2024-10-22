@@ -70,6 +70,15 @@ p{
 }
 
 
+.grossisQuandHover{
+    transition: transform 0.3s ease;
+}
+
+.grossisQuandHover:hover{
+    transform: scale(1.05);
+}
+
+
 /* rectangle */
 .rectangleTitre{
     display: flex;
