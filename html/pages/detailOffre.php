@@ -12,7 +12,7 @@
         $idOffre =$_GET["idOffre"]; // reccuperation de id de l offre
         
         // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell._offre where idoffre=" +$idOffre+ ";")->fetchAll();          
+        $contentOffre = $dbh->query("select * from tripskell._offre where idoffre=" . $idOffre . ";")->fetchAll();          
     }
     if(key_exists("user", $_GET))
     {
@@ -50,8 +50,20 @@
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p>4.7</p>
-                                <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
+                                <p><?php echo $contentOffre["note"];?></p>
+                                <?php
+                                    for ($i = 1; $i < intval($contentOffre["note"]); $i++) {
+                                        ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
+                                    }
+                                    if(intfloat($contentOffre["note"]) - intval($contentOffre["note"]) >= 0.5) {
+                                        ?><img src="../icones/etoileMoitiePleineSVG.svg" alt="etoile moitié pleine"><?php
+                                        $i++;
+                                    }
+                                    for (; $i < 5; $i++) {
+                                        ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
+                                    }
+                                ?>
+                                
                                 <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
                                 <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
                                 <img src="../icones/etoilePleineSVG.svg" alt="etoile pleine">
@@ -69,9 +81,9 @@
                         <img src="../images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
                     </div>
                     <div class="resumePrixDetailOffre">
-                        <p>Le chateau de la roche, Fort la Latte, situé à Plévenon cap Fréhel</p>
+                        <p><?php echo $contentOffre["resume"];?></p>
                         <hr>
-                        <p>À partir de 7.50€/pers</p>
+                        <p>À partir de <?php echo $contentOffre["tarifminimal"];?>/pers</p>
                     </div>
 
                     <p id="descriptionOffre">
