@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    
+    <p>Redirection ...</p>
 </body>
 </html>
+<?php
+header("location: /pages/accueil.php");
