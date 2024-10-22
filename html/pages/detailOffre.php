@@ -13,7 +13,7 @@
         $idOffre =$_GET["idOffre"]; 
         
         // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where numero='" . $idOffre . "';")->fetchAll()[0];          
+        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
     }
     if(key_exists("user", $_GET))
     {
@@ -51,8 +51,11 @@
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p> <!-- a -->
+                                <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
                                 <?php
+                                //
+                                //  affichage de la note avec des etoiles
+                                //
                                     for ($i = 0; $i < intval($contentOffre["note"]); $i++) {
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
                                     }
@@ -82,11 +85,7 @@
                         <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
 
-                    <p id="descriptionOffre">
-                    Le Fort La Latte, construit au XIVe siècle, est un château fort majestueux situé en Bretagne, sur une falaise face à 
-                    la mer. Entouré de remparts et de tours, il surplombe la Côte d'Émeraude et offre des panoramas spectaculaires. Ce 
-                    lieu emblématique attire de nombreux visiteurs pour son histoire et son cadre pittoresque.
-                    </p>
+                    <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                 
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
                         <div id="partieTags">
@@ -120,7 +119,7 @@
                                 <p class="jour jourFerme">D</p>
                             </div>-->
                             <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre">07h30</span> à <span class="horaireEncadre">19h00</span></p>
+                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
                             </div>
                         </div>
                     </div>
