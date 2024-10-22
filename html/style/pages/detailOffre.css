@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     margin: 10px 0px;
+    flex-wrap: wrap;
 }
 .offre .conteneurSVGtexte img{
     width: 40px;

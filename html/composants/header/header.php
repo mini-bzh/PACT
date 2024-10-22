@@ -39,7 +39,7 @@
                         echo "hidden";                          //cache la brique "mes offres" si l'utilisateur n'est pas un professionnel
                     }
                 ?>>
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="/pages/gestionOffres.php?user=<?php echo $user; ?>">
                     <img src="/icones/offreSVG.svg" alt="icone offres">
                     <h3>Mes offres</h3>
                     </a>

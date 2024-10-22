@@ -1,0 +1,55 @@
+@import "detailOffre.css";
+
+#mainGestionOffres{
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin-top: 50px;
+}
+.conteneurSVGtexte{
+    display: flex;
+    align-items: center;
+}
+
+.conteneurSVGtexte img{
+    margin-right: 20px;
+    width: 60px;
+    height: 60px;
+}
+
+#btnAjouterOffre{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    width: 1000px;
+    padding: 30px;
+    border-radius: 40px;
+    margin: 20px 0px;
+}
+
+#conteneurBtnOffres{
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    flex-wrap: wrap;
+}
+
+h1{
+    border-left: 20px solid var(--secondary);
+    padding-left: 20px;
+    margin: 30px;
+}
+
+#separateurOffreGestion{
+    height: 3px;
+    background-color: black;
+    margin: 40px 0px 20px;
+}
+
+.enLigne{
+    color: var(--accentDark);
+}
+
+.horsLigne{
+    color: var(--rouge);
+}
