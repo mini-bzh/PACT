@@ -9,10 +9,11 @@
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
-        $idOffre =$_GET["idOffre"]; // reccuperation de id de l offre
+        // reccuperation de id de l offre
+        $idOffre =$_GET["idOffre"]; 
         
         // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell._offre where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where numero='" . $idOffre . "';")->fetchAll()[0];          
     }
     if(key_exists("user", $_GET))
     {
@@ -50,7 +51,7 @@
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p>
+                                <p><?php echo $contentOffre["note"];?></p> <!-- a
                                 <?php
                                     for ($i = 0; $i < intval($contentOffre["note"]); $i++) {
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
@@ -64,7 +65,7 @@
                                     }
                                 ?>
                             </div>
-                            <p>38 avis</p>
+                            <!-- <p>38 avis</p> -->
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
@@ -108,7 +109,7 @@
                                 <img src="../icones/horairesSVG.svg" alt="icone horaires">
                                 <h4>Horaires</h4>
                             </div>
-                            <hr>
+                            <hr><!--
                             <div id="conteneurJoursOffre">
                                 <p class="jour jourOuvert">L</p>
                                 <p class="jour jourOuvert">Ma</p>
@@ -117,17 +118,17 @@
                                 <p class="jour jourOuvert">V</p>
                                 <p class="jour jourFerme">S</p>
                                 <p class="jour jourFerme">D</p>
-                            </div>
-                                <div id="conteneurPlagesHoraires">
-                                    <p class="plageHoraire">De <span class="horaireEncadre">07h30</span> à <span class="horaireEncadre">19h00</span></p>
+                            </div>-->
+                            <div id="conteneurPlagesHoraires">
+                                <p class="plageHoraire">De <span class="horaireEncadre">07h30</span> à <span class="horaireEncadre">19h00</span></p>
                             </div>
                         </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Fort%20La%20Latte%20-%20Ch%C3%A2teau%20de%20la%20Roche%20Goyon"
+                    <!-- <a href="https://www.google.com/maps/search/?api=1&query=Fort%20La%20Latte%20-%20Ch%C3%A2teau%20de%20la%20Roche%20Goyon"
                     class="conteneurSVGtexte" id="itineraire" target="_blank">
                         <img src="../icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
-                    </a>
+                    </a> -->
                 </article>
         </main>
         <?php                                                   //footer
