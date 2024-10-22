@@ -64,11 +64,11 @@
                                     }
                                 ?>
                             </div>
-                            <p><?php $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]; ?></p>
+                            <p>38 avis</p>
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
-                            <p>Fort la Latte</p>
+                            <p><?php $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                     </div>
 
