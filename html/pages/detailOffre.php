@@ -51,7 +51,7 @@
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p> <!-- a
+                                <p><?php echo $contentOffre["note"];?></p> <!-- a -->
                                 <?php
                                     for ($i = 0; $i < intval($contentOffre["note"]); $i++) {
                                         ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
