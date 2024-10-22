@@ -16,19 +16,19 @@
             <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
-                    <a class="aHeader" href="/pages/accueil.php?user=<?php echo $user?>">
+                    <a class="aHeader" href="/pages/accueil.php<?php echo $user?>">
                     <img src="/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>
                 </li>
                 <li class="liHeader" id="btRech">
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="recherche.php">
                     <img src="/icones/rechercherSVG.svg" alt="icone rechercher">
                     <h3>Rechercher</h3>
                     </a>
                 </li>
                 <li class="liHeader" id="btAvis">
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="avis.php">
                     <img src="/icones/commentSVG.svg" alt="icone commentaires">
                     <h3>Mes avis</h3>
                     </a>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="liHeader" id="btConnect" hidden>
-                    <a class="aHeader" href="">
+                    <a class="aHeader" href="compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
                     <h3>Se connecter</h3>
                     </a>
