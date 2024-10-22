@@ -60,11 +60,11 @@
                                         $i++;
                                     }
                                     for (; $i < 5; $i++) {
-                                        ?><img src="../icones/etoilePleineSVG.svg" alt="etoile pleine"><?php
+                                        ?><img src="../icones/etoileVideSVG.svg" alt="etoile vide"><?php
                                     }
                                 ?>
                             </div>
-                            <p>38 avis</p>
+                            <p><?php $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]; ?></p>
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
