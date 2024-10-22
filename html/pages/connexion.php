@@ -72,10 +72,27 @@
 
 </form>
 
-<div>
+<div class="accepteSouvenir">
     <input type="checkbox" id="souvenir" name="souvenir">
     <p class="texteLarge">Se souvenir de moi</p>
 </div>
+
+<div class="zoneBtn">
+    <a href="compte.php" class="btnAnnuler">
+        <p class="texteLarge boldArchivo">Annuler</p>
+<?php
+        include 'html/icones/croixSVG.svg';
+?>
+    </a>
+
+    <a href="#" class="btnConfirmer">
+        <p class="texteLarge boldArchivo">Confirmer</p>
+<?php
+        include 'html/icones/okSVG.svg';
+?>
+    </a>
+</div>
+
 
 </main>
 
