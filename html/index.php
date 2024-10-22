@@ -1,3 +1,4 @@
+<?php header("location: /pages/accueil.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,5 +11,3 @@
     <p>Redirection ...</p>
 </body>
 </html>
-<?php
-header("location: /pages/accueil.php");
