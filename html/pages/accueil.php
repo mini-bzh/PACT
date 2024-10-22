@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Acceuil</title>
+        <title>Accueil</title>
         <link rel="stylesheet" href="../style/pages/accueil.css">
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur

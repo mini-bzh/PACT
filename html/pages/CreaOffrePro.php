@@ -1,28 +1,26 @@
 <?php
-// V1.1
+    $user = "pro";
 
-
-
-// php -S localhost:8888
-// http://localhost:8888/PACT/html/pages/CreaOffrePro.php
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avis</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <title>Creation Offre</title>
     <link rel="stylesheet" href="../style/pages/CreaOffrePro.css">
 </head>
-
+<body  class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($user == "pro")
+            {
+                echo "fondPro";
+            }
+        ?>>
+        <?php include "../composants/header/header.php";        //import navbar
+        ?>
 <body>
     <!-- HEADER -->
-    <?php
-    echo file_get_contents('../composants/header/header.php');
-    ?>
 
     <main>
 
