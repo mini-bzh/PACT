@@ -11,6 +11,7 @@
     #btn{
         padding: 10px;
         border: 2px solid black;
+        width: fit-content;
     }
     #btn:hover{
         cursor: pointer;
