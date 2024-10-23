@@ -56,7 +56,7 @@
                                 //
                                 //  affichage de la note avec des etoiles
                                 //
-                                    include "/php/etoiles.php";
+                                    include "/var/www/html/php/etoiles.php";
                                 ?>
                             </div>
                             <!-- <p>38 avis</p> -->
