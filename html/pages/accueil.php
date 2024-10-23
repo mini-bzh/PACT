@@ -2,7 +2,7 @@
     $profil = null;
     if(key_exists("user", $_GET))
     {
-        $user =$_GET["user"];
+        $profil =$_GET["user"];
     }
 
 $driver = "pgsql";
