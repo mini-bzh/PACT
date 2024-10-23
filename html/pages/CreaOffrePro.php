@@ -147,28 +147,65 @@
 if (!empty($_POST)) {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-    $titre = $_POST["titre"];
-    $prixMin = $_POST["prix-minimal"];
-    $resume = $_POST["resume"];
-    $description = $_POST["description"];
-    $heuresDebut = $_POST["heure-debut"];
-    $heuresFin = $_POST["heure-fin"];
-    $heures = $heuresDebut." ".$heuresFin;
-    $numero = $_POST["num"];
-    $nomRue = $_POST["nomRue"];
-    $ville = $_POST["ville"];
-    $codePostal = $_POST["codePostal"];
-    $typeOffre = $_POST["offre"];
-    $option = $_POST["option"];
-    $note = 5;
-    $accessible = $_POST["choixAccessible"];
-
-    $qwery = "INSERT INTO tripskell.offre_pro(titreOffre,resume,description_detaille,tarifMinimal,note,horaires,accessibilite,enLigne,id_abo, id_option, numero, rue, ville, codePostal,id_c) VALUES(':titre','resume','description',23,2,'23h-12h','accessible',true,'Premium','A la une','25','rue','ville','22540',1);";
+    $qwery = "INSERT INTO tripskell.offre_pro(";
+    $qwery.= "titreOffre,";
+    $qwery.= "resume,";
+    $qwery.= "description_detaille,";
+    $qwery.= "tarifMinimal,";
+    $qwery.= "note,";
+    $qwery.= "horaires,";
+    $qwery.= "accessibilite,";
+    $qwery.= "enLigne,";
+    $qwery.= "id_abo, ";
+    $qwery.= "id_option, ";
+    $qwery.= "numero, ";
+    $qwery.= "rue, ";
+    $qwery.= "ville, ";
+    $qwery.= "codePostal,";
+    $qwery.= "id_c) ";
+    
+    $qwery.= "VALUES(";
+    $qwery.= ":titre,";
+    $qwery.= ":resume,";
+    $qwery.= ":description,";
+    $qwery.= ":tarif,";
+    $qwery.= ":note,";
+    $qwery.= ":horaires,";
+    $qwery.= ":accessibilite,";
+    $qwery.= ":enLigne,";
+    $qwery.= ":id_abo,";
+    $qwery.= ":id_option,";
+    $qwery.= ":numero,";
+    $qwery.= ":rue,";
+    $qwery.= ":ville,";
+    $qwery.= ":codePostal,";
+    $qwery.= ":id_c);";
     echo $qwery;
 
-    $stmt = $dbh->prepare(
-        $qwery
-    );
+    $stmt = $dbh->prepare($qwery);
+
+    $titre = $_POST["titre"];
+    $resume = $_POST["resume"];
+    $description = $_POST["description"];
+    $tarif = $_POST["prix-minimal"];
+    $note = 5;
+
+    $heuresDebut = $_POST["heure-debut"];
+    $heuresFin = $_POST["heure-fin"];
+    $horaires = $heuresDebut."-".$heuresFin;
+
+    $accessible = $_POST["choixAccessible"];
+
+    $enLigne = true;
+
+    $id_abo = $_POST["offre"];
+    $id_option = $_POST["option"];
+
+    $numero = $_POST["num"];
+    $rue = $_POST["nomRue"];
+    $ville = $_POST["ville"];
+    $codePostal = $_POST["codePostal"];
+    
 
     
 
