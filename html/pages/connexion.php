@@ -53,12 +53,12 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 }
 
 ?>
-    <script defer>
+    <!-- <script defer> -->
 <?php
 if (($correspond === true)) {
-        validerCorrect();
+//         validerCorrect();
 ?>
-    </script>
+    <!-- </script> -->
 <?php
 } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
@@ -75,7 +75,7 @@ if (($correspond === true)) {
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/connexion.css">
-    <script src="../js/connexion.js" defer></script>
+    <!-- <script src="../js/connexion.js" defer></script> -->
 </head>
 <body class=
 <?php
