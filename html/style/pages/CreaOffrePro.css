@@ -36,7 +36,7 @@ input, select, textarea {
     margin-bottom: 10px;
     border-radius: 5%;
     border: 1px solid #ccc;
-    font-size: 18px; /* Taille de police augmentée pour rendre les champs plus lisibles */
+    font-size: 18px; 
     box-sizing: border-box;
 }
 
@@ -53,18 +53,18 @@ textarea {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    width: 60%; /* Limite la taille de la section des jours pour correspondre aux images */
+    width: 60%;
 }
 
 .jours button {
     background-color: #fff;
     border: 2px solid #000;
     padding: 15px;
-    width: 60px; /* Dimensions plus petites pour les boutons circulaires */
+    width: 60px; 
     height: 60px;
     border-radius: 50%;
     text-align: center;
-    font-size: 16px; /* Taille de texte ajustée */
+    font-size: 16px; 
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -76,7 +76,6 @@ textarea {
 .heures {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .heures label {
@@ -86,31 +85,5 @@ textarea {
 .heures input {
     width: auto;
     padding: 8px;
-    font-size: 16px; /* Taille de texte ajustée pour correspondre à l'image */
-}
-
-/* Ajustement pour les boutons de validation et annulation */
-.boutons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.boutons button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.boutons .valider {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-}
-
-.boutons .annuler {
-    background-color: #f44336;
-    color: white;
-    border: none;
+    font-size: 16px; 
 }
