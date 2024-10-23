@@ -24,12 +24,12 @@
         // Récupérer les paramètres envoyés via POST
         $idOffre = $_POST["idOffre"];
 
-    $statut = $dbh->query("SELECT enLigne from tripskell.offrepro WHERE idoffre = $idOffre);
-    echo $statut;
+        $statut = $dbh->query("SELECT enLigne from tripskell.offre_pro WHERE idOffre =" . $idOffre);
+        echo $statut;
     } 
     else 
     {
-        echo $user;
+        echo "erreur !";
     }
 
 
