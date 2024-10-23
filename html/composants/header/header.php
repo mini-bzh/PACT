@@ -90,4 +90,4 @@
             </ul>
         </nav>
     </header>
-    <script src="js/click.js"></script>
+    <script src="../js/click.js"></script>
