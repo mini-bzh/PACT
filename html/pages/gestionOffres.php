@@ -26,10 +26,6 @@
     // recuperation de la reponse et mise en forme
     $contentMesOffres = $stmt->fetchAll();
     
-    
-    
-    //print_r($contentMesOffres);
-    
 ?>
 
 <!DOCTYPE html>
