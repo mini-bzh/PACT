@@ -12,8 +12,10 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$username = $_POST['userName'];
-$password = $_POST['userPSW'];
+if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
+    $username = $_POST['userName'];
+    $password = $_POST['userPSW'];
+}
 
 $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
 
