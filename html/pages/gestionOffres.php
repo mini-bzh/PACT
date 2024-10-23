@@ -11,10 +11,8 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    //
     // Creation requete pour recuperer les offres
     // du professionnel connecte
-    //
     $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
 
     // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
@@ -38,7 +36,7 @@
     </head>
     <body  class=<?php echo "fondPro"; ?>>      <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
-            include "../composants/header/header.php";
+            include "../composants/header/header.php";              // import header (navbar)
         ?>
         <h1>
             Gestion des offres
@@ -52,7 +50,7 @@
                         <h3>Ajouter une offre</h3>
                     </div>
                 </a>
-                <?php foreach($contentMesOffres as $contentOffre)
+                <?php foreach($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
                 {?>
                 <article class="offre" id="offre<?php echo $contentOffre['idoffre']?>">
                     <h2><?php echo $contentOffre["titreoffre"]?></h2>
@@ -67,21 +65,25 @@
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
-                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            <p> <!-- insertion nom du professionel-->
+                                <?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?>
+                            </p>
                         </div>
                     </div>
 
                     <div class="imgChg">
-                        <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
+                        <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante"> <!-- insertion image de l'offre-->
                     </div>
                     <div class="resumePrixDetailOffre">
-                        <p><?php echo $contentOffre["resume"];?></p>
+                        <p>     <!-- insertion résumé de l'offre-->
+                            <?php echo $contentOffre["resume"];?>
+                        </p>
                         <hr>
                         <!-- Tarif minimal -->
                         <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
 
-                    <p id="descriptionOffre">
+                    <p id="descriptionOffre">   <!-- insertion description de l'offre -->
                     <?php echo $contentOffre["description_detaille"]; ?>
                     </p>
                 
@@ -118,12 +120,12 @@
                             </div>-->
 
                             <!-- Horaires -->
-                            <div id="conteneurPlagesHoraires">
+                            <div id="conteneurPlagesHoraires">  <!-- insertion horaires -->
                                 <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
                             </div>
                         </div>
                     </div>
-                    <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]?>"
+                    <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]     //lien vers ville de l'offre ?>"
                     class="conteneurSVGtexte" id="itineraire" target="_blank">
                         <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
@@ -132,7 +134,7 @@
                     <div id="conteneurGestion">
                         <h4>Statut : 
                         <?php
-                            if($contentOffre["enligne"])
+                            if($contentOffre["enligne"])    // définit l'affichage du statut de l'offre en fonction de en ligne / hors ligne
                             {
                                 ?>
                                 <span class="enLigne" id="txtEnLigne">En ligne</span></h4>
@@ -149,7 +151,7 @@
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                             <?php
-                                if($contentOffre["enligne"])
+                                if($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
                                 {
                                     ?>
                                     <img src="../icones/horsLigneSVG.svg" alt="svg hors ligne" id="imgEnHorsLigne">
@@ -164,23 +166,23 @@
                             ?>
                             
                             <?php
-                                        if($contentOffre["enligne"])
-                                        {
-                                            ?>
-                                            <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
-                                            <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>
-                                            <?php
-                                        }
-                                    ?>
+                                    if($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
+                                    {
+                                        ?>
+                                        <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>
+                                        <?php
+                                    }
+                                ?>
                                 </p>
                             </div>
                             <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre']?>" <?php
-                                if($contentOffre["enligne"])
+                                if($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
                                 {
                                     ?>
                                     class="btnModifCache";
