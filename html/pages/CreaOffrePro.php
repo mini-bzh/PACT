@@ -145,7 +145,6 @@
 
 
 if (!empty($_POST)) {
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
     $qwery.= "titreOffre,";
