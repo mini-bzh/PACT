@@ -52,11 +52,10 @@ if (($correspond === false) && (count($result) === 0) && (count($result2) === 0)
     $message1 = "<p style='color:red;'>Ce nom d'utilisateur n'existe pas.</p>";
 }
 
-if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) && (count($result2) === 1))){
+if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
-print(count($result));
-print(count($result2));
+
 ?>
 
 
