@@ -232,7 +232,7 @@ p{
 }
 .apercuOffre{
     width: 600px;
-    height: fit-content;
+    height: 550px;
 
     border-radius: 20px;
     background-color: white;
@@ -437,9 +437,11 @@ p{
     padding-right: 12px;
 }
 
-.fondPro header li:hover{
+#test{
+    width: auto;
+    display: flex;
+    justify-content: center;
 }
-
 .fondVisiteur .li:hover{
     background: linear-gradient(white, var(--primaryLight));
 }
@@ -463,6 +465,14 @@ p{
 
 .aHeader > h3 {
     margin: 0;
+}
+
+.ulHeader .aHeader:hover{
+    background: linear-gradient(white, var(--primary));
+}
+
+.navBarPro .ulHeader .aHeader:hover{
+    background: linear-gradient(white, var(--secondary));
 }
 
 }

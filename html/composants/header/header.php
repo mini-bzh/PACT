@@ -5,7 +5,7 @@
         $user =$_GET["user"];
     }
 ?>
-
+    <link rel="stylesheet" href="../../style/style.css">
     <header class="headerPC-Tab <?php
         if($user == "pro")
         {
@@ -13,7 +13,7 @@
         }
     ?>">
         <nav class="navHeader">
-            <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
+        <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
                     <a class="aHeader" href="/pages/accueil.php?user=<?php echo $user?>">
