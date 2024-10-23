@@ -52,6 +52,9 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
     $message1 = "<p style='color:red;'>Ce nom d'utilisateur n'existe pas.</p>";
 }
 
+if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
+    $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+}
 ?>
 
 
@@ -198,8 +201,6 @@ if ($correspond === true) {
         validerCorrect();
     </script>
 <?php
-} else if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
-    $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
 
 
