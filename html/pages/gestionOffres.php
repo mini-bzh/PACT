@@ -177,11 +177,11 @@
                                     ?>
                                 </p>
                             </div>
-                            <a href="modifOffre.php">
+                            <a href="modifOffre.php?idoffre=<?php echo $contentOffre['idoffre']?>">
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre </p>
-                                <?php echo $contentOffre['idoffre']?>
+                                
                             </div>
                             </a>
                         </div>
