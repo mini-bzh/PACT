@@ -1,6 +1,7 @@
 // Fonction d'affichage de la pop-ip
 function validerCorrect() {
     let pop = document.getElementsByClassName('popUp');
+    alert(pop.innerHTML);
     pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 
