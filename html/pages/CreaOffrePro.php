@@ -95,6 +95,7 @@
                     <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
+                <!--
                 <div class="champs">
                     <label for="offre">Type offre :</label>
                     <select id="offre" name="offre">
@@ -103,7 +104,6 @@
                         <option value="Premium">Premium</option>
                     </select>
                 </div>
-                <!--
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
