@@ -18,5 +18,7 @@
 
     $idOffre = $_POST["idOffre"];
 
-    $dbh->query("SELECT enLigne from tripskell.offrepro WHERE idoffre = $idOffre);
+    $statut = $dbh->query("SELECT enLigne from tripskell.offrepro WHERE idoffre = $idOffre);
+
+    echo $statut;
 ?>
