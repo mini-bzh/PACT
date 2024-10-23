@@ -29,7 +29,7 @@
         $stmt->execute();
         $result = $stmt->fetchAll();        
         
-        echo $result["enLigne"];
+        print_r($result);
     } 
     else 
     {
