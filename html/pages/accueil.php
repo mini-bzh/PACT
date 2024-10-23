@@ -8,17 +8,7 @@
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-    $profil = null;
-    if(key_exists("idCompte", $_SESSION)) {
-        $stmt = $dbh->prepare("select count(*) from (select id_c from tripskell.pro_public where id_c=:id_c union select id_c from tripskell.pro_prive where id_c=:id_c );"); 
-        $stmt->bindParam(":id_c", $id_c);
-
-        $id_c = $_SESSION["idCompte"];
-
-        $stmt->execute();
-        $comptePro = $stmt->fetchAll()[0];
-        print_r($comptePro);
-    }
+    include('/var/www/html/php/verif_compte_pro.php');
 
     
     
