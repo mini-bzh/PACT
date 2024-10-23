@@ -12,7 +12,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("SELECT * from tripskell._compte");
+$stmt = $dbh->prepare("SELECT * from tripskell.pro_public");
 
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -20,7 +20,7 @@ echo "<pre>";
 print_r($result);
 echo "</pre>";
 
-foreach($dbh->query("SELECT * from tripskell._compte") as $row) {
+foreach($dbh->query("SELECT * from tripskell.pro_public") as $row) {
     echo "<pre>"; // pour la version navigateur (présentation brute)
     print_r($row);
     echo "</pre>";
