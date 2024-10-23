@@ -106,7 +106,7 @@ p{
 }
 
 .coMembre:hover, .coPro:hover, .nouvCompte:hover{
-    transform: scale(12);
+    transform: scale(1.1);
 }
 
 
