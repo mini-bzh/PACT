@@ -32,7 +32,15 @@
         $stmt->execute();
         $result = $stmt->fetchAll();
         
-        echo("modification effectuée");
+        if($enLigne)
+        {
+            echo("Votre offre est maintenant hors ligne, invisible pour les autres utilisateurs");
+        }
+        else
+        {
+            echo("Votre offre est maintenant en ligne, visible par les autres utilisateurs.");
+        }
+        
     } 
     else 
     {
