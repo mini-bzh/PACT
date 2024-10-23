@@ -180,7 +180,7 @@
                                 </p>
                             </div>
                             <a href="modifOffre.php" <?php
-                                if(!$contentOffre["enligne"])
+                                if($contentOffre["enligne"])
                                 {
                                     ?>
                                     class="btnModifCache";
