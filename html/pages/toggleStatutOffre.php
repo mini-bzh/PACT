@@ -24,13 +24,13 @@
         // Récupérer les paramètres envoyés via POST
         $idOffre = $_POST["idOffre"];
 
-        $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = false where idoffre = ".$idOffre.";");
+        $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = true where idoffre = ".$idOffre.";");
         $stmt->execute();
         $result = $stmt->fetchAll();
 
         $stmt = $dbh->prepare("SELECT enLigne from tripskell.offre_pro where idoffre = ".$idOffre.";");
         $stmt->execute();
-        $result = $stmt->fetchAll();        
+        $result = $stmt->fetchAll();  
         
         echo($result[0]["enligne"]);
     } 
