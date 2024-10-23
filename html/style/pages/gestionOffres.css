@@ -85,6 +85,6 @@ h1{
     cursor: pointer;
 }
 
-.offre4 .conteneurBtnGestion img{
+#offre4 .conteneurBtnGestion img{
     height: 500px;
 }
