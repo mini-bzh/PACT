@@ -114,7 +114,7 @@ input[type="checkbox"]{
     height: 300px;
     border: var(--accent) solid 2px;
     color: var(--accent);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }

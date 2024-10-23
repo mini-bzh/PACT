@@ -53,7 +53,11 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 }
 
 if (($correspond === true)) {
-    
+?>
+    <script>
+        validerCorrect();
+    </script>
+<?php
 } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
