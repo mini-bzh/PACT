@@ -25,7 +25,10 @@
     
     // recuperation de la reponse et mise en forme
     $contentMesOffres = $stmt->fetchAll();
-    print_r($contentMesOffres);
+    
+    
+    
+    //print_r($contentMesOffres);
     
 ?>
 
