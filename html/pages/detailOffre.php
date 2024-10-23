@@ -1,6 +1,6 @@
 <?php
     // reccuperation des parametre de connection a la BdD
-    include('../connection_params.php');
+    include('/var/www/html/connection_params.php');
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -28,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>détail offre</title>
-    <link rel="stylesheet" href="../style/pages/detailOffre.css">
+    <link rel="stylesheet" href="/style/pages/detailOffre.css">
 </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($user == "pro")
@@ -41,7 +41,7 @@
             }
         ?>>
         <?php
-            include "../composants/header/header.php";
+            include "/var/www/html/composants/header/header.php";
         ?>
         <main class="conteneurOffre">
                 <article class="offre">
@@ -62,13 +62,13 @@
                             <!-- <p>38 avis</p> -->
                         </div>
                         <div class="conteneurSVGtexte">
-                            <img src="../icones/logoUserSVG.svg" alt="pro">
+                            <img src="/icones/logoUserSVG.svg" alt="pro">
                             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                     </div>
 
                     <div class="imgChg">
-                        <img src="../images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
+                        <img src="/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
                     </div>
                     <div class="resumePrixDetailOffre">
                         <p><?php echo $contentOffre["resume"];?></p>
@@ -81,7 +81,7 @@
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
                         <div id="partieTags">
                             <div class="conteneurSVGtexte">
-                                <img src="../icones/tagSVG.svg" alt="icone tag">
+                                <img src="/icones/tagSVG.svg" alt="icone tag">
                                 <h4>Tags</h4>
                             </div>
                             <hr>
@@ -96,7 +96,7 @@
                         </div>
                         <div id="partieHoraires">
                             <div class="conteneurSVGtexte">
-                                <img src="../icones/horairesSVG.svg" alt="icone horaires">
+                                <img src="/icones/horairesSVG.svg" alt="icone horaires">
                                 <h4>Horaires</h4>
                             </div>
                             <hr><!--
@@ -116,16 +116,16 @@
                     </div>
                     <!-- <a href="https://www.google.com/maps/search/?api=1&query=Fort%20La%20Latte%20-%20Ch%C3%A2teau%20de%20la%20Roche%20Goyon"
                     class="conteneurSVGtexte" id="itineraire" target="_blank">
-                        <img src="../icones/adresseSVGblanc.svg" alt="icone adresse">
+                        <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
                     </a> -->
                 </article>
         </main>
         <?php                                                   //footer
-            include "../composants/footer/footer.php";
+            include "/var/www/html/composants/footer/footer.php";
         ?>
     </body>
-    <script src="../js/scriptImageChangeante.js"></script>
+    <script src="/js/scriptImageChangeante.js"></script>
 </html>
 
 <?php $dbh = null; // on ferme la connexion  ?>
