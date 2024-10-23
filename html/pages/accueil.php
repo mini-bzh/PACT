@@ -1,5 +1,5 @@
 <?php
-    $user = null;
+    $profil = null;
     if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
@@ -25,20 +25,20 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
         <link rel="stylesheet" href="../style/pages/accueil.css">
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($user == "pro")
+            if ($profil == "pro")
             {
-                echo $user . "fondPro";
+                echo "fondPro";
             }
             else
             {
-                echo $user . "fondVisiteur";
+                echo "fondVisiteur";
             }
         ?>>
         <?php include "../composants/header/header.php";        //import navbar
         ?>
         <main>
             <?php
-                if($user == "pro")
+                if($profil == "pro")
                 {
                     ?>
                     <h1>Mes offres</h1>
@@ -58,7 +58,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                         foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row) 
                         {
                             ?>
-                                <a href="/pages/detailOffre.php?user=<?php echo $user?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                <a href="/pages/detailOffre.php?user=<?php echo $profil?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
                                         <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
