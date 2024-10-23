@@ -67,11 +67,10 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                             
                                         <div class="conteneurImage">
                                             <img src="/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="fort la latte">
-                                            <div class="text-overlay">dès 7€/pers</div>
+                                            <div class="text-overlay">dès <?php echo $row["tarifminimal"]?>€/pers</div>
                                         </div>
                                         
-                                        <p class="resumeApercu">Le Fort La Latte, construit au XIVe siècle, est un château fort majestueux situé en Bretagne, sur une 
-                                        falaise face à la mer.</p>
+                                        <p class="resumeApercu"><?php echo $row["resume"]?></p>
                             
                                         <div class="conteneurSVGtexte">
                                             <img src="/icones/adresseSVG.svg" alt="adresse">

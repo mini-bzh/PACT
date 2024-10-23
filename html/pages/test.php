@@ -29,7 +29,8 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 </head>
 <body>
     <?php
-        foreach($dbh->query("SELECT * from tripskell._offre") as $row) {
+        foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row) 
+        {
             echo "<pre>"; // pour la version navigateur (présentation brute)
             ?>
                 <p><?php echo $row["titreoffre"]?></p>
