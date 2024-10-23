@@ -6,7 +6,12 @@
         <title>Document</title>
 </head>
 <body>
-<button id="monBouton">Exécuter PHP</button>
+
+<style>
+    #btn:hover{
+        cursor: pointer;
+    }
+</style>
 <div id="btn">
     <p>clique !</p>
 </div>
