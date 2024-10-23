@@ -1,5 +1,5 @@
 <?php
-// CreaOffreProPubV3
+// CreaOffreProPubV4
 // php -S localhost:8888
 // http://localhost:8888/pages/CreaOffrePro.php
 
@@ -28,7 +28,7 @@ $user = "pro";
 
         <div class="conteneur-formulaire">
             <h1>Création d'une offre</h1>
-            <form>
+            <form  name="test" action="http://localhost:8888/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
@@ -123,6 +123,10 @@ $user = "pro";
                 <!-- <div class="champs">
                     futur data de mise en ligne
                 </div> -->
+
+                <input type="submit" value="Soumettre" />
+                <!-- Bouton de test temporaire -->
+                
             </form>
         </div>
     </main>
@@ -147,6 +151,7 @@ $dbname = "postgres";
 $user = "sae";
 $pass = "ashton-izzY-c0mplet";
 
+if(!empty($_POST)){
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 $titre = $_POST["titre"];
@@ -171,4 +176,5 @@ $stmt = $dbh->prepare(
 
 $stmt->execute();
 $dbh = null;
+}
 ?>
