@@ -16,7 +16,7 @@
         $user =$_GET["user"];
     }
 
-    $contentOffre = $dbh->query("select * from tripskell.offre_pro where id_c='" . $user . "';")->fetchAll();
+    $contentMesOffres = $dbh->query("select * from tripskell.offre_pro where id_c='" . $user . "';")->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -43,36 +43,36 @@
                         <h3>Ajouter une offre</h3>
                     </div>
                 </a>
-                <?php foreach($contentOffre as $value){?>
+                <?php foreach($contentMesOffres as $contentOffre){?>
                 <article class="offre">
-                    <h2><?php echo $value["titreoffre"]?></h2>
+                    <h2><?php echo $contentOffre["titreoffre"]?></h2>
                     <!-- <p>Visite</p> future categorie -->
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $value["note"];?></p>
+                                <p><?php echo $contentOffre["note"];?></p>
                                 <?php include "/var/www/html/php/etoiles.php"; ?>
                             </div>
                             <!-- <p>38 avis</p> -->
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="../icones/logoUserSVG.svg" alt="pro">
-                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $value["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                     </div>
 
                     <div class="imgChg">
-                        <img src="/images/imagesOffres/<?php echo $value["img1"]; ?>" alt="" id="imageChangeante">
+                        <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
                     </div>
                     <div class="resumePrixDetailOffre">
-                        <p><?php echo $value["resume"];?></p>
+                        <p><?php echo $contentOffre["resume"];?></p>
                         <hr>
                         <!-- Tarif minimal -->
-                        <p>À partir de <?php echo $value["tarifminimal"];?>€/pers</p>
+                        <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
 
                     <p id="descriptionOffre">
-                    <?php echo $value["description_detaille"]; ?>
+                    <?php echo $contentOffre["description_detaille"]; ?>
                     </p>
                 
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
@@ -109,7 +109,7 @@
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$value["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$value["horaires"])[1]; ?></span></p>
+                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
                             </div>
                         </div>
                     </div>
