@@ -7,7 +7,6 @@ function ChangerBtnLigne()
     } else
     {
         image.src = "/icones/horsLigneSVG.svg";
-        console.log("cc");
     }
 
     const texte = document.getElementById('txtEnHorsLigne');

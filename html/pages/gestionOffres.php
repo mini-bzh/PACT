@@ -118,8 +118,30 @@
                         <h4>Statut : <span class="enLigne" id="txtEnLigne">en Ligne</span></h4>
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
-                                <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
-                                <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
+                                <img src="../icones/
+                                <?php
+                                    if($contentOffre["enligne"])
+                                    {
+                                        echo "horsLigneSVG.svg";
+                                    }
+                                    else
+                                    {
+                                        echo "enLigneSVG.svg";
+                                    }
+                                ?>
+                                " alt="" id="imgEnHorsLigne">
+                                <p id="txtEnHorsLigne">
+                                    <?php
+                                        if($contentOffre["enligne"])
+                                        {
+                                            echo "Mettre l'offre hors ligne";
+                                        }
+                                        else
+                                        {
+                                            echo "Mettre l'offre en ligne";
+                                        }
+                                    ?>
+                                </p>
                             </div>
                             <a href="modifOffre.php">
                             <div class="btnGestionOffre grossisQuandHover">
