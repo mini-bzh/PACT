@@ -146,7 +146,7 @@
                             }
                         ?>
                         
-                        <div id="conteneurBtnGestion">
+                        <div class="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                             <?php
                                 if($contentOffre["enligne"])
