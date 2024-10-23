@@ -41,13 +41,14 @@
             }
         ?>>
         <?php
+            // ajout du header
             include "/var/www/html/composants/header/header.php";
         ?>
         <main class="conteneurOffre">
                 <article class="offre">
                     
                     <h2><?php echo $contentOffre["titreoffre"];?></h2>
-                    <p>Visite</p>
+                    <!-- <p>Visite</p> future categorie -->
                     <div class="conteneurSpaceBetween">
                         <div class="noteDetailOffre">
                             <div class="etoiles">
@@ -66,25 +67,28 @@
                             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                     </div>
-
                     <div class="imgChg">
-                        <img src="/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="" id="imageChangeante">
+                        <!-- image de l'offre -->
+                        <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
                     </div>
                     <div class="resumePrixDetailOffre">
+                        <!-- Resume -->
                         <p><?php echo $contentOffre["resume"];?></p>
                         <hr>
+                        <!-- Tarif minimal -->
                         <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
 
+                    <!-- Offre detaille -->
                     <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                 
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                        <div id="partieTags">
+                        <!-- future tag<div id="partieTags">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/tagSVG.svg" alt="icone tag">
                                 <h4>Tags</h4>
                             </div>
-                            <hr>
+                            <hr> 
                             <div id="conteneurTagsOffre">
                                 <p class="tagOffre">Culturel</p>
                                 <p class="tagOffre">Histoire</p>
@@ -93,13 +97,13 @@
 
 
                             </div>
-                        </div>
+                        </div> -->
                         <div id="partieHoraires">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/horairesSVG.svg" alt="icone horaires">
                                 <h4>Horaires</h4>
                             </div>
-                            <hr><!--
+                            <hr><!-- future jours d'ouverture
                             <div id="conteneurJoursOffre">
                                 <p class="jour jourOuvert">L</p>
                                 <p class="jour jourOuvert">Ma</p>
@@ -109,6 +113,8 @@
                                 <p class="jour jourFerme">S</p>
                                 <p class="jour jourFerme">D</p>
                             </div>-->
+
+                            <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
                                 <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
                             </div>
@@ -121,11 +127,12 @@
                     </a> -->
                 </article>
         </main>
-        <?php                                                   //footer
+        <?php                                                   
+            // ajout du footer
             include "/var/www/html/composants/footer/footer.php";
         ?>
     </body>
-    <script src="/js/scriptImageChangeante.js"></script>
+    <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->
 </html>
 
 <?php $dbh = null; // on ferme la connexion  ?>
