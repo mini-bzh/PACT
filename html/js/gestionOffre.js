@@ -9,14 +9,14 @@ function ChangerBtnLigne(idOffre)
     {
         image.src = "/icones/horsLigneSVG.svg";
     }
-
+/*
     //const texte = document.getElementById('txtEnHorsLigne');
     const texte = document.querySelector("#offre" + idOffre + "conteneurBtnGestion p");
     if (texte.innerText === "Mettre l'offre hors ligne") {
         texte.innerText = "Mettre l'offre en ligne";
     } else {
         texte.innerText = "Mettre l'offre hors ligne";
-    }
+    }*/
 
     //const texte2 = document.getElementById('txtEnLigne');
     const texte2 = document.querySelector("#offre" + idOffre + "conteneurGestion h4 span");
