@@ -3,13 +3,6 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-
-    $profil = null;
-    if(key_exists("user", $_GET))
-    {
-        $profil =$_GET["user"];
-    }
-
     $driver = "pgsql";
 
     $server = "postgresdb";
@@ -24,15 +17,16 @@
         // Récupérer les paramètres envoyés via POST
         $idOffre = $_POST["idOffre"];
 
-        $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = true where idoffre = ".$idOffre.";");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
         $stmt = $dbh->prepare("SELECT enLigne from tripskell.offre_pro where idoffre = ".$idOffre.";");
         $stmt->execute();
-        $result = $stmt->fetchAll();  
+        $enLigne = $stmt->fetchAll()[0]["enligne"];
+
+
+        $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = ". !$enLigne . " where idoffre = ".$idOffre.";");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
         
-        echo($result[0]["enligne"]);
+        echo("modification effectuée");
     } 
     else 
     {

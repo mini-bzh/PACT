@@ -5,12 +5,7 @@
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-    $idOffre = null;
     $user = null;
-    if(key_exists("idOffre", $_GET))
-    {
-        $idOffre =$_GET["idOffre"];
-    }
     if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
@@ -122,7 +117,7 @@
                     <div id="conteneurGestion">
                         <h4>Statut : <span class="enLigne" id="txtEnLigne">en Ligne</span></h4>
                         <div id="conteneurBtnGestion">
-                            <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="ChangerBtnLigne()">
+                            <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                                 <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
                                 <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
                             </div>

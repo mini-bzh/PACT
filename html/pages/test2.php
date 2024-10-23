@@ -17,11 +17,12 @@
         cursor: pointer;
     }
 </style>
-<div id="btn" onclick="toggle()">
+<div id="btn" onclick="toggleEnLigne(<?php echo 4;?>)">
     <p>clique !</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="gestionOffre.js"></script>
 <script>
 
     function toggle()

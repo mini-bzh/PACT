@@ -24,9 +24,9 @@ function ChangerBtnLigne()
         texte2.innerText = "en Ligne";
     }
 }
-/*
-$('#btn').on('click', function() {
-    const idOffre = <?php echo "4"?>;
+
+function toggleEnLigne(idOffre)
+{
     $.ajax({
         url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
         type: 'POST',        // Type de la requête (POST dans ce cas)
@@ -38,4 +38,4 @@ $('#btn').on('click', function() {
             alert('Erreur lors de l\'exécution de la fonction PHP');
         }
     });
-});*/
+}
