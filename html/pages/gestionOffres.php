@@ -133,18 +133,22 @@
                         
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
-                                <img src="../icones/
-                                <?php
-                                    if($contentOffre["enligne"])
-                                    {
-                                        echo "horsLigneSVG.svg";
-                                    }
-                                    else
-                                    {
-                                        echo "enLigneSVG.svg";
-                                    }
-                                ?>
-                                " alt="" id="imgEnHorsLigne">
+                            <?php
+                                if($contentOffre["enligne"])
+                                {
+                                    ?>
+                                    <img src="../icones/horsLigneSVG.svg" alt="svg hors ligne" id="imgEnHorsLigne">
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <img src="../icones/enLigneSVG.svg" alt="svg en ligne" id="imgEnHorsLigne">
+                                    <?php
+                                }
+                            ?>
+                            
+                            
                                 <p id="txtEnHorsLigne">
                                     <?php
                                         if($contentOffre["enligne"])
