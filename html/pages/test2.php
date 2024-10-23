@@ -7,10 +7,13 @@
 </head>
 <body>
 <button id="monBouton">Exécuter PHP</button>
+<div id="btn">
+    <p>clique !</p>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $('#monBouton').on('click', function() {
+    $('#btn').on('click', function() {
         const idOffre = <?php echo "4"?>;
         $.ajax({
             url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
