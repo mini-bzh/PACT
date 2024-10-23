@@ -67,7 +67,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/connexion.css">
-    <!-- <script src="../js/connexion.js" defer></script> -->
+    <script src="../js/connexion.js" defer></script>
 </head>
 <body class=
 <?php
@@ -176,7 +176,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 
 </body>
 
-<script>
+<!-- <script>
     function validerCorrect() {
         let pop = document.querySelector('.popUp');
         pop.style.display = 'flex';
@@ -189,7 +189,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
             window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro";
         }, 3000);
     }
-</script>
+</script> -->
 
 </html>
 
