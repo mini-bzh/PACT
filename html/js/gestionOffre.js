@@ -11,7 +11,7 @@ function ChangerBtnLigne(idOffre)
     }
 
     //const texte = document.getElementById('txtEnHorsLigne');
-    const texte = document.querySelector("#offre" + idOffre + "#txtEnHorsLigne");
+    const texte = document.querySelector("#offre" + idOffre + " #txtEnHorsLigne");
     console.log(texte);
     if (texte.innerText === "Mettre l'offre hors ligne") 
         {
@@ -22,7 +22,7 @@ function ChangerBtnLigne(idOffre)
     }
 
     //const texte2 = document.getElementById('txtEnLigne');
-    const texte2 = document.querySelector("#offre" + idOffre + "#conteneurGestion h4 span");
+    const texte2 = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
     console.log(texte2);
     if (texte2.innerText === "En ligne")
     {
