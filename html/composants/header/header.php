@@ -66,7 +66,7 @@
                 <li class="liHeaderMobile" id="btAccueilMobile">
                     <a class="aHeaderMobile" href="/pages/accueil.php?user=<?php echo $user?>">
                     <img src="/icones/homeSVG.svg" alt="icone home">
-                    <div class="trait" hidden></div>
+                    <div class="trait"></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btRechMobile">
@@ -78,13 +78,13 @@
                 <li class="liHeaderMobile" id="btAvisMobile">
                     <a class="aHeaderMobile" href="">
                     <img src="/icones/commentSVG.svg" alt="icone commentaires">
-                    <div class="trait" hidden></div>
+                    <div class="trait"></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btCompteMobile">
                     <a class="aHeaderMobile" href="/pages/compte.php?user=<?php echo $user; ?>">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
-                    <div class="trait" hidden></div>
+                    <div class="trait"></div>
                     </a>
                 </li>
             </ul>
