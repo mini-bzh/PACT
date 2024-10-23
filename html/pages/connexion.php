@@ -53,7 +53,7 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 }
 
 // Traite si les logins sont corrects
-if (($correspond === true)) {
+if ($correspond === true) {
 ?>
     <script>
         validerCorrect();
