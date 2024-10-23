@@ -12,10 +12,11 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive");
-
 $username = $_POST['userName'];
 $password = $_POST['userPSW'];
+
+print($username);
+print($password);
 
 $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive");
 
