@@ -1,6 +1,10 @@
 /* corps de la page */
 @import "../style.css";
 
+main{
+    display: flex;
+    justify-content: center;
+}
 
 .conteneur-formulaire {
     width: 60%;
@@ -18,7 +22,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.champs {
+div {
     margin-bottom: 20px;
 }
 
@@ -27,22 +31,29 @@ label {
     font-size: 18px; 
     font-weight: bold;
     margin-bottom: 10px;
+    align-self: center;
 }
 
 
 input, select, textarea {
-    width: 50%; 
+    width: 40%; 
     padding: 12px; 
     margin-bottom: 10px;
+    margin-left: 20px;
     border-radius: 5%;
     border: 1px solid #ccc;
     font-size: 18px; 
     box-sizing: border-box;
 }
 
+.champs{
+    display: flex;
+}
+
 textarea {
     resize: none;
-    height: 150px;
+    height: 200px;
+    width: 70%;
 }
 
 .required {
@@ -76,6 +87,8 @@ textarea {
 .heures {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    max-width: 30%;
 }
 
 .heures label {
@@ -86,4 +99,30 @@ textarea {
     width: auto;
     padding: 8px;
     font-size: 16px; 
+}
+
+.adresse{
+    display: flex;
+}
+
+.adresse>input{
+    padding: 12px; 
+    margin-bottom: 10px;
+    margin-left: 5px;
+    border-radius: 5%;
+    border: 1px solid #ccc;
+    font-size: 18px; 
+    box-sizing: border-box;
+}
+
+#num{
+    width: 15%; 
+}
+
+#nomRue{
+    width: 25%; 
+}
+
+#ville{
+    width: 40%; 
 }
