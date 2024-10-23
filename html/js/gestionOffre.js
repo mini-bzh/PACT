@@ -20,6 +20,7 @@ function ChangerBtnLigne(idOffre)
 
     //const texte2 = document.getElementById('txtEnLigne');
     const texte2 = document.querySelector("#offre" + idOffre + "conteneurGestion h4 span");
+    console.log(texte2);
     if (texte2.innerText === "En ligne")
     {
         texte2.innerText = "Hors ligne";
