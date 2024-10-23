@@ -76,15 +76,15 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                                             <p><?php echo $row["ville"]?></p>
                                         </div>
                                         <div class="conteneurSpaceBetween">
-                                            <div class="etoiles">
+                                            <!--<div class="etoiles">
                                                 <p>4.7</p>
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
+                                                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">                    //coming soon !
                                             </div>
-                                            <p>439 avis</p>
+                                            <p>439 avis</p>-->
                                         </div>
                                     </article>
                                 </a>
