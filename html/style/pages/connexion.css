@@ -37,8 +37,8 @@ form div{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 23%;
-    margin-top: 2%;
+    margin-left: 5%;
+    margin-top: 4%;
 }
 
 input[type="checkbox"]{
@@ -47,7 +47,7 @@ input[type="checkbox"]{
     margin-right: 1%;
 }
 
-main > div > a{
+.zoneBtn button, .zoneBtn a{
     border-radius: 25px;
     width: 320px;
     height: 88px;
@@ -57,9 +57,12 @@ main > div > a{
     align-items: center;
     color: white;
     justify-content: space-evenly;
+    margin-top: 3%;
+    cursor: pointer;
+    border: none;
 }
 
-main > div > a > svg{
+.btnAnnuler > svg{
     width: 40px;
     height: 40px;
 }
@@ -75,7 +78,7 @@ main > div > a > svg{
 .zoneBtn{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 3%;
 }
 

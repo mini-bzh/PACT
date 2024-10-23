@@ -8,23 +8,23 @@ $dbname = "postgres";
 $user = "sae";
 $pass = "ashton-izzY-c0mplet";
 
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+// $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+// $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive");
+// $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive");
 
-$stmt->execute();
-$result = $stmt->fetchAll();
-echo "<pre>";
-print_r($result);
-echo "</pre>";
+// $stmt->execute();
+// $result = $stmt->fetchAll();
+// echo "<pre>";
+// print_r($result);
+// echo "</pre>";
 
-foreach($dbh->query("SELECT * from tripskell.pro_prive") as $row) {
-    echo "<pre>";
-    print_r($row);
-    echo "</pre>";
-}
+// foreach($dbh->query("SELECT * from tripskell.pro_prive") as $row) {
+//     echo "<pre>";
+//     print_r($row);
+//     echo "</pre>";
+// }
 
 ?>
 
@@ -100,29 +100,29 @@ foreach($dbh->query("SELECT * from tripskell.pro_prive") as $row) {
         <input type="password" id="userPSW" name="userPSW" minlength="12" required>
     </div>
 
-</form>
-
-<div class="accepteSouvenir">
+    <div class="accepteSouvenir">
     <input type="checkbox" id="souvenir" name="souvenir">
     <p class="texteLarge">Se souvenir de moi</p>
 </div>
 
-<div class="zoneBtn">
-    <a href="compte.php" class="btnAnnuler">
-        <p class="texteLarge boldArchivo">Annuler</p>
+    <div class="zoneBtn">
+        <a href="compte.php" class="btnAnnuler">
+            <p class="texteLarge boldArchivo">Annuler</p>
 <?php
-        include '../icones/croixSVG.svg';
+            include '../icones/croixSVG.svg';
 ?>
-    </a>
+        </a>
 
-    <a href="#" class="btnConfirmer">
-        <p class="texteLarge boldArchivo">Confirmer</p>
+        <button type="submit" href="#" class="btnConfirmer">
+            <p class="texteLarge boldArchivo">Confirmer</p>
 <?php
-        include '../icones/okSVG.svg';
+            include '../icones/okSVG.svg';
 ?>
-    </a>
-</div>
 
+        </button>
+    </div>
+
+</form>
 
 </main>
 
