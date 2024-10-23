@@ -1,19 +1,15 @@
 <?php
-    $profil = null;
-    if(key_exists("user", $_GET))
-    {
-        $profil =$_GET["user"];
-    }
+    session_start(); // recuperation de la sessions
 
-$driver = "pgsql";
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-$server = "postgresdb";
-$dbname = "postgres";
-
-$user = "sae";
-$pass = "ashton-izzY-c0mplet";
-
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +21,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     <link rel="stylesheet" href="../style/pages/recherche.css">
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($profil == "pro")
+            if ($comptePro)
             {
                 echo "fondPro";
             }
@@ -38,7 +34,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
         ?>
         <main>
         <?php
-                if($profil == "pro")
+                if($comptePro)
                 {
                     ?>
                     <h1>Mes offres</h1>
