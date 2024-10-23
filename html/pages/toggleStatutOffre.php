@@ -34,17 +34,16 @@
         
         if($enLigne)
         {
-            echo("Votre offre est maintenant hors ligne, invisible pour les autres utilisateurs");
+            echo("Votre offre est maintenant hors ligne, invisible pour les autres utilisateurs. Vous pouvez la modifier.");
         }
         else
         {
-            echo("Votre offre est maintenant en ligne, visible par les autres utilisateurs.");
+            echo("Votre offre est maintenant en ligne, visible par les autres utilisateurs. Mettez la hors ligne pour pouvoir la modifier.");
         }
-        
     } 
     else 
     {
-        echo "erreur !";
+        echo "erreur : nous n'avons pas pu changer le statut de votre offre";
     }
 ?>
 
