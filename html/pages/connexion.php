@@ -56,7 +56,6 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 if ($correspond === true) {
 ?>
     <script>
-        alert("ok");
         validerCorrect();
     </script>
 <?php
@@ -76,7 +75,7 @@ if ($correspond === true) {
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/connexion.css">
-    <script src="../js/connexion.js" defer></script>
+    <!-- <script src="../js/connexion.js" defer></script> -->
 </head>
 <body class=
 <?php
@@ -183,4 +182,22 @@ if ($correspond === true) {
 
 </main>
 
-</div>  
+</body>
+
+<script>
+    function validerCorrect() {
+        let pop = document.getElementsByClassName('popUp');
+        pop.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+
+        // Après 5 secondes, cacher la popup et réactiver les interactions
+        setTimeout(function() {
+            pop.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+            header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
+            exit;
+        }, 5000);
+    }
+</script>
+
+</html>
