@@ -438,7 +438,6 @@ p{
 }
 
 .fondPro header li:hover{
-    background-color: red;
 }
 
 .fondVisiteur .li:hover{
@@ -496,6 +495,7 @@ p{
     }
 
     .trait{
+        display: none;
         background-color: #fff;
         width: 52px;
         height: 7px;

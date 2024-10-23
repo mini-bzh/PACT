@@ -44,6 +44,12 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                     <h1>Mes offres</h1>
                     <?php
                 }
+                else
+                {
+                    ?>
+                    <h1>Toutes les offres</h1>
+                    <?php
+                }
             ?>
 
             <section id="conteneurOffres">

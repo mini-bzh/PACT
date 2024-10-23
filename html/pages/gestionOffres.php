@@ -1,4 +1,10 @@
 <?php
+    // reccuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+        
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
     $idOffre = null;
     $user = null;
     if(key_exists("idOffre", $_GET))
@@ -10,45 +16,18 @@
         $user =$_GET["user"];
     }
 
-
-    /*echo "HW";
-
-    $driver = "pgsql";
-
-    $server = "postgresdb";
-    $dbname = "postgres";
-
-    $user = "sae";
-    $pass = "ashton-izzY-c0mplet";
-
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-
-
-    foreach($dbh->query("SELECT * from tripskell._compte") as $row) {
-            echo "<pre>"; // pour la version navigateur (présentation brute)
-            print_r($row);
-            echo "</pre>";
-    }*/
+    $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where id_c='" . $user . "';")->fetchAll()[0];
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gestion des offre</title>
-    <link rel="stylesheet" href="../style/pages/gestionOffres.css">
-</head>
-    <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($user == "pro")
-            {
-                echo "fondPro";
-            }
-            else
-            {
-                echo "fondVisiteur";
-            }
-        ?>>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gestion des offre</title>
+        <link rel="stylesheet" href="../style/pages/gestionOffres.css">
+    </head>
+    <body  class=<?php echo "fondPro"; ?>>      <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
             include "../composants/header/header.php";
         ?>
