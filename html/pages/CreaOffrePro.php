@@ -158,9 +158,9 @@ if (!empty($_POST)) {
     $prixMin = $_POST["prix-minimal"];
     $resume = $_POST["resume"];
     $description = $_POST["description"];
-    $horaires = $_POST["horaires"];
     $heuresDebut = $_POST["heure-debut"];
     $heuresFin = $_POST["heure-fin"];
+    $heures = $heuresDebut." ".$heuresFin;
     $numero = $_POST["num"];
     $nomRue = $_POST["nomRue"];
     $ville = $_POST["ville"];
