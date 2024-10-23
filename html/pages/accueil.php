@@ -55,7 +55,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                             ?>
                                 <a href="/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
-                                        <h3>fort la Latte</h3>
+                                        <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
                                             <img src="/icones/logoUserSVG.svg" alt="pro">
                                             <p>Fort la Latte</p>
