@@ -32,7 +32,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
         foreach($dbh->query("SELECT * from tripskell._offre") as $row) {
             echo "<pre>"; // pour la version navigateur (présentation brute)
             ?>
-                <p><?php $row["titreoffre"]?></p>
+                <p><?php echo $row["titreoffre"]?></p>
             <?php
             echo "</pre>";
         }
