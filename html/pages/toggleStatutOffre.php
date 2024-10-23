@@ -32,8 +32,4 @@
     {
         echo "erreur !";
     }
-
-
-
-    echo $statut;
 ?>
