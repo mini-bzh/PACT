@@ -29,7 +29,7 @@
         $stmt->execute();
         $result = $stmt->fetchAll();        
         
-        echo($result["enligne"]);
+        echo($result[0]["enligne"]);
     } 
     else 
     {
