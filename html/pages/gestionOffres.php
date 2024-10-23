@@ -181,6 +181,7 @@
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre </p>
+                                <?php echo $contentOffre['idoffre']?>
                             </div>
                             </a>
                         </div>
