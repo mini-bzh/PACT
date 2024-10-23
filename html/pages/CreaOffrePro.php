@@ -175,8 +175,7 @@ if (!empty($_POST)) {
                                   VALUES('$titre', '$resume', '$description', $prixMin, $note, '$heures', '$accessible', true, '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');"
     );
 
-    echo  "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal) VALUES('$titre', '$resume', '$description', $prixMin, $note, '$heures', '$accessible', null, now(), true,'$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');";
-
+    echo  "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal, id_c) VALUES('$titre', '$resume', '$description', $prixMin, $note, '$heures', '$accessible', null, now(), true,'$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal', 1);";
 
     $stmt->execute();
     $dbh = null;
