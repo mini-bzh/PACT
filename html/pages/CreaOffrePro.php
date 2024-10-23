@@ -28,7 +28,7 @@ $user = "pro";
 
         <div class="conteneur-formulaire">
             <h1>Création d'une offre</h1>
-            <form  name="test" action="http://localhost:8888/pages/CreaOffrePro.php" method="post">
+            <form name="test" action="http://localhost:8888/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
@@ -90,7 +90,7 @@ $user = "pro";
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
                     <input type="text" id="num" name="num" placeholder="Numéro" required>
                     <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
-                    <input type="text" id="Ville" name="Ville" placeholder="Ville" required>
+                    <input type="text" id="ville" name="Ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
                 <div class="champs">
@@ -126,7 +126,7 @@ $user = "pro";
 
                 <input type="submit" value="Soumettre" />
                 <!-- Bouton de test temporaire -->
-                
+
             </form>
         </div>
     </main>
@@ -139,7 +139,7 @@ $user = "pro";
 </html>
 
 
-<?php 
+<?php
 
 echo "HW";
 
@@ -151,30 +151,31 @@ $dbname = "postgres";
 $user = "sae";
 $pass = "ashton-izzY-c0mplet";
 
-if(!empty($_POST)){
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+if (!empty($_POST)) {
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-$titre = $_POST["titre"];
-$prixMin = $_POST["prix-minimal"];
-$resume = $_POST["resume"];
-$description = $_POST["description"];
-$horaires = $_POST["horaires"];
-$heures = $_POST["heures"];
-$numero = $_POST["num"];
-$nomRue = $_POST["nomRue"];
-$ville = $_POST["ville"];
-$codePostal = $_POST["codePostal"];
-$typeOffre = $_POST["offre"];
-$option = $_POST["option"];
-$note = 5;
-$accessible = $_POST["choixAccessible"];
+    $titre = $_POST["titre"];
+    $prixMin = $_POST["prix-minimal"];
+    $resume = $_POST["resume"];
+    $description = $_POST["description"];
+    $horaires = $_POST["horaires"];
+    $heuresDebut = $_POST["heure-debut"];
+    $heuresFin = $_POST["heure-fin"];
+    $numero = $_POST["num"];
+    $nomRue = $_POST["nomRue"];
+    $ville = $_POST["ville"];
+    $codePostal = $_POST["codePostal"];
+    $typeOffre = $_POST["offre"];
+    $option = $_POST["option"];
+    $note = 5;
+    $accessible = $_POST["choixAccessible"];
 
-$stmt = $dbh->prepare(
-    "INSERT INTO tripskell.pro_public(idOffre, titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal)
+    $stmt = $dbh->prepare(
+        "INSERT INTO tripskell.pro_public(idOffre, titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal)
         VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal')"
-);
+    );
 
-$stmt->execute();
-$dbh = null;
+    $stmt->execute();
+    $dbh = null;
 }
 ?>
