@@ -16,8 +16,7 @@
         $user =$_GET["user"];
     }
 
-    $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where id_c='" . $user . "';")->fetchAll()[0];
-    print_r($contentOffre);
+    $contentOffre = $dbh->query("select * from tripskell.offre_pro where id_c='" . $user . "';")->fetchAll()[0];
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +118,7 @@
                     </a> -->
                     <hr id="separateurOffreGestion">
                     <div id="conteneurGestion">
-                        <h4>Statut : <span class="enLigne">en ligne</span></h4>
+                        <h4>Statut : <span class="<?php if($contentOffre["enLigne"]==true){echo "enLigne";}else{echo "horsLigne"}?>" id="txthorsligne>">en ligne</span></h4>
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="ChangerBtnLigne()">
                                 <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
