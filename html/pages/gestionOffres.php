@@ -1,17 +1,31 @@
 <?php
-    // reccuperation des parametre de connection a la BdD
+    session_start(); // recuperation de la sessions
+
+    // recuperation des parametre de connection a la BdD
     include('/var/www/html/php/connection_params.php');
-        
+    
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-    $user = null;
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
 
-    $contentMesOffres = $dbh->query("select * from tripskell.offre_pro where id_c='" . $user . "';")->fetchAll();
+    //
+    // Creation requete pour recuperer les offres
+    // du professionnel connecte
+    //
+    $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
+
+    // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
+    $stmt->bindParam(":id_c", $id_c); 
+    $id_c = $_SESSION["idCompte"];
+
+    $stmt->execute();   // execution de la requete
+    
+    // recuperation de la reponse et mise en forme
+    $contentMesOffres = $stmt->fetchAll();
+    
 ?>
 
 <!DOCTYPE html>
@@ -166,7 +180,7 @@
                             <a href="modifOffre.php">
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
-                                <p>Modifier l'offre</p>
+                                <p>Modifier l'offre <?php echo $contentOffre["idOffre"]->fetchAll()[0];?></p>
                             </div>
                             </a>
                         </div>

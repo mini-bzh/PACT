@@ -18,7 +18,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Accueil</title>
-        <link rel="stylesheet" href="../style/pages/accueil.css">
+        <link rel="stylesheet" href="/style/pages/accueil.css">
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -30,7 +30,7 @@
                 echo "fondVisiteur";
             }
         ?>>
-        <?php include "../composants/header/header.php";        //import navbar
+        <?php include "/var/www/html/composants/header/header.php";        //import navbar
         ?>
         <div class="titrePortable">
 

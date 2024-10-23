@@ -1,13 +1,6 @@
-<?php
-    $user = null;
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
-?>
-    <link rel="stylesheet" href="../../style/style.css">
+    <link rel="stylesheet" href="/style/style.css">
     <header class="headerPC-Tab <?php
-        if($user == "pro")
+        if($comptePro)
         {
             echo "navBarPro";               //classe qui réduit la police (car il y a une brique de navigation de plus)
         }
@@ -34,7 +27,7 @@
                     </a>
                 </li>
                 <li class="liHeader" id="btOffres"    <?php 
-                    if($user != "pro")
+                    if(!$comptePro)
                     {
                         echo "hidden";                          //cache la brique "mes offres" si l'utilisateur n'est pas un professionnel
                     }
@@ -90,4 +83,4 @@
             </ul>
         </nav>
     </header>
-    <script src="../js/click.js"></script>
+    <script src="/js/click.js"></script>
