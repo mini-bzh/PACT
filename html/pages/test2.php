@@ -1,22 +1,30 @@
-<?php 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+<body>
+<button id="monBouton">Exécuter PHP</button>
 
-echo "HW";
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('#monBouton').on('click', function() {
+        const var = <?php echo "cc"?>;
+        $.ajax({
+            url: 'fonction.php', // Le fichier PHP à appeler
+            type: 'POST',        // Type de la requête (POST dans ce cas)
+            data: var;
+            success: function(response) {
+                alert(response); // Affiche la réponse de fonction.php
+            },
+            error: function() {
+                alert('Erreur lors de l\'exécution de la fonction PHP');
+            }
+        });
+    });
+</script>
 
-$driver = "pgsql";
-
-$server = "postgresdb";
-$dbname = "postgres";
-
-$user = "sae";
-$pass = "ashton-izzY-c0mplet";
-
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-
-
-foreach($dbh->query("SELECT * from tripskell._compte") as $row)
-{
-        echo "<pre>"; // pour la version navigateur (présentation brute)
-        print_r($row);
-        echo "</pre>";
-}
-?>
+</body>
+</html>
