@@ -15,7 +15,9 @@
 
         $id_c = $_SESSION["idCompte"];
 
-        $comptePro->execute()[0];
+        $comptePro->execute();
+
+        print_r($comptePro);
     }
 
     
