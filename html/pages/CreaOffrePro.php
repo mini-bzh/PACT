@@ -1,5 +1,5 @@
 <?php
-// CreaOffreProPubV1
+// CreaOffreProPubV2
 // php -S localhost:8888
 // http://localhost:8888/pages/CreaOffrePro.php
 
@@ -53,8 +53,8 @@ $user = "pro";
                 </div> -->
 
                 <div class="champs">
-                    <label for="prix-minimal">Prix minimal :</label>
-                    <input type="number" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal">
+                    <label for="prix-minimal">Prix minimal (euro) :</label>
+                    <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
                 </div>
 
                 <div>
