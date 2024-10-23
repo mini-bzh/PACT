@@ -53,9 +53,9 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 }
 
 
-if ($correspond === true) {
+if (($correspond === true)) {
     alert("C'est bon");
-} else {
+} else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
 
