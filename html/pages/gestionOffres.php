@@ -126,10 +126,12 @@
                                 <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
                                 <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
                             </div>
+                            <a href="modifOffre.php">
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre</p>
                             </div>
+                            </a>
                         </div>
                      
                     </div>

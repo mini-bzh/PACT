@@ -1,4 +1,25 @@
-$user = "pro";
+<?php
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    $idOffre = null;
+    $user = null;
+    if(key_exists("idOffre", $_GET))
+    {
+        // reccuperation de id de l offre
+        $idOffre =$_GET["idOffre"]; 
+        
+        // reccuperation du contenu de l offre
+        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+    }
+    if(key_exists("user", $_GET))
+    {
+        $user =$_GET["user"];
+    }
 
 ?>
 <!DOCTYPE html>
