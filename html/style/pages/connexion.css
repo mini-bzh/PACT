@@ -92,3 +92,34 @@ input[type="checkbox"]{
     width: 42px;
     height: 31.07px;
 }
+
+/* POP-UP si correct */
+.popUp{
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popUp > div{
+    background-color: white;
+    border-radius: 20px;
+    width: 700px;
+    height: 300px;
+    border: var(--accent) solid 2px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2{
+    width: fit-content;
+    margin-bottom: 3%;
+}
