@@ -17,6 +17,7 @@
     }
 
     $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where id_c='" . $user . "';")->fetchAll()[0];
+    print_r($contentOffre);
 ?>
 
 <!DOCTYPE html>
