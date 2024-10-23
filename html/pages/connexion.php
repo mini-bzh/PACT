@@ -175,7 +175,6 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 <script>
     function validerCorrect() {
         let pop = document.querySelector('.popUp');
-        alert(pop.innerHTML);
         pop.style.display = 'flex';
         document.body.classList.add('no-scroll');
 
@@ -184,7 +183,7 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
             pop.style.display = 'none';
             document.body.classList.remove('no-scroll');
             header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
-            exit;
+            exit();
         }, 5000);
     }
 </script>
