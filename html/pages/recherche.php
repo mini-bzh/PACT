@@ -33,21 +33,7 @@
         <?php include "../composants/header/header.php";        //import header (navbar)
         ?>
         <main>
-        <?php
-                if($comptePro)
-                {
-                    ?>
-                    <h1>Mes offres</h1>
-                    <?php
-                }
-                else
-                {
-                    ?>
-                    <h1>Toutes les offres</h1>
-                    <?php
-                }
-            ?>
-
+            <h1>Toutes les offres</h1>
             <section id="conteneurOffres">
                 <article>
                     <?php
