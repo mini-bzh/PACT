@@ -18,12 +18,12 @@ $password = $_POST['userPSW'];
 print($username);
 print($password);
 
-$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where username = ${username}");
+$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
 
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where username = ${username}");
+$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
 
 $stmt2->execute();
 $result2 = $stmt->fetchAll();
