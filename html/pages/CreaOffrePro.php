@@ -181,5 +181,7 @@ if (!empty($_POST)) {
 
     $stmt->execute();
     $dbh = null;
+
+    header("location: /pages/accueil.php");
 }
 ?>
