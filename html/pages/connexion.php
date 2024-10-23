@@ -47,19 +47,14 @@ if (($correspond === false) && ($result2)) {
 
 $message1 = "";
 $message2 = "";
+$messageSuccess = "";
 
 if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
 }
 
-?>
-    <!-- <script defer> -->
-<?php
 if (($correspond === true)) {
-//         validerCorrect();
-?>
-    <!-- </script> -->
-<?php
+    $messageSuccess = "<script>alert('Connexion réussie !');</script>";
 } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
@@ -75,7 +70,7 @@ if (($correspond === true)) {
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/connexion.css">
-    <!-- <script src="../js/connexion.js" defer></script> -->
+    <script src="../js/connexion.js" defer></script>
 </head>
 <body class=
 <?php
@@ -127,6 +122,7 @@ if (($correspond === true)) {
     <p class="texteLarge">Connexion à un compte professionnel :</p>
 </div>
 
+<?php echo $messageSuccess; ?>
 
 <form action="" method="post">
 
