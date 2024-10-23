@@ -15,5 +15,8 @@
 
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-    $dbh->query("SELECT ")
+
+    $idOffre = $_POST["idOffre"];
+
+    $dbh->query("SELECT enLigne from tripskell.offrepro WHERE idoffre = $idOffre);
 ?>
