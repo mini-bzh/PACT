@@ -11,6 +11,15 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
+    if($comptePro)
+    {
+        $stm = $dbh->query("SELECT * from tripskell.offre_pro WHERE id_c=:id_c;");
+    }
+    else
+    {
+        $dbh->query("SELECT * from tripskell.offre_visiteur");
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +85,7 @@
             <section id="conteneurOffres">
                 <article>
                     <?php
-                        foreach($dbh->query("SELECT * from tripskell.offre_pro WHERE id_c=:id_c;") as $row) 
+                        foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row)
                         {
                             ?>
                                 <a href="/pages/detailOffre.php?user=<?php echo $profil?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
