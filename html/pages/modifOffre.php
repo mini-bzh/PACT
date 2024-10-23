@@ -108,7 +108,7 @@
                     <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>" required>
                     <input type="text" id="nomRue" name="nomRue" value="<?php echo $contentOffre["rue"];?>" required>
                     <input type="text" id="ville" name="ville" value="<?php echo $contentOffre["ville"];?>" required>
-                    <input type="text" id="codePostal" name="codePostal" value="<?php echo $contentOffre["codePostal"];?>" required>
+                    <input type="text" id="codePostal" name="codePostal" value="" required>
                 </div>
                 <div class="champs">
                     <label for="offre">Type offre :</label>
@@ -151,6 +151,8 @@
     <?php
     include "../composants/footer/footer.php";
     ?>
+
+<?php echo $contentOffre["codePostal"];?>
 </body>
 
 </html>
