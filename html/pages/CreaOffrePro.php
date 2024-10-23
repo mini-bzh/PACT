@@ -1,5 +1,5 @@
 <?php
-// CreaOffreProPubV4
+// CreaOffreProPubV5
 // php -S localhost:8888
 // http://localhost:8888/pages/CreaOffrePro.php
 
@@ -28,7 +28,7 @@ $user = "pro";
 
         <div class="conteneur-formulaire">
             <h1>Création d'une offre</h1>
-            <form name="test" action="http://localhost:8888/pages/CreaOffrePro.php" method="post">
+            <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
