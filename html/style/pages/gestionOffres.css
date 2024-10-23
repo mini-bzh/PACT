@@ -85,6 +85,6 @@ h1{
     cursor: pointer;
 }
 
-#offre4 .conteneurBtnGestion img{
-    height: 500px;
+#offre4{
+    background-color: red;
 }
