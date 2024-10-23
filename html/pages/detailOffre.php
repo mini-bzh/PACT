@@ -1,12 +1,16 @@
 <?php
+    session_start(); // recuperation de la sessions
+
     // recuperation des parametre de connection a la BdD
     include('/var/www/html/php/connection_params.php');
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-    $idOffre = null;
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
+
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
@@ -32,7 +36,7 @@
     <link rel="stylesheet" href="/style/pages/detailOffre.css">
 </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($user == "pro")
+            if ($comptePro)
             {
                 echo "fondPro";
             }
