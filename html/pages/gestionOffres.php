@@ -181,7 +181,7 @@
                             <a href="modifOffre.php">
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
-                                <p>Modifier l'offre <?php echo $contentOffre["idOffre"]->fetchAll()[0];?></p>
+                                <p>Modifier l'offre </p>
                             </div>
                             </a>
                         </div>
