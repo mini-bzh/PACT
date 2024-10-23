@@ -10,7 +10,7 @@
 
     $profil = null;
     if(key_exists("idCompte", $_SESSION)) {
-        $comptePro = $dbh->query("select count(*) from (select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . "union select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ");")->fetchAll()[0]; 
+        $comptePro = $dbh->query("select count(*) from (select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . " union select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ");")->fetchAll()[0]; 
     }
 
     
