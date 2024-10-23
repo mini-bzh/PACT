@@ -175,7 +175,7 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 <script>
     function validerCorrect() {
         function validerCorrect() {
-            let pop = document.getElementsByClassName('popUp')[0];
+            let pop = document.querySelector('.popUp');
             console.log(pop.textContent);
             pop.style.display = 'flex';
             document.body.classList.add('no-scroll');
