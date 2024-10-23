@@ -167,14 +167,14 @@
                                         if($contentOffre["enligne"])
                                         {
                                             ?>
-                                            <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>;
+                                            <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
                                             <?php
                                         }
                                         else
                                         {
                                             ?>
-                                            <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>;
-                                            <?php                                        
+                                            <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>
+                                            <?php
                                         }
                                     ?>
                                 </p>

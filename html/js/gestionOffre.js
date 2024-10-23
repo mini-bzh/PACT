@@ -11,10 +11,13 @@ function ChangerBtnLigne(idOffre)
     }
 
     //const texte = document.getElementById('txtEnHorsLigne');
-    const texte = document.querySelector("#offre" + idOffre + "#conteneurBtnGestion p");
-    if (texte.innerText === "Mettre l'offre hors ligne") {
+    const texte = document.querySelector("#offre" + idOffre + "#txtEnHorsLigne");
+    console.log(texte);
+    if (texte.innerText === "Mettre l'offre hors ligne") 
+        {
         texte.innerText = "Mettre l'offre en ligne";
-    } else {
+    } else 
+    {
         texte.innerText = "Mettre l'offre hors ligne";
     }
 
