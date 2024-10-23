@@ -6,14 +6,15 @@
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     $profil = null;
-    if(key_exists("idCompte", $_SESSION))
-    {
-        
-        $profil =$_GET["user"];
+    if(key_exists("idCompte", $_SESSION)) {
+        $comptePro = $dbh->query("select count(*) from (select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . "union select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ");")->fetchAll()[0]; 
     }
 
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@
         <link rel="stylesheet" href="../style/pages/accueil.css">
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($profil == "pro")
+            if ($comptePro)
             {
                 echo "fondPro";
             }
