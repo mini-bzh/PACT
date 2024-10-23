@@ -71,17 +71,17 @@
 
                 <div class="champs">
                     <label for="prix-minimal">Prix minimal (euro) :</label>
-                    <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
+                    <input type="text" id="prix-minimal" name="prix-minimal" value="<?php echo $contentOffre["tarifminimal"];?>">
                 </div>
 
                 <div>
                     <label for="resume">Résumé <span class="required">*</span> :</label>
-                    <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
+                    <textarea id="resume" name="resume" value="<?php echo $contentOffre["resume"];?>" required></textarea>
                 </div>
 
                 <div>
                     <label for="description">Description détaillée <span class="required">*</span> :</label>
-                    <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
+                    <textarea id="description" name="description" value="<?php echo $contentOffre["description_detaille"]; ?>" required></textarea>
                 </div>
 
                 <div>
@@ -97,9 +97,9 @@
                     </div>
                     <div class="heures">
                         <label for="heure-debut">De</label>
-                        <input type="time" id="heure-debut" name="heure-debut">
+                        <input type="time" id="heure-debut" name="heure-debut" value="<?php echo explode("-",$contentOffre["horaires"])[0]; ?>">
                         <label for="heure-fin">à</label>
-                        <input type="time" id="heure-fin" name="heure-fin">
+                        <input type="time" id="heure-fin" name="heure-fin" value="<?php echo explode("-",$contentOffre["horaires"])[1]; ?>">
                     </div>
                 </div>
 
