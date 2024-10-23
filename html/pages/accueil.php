@@ -4,7 +4,7 @@
     {
         $user =$_GET["user"];
     }
-echo "HW";
+/*echo "HW";
 
 $driver = "pgsql";
 
@@ -21,7 +21,7 @@ foreach($dbh->query("SELECT * from tripskell._offre") as $row) {
         echo "<pre>"; // pour la version navigateur (présentation brute)
         print_r($row);
         echo "</pre>";
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +50,10 @@ foreach($dbh->query("SELECT * from tripskell._offre") as $row) {
                     ?>
                     <h1>Mes offres</h1>
                     <?php
+                }
+                else
+                {
+
                 }
             ?>
 
