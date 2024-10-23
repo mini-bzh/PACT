@@ -1,40 +1,39 @@
 function ChangerBtnLigne(idOffre) 
 {
-    //const image = document.getElementById('imgEnHorsLigne');
-    const image = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion img");
-    if (image.src.includes("/icones/horsLigneSVG.svg")) 
+    const icone = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion img");
+    if (icone.src.includes("/icones/horsLigneSVG.svg")) 
     {
-        image.src = "/icones/enLigneSVG.svg";
+        icone.src = "/icones/enLigneSVG.svg";
     } else
     {
-        image.src = "/icones/horsLigneSVG.svg";
+        icone.src = "/icones/horsLigneSVG.svg";
     }
 
-    //const texte = document.getElementById('txtEnHorsLigne');
-    const texte = document.querySelector("#offre" + idOffre + " p");
-    console.log(texte);
-    if (texte.innerText === "Mettre l'offre hors ligne") 
+    const texteBtnLigne = document.querySelector("#offre" + idOffre + " p");
+    if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
         {
-        texte.innerText = "Mettre l'offre en ligne";
+            texteBtnLigne.innerText = "Mettre l'offre en ligne";
     } else 
     {
-        texte.innerText = "Mettre l'offre hors ligne";
+        texteBtnLigne.innerText = "Mettre l'offre hors ligne";
     }
 
-    //const texte2 = document.getElementById('txtEnLigne');
-    const texte2 = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
+    const texteStatutOffre = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
     console.log(texte2);
-    if (texte2.innerText === "En ligne")
+    if (texteStatutOffre.innerText === "En ligne")
     {
-        texte2.innerText = "Hors ligne";
-        texte2.classList.remove("enLigne");
-        texte2.classList.add("horsLigne");
+        texteStatutOffre.innerText = "Hors ligne";
+        texteStatutOffre.classList.remove("enLigne");
+        texteStatutOffre.classList.add("horsLigne");
     } else 
     {
-        texte2.innerText = "En ligne";
-        texte2.classList.remove("horsLigne");
-        texte2.classList.add("enLigne");
+        texteStatutOffre.innerText = "En ligne";
+        texteStatutOffre.classList.remove("horsLigne");
+        texteStatutOffre.classList.add("enLigne");
     }
+
+    const boutonModif = document.querySelector("#offre" + idOffre + " #conteneurGestion a");
+    boutonModif.classList.toggle("btnModifCache");
 }
 
 function toggleEnLigne(idOffre)

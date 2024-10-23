@@ -179,7 +179,14 @@
                                     ?>
                                 </p>
                             </div>
-                            <a href="modifOffre.php">
+                            <a href="modifOffre.php" <?php
+                                if(!$contentOffre["enligne"])
+                                {
+                                    ?>
+                                    class="btnModifCache";
+                                    <?php
+                                }
+                            ?>>
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="../icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre </p>

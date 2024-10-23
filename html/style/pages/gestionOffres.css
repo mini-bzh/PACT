@@ -84,3 +84,7 @@ h1{
 #btnEnHorsLigne{
     cursor: pointer;
 }
+
+.btnModifCache{
+    display: none;
+}
