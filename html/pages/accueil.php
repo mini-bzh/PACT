@@ -4,6 +4,24 @@
     {
         $user =$_GET["user"];
     }
+echo "HW";
+
+$driver = "pgsql";
+
+$server = "postgresdb";
+$dbname = "postgres";
+
+$user = "sae";
+$pass = "ashton-izzY-c0mplet";
+
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
+
+foreach($dbh->query("SELECT * from tripskell._offre") as $row) {
+        echo "<pre>"; // pour la version navigateur (présentation brute)
+        print_r($row);
+        echo "</pre>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +55,7 @@
 
             <section id="conteneurOffres">
                 <article>
-                    <a href="/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre">
+                    <a href="/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre grossisQuandHover">
                         <article class="apercuOffre">
                             <h3>fort la Latte</h3>
                             <div class="conteneurSVGtexte">
@@ -74,7 +92,7 @@
                             </div>
                         </article>
                     </a>
-                    <a href="" class="lienApercuOffre">
+                    <a href="" class="lienApercuOffre grossisQuandHover">
                         <article class="apercuOffre">
                             <h3>Manoir de Lan Kerellec</h3>
                             <div class="conteneurSVGtexte">
@@ -110,7 +128,7 @@
                             </div>
                         </article>
                     </a>
-                    <a href="" class="lienApercuOffre">
+                    <a href="" class="lienApercuOffre grossisQuandHover">
                         <article class="apercuOffre">
                             <h3>Armoripark</h3>
                             <div class="conteneurSVGtexte">

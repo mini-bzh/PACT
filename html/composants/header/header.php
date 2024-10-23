@@ -16,7 +16,7 @@
             <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
-                    <a class="aHeader" href="/pages/accueil.php<?php echo $user?>">
+                    <a class="aHeader" href="/pages/accueil.php?user=<?php echo $user?>">
                     <img src="/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>

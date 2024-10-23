@@ -79,3 +79,7 @@ h1{
     margin-top: 20px;
     display: flex;
 }
+
+#btnEnHorsLigne{
+    cursor: pointer;
+}
