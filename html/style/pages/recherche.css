@@ -1,8 +1,6 @@
-@import "../style.css";
 main{
     padding: 60px;
 }
-
 h1{
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
@@ -21,4 +19,14 @@ h1{
 #conteneurOffres>article{
     display: flex;
     flex-wrap: wrap;
+}
+
+@media screen and (max-width : 428px)
+{
+    #conteneurOffres>article{
+        display: block;
+    }
+    #conteneurOffres .lienApercuOffre{
+        margin: 10px;
+    }
 }
