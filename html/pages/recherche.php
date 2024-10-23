@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recherche</title>
-    <link rel="stylesheet" href="../style/pages/recherche.css">
+    <link rel="stylesheet" href="/style/pages/recherche.css">
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -30,24 +30,10 @@
                 echo "fondVisiteur";
             }
         ?>>
-        <?php include "../composants/header/header.php";        //import header (navbar)
+        <?php include "/var/www/html/composants/header/header.php";        //import header (navbar)
         ?>
         <main>
-        <?php
-                if($comptePro)
-                {
-                    ?>
-                    <h1>Mes offres</h1>
-                    <?php
-                }
-                else
-                {
-                    ?>
-                    <h1>Toutes les offres</h1>
-                    <?php
-                }
-            ?>
-
+            <h1>Toutes les offres</h1>
             <section id="conteneurOffres">
                 <article>
                     <?php
@@ -97,7 +83,7 @@
             </section>
         </main>
         <?php                                                   //import footer
-            include "../composants/footer/footer.php";
+            include "/var/www/html/composants/footer/footer.php";
         ?>
 </body>
 </html>
