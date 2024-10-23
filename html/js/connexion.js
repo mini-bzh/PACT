@@ -1,7 +1,12 @@
+// Fonction d'affichage de la pop-ip
 function validerCorrect() {
-    maFenertre = open("", "popUp", "width=250, height=100");
+    let pop = document.getElementsByClassName('popUp');
+    pop.style.display = 'flex';
 
-    maFenertre.document.write("<h1>Bonjour à tous</h1>");
-
-    maFenertre.focus();
+    // Après 5 secondes, cacher la popup et réactiver les interactions
+    setTimeout(function() {
+        pop.style.display = 'none';
+        header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
+        exit;
+    }, 5000);
 }
