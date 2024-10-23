@@ -1,5 +1,5 @@
 <?php
-// CreaOffreProPubV2
+// CreaOffreProPubV3
 // php -S localhost:8888
 // http://localhost:8888/pages/CreaOffrePro.php
 
@@ -85,11 +85,13 @@ $user = "pro";
                         <input type="time" id="heure-fin" name="heure-fin">
                     </div>
                 </div>
-                <div class="adresse">
-                    <label for="titre">Titre <span class="required">*</span> :</label>
-                        <input type="text" id="num" name="num" placeholder="Numéro" required>
-                        <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
-                        <input type="text" id="Ville" name="Ville" placeholder="Ville" required>
+
+                <div class="champsAdresse">
+                    <label for="adresse">Adresse <span class="required">*</span> :</label>
+                    <input type="text" id="num" name="num" placeholder="Numéro" required>
+                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
+                    <input type="text" id="Ville" name="Ville" placeholder="Ville" required>
+                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
                 <div class="champs">
                     <label for="offre">Type offre :</label>
@@ -108,6 +110,19 @@ $user = "pro";
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
                     </select>
                 </div>
+
+                <div class="champs">
+                    <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
+                    <select id="choixAccessible" name="choixAccessible">
+                        <option value="">Sélectionnez un choix</option>
+                        <option value="Accessible">Accessible</option>
+                        <option value="PasAccessible">Pas Accessible</option>
+                    </select>
+                </div>
+
+                <!-- <div class="champs">
+                    futur data de mise en ligne
+                </div> -->
             </form>
         </div>
     </main>
@@ -118,3 +133,42 @@ $user = "pro";
 </body>
 
 </html>
+
+
+<?php 
+
+echo "HW";
+
+$driver = "pgsql";
+
+$server = "postgresdb";
+$dbname = "postgres";
+
+$user = "sae";
+$pass = "ashton-izzY-c0mplet";
+
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
+$titre = $_POST["titre"];
+$prixMin = $_POST["prix-minimal"];
+$resume = $_POST["resume"];
+$description = $_POST["description"];
+$horaires = $_POST["horaires"];
+$heures = $_POST["heures"];
+$numero = $_POST["num"];
+$nomRue = $_POST["nomRue"];
+$ville = $_POST["ville"];
+$codePostal = $_POST["codePostal"];
+$typeOffre = $_POST["offre"];
+$option = $_POST["option"];
+$note = 5;
+$accessible = $_POST["choixAccessible"];
+
+$stmt = $dbh->prepare(
+    "INSERT INTO tripskell.pro_public(idOffre, titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal)
+        VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal')"
+);
+
+$stmt->execute();
+$dbh = null;
+?>
