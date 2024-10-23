@@ -2,8 +2,6 @@ function ChangerBtnLigne(idOffre)
 {
     //const image = document.getElementById('imgEnHorsLigne');
     const image = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion img");
-    console.log(document.querySelector("#offre4"));
-    console.log("#offre" + idOffre + " .conteneurBtnGestion img");
     if (image.src.includes("/icones/horsLigneSVG.svg")) 
     {
         image.src = "/icones/enLigneSVG.svg";
@@ -12,18 +10,26 @@ function ChangerBtnLigne(idOffre)
         image.src = "/icones/horsLigneSVG.svg";
     }
 
-    const texte = document.getElementById('txtEnHorsLigne');
+    //const texte = document.getElementById('txtEnHorsLigne');
+    const texte = document.querySelector("#offre" + idOffre + "conteneurBtnGestion p");
     if (texte.innerText === "Mettre l'offre hors ligne") {
         texte.innerText = "Mettre l'offre en ligne";
     } else {
         texte.innerText = "Mettre l'offre hors ligne";
     }
 
-    const texte2 = document.getElementById('txtEnLigne');
-    if (texte2.innerText === "En ligne"){
+    //const texte2 = document.getElementById('txtEnLigne');
+    const texte2 = document.querySelector("#offre" + idOffre + "conteneurGestion h4 span");
+    if (texte2.innerText === "En ligne")
+    {
         texte2.innerText = "Hors ligne";
-    } else {
+        texte2.classList.remove("enLigne");
+        texte2.classList.add("horsLigne");
+    } else 
+    {
         texte2.innerText = "En ligne";
+        texte2.classList.remove("horsLigne");
+        texte2.classList.add("enLigne");
     }
 }
 
