@@ -29,7 +29,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 </head>
 <body>
     <?php
-        foreach($dbh->query("SELECT * from tripskell.offre_pro") as $row) 
+        foreach($dbh->query("SELECT * from tripskell.offre_pro") as $row)
         {
             echo "<pre>"; // pour la version navigateur (présentation brute)
             print_r($row);/*

@@ -23,7 +23,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $('#btn').on('click', function() {
+
+    function toggle
+    /*$('#btn').on('click', function() */
+    {
         const idOffre = <?php echo "4"?>;
         $.ajax({
             url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
@@ -36,7 +39,7 @@
                 alert('Erreur lors de l\'exécution de la fonction PHP');
             }
         });
-    });
+    }/*)*/;
 </script>
 
 </body>
