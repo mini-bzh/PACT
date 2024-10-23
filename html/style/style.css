@@ -101,7 +101,15 @@ p{
     margin-left: 2%;
     border-radius: 15px;
     text-decoration: none;
+
+    transition: transform 0.2s ease;
 }
+
+.coMembre:hover, .coPro:hover, .nouvCompte:hover{
+    transform: translateY(-5px);
+}
+
+
 .coMembre p, .coMembre h4, .coPro p, .coPro h4, .nouvCompte p, .nouvCompte h4{
     color: white;
 }
@@ -468,12 +476,12 @@ p{
 }
 
 .ulHeader .aHeader{
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .ulHeader .aHeader:hover{
     /*background: linear-gradient(white, var(--primary));*/
-    transform: scale(1.05);
+    transform: translateY(-5px);
 }
 
 /*.navBarPro .ulHeader .aHeader:hover{

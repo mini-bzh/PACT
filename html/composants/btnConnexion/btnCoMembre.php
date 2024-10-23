@@ -1,4 +1,4 @@
-<a href="connexion.php?user-tempo=membre" class="coMembre">
+<a href="connexion.php?user-tempo=membre" class="coMembre btnCo">
     <div>
         <div>
             <p>Connexion</p>
