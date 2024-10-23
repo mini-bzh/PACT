@@ -38,8 +38,9 @@
                         <h3>Ajouter une offre</h3>
                     </div>
                 </a>
-                <?php foreach($contentMesOffres as $contentOffre){?>
-                <article class="offre">
+                <?php foreach($contentMesOffres as $contentOffre)
+                {?>
+                <article class="offre" id="offre<?php echo $contentOffre['idoffre']?>">
                     <h2><?php echo $contentOffre["titreoffre"]?></h2>
                     <!-- <p>Visite</p> future categorie -->
                     <div class="conteneurSpaceBetween">
@@ -172,7 +173,8 @@
                      
                     </div>
                 </article>
-                <?php } ?>
+                <?php }
+                ?>
         </section>
         
         </main>
