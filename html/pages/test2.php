@@ -8,6 +8,10 @@
 <body>
 
 <style>
+    #btn{
+        padding: 10px;
+        border: 2px solid black;
+    }
     #btn:hover{
         cursor: pointer;
     }
