@@ -17,10 +17,10 @@ function ChangerBtnLigne()
     }
 
     const texte2 = document.getElementById('txtEnLigne');
-    if (texte2.innerText === "en Ligne"){
+    if (texte2.innerText === "En ligne"){
         texte2.innerText = "Hors ligne";
     } else {
-        texte2.innerText = "en Ligne";
+        texte2.innerText = "En ligne";
     }
 }
 

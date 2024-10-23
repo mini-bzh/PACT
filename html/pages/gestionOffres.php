@@ -115,7 +115,22 @@
                     </a> -->
                     <hr id="separateurOffreGestion">
                     <div id="conteneurGestion">
-                        <h4>Statut : <span class="enLigne" id="txtEnLigne">en Ligne</span></h4>
+                        <h4>Statut : 
+                        <?php
+                            if($contentOffre["enligne"])
+                            {
+                                ?>
+                                <span class="enLigne" id="txtEnLigne">En ligne</span></h4>
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                <span class="horsLigne" id="txtEnLigne">Hors ligne</span></h4>
+                                <?php
+                            }
+                        ?>
+                        
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                                 <img src="../icones/
