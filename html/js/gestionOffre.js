@@ -27,6 +27,7 @@ function ChangerBtnLigne()
 
 function toggleEnLigne(idOffre)
 {
+    ChangerBtnLigne();
     $.ajax({
         url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
         type: 'POST',        // Type de la requête (POST dans ce cas)
