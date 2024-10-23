@@ -76,7 +76,7 @@ h1{
 }
 
 
-.conteneurBtnGestion{
+#conteneurBtnGestion{
     margin-top: 20px;
     display: flex;
 }
