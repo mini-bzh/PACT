@@ -212,8 +212,11 @@ if (!empty($_POST)) {
 
     $enLigne = true;
 
-    $id_abo = $_POST["offre"];
-    $id_option = $_POST["option"];
+    //$id_abo = $_POST["offre"];
+    //$id_option = $_POST["option"];
+
+    $id_abo = 'Premium';
+    $id_option = 'A la une';
 
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
