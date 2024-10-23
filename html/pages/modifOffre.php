@@ -105,7 +105,7 @@
 
                 <div class="champsAdresse">
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
-                    <input type="text" id="num" name="num" placeholder="Numéro" required>
+                    <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>" required>
                     <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                     <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
