@@ -1,9 +1,15 @@
 <?php
-// CreaOffreProPubV5
-// php -S localhost:8888
-// http://localhost:8888/pages/CreaOffrePro.php
+    session_start(); // recuperation de la sessions
 
-$user = "pro";
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
 
 ?>
 <!DOCTYPE html>
@@ -16,12 +22,8 @@ $user = "pro";
     <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
 </head>
 
-<body class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($user == "pro") {
-                echo "fondPro";
-            }
-            ?>>
-    <?php include "../composants/header/header.php";        //import navbar
+<body class="fondPro">
+    <?php include "/var/www/html/composants/header/header.php";        //import navbar
     ?>
 
     <main>
@@ -141,15 +143,6 @@ $user = "pro";
 
 <?php
 
-echo "HW";
-
-$driver = "pgsql";
-
-$server = "postgresdb";
-$dbname = "postgres";
-
-$user = "sae";
-$pass = "ashton-izzY-c0mplet";
 
 if (!empty($_POST)) {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -181,8 +174,5 @@ if (!empty($_POST)) {
 
     $stmt->execute();
     $dbh = null;
-
-    header("location: /pages/accueil.php");
-    exit();
 }
 ?>
