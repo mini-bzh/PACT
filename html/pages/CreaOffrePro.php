@@ -171,10 +171,10 @@ if (!empty($_POST)) {
     $accessible = $_POST["choixAccessible"];
 
     $stmt = $dbh->prepare(
-        "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal) VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');"
+        "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal) VALUES('$titre', '$resume', '$description', $prixMin, $note, '$heures', '$accessible', null, now(), true,'$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');"
     );
 
-    echo  "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal) VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');";
+    echo  "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal) VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), true,'$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal');";
 
 
     $stmt->execute();
