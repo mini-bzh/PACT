@@ -1,9 +1,16 @@
 <?php
-    $user = null;
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
+    session_start(); // recuperation de la sessions
+
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +22,7 @@
     <link rel="stylesheet" href="../style/pages/compte.css">
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($user == "pro")
+            if ($comptePro)
             {
                 echo "fondPro";
             }
@@ -27,7 +34,7 @@
 
 <!------ HEADER  ------>
 <?php
-    include "../composants/header/header.php";
+    include "composants/header/header.php";
 ?>
 
 <div class="titrePortable">
