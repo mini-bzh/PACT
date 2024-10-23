@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $('#monBouton').on('click', function() {
-        const var = <?php echo "4"?>;
+        const idOffre = <?php echo "4"?>;
         $.ajax({
             url: 'fonction.php', // Le fichier PHP à appeler
             type: 'POST',        // Type de la requête (POST dans ce cas)
