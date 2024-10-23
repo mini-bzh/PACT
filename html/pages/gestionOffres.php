@@ -179,7 +179,7 @@
                                     ?>
                                 </p>
                             </div>
-                            <a href="modifOffre.php<?php echo $contentOffre['idoffre']?>" <?php
+                            <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre']?>" <?php
                                 if($contentOffre["enligne"])
                                 {
                                     ?>
