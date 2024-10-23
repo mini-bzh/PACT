@@ -182,8 +182,10 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
         setTimeout(function() {
             pop.style.display = 'none';
             document.body.classList.remove('no-scroll');
+<?php
             header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
             exit();
+?>
         }, 5000);
     }
 </script>
