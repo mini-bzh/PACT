@@ -496,6 +496,7 @@ p{
     }
 
     .trait{
+        display: none;
         background-color: #fff;
         width: 52px;
         height: 7px;
