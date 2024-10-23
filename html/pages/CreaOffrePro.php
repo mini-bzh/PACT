@@ -103,15 +103,18 @@
                         <option value="Premium">Premium</option>
                     </select>
                 </div>
+                <!--
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
-                        <option value="">Sélectionnez des tags</option>
+                        <option value="">Sélectionnez des options</option>
+                        <option value="Aucune">Aucune</option>
                         <option value="AlaUne">A la une</option>
                         <option value="EnRelief">En relief</option>
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
                     </select>
                 </div>
+                -->
 
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
@@ -121,7 +124,7 @@
                         <option value="PasAccessible">Pas Accessible</option>
                     </select>
                 </div>
-
+                
                 <!-- <div class="champs">
                     futur data de mise en ligne
                 </div> -->
@@ -215,8 +218,8 @@ if (!empty($_POST)) {
     //$id_abo = $_POST["offre"];
     //$id_option = $_POST["option"];
 
-    $id_abo = 'Premium';
-    $id_option = 'A la une';
+    $id_abo = 'Standard';
+    $id_option = null;
 
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
