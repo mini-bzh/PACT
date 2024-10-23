@@ -31,4 +31,8 @@ h1{
     #conteneurOffres .lienApercuOffre{
         margin: 10px;
     }
+
+    main>h1{
+        display: none;
+    }
 }
