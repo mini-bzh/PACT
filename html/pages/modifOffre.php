@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../style/pages/CreaOffrePro.css">
 </head>
 
-<body class=<?php echo "fondPro"; ?>>                       
+<body class=<?php echo "fondPro"; ?>>                        
 
     <?php include "../composants/header/header.php";        //import navbar
     ?>
@@ -44,7 +44,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
+                    <input type="text" id="titre" name="titre" placeholder=<?php echo "coucou" ?> required>
                 </div>
 
                 <!-- <div class="champs">
