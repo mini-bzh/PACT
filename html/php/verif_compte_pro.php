@@ -20,5 +20,7 @@
         // garder que le charactere 1 ou 0
         $comptePro = $stmt->fetchAll()[0]["count"];
 
-        $stmt = null; // suppression de la requete
+        // suppression de la requete
+        $stmt = null; 
+        $id_c = null;
     }

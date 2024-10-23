@@ -13,7 +13,7 @@ $user = "pro";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creation Offre</title>
-    <link rel="stylesheet" href="../style/pages/CreaOffrePro.css">
+    <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
 </head>
 
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
