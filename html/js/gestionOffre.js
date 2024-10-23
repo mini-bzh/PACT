@@ -1,7 +1,8 @@
 function ChangerBtnLigne(idOffre) 
 {
     //const image = document.getElementById('imgEnHorsLigne');
-    const image = document.querySelectorAll("#offre" + idOffre + " #conteneurBtnGestion img");
+    const image = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion img");
+    console.log(document.querySelector("#offre4"));
     console.log("#offre" + idOffre + " .conteneurBtnGestion img");
     if (image.src.includes("/icones/horsLigneSVG.svg")) 
     {
