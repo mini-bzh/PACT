@@ -1,63 +1,62 @@
 <?php 
 
-// $driver = "pgsql";
+$driver = "pgsql";
 
-// $server = "postgresdb";
-// $dbname = "postgres";
+$server = "postgresdb";
+$dbname = "postgres";
 
-// $user = "sae";
-// $pass = "ashton-izzY-c0mplet";
+$user = "sae";
+$pass = "ashton-izzY-c0mplet";
 
-// $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-// $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-// if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
-//     $username = $_POST['userName'];
-//     $password = $_POST['userPSW'];
-// }
+if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
+    $username = $_POST['userName'];
+    $password = $_POST['userPSW'];
+}
 
-// $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
+$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
 
-// $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
-// $stmt->execute();
-// $result = $stmt->fetchAll();
+$stmt->execute();
+$result = $stmt->fetchAll();
 
-// $stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
+$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
 
-// $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
+$stmt2->bindParam(':username', $username, PDO::PARAM_STR);
 
-// $stmt2->execute();
-// $result2 = $stmt->fetchAll();
+$stmt2->execute();
+$result2 = $stmt->fetchAll();
 
-// $correspond = false;
+$correspond = false;
 
-// if (($correspond === false) && ($result)) {
-//     if ($password === $result[0]['mot_de_passe']) {
-//         $correspond = true;
-//     }
-// }
+if (($correspond === false) && ($result)) {
+    if ($password === $result[0]['mot_de_passe']) {
+        $correspond = true;
+    }
+}
 
-// if (($correspond === false) && ($result2)) {
-//     if ($password === $result2[0]['mot_de_passe']) {
-//         $correspond = true;
-//     }
-// }
+if (($correspond === false) && ($result2)) {
+    if ($password === $result2[0]['mot_de_passe']) {
+        $correspond = true;
+    }
+}
 
-// $message1 = "";
-// $message2 = "";
-// $messageSuccess = "";
+$message1 = "";
+$message2 = "";
 
-// if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-//     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
-// }
+if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
+    $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
+}
 
-// if (($correspond === true)) {
-//     $messageSuccess = "<script>alert('Connexion réussie !');</script>";
-// } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
-//     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
-// }
+if (($correspond === true)) {
+    
+} else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
+    $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+}
 
 
 ?>
@@ -121,8 +120,6 @@
 <div class=textBulle>
     <p class="texteLarge">Connexion à un compte professionnel :</p>
 </div>
-
-<?php echo $messageSuccess; ?>
 
 <form action="" method="post">
 
