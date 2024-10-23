@@ -22,7 +22,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recherche</title>
-    <link rel="stylesheet" href="../style/recherche.css">
+    <link rel="stylesheet" href="../style/pages/recherche.css">
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($profil == "pro")
