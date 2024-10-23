@@ -176,7 +176,6 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
     function validerCorrect() {
         let pop = document.querySelector('.popUp');
         alert(pop.innerHTML);
-        alert("ok2");
         pop.style.display = 'flex';
         document.body.classList.add('no-scroll');
 
@@ -198,7 +197,6 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 if ($correspond === true) {
 ?>
     <script>
-        alert("ok1");
         validerCorrect();
     </script>
 <?php
