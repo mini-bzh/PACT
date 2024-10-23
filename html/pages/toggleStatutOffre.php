@@ -22,6 +22,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') 
     {
         // Récupérer les paramètres envoyés via POST
+        print_r($_POST);
         $idOffre = $_POST["idOffre"];
 
         $statut = $dbh->query("SELECT enLigne from tripskell.offre_pro WHERE idOffre =" . $idOffre);
