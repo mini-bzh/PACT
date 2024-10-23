@@ -13,7 +13,7 @@
     $('#monBouton').on('click', function() {
         const idOffre = <?php echo "4"?>;
         $.ajax({
-            url: 'fonction.php', // Le fichier PHP à appeler
+            url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
             type: 'POST',        // Type de la requête (POST dans ce cas)
             data: idOffre,
             success: function(response) {
