@@ -2,3 +2,18 @@ h1{
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
 }
+
+#conteneurOffres{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+#conteneurOffres .lienApercuOffre{
+    margin: 30px;
+}
+
+#conteneurOffres>article{
+    display: flex;
+    flex-wrap: wrap;
+}
