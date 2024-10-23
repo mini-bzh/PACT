@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../style/pages/CreaOffrePro.css">
 </head>
 
-<body class=<?php echo "fondPro"; ?>>                        //met le bon fond en fonction de l'utilisateur
+<body class=<?php echo "fondPro"; ?>>                       
 
     <?php include "../composants/header/header.php";        //import navbar
     ?>
