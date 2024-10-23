@@ -163,16 +163,18 @@
                                 }
                             ?>
                             
-                            
-                                <p id="txtEnHorsLigne">
-                                    <?php
+                            <?php
                                         if($contentOffre["enligne"])
                                         {
-                                            echo "Mettre l'offre hors ligne";
+                                            ?>
+                                            <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>;
+                                            <?php
                                         }
                                         else
                                         {
-                                            echo "Mettre l'offre en ligne";
+                                            ?>
+                                            <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>;
+                                            <?php                                        
                                         }
                                     ?>
                                 </p>
