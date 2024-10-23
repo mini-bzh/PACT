@@ -29,6 +29,10 @@ $result2 = $stmt->fetchAll();
 
 $correspond = false;
 
+print_r($result);
+
+print_r($result2);
+
 if (($correspond === false) && ($result)) {
     if ($password === $result['mot_de_passe']) {
         $correspond = true;
@@ -40,6 +44,7 @@ if (($correspond === false) && ($result2)) {
         $correspond = true;
     }
 }
+
 
 if ($correspond === true) {
     print_r("\n\nok\n\n");
