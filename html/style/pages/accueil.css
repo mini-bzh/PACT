@@ -19,11 +19,6 @@ h1{
     flex-wrap: wrap;
 }
 
-#conteneurOffres .lienApercuOffre{
-    margin: 10px;
-}
-
-
 @media screen and (max-width : 428px)
 {
     #conteneurOffres>article{
