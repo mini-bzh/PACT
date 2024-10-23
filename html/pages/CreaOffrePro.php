@@ -90,7 +90,7 @@ $user = "pro";
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
                     <input type="text" id="num" name="num" placeholder="Numéro" required>
                     <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
-                    <input type="text" id="ville" name="Ville" placeholder="Ville" required>
+                    <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
                 <div class="champs">
@@ -171,7 +171,7 @@ if (!empty($_POST)) {
     $accessible = $_POST["choixAccessible"];
 
     $stmt = $dbh->prepare(
-        "INSERT INTO tripskell.offre_pro(idOffre, titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal)
+        "INSERT INTO tripskell.offre_pro(titreOffre, resume, description_detaille, tarifMinimal, note, horaires, accessibilite, enLigne, id_abo, id_option, numero, rue, ville, codePostal)
         VALUES('$titre', '$resume', '$description', '$prixMin', '$note', '$heures', '$accessible', null, now(), '$typeOffre', '$option', '$numero', '$nomRue', '$ville', '$codePostal')"
     );
 
