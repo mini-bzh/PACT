@@ -182,6 +182,21 @@ if (!empty($_POST)) {
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
+    $stmt->bindParam(":titre", $titre); 
+    $stmt->bindParam(":resume", $resume); 
+    $stmt->bindParam(":description", $description); 
+    $stmt->bindParam(":tarif", $tarif); 
+    $stmt->bindParam(":note", $note); 
+    $stmt->bindParam(":horaires", $horaires); 
+    $stmt->bindParam(":accessibilite", $accessible); 
+    $stmt->bindParam(":enLigne", $enLigne); 
+    $stmt->bindParam(":id_abo", $id_abo); 
+    $stmt->bindParam(":id_option", $id_option); 
+    $stmt->bindParam(":numero", $numero); 
+    $stmt->bindParam(":rue", $rue); 
+    $stmt->bindParam(":ville", $ville); 
+    $stmt->bindParam(":codePostal", $codePostal); 
+    $stmt->bindParam(":id_c", $id_c); 
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -205,6 +220,7 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
     
+    $id_c = $_SESSION["idCompte"];
 
     
 
