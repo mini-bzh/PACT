@@ -14,11 +14,11 @@
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
-        // reccuperation de id de l offre
+        // recuperation de id de l offre
         $idOffre =$_GET["idOffre"]; 
         
-        // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        // recuperation du contenu de l offre
+        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
     }
     if(key_exists("user", $_GET))
     {
@@ -26,7 +26,6 @@
     }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -49,7 +48,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" value=<?php echo $contentOffre["titreoffre"]?> required>
+                    <input type="text" id="titre" name="titre" value=<?php echo $contentOffre["titreoffre"];?>   required>
                 </div>
 
                 <!-- <div class="champs">
