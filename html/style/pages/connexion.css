@@ -123,3 +123,7 @@ h2{
     width: fit-content;
     margin-bottom: 3%;
 }
+
+body.no-scroll {
+    overflow: hidden;
+}
