@@ -44,7 +44,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" placeholder=<?php echo $contentOffre["titreoffre"];?> required>
+                    <input type="text" id="titre" name="titre" placeholder=<?php echo "coucou" ?> required>
                 </div>
 
                 <!-- <div class="champs">
