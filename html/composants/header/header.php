@@ -1,13 +1,20 @@
 <?php
-    $user = null;
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
+    session_start(); // recuperation de la sessions
+
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('/var/www/html/php/verif_compte_pro.php');
+    
 ?>
-    <link rel="stylesheet" href="../../style/style.css">
+    <link rel="stylesheet" href="/style/style.css">
     <header class="headerPC-Tab <?php
-        if($user == "pro")
+        if($comptePro)
         {
             echo "navBarPro";               //classe qui réduit la police (car il y a une brique de navigation de plus)
         }
@@ -90,4 +97,4 @@
             </ul>
         </nav>
     </header>
-    <script src="../js/click.js"></script>
+    <script src="/js/click.js"></script>
