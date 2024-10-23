@@ -134,7 +134,7 @@
                     </div>
                 </article>
         </section>
-        <?php}?>
+        <?php } ?>
         </main>
         <?php                                                   //footer
             include "../composants/footer/footer.php";
