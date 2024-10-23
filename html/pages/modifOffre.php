@@ -8,6 +8,8 @@
 
     $idOffre = null;
     $user = null;
+     echo $contentOffre["idOffre"];
+
     if(key_exists("idOffre", $_GET))
     {
         // recuperation de l'id de l offre
@@ -43,7 +45,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" value=<?php echo "coucou"?> required>
+                    <input type="text" id="titre" name="titre" value=<?php echo "coucou"?>   required>
                 </div>
 
                 <!-- <div class="champs">
