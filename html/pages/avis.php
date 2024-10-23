@@ -6,7 +6,24 @@
     <title>Avis</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
-<body>
-    <h1>Avis</h1>
+<body class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($profil == "pro")
+            {
+                echo "fondPro";
+            }
+            else
+            {
+                echo "fondVisiteur";
+            }
+    ?>>
+        
+    <?php include "../composants/header/header.php";        //import header (navbar)
+    ?>
+    <main>
+        <h1>Coming soon !</h1>
+    </main>
+    <?php                                                   //import footer
+            include "../composants/footer/footer.php";
+    ?>
 </body>
 </html>
