@@ -84,3 +84,7 @@ h1{
 #btnEnHorsLigne{
     cursor: pointer;
 }
+
+.offre4 .conteneurBtnGestion img{
+    height: 500px;
+}
