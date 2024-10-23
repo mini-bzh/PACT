@@ -60,7 +60,7 @@
 </div>
         <main>
             <?php
-                if($profil == "pro")
+                if($comptePro)
                 {
                     ?>
                     <h1>Mes offres</h1>
