@@ -1,5 +1,9 @@
 <?php 
 
+session_start();
+
+$_SESSION['idCompte'] = null;
+
 // Connexion à la BDD
 $driver = "pgsql";
 
@@ -39,12 +43,14 @@ $correspond = false;
 if (($correspond === false) && ($result)) {
     if ($password === $result[0]['mot_de_passe']) {
         $correspond = true;
+        $_SESSION['idCompte'] = $result[0]['id_c'];
     }
 }
 
 if (($correspond === false) && ($result2)) {
     if ($password === $result2[0]['mot_de_passe']) {
         $correspond = true;
+        $_SESSION['idCompte'] = $result2[0]['id_c'];
     }
 }
 
