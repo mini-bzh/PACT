@@ -9,7 +9,7 @@
         <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
-                    <a class="aHeader" href="/pages/accueil.php?user=<?php echo $user?>">
+                    <a class="aHeader" href="/pages/accueil.php">
                     <img src="/icones/homeSVG.svg" alt="icone home">
                     <h3>Accueil</h3>
                     </a>
@@ -32,7 +32,7 @@
                         echo "hidden";                          //cache la brique "mes offres" si l'utilisateur n'est pas un professionnel
                     }
                 ?>>
-                    <a class="aHeader" href="/pages/gestionOffres.php?user=<?php echo $user; ?>">
+                    <a class="aHeader" href="/pages/gestionOffres.php">
                     <img src="/icones/offreSVG.svg" alt="icone offres">
                     <h3>Mes offres</h3>
                     </a>
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="liHeader" id="btCompte">
-                    <a class="aHeader" href="/pages/compte.php?user=<?php echo $user; ?>">
+                    <a class="aHeader" href="/pages/compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
                     <h3>Mon compte</h3>
                     </a>
@@ -57,7 +57,7 @@
         <nav class="navHeaderMobile">
             <ul class="ulHeaderMobile">
                 <li class="liHeaderMobile" id="btAccueilMobile">
-                    <a class="aHeaderMobile" href="/pages/accueil.php?user=<?php echo $user?>">
+                    <a class="aHeaderMobile" href="/pages/accueil.php">
                     <img src="/icones/homeSVG.svg" alt="icone home">
                     <div class="trait"></div>
                     </a>
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btCompteMobile">
-                    <a class="aHeaderMobile" href="/pages/compte.php?user=<?php echo $user; ?>">
+                    <a class="aHeaderMobile" href="/pages/compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
                     <div class="trait"></div>
                     </a>
