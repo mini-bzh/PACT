@@ -174,21 +174,17 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 
 <script>
     function validerCorrect() {
-        function validerCorrect() {
-            let pop = document.querySelector('.popUp');
-            alert(pop.innerHTML);
-            alert("ok2");
-            pop.style.display = 'flex';
-            document.body.classList.add('no-scroll');
+        let pop = document.querySelector('.popUp');
+        pop.style.display = 'flex';
+        document.body.classList.add('no-scroll');
 
-            // Après 5 secondes, cacher la popup et réactiver les interactions
-            // setTimeout(function() {
-            //     pop.style.display = 'none';
-            //     document.body.classList.remove('no-scroll');
-            //     header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
-            //     exit;
-            // }, 5000);
-        }
+        // Après 5 secondes, cacher la popup et réactiver les interactions
+        setTimeout(function() {
+            pop.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+            header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
+            exit();
+        }, 5000);
     }
 </script>
 
@@ -200,7 +196,6 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 if ($correspond === true) {
 ?>
     <script>
-        alert("ok1");
         validerCorrect();
     </script>
 <?php
