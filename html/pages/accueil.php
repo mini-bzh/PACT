@@ -31,7 +31,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
             }
             else
             {
-                echo "fondVisiteur";
+                echo $user . "fondVisiteur";
             }
         ?>>
         <?php include "../composants/header/header.php";        //import navbar
