@@ -1,5 +1,9 @@
-function ChangerBtnLigne(idOffre) 
+function ChangerBtnLigne(idOffre)
+/*  idOffre : id de l'offre concernée par les changements
+    met à jour le visuel du bouton pour passer l'offre en/hors ligne, le texte indiquant le statut de l'offre, et 
+    affiche ou non le bouton modifier */
 {
+    // met à jour l'icône de bouton
     const icone = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion img");
     if (icone.src.includes("/icones/horsLigneSVG.svg")) 
     {
@@ -9,6 +13,7 @@ function ChangerBtnLigne(idOffre)
         icone.src = "/icones/horsLigneSVG.svg";
     }
 
+    // met à jour le texte du bouton
     const texteBtnLigne = document.querySelector("#offre" + idOffre + " p");
     if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
         {
@@ -18,6 +23,7 @@ function ChangerBtnLigne(idOffre)
         texteBtnLigne.innerText = "Mettre l'offre hors ligne";
     }
 
+    // met à jour le statut de l'offre (texte et couleur)
     const texteStatutOffre = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
     if (texteStatutOffre.innerText === "En ligne")
     {
@@ -31,22 +37,28 @@ function ChangerBtnLigne(idOffre)
         texteStatutOffre.classList.add("enLigne");
     }
 
+    // cache ou non le bouton modifier
     const boutonModif = document.querySelector("#offre" + idOffre + " #conteneurGestion a");
     boutonModif.classList.toggle("btnModifCache");
 }
 
 function toggleEnLigne(idOffre)
+/*  idOffre : id de l'offre concernée par les changements
+    s'exécute quand le bouton pour passer une offre en/hors ligne. Change le statut de l'offre dans la BDD et 
+    les visuels de l'offre (ciblée avec idOffre) */
 {
-    ChangerBtnLigne(idOffre);
+    ChangerBtnLigne(idOffre);                       //change les visuels de l'offre (ciblée avec idOffre)
     $.ajax({
-        url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
-        type: 'POST',        // Type de la requête (POST dans ce cas)
+        url: 'toggleStatutOffre.php',               // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: {idOffre: idOffre},
         success: function(response) {
-            alert(response); // Affiche la réponse de fonction.php
+
+            alert(response);                        // Affiche la réponse du script PHP si appelé correctement
         },
-        error: function() {
-            alert('Erreur lors de l\'exécution de la fonction PHP');
+        error: function()
+        {
+            alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
         }
     });
 }
