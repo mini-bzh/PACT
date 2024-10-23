@@ -1,19 +1,18 @@
 <?php
+    session_start(); // recuperation de la sessions
+
+    // recuperation des parametre de connection a la BdD
+    include('/var/www/html/php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+
     $profil = null;
-    if(key_exists("user", $_GET))
+    if(key_exists("idCompte", $_SESSION))
     {
+        
         $profil =$_GET["user"];
     }
-
-$driver = "pgsql";
-
-$server = "postgresdb";
-$dbname = "postgres";
-
-$user = "sae";
-$pass = "ashton-izzY-c0mplet";
-
-$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 ?>
 <!DOCTYPE html>

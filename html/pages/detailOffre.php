@@ -1,5 +1,5 @@
 <?php
-    // reccuperation des parametre de connection a la BdD
+    // recuperation des parametre de connection a la BdD
     include('/var/www/html/php/connection_params.php');
     
     // connexion a la BdD
