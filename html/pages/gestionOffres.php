@@ -35,7 +35,7 @@
             Gestion des offres
         </h1>
         <main id="mainGestionOffres">
-        <?php foreach($contentOffre as $value){?>
+        
         <section id="conteneurBtnOffres">
         <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
@@ -44,6 +44,7 @@
                     </div>
                 </a>
                 <article class="offre">
+                <?php foreach($contentOffre as $value){?>
                     <h2><?php echo $value["titreoffre"]?></h2>
                     <!-- <p>Visite</p> future categorie -->
                     <div class="conteneurSpaceBetween">
@@ -132,9 +133,10 @@
                         </div>
                      
                     </div>
+                    <?php } ?>
                 </article>
         </section>
-        <?php } ?>
+        
         </main>
         <?php                                                   //footer
             include "../composants/footer/footer.php";
