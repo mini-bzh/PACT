@@ -17,14 +17,14 @@
         cursor: pointer;
     }
 </style>
-<div id="btn">
+<div id="btn" onclick="toggle()">
     <p>clique !</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-    function toggle
+    function toggle()
     /*$('#btn').on('click', function() */
     {
         const idOffre = <?php echo "4"?>;
