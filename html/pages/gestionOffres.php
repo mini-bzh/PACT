@@ -118,7 +118,7 @@
                     </a> -->
                     <hr id="separateurOffreGestion">
                     <div id="conteneurGestion">
-                        <h4>Statut : <span class="<?php if($contentOffre["enLigne"]=="true"){echo "enLigne";} else{echo "horsLigne";} ?>">en Ligne</span></h4>
+                        <h4>Statut : <span class="enLigne" id="txtEnLigne">en Ligne</span></h4>
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="ChangerBtnLigne()">
                                 <img src="../icones/horsLigneSVG.svg" alt="" id="imgEnHorsLigne">
