@@ -14,11 +14,11 @@
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
-        // recuperation de id de l offre
+        // reccuperation de id de l offre
         $idOffre =$_GET["idOffre"]; 
         
-        // recuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        // reccuperation du contenu de l offre
+        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
     }
     if(key_exists("user", $_GET))
     {
