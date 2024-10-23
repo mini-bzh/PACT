@@ -56,6 +56,7 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
 if ($correspond === true) {
 ?>
     <script>
+        alert("ok");
         validerCorrect();
     </script>
 <?php
