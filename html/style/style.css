@@ -467,13 +467,18 @@ p{
     margin: 0;
 }
 
-.ulHeader .aHeader:hover{
-    background: linear-gradient(white, var(--primary));
+.ulHeader .aHeader{
+    transition: transform 0.3s ease;
 }
 
-.navBarPro .ulHeader .aHeader:hover{
-    background: linear-gradient(white, var(--secondary));
+.ulHeader .aHeader:hover{
+    /*background: linear-gradient(white, var(--primary));*/
+    transform: scale(1.05);
 }
+
+/*.navBarPro .ulHeader .aHeader:hover{
+    background: linear-gradient(white, var(--secondary));
+}*/
 
 }
 
