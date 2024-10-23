@@ -60,7 +60,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                                             <p><?php $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
                                         </div>
                                         <div class="conteneurSpaceBetween">
-                                            <p>Visite</p>
+                                            <p></p> <!-- catégorie -->
                                             <p class="ouvert">Ouvert</p>
                                         </div>
                             
