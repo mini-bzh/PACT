@@ -37,6 +37,9 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
         <?php include "../composants/header/header.php";        //import navbar
         ?>
         <main>
+        <h1>
+            Gestion des offres
+        </h1>
             <?php
                 if($user == "pro")
                 {
