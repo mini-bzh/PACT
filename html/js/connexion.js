@@ -3,7 +3,7 @@ function validerCorrect() {
     let pop = document.getElementsByClassName('popUp');
     console.log(pop.textContent);
     console.log("pasOK");
-    pop.style.display = 'flex';
+    // pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 
     // Après 5 secondes, cacher la popup et réactiver les interactions
