@@ -8,13 +8,8 @@
 
     $idOffre = null;
     $user = null;
-    if(key_exists("idOffre", $_GET))
-    {
-        // recuperation de l'id de l offre
-        $idOffre =$_GET["idOffre"]; 
-        
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
+     echo $contentOffre["idOffre"];
+
     if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
@@ -43,7 +38,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" value=<?php echo "coucou"?> required>
+                    <input type="text" id="titre" name="titre" value=<?php echo "coucou"?>   required>
                 </div>
 
                 <!-- <div class="champs">
