@@ -1,12 +1,15 @@
+document.querySelectorAll('.trait').forEach(sousBloc => {
+    sousBloc.style.display = 'none';
+});
+
 document.querySelectorAll('.liHeaderMobile').forEach(parent => {
     parent.addEventListener('click', () => {
         
-        const sousBloc = parent.querySelector('.trait');
-        
-        if (sousBloc.style.display === 'block') {
+        document.querySelectorAll('.trait').forEach(sousBloc => {
             sousBloc.style.display = 'none';
-        } else {
-            sousBloc.style.display = 'block';
-        }
+        });
+        
+        const sousBloc = parent.querySelector('.trait');
+        sousBloc.style.display = 'block';
     });
 });
