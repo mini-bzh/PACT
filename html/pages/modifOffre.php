@@ -76,12 +76,16 @@
 
                 <div>
                     <label for="resume">Résumé <span class="required">*</span> :</label>
-                    <textarea id="resume" name="resume" <?php echo $contentOffre["resume"];?> required></textarea>
+                    <textarea id="resume" name="resume"  required>
+                        <?php echo $contentOffre["resume"];?>
+                    </textarea>
                 </div>
 
                 <div>
                     <label for="description">Description détaillée <span class="required">*</span> :</label>
-                    <textarea id="description" name="description" <?php echo $contentOffre["description_detaille"];?> required></textarea>
+                    <textarea id="description" name="description"  required>
+                    <?php echo $contentOffre["description_detaille"];?>
+                    </textarea>
                 </div>
 
                 <div>
