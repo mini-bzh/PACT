@@ -52,14 +52,20 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
 }
 
+// Traite si les logins sont corrects
 if (($correspond === true)) {
-    
+?>
+    <script>
+        validerCorrect();
+    </script>
+<?php
 } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
