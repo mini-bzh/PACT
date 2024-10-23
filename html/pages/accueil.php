@@ -4,7 +4,6 @@
     {
         $user =$_GET["user"];
     }
-echo "HW";
 
 $driver = "pgsql";
 
@@ -50,7 +49,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
             <section id="conteneurOffres">
                 <article>
                     <?php
-                        foreach($dbh->query("SELECT * from tripskell._offre") as $row) 
+                        foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row) 
                         {
                             ?>
                                 <a href="/pages/detailOffre.php?user=<?php echo $user?>" class="lienApercuOffre grossisQuandHover">
