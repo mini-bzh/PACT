@@ -1,9 +1,10 @@
 <?php
-    $user = null;
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
+echo "cc";
+$user = null;
+if(key_exists("user", $_GET))
+{
+    $user =$_GET["user"];
+}
 echo "HW";
 
 $driver = "pgsql";
