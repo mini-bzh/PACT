@@ -27,7 +27,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($user == "pro")
             {
-                echo "fondPro";
+                echo $user . "fondPro";
             }
             else
             {
