@@ -16,7 +16,7 @@
         $id_c = $_SESSION["idCompte"];
 
         $stmt->execute();
-        $comptePro = stmt->fetchAll()[0];
+        $comptePro = $stmt->fetchAll()[0];
         print_r($comptePro);
     }
 
