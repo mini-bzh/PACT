@@ -11,21 +11,24 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    $user = null;
-    if(key_exists("idOffre", $_GET))
-    {
-        // reccuperation de id de l offre
-        $idOffre =$_GET["idOffre"]; 
-        
-        // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
-    }
+    //
+    // Creation requete pour recuperer les offres
+    // du professionnel connecte
+    //
+    $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
 
+    // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
+    $stmt->bindParam(":id_c", $id_c); 
+    $id_c = $_SESSION["idCompte"];
+
+    $stmt->execute();   // execution de la requete
+    
+    // recuperation de la reponse et mise en forme
+    $contentMesOffres = $stmt->fetchAll();
+    
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -48,7 +51,7 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" value=<?php echo $contentOffre["titreoffre"];?>   required>
+                    <input type="text" id="titre" name="titre" value=<?php echo $contentOffre["titreoffre"]?>   required>
                 </div>
 
                 <!-- <div class="champs">

@@ -34,7 +34,7 @@
 
 <!------ HEADER  ------>
 <?php
-    include "composants/header/header.php";
+    include "/var/www/html/composants/header/header.php";
 ?>
 
 <div class="titrePortable">
@@ -76,8 +76,8 @@
 
         <div>
 <?php
-            include '../composants/btnConnexion/btnCoMembre.php';
-            include '../composants/btnConnexion/btnCoPro.php';
+            include '/var/www/html/composants/btnConnexion/btnCoMembre.php';
+            include '/var/www/html/composants/btnConnexion/btnCoPro.php';
 ?>
         </div>
 
@@ -91,7 +91,7 @@
         <div>
             <div class="fakeDiv"></div>
 <?php
-            include '../composants/btnConnexion/btnNouvCo.php';
+            include '/var/www/html/composants/btnConnexion/btnNouvCo.php';
 ?>
         </div>
 
@@ -104,7 +104,7 @@
 <!------ FOOTER  ------>
 
 <?php
-    include "../composants/footer/footer.php";
+    include "/var/www/html/composants/footer/footer.php";
 ?>
 
 </body>
