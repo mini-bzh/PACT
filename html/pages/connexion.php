@@ -52,10 +52,15 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
 }
 
-
+?>
+    <script defer>
+<?php
 if (($correspond === true)) {
-    alert("C'est bon");
-} else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))){
+        validerCorrect();
+?>
+    </script>
+<?php
+} else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
 
@@ -70,6 +75,7 @@ if (($correspond === true)) {
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/connexion.css">
+    <script src="../js/connexion.js" defer></script>
 </head>
 <body class=
 <?php
@@ -137,6 +143,8 @@ if (($correspond === true)) {
         <label for="userPSW"><p class="texteLarge">Mot de passe :</p></label><br>
         <input type="password" id="userPSW" name="userPSW" minlength="12" required>
     </div>
+
+    <a href="#"><p class="texteSmall">Mot de passe oublié ?</p></a>
 
 <?php
     echo $message2;

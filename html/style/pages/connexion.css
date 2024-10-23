@@ -32,6 +32,12 @@ form div{
     margin-top: 3%;
 }
 
+form > div + a{
+    margin-top: 1%;
+    position: absolute;
+    right: 27%;
+}
+
 .accepteSouvenir{
     margin: 0;
     display: flex;
