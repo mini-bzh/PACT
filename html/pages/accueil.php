@@ -11,14 +11,14 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    if($comptePro)
+    /*if($comptePro)
     {
         $stm = $dbh->query("SELECT * from tripskell.offre_pro WHERE id_c=:id_c;");
     }
     else
     {
         $dbh->query("SELECT * from tripskell.offre_visiteur");
-    }
+    }*/
 
 ?>
 <!DOCTYPE html>
