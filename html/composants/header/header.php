@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="liHeader" id="btOffres"    <?php 
-                    if($user != "pro")
+                    if(!$comptePro)
                     {
                         echo "hidden";                          //cache la brique "mes offres" si l'utilisateur n'est pas un professionnel
                     }
