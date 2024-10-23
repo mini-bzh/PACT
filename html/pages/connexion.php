@@ -101,9 +101,9 @@ $pass = "ashton-izzY-c0mplet";
     </div>
 
     <div class="accepteSouvenir">
-    <input type="checkbox" id="souvenir" name="souvenir">
-    <p class="texteLarge">Se souvenir de moi</p>
-</div>
+        <input type="checkbox" id="souvenir" name="souvenir">
+        <p class="texteLarge">Se souvenir de moi</p>
+    </div>
 
     <div class="zoneBtn">
         <a href="compte.php" class="btnAnnuler">
