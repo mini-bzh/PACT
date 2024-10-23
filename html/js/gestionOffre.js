@@ -17,7 +17,7 @@ function ChangerBtnLigne(params)
         texte.innerText = "Mettre l'offre hors ligne";
     }
 
-    const texte2 = document.getElementById('txtEnHorsLigne');
+    const texte2 = document.getElementById('txtEnLigne');
     if (texte2.innerText === "en Ligne"){
         texte2.innerText = "Hors ligne";
     } else {
