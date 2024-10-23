@@ -1,3 +1,10 @@
+<?php
+    $profil = null;
+    if(key_exists("user", $_GET))
+    {
+        $profil =$_GET["user"];
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
