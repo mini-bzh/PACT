@@ -19,70 +19,75 @@
         ?>>
         <?php include "../composants/header/header.php";        //import navbar
         ?>
-<body>
-    <!-- HEADER -->
 
     <main>
 
-        <div>
-            <h2>Création d'une offre</h2>
-            <div id="test">
-                <!-- <form name="test" action="http://localhost:8888/import.php" method="get"> -->
-
-                <div class="champTexte">
-                    <label for="titre">Titre : <input type="text" id="titre" name="titre" size="20" /></label>
-                    <br />
-                </div>
-
-                <div class="champTexte">
-                    <label for="categorie">Catégorie :
-                        <select id="categorie" name="categorie">
-                            <option value="restauration">Restauration</option>
-                            <option value="visite">Visite</option>
-                            <option value="spectacle">Spectacle</option>
-                            <option value="parcDatraction">Parc d'attraction</option>
-                            <option value="activite">Activité</option>
-                        </select>
-                    </label>
-                    <br />
-                </div>
-
-                <?php
-
-                ?>
-                <div class="champTexte">
-                    <!-- Liste déroulante -->
-                    <label for="tags">Tags :
-                        <select id="tags" name="tags">
-                            <option value="FR">Française</option>
-                            <option value="hotel">Hotel</option>
-                            <option value="chateau">Chateau</option>
-                            <option value="musee">Musée</option>
-                            <option value="visite">Visite</option>
-                            <option value="chambrehote">Chambre d'hôtes</option>
-                            <option value="autre">Autre</option>
-                        </select>
-                    </label>
-                    <br />
-                </div>
-            </div>
-            <div>
-                <label for="resume">Résumé :</label>
-                <textarea id="resume" name="resume" rows="5" cols="33" placeholder="Résumé de votre offre"></textarea>
-                <br />
-
-                <label for="descripDetail">Description détaillé :</label>
-                <textarea id="resume" name="resume" rows="10" cols="60" placeholder="Description détaillé de votre offre"></textarea>
-                <br />
+    <div class="conteneur-formulaire">
+        <h1>Création d'une offre</h1>
+        <form>
+            <div class="champs">
+                <label for="titre">Titre <span class="required">*</span> :</label>
+                <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
             </div>
 
-            <!-- </form> -->
-        </div>
+            <div class="champs">
+                <label for="categorie">Catégorie <span class="required">*</span> :</label>
+                <select id="categorie" name="categorie" required>
+                    <option value="">Sélectionnez une catégorie</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </select>
+            </div>
+
+            <div class="champs">
+                <label for="tags">Tags :</label>
+                <select id="tags" name="tags">
+                    <option value="">Sélectionnez des tags</option>
+                    <option value="tag1">Tag 1</option>
+                    <option value="tag2">Tag 2</option>
+                </select>
+            </div>
+
+            <div class="champs">
+                <label for="prix-minimal">Prix minimal :</label>
+                <input type="number" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal">
+            </div>
+
+            <div class="champs">
+                <label for="resume">Résumé <span class="required">*</span> :</label>
+                <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
+            </div>
+
+            <div class="champs">
+                <label for="description">Description détaillée <span class="required">*</span> :</label>
+                <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
+            </div>
+
+            <div class="champs">
+                <label for="horaires">Horaires d'ouverture :</label>
+                <div class="jours">
+                    <button type="button">L</button>
+                    <button type="button">Ma</button>
+                    <button type="button">Me</button>
+                    <button type="button">J</button>
+                    <button type="button">V</button>
+                    <button type="button">S</button>
+                    <button type="button">D</button>
+                </div>
+                <div class="heures">
+                    <label for="heure-debut">De</label>
+                    <input type="time" id="heure-debut" name="heure-debut">
+                    <label for="heure-fin">à</label>
+                    <input type="time" id="heure-fin" name="heure-fin">
+                </div>
+            </div>
+        </form>
+    </div>
     </main>
-    <!-- footer -->
+
     <?php
-    echo file_get_contents('../composants/footer/footer.php');
-    ?>
+            include "../composants/footer/footer.php";
+        ?>
 </body>
 
 </html>
