@@ -52,7 +52,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                         foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row) 
                         {
                             ?>
-                                <a href="/pages/detailOffre.php?user=<?php echo $user?>&idOffre=<?php echo $row["idOffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                <a href="/pages/detailOffre.php?user=<?php echo $user?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
                                         <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
