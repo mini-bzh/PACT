@@ -10,13 +10,13 @@
 
     $profil = null;
     if(key_exists("idCompte", $_SESSION)) {
-        $comptePro = $dbh->prepare("select count(*) from (select id_c from tripskell.pro_public where id_c=:id_c union select id_c from tripskell.pro_prive where id_c=:id_c );"); 
-        $comptePro->bindParam(":id_c", $id_c);
+        $stmt = $dbh->prepare("select count(*) from (select id_c from tripskell.pro_public where id_c=:id_c union select id_c from tripskell.pro_prive where id_c=:id_c );"); 
+        $stmt->bindParam(":id_c", $id_c);
 
         $id_c = $_SESSION["idCompte"];
 
-        $comptePro->execute();
-
+        $stmt->execute();
+        $comptePro = stmt->fetchAll()[0];
         print_r($comptePro);
     }
 
