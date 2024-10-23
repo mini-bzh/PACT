@@ -44,8 +44,8 @@
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
-                    <input type="text" id="titre" name="titre" required>
-                    <?php echo $contentOffre["titreoffre"];?>
+                    <input type="text" id="titre" name="titre" <?php echo $contentOffre["titreoffre"];?> required>
+                    
                 </div>
 
                 <!-- <div class="champs">
