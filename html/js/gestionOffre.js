@@ -19,7 +19,6 @@ function ChangerBtnLigne(idOffre)
     }
 
     const texteStatutOffre = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
-    console.log(texte2);
     if (texteStatutOffre.innerText === "En ligne")
     {
         texteStatutOffre.innerText = "Hors ligne";
