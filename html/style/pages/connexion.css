@@ -35,7 +35,7 @@ form div{
 form > div + a{
     margin-top: 1%;
     position: absolute;
-    right: 27%;
+    right: 25%;
 }
 
 .accepteSouvenir{
