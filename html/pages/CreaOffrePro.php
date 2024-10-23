@@ -95,6 +95,7 @@
                     <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
+                <!--
                 <div class="champs">
                     <label for="offre">Type offre :</label>
                     <select id="offre" name="offre">
@@ -106,12 +107,14 @@
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
-                        <option value="">Sélectionnez des tags</option>
+                        <option value="">Sélectionnez des options</option>
+                        <option value="Aucune">Aucune</option>
                         <option value="AlaUne">A la une</option>
                         <option value="EnRelief">En relief</option>
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
                     </select>
                 </div>
+                -->
 
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
@@ -121,7 +124,7 @@
                         <option value="PasAccessible">Pas Accessible</option>
                     </select>
                 </div>
-
+                
                 <!-- <div class="champs">
                     futur data de mise en ligne
                 </div> -->
@@ -182,6 +185,21 @@ if (!empty($_POST)) {
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
+    $stmt->bindParam(":titre", $titre); 
+    $stmt->bindParam(":resume", $resume); 
+    $stmt->bindParam(":description", $description); 
+    $stmt->bindParam(":tarif", $tarif); 
+    $stmt->bindParam(":note", $note); 
+    $stmt->bindParam(":horaires", $horaires); 
+    $stmt->bindParam(":accessibilite", $accessible); 
+    $stmt->bindParam(":enLigne", $enLigne); 
+    $stmt->bindParam(":id_abo", $id_abo); 
+    $stmt->bindParam(":id_option", $id_option); 
+    $stmt->bindParam(":numero", $numero); 
+    $stmt->bindParam(":rue", $rue); 
+    $stmt->bindParam(":ville", $ville); 
+    $stmt->bindParam(":codePostal", $codePostal); 
+    $stmt->bindParam(":id_c", $id_c); 
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -197,14 +215,18 @@ if (!empty($_POST)) {
 
     $enLigne = true;
 
-    $id_abo = $_POST["offre"];
-    $id_option = $_POST["option"];
+    //$id_abo = $_POST["offre"];
+    //$id_option = $_POST["option"];
+
+    $id_abo = 'Standard';
+    $id_option = null;
 
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
     
+    $id_c = $_SESSION["idCompte"];
 
     
 

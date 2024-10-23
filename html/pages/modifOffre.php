@@ -18,7 +18,7 @@
         $idOffre =$_GET["idOffre"]; 
         
         // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
     }
     if(key_exists("user", $_GET))
     {
@@ -105,7 +105,7 @@
 
                 <div class="champsAdresse">
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
-                    <input type="text" id="num" name="num" placeholder="Numéro" required>
+                    <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>" required>
                     <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                     <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
