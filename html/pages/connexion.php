@@ -8,7 +8,7 @@ $dbname = "postgres";
 $user = "sae";
 $pass = "ashton-izzY-c0mplet";
 
-// $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 // $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -88,7 +88,7 @@ $pass = "ashton-izzY-c0mplet";
 </div>
 
 
-<form action="acceuil.php" method="post">
+<form action="loginPro.php" method="post">
 
     <div>
         <label for="userName"><p class="texteLarge">Nom d'entreprise :</p></label><br>
