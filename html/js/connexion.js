@@ -9,5 +9,5 @@ function validerCorrect() {
         pop.style.display = 'none';
         document.body.classList.remove('no-scroll');
         window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro";
-    }, 3000);
+    }, 1500);
 }
