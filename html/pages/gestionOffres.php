@@ -16,11 +16,7 @@
         $user =$_GET["user"];
     }
 
-    foreach($dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';") as $row){
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-    }
+    $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where id_c='" . $user . "';")->fetchAll()[0];
 ?>
 
 <!DOCTYPE html>
