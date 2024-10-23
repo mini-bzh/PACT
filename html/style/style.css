@@ -232,7 +232,7 @@ p{
 }
 .apercuOffre{
     width: 600px;
-    height: 550px;
+    height: fit-content;
 
     border-radius: 20px;
     background-color: white;
