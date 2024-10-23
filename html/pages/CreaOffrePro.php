@@ -170,7 +170,7 @@ if (!empty($_POST)) {
     $note = 5;
     $accessible = $_POST["choixAccessible"];
 
-    $qwery = "INSERT INTO tripskell.offre_pro(titreOffre,resume,description_detaille,tarifMinimal,note,horaires,accessibilite,enLigne,id_abo, id_option, numero, rue, ville, codePostal,id_c) VALUES('$titre','resume','description',23,2,'23h-12h','accessible',true,'Premium','A la une','25','rue','ville','22540',1);";
+    $qwery = "INSERT INTO tripskell.offre_pro(titreOffre,resume,description_detaille,tarifMinimal,note,horaires,accessibilite,enLigne,id_abo, id_option, numero, rue, ville, codePostal,id_c) VALUES(':titre','resume','description',23,2,'23h-12h','accessible',true,'Premium','A la une','25','rue','ville','22540',1);";
     echo $qwery;
 
     $stmt = $dbh->prepare(
