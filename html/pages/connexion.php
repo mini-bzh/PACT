@@ -1,5 +1,6 @@
 <?php 
 
+// Connexion à la BDD
 $driver = "pgsql";
 
 $server = "postgresdb";
@@ -12,6 +13,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+// Récupère les login si ils ont été entrés
 if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
     $username = $_POST['userName'];
     $password = $_POST['userPSW'];
@@ -33,6 +35,7 @@ $result2 = $stmt->fetchAll();
 
 $correspond = false;
 
+// Voit si l'identifiant existe et correspond au mot de passe
 if (($correspond === false) && ($result)) {
     if ($password === $result[0]['mot_de_passe']) {
         $correspond = true;
@@ -48,6 +51,7 @@ if (($correspond === false) && ($result2)) {
 $message1 = "";
 $message2 = "";
 
+// Affiche un message d'erreur à l'utilisateur selon son erreur
 if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
     $message1 = "<p style='color:red;'>Ce nom d'utilisateur n'existe pas.</p>";
 }
@@ -118,6 +122,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     <p class="texteLarge">Connexion à un compte professionnel :</p>
 </div>
 
+<!-- Formulaire de connexion -->
 <form action="" method="post">
 
     <div>
@@ -125,6 +130,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
         <input type="text" id="userName" name="userName" maxlength="40" required>
     </div>
 
+<!-- Ecrit le message "utilisateur inexistant si nécessaire" -->
 <?php
     echo $message1;
 ?>
@@ -136,6 +142,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 
     <a href="#"><p class="texteSmall">Mot de passe oublié ?</p></a>
 
+<!-- Ecrit le message "mot de passe incorrect" si nécessaire -->
 <?php
     echo $message2;
 ?>
