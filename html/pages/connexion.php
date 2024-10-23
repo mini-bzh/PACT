@@ -182,8 +182,8 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
         setTimeout(function() {
             pop.style.display = 'none';
             document.body.classList.remove('no-scroll');
-            alert("ok");
-        }, 5000);
+            window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro";
+        }, 3000);
     }
 </script>
 
@@ -198,8 +198,6 @@ if ($correspond === true) {
         validerCorrect();
     </script>
 <?php
-    header("Location: https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro");
-    exit();
 } else if ($correspond === false && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((!empty($result)) && (!empty($result2)))){
     $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
 }
