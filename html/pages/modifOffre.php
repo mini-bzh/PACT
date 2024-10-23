@@ -10,13 +10,6 @@
     $user = null;
      echo $contentOffre["idOffre"];
 
-    if(key_exists("idOffre", $_GET))
-    {
-        // recuperation de l'id de l offre
-        $idOffre =$_GET["idOffre"]; 
-        
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
     if(key_exists("user", $_GET))
     {
         $user =$_GET["user"];
