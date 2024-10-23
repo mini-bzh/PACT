@@ -35,7 +35,7 @@
             Gestion des offres
         </h1>
         <main id="mainGestionOffres">
-        <?phpforeach($contentOffre as $value){?>
+        <?phpforeach($contentOffre as $key => $value){?>
         <section id="conteneurBtnOffres">
         <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
