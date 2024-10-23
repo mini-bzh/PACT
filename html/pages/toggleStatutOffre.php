@@ -23,11 +23,11 @@
 
         if($enLigne)
         {
-            $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = false where idoffre = ".$idOffre.";");
+            $stmt = $dbh->prepare("UPDATE tripskell.offre_pro SET enligne = false where idoffre = ".$idOffre.";");
         }
         else
         {
-            $stmt = $dbh->prepare("UPDATE tripskell._offre SET enligne = true where idoffre = ".$idOffre.";");
+            $stmt = $dbh->prepare("UPDATE tripskell.offre_pro SET enligne = true where idoffre = ".$idOffre.";");
         }
         $stmt->execute();
         $result = $stmt->fetchAll();
