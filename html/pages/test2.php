@@ -15,7 +15,7 @@
         $.ajax({
             url: 'toggleStatutOffre.php', // Le fichier PHP à appeler
             type: 'POST',        // Type de la requête (POST dans ce cas)
-            data: idOffre,
+            data: {idOffre: idOffre},
             success: function(response) {
                 alert(response); // Affiche la réponse de fonction.php
             },
