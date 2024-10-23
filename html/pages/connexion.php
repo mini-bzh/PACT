@@ -48,7 +48,7 @@ if (($correspond === false) && ($result2)) {
 $message1 = "";
 $message2 = "";
 
-if ((empty($result)) && (empty($result2))) {
+if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
 }
 
