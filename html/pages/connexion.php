@@ -88,7 +88,7 @@ $pass = "ashton-izzY-c0mplet";
 </div>
 
 
-<form action="loginPro.php" method="post">
+<form action="../php/loginPro.php" method="post">
 
     <div>
         <label for="userName"><p class="texteLarge">Nom d'entreprise :</p></label><br>

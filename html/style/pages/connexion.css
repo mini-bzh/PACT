@@ -69,34 +69,10 @@ input[type="checkbox"]{
 
 .btnAnnuler{
     background-color: red;
-    border-radius: 25px;
-    width: 320px;
-    height: 88px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    justify-content: space-evenly;
-    margin-top: 3%;
-    cursor: pointer;
-    border: none;
 }
 
 .btnConfirmer{
     background-color: var(--accentDark);
-    border-radius: 25px;
-    width: 320px;
-    height: 88px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    justify-content: space-evenly;
-    margin-top: 3%;
-    cursor: pointer;
-    border: none;
 }
 
 .zoneBtn{
