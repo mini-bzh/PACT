@@ -2,20 +2,14 @@
 
 session_start();
 
-$_SESSION['idCompte'] = null;
+$_SESSION['idCompte'] = null;       // met l'id de connextion a null pour eviter toute aproximation
 
-// Connexion à la BDD
-$driver = "pgsql";
+// recuperation des parametre de connection a la BdD
+include('/var/www/html/php/connection_params.php');
 
-$server = "postgresdb";
-$dbname = "postgres";
-
-$user = "sae";
-$pass = "ashton-izzY-c0mplet";
-
+// connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
 // Récupère les login si ils ont été entrés
 if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
@@ -82,9 +76,12 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 <?php
     if ($_GET['user-tempo'] == 'pro') {
         echo 'fondPro';
+        $comptePro = true;
     } else {
         echo 'fondVisiteur';
+        $comptePro = false;
     }
+
 ?>
 >
 
