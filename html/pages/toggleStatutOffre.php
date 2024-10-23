@@ -25,9 +25,9 @@
         print_r($_POST);
         $idOffre = $_POST["idOffre"];
 
-        $stmt = $dbh->prepare("SELECT enLigne from tripskell.offre_pro where idoffre = 4");
+        $stmt = $dbh->prepare("SELECT enLigne from tripskell.offre_pro where idoffre = ".$idOffre);
 
-        $stmt->bindParam(':idoffre', $idOffre, PDO::PARAM_STR);
+        $stmt->bindParam('idoffre', $idOffre, PDO::PARAM_STR);
         
         $stmt->execute();
         $result = $stmt->fetchAll();        
