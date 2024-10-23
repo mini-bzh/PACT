@@ -121,7 +121,7 @@ p{
 .coMembre hr, .coPro hr, .nouvCompte hr{
     rotate: 90deg;
     width: 101px;
-    height: 9px;
+    height: 3px;
     border: none;
     border-radius: 25px;
 }
@@ -154,15 +154,12 @@ p{
     align-items: center;
 }
 .coMembre{
-    border: var(--primaryDark) solid 6px;
     background-color: var(--primary);
 }
 .coPro{
-    border: var(--secondaryDark) solid 6px;
     background-color: var(--secondary);
 }
 .nouvCompte{
-    border: var(--accentDark) solid 6px;
     background-color: var(--accent);
     padding-right: 2%;
     padding-left: 1%;
