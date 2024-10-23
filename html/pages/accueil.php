@@ -65,7 +65,7 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
                                         </div>
                             
                                         <div class="conteneurImage">
-                                            <img src="/images/images_illsutration_tempo/fort_la_latte/carrou_fort1.jpg" alt="fort la latte">
+                                            <img src="/images/imagesOffres/" alt="illustration offre">
                                             <div class="text-overlay">dès <?php echo $row["tarifminimal"]?>€/pers</div>
                                         </div>
                                         
