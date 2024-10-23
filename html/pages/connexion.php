@@ -52,6 +52,7 @@ if ((empty($result)) && (empty($result2)) && ((isset($_POST['userName'])) && (is
     $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
 }
 
+// Traite si les logins sont corrects
 if (($correspond === true)) {
 ?>
     <script>
@@ -64,6 +65,7 @@ if (($correspond === true)) {
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
