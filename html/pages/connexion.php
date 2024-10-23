@@ -10,21 +10,53 @@ $pass = "ashton-izzY-c0mplet";
 
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
-// $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-// $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive");
+$username = $_POST['userName'];
+$password = $_POST['userPSW'];
 
-// $stmt->execute();
-// $result = $stmt->fetchAll();
-// echo "<pre>";
-// print_r($result);
-// echo "</pre>";
+$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
 
-// foreach($dbh->query("SELECT * from tripskell.pro_prive") as $row) {
-//     echo "<pre>";
-//     print_r($row);
-//     echo "</pre>";
-// }
+$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+$stmt->execute();
+$result = $stmt->fetchAll();
+
+$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
+
+$stmt2->bindParam(':username', $username, PDO::PARAM_STR);
+
+$stmt2->execute();
+$result2 = $stmt->fetchAll();
+
+$correspond = false;
+
+if (($correspond === false) && ($result)) {
+    if ($password === $result[0]['mot_de_passe']) {
+        $correspond = true;
+    }
+}
+
+if (($correspond === false) && ($result2)) {
+    if ($password === $result2[0]['mot_de_passe']) {
+        $correspond = true;
+    }
+}
+
+$message1 = "";
+$message2 = "";
+
+if ((empty($result)) && (empty($result2))) {
+    $message1 = "<p style='color:red;'>Nom d'utilisateur incorrect.</p>";
+}
+
+
+if ($correspond === true) {
+    alert("C'est bon");
+} else {
+    $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+}
+
 
 ?>
 
@@ -88,17 +120,25 @@ $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 </div>
 
 
-<form action="../php/loginPro.php" method="post">
+<form action="" method="post">
 
     <div>
         <label for="userName"><p class="texteLarge">Nom d'entreprise :</p></label><br>
         <input type="text" id="userName" name="userName" maxlength="40" required>
     </div>
 
+<?php
+    echo $message1;
+?>
+
     <div>
         <label for="userPSW"><p class="texteLarge">Mot de passe :</p></label><br>
         <input type="password" id="userPSW" name="userPSW" minlength="12" required>
     </div>
+
+<?php
+    echo $message2;
+?>
 
     <div class="accepteSouvenir">
         <input type="checkbox" id="souvenir" name="souvenir">

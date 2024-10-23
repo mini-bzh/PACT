@@ -46,6 +46,9 @@ if (($correspond === false) && ($result2)) {
 
 if ($correspond === true) {
     print_r("\n\nok\n\n");
+} else {
+    header('Location: https://tripskell.ventsdouest.dev/pages/connexion.php?user-tempo=pro');
+    exit();
 }
 
 
