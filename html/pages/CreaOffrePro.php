@@ -314,10 +314,10 @@ if (!empty($_GET)) { // On vérifie si le formulaire est compléter ou non.
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":img1", $image1);
-    $stmt->bindParam(":img2", $image2);
-    $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img4", $image4);
+    $stmt->bindParam("img1", $image1);
+    $stmt->bindParam("img2", $image2);
+    $stmt->bindParam("img3", $image3);
+    $stmt->bindParam("img4", $image4);
 
 
 
