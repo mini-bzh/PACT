@@ -24,7 +24,7 @@
         function deconnexion() {
             alert("deco1");
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "gestionDeconnexion.php", true);
+            xhr.open("POST", "../php/gestionDeconnexion.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             alert("deco2");
             // Gérer la réponse du serveur
