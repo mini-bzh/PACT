@@ -167,7 +167,7 @@ $stock = false;
                         ?>
                     </a>
 
-                    <button type="submit" href="CreaOffrePro.php" class="btnConfirmer">
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
@@ -317,21 +317,21 @@ if (!empty($_POST)) {
     $image3 = $_POST["fichier3"];
     $image4 = $_POST["fichier4"];
 
-    $type = explode("/", $image1["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img);
+    $type1 = explode("/", $image1["types"])[1];
+    $nom_img1 = time() . "." . $type1;
+    move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img1);
 
-    $type = explode("/", $image2["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+    $type2 = explode("/", $image2["types"])[1];
+    $nom_img2 = time() . "." . $type1;
+    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img2);
 
-    $type = explode("/", $image3["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img);
+    $type3 = explode("/", $image3["types"])[1];
+    $nom_img3 = time() . "." . $type3;
+    move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img3);
 
-    $type = explode("/", $image4["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img);
+    $type4 = explode("/", $image4["types"])[1];
+    $nom_img4 = time() . "." . $type4;
+    move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img4);
 
     $id_c = $_SESSION["idCompte"];
 
