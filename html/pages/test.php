@@ -8,4 +8,8 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 $stmt = $dbh->prepare("select * from tripskell.pro_prive");
 $stmt->execute();
 $result = $stmt->fetchAll();
-print_r($result);
+
+foreach ($result as $row) 
+{
+    print_r($row);
+}
