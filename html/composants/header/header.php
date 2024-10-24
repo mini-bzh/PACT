@@ -40,7 +40,7 @@
                 ?>>
                     <a class="aHeader" href="/pages/gestionOffres.php">
                     <img src="/icones/offreSVG.svg" alt="icone offres">
-                    <h3>Mes offres</h3>
+                    <h3>MGestion des offres</h3>
                     </a>
                 </li>
                 <li class="liHeader" id="btCompte">
