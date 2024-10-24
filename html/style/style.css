@@ -317,6 +317,10 @@ p{
     display: inline-block;
 }
 
+.apercuOffre .conteneurImage p{
+    font-size: 1.5em;
+    text-align: center;
+}
 .apercuOffre .conteneurImage span{
     font-weight: bold;
     font-size: 2em;
