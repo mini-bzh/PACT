@@ -3,7 +3,7 @@
 main{
     padding: 60px;
 }
-h1{
+main h1{
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
     margin-left: 10px;
