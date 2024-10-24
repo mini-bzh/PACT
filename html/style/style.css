@@ -239,6 +239,7 @@ p{
     color: black;
     display: block;
 }
+
 .apercuOffre{
     width: 600px;
     height: 550px;
@@ -329,7 +330,7 @@ p{
 
 @media screen and (max-width : 428px){
     .apercuOffre{
-        width: 185px;
+        width: 300px;
         height: 240px;
     
         border-radius: 20px;
@@ -349,21 +350,17 @@ p{
     }
 
     .apercuOffre .conteneurSVGtexte img{
-        width: 15px;
-        height: 15px;
-    }
-
-    .apercuOffre .conteneurSVGtexte p{
-        font-size: 10px;
+        width: 25px; 
+        height: 25px;
     }
 
     .apercuOffre p{
-        font-size: 10px;
+        font-size: 10px; 
     }
 
     .apercuOffre img{
-        width: 170px;
-        height: 90px;
+        width: 280px; 
+        height: 120px; 
         object-fit: cover;
         display: block;
     }
@@ -388,7 +385,7 @@ p{
     }
 
     .apercuOffre .resumeApercu{
-        font-size: 0.55em;
+        font-size: 1em; 
     }
 }
 
