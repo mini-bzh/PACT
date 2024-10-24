@@ -189,7 +189,7 @@ select{
 }
 
 .zoneBtn{
-    display: inline;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 3%;
