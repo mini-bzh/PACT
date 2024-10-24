@@ -37,7 +37,10 @@ main h1{
     }
 
     main>h1{
-        font-size: 1em;
+        font-size: 1.6em;
+        border-left: 10px solid var(--secondary);
+        padding-left: 10px;
+        margin-left: 5px;
     }
 
     #logoTitreMobile{
