@@ -71,9 +71,17 @@ select{
     box-sizing: border-box;
 }
 
-.champs{
+.haut-de-page{
     display: flex;
     justify-content: space-between;
+}
+
+.haut-de-page>div{
+    display: flex;
+}
+
+.champs{
+    display: flex;
 }
 
 .required {

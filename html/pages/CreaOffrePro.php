@@ -34,15 +34,14 @@ include('/var/www/html/php/verif_compte_pro.php');
 
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
 
-                <div class="champs">
-
+                <div class="haut-de-page">
+                    <div>
                         <label for="titre">Titre <span class="required">*</span> :</label>
                         <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
-                    <div class="image">
-
-                        <label for="fichier">Selectionner 4 images :</label>
+                    </div>
+                    <div>
+                        <label for="fichier">Selectionner maximum 4 images :</label>
                         <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
-                        <br />
                     </div>
                 </div>
 
