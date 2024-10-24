@@ -107,7 +107,7 @@
                                     else
                                     {
                                         ?>
-                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>"
+                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idOffre"]?>"
                                         <?php
                                     }
                                 ?>
