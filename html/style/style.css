@@ -617,6 +617,10 @@ rect{
     .footer {
         display: none;
     }
+
+    main{
+        padding-bottom: 100px;
+    }
 }
 
 
