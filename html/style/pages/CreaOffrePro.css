@@ -73,6 +73,7 @@ select{
 
 .champs{
     display: flex;
+    justify-content: space-between;
 }
 
 .required {
