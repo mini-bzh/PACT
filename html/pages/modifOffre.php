@@ -71,6 +71,9 @@ if (!empty($_POST)) {
     $idOffre = $_GET["idOffre"];
 
     $stmt->execute();
+     // Redirection vers gestionOffres.php après mise à jour réussie
+     header("Location: /pages/gestionOffres.php");
+     exit(); // Terminez le script après la redirection
     
 }
 
