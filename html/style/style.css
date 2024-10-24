@@ -243,7 +243,7 @@ p{
 
 .apercuOffre{
     width: 600px;
-    height: 550px;
+    height: 450px;
 
     border-radius: 20px;
     background-color: white;
@@ -315,6 +315,11 @@ p{
 .apercuOffre .conteneurImage{
     position: relative;
     display: inline-block;
+}
+
+.apercuOffre .conteneurImage div>div{
+    font-weight: bold;
+    font-size: 1em;
 }
 
 .text-overlay {
