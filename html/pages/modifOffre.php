@@ -157,3 +157,89 @@
 
 </html>
 
+<?php
+
+
+if (!empty($_POST)) {
+
+    $qwery = "UPDATE tripskell.offre_pro set ";
+    $qwery .= "titreOffre = :titre,";
+    $qwery .= "resume = :resume,";
+    $qwery .= "description_detaille = :description,";
+    $qwery .= "tarifMinimal = :tarif,";
+    $qwery .= "horaires = :horaires,";
+    $qwery .= "accessibilite = :accessibilite,";
+  //  $qwery .= "id_abo, ";
+  //  $qwery .= "id_option, ";
+    $qwery .= "numero = :numero, ";
+    $qwery .= "rue = :rue, ";
+    $qwery .= "ville = :ville, ";
+    $qwery .= "codePostal = :codePostal";
+    $qwery .= " WHERE idOffre = :idOffre ;";
+/*
+    $qwery .= "VALUES(";
+    $qwery .= ":titre,";
+    $qwery .= ":resume,";
+    $qwery .= ":description,";
+    $qwery .= ":tarif,";
+    $qwery .= ":note,";
+    $qwery .= ":horaires,";
+    $qwery .= ":accessibilite,";
+    $qwery .= ":enLigne,";
+    $qwery .= ":id_abo,";
+    $qwery .= ":id_option,";
+    $qwery .= ":numero,";
+    $qwery .= ":rue,";
+    $qwery .= ":ville,";
+    $qwery .= ":codePostal,";
+    $qwery .= ":id_c);";*/
+    echo $qwery;
+
+    $stmt = $dbh->prepare($qwery);
+    $stmt->bindParam(":titre", $titre);
+    $stmt->bindParam(":resume", $resume);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":tarif", $tarif);
+    $stmt->bindParam(":note", $note);
+    $stmt->bindParam(":horaires", $horaires);
+    $stmt->bindParam(":accessibilite", $accessible);
+    $stmt->bindParam(":enLigne", $enLigne);
+    $stmt->bindParam(":id_abo", $id_abo);
+    $stmt->bindParam(":id_option", $id_option);
+    $stmt->bindParam(":numero", $numero);
+    $stmt->bindParam(":rue", $rue);
+    $stmt->bindParam(":ville", $ville);
+    $stmt->bindParam(":codePostal", $codePostal);
+    $stmt->bindParam(":idOffre", $idOffre);
+
+    $titre = $_POST["titre"];
+    $resume = $_POST["resume"];
+    $description = $_POST["description"];
+    $tarif = $_POST["prix-minimal"];
+
+
+    $heuresDebut = $_POST["heure-debut"];
+    $heuresFin = $_POST["heure-fin"];
+    $horaires = $heuresDebut . "-" . $heuresFin;
+
+    $accessible = $_POST["choixAccessible"];
+
+
+    //$id_abo = $_POST["offre"];
+    //$id_option = $_POST["option"];
+
+
+
+    $numero = $_POST["num"];
+    $rue = $_POST["nomRue"];
+    $ville = $_POST["ville"];
+    $codePostal = $_POST["codePostal"];
+
+    $idOffre = $_SESSION["idOffre"];
+
+
+
+    $stmt->execute();
+    $dbh = null;
+}
+?>
