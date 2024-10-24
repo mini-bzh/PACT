@@ -45,7 +45,7 @@
 
         <div class="conteneur-formulaire">
             <h1>Modification d'une offre</h1>
-            <form name="test" action="/pages/CreaOffrePro.php" method="post">
+            <form name="modification" action="/pages/modifOffre.php" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
