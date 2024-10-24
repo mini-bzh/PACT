@@ -26,6 +26,9 @@ main h1{
 
 @media screen and (max-width : 428px)
 {
+    main{
+        padding: 10px;
+    }
     #conteneurOffres>article{
         display: block;
     }
@@ -34,7 +37,7 @@ main h1{
     }
 
     main>h1{
-        display: none;
+        font-size: 1em;
     }
 
     #logoTitreMobile{
