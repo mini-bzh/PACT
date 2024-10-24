@@ -90,13 +90,21 @@ div:has(> .fakeDiv){
     height: 198px;
     border: black solid 1px;
     border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
-.popUpDeco div div{
+.popUpDeco button {
     border: black solid 2px;
     border-radius: 10px;
     width: 74px;
     height: 45px;
+}
+
+.popUpDeco div div{
+    display: flex;
+    flex-direction: row;
 }
 
 .btnAnnuler{
