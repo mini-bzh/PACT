@@ -647,6 +647,12 @@ rect{
     main{
         padding-bottom: 110px;
     }
+
+    #logoTitreMobile{
+        width: 200px;
+        height: auto;
+        transform: translate(30px, -25px);
+    }
 }
 
 
