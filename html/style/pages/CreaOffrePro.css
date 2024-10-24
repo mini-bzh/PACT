@@ -165,11 +165,8 @@ select{
     width: 320px;
     height: 88px;
     text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: inline;
     color: white;
-    justify-content: space-evenly;
     margin-top: 3%;
     cursor: pointer;
     border: none;
@@ -182,10 +179,12 @@ select{
 
 .btnAnnuler{
     background-color: red;
+    align-items: flex-start;
 }
 
 .btnConfirmer{
     background-color: var(--accentDark);
+    align-items: flex-end;
 }
 
 .zoneBtn{

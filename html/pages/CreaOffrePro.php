@@ -1,4 +1,9 @@
 <?php
+// php -S localhost:8888
+// http://localhost:8888/html/pages/CreaOffrePro.php
+?>
+
+<?php
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
@@ -40,7 +45,6 @@ include('/var/www/html/php/verif_compte_pro.php');
                 </div>
 
                 <div class="champs">
-                    <?php include '../icones/joindreImagesSVG.svg'; ?>
                     <label for="fichier">Selectionner maximum 4 images :</label>
                     <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
                 </div>
