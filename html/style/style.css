@@ -318,12 +318,12 @@ p{
 }
 
 .apercuOffre .conteneurImage p{
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
 }
 .apercuOffre .conteneurImage span{
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .text-overlay {
