@@ -157,11 +157,11 @@ body.no-scroll {
     }
 
     .zoneBtn{
-        margin: 1% auto 3% auto;
+        margin: 10% auto 3% auto;
     }
 
     .btnConfirmer, .btnAnnuler{
-        width: 170px;
+        width: 185px;
         height: 60px;
         border-radius: 15px;
     }
