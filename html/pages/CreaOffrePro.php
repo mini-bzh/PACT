@@ -257,7 +257,7 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
 
-    // $listeImage = $_POST["fichier"];
+    $listeImage = $_POST["fichier"];
     // $arrayImage = explode('&', $listeImage);
     // $image1 = $arrayImage[0];
     // $image2 = $arrayImage[1];
