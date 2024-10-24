@@ -282,10 +282,10 @@ if (!empty($_POST)) {
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":img1", $image1);
-    $stmt->bindParam(":img2", $image2);
-    $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img4", $image4);
+    $stmt->bindParam(":image1", $image1);
+    $stmt->bindParam(":image2", $image2);
+    $stmt->bindParam(":image3", $image3);
+    $stmt->bindParam(":image4", $image4);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
