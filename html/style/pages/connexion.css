@@ -137,10 +137,12 @@ body.no-scroll {
         width: fit-content;
     }
 
-    header div
-
     .textBulle{
         display: none;
+    }
+
+    form div{
+        margin-top: 1%;
     }
 
     form div p{
@@ -152,5 +154,14 @@ body.no-scroll {
         width: 385.12px;
         height: 61px;
         padding: 0 2%;
+    }
+
+    .zoneBtn{
+        margin: 3% auto 0 auto;
+    }
+
+    .btnConfirmer, .btnAnnuler{
+        width: 250px;
+        height: 50px;
     }
 }
