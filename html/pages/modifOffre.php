@@ -98,6 +98,7 @@
                     <div class="heures">
                         <label for="heure-debut">De</label>
                         <input type="time" id="heure-debut" name="heure-debut" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[0])); ?>">
+                        <label for="test"><?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[0])); ?></label>
                         <label for="heure-fin">à</label>
                         <input type="time" id="heure-fin" name="heure-fin" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[1])); ?>">
                     </div>
