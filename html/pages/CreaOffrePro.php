@@ -333,10 +333,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $requete .= ":ville,";
         $requete .= ":codePostal,";
         $requete .= ":id_c, ";
-        $requete .= "img1, ";
-        $requete .= "img2, ";
-        $requete .= "img3, ";
-        $requete .= "img4);";
+        $requete .= ":img1, ";
+        $requete .= ":img2, ";
+        $requete .= ":img3, ";
+        $requete .= ":img4);";
         echo $requete;
 
         // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
@@ -356,10 +356,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $stmt->bindParam(":ville", $ville);
         $stmt->bindParam(":codePostal", $codePostal);
         $stmt->bindParam(":id_c", $id_c);
-        $stmt->bindParam("img1", $image1);
-        $stmt->bindParam("img2", $image2);
-        $stmt->bindParam("img3", $image3);
-        $stmt->bindParam("img4", $image4);
+        $stmt->bindParam(":img1", $image1);
+        $stmt->bindParam(":img2", $image2);
+        $stmt->bindParam(":img3", $image3);
+        $stmt->bindParam(":img4", $image4);
 
 
 
