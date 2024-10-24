@@ -23,7 +23,7 @@
     }
     else
     {
-        $stmt = $dbh->query("SELECT * from tripskell.offre_visiteur WHERE enligne = true");
+        $stmt = $dbh->query("SELECT * from tripskell.offre_pro WHERE enligne = true");
     }
 
     $stmt->execute();
