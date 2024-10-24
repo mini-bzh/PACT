@@ -110,6 +110,8 @@
                     <input type="text" id="ville" name="ville" value="<?php echo $contentOffre["ville"];?>" required>
                     <input type="text" id="codePostal" name="codePostal" value="<?php echo $contentOffre["codepostal"];?>" required>
                 </div>
+                
+                <!--
                 <div class="champs">
                     <label for="offre">Type offre :</label>
                     <select id="offre" name="offre">
@@ -127,7 +129,7 @@
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
                     </select>
                 </div>
-
+-->
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
                     <select id="choixAccessible" name="choixAccessible">
