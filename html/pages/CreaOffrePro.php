@@ -160,7 +160,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 
     <?php
     include "../composants/footer/footer.php";
-    print_r($listeImage);
+    print_r($_POST["fichier"]);
     ?>
 </body>
 
