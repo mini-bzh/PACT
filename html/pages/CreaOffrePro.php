@@ -293,6 +293,35 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
     if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
+        // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+
+        print_r($_FILES);
+        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["type"])[1];
+        echo "<br><br>" . $nom_img1 . "<br><br>";
+        
+        move_uploaded_file($_FILES["fichier1"]["tmp_name"], "../images/imagesOffres/" . $nom_img1);
+        
+/*
+        $type2 = explode("/", $image2["types"])[1];
+        $nom_img2 = time() . "." . $type2;
+        if (in_array($type2, ["png", "gif", "jpeg"])) {
+            move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
+        }
+
+        $type3 = explode("/", $image3["types"])[1];
+        $nom_img3 = time() . "." . $type3;
+        if (in_array($type3, ["png", "gif", "jpeg"])) {
+            move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
+        }
+
+        $type4 = explode("/", $image4["types"])[1];
+        $nom_img4 = time() . "." . $type4;
+        if (in_array($type4, ["png", "gif", "jpeg"])) {
+            move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
+        }
+            */
+
+
         // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
         // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
 
@@ -384,6 +413,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $ville = $_POST["ville"];
         $codePostal = $_POST["codePostal"];
 
+        $img1 = $nom_img1;
 
         // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
         $id_c = $_SESSION["idCompte"];
@@ -394,35 +424,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         // on ferme la base de donnée
         $dbh = null;
 
-        // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
-
-
-        print_r($_FILES);
-
-        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["type"])[1];
-        echo "<br><br>" . $nom_img1 . "<br><br>";
         
-        move_uploaded_file($_FILES["fichier1"]["tmp_name"], "../images/imagesOffres/" . $nom_img1);
-        
-
-        $type2 = explode("/", $image2["types"])[1];
-        $nom_img2 = time() . "." . $type2;
-        if (in_array($type2, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
-        }
-
-        $type3 = explode("/", $image3["types"])[1];
-        $nom_img3 = time() . "." . $type3;
-        if (in_array($type3, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
-        }
-
-        $type4 = explode("/", $image4["types"])[1];
-        $nom_img4 = time() . "." . $type4;
-        if (in_array($type4, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
-        }
-
     }
     ?>
 <?php
