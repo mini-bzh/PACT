@@ -71,10 +71,6 @@ select{
     box-sizing: border-box;
 }
 
-.haut-de-page{
-    display: flex;
-}
-
 .champs{
     display: flex;
 }
