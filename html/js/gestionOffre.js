@@ -18,11 +18,11 @@ function ChangerBtnLigne(idOffre)
     if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
     {
         console.log("en");
-        texteBtnLigne.innerText = "Mettre l'offre en ligne";
+        texteBtnLigne.innerText = "aaaaaaaaaaaaa";
     } else 
     {
         console.log("hors");
-        texteBtnLigne.innerText = "Mettre l'offre hors ligne";
+        texteBtnLigne.innerText = "bbbbbbbbbbbbbbbbbb";
     }
 
     // met à jour le statut de l'offre (texte et couleur)
