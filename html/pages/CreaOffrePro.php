@@ -12,7 +12,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 include('/var/www/html/php/verif_compte_pro.php');
 
 
-$stock = false;
+// $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
 
 <!DOCTYPE html>
@@ -32,32 +32,40 @@ $stock = false;
     <main>
 
         <div class="conteneur-formulaire">
+
             <h1>Création d'une offre</h1>
+
+            <!-- Formulaire de création d'offre -->
 
             <form name="creation" action="/pages/CreaOffrePro.php" method="post">
 
+
+                <!-- titre -->
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
                 </div>
 
+                <!-- Champs pour sélectionner les images -->
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 1 :</label>
-                    <input type="file" id="fichier1" name="fichier1" accept="image/*,.png,.jpg,.gif" />
+                    <label for="fichier1">Selectionner une image 1 :</label>
+                    <input type="file" id="fichier1" name="fichier1" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 2 :</label>
-                    <input type="file" id="fichier2" name="fichier2" accept="image/*,.png,.jpg,.gif" />
+                    <label for="fichier2">Selectionner une image 2 :</label>
+                    <input type="file" id="fichier2" name="fichier2" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 3 :</label>
-                    <input type="file" id="fichier3" name="fichier3" accept="image/*,.png,.jpg,.gif" />
+                    <label for="fichier3">Selectionner une image 3 :</label>
+                    <input type="file" id="fichier3" name="fichier3" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 4 :</label>
-                    <input type="file" id="fichier4" name="fichier4" accept="image/*,.png,.jpg,.gif" />
+                    <label for="fichier4">Selectionner une image 4 :</label>
+                    <input type="file" id="fichier4" name="fichier4" />
                 </div>
 
+
+                <!-- catégorie et tags -->
                 <div class="champs">
                     <label for="categorie">Catégorie <span class="required">*</span> :</label>
                     <select id="categorie" name="categorie" required>
@@ -83,22 +91,29 @@ $stock = false;
                     </select>
                 </div>
 
+
+                <!-- prix minimum -->
                 <div class="champs">
                     <label for="prix-minimal">Prix minimal (euro) :</label>
                     <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
                 </div>
 
+                <!-- résumé -->
                 <div>
                     <label for="resume">Résumé <span class="required">*</span> :</label>
                     <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
                 </div>
 
+                <!-- description détaillé -->
                 <div>
                     <label for="description">Description détaillée <span class="required">*</span> :</label>
                     <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
                 </div>
 
+
+                <!-- jours ouvertures et heures d'ouverture -->
                 <div>
+                    
                     <label for="horaires">Horaires d'ouverture :</label>
                     <div class="jours">
                         <button type="button">L</button>
@@ -109,6 +124,7 @@ $stock = false;
                         <button type="button">S</button>
                         <button type="button">D</button>
                     </div>
+                    
                     <div class="heures">
                         <label for="heure-debut">De</label>
                         <input type="time" id="heure-debut" name="heure-debut">
@@ -117,6 +133,8 @@ $stock = false;
                     </div>
                 </div>
 
+
+                <!-- Adresse -->
                 <div class="champsAdresse">
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
                     <input type="text" id="num" name="num" placeholder="Numéro" required>
@@ -125,6 +143,7 @@ $stock = false;
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
 
+                <!-- Abonnement -->
                 <div class="champs">
                     <label for="offre">Type offre :</label>
                     <select id="offre" name="offre">
@@ -133,6 +152,8 @@ $stock = false;
                         <option value="Premium">Premium</option>
                     </select>
                 </div>
+
+                <!-- Option -->
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
@@ -144,6 +165,7 @@ $stock = false;
                     </select>
                 </div>
 
+                <!-- accessibilité -->
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
                     <select id="choixAccessible" name="choixAccessible">
@@ -159,6 +181,9 @@ $stock = false;
                                                                 ?> </label>
                 </div> -->
 
+
+                <!-- Bouton de confirmation d'ajout d'offre ou d'annulation -->
+
                 <div class="zoneBtn">
                     <a href="gestionOffres.php" class="btnAnnuler">
                         <p class="texteLarge boldArchivo">Annuler</p>
@@ -167,17 +192,19 @@ $stock = false;
                         ?>
                     </a>
 
-                    <button type="submit" href="CreaOffrePro.php" class="btnConfirmer">
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
                         ?>
-
                 </div>
 
+
+                <!-- POPUP de confirmation (problème de placement de la popup, à revoir comment la faire) -->
+                 
                 <!-- <?php
-                // if (!empty($_POST)) {
-                ?>
+                        // if (!empty($_POST)) {
+                        ?>
                     <div id="popup">
 
                         <div>
@@ -221,17 +248,21 @@ $stock = false;
 <?php
 
 
-if (!empty($_POST)) {
+
+if (!empty($_GET)) { // On vérifie si le formulaire est compléter ou non.
+
+// on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
+// qwery va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
-    $qwery .= "titreOffre,";
-    $qwery .= "resume,";
-    $qwery .= "description_detaille,";
-    $qwery .= "tarifMinimal,";
-    $qwery .= "note,";
-    $qwery .= "horaires,";
-    $qwery .= "accessibilite,";
-    $qwery .= "enLigne,";
+    $qwery .= "titreOffre, ";
+    $qwery .= "resume, ";
+    $qwery .= "description_detaille, ";
+    $qwery .= "tarifMinimal, ";
+    $qwery .= "note, ";
+    $qwery .= "horaires, ";
+    $qwery .= "accessibilite, ";
+    $qwery .= "enLigne, ";
     $qwery .= "id_abo, ";
     $qwery .= "id_option, ";
     $qwery .= "numero, ";
@@ -242,9 +273,9 @@ if (!empty($_POST)) {
     $qwery .= "img1, ";
     $qwery .= "img2, ";
     $qwery .= "img3, ";
-    $qwery .= "img4)";
+    $qwery .= "img4) ";
 
-    $qwery .= "VALUES(";
+    $qwery .= "VALUES (";
     $qwery .= ":titre,";
     $qwery .= ":resume,";
     $qwery .= ":description,";
@@ -263,9 +294,10 @@ if (!empty($_POST)) {
     $qwery .= "img1, ";
     $qwery .= "img2, ";
     $qwery .= "img3, ";
-    $qwery .= "img4)";
-    echo $qwery;
+    $qwery .= "img4);";
+    // echo $qwery;
 
+    // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de l'INSERT
     $stmt = $dbh->prepare($qwery);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
@@ -282,10 +314,14 @@ if (!empty($_POST)) {
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":img1", $image1);
-    $stmt->bindParam(":img2", $image2);
-    $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img4", $image4);
+    $stmt->bindParam("img1", $image1);
+    $stmt->bindParam("img2", $image2);
+    $stmt->bindParam("img3", $image3);
+    $stmt->bindParam("img4", $image4);
+
+
+
+    // On definit ici chacune des variables
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -317,24 +353,38 @@ if (!empty($_POST)) {
     $image3 = $_POST["fichier3"];
     $image4 = $_POST["fichier4"];
 
-    $type = explode("/", $image1["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img);
 
-    $type = explode("/", $image2["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+    // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 
-    $type = explode("/", $image3["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img);
+    $type1 = explode("/", $image1["types"])[1];
+    $nom_img1 = time() . "." . $type1;
+    if (in_array($type, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image1["tmp_name"], "../images/imagesTest/" . $nom_img1);
+    }
 
-    $type = explode("/", $image4["types"])[1];
-    $nom_img = time() . "." . $type;
-    move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img);
+    $type2 = explode("/", $image2["types"])[1];
+    $nom_img2 = time() . "." . $type2;
+    if (in_array($type2, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image2["tmp_name"], "../images/imagesTest/" . $nom_img2);
+    }
+
+    $type3 = explode("/", $image3["types"])[1];
+    $nom_img3 = time() . "." . $type3;
+    if (in_array($type3, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image3["tmp_name"], "../images/imagesTest/" . $nom_img3);
+    }
+
+    $type4 = explode("/", $image4["types"])[1];
+    $nom_img4 = time() . "." . $type4;
+    if (in_array($type4, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image4["tmp_name"], "../images/imagesTest/" . $nom_img4);
+    }
+
+    // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
 
     $id_c = $_SESSION["idCompte"];
 
+    // on execute tout ce qui a été fait précèdement
     $stmt->execute();
     $dbh = null;
 }
