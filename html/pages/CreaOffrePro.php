@@ -51,7 +51,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
                 <!-- Formulaire de création d'offre -->
 
-                <form name="creation" action="/pages/CreaOffrePro.php" method="post">
+                <form name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
 
 
                     <!-- titre -->
