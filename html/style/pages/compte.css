@@ -53,6 +53,10 @@ div:has(> .fakeDiv){
     margin: 5% 10%;
 }
 
+.btnDeconnexion:hover{
+    cursor: pointer;
+}
+
 .btnDeconnexion p{
     width: 100%;
     color: white;
