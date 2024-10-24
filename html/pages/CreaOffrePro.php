@@ -230,10 +230,10 @@ if (!empty($_POST)) {
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":img1", $image1);
-    $stmt->bindParam(":img2", $image2);
-    $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img4", $image4);
+    $stmt->bindParam(":fichier", $image1);
+    $stmt->bindParam(":fichier", $image2);
+    $stmt->bindParam(":fichier", $image3);
+    $stmt->bindParam(":fichier", $image4);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -263,7 +263,15 @@ if (!empty($_POST)) {
     $listeImage = $_POST["fichier"];
     $arrayImage = explode('&', $listeImage);
     $image1 = $arrayImage[0];
+    echo _;
+    print_r($arrayImage[0]);
+    echo _;
+    print_r($image2);
     $image2 = $arrayImage[1];
+    echo _;
+    print_r($image2);
+    echo _;
+    print_r($image2);
     $image3 = $arrayImage[2];
     $image4 = $arrayImage[4];
 
