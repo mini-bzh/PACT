@@ -348,7 +348,8 @@ p{
 
 .apercuOffre .resumeApercu{
     font-size: 1.2em;
-    margin: 10px 0px; 
+    margin: 10px 0px;
+    height: 55px;
 }
 
 .apercuOffre h3{

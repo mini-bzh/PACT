@@ -20,12 +20,18 @@
                     <h3>Rechercher</h3>
                     </a>
                 </li>
-                <li class="liHeader" id="btAvis">
-                    <a class="aHeader" href="avis.php">
-                    <img src="/icones/commentSVG.svg" alt="icone commentaires">
-                    <h3>Mes avis</h3>
-                    </a>
-                </li>
+                <?php if($comptePro)
+                {
+                    ?>
+                        <li class="liHeader" id="btAvis">
+                            <a class="aHeader" href="avis.php">
+                            <img src="/icones/commentSVG.svg" alt="icone commentaires">
+                            <h3>Mes avis</h3>
+                            </a>
+                        </li>
+                    <?php 
+                } 
+                ?>
                 <li class="liHeader" id="btOffres"    <?php 
                     if(!$comptePro)
                     {
@@ -40,6 +46,12 @@
                 <li class="liHeader" id="btConnect" hidden>
                     <a class="aHeader" href="compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
+                    <?php
+                        if($comptePro)
+                        {
+                            
+                        }
+                    ?>
                     <h3>Se connecter</h3>
                     </a>
                 </li>
