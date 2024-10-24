@@ -208,13 +208,13 @@ if (!empty($_POST)) {
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
-
+                    <a href="gestionOffres.php">
                     <button type="submit" href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
                         ?>
-
+                    </a>
                     </button>
                 </div>
 
