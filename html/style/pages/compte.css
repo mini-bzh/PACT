@@ -41,6 +41,8 @@ div:has(> .fakeDiv){
     margin: 3% auto;
 }
 
+/* Si profesionnel */
+
 .btnDeconnexion{
     background-color: #D80303;
     width: 486px;
@@ -67,10 +69,10 @@ div:has(> .fakeDiv){
 .btnDeconnexion svg{
     width: 35px;
     height: 35px;
+    border-color: white;
 }
 
 
-/* Si profesionnel */
 
 .popUpDeco{
     display: none;
@@ -123,6 +125,7 @@ div:has(> .fakeDiv){
     background-color: #FF0101;
     color: white;
 }
+
 
 body.no-scroll {
     overflow: hidden;
@@ -178,4 +181,26 @@ body.no-scroll {
         margin: 3% auto;
     }
 
+
+    /* Si professionel */
+
+    .btnDeconnexion{
+        width: 413px;
+        height: 74px;
+        padding: 0 1%;
+        margin: 2% auto;
+        border: none;
+    }
+
+    .btnDeconnexion p{
+        width: 100%;
+        color: black;
+        text-align: center;
+    }
+    
+    .btnDeconnexion svg{
+        width: 60px;
+        height: 55px;
+        border-color: black;
+    }
 }

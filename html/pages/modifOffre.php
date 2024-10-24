@@ -37,7 +37,6 @@ if (!empty($_POST)) {
     $requete .= "codePostal = :codePostal";
     $requete .= " WHERE idOffre = :idOffre ;";
 
-    echo $requete;
 
     $stmt = $dbh->prepare($requete);
     $stmt->bindParam(":titre", $titre);
@@ -208,13 +207,11 @@ if (!empty($_POST)) {
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
-                    <a href="gestionOffres.php">
-                    <button type="submit" href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnConfirmer">
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
                         ?>
-                    </a>
                     </button>
                 </div>
 
