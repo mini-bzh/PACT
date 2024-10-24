@@ -399,7 +399,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
         print_r($_FILES);
 
-        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["types"])[1];
+        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["type"])[1];
         echo "<br><br>" . $nom_img1 . "<br><br>";
         if (in_array($type, ["png", "gif", "jpeg"])) {
             move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
