@@ -384,21 +384,15 @@ if (in_array($id_c, $contentid_cPri) || in_array($id_c, $contentid_cPub)) {
         $description = $_POST["description"];
         $tarif = $_POST["prix-minimal"];
         $note = 5;
-
         $heuresDebut = $_POST["heure-debut"];
         $heuresFin = $_POST["heure-fin"];
         $horaires = $heuresDebut . "-" . $heuresFin;
-
         $accessible = $_POST["choixAccessible"];
-
         $enLigne = true;
-
         //$id_abo = $_POST["offre"];
         //$id_option = $_POST["option"];
-
         $id_abo = 'Standard';
         $id_option = null;
-
         $numero = $_POST["num"];
         $rue = $_POST["nomRue"];
         $ville = $_POST["ville"];
@@ -442,8 +436,10 @@ if (in_array($id_c, $contentid_cPri) || in_array($id_c, $contentid_cPub)) {
 
         // on execute tout ce qui a été fait précèdement
         $stmt->execute();
+
+        echo $stmt->fetchAll();
         $dbh = null;
-        
+
     }
     ?>
 <?php
