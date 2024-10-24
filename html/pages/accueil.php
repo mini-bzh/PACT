@@ -71,7 +71,7 @@
             </svg>
 
         <div>
-    <img src="/images/logo/logo_grand.png" alt="logo grand">
+    <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
 </div>
 </div>
         <main>

@@ -36,4 +36,9 @@ main h1{
     main>h1{
         display: none;
     }
+
+    #logoTitreMobile{
+        width: 500px;
+        height: auto;
+    }
 }
