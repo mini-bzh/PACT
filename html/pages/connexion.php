@@ -86,7 +86,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 
 <!------ HEADER  ------>
 <?php
-    include "/composants/header/header.php";
+    include "../composants/header/header.php";
 ?>
 
 <div class="titrePortable">
