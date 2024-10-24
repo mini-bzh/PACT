@@ -115,7 +115,7 @@ if (!$comptePro) {
 <!------ MAIN  ------>
 <main>
 
-<button class="btnDeconnexion" onclick="alert('ok')">
+<button class="btnDeconnexion">
 <?php
     include '../icones/deconnexionSVG.svg';
 ?>
