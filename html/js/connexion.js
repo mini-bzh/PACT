@@ -1,4 +1,4 @@
-// Fonction d'affichage de la pop-ip
+// Fonction d'affichage de la pop-up
 function validerCorrect() {
     let pop = document.querySelector('.popUp');
     pop.style.display = 'flex';
@@ -8,6 +8,6 @@ function validerCorrect() {
     setTimeout(function() {
         pop.style.display = 'none';
         document.body.classList.remove('no-scroll');
-        window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?user=pro";
+        window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?";
     }, 1500);
 }

@@ -69,6 +69,50 @@ div:has(> .fakeDiv){
     height: 35px;
 }
 
+
+/* Si profesionnel */
+
+.popUpDeco{
+    display: none;
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.popUpDeco div{
+    width: 323px;
+    height: 198px;
+    border: black solid 1px;
+    border-radius: 10px;
+}
+
+.popUpDeco div div{
+    border: black solid 2px;
+    border-radius: 10px;
+    width: 74px;
+    height: 45px;
+}
+
+.btnAnnuler{
+    background-color: #C6C6C6;
+    color: black;
+}
+
+.btnValider{
+    background-color: #FF0101;
+    color: white;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
 @media screen and (max-width : 428px){
 
     .textBulle + div{
