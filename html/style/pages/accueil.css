@@ -38,7 +38,7 @@ main h1{
     }
 
     #logoTitreMobile{
-        width: 100px;
+        width: 200px;
         height: auto;
         transform: translate(30px, -25px);
     }
