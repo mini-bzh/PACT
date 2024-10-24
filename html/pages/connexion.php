@@ -110,8 +110,8 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     </svg>
 
     <div>
-        <img src="/html/images/logo/logo_petit.png" alt="logo petit">
-        <h3>Connexion compte professionnel</h3>
+        <img src="/images/logo/logo_petit.png" alt="logo petit">
+        <h4>Connexion compte<br>professionnel</h4>
     </div>
 </div>
 

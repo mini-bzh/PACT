@@ -32,6 +32,10 @@ form div{
     margin-top: 3%;
 }
 
+form div p{
+    font-size: var(--typescale-large-text);
+}
+
 form > div + a{
     margin-top: 1%;
     position: absolute;
@@ -126,4 +130,25 @@ h2{
 
 body.no-scroll {
     overflow: hidden;
+}
+
+@media screen and (max-width : 428px){
+    header div h4{
+        width: fit-content;
+    }
+
+    .textBulle{
+        display: none;
+    }
+
+    form div p{
+        font-size: var(--typescale-text);
+        font-family: "Archivo-bold";
+    }
+
+    form input{
+        width: 385.12px;
+        height: 61px;
+        padding: 0 2%;
+    }
 }
