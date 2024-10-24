@@ -105,6 +105,7 @@ div:has(> .fakeDiv){
     font-family: "Archivo";
     font-size: var(--typescale-text);
     margin: 1% 3%;
+    cursor: pointer;
 }
 
 .popUpDeco > div > div{
