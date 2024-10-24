@@ -240,6 +240,7 @@ p{
     display: block;
 }
 
+
 .apercuOffre{
     width: 600px;
     height: 550px;
@@ -252,15 +253,34 @@ p{
     margin-bottom: 30px;
 }
 
+/*dccccccccccc*/
+.apercuOffre{
+    width: 300px;
+    height: 300px;
+
+    border-radius: 20px;
+    background-color: white;
+    padding: 5px 10px;
+
+    overflow: hidden;
+}
+
 .apercuOffre .conteneurSVGtexte{
     display: flex;
     align-items: center;
     margin: 10px 0px;
 }
+
+/*bgvdbrgbth*/
+.apercuOffre .conteneurSVGtexte{
+    margin: 5px 0px;
+}
+
 .apercuOffre .conteneurSVGtexte img{
     width: 25px;
     height: 25px;
 }
+
 
 .apercuOffre .conteneurSVGtexte p{
     font-size: 16px;
@@ -292,6 +312,14 @@ p{
     display: block;
 }
 
+/*dgbgghbg*/
+.apercuOffre img{
+    width: 280px; 
+    height: 120px; 
+    object-fit: cover;
+    display: block;
+}
+
 .apercuOffre .conteneurImage{
     position: relative;
     display: inline-block;
@@ -307,7 +335,15 @@ p{
     color: white; 
     font-size: 14px;
     z-index: 2;
-  }
+}
+
+/*qfdbrbgr*/
+.text-overlay {
+    padding: 5px;
+    font-size: 0.7em;
+    width: 70px;
+    height: 20px;
+}
 
 
 .etoiles{
@@ -320,8 +356,19 @@ p{
     height: 20px;
 }
 
+/*dgnhgvd*/
+.etoiles img{
+    width: 10px;
+    height: 10px;
+}
+
 .etoileMoitiePleine{
     position: relative;
+}
+
+/*hnth*/
+.apercuOffre .resumeApercu{
+    font-size: 1em; 
 }
 
 
