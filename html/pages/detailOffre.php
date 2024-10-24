@@ -18,11 +18,8 @@
         $idOffre =$_GET["idOffre"]; 
         
         // reccuperation du contenu de l offre
+        
         $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
     }
 
 ?>
