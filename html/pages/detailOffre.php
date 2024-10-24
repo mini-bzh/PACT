@@ -18,7 +18,7 @@
         $idOffre =$_GET["idOffre"]; 
         
         // reccuperation du contenu de l offre
-        
+
         $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
     }
 
@@ -109,7 +109,7 @@
                     <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                 
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                        <!-- future tag<div id="partieTags">
+                        <div id="partieTags"><!-- future tag -->
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/tagSVG.svg" alt="icone tag">
                                 <h4>Tags</h4>
@@ -123,13 +123,13 @@
 
 
                             </div>
-                        </div> -->
+                        </div> 
                         <div id="partieHoraires">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/horairesSVG.svg" alt="icone horaires">
                                 <h4>Horaires</h4>
                             </div>
-                            <hr><!-- future jours d'ouverture
+                            <hr><!-- future jours d'ouverture -->
                             <div id="conteneurJoursOffre">
                                 <p class="jour jourOuvert">L</p>
                                 <p class="jour jourOuvert">Ma</p>
@@ -138,7 +138,7 @@
                                 <p class="jour jourOuvert">V</p>
                                 <p class="jour jourFerme">S</p>
                                 <p class="jour jourFerme">D</p>
-                            </div>-->
+                            </div>
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
