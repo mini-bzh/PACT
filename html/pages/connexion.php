@@ -69,8 +69,8 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/connexion.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/pages/connexion.css">
 </head>
 <body class=
 <?php
@@ -86,7 +86,7 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 
 <!------ HEADER  ------>
 <?php
-    include "../composants/header/header.php";
+    include "/composants/header/header.php";
 ?>
 
 <div class="titrePortable">
