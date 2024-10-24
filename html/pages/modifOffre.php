@@ -210,10 +210,10 @@ if (!empty($_POST)) {
     $stmt->bindParam(":resume", $resume);
     $stmt->bindParam(":description", $description);
     $stmt->bindParam(":tarif", $tarif);
-  //$stmt->bindParam(":note", $note);
+
     $stmt->bindParam(":horaires", $horaires);
     $stmt->bindParam(":accessibilite", $accessible);
-    $stmt->bindParam(":enLigne", $enLigne);
+ 
     $stmt->bindParam(":id_abo", $id_abo);
     $stmt->bindParam(":id_option", $id_option);
     $stmt->bindParam(":numero", $numero);
