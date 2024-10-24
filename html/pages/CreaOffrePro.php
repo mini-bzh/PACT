@@ -1,17 +1,18 @@
 <?php
-    session_start(); // recuperation de la sessions
+session_start(); // recuperation de la sessions
 
-    // recuperation des parametre de connection a la BdD
-    include('/var/www/html/php/connection_params.php');
-    
-    // connexion a la BdD
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+// recuperation des parametre de connection a la BdD
+include('/var/www/html/php/connection_params.php');
 
-    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('/var/www/html/php/verif_compte_pro.php');
+// connexion a la BdD
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+include('/var/www/html/php/verif_compte_pro.php');
 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -34,6 +35,12 @@
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
+                </div>
+
+                <div class="image">
+                    <label for="fichier">Envoyer fichier :</label>
+                    <input type="file" id="fichier" name="fichier"> <img src="PACT/html/icones/joindreImagesSVG.svg" alt="error"> </input>
+                    <br />
                 </div>
 
                 <!-- <div class="champs">
@@ -124,7 +131,7 @@
                         <option value="PasAccessible">Pas Accessible</option>
                     </select>
                 </div>
-                
+
                 <!-- <div class="champs">
                     futur data de mise en ligne
                 </div> -->
@@ -150,56 +157,56 @@
 if (!empty($_POST)) {
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
-    $qwery.= "titreOffre,";
-    $qwery.= "resume,";
-    $qwery.= "description_detaille,";
-    $qwery.= "tarifMinimal,";
-    $qwery.= "note,";
-    $qwery.= "horaires,";
-    $qwery.= "accessibilite,";
-    $qwery.= "enLigne,";
-    $qwery.= "id_abo, ";
-    $qwery.= "id_option, ";
-    $qwery.= "numero, ";
-    $qwery.= "rue, ";
-    $qwery.= "ville, ";
-    $qwery.= "codePostal,";
-    $qwery.= "id_c) ";
-    
-    $qwery.= "VALUES(";
-    $qwery.= ":titre,";
-    $qwery.= ":resume,";
-    $qwery.= ":description,";
-    $qwery.= ":tarif,";
-    $qwery.= ":note,";
-    $qwery.= ":horaires,";
-    $qwery.= ":accessibilite,";
-    $qwery.= ":enLigne,";
-    $qwery.= ":id_abo,";
-    $qwery.= ":id_option,";
-    $qwery.= ":numero,";
-    $qwery.= ":rue,";
-    $qwery.= ":ville,";
-    $qwery.= ":codePostal,";
-    $qwery.= ":id_c);";
+    $qwery .= "titreOffre,";
+    $qwery .= "resume,";
+    $qwery .= "description_detaille,";
+    $qwery .= "tarifMinimal,";
+    $qwery .= "note,";
+    $qwery .= "horaires,";
+    $qwery .= "accessibilite,";
+    $qwery .= "enLigne,";
+    $qwery .= "id_abo, ";
+    $qwery .= "id_option, ";
+    $qwery .= "numero, ";
+    $qwery .= "rue, ";
+    $qwery .= "ville, ";
+    $qwery .= "codePostal,";
+    $qwery .= "id_c) ";
+
+    $qwery .= "VALUES(";
+    $qwery .= ":titre,";
+    $qwery .= ":resume,";
+    $qwery .= ":description,";
+    $qwery .= ":tarif,";
+    $qwery .= ":note,";
+    $qwery .= ":horaires,";
+    $qwery .= ":accessibilite,";
+    $qwery .= ":enLigne,";
+    $qwery .= ":id_abo,";
+    $qwery .= ":id_option,";
+    $qwery .= ":numero,";
+    $qwery .= ":rue,";
+    $qwery .= ":ville,";
+    $qwery .= ":codePostal,";
+    $qwery .= ":id_c);";
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
-    $stmt->bindParam(":titre", $titre); 
-    $stmt->bindParam(":resume", $resume); 
-    $stmt->bindParam(":description", $description); 
-    $stmt->bindParam(":tarif", $tarif); 
-    $stmt->bindParam(":note", $note); 
-    $stmt->bindParam(":horaires", $horaires); 
-    $stmt->bindParam(":accessibilite", $accessible); 
-    $stmt->bindParam(":enLigne", $enLigne); 
-    $stmt->bindParam(":id_abo", $id_abo); 
-    $stmt->bindParam(":id_option", $id_option); 
-    $stmt->bindParam(":numero", $numero); 
-    $stmt->bindParam(":rue", $rue); 
-    $stmt->bindParam(":ville", $ville); 
-    $stmt->bindParam(":codePostal", $codePostal); 
-    $stmt->bindParam(":id_c", $id_c); 
+    $stmt->bindParam(":titre", $titre);
+    $stmt->bindParam(":resume", $resume);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":tarif", $tarif);
+    $stmt->bindParam(":note", $note);
+    $stmt->bindParam(":horaires", $horaires);
+    $stmt->bindParam(":accessibilite", $accessible);
+    $stmt->bindParam(":enLigne", $enLigne);
+    $stmt->bindParam(":id_abo", $id_abo);
+    $stmt->bindParam(":id_option", $id_option);
+    $stmt->bindParam(":numero", $numero);
+    $stmt->bindParam(":rue", $rue);
+    $stmt->bindParam(":ville", $ville);
+    $stmt->bindParam(":codePostal", $codePostal);
+    $stmt->bindParam(":id_c", $id_c);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -209,7 +216,7 @@ if (!empty($_POST)) {
 
     $heuresDebut = $_POST["heure-debut"];
     $heuresFin = $_POST["heure-fin"];
-    $horaires = $heuresDebut."-".$heuresFin;
+    $horaires = $heuresDebut . "-" . $heuresFin;
 
     $accessible = $_POST["choixAccessible"];
 
@@ -225,10 +232,10 @@ if (!empty($_POST)) {
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
-    
+
     $id_c = $_SESSION["idCompte"];
 
-    
+
 
     $stmt->execute();
     $dbh = null;
