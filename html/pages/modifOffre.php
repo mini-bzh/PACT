@@ -121,7 +121,7 @@
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
-                        <option value="">Sélectionnez des tags</option>
+                        <option value="">Sélectionnez une option</option>
                         <option value="AlaUne">A la une</option>
                         <option value="EnRelief">En relief</option>
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
@@ -131,9 +131,8 @@
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
                     <select id="choixAccessible" name="choixAccessible">
-                        <option value="">Sélectionnez un choix</option>
-                        <option value="Accessible">Accessible</option>
-                        <option value="PasAccessible">Pas Accessible</option>
+                        <option value="Accessible" <?php echo ($contentOffre["accessibilite"] == "Accessible") ? 'selected' : ''; ?>>Accessible</option>
+                        <option value="PasAccessible" <?php echo ($contentOffre["accessibilite"] == "PasAccessible") ? 'selected' : ''; ?>>Pas Accessible</option>
                     </select>
                 </div>
 
