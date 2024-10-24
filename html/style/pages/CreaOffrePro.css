@@ -199,3 +199,10 @@ select{
     width: 42px;
     height: 31.07px;
 }
+
+
+#popup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
