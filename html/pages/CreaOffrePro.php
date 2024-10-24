@@ -257,14 +257,18 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
 
-    $listeImage = $_POST["fichier"];
-    $arrayImage = explode('&', $listeImage);
-    $image1 = $arrayImage[0];
-    $image2 = $arrayImage[1];
-    $image3 = $arrayImage[2];
-    $image4 = $arrayImage[4];
+    // $listeImage = $_POST["fichier"];
+    // $arrayImage = explode('&', $listeImage);
+    // $image1 = $arrayImage[0];
+    // $image2 = $arrayImage[1];
+    // $image3 = $arrayImage[2];
+    // $image4 = $arrayImage[4];
 
     $id_c = $_SESSION["idCompte"];
+
+    $type = explode("/", $_FILES["fichier"]["types"])[1];
+    $nom_img = time() . "." . $type;
+    move_uploaded_file($_FILES["fichier"]["tmp_name"], "imagesTest/" . $nom_img);
 
     $stmt->execute();
     $dbh = null;
