@@ -74,10 +74,12 @@ select{
 .haut-de-page{
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
 }
 
 .haut-de-page>div{
     display: flex;
+    flex-direction: row;
 }
 
 .champs{
