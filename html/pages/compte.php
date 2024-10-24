@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../style/pages/compte.css">
     <script>
         function deconnexion() {
+            alert("deco1");
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "gestionDeconnexion.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
