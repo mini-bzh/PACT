@@ -76,11 +76,10 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 <?php
     if ($_GET['user-tempo'] == 'pro') {
         echo 'fondPro';
-        $comptePro = true;
     } else {
         echo 'fondVisiteur';
-        $comptePro = false;
     }
+    $comptePro = false;
 
 ?>
 >
@@ -198,6 +197,7 @@ if ($correspond === true) {
         validerCorrect();
     </script>
 <?php
+    $comptePro = true;
 }
 
 

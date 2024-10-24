@@ -37,6 +37,12 @@
     include "/var/www/html/composants/header/header.php";
 ?>
 
+<!-- SI C'EST UN VISITEUR !!! -->
+<?php
+
+if (!$comptePro) {
+?>
+
 <div class="titrePortable">
 
     <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,6 +106,30 @@
 
 </main>
 
+<?php
+} else if ($comptePro) {
+?>
+
+<!-- SI C'EST UN PROFESSIONNEL !!! -->
+
+<!------ MAIN  ------>
+<main>
+
+<button class="btnDeconnexion" onclick="alert('ok')">
+<?php
+    include '../icones/deconnexionSVG.svg';
+?>
+    <p class="boldArchivo">Déconnexion</p>
+</button>
+
+
+
+
+</main>
+
+<?php
+}
+?>
 
 <!------ FOOTER  ------>
 
