@@ -121,7 +121,7 @@
                 <div class="champs">
                     <label for="option">Option :</label>
                     <select id="option" name="option">
-                        <option value="">Sélectionnez des tags</option>
+                        <option value="">Sélectionnez une option</option>
                         <option value="AlaUne">A la une</option>
                         <option value="EnRelief">En relief</option>
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
