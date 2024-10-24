@@ -396,13 +396,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
         // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 
-        $image2 = $_POST["fichier2"];
-        $image3 = $_POST["fichier3"];
-        $image4 = $_POST["fichier4"];
 
         print_r($_FILES);
 
-        $nom_img1 = time() . "." . explode("/", $_POST["fichier1"]["types"])[1];
+        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["types"])[1];
         echo "<br><br>" . $nom_img1 . "<br><br>";
         if (in_array($type, ["png", "gif", "jpeg"])) {
             move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
