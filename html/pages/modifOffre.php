@@ -11,7 +11,7 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    $user = null;
+    $idOffre = null;
     if(key_exists("idOffre", $_GET))
     {
         // reccuperation de id de l offre
@@ -19,10 +19,6 @@
         
         // reccuperation du contenu de l offre
         $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
-    if(key_exists("user", $_GET))
-    {
-        $user =$_GET["user"];
     }
 
 ?>
@@ -45,7 +41,7 @@
 
         <div class="conteneur-formulaire">
             <h1>Modification d'une offre</h1>
-            <form name="test" action="/pages/CreaOffrePro.php" method="post">
+            <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
@@ -143,14 +139,14 @@
                 </div> -->
 
                 <div class="zoneBtn">
-                    <a href="modifOffre.php" class="btnAnnuler">
+                    <a href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnAnnuler">
                         <p class="texteLarge boldArchivo">Annuler</p>
                         <?php
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
 
-                    <button type="submit" href="modifOffre.php" class="btnConfirmer">
+                    <button type="submit" href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';

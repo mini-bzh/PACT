@@ -32,7 +32,7 @@ include('/var/www/html/php/verif_compte_pro.php');
         <div class="conteneur-formulaire">
             <h1>Création d'une offre</h1>
 
-            <form name="test" action="/pages/CreaOffrePro.php" method="post">
+            <form name="creation" action="/pages/CreaOffrePro.php" method="post">
 
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>

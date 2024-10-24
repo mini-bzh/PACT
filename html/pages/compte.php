@@ -20,6 +20,25 @@
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/compte.css">
+    <script>
+        function deconnexion() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "gestionDeconnexion.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // Gérer la réponse du serveur
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log("Déconnexion réussie");
+                    window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
+                } else {
+                    console.error("Erreur lors de la déconnexion.");
+                }
+            };
+
+            xhr.send("action=executer");
+        }
+    </script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -115,7 +134,7 @@ if (!$comptePro) {
 <!------ MAIN  ------>
 <main>
 
-<button class="btnDeconnexion">
+<button class="btnDeconnexion" onclick="deconnexion()">
 <?php
     include '../icones/deconnexionSVG.svg';
 ?>
@@ -138,4 +157,5 @@ if (!$comptePro) {
 ?>
 
 </body>
+
 </html>
