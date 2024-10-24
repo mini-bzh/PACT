@@ -11,6 +11,8 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
 include('/var/www/html/php/verif_compte_pro.php');
 
+print_r($_SESSION);
+
 // On va récupérer ici l'identifiant id_c présent dans la table pro privé.
 $userPri = null;
     if(key_exists("id_c", $_SESSION))
