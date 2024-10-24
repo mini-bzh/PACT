@@ -384,26 +384,23 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $ville = $_POST["ville"];
         $codePostal = $_POST["codePostal"];
 
-        $image1 = $_POST["fichier1"];
-        $image2 = $_POST["fichier2"];
-        $image3 = $_POST["fichier3"];
-        $image4 = $_POST["fichier4"];
-
-
-        
 
         // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-
         $id_c = $_SESSION["idCompte"];
 
         // on execute tout ce qui a été fait précèdement
         $stmt->execute();
-
+        
+        // on ferme la base de donnée
         $dbh = null;
 
         // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 
-        $nom_img1 = time() . "." . explode("/", $image1["types"])[1];
+        $image2 = $_POST["fichier2"];
+        $image3 = $_POST["fichier3"];
+        $image4 = $_POST["fichier4"];
+
+        $nom_img1 = time() . "." . explode("/", $_POST["fichier1"]["types"])[1];
         echo "<br><br>" . $nom_img1 . "<br><br>";
         if (in_array($type, ["png", "gif", "jpeg"])) {
             move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
