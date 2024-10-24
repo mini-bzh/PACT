@@ -175,8 +175,8 @@ $stock = false;
 
                 </div>
 
-                <?php
-                if (!empty($_POST)) {
+                <!-- <?php
+                // if (!empty($_POST)) {
                 ?>
                     <div id="popup">
 
@@ -195,15 +195,17 @@ $stock = false;
                             <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                                 <p class="texteLarge boldArchivo">Confirmer</p>
                                 <?php
-                                include '../icones/okSVG.svg';
-                                $stock = true;
+                                // include '../icones/okSVG.svg';
+                                // $stock = true;
                                 ?>
                             </button>
                         </div>
                     </div>
                 <?php
-                }
-                ?>
+                // }
+                ?> -->
+
+
             </form>
         </div>
     </main>
@@ -219,7 +221,7 @@ $stock = false;
 <?php
 
 
-if ($stock == true) {
+if (!empty($_POST)) {
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
     $qwery .= "titreOffre,";
