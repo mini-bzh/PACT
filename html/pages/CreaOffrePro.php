@@ -15,7 +15,7 @@ print_r($_SESSION);
 
 // On va récupérer ici l'identifiant id_c présent dans la table pro privé.
 $userPri = null;
-    if(key_exists("id_c", $_SESSION))
+    if(key_exists("idCompte", $_SESSION))
     {
         echo "je suis dans un privé";
         // reccuperation de id du compte
@@ -27,7 +27,7 @@ $userPri = null;
 
 // On va récupérer ici l'identifiant id_c présent dans la table pro public.
 $userPub = null;
-    if(key_exists("id_c", $_SESSION))
+    if(key_exists("idCompte", $_SESSION))
     {
         echo "je suis dans un public";
         // reccuperation de id du compte
