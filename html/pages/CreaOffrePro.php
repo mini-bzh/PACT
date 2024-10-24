@@ -15,6 +15,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 $userPri = null;
     if(key_exists("id_c", $_SESSION))
     {
+        echo "je suis dans un privé";
         // reccuperation de id du compte
         $id_c = $_SESSION["idCompte"]; 
         
@@ -26,6 +27,7 @@ $userPri = null;
 $userPub = null;
     if(key_exists("id_c", $_SESSION))
     {
+        echo "je suis dans un public";
         // reccuperation de id du compte
         $id_c = $_SESSION["idCompte"]; 
         
