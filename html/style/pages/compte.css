@@ -85,7 +85,7 @@ div:has(> .fakeDiv){
     justify-content: center;
 }
 
-.popUpDeco div{
+.popUpDeco > div{
     width: 323px;
     height: 198px;
     border: black solid 1px;
@@ -100,9 +100,11 @@ div:has(> .fakeDiv){
     border-radius: 10px;
     width: 74px;
     height: 45px;
+    font-family: "Archivo";
+    font-size: var(--typescale-text);
 }
 
-.popUpDeco div div{
+.popUpDeco > div > div{
     display: flex;
     flex-direction: row;
 }
