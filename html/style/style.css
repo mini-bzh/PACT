@@ -283,7 +283,7 @@ p{
 
 
 .apercuOffre .conteneurSVGtexte p{
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
@@ -306,16 +306,8 @@ p{
 }
 
 .apercuOffre img{
-    width: 480px;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-}
-
-/*dgbgghbg*/
-.apercuOffre img{
-    width: 280px; 
-    height: 120px; 
+    width: 380px;
+    height: 180px;
     object-fit: cover;
     display: block;
 }
@@ -355,11 +347,12 @@ p{
 }
 
 .apercuOffre .resumeApercu{
-    font-size: 1em; 
+    font-size: 1.2em;
+    margin: 10px 0px; 
 }
 
 .apercuOffre h3{
-    font-size: 1em;
+    font-size: 2em;
 }
 
 
