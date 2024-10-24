@@ -92,7 +92,7 @@
             <section id="conteneurOffres">
                 <article>
                     <?php
-                        foreach($dbh->query("SELECT * from tripskell.offre_visiteur") as $row)
+                        foreach(/*$dbh->query("SELECT * from tripskell.offre_visiteur")*/ $rows as $row)
                         {
                             ?>
                                 <a href="/pages/detailOffre.php?user=<?php echo $profil?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
