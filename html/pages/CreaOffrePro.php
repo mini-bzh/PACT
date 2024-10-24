@@ -13,7 +13,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 
 // On va récupérer ici l'identifiant id_c présent dans la table pro privé.
 $userPri = null;
-    if(key_exists("id_c", $_GET))
+    if(key_exists("id_c", $_SESSION))
     {
         // reccuperation de id du compte
         $id_c = $_SESSION["idCompte"]; 
@@ -24,7 +24,7 @@ $userPri = null;
 
 // On va récupérer ici l'identifiant id_c présent dans la table pro public.
 $userPub = null;
-    if(key_exists("id_c", $_GET))
+    if(key_exists("id_c", $_SESSION))
     {
         // reccuperation de id du compte
         $id_c = $_SESSION["idCompte"]; 
