@@ -1,7 +1,7 @@
 @import "../style.css";
 
 main{
-    padding: 60px;
+    padding: 30px;
 }
 main h1{
     border-left: 20px solid var(--secondary);
