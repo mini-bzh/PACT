@@ -43,22 +43,24 @@
                     <h3>Mes offres</h3>
                     </a>
                 </li>
-                <li class="liHeader" id="btConnect" hidden>
-                    <a class="aHeader" href="compte.php">
+                <li class="liHeader" id="btCompte">
+                    <a class="aHeader" href="/pages/compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
                     <?php
                         if($comptePro)
                         {
-                            
+                            ?>
+                            <h3>Mon compte</h3>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <h3>Connexion</h3>
+                            <?php
                         }
                     ?>
-                    <h3>Se connecter</h3>
-                    </a>
-                </li>
-                <li class="liHeader" id="btCompte">
-                    <a class="aHeader" href="/pages/compte.php">
-                    <img src="/icones/compteSVG.svg" alt="icone compte">
-                    <h3>Mon compte</h3>
+                    
                     </a>
                 </li>
             </ul>
