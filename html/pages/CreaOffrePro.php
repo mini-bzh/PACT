@@ -260,10 +260,10 @@ if (!empty($_POST)) {
     $qwery .= ":ville,";
     $qwery .= ":codePostal,";
     $qwery .= ":id_c, ";
-    $qwery .= "img1, ";
-    $qwery .= "img2, ";
-    $qwery .= "img3, ";
-    $qwery .= "img4)";
+    $qwery .= "image1, ";
+    $qwery .= "image2, ";
+    $qwery .= "image3, ";
+    $qwery .= "image4)";
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
