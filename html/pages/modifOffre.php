@@ -37,7 +37,6 @@ if (!empty($_POST)) {
     $requete .= "codePostal = :codePostal";
     $requete .= " WHERE idOffre = :idOffre ;";
 
-    echo $requete;
 
     $stmt = $dbh->prepare($requete);
     $stmt->bindParam(":titre", $titre);
