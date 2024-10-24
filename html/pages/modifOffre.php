@@ -214,8 +214,8 @@ if (!empty($_POST)) {
     $stmt->bindParam(":horaires", $horaires);
     $stmt->bindParam(":accessibilite", $accessible);
  
-    $stmt->bindParam(":id_abo", $id_abo);
-    $stmt->bindParam(":id_option", $id_option);
+//    $stmt->bindParam(":id_abo", $id_abo);
+//    $stmt->bindParam(":id_option", $id_option);
     $stmt->bindParam(":numero", $numero);
     $stmt->bindParam(":rue", $rue);
     $stmt->bindParam(":ville", $ville);
