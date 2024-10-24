@@ -397,8 +397,8 @@ p{
     display: none;
 }
 
-.navBarPro h3{
-    font-size: 37px;
+.headerPC-Tab h3{
+    font-size: 30px;
 }
 
 .headerPC-Tab{
@@ -421,17 +421,20 @@ p{
     width: 100%;
     justify-content: space-between;
     padding-right: 0;
-    border-bottom: var(--primary) solid 2px;
+    /*border-bottom: var(--primary) solid 2px;*/
 }
 
 .logoHeader{
     width: 135px;
     height: 75px;
+    position: relative;
+    left: 30px;
 }
 
 .aHeader > img {
     width: 63px;
     height: 63px;
+    display: none;
 }
 
 .liHeader {
