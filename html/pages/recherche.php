@@ -70,10 +70,10 @@
             </defs>
             </svg>
 
-        <div>
-    <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
-</div>
-</div>
+            <div>
+                <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
+            </div>
+        </div>
         <main>
             <?php
                 if($comptePro)
@@ -118,13 +118,13 @@
                                             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
                                         </div>
                                         <div class="conteneurSpaceBetween">
-                                            <p></p> <!-- catégorie -->
+                                            <p>Visite</p> <!-- catégorie -->
                                             <p class="ouvert">Ouvert</p>
                                         </div>
                             
                                         <div class="conteneurImage">
                                             <img src="/images/imagesOffres/<?php echo $row["img1"]?>" alt="illustration offre">
-                                            <div class="text-overlay">dès <?php echo $row["tarifminimal"]?>€/pers</div>
+                                            <p class="text-overlay">dès <span><?php echo $row["tarifminimal"]?>€</span> /pers</p>
                                         </div>
                                         
                                         <p class="resumeApercu"><?php echo $row["resume"]?></p>
@@ -140,7 +140,7 @@
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
                                                 <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">                   
+                                                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
                                             </div>
                                             <p>439 avis</p>
                                         </div>
