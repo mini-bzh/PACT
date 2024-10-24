@@ -400,7 +400,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $image3 = $_POST["fichier3"];
         $image4 = $_POST["fichier4"];
 
-        print_r($_POST["fichier1"]);
+        print_r($_FILES["fichier1"]);
 
         $nom_img1 = time() . "." . explode("/", $_POST["fichier1"]["types"])[1];
         echo "<br><br>" . $nom_img1 . "<br><br>";
