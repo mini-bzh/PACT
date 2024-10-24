@@ -207,11 +207,11 @@ if (!empty($_POST)) {
     $qwery .= ":rue,";
     $qwery .= ":ville,";
     $qwery .= ":codePostal,";
-    $qwery .= "id_c, ";
-    $qwery .= "img1, ";
-    $qwery .= "img2, ";
-    $qwery .= "img3, ";
-    $qwery .= "img4)";
+    $qwery .= ":id_c, ";
+    $qwery .= ":img1, ";
+    $qwery .= ":img2, ";
+    $qwery .= ":img3, ";
+    $qwery .= ":img4)";
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
