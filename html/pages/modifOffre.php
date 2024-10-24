@@ -1,18 +1,18 @@
 <?php
-session_start(); // recuperation de la sessions
+session_start(); // Démarre la session pour récupérer les données de session
 
-// recuperation des parametre de connection a la BdD
+// Récupération des paramètres de connexion à la base de données
 include('/var/www/html/php/connection_params.php');
 
-// connexion a la BdD
+// Connexion à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associatif
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
-// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+// Inclusion du script pour vérifier si l'utilisateur a un compte pro
 include('/var/www/html/php/verif_compte_pro.php');
 
 if (!empty($_POST)) {
-    // Requete pour Update
+    // Préparation de la requête de mise à jour de l'offre
     $requete = "UPDATE tripskell.offre_pro SET ";
     $requete .= "titreOffre = :titre, ";
     $requete .= "resume = :resume, ";
@@ -24,9 +24,12 @@ if (!empty($_POST)) {
     $requete .= "rue = :rue, ";
     $requete .= "ville = :ville, ";
     $requete .= "codePostal = :codePostal ";
-    $requete .= "WHERE idOffre = :idOffre;";
+    $requete .= "WHERE idOffre = :idOffre;"; // Condition pour mettre à jour l'offre spécifiée
 
+    // Préparation de la requête
     $stmt = $dbh->prepare($requete);
+    
+    // Liaison des paramètres de la requête
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
     $stmt->bindParam(":description", $description);
@@ -39,38 +42,39 @@ if (!empty($_POST)) {
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":idOffre", $idOffre);
 
+    // Récupération des données du formulaire
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
     $description = $_POST["description"];
     $tarif = $_POST["prix-minimal"];
     $heuresDebut = $_POST["heure-debut"];
     $heuresFin = $_POST["heure-fin"];
-    $horaires = $heuresDebut . "-" . $heuresFin;
+    $horaires = $heuresDebut . "-" . $heuresFin; // Formatage des horaires
     $accessible = $_POST["choixAccessible"];
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
-    $idOffre = $_GET["idOffre"];
+    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
-    // Exécutez la mise à jour
+    // Exécution de la mise à jour
     $stmt->execute();
 
-    // Redirection vers gestionOffres.php après mise à jour réussie
+    // Redirection vers gestionOffres.php après la mise à jour réussie
     header("Location: /pages/gestionOffres.php");
-    exit(); // Terminez le script après la redirection
+    exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
-// Code pour récupérer l'offre
+// Récupération de l'identifiant de l'offre si présent dans l'URL
 $idOffre = null;
 if (key_exists("idOffre", $_GET)) {
-    // recuperation de id de l offre
-    $idOffre = $_GET["idOffre"];
+    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
-    // recuperation du contenu de l offre
+    // Récupération des détails de l'offre à partir de la base de données
     $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -94,6 +98,7 @@ if (key_exists("idOffre", $_GET)) {
             <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post">
                 <div class="champs">
                     <label for="titre">Titre <span class="required">*</span> :</label>
+                    <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
 
@@ -117,16 +122,19 @@ if (key_exists("idOffre", $_GET)) {
 
                 <div class="champs">
                     <label for="prix-minimal">Prix minimal (euro) :</label>
+                    <!-- Champ de saisie pour le prix minimal avec valeur préremplie -->
                     <input type="text" id="prix-minimal" name="prix-minimal" value="<?php echo $contentOffre["tarifminimal"];?>">
                 </div>
 
                 <div>
                     <label for="resume">Résumé <span class="required">*</span> :</label>
+                     <!-- Champ de saisie pour le résumé avec valeur préremplie -->
                     <textarea id="resume" name="resume"  required><?php echo $contentOffre["resume"];?></textarea>
                 </div>
 
                 <div>
                     <label for="description">Description détaillée <span class="required">*</span> :</label>
+                     <!-- Champ de saisie pour la description détaillée avec valeur préremplie -->
                     <textarea id="description" name="description"  required><?php echo $contentOffre["description_detaille"];?></textarea>
                 </div>
 
@@ -143,14 +151,17 @@ if (key_exists("idOffre", $_GET)) {
                     </div>
                     <div class="heures">
                         <label for="heure-debut">De</label>
+                        <!-- Champ de saisie pour l'heure de début avec valeur préremplie -->
                         <input type="time" id="heure-debut" name="heure-debut" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[0])); ?>">
                         <label for="heure-fin">à</label>
+                        <!-- Champ de saisie pour l'heure de fin avec valeur préremplie -->
                         <input type="time" id="heure-fin" name="heure-fin" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[1])); ?>">
                     </div>
                 </div>
 
                 <div class="champsAdresse">
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
+                     <!-- Champs de saisie pour l'adresse avec valeurs préremplies -->
                     <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>" required>
                     <input type="text" id="nomRue" name="nomRue" value="<?php echo $contentOffre["rue"];?>" required>
                     <input type="text" id="ville" name="ville" value="<?php echo $contentOffre["ville"];?>" required>
@@ -189,12 +200,14 @@ if (key_exists("idOffre", $_GET)) {
                 </div> -->
 
                 <div class="zoneBtn">
+                     <!-- Bouton pour annuler la modification -->
                     <a href="gestionOffres.php" class="btnAnnuler">
                         <p class="texteLarge boldArchivo">Annuler</p>
                         <?php
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
+                     <!-- Bouton pour soumettre le formulaire -->
                     <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
