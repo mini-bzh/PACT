@@ -434,7 +434,7 @@ p{
     position: sticky;
     top: 0;
     z-index: 3;
-   /* border-bottom: 1px solid black;*/
+    border-bottom: 1px solid black;
 }
 
 .navHeader,.ulHeader,.aHeader{
