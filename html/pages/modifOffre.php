@@ -64,25 +64,14 @@ if (!empty($_POST)) {
 // Code pour récupérer l'offre
 $idOffre = null;
 if (key_exists("idOffre", $_GET)) {
-    // reccuperation de id de l offre
+    // recuperation de id de l offre
     $idOffre = $_GET["idOffre"];
 
-    // reccuperation du contenu de l offre
+    // recuperation du contenu de l offre
     $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
 }
 ?>
 
-
-    $idOffre = null;
-    if(key_exists("idOffre", $_GET))
-    {
-        // reccuperation de id de l offre
-        $idOffre =$_GET["idOffre"]; 
-        
-        // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
