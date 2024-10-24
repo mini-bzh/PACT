@@ -42,19 +42,19 @@ $stock = false;
                 </div>
 
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 1 :</label>
+                    <label for="fichier1">Selectionner une image 1 :</label>
                     <input type="file" id="fichier1" name="fichier1" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 2 :</label>
+                    <label for="fichier2">Selectionner une image 2 :</label>
                     <input type="file" id="fichier2" name="fichier2" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 3 :</label>
+                    <label for="fichier3">Selectionner une image 3 :</label>
                     <input type="file" id="fichier3" name="fichier3" />
                 </div>
                 <div class="champs">
-                    <label for="fichier">Selectionner une image 4 :</label>
+                    <label for="fichier4">Selectionner une image 4 :</label>
                     <input type="file" id="fichier4" name="fichier4" />
                 </div>
 
