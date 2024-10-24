@@ -115,12 +115,12 @@ if (!$comptePro) {
 <!------ MAIN  ------>
 <main>
 
-<button class="btnDeconnexion">
+<div class="btnDeconnexion">
 <?php
     include '../icones/deconnexionSVG.svg';
 ?>
     <p class="boldArchivo">Déconnexion</p>
-</button>
+</div>
 
 
 
