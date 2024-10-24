@@ -1,9 +1,4 @@
 <?php
-// php -S localhost:8888
-// http://localhost:8888/html/pages/CreaOffrePro.php
-?>
-
-<?php
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
