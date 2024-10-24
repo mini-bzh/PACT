@@ -40,7 +40,6 @@ include('/var/www/html/php/verif_compte_pro.php');
                 </div>
 
                 <div class="champs">
-                    <?php include '../icones/joindreImagesSVG.svg'; ?>
                     <label for="fichier">Selectionner maximum 4 images :</label>
                     <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
                 </div>
