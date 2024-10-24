@@ -359,16 +359,13 @@ p{
     #conteneurOffres{
         margin-top: 30px;
     }
-    
+
     .apercuOffre{
         width: 300px;
         height: fit-content;
     
         border-radius: 20px;
-        background-color: white;
         padding: 5px 10px;
-    
-        overflow: hidden;
     }
 
     .apercuOffre .conteneurSVGtexte{
