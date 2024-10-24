@@ -1,4 +1,6 @@
 <?php
+     // Redirection vers gestionOffres.php après mise à jour réussie
+     header("Location: /pages/gestionOffres.php");
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
@@ -71,8 +73,7 @@ if (!empty($_POST)) {
     $idOffre = $_GET["idOffre"];
 
     $stmt->execute();
-     // Redirection vers gestionOffres.php après mise à jour réussie
-     header("Location: /pages/gestionOffres.php");
+
      exit(); // Terminez le script après la redirection
     
 }
