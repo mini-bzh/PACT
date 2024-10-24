@@ -71,8 +71,7 @@
             </svg>
 
         <div>
-    <img src="/html/images/logo/logo_petit.png" alt="logo petit">
-    <h3>Connexion compte professionnel</h3>
+    <img src="/images/logo/logo_grand.png" alt="logo grand">
 </div>
 </div>
         <main>

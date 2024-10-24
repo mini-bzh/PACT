@@ -47,7 +47,8 @@ function toggleEnLigne(idOffre)
     s'exécute quand le bouton pour passer une offre en/hors ligne. Change le statut de l'offre dans la BDD et 
     les visuels de l'offre (ciblée avec idOffre) */
 {
-    ChangerBtnLigne(idOffre);                       //change les visuels de l'offre (ciblée avec idOffre)
+    Chang+
+    erBtnLigne(idOffre);                       //change les visuels de l'offre (ciblée avec idOffre)
     $.ajax({
         url: 'toggleStatutOffre.php',               // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
