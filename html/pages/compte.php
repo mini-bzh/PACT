@@ -20,27 +20,7 @@
     <title>Compte</title>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/compte.css">
-    <script>
-        function deconnexion() {
-            alert("deco1");
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "gestionDeconnexion.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            alert("deco2");
-            // Gérer la réponse du serveur
-            xhr.onload = function() {
-                alert("deco3");
-                if (xhr.status === 200) {
-                    console.log("Déconnexion réussie");
-                    window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
-                } else {
-                    console.error("Erreur lors de la déconnexion.");
-                }
-            };
-
-            xhr.send("action=executer");
-        }
-    </script>
+    <script src="../js/deconnexion.js"></script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -136,7 +116,7 @@ if (!$comptePro) {
 <!------ MAIN  ------>
 <main>
 
-<button class="btnDeconnexion" onclick="deconnexion()">
+<button class="btnDeconnexion" onclick="confDeco()">
 <?php
     include '../icones/deconnexionSVG.svg';
 ?>
@@ -144,7 +124,16 @@ if (!$comptePro) {
 </button>
 
 
-
+<!-- POP-UP -->
+<div class="popUpDeco">
+    <div>
+        <p>Êtes vous sur de vouloir vous déconnecter ?</p>
+        <div>
+            <button class="btnAnnuler" onclick="fermeConfDeco()">Non</button>
+            <button class="btnValider" onclick="deconnexion()">OK</button>
+        </div>
+    </div>
+</div>
 
 </main>
 
