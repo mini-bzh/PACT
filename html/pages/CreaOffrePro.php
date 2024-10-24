@@ -43,19 +43,19 @@ $stock = false;
 
                 <div class="champs">
                     <label for="fichier">Selectionner une image 1 :</label>
-                    <input type="file" id="fichier1" name="fichier1" accept="image/*,.png,.jpg,.gif" />
+                    <input type="file" id="fichier1" name="fichier1" />
                 </div>
                 <div class="champs">
                     <label for="fichier">Selectionner une image 2 :</label>
-                    <input type="file" id="fichier2" name="fichier2" accept="image/*,.png,.jpg,.gif" />
+                    <input type="file" id="fichier2" name="fichier2" />
                 </div>
                 <div class="champs">
                     <label for="fichier">Selectionner une image 3 :</label>
-                    <input type="file" id="fichier3" name="fichier3" accept="image/*,.png,.jpg,.gif" />
+                    <input type="file" id="fichier3" name="fichier3" />
                 </div>
                 <div class="champs">
                     <label for="fichier">Selectionner une image 4 :</label>
-                    <input type="file" id="fichier4" name="fichier4" accept="image/*,.png,.jpg,.gif" />
+                    <input type="file" id="fichier4" name="fichier4" />
                 </div>
 
                 <div class="champs">
@@ -176,8 +176,8 @@ $stock = false;
                 </div>
 
                 <!-- <?php
-                // if (!empty($_POST)) {
-                ?>
+                        // if (!empty($_POST)) {
+                        ?>
                     <div id="popup">
 
                         <div>
@@ -317,21 +317,30 @@ if (!empty($_POST)) {
     $image3 = $_POST["fichier3"];
     $image4 = $_POST["fichier4"];
 
+
     $type1 = explode("/", $image1["types"])[1];
     $nom_img1 = time() . "." . $type1;
-    move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img1);
+    if (in_array($type, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img1);
+    }
 
     $type2 = explode("/", $image2["types"])[1];
     $nom_img2 = time() . "." . $type1;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img2);
+    if (in_array($type, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img2);
+    }
 
     $type3 = explode("/", $image3["types"])[1];
     $nom_img3 = time() . "." . $type3;
-    move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img3);
+    if (in_array($type, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img3);
+    }
 
     $type4 = explode("/", $image4["types"])[1];
     $nom_img4 = time() . "." . $type4;
-    move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img4);
+    if (in_array($type, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img4);
+    }
 
     $id_c = $_SESSION["idCompte"];
 
