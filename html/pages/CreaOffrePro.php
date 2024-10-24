@@ -11,6 +11,8 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
 include('/var/www/html/php/verif_compte_pro.php');
 
+
+$stock = false;
 ?>
 
 <!DOCTYPE html>
@@ -40,16 +42,31 @@ include('/var/www/html/php/verif_compte_pro.php');
                 </div>
 
                 <div class="champs">
-                    <label for="fichier">Selectionner maximum 4 images :</label>
-                    <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
+                    <label for="fichier">Selectionner une image 1 :</label>
+                    <input type="file" id="fichier1" name="fichier1" accept="image/*,.png,.jpg,.gif" />
+                </div>
+                <div class="champs">
+                    <label for="fichier">Selectionner une image 2 :</label>
+                    <input type="file" id="fichier2" name="fichier2" accept="image/*,.png,.jpg,.gif" />
+                </div>
+                <div class="champs">
+                    <label for="fichier">Selectionner une image 3 :</label>
+                    <input type="file" id="fichier3" name="fichier3" accept="image/*,.png,.jpg,.gif" />
+                </div>
+                <div class="champs">
+                    <label for="fichier">Selectionner une image 4 :</label>
+                    <input type="file" id="fichier4" name="fichier4" accept="image/*,.png,.jpg,.gif" />
                 </div>
 
-                <!-- <div class="champs">
+                <div class="champs">
                     <label for="categorie">Catégorie <span class="required">*</span> :</label>
                     <select id="categorie" name="categorie" required>
                         <option value="">Sélectionnez une catégorie</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
+                        <option value="activite">Activité</option>
+                        <option value="visite">Visite</option>
+                        <option value="ParcDattraction">Parc d'attraction</option>
+                        <option value="spectacle">Spectacle</option>
+                        <option value="restauration">Restauration</option>
                     </select>
                 </div>
 
@@ -57,10 +74,14 @@ include('/var/www/html/php/verif_compte_pro.php');
                     <label for="tags">Tags :</label>
                     <select id="tags" name="tags">
                         <option value="">Sélectionnez des tags</option>
-                        <option value="tag1">Tag 1</option>
-                        <option value="tag2">Tag 2</option>
+                        <option value="tag1">Français</option>
+                        <option value="tag2">Local</option>
+                        <option value="tag2">Rafraichissant</option>
+                        <option value="tag2">cuisine</option>
+                        <option value="tag2">repas</option>
+                        <option value="tag2">divertissant</option>
                     </select>
-                </div> -->
+                </div>
 
                 <div class="champs">
                     <label for="prix-minimal">Prix minimal (euro) :</label>
@@ -103,7 +124,7 @@ include('/var/www/html/php/verif_compte_pro.php');
                     <input type="text" id="ville" name="ville" placeholder="Ville" required>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                 </div>
-                <!--
+
                 <div class="champs">
                     <label for="offre">Type offre :</label>
                     <select id="offre" name="offre">
@@ -122,7 +143,6 @@ include('/var/www/html/php/verif_compte_pro.php');
                         <option value="AlaUneEtEnRelief">A la une et En relief</option>
                     </select>
                 </div>
-                -->
 
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
@@ -133,8 +153,10 @@ include('/var/www/html/php/verif_compte_pro.php');
                     </select>
                 </div>
 
+
                 <!-- <div class="champs">
-                    futur data de mise en ligne
+                    <label for="prixOffre">Prix de l'offre : <?php // echo 
+                                                                ?> </label>
                 </div> -->
 
                 <div class="zoneBtn">
@@ -145,26 +167,49 @@ include('/var/www/html/php/verif_compte_pro.php');
                         ?>
                     </a>
 
-                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                    <button type="submit" href="CreaOffrePro.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
                         ?>
 
-                    </button>
                 </div>
 
+                <?php
+                if (!empty($_POST)) {
+                ?>
+                    <div id="popup">
+
+                        <div>
+                            <p>le prix de l'offre est de :</p>
+                        </div>
+
+                        <div class="zoneBtn">
+                            <a href="CreaOffrePro.php" class="btnAnnuler">
+                                <p class="texteLarge boldArchivo">Annuler</p>
+                                <?php
+                                // include '../icones/croixSVG.svg';
+                                ?>
+                            </a>
+
+                            <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                                <p class="texteLarge boldArchivo">Confirmer</p>
+                                <?php
+                                include '../icones/okSVG.svg';
+                                $stock = true;
+                                ?>
+                            </button>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
             </form>
         </div>
     </main>
 
     <?php
     include "../composants/footer/footer.php";
-    // print_r($_POST["fichier"]);
-    // print_r($image1);
-    // print_r($image2);
-    // print_r($image3);
-    // print_r($image4);
     ?>
 </body>
 
@@ -174,20 +219,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 <?php
 
 
-if (!empty($_POST)) {
-
-    $listeImage = $_POST["fichier"];
-    echo($listeImage);
-    $arrayImage = explode('&', $listeImage);
-    print_r($arrayImage);
-    $image1 = $arrayImage[0];
-    echo($image1);
-    $image2 = $arrayImage[1];
-    echo($image2);
-    $image3 = $arrayImage[2];
-    echo($image3);
-    $image4 = $arrayImage[4];
-    echo($image4);
+if ($stock == true) {
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
     $qwery .= "titreOffre,";
@@ -251,7 +283,7 @@ if (!empty($_POST)) {
     $stmt->bindParam(":img1", $image1);
     $stmt->bindParam(":img2", $image2);
     $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img3", $image4);
+    $stmt->bindParam(":img4", $image4);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -278,7 +310,10 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
 
-    $id_c = $_SESSION["idCompte"];
+    $image1 = $_POST["fichier1"];
+    $image2 = $_POST["fichier2"];
+    $image3 = $_POST["fichier3"];
+    $image4 = $_POST["fichier4"];
 
     $type = explode("/", $image1["types"])[1];
     $nom_img = time() . "." . $type;
@@ -295,6 +330,8 @@ if (!empty($_POST)) {
     $type = explode("/", $image4["types"])[1];
     $nom_img = time() . "." . $type;
     move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img);
+
+    $id_c = $_SESSION["idCompte"];
 
     $stmt->execute();
     $dbh = null;
