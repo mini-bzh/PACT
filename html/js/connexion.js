@@ -8,6 +8,6 @@ function validerCorrect() {
     setTimeout(function() {
         pop.style.display = 'none';
         document.body.classList.remove('no-scroll');
-        window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php?";
+        window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
     }, 1500);
 }

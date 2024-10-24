@@ -11,15 +11,7 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    $idOffre = null;
-    if(key_exists("idOffre", $_GET))
-    {
-        // reccuperation de id de l offre
-        $idOffre =$_GET["idOffre"]; 
-        
-        // reccuperation du contenu de l offre
-        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
-    }
+   
 
 ?>
 
@@ -30,32 +22,30 @@
 
 if (!empty($_POST)) {
 
-    $qwery = "UPDATE tripskell.offre_pro set ";
-    $qwery .= "titreOffre = :titre,";
-    $qwery .= "resume = :resume,";
-    $qwery .= "description_detaille = :description,";
-    $qwery .= "tarifMinimal = :tarif,";
-    $qwery .= "horaires = :horaires,";
-    $qwery .= "accessibilite = :accessibilite,";
-  //  $qwery .= "id_abo, ";
-  //  $qwery .= "id_option, ";
-    $qwery .= "numero = :numero, ";
-    $qwery .= "rue = :rue, ";
-    $qwery .= "ville = :ville, ";
-    $qwery .= "codePostal = :codePostal";
-    $qwery .= " WHERE idOffre = :idOffre ;";
+    $requete = "UPDATE tripskell.offre_pro set ";
+    $requete .= "titreOffre = :titre,";
+    $requete .= "resume = :resume,";
+    $requete .= "description_detaille = :description,";
+    $requete .= "tarifMinimal = :tarif,";
+    $requete .= "horaires = :horaires,";
+    $requete .= "accessibilite = :accessibilite,";
+  //  $requete .= "id_abo, ";
+  //  $requete .= "id_option, ";
+    $requete .= "numero = :numero, ";
+    $requete .= "rue = :rue, ";
+    $requete .= "ville = :ville, ";
+    $requete .= "codePostal = :codePostal";
+    $requete .= " WHERE idOffre = :idOffre ;";
 
-    echo $qwery;
+    echo $requete;
 
-    $stmt = $dbh->prepare($qwery);
+    $stmt = $dbh->prepare($requete);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
     $stmt->bindParam(":description", $description);
     $stmt->bindParam(":tarif", $tarif);
-
     $stmt->bindParam(":horaires", $horaires);
     $stmt->bindParam(":accessibilite", $accessible);
- 
 //    $stmt->bindParam(":id_abo", $id_abo);
 //    $stmt->bindParam(":id_option", $id_option);
     $stmt->bindParam(":numero", $numero);
@@ -68,20 +58,12 @@ if (!empty($_POST)) {
     $resume = $_POST["resume"];
     $description = $_POST["description"];
     $tarif = $_POST["prix-minimal"];
-
-
     $heuresDebut = $_POST["heure-debut"];
     $heuresFin = $_POST["heure-fin"];
     $horaires = $heuresDebut . "-" . $heuresFin;
-
     $accessible = $_POST["choixAccessible"];
-
-
     //$id_abo = $_POST["offre"];
     //$id_option = $_POST["option"];
-
-
-
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
@@ -89,11 +71,19 @@ if (!empty($_POST)) {
 
     $idOffre = $_GET["idOffre"];
 
-
-
     $stmt->execute();
-    $dbh = null;
+    
 }
+
+    $idOffre = null;
+    if(key_exists("idOffre", $_GET))
+    {
+        // reccuperation de id de l offre
+        $idOffre =$_GET["idOffre"]; 
+        
+        // reccuperation du contenu de l offre
+        $contentOffre = $dbh->query("select * from tripskell.offre_pro where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -218,13 +208,13 @@ if (!empty($_POST)) {
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
-
+                    <a href="gestionOffres.php">
                     <button type="submit" href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
                         ?>
-
+                    </a>
                     </button>
                 </div>
 
@@ -240,3 +230,5 @@ if (!empty($_POST)) {
 
 </html>
 
+<?php
+$dbh = null;
