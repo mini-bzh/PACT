@@ -11,10 +11,39 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
 include('/var/www/html/php/verif_compte_pro.php');
 
+// On va récupérer ici l'identifiant id_c présent dans la table pro privé.
+$userPri = null;
+    if(key_exists("id_c", $_GET))
+    {
+        // reccuperation de id du compte
+        $id_c = $_SESSION["idCompte"]; 
+        
+        // reccuperation du contenu de l offre 
+        $contentid_cPri = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $id_c . "';")->fetchAll()[0];          
+    }
+
+// On va récupérer ici l'identifiant id_c présent dans la table pro public.
+$userPub = null;
+    if(key_exists("id_c", $_GET))
+    {
+        // reccuperation de id du compte
+        $id_c = $_SESSION["idCompte"]; 
+        
+        // reccuperation du contenu de l offre
+        $contentid_cPub = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $id_c . "';")->fetchAll()[0];          
+    }
+
 
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
 
+<?php
+    echo $id_c;
+    print_r($contentid_cPri);
+    print_r($contentid_cPub);
+    //if(){
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,6 +55,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 </head>
 
 <body class="fondPro">
+
     <?php include "/var/www/html/composants/header/header.php";        //import navbar
     ?>
 
@@ -249,7 +279,7 @@ include('/var/www/html/php/verif_compte_pro.php');
 
 
 
-if (!empty($_GET)) { // On vérifie si le formulaire est compléter ou non.
+if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
 // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
 // qwery va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
@@ -297,7 +327,7 @@ if (!empty($_GET)) { // On vérifie si le formulaire est compléter ou non.
     $qwery .= "img4);";
     // echo $qwery;
 
-    // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de l'INSERT
+    // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
     $stmt = $dbh->prepare($qwery);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
@@ -388,4 +418,8 @@ if (!empty($_GET)) { // On vérifie si le formulaire est compléter ou non.
     $stmt->execute();
     $dbh = null;
 }
+?>
+<?php
+
+//}
 ?>
