@@ -49,10 +49,13 @@ div:has(> .fakeDiv){
     padding: 0 1%;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .btnDeconnexion p{
     width: 100%;
+    color: white;
+    text-align: center;
 }
 
 .btnDeconnexion svg{
