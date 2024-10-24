@@ -32,7 +32,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>gestion des offre</title>
-        <link rel="stylesheet" href="../style/pages/gestionOffres.css">
+        <link rel="stylesheet" href="/style/pages/gestionOffres.css">
     </head>
     <body  class=<?php echo "fondPro"; ?>>      <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
