@@ -16,10 +16,12 @@ function ChangerBtnLigne(idOffre)
     // met à jour le texte du bouton
     const texteBtnLigne = document.querySelector("#offre" + idOffre + " p");
     if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
-        {
-            texteBtnLigne.innerText = "Mettre l'offre en ligne";
+    {
+        console.log("en");
+        texteBtnLigne.innerText = "Mettre l'offre en ligne";
     } else 
     {
+        console.log("hors");
         texteBtnLigne.innerText = "Mettre l'offre hors ligne";
     }
 

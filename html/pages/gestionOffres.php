@@ -88,7 +88,7 @@
                     </p>
                 
                     <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                        <!-- future tag<div id="partieTags">
+                        <div id="partieTags">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/tagSVG.svg" alt="icone tag">
                                 <h4>Tags</h4>
@@ -102,7 +102,7 @@
 
 
                             </div>
-                        </div> -->
+                        </div>
                         <div id="partieHoraires">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/horairesSVG.svg" alt="icone horaires">

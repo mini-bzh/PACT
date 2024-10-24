@@ -249,6 +249,7 @@ p{
     padding: 20px 40px;
 
     overflow: hidden;
+    margin-bottom: 30px;
 }
 
 .apercuOffre .conteneurSVGtexte{
@@ -619,7 +620,7 @@ rect{
     }
 
     main{
-        padding-bottom: 100px;
+        padding-bottom: 110px;
     }
 }
 

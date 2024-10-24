@@ -37,7 +37,7 @@ main h1{
     }
 
     main>h1{
-        font-size: 1.6em;
+        font-size: 2em;
         border-left: 10px solid var(--secondary);
         padding-left: 10px;
         margin-left: 5px;
