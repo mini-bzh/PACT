@@ -250,7 +250,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
                     <?php
-                    if (in_array($id_c, $contentid_cPri) == true) { // permet de vérifier l'id_c
+                    if (in_array($id_c, $contentid_cPri)) { // permet de vérifier l'id_c
                     ?>
 
                         <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement que vous avez chosis avec en plus les options si vous en avez choisis.</p>
@@ -392,8 +392,8 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
         // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 
-        $type1 = explode("/", $image1["types"])[1];
-        $nom_img1 = time() . "." . $type1;
+        $nom_img1 = time() . "." . explode("/", $image1["types"])[1];
+        echo "<br><br>" . $nom_img1 . "<br><br>";
         if (in_array($type, ["png", "gif", "jpeg"])) {
             move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
         }
