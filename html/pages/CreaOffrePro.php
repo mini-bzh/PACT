@@ -402,7 +402,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["type"])[1];
         echo "<br><br>" . $nom_img1 . "<br><br>";
         
-        move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
+        move_uploaded_file($_FILES["fichier1"]["tmp_name"], "../images/imagesOffres/" . $nom_img1);
         
 
         $type2 = explode("/", $image2["types"])[1];
