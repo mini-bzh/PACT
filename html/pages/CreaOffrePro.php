@@ -63,7 +63,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- Champs pour sélectionner les images -->
                     <div class="champs">
                         <label for="fichier1">Selectionner une image 1 :</label>
-                        <input type="file" id="fichier1" name="fichier1" />
+                        <input type="file" id="fichier1" name="fichier1" >
                     </div>
                     <div class="champs">
                         <label for="fichier2">Selectionner une image 2 :</label>
