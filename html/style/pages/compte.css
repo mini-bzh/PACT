@@ -75,6 +75,7 @@ div:has(> .fakeDiv){
 
 .btnDeconnexion svg path{
     stroke: white;
+    stroke-width: 8px;
 }
 
 .popUpDeco{
@@ -203,11 +204,9 @@ body.no-scroll {
     .btnDeconnexion svg{
         width: 60px;
         height: 55px;
-        stroke: black;
-        border-width: 8px;
     }
 
     .btnDeconnexion svg path{
-        stroke-width: 7px;
+        stroke: black;
     }
 }

@@ -275,21 +275,21 @@ if (!empty($_POST)) {
 
     $id_c = $_SESSION["idCompte"];
 
-    $type = explode("/", $image2["types"])[1];
+    $type = explode("/", $image1["types"])[1];
     $nom_img = time() . "." . $type;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+    move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img);
 
     $type = explode("/", $image2["types"])[1];
     $nom_img = time() . "." . $type;
     move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
 
-    $type = explode("/", $image2["types"])[1];
+    $type = explode("/", $image3["types"])[1];
     $nom_img = time() . "." . $type;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+    move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img);
 
-    $type = explode("/", $image2["types"])[1];
+    $type = explode("/", $image4["types"])[1];
     $nom_img = time() . "." . $type;
-    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+    move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img);
 
     $stmt->execute();
     $dbh = null;
