@@ -1,11 +1,12 @@
 @import "../style.css";
 
 main{
-    padding: 60px;
+    padding: 0px;
 }
-h1{
+main h1{
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
+    margin: 20px;
 }
 
 #conteneurOffres{
@@ -25,10 +26,26 @@ h1{
 
 @media screen and (max-width : 428px)
 {
+    main{
+        padding: 10px;
+    }
     #conteneurOffres>article{
         display: block;
     }
     #conteneurOffres .lienApercuOffre{
         margin: 10px;
+    }
+
+    main>h1{
+        font-size: 2em;
+        border-left: 10px solid var(--secondary);
+        padding-left: 10px;
+        margin-left: 5px;
+    }
+
+    #logoTitreMobile{
+        width: 200px;
+        height: auto;
+        transform: translate(30px, -25px);
     }
 }
