@@ -321,25 +321,25 @@ if (!empty($_POST)) {
     $type1 = explode("/", $image1["types"])[1];
     $nom_img1 = time() . "." . $type1;
     if (in_array($type, ["png", "gif", "jpeg"])) {
-        move_uploaded_file($image1["tmp_name"], "imagesTest/" . $nom_img1);
+        move_uploaded_file($image1["tmp_name"], "../images/imagesTest/" . $nom_img1);
     }
 
     $type2 = explode("/", $image2["types"])[1];
-    $nom_img2 = time() . "." . $type1;
-    if (in_array($type, ["png", "gif", "jpeg"])) {
-        move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img2);
+    $nom_img2 = time() . "." . $type2;
+    if (in_array($type2, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image2["tmp_name"], "../images/imagesTest/" . $nom_img2);
     }
 
     $type3 = explode("/", $image3["types"])[1];
     $nom_img3 = time() . "." . $type3;
-    if (in_array($type, ["png", "gif", "jpeg"])) {
-        move_uploaded_file($image3["tmp_name"], "imagesTest/" . $nom_img3);
+    if (in_array($type3, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image3["tmp_name"], "../images/imagesTest/" . $nom_img3);
     }
 
     $type4 = explode("/", $image4["types"])[1];
     $nom_img4 = time() . "." . $type4;
-    if (in_array($type, ["png", "gif", "jpeg"])) {
-        move_uploaded_file($image4["tmp_name"], "imagesTest/" . $nom_img4);
+    if (in_array($type4, ["png", "gif", "jpeg"])) {
+        move_uploaded_file($image4["tmp_name"], "../images/imagesTest/" . $nom_img4);
     }
 
     $id_c = $_SESSION["idCompte"];
