@@ -337,7 +337,7 @@ p{
     color: white; 
     font-size: 0.7em;
     z-index: 2;
-    width: 150px;
+    width: fit-content;
     height: 40px;
 }
 
