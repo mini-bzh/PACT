@@ -124,7 +124,7 @@
                             
                                         <div class="conteneurImage">
                                             <img src="/images/imagesOffres/<?php echo $row["img1"]?>" alt="illustration offre">
-                                            <div class="text-overlay">dès <div><?php echo $row["tarifminimal"]?>€</div>/pers</div>
+                                            <p class="text-overlay">dès <span><?php echo $row["tarifminimal"]?>€</sp>/pers</p>
                                         </div>
                                         
                                         <p class="resumeApercu"><?php echo $row["resume"]?></p>

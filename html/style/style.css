@@ -317,7 +317,7 @@ p{
     display: inline-block;
 }
 
-.apercuOffre .conteneurImage div>div{
+.apercuOffre .conteneurImage span{
     font-weight: bold;
     font-size: 1em;
 }
