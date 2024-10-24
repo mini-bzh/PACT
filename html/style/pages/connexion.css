@@ -157,7 +157,7 @@ body.no-scroll {
     }
 
     .zoneBtn{
-        margin: 3% auto;
+        margin: 1% auto 3% auto;
     }
 
     .btnConfirmer, .btnAnnuler{
@@ -167,8 +167,8 @@ body.no-scroll {
     }
 
     .btnConfirmer svg{
-        width: 27px;
-        height: 19px;
+        width: 35px;
+        height: 27px;
     }
 
     .btnAnnuler svg{
