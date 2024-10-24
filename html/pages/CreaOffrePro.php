@@ -43,7 +43,7 @@ include('/var/www/html/php/verif_compte_pro.php');
                     <div class="image">
                         <label for="fichier">Envoyer fichier :</label>
                         <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple/>
-                        <img src="PACT/html/icones/joindreImagesSVG.svg" alt="error">
+                        <img src="../icones/joindreImagesSVG.svg" alt="error">
                         <br />
                     </div>
                 </div>
