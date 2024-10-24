@@ -315,11 +315,12 @@ p{
 .apercuOffre .conteneurImage{
     position: relative;
     display: inline-block;
+    width: fit-content;
 }
 
 .apercuOffre .conteneurImage p{
     font-size: 1em;
-    text-align: center;
+    text-align: right;
 }
 .apercuOffre .conteneurImage span{
     font-weight: bold;
