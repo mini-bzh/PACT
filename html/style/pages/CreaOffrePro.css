@@ -182,16 +182,16 @@ select{
 
 .btnAnnuler{
     background-color: red;
-    justify-content: flex-end;
 }
 
 .btnConfirmer{
     background-color: var(--accentDark);
-    justify-content: flex-start;
 }
 
 .zoneBtn{
     display: inline;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 3%;
 }
 
