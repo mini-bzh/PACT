@@ -38,12 +38,11 @@
         <?php
             include "../composants/header/header.php";              // import header (navbar)
         ?>
-
-        <main id="mainGestionOffres">
         <h1>
             Gestion des offres
         </h1>
-        
+        <main id="mainGestionOffres">
+
         <section id="conteneurBtnOffres">
         <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
