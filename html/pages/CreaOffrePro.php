@@ -443,6 +443,7 @@ if (in_array($id_c, $contentid_cPri) || in_array($id_c, $contentid_cPub)) {
         // on execute tout ce qui a été fait précèdement
         $stmt->execute();
         $dbh = null;
+        
     }
     ?>
 <?php

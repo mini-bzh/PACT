@@ -44,7 +44,7 @@
         <main id="mainGestionOffres">
 
         <section id="conteneurBtnOffres">
-        <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
+        <a href="CreaOffrePro.php" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
                         <img src="/icones/ajouterSVG.svg" alt="ajouter offre">
                         <h3>Ajouter une offre</h3>
