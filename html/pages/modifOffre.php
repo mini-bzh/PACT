@@ -22,24 +22,24 @@
 
 if (!empty($_POST)) {
 
-    $query = "UPDATE tripskell.offre_pro set ";
-    $query .= "titreOffre = :titre,";
-    $query .= "resume = :resume,";
-    $query .= "description_detaille = :description,";
-    $query .= "tarifMinimal = :tarif,";
-    $query .= "horaires = :horaires,";
-    $query .= "accessibilite = :accessibilite,";
-  //  $query .= "id_abo, ";
-  //  $query .= "id_option, ";
-    $query .= "numero = :numero, ";
-    $query .= "rue = :rue, ";
-    $query .= "ville = :ville, ";
-    $query .= "codePostal = :codePostal";
-    $query .= " WHERE idOffre = :idOffre ;";
+    $requete = "UPDATE tripskell.offre_pro set ";
+    $requete .= "titreOffre = :titre,";
+    $requete .= "resume = :resume,";
+    $requete .= "description_detaille = :description,";
+    $requete .= "tarifMinimal = :tarif,";
+    $requete .= "horaires = :horaires,";
+    $requete .= "accessibilite = :accessibilite,";
+  //  $requete .= "id_abo, ";
+  //  $requete .= "id_option, ";
+    $requete .= "numero = :numero, ";
+    $requete .= "rue = :rue, ";
+    $requete .= "ville = :ville, ";
+    $requete .= "codePostal = :codePostal";
+    $requete .= " WHERE idOffre = :idOffre ;";
 
-    echo $query;
+    echo $requete;
 
-    $stmt = $dbh->prepare($query);
+    $stmt = $dbh->prepare($requete);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
     $stmt->bindParam(":description", $description);
