@@ -95,7 +95,7 @@
                         foreach(/*$dbh->query("SELECT * from tripskell.offre_visiteur")*/ $rows as $row)
                         {
                             ?>
-                                <a href="/pages/detailOffre.php?user=<?php echo $profil?>&idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
                                         <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
