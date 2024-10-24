@@ -6,6 +6,10 @@
 h1{
     font-family: "Luciole";
     font-size: var(--typescale-h1);
+    
+    border-left: 20px solid var(--secondary);
+    padding-left: 20px;
+    margin-left: 10px;
 }
 
 h2{
