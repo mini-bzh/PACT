@@ -26,9 +26,10 @@
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "gestionDeconnexion.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
+            alert("deco2");
             // Gérer la réponse du serveur
             xhr.onload = function() {
+                alert("deco3");
                 if (xhr.status === 200) {
                     console.log("Déconnexion réussie");
                     window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
