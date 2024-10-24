@@ -34,7 +34,7 @@
     flex-wrap: wrap;
 }
 
-main h1{
+#mainGestionOffres h1{
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
     margin: 30px;
