@@ -13,11 +13,11 @@
 
     if($comptePro)
     {
-        $stmt->bindParam(":id_c", var: $id_c);
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
+
+        // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
+        $stmt->bindParam(":id_c", var: $id_c); 
         $id_c = $_SESSION["idCompte"];
-        $stm = $dbh->query("SELECT * from tripskell.offre_pro WHERE id_c=:id_c;");
-
-
     }
     else
     {
