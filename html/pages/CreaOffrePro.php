@@ -40,7 +40,8 @@ include('/var/www/html/php/verif_compte_pro.php');
                 </div>
 
                 <div class="champs">
-                    <label for="fichier"><?php include '../icones/joindreImagesSVG.svg';?> Selectionner maximum 4 images :</label>
+                    <?php include '../icones/joindreImagesSVG.svg'; ?>
+                    <label for="fichier">Selectionner maximum 4 images :</label>
                     <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
                 </div>
 
@@ -138,14 +139,14 @@ include('/var/www/html/php/verif_compte_pro.php');
                 </div> -->
 
                 <div class="zoneBtn">
-                    <a href="compte.php" class="btnAnnuler">
+                    <a href="gestionOffres.php" class="btnAnnuler">
                         <p class="texteLarge boldArchivo">Annuler</p>
                         <?php
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
 
-                    <button type="submit" href="#" class="btnConfirmer">
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
