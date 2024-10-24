@@ -64,15 +64,18 @@ div:has(> .fakeDiv){
     width: 100%;
     color: white;
     text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
 }
 
 .btnDeconnexion svg{
     width: 35px;
     height: 35px;
-    border-color: white;
 }
 
-
+.btnDeconnexion svg path{
+    stroke: white;
+}
 
 .popUpDeco{
     display: none;
@@ -187,20 +190,24 @@ body.no-scroll {
     .btnDeconnexion{
         width: 413px;
         height: 74px;
-        padding: 0 1%;
+        padding: 0 7%;
         margin: 2% auto;
-        border: none;
     }
 
     .btnDeconnexion p{
-        width: 100%;
         color: black;
-        text-align: center;
+        padding-right: 8%;
+        padding-top: 0.5%;
     }
     
     .btnDeconnexion svg{
         width: 60px;
         height: 55px;
-        border-color: black;
+        stroke: black;
+        border-width: 8px;
+    }
+
+    .btnDeconnexion svg path{
+        stroke-width: 7px;
     }
 }

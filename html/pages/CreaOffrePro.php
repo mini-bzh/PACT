@@ -208,10 +208,10 @@ if (!empty($_POST)) {
     $qwery .= ":ville,";
     $qwery .= ":codePostal,";
     $qwery .= ":id_c, ";
-    $qwery .= ":img1, ";
-    $qwery .= ":img2, ";
-    $qwery .= ":img3, ";
-    $qwery .= ":img4)";
+    $qwery .= "img1, ";
+    $qwery .= "img2, ";
+    $qwery .= "img3, ";
+    $qwery .= "img4)";
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
@@ -230,7 +230,10 @@ if (!empty($_POST)) {
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":fichier", $listeImage);
+    $stmt->bindParam(":img1", $image1);
+    $stmt->bindParam(":img2", $image2);
+    $stmt->bindParam(":img3", $image3);
+    $stmt->bindParam(":img3", $image4);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -258,17 +261,35 @@ if (!empty($_POST)) {
     $codePostal = $_POST["codePostal"];
 
     $listeImage = $_POST["fichier"];
-    // $arrayImage = explode('&', $listeImage);
-    // $image1 = $arrayImage[0];
-    // $image2 = $arrayImage[1];
-    // $image3 = $arrayImage[2];
-    // $image4 = $arrayImage[4];
+    print_r($listeImage);
+    $arrayImage = explode('&', $listeImage);
+    print_r($arrayImage);
+    $image1 = $arrayImage[0];
+    print_r($image1);
+    $image2 = $arrayImage[1];
+    print_r($image2);
+    $image3 = $arrayImage[2];
+    print_r($image3);
+    $image4 = $arrayImage[4];
+    print_r($image4);
 
     $id_c = $_SESSION["idCompte"];
 
-    $type = explode("/", $_FILES["fichier"]["types"])[1];
+    $type = explode("/", $image2["types"])[1];
     $nom_img = time() . "." . $type;
-    move_uploaded_file($_FILES["fichier"]["tmp_name"], "imagesTest/" . $nom_img);
+    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+
+    $type = explode("/", $image2["types"])[1];
+    $nom_img = time() . "." . $type;
+    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+
+    $type = explode("/", $image2["types"])[1];
+    $nom_img = time() . "." . $type;
+    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
+
+    $type = explode("/", $image2["types"])[1];
+    $nom_img = time() . "." . $type;
+    move_uploaded_file($image2["tmp_name"], "imagesTest/" . $nom_img);
 
     $stmt->execute();
     $dbh = null;
