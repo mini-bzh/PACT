@@ -131,9 +131,8 @@
                 <div class="champs">
                     <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
                     <select id="choixAccessible" name="choixAccessible">
-                        <option value="">Sélectionnez un choix</option>
-                        <option value="Accessible">Accessible</option>
-                        <option value="PasAccessible">Pas Accessible</option>
+                        <option value="Accessible" <?php echo ($contentOffre["accessibilite"] == "Accessible") ? 'selected' : ''; ?>>Accessible</option>
+                        <option value="PasAccessible" <?php echo ($contentOffre["accessibilite"] == "PasAccessible") ? 'selected' : ''; ?>>Pas Accessible</option>
                     </select>
                 </div>
 
