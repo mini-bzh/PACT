@@ -245,7 +245,7 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
 
-    $idOffre = $_SESSION["idOffre"];
+    $idOffre = $_GET["idOffre"];
 
 
 
