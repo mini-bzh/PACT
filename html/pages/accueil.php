@@ -70,10 +70,10 @@
             </defs>
             </svg>
 
-        <div>
-    <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
-</div>
-</div>
+            <div>
+                <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
+            </div>
+        </div>
         <main>
             <?php
                 if($comptePro)
