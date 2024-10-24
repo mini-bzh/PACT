@@ -161,6 +161,10 @@ include('/var/www/html/php/verif_compte_pro.php');
     <?php
     include "../composants/footer/footer.php";
     print_r($_POST["fichier"]);
+    print_r($image1);
+    print_r($image2);
+    print_r($image3);
+    print_r($image4);
     ?>
 </body>
 
