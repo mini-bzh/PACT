@@ -1,44 +1,30 @@
 <?php
-     // Redirection vers gestionOffres.php après mise à jour réussie
-     header("Location: /pages/gestionOffres.php");
-    session_start(); // recuperation de la sessions
+session_start(); // recuperation de la sessions
 
-    // recuperation des parametre de connection a la BdD
-    include('/var/www/html/php/connection_params.php');
-    
-    // connexion a la BdD
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+// recuperation des parametre de connection a la BdD
+include('/var/www/html/php/connection_params.php');
 
-    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('/var/www/html/php/verif_compte_pro.php');
+// connexion a la BdD
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associatif
 
-   
-
-?>
-
-<?php
-//
-// Requete pour Update
-//
+// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+include('/var/www/html/php/verif_compte_pro.php');
 
 if (!empty($_POST)) {
-
-    $requete = "UPDATE tripskell.offre_pro set ";
-    $requete .= "titreOffre = :titre,";
-    $requete .= "resume = :resume,";
-    $requete .= "description_detaille = :description,";
-    $requete .= "tarifMinimal = :tarif,";
-    $requete .= "horaires = :horaires,";
-    $requete .= "accessibilite = :accessibilite,";
-  //  $requete .= "id_abo, ";
-  //  $requete .= "id_option, ";
+    // Requete pour Update
+    $requete = "UPDATE tripskell.offre_pro SET ";
+    $requete .= "titreOffre = :titre, ";
+    $requete .= "resume = :resume, ";
+    $requete .= "description_detaille = :description, ";
+    $requete .= "tarifMinimal = :tarif, ";
+    $requete .= "horaires = :horaires, ";
+    $requete .= "accessibilite = :accessibilite, ";
     $requete .= "numero = :numero, ";
     $requete .= "rue = :rue, ";
     $requete .= "ville = :ville, ";
-    $requete .= "codePostal = :codePostal";
-    $requete .= " WHERE idOffre = :idOffre ;";
-
+    $requete .= "codePostal = :codePostal ";
+    $requete .= "WHERE idOffre = :idOffre;";
 
     $stmt = $dbh->prepare($requete);
     $stmt->bindParam(":titre", $titre);
@@ -47,8 +33,6 @@ if (!empty($_POST)) {
     $stmt->bindParam(":tarif", $tarif);
     $stmt->bindParam(":horaires", $horaires);
     $stmt->bindParam(":accessibilite", $accessible);
-//    $stmt->bindParam(":id_abo", $id_abo);
-//    $stmt->bindParam(":id_option", $id_option);
     $stmt->bindParam(":numero", $numero);
     $stmt->bindParam(":rue", $rue);
     $stmt->bindParam(":ville", $ville);
@@ -63,20 +47,31 @@ if (!empty($_POST)) {
     $heuresFin = $_POST["heure-fin"];
     $horaires = $heuresDebut . "-" . $heuresFin;
     $accessible = $_POST["choixAccessible"];
-    //$id_abo = $_POST["offre"];
-    //$id_option = $_POST["option"];
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
-
     $idOffre = $_GET["idOffre"];
 
+    // Exécutez la mise à jour
     $stmt->execute();
 
-     exit(); // Terminez le script après la redirection
-    
+    // Redirection vers gestionOffres.php après mise à jour réussie
+    header("Location: /pages/gestionOffres.php");
+    exit(); // Terminez le script après la redirection
 }
+
+// Code pour récupérer l'offre
+$idOffre = null;
+if (key_exists("idOffre", $_GET)) {
+    // reccuperation de id de l offre
+    $idOffre = $_GET["idOffre"];
+
+    // reccuperation du contenu de l offre
+    $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
+}
+?>
+
 
     $idOffre = null;
     if(key_exists("idOffre", $_GET))
