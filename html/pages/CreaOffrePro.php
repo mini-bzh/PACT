@@ -34,15 +34,15 @@ include('/var/www/html/php/verif_compte_pro.php');
 
             <form name="test" action="/pages/CreaOffrePro.php" method="post">
 
-                <div class="haut-de-page">
-                    <div>
-                        <label for="titre">Titre <span class="required">*</span> :</label>
-                        <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
-                    </div>
-                    <div>
-                        <label for="fichier">Selectionner maximum 4 images :</label>
-                        <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
-                    </div>
+                <div class="champs">
+                    <label for="titre">Titre <span class="required">*</span> :</label>
+                    <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" required>
+                </div>
+
+                <div class="champs">
+                    <?php include '../icones/joindreImagesSVG.svg'; ?>
+                    <label for="fichier">Selectionner maximum 4 images :</label>
+                    <input type="file" id="fichier" name="fichier" accept="image/*,.png,.jpg,.gif" multiple />
                 </div>
 
                 <!-- <div class="champs">
@@ -138,8 +138,22 @@ include('/var/www/html/php/verif_compte_pro.php');
                     futur data de mise en ligne
                 </div> -->
 
-                <input type="submit" value="Soumettre" />
-                <!-- Bouton de test temporaire -->
+                <div class="zoneBtn">
+                    <a href="gestionOffres.php" class="btnAnnuler">
+                        <p class="texteLarge boldArchivo">Annuler</p>
+                        <?php
+                        include '../icones/croixSVG.svg';
+                        ?>
+                    </a>
+
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                        <p class="texteLarge boldArchivo">Confirmer</p>
+                        <?php
+                        include '../icones/okSVG.svg';
+                        ?>
+
+                    </button>
+                </div>
 
             </form>
         </div>
@@ -173,7 +187,11 @@ if (!empty($_POST)) {
     $qwery .= "rue, ";
     $qwery .= "ville, ";
     $qwery .= "codePostal,";
-    $qwery .= "id_c) ";
+    $qwery .= "id_c, ";
+    $qwery .= "img1, ";
+    $qwery .= "img2, ";
+    $qwery .= "img3, ";
+    $qwery .= "img4)";
 
     $qwery .= "VALUES(";
     $qwery .= ":titre,";
@@ -190,7 +208,11 @@ if (!empty($_POST)) {
     $qwery .= ":rue,";
     $qwery .= ":ville,";
     $qwery .= ":codePostal,";
-    $qwery .= ":id_c);";
+    $qwery .= "id_c, ";
+    $qwery .= "img1, ";
+    $qwery .= "img2, ";
+    $qwery .= "img3, ";
+    $qwery .= "img4)";
     echo $qwery;
 
     $stmt = $dbh->prepare($qwery);
@@ -209,6 +231,10 @@ if (!empty($_POST)) {
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
     $stmt->bindParam(":id_c", $id_c);
+    $stmt->bindParam(":img1", $image1);
+    $stmt->bindParam(":img2", $image2);
+    $stmt->bindParam(":img3", $image3);
+    $stmt->bindParam(":img4", $image4);
 
     $titre = $_POST["titre"];
     $resume = $_POST["resume"];
@@ -235,9 +261,14 @@ if (!empty($_POST)) {
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
 
+    $listeImage = $_POST["fichier"];
+    $arrayImage = explode('&', $listeImage);
+    $image1 = $arrayImage[0];
+    $image2 = $arrayImage[1];
+    $image3 = $arrayImage[2];
+    $image4 = $arrayImage[4];
+
     $id_c = $_SESSION["idCompte"];
-
-
 
     $stmt->execute();
     $dbh = null;
