@@ -101,7 +101,7 @@
                                     if($comptePro)
                                     {
                                         ?>
-                                            href="/pages/gestionOffre.php"
+                                            href="/pages/gestionOffres.php/#offre<?php echo $row['idOffre'];?>"
                                         <?php
                                     }
                                     else
