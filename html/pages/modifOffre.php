@@ -201,13 +201,13 @@ if (!empty($_POST)) {
                 </div> -->
 
                 <div class="zoneBtn">
-                    <a href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnAnnuler">
+                    <a href="gestionOffres.php" class="btnAnnuler">
                         <p class="texteLarge boldArchivo">Annuler</p>
                         <?php
                         include '../icones/croixSVG.svg';
                         ?>
                     </a>
-                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                    <button type="submit" href="modifOffre.php?idOffre=<?php echo $idOffre; ?>" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
