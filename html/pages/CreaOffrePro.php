@@ -177,17 +177,17 @@ include('/var/www/html/php/verif_compte_pro.php');
 if (!empty($_POST)) {
 
     $listeImage = $_POST["fichier"];
-    print_r($listeImage);
+    echo($listeImage);
     $arrayImage = explode('&', $listeImage);
     print_r($arrayImage);
     $image1 = $arrayImage[0];
-    print_r($image1);
+    echo($image1);
     $image2 = $arrayImage[1];
-    print_r($image2);
+    echo($image2);
     $image3 = $arrayImage[2];
-    print_r($image3);
+    echo($image3);
     $image4 = $arrayImage[4];
-    print_r($image4);
+    echo($image4);
 
     $qwery = "INSERT INTO tripskell.offre_pro(";
     $qwery .= "titreOffre,";
