@@ -130,6 +130,7 @@
                         <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
                     </a>
+                    <!--gestion du bouton de mise en/hors ligne-->
                     <hr id="separateurOffreGestion">
                     <div id="conteneurGestion">
                         <h4>Statut : 
@@ -147,7 +148,7 @@
                                 <?php
                             }
                         ?>
-                        
+                        <!--gestion du bouton de mise en/hors ligne-->
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne"  onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                             <?php
