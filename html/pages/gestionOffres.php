@@ -36,7 +36,7 @@
     </head>
     <body  class=<?php echo "fondPro"; ?>>      <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
-            include "/composants/header/header.php";              // import header (navbar)
+            include "../composants/header/header.php";              // import header (navbar)
         ?>
         <h1>
             Gestion des offres
