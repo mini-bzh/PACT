@@ -101,13 +101,13 @@
                                     if($comptePro)
                                     {
                                         ?>
-                                            href="/pages/gestionOffres.php/#offre<?php echo $row['idOffre'];?>"
+                                            href="/pages/gestionOffres.php/#offre<?php echo $row['idoffre'];?>"
                                         <?php
                                     }
                                     else
                                     {
                                         ?>
-                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idOffre"]?>"
+                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>"
                                         <?php
                                     }
                                 ?>
