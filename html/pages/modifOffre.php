@@ -72,7 +72,7 @@ if (!empty($_POST)) {
     $idOffre = $_GET["idOffre"];
 
     $stmt->execute();
-    $dbh = null;
+    
 }
 
     $idOffre = null;
@@ -230,3 +230,5 @@ if (!empty($_POST)) {
 
 </html>
 
+<?php
+$dbh = null;
