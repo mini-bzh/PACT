@@ -40,5 +40,6 @@ main h1{
     #logoTitreMobile{
         width: 100px;
         height: auto;
+        transform: translateX(-20px);
     }
 }
