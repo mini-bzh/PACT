@@ -9,7 +9,7 @@ $stmt = $dbh->prepare("select * from tripskell.pro_prive");
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-foreach ($result as $row) 
+foreach ($result as $row)
 {
     print_r($row);
     ?><br><?php
