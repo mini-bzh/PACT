@@ -413,7 +413,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $ville = $_POST["ville"];
         $codePostal = $_POST["codePostal"];
 
-        $img1 = $nom_img1;
+        $image1 = $nom_img1;
 
         // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
         $id_c = $_SESSION["idCompte"];
