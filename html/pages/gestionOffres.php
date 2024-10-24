@@ -36,7 +36,7 @@
     </head>
     <body  class=<?php echo "fondPro"; ?>>      <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
-            include "../composants/header/header.php";              // import header (navbar)
+            include "/composants/header/header.php";              // import header (navbar)
         ?>
         <h1>
             Gestion des offres
@@ -46,7 +46,7 @@
         <section id="conteneurBtnOffres">
         <a href="CreaOffrePro.php?user=<?php echo $user;?>" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
-                        <img src="../icones/ajouterSVG.svg" alt="ajouter offre">
+                        <img src="/icones/ajouterSVG.svg" alt="ajouter offre">
                         <h3>Ajouter une offre</h3>
                     </div>
                 </a>
@@ -64,7 +64,7 @@
                             <!-- <p>38 avis</p> -->
                         </div>
                         <div class="conteneurSVGtexte">
-                            <img src="../icones/logoUserSVG.svg" alt="pro">
+                            <img src="/icones/logoUserSVG.svg" alt="pro">
                             <p> <!-- insertion nom du professionel-->
                                 <?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?>
                             </p>
@@ -155,13 +155,13 @@
                                 if($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
                                 {
                                     ?>
-                                    <img src="../icones/horsLigneSVG.svg" alt="svg hors ligne" id="imgEnHorsLigne">
+                                    <img src="/icones/horsLigneSVG.svg" alt="svg hors ligne" id="imgEnHorsLigne">
                                     <?php
                                 }
                                 else
                                 {
                                     ?>
-                                    <img src="../icones/enLigneSVG.svg" alt="svg en ligne" id="imgEnHorsLigne">
+                                    <img src="/icones/enLigneSVG.svg" alt="svg en ligne" id="imgEnHorsLigne">
                                     <?php
                                 }
                             ?>
@@ -191,7 +191,7 @@
                                 }
                             ?>>
                             <div class="btnGestionOffre grossisQuandHover">
-                                <img src="../icones/crayonSVG.svg" alt="">
+                                <img src="/icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre </p>
                                 
                             </div>
