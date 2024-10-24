@@ -11,35 +11,22 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
 include('/var/www/html/php/verif_compte_pro.php');
 
-/*
-// On va récupérer ici l'identifiant id_c présent dans la table pro privé.
-$userPri = null;
-if (key_exists("idCompte", $_SESSION)) {
-    echo "je suis dans un privé";
-    // reccuperation de id du compte
-    $id_c = $_SESSION["idCompte"];
 
+// On va récupérer ici l'identifiant id_c présent dans les vues pro.
+if (key_exists("idCompte", $_SESSION)) {
     // reccuperation de id_c de pro_prive 
-    $contentid_cPri = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $id_c . "';")->fetchAll()[0];
-}
-
-// On va récupérer ici l'identifiant id_c présent dans la table pro public.
-$userPub = null;
-if (key_exists("idCompte", $_SESSION)) {
-    echo "je suis dans un public";
-    // reccuperation de id du compte
-    $id_c = $_SESSION["idCompte"];
+    $contentid_cPri = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 
     // reccuperation de id_c de pro_public
-    $contentid_cPub = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $id_c . "';")->fetchAll()[0];
-}*/
+    $contentid_cPub = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+}
 
 
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
 
 <?php
-if (in_array($id_c, $contentid_cPri) || in_array($id_c, $contentid_cPub)) {
+if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCompte"], $contentid_cPub)) {
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -408,25 +395,25 @@ if (in_array($id_c, $contentid_cPri) || in_array($id_c, $contentid_cPub)) {
         $type1 = explode("/", $image1["types"])[1];
         $nom_img1 = time() . "." . $type1;
         if (in_array($type, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image1["tmp_name"], "../images/imagesTest/" . $nom_img1);
+            move_uploaded_file($image1["tmp_name"], "../images/imagesOffres/" . $nom_img1);
         }
 
         $type2 = explode("/", $image2["types"])[1];
         $nom_img2 = time() . "." . $type2;
         if (in_array($type2, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image2["tmp_name"], "../images/imagesTest/" . $nom_img2);
+            move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
         }
 
         $type3 = explode("/", $image3["types"])[1];
         $nom_img3 = time() . "." . $type3;
         if (in_array($type3, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image3["tmp_name"], "../images/imagesTest/" . $nom_img3);
+            move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
         }
 
         $type4 = explode("/", $image4["types"])[1];
         $nom_img4 = time() . "." . $type4;
         if (in_array($type4, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image4["tmp_name"], "../images/imagesTest/" . $nom_img4);
+            move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
         }
 
         // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
