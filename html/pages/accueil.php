@@ -11,7 +11,9 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('/var/www/html/php/verif_compte_pro.php');
 
-    if($comptePro)
+    if($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
+                         offres sinon */
+
     {
         $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
 
@@ -25,7 +27,7 @@
     }
 
     $stmt->execute();
-    $rows = $stmt->fetchAll();
+    $rows = $stmt->fetchAll();          // rows : les offres à afficher
 
 ?>
 <!DOCTYPE html>
@@ -92,10 +94,24 @@
             <section id="conteneurOffres">
                 <article>
                     <?php
-                        foreach(/*$dbh->query("SELECT * from tripskell.offre_visiteur")*/ $rows as $row)
+                        foreach($rows as $row)          // parcourt les offres pour les afficher
                         {
                             ?>
-                                <a href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                <a <?php
+                                    if($comptePro)
+                                    {
+                                        ?>
+                                            href="/pages/gestionOffre.php/#offre<?php echo $row['idOffre']; ?>"
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>"
+                                        <?php
+                                    }
+                                ?>
+                                href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
                                         <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
