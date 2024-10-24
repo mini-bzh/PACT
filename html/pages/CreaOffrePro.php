@@ -294,16 +294,17 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
     if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
         // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+        $i = 0;
+        foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
 
-        print_r($_FILES);
+            $nom_img[$key_fichier] = null; // initialistion des noms des images a null
 
-        foreach ($_FILES as $key_fichier => $fichier) {
+            if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
 
-            $nom_img[$key_fichier] = null;
+                // creation du nom de fichier en utilisant time et le type de fichier
+                $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
 
-            if ($fichier["size"]!=0) {
-
-                $nom_img[$key_fichier] = time() . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
+                // deplacement du fichier depuis l'espace temporaire
                 move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
 
             }
