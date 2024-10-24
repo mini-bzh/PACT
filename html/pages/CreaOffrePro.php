@@ -296,11 +296,16 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 
         print_r($_FILES);
-        $nom_img1 = time() . "." . explode("/", $_FILES["fichier1"]["type"])[1];
-        echo "<br><br>" . $nom_img1 . "<br><br>";
-        
-        move_uploaded_file($_FILES["fichier1"]["tmp_name"], "../images/imagesOffres/" . $nom_img1);
-        
+
+        foreach ($_FILES as $key_fichier => $fichier) {
+            if ($fichier["size"]!=0) {
+
+                $nom_img[$key_fichier] = time() . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+
+            }
+        }
+
 /*
         $type2 = explode("/", $image2["types"])[1];
         $nom_img2 = time() . "." . $type2;
@@ -366,7 +371,6 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $requete .= ":img2, ";
         $requete .= ":img3, ";
         $requete .= ":img4);";
-        echo $requete;
 
         // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
         $stmt = $dbh->prepare($requete);
@@ -413,7 +417,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         $ville = $_POST["ville"];
         $codePostal = $_POST["codePostal"];
 
-        $img1 = $nom_img1;
+        $img1 = $nom_img["fichier1"];
+        $img2 = $nom_img["fichier2"];
+        $img3 = $nom_img["fichier3"];
+        $img4 = $nom_img["fichier4"];
 
         // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
         $id_c = $_SESSION["idCompte"];
