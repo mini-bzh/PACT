@@ -143,17 +143,17 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
         <input type="password" id="userPSW" name="userPSW" minlength="12" required>
     </div>
 
-    <a href="#"><p class="texteSmall">Mot de passe oublié ?</p></a>
+    <!-- <a href="#"><p class="texteSmall">Mot de passe oublié ?</p></a> -->
 
 <!-- Ecrit le message "mot de passe incorrect" si nécessaire -->
 <?php
     echo $message2;
 ?>
 
-    <div class="accepteSouvenir">
+    <!-- <div class="accepteSouvenir">
         <input type="checkbox" id="souvenir" name="souvenir">
         <p class="texteLarge">Se souvenir de moi</p>
-    </div>
+    </div> -->
 
     <div class="zoneBtn">
         <a href="compte.php" class="btnAnnuler">
