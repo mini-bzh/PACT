@@ -73,7 +73,6 @@ select{
 
 .haut-de-page{
     display: flex;
-    justify-content: space-between;
 }
 
 .champs{
