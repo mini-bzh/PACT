@@ -15,7 +15,7 @@
                          offres sinon */
 
     {
-        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c and enligne = true;");
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c); 
