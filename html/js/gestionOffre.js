@@ -14,15 +14,13 @@ function ChangerBtnLigne(idOffre)
     }
 
     // met à jour le texte du bouton
-    const texteBtnLigne = document.querySelector("#offre" + idOffre + " p");
+    const texteBtnLigne = document.querySelector("#offre" + idOffre + " #conteneurGestion p");
     if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
     {
-        console.log("en");
-        texteBtnLigne.innerText = "aaaaaaaaaaaaa";
+        texteBtnLigne.innerText = "Mettre l'offre en ligne";
     } else 
     {
-        console.log("hors");
-        texteBtnLigne.innerText = "bbbbbbbbbbbbbbbbbb";
+        texteBtnLigne.innerText = "Mettre l'offre hors ligne";
     }
 
     // met à jour le statut de l'offre (texte et couleur)

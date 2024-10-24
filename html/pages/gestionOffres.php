@@ -108,7 +108,7 @@
                                 <img src="/icones/horairesSVG.svg" alt="icone horaires">
                                 <h4>Horaires</h4>
                             </div>
-                            <hr><!-- future jours d'ouverture
+                            <hr>
                             <div id="conteneurJoursOffre">
                                 <p class="jour jourOuvert">L</p>
                                 <p class="jour jourOuvert">Ma</p>
@@ -117,7 +117,7 @@
                                 <p class="jour jourOuvert">V</p>
                                 <p class="jour jourFerme">S</p>
                                 <p class="jour jourFerme">D</p>
-                            </div>-->
+                            </div>
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">  <!-- insertion horaires -->
