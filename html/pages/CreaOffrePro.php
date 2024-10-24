@@ -298,6 +298,9 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         print_r($_FILES);
 
         foreach ($_FILES as $key_fichier => $fichier) {
+
+            $nom_img[$key_fichier] = null;
+
             if ($fichier["size"]!=0) {
 
                 $nom_img[$key_fichier] = time() . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
