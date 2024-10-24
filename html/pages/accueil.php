@@ -52,7 +52,7 @@
         ?>
         <div class="titrePortable">
 
-            <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg"> <!-- SVG pour  -->
             <g filter="url(#filter0_d_169_4380)">
             <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white"/>
             </g>
@@ -76,7 +76,7 @@
         </div>
         <main>
             <?php
-                if($comptePro)
+                if($comptePro)                  //change le titre de la page
                 {
                     ?>
                     <h1>Mes offres</h1>
@@ -97,7 +97,7 @@
                         {
                             ?>
                                 <a <?php
-                                    if($comptePro)
+                                    if($comptePro)      
                                     {
                                         ?>
                                             href="/pages/gestionOffres.php/#offre<?php echo $row['idoffre'];?>"
