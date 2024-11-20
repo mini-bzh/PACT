@@ -6,7 +6,7 @@
         }
     ?>">
         <nav class="navHeader">
-            <div id="imageEtPro">
+            <a id="imageEtPro" href="/pages/accueil.php">
                 <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
                 <?php
                     if($comptePro)
@@ -16,7 +16,7 @@
                         <?php
                     }
                 ?>
-            </div>
+            </a>
 
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
