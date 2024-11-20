@@ -96,7 +96,6 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     } else {
         echo 'fondVisiteur';
     }
-    $comptePro = false;
 
 ?>
 >
@@ -222,8 +221,5 @@ if ($correspond === true) {
         validerCorrect();
     </script>
 <?php
-    $comptePro = true;
 }
-
-
 ?>
