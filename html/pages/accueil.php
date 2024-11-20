@@ -5,7 +5,7 @@
     include('../php/connection_params.php');
     
     // connexion a la BdD
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh = new PDO("pgsql:host=tripskell.ventsdouest.dev;dbname=postgres", "sae", "ashton-izzY-c0mplet");
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
@@ -18,7 +18,7 @@
         $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
-        $stmt->bindParam(":id_c", var: $id_c); 
+        $stmt->bindParam(":id_c", var: $id_c);
         $id_c = $_SESSION["idCompte"];
     }
     else
