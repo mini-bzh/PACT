@@ -168,6 +168,11 @@
     .conteneurOffre{
         margin-top: 2.4em;
     }
+
+    main{
+        padding-bottom: 110px;
+    }
+
     .offre{
         margin: 0px;
         padding: 10px;
