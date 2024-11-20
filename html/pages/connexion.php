@@ -17,14 +17,14 @@ if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
     $password = $_POST['userPSW'];
 }
 
-$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
+$stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where 'login' = :username");
 
 $stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
+$stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where 'login' = :username");
 
 $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
 
@@ -34,6 +34,24 @@ $result2 = $stmt->fetchAll();
 $correspond = false;
 
 // Voit si l'identifiant existe et correspond au mot de passe
+// if ($_GET['user-tempo'] == "pro") {
+//     if (($correspond === false) && ($result)) {
+//         if ($password === $result[0]['mot_de_passe']) {
+//             $correspond = true;
+//             $_SESSION['idCompte'] = $result[0]['id_c'];
+//         }
+//     }
+
+//     if (($correspond === false) && ($result2)) {
+//         if ($password === $result2[0]['mot_de_passe']) {
+//             $correspond = true;
+//             $_SESSION['idCompte'] = $result2[0]['id_c'];
+//         }
+//     }
+// } else{
+    
+// }
+
 if (($correspond === false) && ($result)) {
     if ($password === $result[0]['mot_de_passe']) {
         $correspond = true;
@@ -53,7 +71,7 @@ $message2 = "";
 
 // Affiche un message d'erreur à l'utilisateur selon son erreur
 if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-    $message1 = "<p style='color:red;'>Ce nom d'utilisateur n'existe pas.</p>";
+    $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
 }
 
 if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
@@ -128,7 +146,15 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 <form action="" method="post">
 
     <div>
-        <label for="userName"><p class="texteLarge">Nom d'entreprise :</p></label><br>
+        <label for="userName"><p class="texteLarge">
+<?php
+    if ($_GET['user-tempo'] == "pro"){
+            echo "Login de l'entreprise :";
+    } else {
+            echo "Nom d'utilisateur :";
+    }
+?>
+        </p></label><br>
         <input type="text" id="userName" name="userName" maxlength="40" required>
     </div>
 

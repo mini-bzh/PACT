@@ -78,7 +78,7 @@ if (!$comptePro) {
 
     <div class="pageChoixCo">
         <div class="textBulle decaleBulleGauche">
-            <p>Veuillez séléctionner une option de connexion</p>
+            <p>Veuillez sélectionner une option de connexion</p>
         </div>
 
         <div>
