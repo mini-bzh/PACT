@@ -1,7 +1,7 @@
 <?php
 $driver = "pgsql";
 
-$server = "postgresdb";
+$server = "tripskell.ventsdouest.dev";
 $dbname = "postgres";
 
 $user = "sae";
