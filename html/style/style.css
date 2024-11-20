@@ -462,6 +462,10 @@ p{
     margin-left: 20px;
 }
 
+#imageEtPro{
+    display: block;
+}
+
 .aHeader > img {
     width: 63px;
     height: 63px;

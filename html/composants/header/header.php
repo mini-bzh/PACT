@@ -6,16 +6,16 @@
         }
     ?>">
         <nav class="navHeader">
-            <div>
-            <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
-            <?php
-                if($comptePro)
-                {
-                    ?>
-                    <p id="textPro">pro</p>
-                    <?php
-                }
-            ?>
+            <div id="imageEtPro">
+                <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
+                <?php
+                    if($comptePro)
+                    {
+                        ?>
+                        <p id="textPro">pro</p>
+                        <?php
+                    }
+                ?>
             </div>
 
             <ul class="ulHeader">
