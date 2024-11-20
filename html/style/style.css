@@ -459,11 +459,11 @@ p{
 }
 
 #textPro{
-    margin-left: 20px;
 }
 
 #imageEtPro{
     display: flex;
+    text-align: center;
 }
 
 .aHeader > img {
