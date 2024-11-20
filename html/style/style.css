@@ -458,6 +458,10 @@ p{
     left: 30px;
 }
 
+#textPro{
+    margin-left: 20px;
+}
+
 .aHeader > img {
     width: 63px;
     height: 63px;

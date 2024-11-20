@@ -12,7 +12,7 @@
                 if($comptePro)
                 {
                     ?>
-                    pro
+                    <p id="textPro">pro</p>
                     <?php
                 }
             ?>
