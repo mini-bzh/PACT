@@ -1,18 +1,19 @@
 function deconnexion() {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "../php/gestionDeconnexion.php", true);
+    // Permet de faire des requêtes sans recharger la page
+    let xhr = new XMLHttpRequest(); // Initialisation
+    xhr.open("POST", "../php/gestionDeconnexion.php", true); // Via la méthode POST et transmet à gestionDeconnexion.php
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     // Gérer la réponse du serveur
-    xhr.onload = function() {
-        if (xhr.status === 200) {
+    xhr.onload = function() {  // Quand la réponse du serveur est reçue, la fonction est lancée
+        if (xhr.status === 200) { // Cas de succès
             console.log("Déconnexion réussie");
             window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
-        } else {
+        } else { // Cas d'échec
             console.error("Erreur lors de la déconnexion.");
         }
     };
 
-    xhr.send("action=executer");
+    xhr.send("action=executer"); // Envoie la requête avec $_POST['action'] = executer
 }
 
 

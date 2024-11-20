@@ -88,6 +88,10 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/pages/connexion.css">
 </head>

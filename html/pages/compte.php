@@ -18,6 +18,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/pages/compte.css">
     <script src="/js/deconnexion.js"></script>
@@ -107,11 +111,11 @@ if (!$comptePro) {
 
 </main>
 
+<!-- SI C'EST UN PROFESSIONNEL !!! -->
+
 <?php
 } else if ($comptePro) {
 ?>
-
-<!-- SI C'EST UN PROFESSIONNEL !!! -->
 
 <!------ MAIN  ------>
 <main>

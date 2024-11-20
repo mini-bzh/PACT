@@ -35,6 +35,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Creation Offre</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
     </head>
 
