@@ -7,7 +7,7 @@ function deconnexion() {
     xhr.onload = function() {  // Quand la réponse du serveur est reçue, la fonction est lancée
         if (xhr.status === 200) { // Cas de succès
             console.log("Déconnexion réussie");
-            window.location.href = "https://tripskell.ventsdouest.dev/pages/accueil.php";
+            window.location.href = "../pages/accueil.php";
         } else { // Cas d'échec
             console.error("Erreur lors de la déconnexion.");
         }
