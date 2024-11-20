@@ -165,6 +165,9 @@
 
 
 @media screen and (max-width : 428px){
+    .conteneurOffre{
+        margin-top: 2.4em;
+    }
     .offre{
         margin: 0px;
         padding: 10px;
