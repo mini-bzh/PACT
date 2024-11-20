@@ -6,7 +6,7 @@
         }
     ?>">
         <nav class="navHeader">
-            <a id="imageEtPro" href="/pages/accueil.php" class="aHeader">
+            <a id="logoEtPro" href="/pages/accueil.php">
                 <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
                 <?php
                     if($comptePro)
