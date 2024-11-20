@@ -18,14 +18,14 @@ if ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) {
 }
 
 if ($_GET['user-tempo'] == "pro") {
-    $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where 'raison_social' = :username");
+    $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where raison_social = :username");
 
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
     $stmt->execute();
     $result = $stmt->fetchAll();
 
-    $stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where 'raison_social' = :username");
+    $stmt2 = $dbh->prepare("SELECT * from tripskell.pro_public where raison_social = :username");
 
     $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
 
