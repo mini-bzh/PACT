@@ -437,7 +437,6 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
         // Redirection vers gestionOffres.php après la mise à jour réussie
     header("Location: /pages/gestionOffres.php");
-    exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
     }
     ?>
 <?php
