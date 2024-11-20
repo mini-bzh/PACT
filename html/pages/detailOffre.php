@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]?>"
-                    class="conteneurSVGtexte" id="itineraire" target="_blank">
+                    class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
                         <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
                         <p>Itinéraire</p>
                     </a>
