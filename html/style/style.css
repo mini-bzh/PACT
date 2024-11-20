@@ -463,7 +463,7 @@ p{
 }
 
 #imageEtPro{
-    display: block;
+    display: flex;
 }
 
 .aHeader > img {
