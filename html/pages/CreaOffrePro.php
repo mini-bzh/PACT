@@ -432,11 +432,13 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         // on execute tout ce qui a été fait précèdement
         $stmt->execute();
         
+
+        header("Location: /pages/gestionOffres.php");
+
+
         // on ferme la base de donnée
         $dbh = null;
 
-        // Redirection vers gestionOffres.php après la mise à jour réussie
-    header("Location: /pages/gestionOffres.php");
     }
     ?>
 <?php
