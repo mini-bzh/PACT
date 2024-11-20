@@ -519,7 +519,7 @@ p{
     transition: transform 0.2s ease;
 }
 
-.ulHeader .aHeader:hover, #logoEtPro{
+.ulHeader .aHeader:hover, #logoEtPro:hover{
     /*background: linear-gradient(white, var(--primary));*/
     transform: translateY(-5px);
 }
