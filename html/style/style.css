@@ -515,11 +515,11 @@ p{
     margin: 0;
 }
 
-.ulHeader .aHeader{
+.ulHeader .aHeader, #logoEtPro{
     transition: transform 0.2s ease;
 }
 
-.ulHeader .aHeader:hover{
+.ulHeader .aHeader:hover, #logoEtPro{
     /*background: linear-gradient(white, var(--primary));*/
     transform: translateY(-5px);
 }
