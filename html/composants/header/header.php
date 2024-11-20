@@ -6,15 +6,18 @@
         }
     ?>">
         <nav class="navHeader">
-        <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
-        <?php
-            if($comptePro)
-            {
-                ?>
-                pro
-                <?php
-            }
-        ?>
+            <div>
+            <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
+            <?php
+                if($comptePro)
+                {
+                    ?>
+                    pro
+                    <?php
+                }
+            ?>
+            </div>
+
             <ul class="ulHeader">
                 <li class="liHeader" id="btAccueil">
                     <a class="aHeader" href="/pages/accueil.php">
