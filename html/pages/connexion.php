@@ -7,8 +7,6 @@ $_SESSION['idCompte'] = null;       // met l'id de connextion a null pour eviter
 // recuperation des parametre de connection a la BdD
 include('/var/www/html/php/connection_params.php');
 
-// Inclusion du script pour vérifier si l'utilisateur a un compte pro
-include('/var/www/html/php/verif_compte_pro.php');
 
 // connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);

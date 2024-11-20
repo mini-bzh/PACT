@@ -1,5 +1,7 @@
 <?php
     $comptePro = null;
+
+
     if(key_exists("idCompte", $_SESSION)) {
         //
         // Creation requete pour compter le nombre de 
