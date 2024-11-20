@@ -519,9 +519,13 @@ p{
     transition: transform 0.2s ease;
 }
 
-.ulHeader .aHeader:hover, #logoEtPro:hover{
+.ulHeader .aHeader:hover{
     /*background: linear-gradient(white, var(--primary));*/
     transform: translateY(-5px);
+}
+
+#logoEtPro:hover{
+    transform: scale(0.9);
 }
 
 /*.navBarPro .ulHeader .aHeader:hover{
