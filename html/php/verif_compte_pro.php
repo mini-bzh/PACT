@@ -23,5 +23,4 @@
         // suppression de la requete
         $stmt = null; 
         $id_c = null;
-
     }

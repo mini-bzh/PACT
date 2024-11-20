@@ -459,10 +459,12 @@ p{
 }
 
 #textPro{
-    font-size: 1em;
+    font-size: 1.2em;
     margin-left: 28px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     color: black;
+
+    font-family: "Luciole";
 }
 
 #logoEtPro{
