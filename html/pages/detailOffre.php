@@ -2,14 +2,14 @@
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
-    include('/var/www/html/php/connection_params.php');
+    include('../php/connection_params.php');
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('/var/www/html/php/verif_compte_pro.php');
+    include('../php/verif_compte_pro.php');
 
     $user = null;
     if(key_exists("idOffre", $_GET))
@@ -44,7 +44,7 @@
         ?>>
         <?php
             // ajout du header
-            include "/var/www/html/composants/header/header.php";
+            include "../composants/header/header.php";
         ?>
         <div class="titrePortable">
 
@@ -83,7 +83,7 @@
                                 //
                                 //  affichage de la note avec des etoiles
                                 //
-                                    include "/var/www/html/php/etoiles.php";
+                                    include "../php/etoiles.php";
                                 ?>
                             </div>
                             <!-- <p>38 avis</p> -->
@@ -155,7 +155,7 @@
         </main>
         <?php                                                   
             // ajout du footer
-            include "/var/www/html/composants/footer/footer.php";
+            include "../composants/footer/footer.php";
         ?>
     </body>
     <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->

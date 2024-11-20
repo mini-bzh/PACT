@@ -1,6 +1,6 @@
 <?php
 // recuperation des parametre de connection a la BdD
-include('/var/www/html/php/connection_params.php');
+include('../php/connection_params.php');
     
 // connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);

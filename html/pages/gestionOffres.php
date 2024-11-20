@@ -2,14 +2,14 @@
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
-    include('/var/www/html/php/connection_params.php');
+    include('../php/connection_params.php');
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('/var/www/html/php/verif_compte_pro.php');
+    include('../php/verif_compte_pro.php');
 
     // Creation requete pour recuperer les offres
     // du professionnel connecte
@@ -59,7 +59,7 @@
                         <div class="noteDetailOffre">
                             <div class="etoiles">
                                 <p><?php echo $contentOffre["note"];?></p>
-                                <?php include "/var/www/html/php/etoiles.php"; ?>
+                                <?php include "../php/etoiles.php"; ?>
                             </div>
                             <!-- <p>38 avis</p> -->
                         </div>

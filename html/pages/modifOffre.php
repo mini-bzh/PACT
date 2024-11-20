@@ -2,14 +2,14 @@
 session_start(); // Démarre la session pour récupérer les données de session
 
 // Récupération des paramètres de connexion à la base de données
-include('/var/www/html/php/connection_params.php');
+include('../php/connection_params.php');
 
 // Connexion à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
 // Inclusion du script pour vérifier si l'utilisateur a un compte pro
-include('/var/www/html/php/verif_compte_pro.php');
+include('../php/verif_compte_pro.php');
 
 if (!empty($_POST)) {
     // Préparation de la requête de mise à jour de l'offre

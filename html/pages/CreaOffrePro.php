@@ -2,14 +2,14 @@
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
-include('/var/www/html/php/connection_params.php');
+include('../php/connection_params.php');
 
 // connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-include('/var/www/html/php/verif_compte_pro.php');
+include('../php/verif_compte_pro.php');
 
 
 // On va récupérer ici l'identifiant id_c présent dans les vues pro.
@@ -40,7 +40,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
     <body class="fondPro">
 
-        <?php include "/var/www/html/composants/header/header.php";        //import navbar
+        <?php include "../composants/header/header.php";        //import navbar
         ?>
 
         <main>
@@ -454,7 +454,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
     <body class="fondPro">
 
-        <?php include "/var/www/html/composants/header/header.php";        //import navbar
+        <?php include "../composants/header/header.php";        //import navbar
         ?>
 
         <main>
