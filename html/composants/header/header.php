@@ -1,3 +1,9 @@
+
+<?php
+    // Inclusion du script pour vérifier si l'utilisateur a un compte pro
+    include('/var/www/html/php/verif_compte_pro.php');
+?>
+    
     <link rel="stylesheet" href="/style/style.css">
     <header class="headerPC-Tab <?php
         if($comptePro)
