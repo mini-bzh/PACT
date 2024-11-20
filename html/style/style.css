@@ -464,7 +464,7 @@ p{
 
 #imageEtPro{
     display: flex;
-    text-align: center;
+    align-items: end;
 }
 
 .aHeader > img {
