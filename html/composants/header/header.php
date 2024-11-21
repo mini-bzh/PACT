@@ -4,7 +4,7 @@
     include('../php/verif_compte_pro.php');
 ?>
     
-    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
     <header class="headerPC-Tab <?php
         if($comptePro)
         {
