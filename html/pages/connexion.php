@@ -33,13 +33,15 @@ if ($_GET['user-tempo'] == "pro") {
 
     $stmt2->execute();
     $result2 = $stmt->fetchAll();
+
 } else {
-    $stmt = $dbh->prepare("SELECT * from tripskell.membre where pseudo = :username");
+    $stmt = $dbh->prepare("SELECT * from tripskell.membre where login = :username");
 
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
     $stmt->execute();
     $result = $stmt->fetchAll();
+
 }
 
 $correspond = false;
@@ -72,12 +74,22 @@ $message1 = "";
 $message2 = "";
 
 // Affiche un message d'erreur à l'utilisateur selon son erreur
-if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-    $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
-}
+if ($_GET['user-tempo'] === 'pro') {
+    if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
+        $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
+    }
 
-if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
-    $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+    if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
+        $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+    }
+} else {
+    if (($correspond === false) && (count($result) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
+        $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
+    }
+
+    if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1))){
+        $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+    }
 }
 
 ?>
