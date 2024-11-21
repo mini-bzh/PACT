@@ -42,6 +42,10 @@ p{
 
 }
 
+.displayNone{
+    display: none;
+}
+
 .fondPro{
     background-color: var(--fondPro);
 }
@@ -223,6 +227,17 @@ p{
     .titrePortable img{
         width: 85px;
         height: 85px;
+    }
+
+    #conteneurTitreMobile #logoTitreMobile{
+        width: 100px;
+        height: auto;
+        transform: translate(0px, -25px);
+    }
+
+    #conteneurTitreMobile{
+        display: flex;
+        align-items: flex-start;
     }
 
 }

@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btRechMobile">
-                    <a class="aHeaderMobile" href="">
+                    <a class="aHeaderMobile" href="/pages/recherche.php">
                     <img src="/icones/rechercherSVG.svg" alt="icone rechercher">
                     <div class="trait"></div>
                     </a>

@@ -179,4 +179,13 @@ body.no-scroll {
     .btnConfirmer p, .btnAnnuler p{
         font-size: var(--typescale-text);
     }
+
+    .popUp > div{
+        width: 220px;
+        height: 120px;
+    }
+
+    .popUp h2{
+        font-size: 1.4rem;
+    }
 }

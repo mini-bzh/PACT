@@ -100,20 +100,7 @@
                         foreach($rows as $row)          // parcourt les offres pour les afficher
                         {
                             ?>
-                                <a <?php
-                                    if($comptePro)      
-                                    {
-                                        ?>
-                                            href="/pages/gestionOffres.php/#offre<?php echo $row['idoffre'];?>"
-                                        <?php
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                            href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>"
-                                        <?php
-                                    }
-                                ?>
+                                <a
                                 href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
                                         <h3><?php echo $row["titreoffre"]?></h3>

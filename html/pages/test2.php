@@ -6,10 +6,6 @@
     <title>Document</title>
 </head>
 <body id="body">
-    <script>
-        bd = document.getElementById("body");
 
-        alert(bd.offsetHeight);
-    </script>
 </body>
 </html>
