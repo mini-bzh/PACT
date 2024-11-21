@@ -34,7 +34,8 @@ if ($_GET['user-tempo'] == "pro") {
     $stmt2->execute();
     $result2 = $stmt->fetchAll();
 } else {
-    $stmt = $dbh->prepare("SELECT * from tripskell.membre where 'pseudo' = :username");
+    $stmt = $dbh->prepare("SELECT * from tripskell.membre where pseudo = :username");
+
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
     $stmt->execute();
@@ -143,7 +144,15 @@ if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['us
 <main>
 
 <div class=textBulle>
-    <p class="texteLarge">Connexion à un compte professionnel :</p>
+    <p class="texteLarge">Connexion à un compte 
+<?php
+    if ($_GET["user-tempo"] === 'pro') {
+        echo 'professionnel';
+    } else {
+        echo 'membre';
+    }
+?>
+    :</p>
 </div>
 
 <!-- Formulaire de connexion -->
