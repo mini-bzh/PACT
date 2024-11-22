@@ -81,23 +81,12 @@
             </div>
         </div>
         <main>
-            <?php
-                if($comptePro)
-                {
-                    ?>
-                    <h1>Mes offres</h1>
-                    <?php
-                }
-                else
-                {
-                    ?>
-                    <h1>Toutes les offres</h1>
-                    <?php
-                }
-            ?>
-
+            <section id="conteneurBarre">
+                <input type="searchbar" id="searchbar" placeholder="Rechercher">
+            </section>
             <section id="conteneurOffres">
                 <article>
+                    
                     <?php
                         foreach($rows as $row)          // parcourt les offres pour les afficher
                         {
@@ -162,4 +151,5 @@
             include "../composants/footer/footer.php";
         ?>
     </body>
+    <script src="/js/recherche.js"></script>
 </html>

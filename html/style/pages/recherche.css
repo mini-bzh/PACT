@@ -24,6 +24,23 @@ main h1{
     flex-wrap: wrap;
 }
 
+
+#conteneurBarre{
+    display: flex;
+    justify-content: center;
+    margin: 40px 15px;
+}
+
+#searchbar{
+    width: 800px;
+    height: 50px;
+    
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
 @media screen and (max-width : 428px)
 {
     main{
