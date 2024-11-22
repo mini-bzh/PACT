@@ -65,9 +65,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     </div>
 
                     <!-- Champs pour sélectionner les images -->
+    
                     <div class="champs">
                         <label for="fichier1">Selectionner une image 1 :</label>
-                        <input type="file" id="fichier1" name="fichier1" >
+                        <input type="file" id="fichier1" name="fichier1" require>
                     </div>
                     <div class="champs">
                         <label for="fichier2">Selectionner une image 2 :</label>
@@ -119,13 +120,13 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- résumé -->
                     <div>
                         <label for="resume">Résumé <span class="required">*</span> :</label>
-                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
+                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" maxlength="100" required></textarea>
                     </div>
 
                     <!-- description détaillé -->
                     <div>
                         <label for="description">Description détaillée <span class="required">*</span> :</label>
-                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
+                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" maxlength="400" required></textarea>
                     </div>
 
 
