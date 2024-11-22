@@ -11,6 +11,9 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
 
+    // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
+    include('../php/verif_compte_membre.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,28 +68,26 @@
             <div id="conteneurTitreMobile">
                 <img src="/images/logo/logo_petit.png" alt="logo petit" id="logoTitreMobile">
 
-                <?php
-                if(!$comptePro)
+<?php
+                if(($comptePro) || ($compteMembre))
                 {
-                ?>
-                <h3>Connexion</h3>
-                <?php
+?>
+                <h3>Profil</h3>
+<?php
                 } 
                 else
                 {
-                ?>
-                <h3>Profil</h3>
+?>
+                <h3>Connexion</h3>
                 <?php } ?>
             </div>
         </div>
 
-<!-- SI C'EST UN MEMBRE !!! -->
+<!-- SI C'EST UN VISITEUR !!! -->
 <?php
 
-if (!$comptePro) {
+if ((!$comptePro) && (!$compteMembre)) {
 ?>
-
-
 
 <!------ MAIN  ------>
 <main>
@@ -125,7 +126,7 @@ if (!$comptePro) {
 <!-- SI C'EST UN PROFESSIONNEL !!! -->
 
 <?php
-} else if ($comptePro) {
+} else if (($comptePro) || ($compteMembre)) {
 ?>
 
 <!------ MAIN  ------>
