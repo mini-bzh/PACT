@@ -94,13 +94,13 @@
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btRechMobile">
-                    <a class="aHeaderMobile" href="">
+                    <a class="aHeaderMobile" href="/pages/recherche.php">
                     <img src="/icones/rechercherSVG.svg" alt="icone rechercher">
                     <div class="trait"></div>
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btAvisMobile">
-                    <a class="aHeaderMobile" href="">
+                    <a class="aHeaderMobile" href="/pages/avis.php">
                     <img src="/icones/commentSVG.svg" alt="icone commentaires">
                     <div class="trait"></div>
                     </a>

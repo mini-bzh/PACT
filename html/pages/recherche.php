@@ -74,8 +74,10 @@
             </defs>
             </svg>
 
-            <div>
-                <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
+            <div id="conteneurTitreMobile">
+                <!--<img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">-->
+                <img src="/images/logo/logo_petit.png" alt="logo petit" id="logoTitreMobile">
+                <h3>Rechercher</h3>
             </div>
         </div>
         <main>

@@ -24,6 +24,155 @@ if (key_exists("idCompte", $_SESSION)) {
 
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
+    <?php
+if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
+
+// ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+$i = 0;
+foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
+
+    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
+
+    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
+
+        // creation du nom de fichier en utilisant time et le type de fichier
+        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
+
+        // deplacement du fichier depuis l'espace temporaire
+        move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+
+    }
+}
+
+/*
+$type2 = explode("/", $image2["types"])[1];
+$nom_img2 = time() . "." . $type2;
+if (in_array($type2, ["png", "gif", "jpeg"])) {
+    move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
+}
+
+$type3 = explode("/", $image3["types"])[1];
+$nom_img3 = time() . "." . $type3;
+if (in_array($type3, ["png", "gif", "jpeg"])) {
+    move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
+}
+
+$type4 = explode("/", $image4["types"])[1];
+$nom_img4 = time() . "." . $type4;
+if (in_array($type4, ["png", "gif", "jpeg"])) {
+    move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
+}
+    */
+
+
+// on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
+// requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
+
+$requete = "INSERT INTO tripskell.offre_pro(";
+$requete .= "titreOffre, ";
+$requete .= "resume, ";
+$requete .= "description_detaille, ";
+$requete .= "tarifMinimal, ";
+$requete .= "note, ";
+$requete .= "horaires, ";
+$requete .= "accessibilite, ";
+$requete .= "enLigne, ";
+$requete .= "id_abo, ";
+$requete .= "id_option, ";
+$requete .= "numero, ";
+$requete .= "rue, ";
+$requete .= "ville, ";
+$requete .= "codePostal,";
+$requete .= "id_c, ";
+$requete .= "img1, ";
+$requete .= "img2, ";
+$requete .= "img3, ";
+$requete .= "img4) ";
+
+$requete .= "VALUES (";
+$requete .= ":titre,";
+$requete .= ":resume,";
+$requete .= ":description,";
+$requete .= ":tarif,";
+$requete .= ":note,";
+$requete .= ":horaires,";
+$requete .= ":accessibilite,";
+$requete .= ":enLigne,";
+$requete .= ":id_abo,";
+$requete .= ":id_option,";
+$requete .= ":numero,";
+$requete .= ":rue,";
+$requete .= ":ville,";
+$requete .= ":codePostal,";
+$requete .= ":id_c, ";
+$requete .= ":img1, ";
+$requete .= ":img2, ";
+$requete .= ":img3, ";
+$requete .= ":img4);";
+
+// ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
+$stmt = $dbh->prepare($requete);
+$stmt->bindParam(":titre", $titre);
+$stmt->bindParam(":resume", $resume);
+$stmt->bindParam(":description", $description);
+$stmt->bindParam(":tarif", $tarif);
+$stmt->bindParam(":note", $note);
+$stmt->bindParam(":horaires", $horaires);
+$stmt->bindParam(":accessibilite", $accessible);
+$stmt->bindParam(":enLigne", $enLigne);
+$stmt->bindParam(":id_abo", $id_abo);
+$stmt->bindParam(":id_option", $id_option);
+$stmt->bindParam(":numero", $numero);
+$stmt->bindParam(":rue", $rue);
+$stmt->bindParam(":ville", $ville);
+$stmt->bindParam(":codePostal", $codePostal);
+$stmt->bindParam(":id_c", $id_c);
+$stmt->bindParam(":img1", $img1);
+$stmt->bindParam(":img2", $image2);
+$stmt->bindParam(":img3", $image3);
+$stmt->bindParam(":img4", $image4);
+
+
+
+// On definit ici chacune des variables
+
+$titre = $_POST["titre"];
+$resume = $_POST["resume"];
+$description = $_POST["description"];
+$tarif = $_POST["prix-minimal"];
+$note = 5;
+$heuresDebut = $_POST["heure-debut"];
+$heuresFin = $_POST["heure-fin"];
+$horaires = $heuresDebut . "-" . $heuresFin;
+$accessible = $_POST["choixAccessible"];
+$enLigne = true;
+//$id_abo = $_POST["offre"];
+//$id_option = $_POST["option"];
+$id_abo = 'Standard';
+$id_option = null;
+$numero = $_POST["num"];
+$rue = $_POST["nomRue"];
+$ville = $_POST["ville"];
+$codePostal = $_POST["codePostal"];
+
+$img1 = $nom_img["fichier1"];
+$img2 = $nom_img["fichier2"];
+$img3 = $nom_img["fichier3"];
+$img4 = $nom_img["fichier4"];
+
+// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
+$id_c = $_SESSION["idCompte"];
+
+// on execute tout ce qui a été fait précèdement
+$stmt->execute();
+
+
+// on ferme la base de donnée
+$dbh = null;
+
+header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+}
+?>
 
 <?php
 if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCompte"], $contentid_cPub)) {
@@ -292,158 +441,11 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
     </html>
 
 
-    <?php
 
 
 
-    if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
-        // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
-        $i = 0;
-        foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
-
-            $nom_img[$key_fichier] = null; // initialistion des noms des images a null
-
-            if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
-
-                // creation du nom de fichier en utilisant time et le type de fichier
-                $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
-
-                // deplacement du fichier depuis l'espace temporaire
-                move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
-
-            }
-        }
-
-/*
-        $type2 = explode("/", $image2["types"])[1];
-        $nom_img2 = time() . "." . $type2;
-        if (in_array($type2, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
-        }
-
-        $type3 = explode("/", $image3["types"])[1];
-        $nom_img3 = time() . "." . $type3;
-        if (in_array($type3, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
-        }
-
-        $type4 = explode("/", $image4["types"])[1];
-        $nom_img4 = time() . "." . $type4;
-        if (in_array($type4, ["png", "gif", "jpeg"])) {
-            move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
-        }
-            */
-
-
-        // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
-        // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
-
-        $requete = "INSERT INTO tripskell.offre_pro(";
-        $requete .= "titreOffre, ";
-        $requete .= "resume, ";
-        $requete .= "description_detaille, ";
-        $requete .= "tarifMinimal, ";
-        $requete .= "note, ";
-        $requete .= "horaires, ";
-        $requete .= "accessibilite, ";
-        $requete .= "enLigne, ";
-        $requete .= "id_abo, ";
-        $requete .= "id_option, ";
-        $requete .= "numero, ";
-        $requete .= "rue, ";
-        $requete .= "ville, ";
-        $requete .= "codePostal,";
-        $requete .= "id_c, ";
-        $requete .= "img1, ";
-        $requete .= "img2, ";
-        $requete .= "img3, ";
-        $requete .= "img4) ";
-
-        $requete .= "VALUES (";
-        $requete .= ":titre,";
-        $requete .= ":resume,";
-        $requete .= ":description,";
-        $requete .= ":tarif,";
-        $requete .= ":note,";
-        $requete .= ":horaires,";
-        $requete .= ":accessibilite,";
-        $requete .= ":enLigne,";
-        $requete .= ":id_abo,";
-        $requete .= ":id_option,";
-        $requete .= ":numero,";
-        $requete .= ":rue,";
-        $requete .= ":ville,";
-        $requete .= ":codePostal,";
-        $requete .= ":id_c, ";
-        $requete .= ":img1, ";
-        $requete .= ":img2, ";
-        $requete .= ":img3, ";
-        $requete .= ":img4);";
-
-        // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
-        $stmt = $dbh->prepare($requete);
-        $stmt->bindParam(":titre", $titre);
-        $stmt->bindParam(":resume", $resume);
-        $stmt->bindParam(":description", $description);
-        $stmt->bindParam(":tarif", $tarif);
-        $stmt->bindParam(":note", $note);
-        $stmt->bindParam(":horaires", $horaires);
-        $stmt->bindParam(":accessibilite", $accessible);
-        $stmt->bindParam(":enLigne", $enLigne);
-        $stmt->bindParam(":id_abo", $id_abo);
-        $stmt->bindParam(":id_option", $id_option);
-        $stmt->bindParam(":numero", $numero);
-        $stmt->bindParam(":rue", $rue);
-        $stmt->bindParam(":ville", $ville);
-        $stmt->bindParam(":codePostal", $codePostal);
-        $stmt->bindParam(":id_c", $id_c);
-        $stmt->bindParam(":img1", $img1);
-        $stmt->bindParam(":img2", $image2);
-        $stmt->bindParam(":img3", $image3);
-        $stmt->bindParam(":img4", $image4);
-
-
-
-        // On definit ici chacune des variables
-
-        $titre = $_POST["titre"];
-        $resume = $_POST["resume"];
-        $description = $_POST["description"];
-        $tarif = $_POST["prix-minimal"];
-        $note = 5;
-        $heuresDebut = $_POST["heure-debut"];
-        $heuresFin = $_POST["heure-fin"];
-        $horaires = $heuresDebut . "-" . $heuresFin;
-        $accessible = $_POST["choixAccessible"];
-        $enLigne = true;
-        //$id_abo = $_POST["offre"];
-        //$id_option = $_POST["option"];
-        $id_abo = 'Standard';
-        $id_option = null;
-        $numero = $_POST["num"];
-        $rue = $_POST["nomRue"];
-        $ville = $_POST["ville"];
-        $codePostal = $_POST["codePostal"];
-
-        $img1 = $nom_img["fichier1"];
-        $img2 = $nom_img["fichier2"];
-        $img3 = $nom_img["fichier3"];
-        $img4 = $nom_img["fichier4"];
-
-        // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-        $id_c = $_SESSION["idCompte"];
-
-        // on execute tout ce qui a été fait précèdement
-        $stmt->execute();
-
-
-        // on ferme la base de donnée
-        $dbh = null;
-
-        header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
-    }
-    ?>
+    
 <?php
 } else { // si id_c n'est pas dans pro_prive ou pro_public, on génère une erreur 404.
 ?>

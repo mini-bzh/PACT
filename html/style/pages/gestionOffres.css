@@ -90,7 +90,16 @@ body h1{
     display: none;
 }
 
-#conteneurGestion a{
+.conteneurGestion a{
     color: black;
     text-decoration: none;
+}
+
+
+@media screen and (max-width : 428px)
+{
+    .conteneurBtnOffres{
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
