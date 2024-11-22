@@ -263,7 +263,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- prix minimum -->
                     <div class="champs">
                         <label for="prix-minimal">Prix minimal (euro) :</label>
-                        <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
+                        <input type="text" id="prix-minimal" name="prix-minimal" minlength="1" maxlength="3" placeholder="Entrez le prix minimal (euro)">
                     </div>
 
                     <!-- résumé -->
@@ -305,10 +305,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- Adresse -->
                     <div class="champsAdresse">
                         <label for="adresse">Adresse <span class="required">*</span> :</label>
-                        <input type="text" id="num" name="num" placeholder="Numéro" required>
+                        <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/" required>
                     </div>
 
                     <!-- Abonnement -->
@@ -438,6 +438,8 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         ?>
     </body>
 
+
+    <script src="../js/CreaOffrePro.js"></script>
     </html>
 
 
