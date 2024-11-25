@@ -26,19 +26,19 @@
         print_r($horaire);
         
         
-        if(empty( $dbh->query("select * from tripskell._visite where idoffre=" . $idOffre . ";")->fetchAll() )) {
+        if(!empty( $dbh->query("select * from tripskell._visite where idoffre=" . $idOffre . ";")->fetchAll() )) {
             $categorie = "visite";
-        } else
-        if(empty( $dbh->query("select * from tripskell._spectacle where idoffre=" . $idOffre . ";")->fetchAll() )) {
+        }
+        if(!empty( $dbh->query("select * from tripskell._spectacle where idoffre=" . $idOffre . ";")->fetchAll() )) {
             $categorie = "spectacle";
-        } else
-        if(empty( $dbh->query("select * from tripskell._parcAttraction where idoffre=" . $idOffre . ";")->fetchAll() )) {
+        }
+        if(!empty( $dbh->query("select * from tripskell._parcAttraction where idoffre=" . $idOffre . ";")->fetchAll() )) {
             $categorie = "parc d'attraction";
-        } else 
-        if(empty( $dbh->query("select * from tripskell._restauration where idoffre=" . $idOffre . ";")->fetchAll() )) {
+        } 
+        if(!empty( $dbh->query("select * from tripskell._restauration where idoffre=" . $idOffre . ";")->fetchAll() )) {
             $categorie = "restauration";
-        } else 
-        if(empty( $dbh->query("select * from tripskell._activite where idoffre=" . $idOffre . ";")->fetchAll() )) {
+        } 
+        if(!empty( $dbh->query("select * from tripskell._activite where idoffre=" . $idOffre . ";")->fetchAll() )) {
             $categorie = "activite";
         }
     }
