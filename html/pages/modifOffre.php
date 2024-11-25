@@ -74,7 +74,9 @@ if (key_exists("idOffre", $_GET)) {
     $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
 }
 ?>
-
+<?php
+if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCompte"], $contentid_cPub)) {
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -233,4 +235,31 @@ if (key_exists("idOffre", $_GET)) {
 </html>
 
 <?php
-$dbh = null;
+} else { // si id_c n'est pas dans pro_prive ou pro_public, on génère une erreur 404.
+?>
+        <!DOCTYPE html>
+        <html lang="fr">
+    
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Creation Offre</title>
+            <link rel="stylesheet" href="/style/pages/modifOffrePro.css">
+        </head>
+    
+        <body class="fondPro">
+    
+            <?php
+            include "../composants/header/header.php";        //import navbar
+            ?>
+    
+            <main>
+                <h1> ERROR 404 </h1>
+            </main>
+    
+            <?php
+            include "../composants/footer/footer.php";
+            ?>
+<?php
+    }
+    ?>
