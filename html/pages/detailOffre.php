@@ -19,7 +19,28 @@
         
         // reccuperation du contenu de l offre
 
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
+        $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
+        print_r($ouverture);
+        $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
+        print_r($horaire);
+        
+        
+        if(empty( $dbh->query("select * from tripskell._visite where idoffre=" . $idOffre . ";")->fetchAll() )) {
+            $categorie = "visite";
+        } else
+        if(empty( $dbh->query("select * from tripskell._spectacle where idoffre=" . $idOffre . ";")->fetchAll() )) {
+            $categorie = "spectacle";
+        } else
+        if(empty( $dbh->query("select * from tripskell._parcAttraction where idoffre=" . $idOffre . ";")->fetchAll() )) {
+            $categorie = "parc d'attraction";
+        } else 
+        if(empty( $dbh->query("select * from tripskell._restauration where idoffre=" . $idOffre . ";")->fetchAll() )) {
+            $categorie = "restauration";
+        } else 
+        if(empty( $dbh->query("select * from tripskell._activite where idoffre=" . $idOffre . ";")->fetchAll() )) {
+            $categorie = "activite";
+        }
     }
 
 ?>
@@ -91,6 +112,7 @@
                                 ?>
                             </div>
                             <!-- <p>38 avis</p> -->
+                            <p> Categorie : <?php echo $categorie ; ?></p>
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="/icones/logoUserSVG.svg" alt="pro">
@@ -146,7 +168,7 @@
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
+                                <p class="plageHoraire">De <span class="horaireEncadre"><?php print_r($contentOffre["idhoraire"]); ?></span> à <span class="horaireEncadre"><?php /*echo explode("-",$contentOffre["horaires"])[1]; */?></span></p>
                             </div>
                         </div>
                     </div>
