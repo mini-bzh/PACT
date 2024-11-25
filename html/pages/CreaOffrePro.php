@@ -308,7 +308,7 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                         <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/" required>
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" required> <!--pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/"-->
                     </div>
 
                     <!-- Abonnement -->
