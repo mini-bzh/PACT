@@ -10,6 +10,8 @@
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
+    include('../php/verif_categorie.php');
+    
 
     $user = null;
     if(key_exists("idOffre", $_GET))
@@ -25,22 +27,8 @@
         $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
         print_r($horaire);
         
+        $categorie = categorie($idOffre);
         
-        if(!empty( $dbh->query("select * from tripskell._visite where idoffre=" . $idOffre . ";")->fetchAll() )) {
-            $categorie = "visite";
-        }
-        if(!empty( $dbh->query("select * from tripskell._spectacle where idoffre=" . $idOffre . ";")->fetchAll() )) {
-            $categorie = "spectacle";
-        }
-        if(!empty( $dbh->query("select * from tripskell._parcAttraction where idoffre=" . $idOffre . ";")->fetchAll() )) {
-            $categorie = "parc d'attraction";
-        } 
-        if(!empty( $dbh->query("select * from tripskell._restauration where idoffre=" . $idOffre . ";")->fetchAll() )) {
-            $categorie = "restauration";
-        } 
-        if(!empty( $dbh->query("select * from tripskell._activite where idoffre=" . $idOffre . ";")->fetchAll() )) {
-            $categorie = "activite";
-        }
     }
 
 ?>

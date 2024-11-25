@@ -14,6 +14,9 @@
     // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_membre.php');
 
+    // contient fonction categorie qui renvoie une categorie a partir d'un idOffre
+    include('../php/verif_categorie.php');
+
     if($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
                          offres sinon */
 
@@ -100,15 +103,15 @@
                         {
                             ?>
                                 <a
-                                href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"];?>" class="lienApercuOffre grossisQuandHover">
                                     <article class="apercuOffre">
-                                        <h3><?php echo $row["titreoffre"]?></h3>
+                                        <h3><?php echo $row["titreoffre"];?></h3>
                                         <div class="conteneurSVGtexte">
                                             <img src="/icones/logoUserSVG.svg" alt="pro">
                                             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
                                         </div>
                                         <div class="conteneurSpaceBetween">
-                                            <p>Visite</p> <!-- catégorie -->
+                                            <p><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
                                             <p class="ouvert">Ouvert</p>
                                         </div>
                             
