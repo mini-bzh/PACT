@@ -2,7 +2,7 @@
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
-    include('/var/www/html/php/connection_params.php');
+    include('../php/connection_params.php');
     
     // connexion a la BdD
     $dbh = new PDO("pgsql:host=tripskell.ventsdouest.dev;dbname=postgres", "sae", "ashton-izzY-c0mplet");

@@ -136,7 +136,7 @@
                     </a>
                     <!--gestion du bouton de mise en/hors ligne-->
                     <hr id="separateurOffreGestion">
-                    <div class="conteneurGestion">
+                    <div id="conteneurGestion">
                         <h4>Statut : 
                         <?php
                             if($contentOffre["enligne"])    // définit l'affichage du statut de l'offre en fonction de en ligne / hors ligne

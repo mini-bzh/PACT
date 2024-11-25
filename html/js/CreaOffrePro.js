@@ -1,6 +1,6 @@
 let prix = document.getElementById("prix-minimal") ;
-let num_adr = document.getElementById("prix-minimal") ;
-let code_postal = document.getElementById("prix-minimal") ;
+let num_adr = document.getElementById("num") ;
+let code_postal = document.getElementById("codePostal") ;
 
 
 
