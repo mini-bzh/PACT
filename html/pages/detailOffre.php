@@ -168,7 +168,7 @@
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php print_r($contentOffre["idhoraire"]); ?></span> à <span class="horaireEncadre"><?php /*echo explode("-",$contentOffre["horaires"])[1]; */?></span></p>
+                                <p class="plageHoraire">De <span class="horaireEncadre"><?php  ?></span> à <span class="horaireEncadre"><?php ?></span></p>
                             </div>
                         </div>
                     </div>
