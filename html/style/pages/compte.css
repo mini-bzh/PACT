@@ -58,18 +58,15 @@ div:has(> .fakeDiv){
 }
 
 .informationsCompte > div{
-    width: 40%;
-    height: 85%;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .infoId{
     display: flex;
     flex-direction: row;
-    margin-bottom: 6%;
 }
 
-.infoId + div{
+.resteInfos{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -77,6 +74,13 @@ div:has(> .fakeDiv){
 }
 
 .infoId > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.zoneInfos{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -91,6 +95,7 @@ div:has(> .fakeDiv){
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    height: 100%;
 }
 
 .zoneBtn > div{
@@ -354,7 +359,15 @@ body.no-scroll {
     stroke-width: 8px;
 }
 
+.resizeShow{
+    display: none;
+}
+
 @media screen and (max-width : 428px){
+
+    #conteneurTitreMobile{
+        margin: 3% 0 0 2%;
+    }
     
     .textBulle + div{
         flex-direction: column;
@@ -428,4 +441,200 @@ body.no-scroll {
     .btnDeconnexion svg path{
         stroke: black;
     }
+
+    .btnDataBanc, .btnModifCompte, .btnSupCompte{
+        display: none;
+    }
+
+    .btnDataCompte{
+        background-color: white;
+        width: 411px;
+        height: 73px;
+    }
+
+    .btnDataCompte p{
+        color: black;
+    }
+
+    .btnDataCompte svg path{
+        stroke: black;
+    }
+
+    .informationsCompte{
+        background-color: transparent;
+        flex-direction: column;
+        width: fit-content;
+        height: 610px;
+        margin: 0 auto;
+    }
+
+    .informationsCompte > div{
+        width: 415px;
+        margin: 3% auto;
+    }
+
+    .btnDataCompte svg{
+        width: 57px;
+        height: 57px;
+    }
+
+    .btnDataCompte p{
+        font-size: var(--typescale-text);
+        width: 80%;
+    }
+
+    .infoId{
+        background-color: white;
+        border-radius: 48px;
+        height: 164px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        position: relative;
+    }
+
+    .infoId > div{
+        margin-left: 4%;
+        margin-bottom: 13%;
+    }
+
+    .infoId + div + div{
+        display: none;
+    }
+
+    .infoId img{
+        width: 130px;
+        height: 130px;
+        margin: auto 0 auto 3%;
+    }
+
+    .zoneBtn{
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    .titreLogin{
+        font-size: var(--typescale-text);
+    }
+
+    .resizeShow{
+        display: block;
+    }
+
+    .resizeHide{
+        display: none;
+    }
+
+    .deroulement{
+        border-radius: 48px 48px 0 0;
+    }
+
+    .menuDeplie{
+        display: flex;
+        position: absolute;
+        top: 330px;
+        z-index: 1;
+        width: 415px;
+        height: 450px;
+        background-color: white;
+        border-radius: 0 0 48px 48px;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 6%;
+    }
+
+    .btnDeplie svg{
+        width: 65px;
+        height: 65px;
+        position: absolute;
+    }
+
+    .btnDeplie{
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        position: absolute;
+        right: 6%;
+        bottom: 6%;
+    }
+
+    .fleche2{
+        transform: rotate(180deg);
+        top: 10px;
+    }
+
+    .rotate180{
+        transform: rotate(180deg);
+    }
+
+    .zoneInfosPort{
+        padding: 0 0 0 5%;
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .btnModifPort{
+        width: 393px;
+        height: 42px;
+        background-color: #E1E1E1;
+        border: black solid 2px;
+        border-radius: 48px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .btnModifPort p {
+        color: black;
+        text-align: center;
+        margin: 1% 4% 0 0;
+    }
+
+    .btnModifPort svg{
+        width: 30px;
+        height: 30px;
+    }
+
+    .btnSupPort{
+        width: 393px;
+        height: 74px;
+        background-color: #ED6666;
+        border-radius: 48px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .btnSupPort p {
+        color: black;
+        text-align: center;
+        margin: 1% 8% 0 0;
+    }
+
+    .btnSupPort svg{
+        width: 50px;
+        height: 50px;
+    }
+
+    .zoneBtnPort{
+        margin-top: 4%;
+        height: 135px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 }

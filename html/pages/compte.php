@@ -25,9 +25,10 @@
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/pages/compte.css">
-    <script src="/js/deconnexion.js"></script>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/pages/compte.css">
+    <script src="../js/deconnexion.js" defer></script>
+    <script src="../js/menuDeroulant.js" defer></script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -185,35 +186,7 @@ if ((!$comptePro) && (!$compteMembre)) {
         <div class="infoId">
             <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
 <?php
-            if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom / login
-?>
-            <div>
-                <p class="boldArchivo titreLogin"><?php echo $infos["login"] ?></p>
-                <div>
-                    <p><span class="boldArchivo">Nom : </span><?php echo $infos["nom"] ?></p>
-                    <p><span class="boldArchivo">Prenom : </span><?php echo $infos["prenom"] ?></p>
-                </div>
-            </div>
-<?php
-            } else {
-?>
-            <div>
-                <p class="boldArchivo titreLogin"><?php echo $infos["raison_social"] ?></p>
-<?php
-                $siren = trim(chunk_split($infos["num_siren"], 3, " ")); // On ajoute un esapce entre 3 caractères
-?>
-                <p><span class="boldArchivo">Numéro SIREN : </span><?php echo $siren ?></p>
-            </div>
-<?php
-            }
-?>
-        </div>
-
-        <!-- div du reste des informations -->
-        <div>
-
-        <!-- On récupère la date au bon format de la date de création d'une offre-->
-<?php
+            // On récupère la date au bon format de la date de création d'une offre
             // On récupère la date
             $dateString = $infos["date_crea_compte"];
 
@@ -222,26 +195,149 @@ if ((!$comptePro) && (!$compteMembre)) {
 
             // On formater la date au format dd/mm/aaaa
             $formattedDate = $date->format('d/m/Y');
+
+            // On change le mdp en étoile
+            $cache = str_repeat("*", strlen($infos["mot_de_passe"])); // On créer une variable qui possède autant de "*" que le nombre de lettres du mdp
+
+            // On rajoute un espace entre 2 caractères pour le téléphone
+            $tel = trim(chunk_split($infos["numero_tel"], 2, " "));
+
+            // On récupère le type du compte
+            //Si c'est un membre, on met membre
+            if ($compteMembre) {
+                $tCompte = "Membre";
+            // Si c'est un professionnel
+            } else {
+                // On regarde si c'est un professionnel privé
+                if(count($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0]) !== 0) {
+                    $tCompte = "Professionnel privé";
+    
+                // Sinon c'est un professionnel public
+                } else {
+                    $tCompte = "Professionnel public";
+                }
+
+                // Dans le cas d'un compte pro, on décompose son numéro SIREN
+                $siren = trim(chunk_split($infos["num_siren"], 3, " ")); // On ajoute un esapce entre 3 caractères
+
+                // On concatène les informations de l'adresse d'un pro
+                $adrPro = $infos["numero"] . " " . $infos["rue"] . ", " . $infos["ville"] . " " . $infos["codepostal"];
+            }
+
+            if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom / login
 ?>
+            <div>
+                <p class="boldArchivo titreLogin"><?php echo $infos["login"] ?></p>
+                <div>
+                    <p class="resizeHide"><span class="boldArchivo">Nom : </span><?php echo $infos["nom"] ?></p>
+                    <p class="resizeHide"><span class="boldArchivo">Prenom : </span><?php echo $infos["prenom"] ?></p>
+                    <p class="texteSmall resizeShow">Création compte : <?php echo $formattedDate ?></p>
+                    <p class="texteSmall resizeShow">Type de compte : <?php echo $tCompte ?></p>
+                </div>
+            </div>
+<?php
+            } else {
+?>
+            <div>
+                <p class="boldArchivo titreLogin"><?php echo $infos["raison_social"] ?></p>
+
+                <div>
+                    <p class="resizeHide"><span class="boldArchivo">Numéro SIREN : </span><?php echo $siren ?></p>
+
+                    <p class="texteSmall resizeShow">Création compte : <?php echo $formattedDate ?></p>
+                    <p class="texteSmall resizeShow">Type de compte :<br><?php echo $tCompte ?></p>
+                </div>
+            </div>
+<?php
+            }
+?>
+
+            <button class="resizeShow btnDeplie">
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M75 62.5L50 37.5L25 62.5" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="fleche2 displayNone" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M75 62.5L50 37.5L25 62.5" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- div du reste des informations en format portable -->
+        <div class="displayNone" id="menuDeroule">
+            <div class="zoneInfosPort">
+<?php
+                if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom
+?>                
+                <div>
+                    <p class="boldArchivo displayNone">Nom : <?php echo $infos["nom"] ?></p>
+                    <p class="boldArchivo displayNone">Prenom : <?php echo $infos["prenom"] ?></p>
+                </div>
+<?php
+                } else {  // Si c'est un pro, son numéro SIREN
+?>
+                <div>
+                    <p class="boldArchivo displayNone">Numéro SIREN : <?php echo $siren ?></p>
+                </div>
+<?php
+                }
+?>
+
+                <!-- Mot de passe -->
+                <p class="boldArchivo displayNone">Mot de passe : <?php echo $cache ?></p>
+
+                <!-- Téléphone -->
+                <p class="boldArchivo displayNone">Téléphone : <?php echo $tel ?></p>
+
+                <!-- E-mail -->
+                <p class="boldArchivo displayNone">Adresse mail :<br><?php echo $infos["adresse_mail"] ?></p>
+
+
+                <!-- Adresse -->
+                <?php
+                if ($compteMembre) {
+?>
+                <p class="boldArchivo displayNone">Adresse postal : <?php echo $infos["codepostal"] ?></p>
+<?php
+                } else {
+?>
+                <p class="boldArchivo displayNone">Adresse :<br><?php echo $adrPro ?></p>
+<?php
+                }
+?>
+            </div>
+            <!-- div des boutons -->
+            <div class="zoneBtnPort">
+                <!-- Bouton de modification portable -->
+                <button class="btnModifPort displayNone">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M88.2249 28.3831C90.4279 26.1807 91.6657 23.1934 91.6661 20.0784C91.6665 16.9633 90.4294 13.9757 88.227 11.7727C86.0246 9.56976 83.0373 8.33193 79.9222 8.33154C76.8071 8.33115 73.8195 9.56823 71.6166 11.7706L16.0082 67.3915C15.0408 68.3561 14.3254 69.5437 13.9249 70.8498L8.42072 88.9831C8.31304 89.3435 8.3049 89.7263 8.39719 90.0909C8.48947 90.4554 8.67872 90.7883 8.94487 91.054C9.21102 91.3197 9.54414 91.5084 9.90888 91.6001C10.2736 91.6918 10.6564 91.6831 11.0166 91.5748L29.1541 86.0748C30.4589 85.6779 31.6464 84.9669 32.6124 84.004L88.2249 28.3831Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M62.5 20.8335L79.1667 37.5002" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="boldArchivo displayNone">Modifier les informations</p>
+                </button>
+
+                <!-- Bouton de supression compte portable -->
+                <button class="btnSupPort displayNone">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 25H87.5" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M79.1666 25V83.3333C79.1666 87.5 74.9999 91.6667 70.8333 91.6667H29.1666C24.9999 91.6667 20.8333 87.5 20.8333 83.3333V25" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M33.3333 24.9999V16.6666C33.3333 12.4999 37.4999 8.33325 41.6666 8.33325H58.3333C62.4999 8.33325 66.6666 12.4999 66.6666 16.6666V24.9999" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M41.6667 45.8333V70.8333" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M58.3333 45.8333V70.8333" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    <p class="boldArchivo displayNone">Supprimer le compte</p>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- div du reste des informations en format desktop -->
+        <div class="resteInfos">
+
             <p><span class="boldArchivo">Création compte : </span><?php echo $formattedDate ?></p>
 
-        <!-- On récupère le type du compte-->
-<?php
-        //Si c'est un membre, on met membre
-        if ($compteMembre) {
-            $tCompte = "Membre";
-        // Si c'est un professionnel
-        } else {
-            // On regarde si c'est un professionnel privé
-            if(count($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0]) !== 0) {
-                $tCompte = "Professionnel privé";
-
-            // Sinon c'est un professionnel public
-            } else {
-                $tCompte = "Professionnel public";
-            }
-        }
-?>
             <p><span class="boldArchivo">Type de compte : </span><?php echo $tCompte ?></p>
 
             <!-- Email -->
@@ -254,30 +350,24 @@ if ((!$comptePro) && (!$compteMembre)) {
             <p><span class="boldArchivo">Adresse postal : </span><?php echo $infos["codepostal"] ?></p>
 <?php
             } else {
-
-            $adrPro = $infos["numero"] . " " . $infos["rue"] . ", " . $infos["ville"] . " " . $infos["codepostal"]; // Variable pour concaténer les informations de l'adresse d'un pro
 ?>
             <p><span class="boldArchivo">Adresse : </span><?php echo $adrPro ?></p>
 <?php
             }
 ?>
             <!-- Téléphone -->
-<?php
-            $tel = trim(chunk_split($infos["numero_tel"], 2, " ")); // On rajoute un espace entre 2 caractères
-?>
+
             <p><span class="boldArchivo">Téléphone : </span><?php echo $tel ?></p>
 
             <!-- Mot de passe (caché) -->
-<?php
-            $cache = str_repeat("*", strlen($infos["mot_de_passe"])); // On créer une variable qui possède autant de "*" que le nombre de lettres du mdp
-?>
+
             <p><span class="boldArchivo">Mot de passe : </span><?php echo $cache ?></p>
 
 <?php
             // Si c'est un pro, on rajoute le mode de payement
             if ($comptePro) {
 ?>
-            <p><span class="boldArchivo">Mode de payement : </span><?php echo "plus tard" ?></p>
+            <p><span class="boldArchivo">Mode de paiement : </span><?php echo "plus tard" ?></p>
 <?php
             }
 ?>
