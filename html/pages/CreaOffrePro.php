@@ -8,18 +8,24 @@ include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+// Inclusion du script pour vérifier si l'utilisateur a un compte pro
 include('../php/verif_compte_pro.php');
+
+if (!isset($_SESSION["idCompte"])) {
+    header("Location: /pages/erreur404.php");
+    exit();
+}
 
 
 // On va récupérer ici l'identifiant id_c présent dans les vues pro.
 if (key_exists("idCompte", $_SESSION)) {
     // reccuperation de id_c de pro_prive 
-    $contentid_cPri = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 
     // reccuperation de id_c de pro_public
-    $contentid_cPub = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 }
+
 
 
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
@@ -175,7 +181,7 @@ header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'o
 ?>
 
 <?php
-if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCompte"], $contentid_cPub)) {
+if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -214,10 +220,9 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     </div>
 
                     <!-- Champs pour sélectionner les images -->
-    
                     <div class="champs">
                         <label for="fichier1">Selectionner une image 1 :</label>
-                        <input type="file" id="fichier1" name="fichier1" require>
+                        <input type="file" id="fichier1" name="fichier1" >
                     </div>
                     <div class="champs">
                         <label for="fichier2">Selectionner une image 2 :</label>
@@ -263,19 +268,19 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- prix minimum -->
                     <div class="champs">
                         <label for="prix-minimal">Prix minimal (euro) :</label>
-                        <input type="text" id="prix-minimal" name="prix-minimal" minlength="1" maxlength="3" placeholder="Entrez le prix minimal (euro)">
+                        <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
                     </div>
 
                     <!-- résumé -->
                     <div>
                         <label for="resume">Résumé <span class="required">*</span> :</label>
-                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" maxlength="100" required></textarea>
+                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
                     </div>
 
                     <!-- description détaillé -->
                     <div>
                         <label for="description">Description détaillée <span class="required">*</span> :</label>
-                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" maxlength="400" required></textarea>
+                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
                     </div>
 
 
@@ -305,10 +310,10 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
                     <!-- Adresse -->
                     <div class="champsAdresse">
                         <label for="adresse">Adresse <span class="required">*</span> :</label>
-                        <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
+                        <input type="text" id="num" name="num" placeholder="Numéro" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" required> <!--pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/"-->
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
                     </div>
 
                     <!-- Abonnement -->
@@ -438,8 +443,6 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
         ?>
     </body>
 
-
-    <script src="../js/CreaOffrePro.js"></script>
     </html>
 
 
@@ -449,30 +452,5 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
 
     
 <?php
-} else { // si id_c n'est pas dans pro_prive ou pro_public, on génère une erreur 404.
-?>
-    <!DOCTYPE html>
-    <html lang="fr">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Creation Offre</title>
-        <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
-    </head>
-
-    <body class="fondPro">
-
-        <?php include "../composants/header/header.php";        //import navbar
-        ?>
-
-        <main>
-            <h1> ERROR 404 </h1>
-        </main>
-
-        <?php
-        include "../composants/footer/footer.php";
-        ?>
-    <?php
 }
-    ?>
+?>

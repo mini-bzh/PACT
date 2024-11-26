@@ -11,6 +11,11 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 // Inclusion du script pour vérifier si l'utilisateur a un compte pro
 include('../php/verif_compte_pro.php');
 
+if (!isset($_SESSION["idCompte"])) {
+    header("Location: /pages/erreur404.php");
+    exit();
+}
+
 if (!empty($_POST)) {
     // Préparation de la requête de mise à jour de l'offre
     $requete = "UPDATE tripskell.offre_pro SET ";
@@ -61,9 +66,17 @@ if (!empty($_POST)) {
     $stmt->execute();
 
     // Redirection vers gestionOffres.php après la mise à jour réussie
-    header("Location: /pages/gestionOffres.php");
+    header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
+if (key_exists("idCompte", $_SESSION)) {
+    // reccuperation de id_c de pro_prive 
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+
+    // reccuperation de id_c de pro_public
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+}
+
 
 // Récupération de l'identifiant de l'offre si présent dans l'URL
 $idOffre = null;
@@ -75,7 +88,7 @@ if (key_exists("idOffre", $_GET)) {
 }
 ?>
 <?php
-if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCompte"], $contentid_cPub)) {
+if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
 ?>
 
 <!DOCTYPE html>
@@ -244,13 +257,13 @@ if (in_array($_SESSION["idCompte"], $contentid_cPri) || in_array($_SESSION["idCo
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Creation Offre</title>
-            <link rel="stylesheet" href="/style/pages/modifOffrePro.css">
+            <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
         </head>
     
         <body class="fondPro">
     
-            <?php
-            include "../composants/header/header.php";        //import navbar
+            <?
+             include "../composants/header/header.php";        //import navbar
             ?>
     
             <main>
