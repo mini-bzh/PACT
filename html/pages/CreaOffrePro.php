@@ -313,7 +313,11 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="text" id="num" name="num" placeholder="Numéro" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
+<<<<<<< HEAD
                         <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
+=======
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+>>>>>>> 00fddb1551cc45fa028ea16be3d3fb050a580c47
                     </div>
 
                     <!-- Abonnement -->

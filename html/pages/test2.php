@@ -197,7 +197,6 @@ if (true) {
         ?>
 
         <main>
-
             <div class="conteneur-formulaire">
 
                 <h1>Création d'une offre</h1>
@@ -293,8 +292,8 @@ if (true) {
                             <button type="button" id="btnD">D</button>
                         </div>
 
-                        <div class="heures">
-                            <label for="heure-debut">De</label>
+                        <div class="heures" id="heures1">
+                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous ouvrez de </label>
                             <input type="time" id="heure-debut" name="heure-debut">
                             <label for="heure-fin">à</label>
                             <input type="time" id="heure-fin" name="heure-fin">
@@ -399,6 +398,7 @@ if (true) {
                 <?php
                 // }
                 ?> -->
+                <script src="../js/test2.js"></script>
 
 
 
@@ -437,9 +437,6 @@ if (true) {
         include "../composants/footer/footer.php";
         ?>
     </body>
-
-
-    <script src="../js/test2.js"></script>
     </html>
 
 

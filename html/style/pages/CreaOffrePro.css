@@ -4,6 +4,7 @@
 main{
     display: flex;
     justify-content: center;
+    font-family: "archivo";
 }
 
 .conteneur-formulaire {
@@ -33,7 +34,6 @@ div {
 label {
     display: block;
     font-size: var(--typescale-text); 
-    font-weight: bold;
     margin-right: 10px;
     align-self: center;
 }
@@ -205,4 +205,31 @@ select{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* partie horaires */
+
+.jours .jourOuvert{
+    background-color: var(--primaryDark);
+    color: white;
+}
+
+.jours .jourOuvert:hover{
+    background-color: var(--primaryDark);
+}
+
+.jours .jourSelectionne{
+    background-color: var(--primaryDark);
+}
+
+.heures{
+    max-width: 50%;
+}
+
+.heures{
+    display: none;
+}
+
+.horairesVisibles{
+    display: flex;
 }

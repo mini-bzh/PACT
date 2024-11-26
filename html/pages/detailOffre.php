@@ -10,6 +10,8 @@
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
+    include('../php/verif_categorie.php');
+    
 
     $user = null;
     if(key_exists("idOffre", $_GET))
@@ -19,7 +21,14 @@
         
         // reccuperation du contenu de l offre
 
-        $contentOffre = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];          
+        $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
+        $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
+        print_r($ouverture);
+        $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
+        print_r($horaire);
+        
+        $categorie = categorie($idOffre);
+        
     }
 
 ?>
@@ -91,6 +100,7 @@
                                 ?>
                             </div>
                             <!-- <p>38 avis</p> -->
+                            <p> Categorie : <?php echo $categorie ; ?></p>
                         </div>
                         <div class="conteneurSVGtexte">
                             <img src="/icones/logoUserSVG.svg" alt="pro">
@@ -146,7 +156,7 @@
 
                             <!-- Horaires -->
                             <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
+                                <p class="plageHoraire">De <span class="horaireEncadre"><?php  ?></span> à <span class="horaireEncadre"><?php ?></span></p>
                             </div>
                         </div>
                     </div>

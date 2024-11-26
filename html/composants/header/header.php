@@ -2,6 +2,7 @@
 <?php
     // Inclusion du script pour vérifier si l'utilisateur a un compte pro
     include('../php/verif_compte_pro.php');
+    include('../php/verif_compte_membre.php');
 ?>
     
     <link rel="stylesheet" href="../style/style.css">
@@ -37,7 +38,7 @@
                     <h3>Rechercher</h3>
                     </a>
                 </li>
-                <?php if($comptePro)
+                <?php if($comptePro || $compteMembre)
                 {
                     ?>
                         <li class="liHeader" id="btAvis">
@@ -64,7 +65,7 @@
                     <a class="aHeader" href="/pages/compte.php">
                     <img src="/icones/compteSVG.svg" alt="icone compte">
                     <?php
-                        if($comptePro)
+                        if($comptePro || $compteMembre)
                         {
                             ?>
                             <h3>Mon compte</h3>
