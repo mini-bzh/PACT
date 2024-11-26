@@ -289,13 +289,63 @@ if ((!$comptePro) && (!$compteMembre)) {
     <!-- div des boutons de compte -->
     <div class="zoneBtn">
 
-        <!-- Bouton de deconnexion -->
-        <button class="btnDeconnexion" onclick="confDeco()">
-        <?php
-            include '../icones/deconnexionSVG.svg';
-        ?>
-            <p class="boldArchivo">Déconnexion</p>
-        </button>
+        <!-- div des boutons de consultation / modification données de compte-->
+        <div>
+            <!-- Bouton de modification -->
+            <button class="btnModifCompte">
+            <?php
+                include '../icones/modifierSVG.svg';
+            ?>
+                <p class="boldArchivo texteSmall">Modifier le profil</p>
+            </button>
+
+            <!-- Bouton de données -->
+            <button class="btnDataCompte">
+            <?php
+                include '../icones/databaseSVG.svg';
+            ?>
+                <p class="boldArchivo texteSmall">Télécharger les données du compte</p>
+            </button>
+
+<?php
+            // On affiche le bouton de données bancaires si c'est un pro
+            if ($comptePro) {
+?>
+
+            <!-- Bouton de données bancaires -->
+            <button class="btnDataBanc">
+            <?php
+                include '../icones/creditCardSVG.svg';
+            ?>
+                <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
+            </button>
+
+<?php
+            }
+?>
+
+        </div>
+
+        <!-- div des boutons dangereux -->
+        <div>
+
+            <!-- Bouton de deconnexion -->
+            <button class="btnDeconnexion" onclick="confDeco()">
+            <?php
+                include '../icones/deconnexionSVG.svg';
+            ?>
+                <p class="boldArchivo">Déconnexion</p>
+            </button>
+
+            <!-- Bouton de suppression compte -->
+            <button class="btnSupCompte">
+            <?php
+                include '../icones/supprimerSVG.svg';
+            ?>
+                <p class="boldArchivo">Supprimer le compte</p>
+            </button>
+            
+        </div>
 
     </div>
 

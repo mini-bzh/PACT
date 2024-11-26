@@ -73,7 +73,7 @@ div:has(> .fakeDiv){
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 50%;
+    height: 60%;
 }
 
 .infoId > div{
@@ -90,6 +90,17 @@ div:has(> .fakeDiv){
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+}
+
+.zoneBtn > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.zoneBtn > div button{
+    margin-bottom: 6%;
 }
 
 
@@ -101,6 +112,7 @@ div:has(> .fakeDiv){
     object-fit: cover; /* Ajuste le contenu pour remplir */
 }
 
+/* Bouton de deconnexion */
 
 .btnDeconnexion{
     background-color: #D80303;
@@ -129,12 +141,51 @@ div:has(> .fakeDiv){
 .btnDeconnexion svg{
     width: 35px;
     height: 35px;
+    margin-left: 3%;
 }
 
 .btnDeconnexion svg path{
     stroke: white;
     stroke-width: 8px;
 }
+
+/* Bouton de suppression de compte */
+
+.btnSupCompte{
+    background-color: #D80303;
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnSupCompte:hover{
+    cursor: pointer;
+}
+
+.btnSupCompte p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btnSupCompte svg{
+    width: 35px;
+    height: 35px;
+    margin-left: 3%;
+}
+
+.btnSupCompte svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
 
 .popUpDeco{
     display: none;
@@ -188,44 +239,154 @@ div:has(> .fakeDiv){
     color: white;
 }
 
-
 body.no-scroll {
     overflow: hidden;
 }
 
-@media screen and (max-width : 428px){
+/* Bouton de modification profil */
 
+.btnModifCompte{
+    background-color: var(--accent);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnModifCompte:hover{
+    cursor: pointer;
+}
+
+.btnModifCompte p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btnModifCompte svg{
+    width: 35px;
+    height: 35px;
+    margin-left: 3%;
+}
+
+.btnModifCompte svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
+/* Bouton de récuperation de données */
+
+.btnDataCompte{
+    background-color: var(--accent);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnDataCompte:hover{
+    cursor: pointer;
+}
+
+.btnDataCompte p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btnDataCompte svg{
+    width: 35px;
+    height: 35px;
+    margin-left: 3%;
+}
+
+.btnDataCompte svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
+/* Bouton de données bancaires */
+
+.btnDataBanc{
+    background-color: var(--primaryLight);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnDataBanc:hover{
+    cursor: pointer;
+}
+
+.btnDataBanc p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btnDataBanc svg{
+    width: 35px;
+    height: 35px;
+    margin-left: 3%;
+}
+
+.btnDataBanc svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
+@media screen and (max-width : 428px){
+    
     .textBulle + div{
         flex-direction: column;
     }
-
+    
     .pageChoixCo > hr{
         width: 330px;
         height: 7px;
         margin: 10% auto;
     }
-
+    
     .textBulle > p{
         font-size: var(--typescale-text);
     }
-
+    
     .textBulle span{
         font-size: var(--typescale-small-text);
     }
-
+    
     .textBulle{
         width: 353px;
         height: 99px;
         padding: 2% 2% 2% 10%;
         margin: 3%;
     }
-
+    
     hr + .textBulle{
         position: relative;
         border-right: none;
         right: -100px;
     }
-
+    
     .decaleBulleGauche{
         position: relative;
         left: -30px;
