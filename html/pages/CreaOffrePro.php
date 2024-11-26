@@ -31,6 +31,8 @@ if (key_exists("idCompte", $_SESSION)) {
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
     <?php
+
+    $idOffre = "";
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
 // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
@@ -80,7 +82,6 @@ $requete .= "resume, ";
 $requete .= "description_detaille, ";
 $requete .= "tarifMinimal, ";
 $requete .= "note, ";
-$requete .= "horaires, ";
 $requete .= "accessibilite, ";
 $requete .= "enLigne, ";
 $requete .= "id_abo, ";
@@ -101,7 +102,6 @@ $requete .= ":resume,";
 $requete .= ":description,";
 $requete .= ":tarif,";
 $requete .= ":note,";
-$requete .= ":horaires,";
 $requete .= ":accessibilite,";
 $requete .= ":enLigne,";
 $requete .= ":id_abo,";
@@ -114,7 +114,8 @@ $requete .= ":id_c, ";
 $requete .= ":img1, ";
 $requete .= ":img2, ";
 $requete .= ":img3, ";
-$requete .= ":img4);";
+$requete .= ":img4) ";
+$requete .= "returning idOffre;";
 
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
@@ -123,7 +124,6 @@ $stmt->bindParam(":resume", $resume);
 $stmt->bindParam(":description", $description);
 $stmt->bindParam(":tarif", $tarif);
 $stmt->bindParam(":note", $note);
-$stmt->bindParam(":horaires", $horaires);
 $stmt->bindParam(":accessibilite", $accessible);
 $stmt->bindParam(":enLigne", $enLigne);
 $stmt->bindParam(":id_abo", $id_abo);
@@ -147,9 +147,6 @@ $resume = $_POST["resume"];
 $description = $_POST["description"];
 $tarif = $_POST["prix-minimal"];
 $note = 5;
-$heuresDebut = $_POST["heure-debut"];
-$heuresFin = $_POST["heure-fin"];
-$horaires = $heuresDebut . "-" . $heuresFin;
 $accessible = $_POST["choixAccessible"];
 $enLigne = true;
 //$id_abo = $_POST["offre"];
@@ -171,6 +168,9 @@ $id_c = $_SESSION["idCompte"];
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
+
+$idOffre = $stmt->fetchColumn();
+
 
 
 // on ferme la base de donnée
@@ -195,6 +195,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
+        <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p>
+
     </head>
 
     <body class="fondPro">
@@ -289,21 +291,31 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                         <label for="horaires">Horaires d'ouverture :</label>
                         <div class="jours">
-                            <button type="button">L</button>
-                            <button type="button">Ma</button>
-                            <button type="button">Me</button>
-                            <button type="button">J</button>
-                            <button type="button">V</button>
-                            <button type="button">S</button>
-                            <button type="button">D</button>
+                            <button type="button" id="btnL">L</button>
+                            <button type="button" id="btnMa">Ma</button>
+                            <button type="button" id="btnMe">Me</button>
+                            <button type="button" id="btnJ">J</button>
+                            <button type="button" id="btnV">V</button>
+                            <button type="button" id="btnS">S</button>
+                            <button type="button" id="btnD">D</button>
                         </div>
 
-                        <div class="heures">
-                            <label for="heure-debut">De</label>
-                            <input type="time" id="heure-debut" name="heure-debut">
+                        <div class="heures" id="heures1">
+                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
                             <label for="heure-fin">à</label>
-                            <input type="time" id="heure-fin" name="heure-fin">
+                            <input type="time" class="heure-fin" name="heure-fin">
+
+                            <h4 id="btnAjoutHoraire">+</h4>
+
                         </div>
+
+                        <div class="heures" id="heures2">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
+                            <label for="heure-fin">à</label>
+                            <input type="time" class="heure-fin" name="heure-fin">
+                        </div>  
                     </div>
 
 
@@ -313,11 +325,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="text" id="num" name="num" placeholder="Numéro" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-<<<<<<< HEAD
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required>
-=======
                         <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
->>>>>>> 00fddb1551cc45fa028ea16be3d3fb050a580c47
                     </div>
 
                     <!-- Abonnement -->
@@ -408,12 +416,13 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 <?php
                 // }
                 ?> -->
-
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="../js/creaOffrePro.js"></script>
 
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
                     <?php
-                    if (in_array($id_c, $contentid_cPri)) { // permet de vérifier l'id_c
+                    if (in_array($id_c, $contentid_cPro)) { // permet de vérifier l'id_c 
                     ?>
 
                         <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement que vous avez chosis avec en plus les options si vous en avez choisis.</p>

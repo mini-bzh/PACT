@@ -74,7 +74,6 @@ $requete .= "resume, ";
 $requete .= "description_detaille, ";
 $requete .= "tarifMinimal, ";
 $requete .= "note, ";
-$requete .= "horaires, ";
 $requete .= "accessibilite, ";
 $requete .= "enLigne, ";
 $requete .= "id_abo, ";
@@ -95,7 +94,6 @@ $requete .= ":resume,";
 $requete .= ":description,";
 $requete .= ":tarif,";
 $requete .= ":note,";
-$requete .= ":horaires,";
 $requete .= ":accessibilite,";
 $requete .= ":enLigne,";
 $requete .= ":id_abo,";
@@ -108,7 +106,8 @@ $requete .= ":id_c, ";
 $requete .= ":img1, ";
 $requete .= ":img2, ";
 $requete .= ":img3, ";
-$requete .= ":img4);";
+$requete .= ":img4) ";
+$requete .= "returning idOffre;";
 
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
@@ -117,7 +116,6 @@ $stmt->bindParam(":resume", $resume);
 $stmt->bindParam(":description", $description);
 $stmt->bindParam(":tarif", $tarif);
 $stmt->bindParam(":note", $note);
-$stmt->bindParam(":horaires", $horaires);
 $stmt->bindParam(":accessibilite", $accessible);
 $stmt->bindParam(":enLigne", $enLigne);
 $stmt->bindParam(":id_abo", $id_abo);
@@ -166,6 +164,8 @@ $id_c = $_SESSION["idCompte"];
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
 
+$idOffre = $stmt->fetchColumn();
+
 
 // on ferme la base de donnée
 $dbh = null;
@@ -189,6 +189,7 @@ if (true) {
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
+        <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p>
     </head>
 
     <body class="fondPro">
@@ -203,7 +204,7 @@ if (true) {
 
                 <!-- Formulaire de création d'offre -->
 
-                <form name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
+                <form name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data" id="formulaire">
 
 
                     <!-- titre -->
@@ -293,13 +294,22 @@ if (true) {
                         </div>
 
                         <div class="heures" id="heures1">
-                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous ouvrez de </label>
-                            <input type="time" id="heure-debut" name="heure-debut">
+                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
                             <label for="heure-fin">à</label>
-                            <input type="time" id="heure-fin" name="heure-fin">
+                            <input type="time" class="heure-fin" name="heure-fin">
+
+                            <h4 id="btnAjoutHoraire">+</h4>
+
+                        </div>
+
+                        <div class="heures" id="heures2">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
+                            <label for="heure-fin">à</label>
+                            <input type="time" class="heure-fin" name="heure-fin">
                         </div>
                     </div>
-
 
                     <!-- Adresse -->
                     <div class="champsAdresse">
@@ -307,7 +317,7 @@ if (true) {
                         <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/" required>
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5">
                     </div>
 
                     <!-- Abonnement -->
@@ -398,9 +408,8 @@ if (true) {
                 <?php
                 // }
                 ?> -->
-                <script src="../js/test2.js"></script>
-
-
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="../js/creaOffrePro.js"></script>
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
                     <?php

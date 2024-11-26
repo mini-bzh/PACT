@@ -51,7 +51,7 @@ function toggleEnLigne(idOffre)
     $.ajax({
         url: "/php/toggleStatutOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
-        data: {idOffre: idOffre},
+        data: {idOffre: "cc cv"},
         success: function(response) {
 
             alert(response);                        // Affiche la réponse du script PHP si appelé correctement

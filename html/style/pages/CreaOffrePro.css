@@ -117,8 +117,8 @@ select{
 .heures {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 30%;
+    /*justify-content: space-between;
+    max-width: 30%;*/
 }
 
 .heures label {
@@ -223,13 +223,23 @@ select{
 }
 
 .heures{
-    max-width: 50%;
-}
-
-.heures{
     display: none;
 }
 
 .horairesVisibles{
     display: flex;
+}
+
+.heures > label:first-child{
+    text-align: start;
+}
+
+#btnAjoutHoraire{
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+#btnAjoutHoraire:hover{
+    cursor: pointer;
 }
