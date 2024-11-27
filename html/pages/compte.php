@@ -21,14 +21,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compte</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
-
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/compte.css">
-    <script src="../js/deconnexion.js" defer></script>
-    <script src="../js/menuDeroulant.js" defer></script>
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/pages/compte.css">
+    <script src="/js/deconnexion.js"></script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -123,8 +118,6 @@ if ((!$comptePro) && (!$compteMembre)) {
 
 
 </main>
-
-<!-- SI C'EST UN UTILISATEUR CONNECTÉ !!! -->
 
 <?php
 } else {
