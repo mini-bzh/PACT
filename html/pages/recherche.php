@@ -89,6 +89,9 @@
                 <label for="searchbar"></label>
                 <input type="searchbar" id="searchbar" placeholder="Rechercher">
             </section>
+            <section id="conteneurBouton">
+            <button onclick="trierPrix()">trier prix</button> 
+            </section>
             <section id="conteneurOffres">
                 <article>
                     
