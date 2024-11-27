@@ -1,6 +1,6 @@
 function initOffres()
 {
-    let elementsOffres = document.querySelectorAll(".lienApercuOffre");
+    let elementsOffres = document.querySelectorAll(".lienApercuOffre"); 
 
     let mapOffresInfos = new Map();
 
@@ -38,22 +38,67 @@ function updateAffichageOffres()
     })
 }
 
+function verifConpatibilite(tab)
+{
+    
+}
+
+function retireElement(array, valeur)
+{
+    let i = 0;
+    let trouve = false;
+
+    while(i < array.length && !trouve)
+    {
+        if(array[i] == valeur)
+        {
+            array.splice(i, 1);
+            trouve = true;
+        }
+
+        i++;
+    }
+
+    return array;
+}
+
 
 
 let mapOffresInfos = initOffres();
 
 
-console.log(mapOffresInfos);
 
 let barreRecherche = document.getElementById("searchbar");
 barreRecherche.addEventListener("keyup", rechercher);
 
 function rechercher()
 {
-    let texte = barreRecherche.value;
+    let texte = barreRecherche.value.toLowerCase();
 
     mapOffresInfos.forEach((map, key, value)=>{
-        
+        if(texte.length >= 1)
+        {
+            if(mapOffresInfos.get(key).get("titre").toLowerCase().includes(texte))
+            {
+                if(!mapOffresInfos.get(key).get("visibilite").includes("recherche"))
+                {
+                    mapOffresInfos.get(key).get("visibilite").push("recherche");
+                }
+            }
+            else
+            {
+                mapOffresInfos.get(key).set("visibilite", retireElement(mapOffresInfos.get(key).get("visibilite"), "recherche"));
+            }
+        }
+        else
+        {
+            if(!mapOffresInfos.get(key).get("visibilite").includes("recherche"))
+            {
+                mapOffresInfos.get(key).get("visibilite").push("recherche");
+            }
+        }
 
-    })
+    });
+    
+    updateAffichageOffres();
 }
