@@ -31,16 +31,38 @@ function updateAffichageOffres()
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
-        else
+        else if(verifConpatibilite(key))
         {
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
     })
 }
 
-function verifConpatibilite(tab)
+function verifConpatibilite(idOffre)
 {
-    
+    let tab = mapOffresInfos.get(idOffre).get("visibilite");
+
+    let i = 0;
+    compatible = true;
+
+    while(compatible && i < tab.length)
+    {
+        if(tab["i"] == "recherche")
+        {
+            let verifRecherche;
+            let texte = barreRecherche.value.toLowerCase();
+            verifRecherche = mapOffresInfos.get(idOffre).get("titre").toLowerCase().includes(texte);
+
+            compatible = compatible && verifRecherche;
+        }
+
+
+
+        i++;
+    }
+
+
+    return compatible;
 }
 
 function retireElement(array, valeur)
@@ -70,6 +92,7 @@ let mapOffresInfos = initOffres();
 
 let barreRecherche = document.getElementById("searchbar");
 barreRecherche.addEventListener("keyup", rechercher);
+
 
 function rechercher()
 {
