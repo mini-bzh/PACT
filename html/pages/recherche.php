@@ -88,7 +88,7 @@
                 <article>
                     
                     <?php
-                        foreach($rows as $row)          // parcourt les offres pour les afficher
+                        foreach($rows as $row)          // il parcourt les offres pour les afficher
                         {
                             ?>
                                 <a <?php
