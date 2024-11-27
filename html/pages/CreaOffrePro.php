@@ -422,7 +422,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
                     <?php
-                    if (in_array($id_c, $contentid_cPro)) { // permet de vérifier l'id_c 
+                    if (in_array($id_c, $idproprive)) { // permet de vérifier l'id_c 
                     ?>
 
                         <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement que vous avez chosis avec en plus les options si vous en avez choisis.</p>
