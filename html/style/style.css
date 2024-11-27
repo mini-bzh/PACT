@@ -659,6 +659,14 @@ rect{
     margin: 0;
 
 }
+/*Footer coller en bas de la page*/
+.footer{
+        left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    z-index: -2;
+}
 
 @media screen and (max-width : 428px){
 

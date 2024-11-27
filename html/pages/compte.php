@@ -178,7 +178,9 @@ if ((!$comptePro) && (!$compteMembre)) {
 
         <!-- div de l'image et de l'identité -->
         <div class="infoId">
-            <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+            <div class="image-container">
+                <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+            </div>
 <?php
             // On récupère la date au bon format de la date de création d'une offre
             // On récupère la date
@@ -220,7 +222,7 @@ if ((!$comptePro) && (!$compteMembre)) {
 
             if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom / login
 ?>
-            <div>
+            <div class="infoPrinc">
                 <p class="boldArchivo titreLogin"><?php echo $infos["login"] ?></p>
                 <div>
                     <p class="resizeHide"><span class="boldArchivo">Nom : </span><?php echo $infos["nom"] ?></p>
@@ -232,7 +234,7 @@ if ((!$comptePro) && (!$compteMembre)) {
 <?php
             } else {
 ?>
-            <div>
+            <div class="infoPrinc">
                 <p class="boldArchivo titreLogin"><?php echo $infos["raison_social"] ?></p>
 
                 <div>
