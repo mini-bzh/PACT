@@ -82,6 +82,7 @@
         </div>
         <main>
             <section id="conteneurBarre">
+                <label for="searchbar"></label>
                 <input type="searchbar" id="searchbar" placeholder="Rechercher">
             </section>
             <section id="conteneurOffres">
