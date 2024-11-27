@@ -132,3 +132,59 @@ function rechercher()
     
     updateAffichageOffres();
 }
+
+// ================== FONCTIONS TRIES PRIX ========================
+
+let triePrix = "";
+
+function trierPrix() {
+    if (triePrix === "asc") {
+        trierPrixDecroissant();
+    }
+    if (triePrix === "decs") {
+        trierPrixCroissant();
+    }
+    else{
+        trierPrixCroissant();
+    }
+}
+
+function trierPrixCroissant() {
+    let mapTrié = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
+    
+    let i = 0;
+    mapTrié.forEach((map, key, value)=>{
+        mapTrié.get(key).get("element").classList.add("order"+i);
+        console.log(mapTrié.get(key).get("element"));
+        i++;
+    })
+
+    let index = 0;
+    mapTrié.forEach((map, key, value)=>{
+        let elem = document.getElementById(mapTrié.get(key).get("id"));
+        elem.style.order = index;
+        index++;
+    })
+
+    triePrix = "asc";
+}
+
+function trierPrixDecroissant() {
+    let mapTrié = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix")));
+    
+    let i = 0;
+    mapTrié.forEach((map, key, value)=>{
+        mapTrié.get(key).get("element").classList.add("order"+i);
+        console.log(mapTrié.get(key).get("element"));
+        i++;
+    })
+
+    let index = 0;
+    mapTrié.forEach((map, key, value)=>{
+        let elem = document.getElementById(mapTrié.get(key).get("id"));
+        elem.style.order = index;
+        index++;
+    })
+
+    triePrix = "decs";
+}
