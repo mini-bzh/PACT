@@ -5,7 +5,7 @@
     include('../php/connection_params.php');
     
     // connexion a la BdD
-    $dbh = new PDO("pgsql:host=tripskell.ventsdouest.dev;dbname=postgres", "sae", "ashton-izzY-c0mplet");
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
