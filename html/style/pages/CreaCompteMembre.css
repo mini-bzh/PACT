@@ -1,0 +1,81 @@
+
+
+.textBulle{
+    width: 550px;
+    height: 50px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    background-color: white;
+    margin: 3%;
+    position: relative;
+}
+
+.textBulle > p{
+    font-size: var(--typescale-text);
+}
+
+.FirstSentence{
+    display: flex;
+/*centrer la phrase */
+    justify-content: center;
+    align-self: center;
+}
+
+.SecondSentence{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.Asterisque{
+    color: red;
+    margin-right: 1%;
+    margin-left: 1%;
+    align-items: center;
+}
+
+
+.conteneur-formulaire {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+form{
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rectangle{
+    width: 15px;
+    height: 70px;
+    background-color: blue;
+    border-radius: 38%;
+    margin: 0%;
+}
+
+.RequisMDP{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.RequisMDP > div{
+    margin-left: 0%;
+}
+
+.RequisMDP > div >p{
+    font-size: small;
+}
