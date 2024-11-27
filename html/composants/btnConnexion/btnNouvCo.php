@@ -1,4 +1,4 @@
-<a href="connexion.php?user=nouv" class="nouvCompte btnCo">
+<a href="ChoixCreationCompte.php" class="nouvCompte btnCo">
     <div>
         <div>
             <h4 class="texteLarge boldArchivo">Nouveau compte</h4>

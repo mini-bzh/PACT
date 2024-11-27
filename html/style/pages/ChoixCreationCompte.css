@@ -1,0 +1,76 @@
+.btnAnnuler{
+    border-radius: 25px;
+    width: 320px;
+    height: 60px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    margin: 3%;
+    cursor: pointer;
+    border: none;
+}
+
+.textBulle{
+    width: 450px;
+    height: 120px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    background-color: white;
+    margin: 3%;
+    position: relative;
+}
+
+.textBulle > p{
+    font-size: var(--typescale-large-text);
+}
+
+.textBulle + div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
+.btnAnnuler > svg{
+    width: 40px;
+    height: 40px;
+}
+
+.btnAnnuler{
+    background-color: red;
+}
+
+.zoneBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3%;
+}
+
+
+.ChoixCrea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+}
+
+.TxtEntreBtn{
+    font-size: var(--typescale-large-text);
+    width: 60px;
+    height: 50px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+}
