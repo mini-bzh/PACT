@@ -3,7 +3,7 @@
 
     // recuperation des parametre de connection a la BdD
     include('../php/connection_params.php');
-    
+
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
@@ -11,11 +11,15 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
 
+
+    // contient fonction caf_offre pour afficher les offres
+    include('../php/affichage_offre.php');
+
     if($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
                          offres sinon */
 
     {
-        $stmt = $dbh->prepare("select * from tripskell.offre_visiteur where id_c=:id_c");
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c); 
@@ -108,44 +112,7 @@
                                 ?>
                                 href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover" 
                                 id="offre<?php echo $row['idoffre']?>">
-                                    <article class="apercuOffre">
-
-                                        
-
-                                        <h3><?php echo $row["titreoffre"]?></h3>
-                                        <div class="conteneurSVGtexte">
-                                            <img src="/icones/adresseSVG.svg" alt="adresse">
-                                            <p class="ville"><?php echo $row["ville"]?></p>
-                                        </div>
-                                        <div class="conteneurSpaceBetween">
-                                            <p>Visite</p> <!-- catégorie -->
-                                            <p class="ouvert">Ouvert</p>
-                                        </div>
-                            
-                                        <div class="conteneurImage">
-                                            <img src="/images/imagesOffres/<?php echo $row["img1"]?>" alt="illustration offre">
-                                            <p class="text-overlay">dès <span><?php echo $row["tarifminimal"]?>€</span> /pers</p>
-                                        </div>
-                                        
-                                        <p class="resumeApercu"><?php echo $row["resume"]?></p>
-                            
-
-                                        <div class="conteneurSVGtexte">
-                                            <img src="/icones/logoUserSVG.svg" alt="pro">
-                                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
-                                        </div>
-                                        <div class="conteneurSpaceBetween">
-                                            <div class="etoiles">
-                                                <p>4.7</p>
-                                                <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoilePleineSVG.svg" alt="">
-                                                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
-                                            </div>
-                                            <p>439 avis</p>
-                                        </div>
-                                    </article>
+                                    <?php af_offre($row);?>
                                 </a>
                             <?php
                         }
