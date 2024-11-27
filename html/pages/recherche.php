@@ -15,7 +15,7 @@
                          offres sinon */
 
     {
-        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c");
+        $stmt = $dbh->prepare("select * from tripskell.offre_visiteur where id_c=:id_c");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c); 
@@ -105,8 +105,12 @@
                                         <?php
                                     }
                                 ?>
-                                href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover">
+                                href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover" 
+                                id="offre<?php echo $row['idoffre']?>">
                                     <article class="apercuOffre">
+
+                                        
+
                                         <h3><?php echo $row["titreoffre"]?></h3>
                                         <div class="conteneurSVGtexte">
                                             <img src="/icones/logoUserSVG.svg" alt="pro">
@@ -126,7 +130,7 @@
                             
                                         <div class="conteneurSVGtexte">
                                             <img src="/icones/adresseSVG.svg" alt="adresse">
-                                            <p><?php echo $row["ville"]?></p>
+                                            <p class="ville"><?php echo $row["ville"]?></p>
                                         </div>
                                         <div class="conteneurSpaceBetween">
                                             <div class="etoiles">
