@@ -128,6 +128,20 @@ function rechercher()
 
 // ================== FONCTIONS TRIES PRIX ========================
 
+let triePrix = "";
+
+function trierPrix() {
+    if (triePrix === "asc") {
+        trierPrixDecroissant();
+    }
+    if (triePrix === "decs") {
+        trierPrixCroissant();
+    }
+    else{
+        trierPrixCroissant();
+    }
+}
+
 function trierPrixCroissant() {
     let mapTrié = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
     
@@ -144,6 +158,8 @@ function trierPrixCroissant() {
         elem.style.order = index;
         index++;
     })
+
+    triePrix = "asc";
 }
 
 function trierPrixDecroissant() {
@@ -162,4 +178,6 @@ function trierPrixDecroissant() {
         elem.style.order = index;
         index++;
     })
+
+    triePrix = "decs";
 }
