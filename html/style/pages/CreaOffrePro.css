@@ -229,6 +229,7 @@ select{
 .horairesVisibles{
     display: flex;
 }
+<<<<<<< Updated upstream
 
 .heures > label:first-child{
     text-align: start;
@@ -243,3 +244,5 @@ select{
 #btnAjoutHoraire:hover{
     cursor: pointer;
 }
+=======
+>>>>>>> Stashed changes
