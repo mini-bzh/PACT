@@ -33,7 +33,10 @@ form {
 }
 
 .champs input[type="text"],
-.champs input[type="file"] {
+.champs input[type="file"],
+ .champs input[type="email"],
+.champs input[type="password"],
+.champs input[type="number"] {
     width: 100%;
     padding: 15px; /* Champs plus hauts */
     border: 1px solid #ccc;

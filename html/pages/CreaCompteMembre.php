@@ -35,6 +35,7 @@ $requete .= "mot_de_passe, ";
 $requete .= "pdp, ";
 $requete .= "numero_tel, ";
 $requete .= "nom,";
+$requete .= "codepostal, ";
 $requete.= "prenom) ";
 
 $requete .= "VALUES (";
@@ -44,6 +45,7 @@ $requete .= ":Mot_de_P,";
 $requete .= ":fichier1,";
 $requete .= ":Telephone,";
 $requete .= ":Nom, ";
+$requete .= ":codePostal,";
 $requete .= ":Prenom); ";
 
 echo $requete;
@@ -55,6 +57,7 @@ $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
 $stmt->bindParam(":fichier1", $nom_img['fichier1']);
 $stmt->bindParam(":Telephone", $_POST["Telephone"]);
 $stmt->bindParam(":Nom", $_POST["Nom"]);
+ $stmt->bindParam(":codePostal", $_POST["codePostal"]);  // on ajoute le code postal à la requete
 $stmt->bindParam(":Prenom", $_POST["Prenom"]);
 
 print_r($stmt);
@@ -141,13 +144,18 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
         <!-- Adresse Mail -->
         <div class="champs">
             <label for="Adresse_Mail">E-mail <span class="required">*</span> :</label>
-            <input type="text" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
+            <input type="email" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="text" id="Telephone" name="Telephone" placeholder="01 23 45 67 89" minlength="10" maxlength="10">
+            <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
+        </div>
+
+        <div class="champs">
+        <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
+        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
         </div>
 
 
