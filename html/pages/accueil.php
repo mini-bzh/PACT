@@ -29,7 +29,7 @@
     }
     else
     {
-        $stmt = $dbh->query("SELECT * from tripskell.offre_pro where enLigne = true;"    ); // utilisez offre_visiteur a terme
+        $stmt = $dbh->query("SELECT * from tripskell.offre_visiteur;"); // utilisez offre_visiteur a terme
     }
 
     $stmt->execute();
