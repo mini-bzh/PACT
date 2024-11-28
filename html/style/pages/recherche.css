@@ -57,6 +57,24 @@ main h1{
     background-size: contain; 
 }
 
+#btnTriePrix{
+    display: flex;
+    background-color: white;
+    width: 100px;
+    height: 45px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#iconeTriePrix{
+    width: 40px;
+}
+
+#txtBtnPrix{
+    user-select: none;
+}
+
 
 @media screen and (max-width : 428px)
 {
