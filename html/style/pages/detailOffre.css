@@ -1,7 +1,16 @@
 @import "../style.css";
 /*-------------/ page détail offre /--------------*/
-.conteneurOffre{
+.mainDetail{
     display: flex;
+    justify-content: center;
+}
+
+.conteneurOffreAvis{
+    display: block;
+}
+
+.conteneurOffre{
+    display: flex;  
     justify-content: center;
     padding: 0px;
 }
@@ -163,6 +172,69 @@
     color: white;
 }
 
+.conteneurAvis{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+}
+
+.avis{
+    margin: 15px;
+    background-color: white;
+    border-radius: 40px;
+    height: fit-content;
+    padding: 40px;
+    width: 1000px;
+}
+
+.avis .conteneurMembreAvis{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.avis .conteneurMembreAvis img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avis .conteneurMembreAvis .infoMembreAvis{
+    display: block;
+    margin-left: 20px;
+}
+
+.avis .conteneurMembreAvis .infoMembreAvis h3{
+    font-size: var(--typescale-h5);
+}
+
+.avis .conteneurMembreAvis .infoMembreAvis p{
+    font-size: var(--typescale-small-text);
+}
+
+.avis .titreAvis{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: var(--typescale-h4);
+}
+
+.avis .conteneurAvisTexte{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.avis .conteneurAvisTexte p{
+    font-size: var(--typescale-text);
+}
+
+.circular-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden; /* Cache tout ce qui dépasse */
+}
 
 @media screen and (max-width : 428px){
     .conteneurOffre{

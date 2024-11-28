@@ -26,7 +26,9 @@
         print_r($ouverture);
         $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
         print_r($horaire);
-        
+        $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
+        print_r($avis);
+
         $categorie = categorie($idOffre);
         
     }
@@ -83,89 +85,126 @@
                 <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
             </div>
         </div>
-        <main class="conteneurOffre">
-                <article class="offre">
+        <main class="mainDetail">
+            <section class="conteneurOffreAvis">
+                <section class="conteneurOffre">
+                    <article class="offre">
+                        <h2><?php echo $contentOffre["titreoffre"];?></h2>
+                        <!-- <p>Visite</p> future categorie -->
+                        <div class="conteneurSpaceBetween">
+                            <div class="noteDetailOffre">
+                                <div class="etoiles">
+                                    <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
+                                    <?php
+                                    //
+                                    //  affichage de la note avec des etoiles
+                                    //
+                                        include "../php/etoiles.php";
+                                    ?>
+                                </div>
+                                <!-- <p>38 avis</p> -->
+                                <p> Categorie : <?php echo $categorie ; ?></p>
+                            </div>
+                            <div class="conteneurSVGtexte">
+                                <img src="/icones/logoUserSVG.svg" alt="pro">
+                                <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            </div>
+                        </div>
+                        <div class="imgChg">
+                            <!-- image de l'offre -->
+                            <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
+                        </div>
+                        <div class="resumePrixDetailOffre">
+                            <!-- Resume -->
+                            <p><?php echo $contentOffre["resume"];?></p>
+                            <hr>
+                            <!-- Tarif minimal -->
+                            <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
+                        </div>
+
+                        <!-- Offre detaille -->
+                        <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                     
-                    <h2><?php echo $contentOffre["titreoffre"];?></h2>
-                    <!-- <p>Visite</p> future categorie -->
-                    <div class="conteneurSpaceBetween">
-                        <div class="noteDetailOffre">
-                            <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
-                                <?php
-                                //
-                                //  affichage de la note avec des etoiles
-                                //
-                                    include "../php/etoiles.php";
-                                ?>
-                            </div>
-                            <!-- <p>38 avis</p> -->
-                            <p> Categorie : <?php echo $categorie ; ?></p>
-                        </div>
-                        <div class="conteneurSVGtexte">
-                            <img src="/icones/logoUserSVG.svg" alt="pro">
-                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
-                        </div>
-                    </div>
-                    <div class="imgChg">
-                        <!-- image de l'offre -->
-                        <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
-                    </div>
-                    <div class="resumePrixDetailOffre">
-                        <!-- Resume -->
-                        <p><?php echo $contentOffre["resume"];?></p>
-                        <hr>
-                        <!-- Tarif minimal -->
-                        <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
-                    </div>
-
-                    <!-- Offre detaille -->
-                    <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
-                
-                    <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                        <div id="partieTags"><!-- future tag -->
-                            <div class="conteneurSVGtexte">
-                                <img src="/icones/tagSVG.svg" alt="icone tag">
-                                <h4>Tags</h4>
-                            </div>
-                            <hr> 
-                            <div id="conteneurTagsOffre">
-                                <p class="tagOffre">Culturel</p>
-                                <p class="tagOffre">Histoire</p>
-                                <p class="tagOffre">Patrimoine</p>
-                                <p class="tagOffre">Famille</p>
+                        <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
+                            <div id="partieTags"><!-- future tag -->
+                                <div class="conteneurSVGtexte">
+                                    <img src="/icones/tagSVG.svg" alt="icone tag">
+                                    <h4>Tags</h4>
+                                </div>
+                                <hr> 
+                                <div id="conteneurTagsOffre">
+                                    <p class="tagOffre">Culturel</p>
+                                    <p class="tagOffre">Histoire</p>
+                                    <p class="tagOffre">Patrimoine</p>
+                                    <p class="tagOffre">Famille</p>
 
 
-                            </div>
-                        </div> 
-                        <div id="partieHoraires">
-                            <div class="conteneurSVGtexte">
-                                <img src="/icones/horairesSVG.svg" alt="icone horaires">
-                                <h4>Horaires</h4>
-                            </div>
-                            <hr><!-- future jours d'ouverture -->
-                            <div id="conteneurJoursOffre">
-                                <p class="jour jourOuvert">L</p>
-                                <p class="jour jourOuvert">Ma</p>
-                                <p class="jour jourOuvert">Me</p>
-                                <p class="jour jourOuvert">J</p>
-                                <p class="jour jourOuvert">V</p>
-                                <p class="jour jourFerme">S</p>
-                                <p class="jour jourFerme">D</p>
-                            </div>
+                                </div>
+                            </div> 
+                            <div id="partieHoraires">
+                                <div class="conteneurSVGtexte">
+                                    <img src="/icones/horairesSVG.svg" alt="icone horaires">
+                                    <h4>Horaires</h4>
+                                </div>
+                                <hr><!-- future jours d'ouverture -->
+                                <div id="conteneurJoursOffre">
+                                    <p class="jour jourOuvert">L</p>
+                                    <p class="jour jourOuvert">Ma</p>
+                                    <p class="jour jourOuvert">Me</p>
+                                    <p class="jour jourOuvert">J</p>
+                                    <p class="jour jourOuvert">V</p>
+                                    <p class="jour jourFerme">S</p>
+                                    <p class="jour jourFerme">D</p>
+                                </div>
 
-                            <!-- Horaires -->
-                            <div id="conteneurPlagesHoraires">
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php  ?></span> à <span class="horaireEncadre"><?php ?></span></p>
+                                <!-- Horaires -->
+                                <div id="conteneurPlagesHoraires">
+                                    <p class="plageHoraire">De <span class="horaireEncadre"><?php  ?></span> à <span class="horaireEncadre"><?php ?></span></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]?>"
-                    class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
-                        <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
-                        <p>Itinéraire</p>
-                    </a>
-                </article>
+                        <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]?>"
+                        class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
+                            <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
+                            <p>Itinéraire</p>
+                        </a>
+                    </article>
+                </section>
+                <h1>Avis</h1>
+                <section class="conteneurAvis">
+                    <?php
+                    foreach ($avis as $key => $avisM) {
+                        $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
+                    ?>
+                    <article class="avis">
+                        <div class="conteneurMembreAvis">
+                            <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                            <div class="infoMembreAvis">
+                                <h3><?php echo $membre['login'] ?></h3>
+                                <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                            </div>
+                        </div>
+                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <div class="conteneurAvisTexte">
+                            <p><?php echo $avis[$key]['commentaire'] ?></p>
+                        </div>
+                        <?php
+                        if($avis[$key]["imageavis"] != null){
+                        ?>
+                        <div class="conteneurAvisImage">
+                            <img src="/images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" alt="image de l'avis">
+                        </div>
+                        <?php
+                        }
+                        ?>
+                    </article>
+                    <?php
+                        $membre++;
+                    }
+                    ?>
+                </section>
+            </section>
         </main>
         <?php                                                   
             // ajout du footer

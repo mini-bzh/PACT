@@ -10,10 +10,15 @@
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
+    // cree $compteMembre qui est true quand on est sur un compte membre et false sinon
+    include('../php/verif_compte_membre.php');
 
 
     // contient fonction caf_offre pour afficher les offres
     include('../php/affichage_offre.php');
+
+    // Inclue la fonction qui verifie la catégorie d'une offre
+    // include('../php/verif_categorie.php');
 
     if($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
                          offres sinon */
@@ -23,6 +28,9 @@
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c);
+        
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro");
+
         $id_c = $_SESSION["idCompte"];
     }
     else
@@ -41,8 +49,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Rechercher</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+        <!-- Favicon -->
+        <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/recherche.css">
     </head>
@@ -89,11 +97,91 @@
                 <label for="searchbar"></label>
                 <input type="searchbar" id="searchbar" placeholder="Rechercher">
             </section>
+
             <section id="conteneurBouton">
             <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
                 <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
                 <p id="txtBtnPrix">prix</p>
             </div> 
+            
+            <section class="filtrerBarre">
+                <div class="filtreHead">
+                    <svg width="89" height="81" viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M86.3333 3H3L36.3333 42.4167V69.6667L53 78V42.4167L86.3333 3Z" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="texteLarge">Filtrer les offres</p>
+                </div>
+                <div class="filtreDeplie displayNone">
+                    <div>
+                        <div id="filtreCat">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Catégorie</h3>
+                            </div>
+
+                            <fieldset id="categorie">
+                                <label>
+                                    <input type="checkbox" name="categorie" value="parcAttr">
+                                    <p>Parc d'attractions</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categorie" value="rest">
+                                    <p>Restauration</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categorie" value="spec">
+                                    <p>Spectacle</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categorie" value="activ">
+                                    <p>Activités</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categorie" value="visite">
+                                    <p>Visites</p>
+                                </label>
+                            </fieldset>
+                        </div>
+
+                        <div id="filtreLieu">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Lieu</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    <div id="filtreOuverture">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Ouverture</h3>
+                            </div>
+                        </div>
+
+                        <div id="filtreDate">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Dates</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    <div id="filtrePrix">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Prix</h3>
+                            </div>
+                        </div>
+
+                        <div id="filtreEtoile">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Étoiles</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </section>
             <section id="conteneurOffres">
                 <article>
