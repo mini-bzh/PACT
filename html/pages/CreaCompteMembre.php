@@ -10,7 +10,19 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
 
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
-    
+   
+
+// Vérifier si le login existe déjà
+$checkQuery = "SELECT COUNT(*) AS count FROM tripskell.membre WHERE login = :Login";
+$checkStmt = $dbh->prepare($checkQuery);
+$checkStmt->bindParam(":Login", $_POST["Login"]);
+$checkStmt->execute();
+$result = $checkStmt->fetch();
+
+if ($result['count'] > 0) {
+    // Si le login existe déjà, définir un message d'erreur
+    $error_message = "Le login est déjà utilisé. Veuillez en choisir un autre.";
+} else {
 // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 $i = 0;
 foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
@@ -66,7 +78,7 @@ $dbh = null;
 
 header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre créée
 }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -117,6 +129,11 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
             <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
+            <?php
+            if (isset($error_message)) {
+                echo '<div class="error">'. $error_message. '</div>';
+            }
+            ?>
         </div>
 
          <!-- Nom  -->
@@ -186,6 +203,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         if (isset($_POST['Confirm_Mot_de_P']))
         {
             $confirm_mot_de_P = $_POST['Confirm_Mot_de_P'];
+            $mot_de_P = $_POST['Mot_de_P'];
             if ($mot_de_P!= $confirm_mot_de_P)
             {
                 echo '<div class="erreur">Les mots de passe ne correspondent pas.</div>';
