@@ -22,7 +22,7 @@
         $stmt = $dbh->prepare("select * from tripskell.offre_pro where ville = (SELECT ville FROM tripskell.pro_prive WHERE id_c=:id_c)");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
-        $stmt->bindParam(":id_c", var: $id_c); 
+        $stmt->bindParam(":id_c", var: $id_c);
         $id_c = $_SESSION["idCompte"];
     }
     else
