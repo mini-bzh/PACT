@@ -23,11 +23,8 @@
 
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
-        print_r($ouverture);
         $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
-        print_r($horaire);
         $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
-        print_r($avis);
 
         $categorie = categorie($idOffre);
         
@@ -171,12 +168,15 @@
                     </article>
                 </section>
                 <h1>Avis</h1>
+                <!-- Avis -->
                 <section class="conteneurAvis">
+                    <!-- Code pour un avis -->
                     <?php
                     foreach ($avis as $key => $avisM) {
                         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
                     ?>
                     <article class="avis">
+                        <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
                             <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                             <div class="infoMembreAvis">
@@ -185,10 +185,13 @@
                                 <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
                             </div>
                         </div>
+                        <!-- Titre de l'avis -->
                         <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <!-- Commentaire -->
                         <div class="conteneurAvisTexte">
                             <p><?php echo $avis[$key]['commentaire'] ?></p>
                         </div>
+                        <!-- Image de l'avis -->
                         <?php
                         if($avis[$key]["imageavis"] != null){
                         ?>
