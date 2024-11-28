@@ -134,7 +134,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
             <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" onchange="updateFileName()" >
+            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
             <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
 
