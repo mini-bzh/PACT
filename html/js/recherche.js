@@ -88,40 +88,64 @@ function eric(idOffre)
 
 // ================== FONCTIONS TRIES PRIX ========================
 
-let triePrix = "";
+let triePrix = "";  // Pour connaitre l'état du trie
 
 function trierPrix() {
     if (triePrix == "") {
+
+        // Trie le Tableau mapOffresInfos dans l'ordre croissant dans le tableau mapTrieAcs
         let mapTrieAcs = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
         
         let index = 0;
+        // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
         mapTrieAcs.forEach((map, key, value)=>{
+
+            // Récupère l'élément dans la page
             let elem = document.getElementById(mapTrieAcs.get(key).get("id"));
-            elem.style.order = index;
+            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+
+            // Rajoute une bordure bleu sur le bouton
+            document.getElementById("btnTriePrix").style.border = "solid";
+            document.getElementById("btnTriePrix").style.borderColor = "blue" ;
+
             index++;
         })
         
-        triePrix = "asc";
+        triePrix = "asc";   // Modifie l'état du trie
     }
     else if(triePrix == "asc") {
+
+        // Trie le Tableau mapOffresInfos dans l'ordre décroissant dans le tableau mapTrieDesc
         let mapTrieDesc = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix")));
 
         let index = 0;
+        // Parcour le tableau mapTrieDesc
         mapTrieDesc.forEach((map, key, value)=>{
+
+            // Récupère l'élément dans la page
             let elem = document.getElementById(mapTrieDesc.get(key).get("id"));
-            elem.style.order = index;
+            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+
+            // Rajoute une bordure bleu sur le bouton
+            document.getElementById("btnTriePrix").style.border = "solid";
+            document.getElementById("btnTriePrix").style.borderColor = "blue" ;
             index++;
         })
-        triePrix = "decs";
+        triePrix = "decs";  // Modifie l'état du trie
     }
     else if(triePrix == "decs"){
         let index = 0;
-
+        // Parcour le tableau mapOffresInfos pour enlever le trie et remettre les offres dans l'ordre normale
         mapOffresInfos.forEach((map, key, value)=>{
+
+            // Récupère l'élément dans la page
             let elem = document.getElementById(mapOffresInfos.get(key).get("id"));
-            elem.style.order = index;
+            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+
+            // Rajoute une bordure bleu sur le bouton
+            document.getElementById("btnTriePrix").style.border = "none";
             index++;
         })
-        triePrix = ""
+        triePrix = "";  // Modifie l'état du trie
     }
 }
