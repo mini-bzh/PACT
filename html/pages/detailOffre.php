@@ -201,7 +201,6 @@
                         ?>
                     </article>
                     <?php
-                        $membre++;
                     }
                     ?>
                 </section>
