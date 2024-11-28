@@ -48,7 +48,7 @@ const mapNomsJours = new Map([
 
 
 let idOffre = document.getElementById("idOffre").textContent;
-alert(idOffre);
+//alert(idOffre);
 
 //récupération des éléments nécéssaires pour les horaires
 let champJours1 = document.getElementById("heures1");
@@ -294,3 +294,42 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
 }
 
 document.getElementsByClassName("zoneBtn")[0].addEventListener("click", verifHorairesCorrectes);
+
+
+/* ----------------------------------------------- Gestion des catégories ----------------------------------------------- */
+
+let categorieSelect = document.getElementById("categorie");
+
+let divResto = document.getElementById("restauration");
+let divSpect = document.getElementById("spectacle");
+let divParc = document.getElementById("parcattraction");
+
+
+divResto.style.display = "none";
+divSpect.style.display = "none";
+divParc.style.display = "none";
+
+categorieSelect.addEventListener("change", function () {
+    
+    if (categorieSelect.value === "restauration") {
+        divResto.style.display = "block";
+        divSpect.style.display = "none";
+        divParc.style.display = "none";
+    } else 
+    if (categorieSelect.value === "spectacle") {
+        divResto.style.display = "none";
+        divSpect.style.display = "block";
+        divParc.style.display = "none";
+    } else 
+    if (categorieSelect.value === "ParcDattraction") {
+        divResto.style.display = "none";
+        divSpect.style.display = "none";
+        divParc.style.display = "block";
+    }
+    else {
+        divResto.style.display = "none";
+        divSpect.style.display = "none";
+        divParc.style.display = "none";
+    }
+});
+

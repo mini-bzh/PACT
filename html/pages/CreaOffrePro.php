@@ -77,94 +77,124 @@ if (in_array($type4, ["png", "gif", "jpeg"])) {
 // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
 
 $requete = "INSERT INTO tripskell.offre_pro(";
+
+$requete .= "numero, ";
+$requete .= "rue, ";
+$requete .= "ville, ";
+$requete .= "codePostal,";
+
 $requete .= "titreOffre, ";
 $requete .= "resume, ";
 $requete .= "description_detaille, ";
 $requete .= "tarifMinimal, ";
 $requete .= "note, ";
 $requete .= "accessibilite, ";
-$requete .= "enLigne, ";
-$requete .= "id_abo, ";
-//$requete .= "id_option, ";
-$requete .= "numero, ";
-$requete .= "rue, ";
-$requete .= "ville, ";
-$requete .= "codePostal,";
+
 $requete .= "id_c, ";
+
 $requete .= "img1, ";
 $requete .= "img2, ";
 $requete .= "img3, ";
-$requete .= "img4) ";
+$requete .= "img4, ";
 
-$requete .= "VALUES (";
+$requete .= "id_abo,";
+
+$requete .= "idrepas,";
+$requete .= "carte,";
+$requete .= "gammeprix";
+
+$requete .= ")VALUES (";
+
+$requete .= ":numero,";
+$requete .= ":rue,";
+$requete .= ":ville,";
+$requete .= ":codePostal,";
+
 $requete .= ":titre,";
 $requete .= ":resume,";
 $requete .= ":description,";
 $requete .= ":tarif,";
 $requete .= ":note,";
 $requete .= ":accessibilite,";
-$requete .= ":enLigne,";
-//$requete .= ":id_abo,";
-$requete .= ":id_option,";
-$requete .= ":numero,";
-$requete .= ":rue,";
-$requete .= ":ville,";
-$requete .= ":codePostal,";
+
 $requete .= ":id_c, ";
+
 $requete .= ":img1, ";
 $requete .= ":img2, ";
 $requete .= ":img3, ";
-$requete .= ":img4) ";
-$requete .= "returning idOffre;";
+$requete .= ":img4, ";
 
+$requete .= ":id_abo,";
+
+$requete .= ":idrepas,";
+$requete .= ":carte,";
+$requete .= ":gammeprix";
+
+$requete .= ") returning idOffre;";
+echo $requete;
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
+
+$stmt->bindParam(":numero", $numero);
+$stmt->bindParam(":rue", $rue);
+$stmt->bindParam(":ville", $ville);
+$stmt->bindParam(":codePostal", $codePostal);
+
 $stmt->bindParam(":titre", $titre);
 $stmt->bindParam(":resume", $resume);
 $stmt->bindParam(":description", $description);
 $stmt->bindParam(":tarif", $tarif);
 $stmt->bindParam(":note", $note);
 $stmt->bindParam(":accessibilite", $accessible);
-$stmt->bindParam(":enLigne", $enLigne);
-//$stmt->bindParam(":id_abo", $id_abo);
-$stmt->bindParam(":id_option", $id_option);
-$stmt->bindParam(":numero", $numero);
-$stmt->bindParam(":rue", $rue);
-$stmt->bindParam(":ville", $ville);
-$stmt->bindParam(":codePostal", $codePostal);
+
 $stmt->bindParam(":id_c", $id_c);
+
 $stmt->bindParam(":img1", $img1);
 $stmt->bindParam(":img2", $image2);
 $stmt->bindParam(":img3", $image3);
 $stmt->bindParam(":img4", $image4);
 
+$stmt->bindParam(":id_abo", $id_abo);
+
+$stmt->bindParam(":idrepas", $idrepas);
+$stmt->bindParam(":carte", $carte);
+$stmt->bindParam(":gammeprix", $gammeprix);
 
 
 // On definit ici chacune des variables
 
-$titre = $_POST["titre"];
-$resume = $_POST["resume"];
-$description = $_POST["description"];
-$tarif = $_POST["prix-minimal"];
-$note = 5;
-$accessible = $_POST["choixAccessible"];
-$enLigne = true;
-//$id_abo = $_POST["offre"];
-//$id_option = $_POST["option"];
-$id_abo = 'Standard';
-$id_option = null;
 $numero = $_POST["num"];
 $rue = $_POST["nomRue"];
 $ville = $_POST["ville"];
 $codePostal = $_POST["codePostal"];
+
+$titre = $_POST["titre"];
+$resume = $_POST["resume"];
+$description = $_POST["description"];
+
+$tarif = $_POST["prix-minimal"];
+$tarif = 5;
+
+$note = 5;
+
+$accessible = $_POST["choixAccessible"];
+$accessible = 'Accessible';
+
+//$id_abo = $_POST["id_abo"];
+$id_abo = 'Standard';
+//$id_option = null;
+
+// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
+$id_c = $_SESSION["idCompte"];
 
 $img1 = $nom_img["fichier1"];
 $img2 = $nom_img["fichier2"];
 $img3 = $nom_img["fichier3"];
 $img4 = $nom_img["fichier4"];
 
-// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-$id_c = $_SESSION["idCompte"];
+$idrepas = "2";
+$carte = "crt.png";
+$gammeprix = "€€";
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
@@ -252,6 +282,54 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <option value="restauration">Restauration</option>
                         </select>
                     </div>
+
+                    <!--  Champs particuliers aux différentes catégories  -->
+
+                    <div id="restauration">
+                        <div class="champs">
+                            <label for="carte">Carte du retaurant <span class="required">*</span> : </label>
+                            <input type="file" id="carte" name="carte" require>
+                        </div>
+                        <div class="champs">
+                            <label for="categorie">Gamme prix <span class="required">*</span> :</label>
+                            <select id="categorie" name="categorie" required>
+                                <option value="">Sélectionnez une gamme de prix</option>
+                                <option value="gamme1">$</option>
+                                <option value="gamme2">$$</option>
+                                <option value="gamme3">$$$</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="spectacle">
+                        <div class="champs">
+                            <label for="capacite">Capacité <span class="required">*</span> :</label>
+                            <input type="number" id="capacite" name="capacite" placeholder="Entrez le nombre de place disponible" min=0 require>
+                        </div>
+                        <div class="champs">
+                            <label for="duree">Durée</label>
+                            <input type="number" id="heures" name="heures" min="0" placeholder="Heures" style="width: 70px;">
+                            <label for="duree">h</label>
+                            <input type="number" id="minutes" name="minutes" min="0" max="59" placeholder="Minutes" style="width: 70px;">
+                            <label for="duree">min</label>
+                        </div>
+                    </div>
+
+                    <div id="parcattraction">
+                        <div class="champs">
+                            <label for="plan">Plan du parc <span class="required">*</span> : </label>
+                            <input type="file" id="plan" name="plan" >
+                        </div>
+                        <div class="champs">
+                            <label for="nbattraction">Nombre d'attraction :</label>
+                            <input type="number" id="nbattraction" name="capnbattractionacite" placeholder="Entrez le nombre d'attraction disponible" min=0>
+                        </div>
+                        <div class="champs">
+                            <label for="agemin">Age minimum :</label>
+                            <input type="number" id="agemin" name="capaagemincite" placeholder="Entrez l'age minimum requis" min=0>
+                        </div>
+                    </div>
+                    
 
                     <div class="champs">
                         <label for="tags">Tags :</label>
@@ -417,7 +495,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 // }
                 ?> -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script src="../js/creaOffrePro.js"></script>
+                <script src="../js/CreaOffrePro.js"></script>
 
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
