@@ -1,5 +1,6 @@
 function initOffres()
-/**/
+/*renvoie la map mapOffreInfos : sa clé est un id offre et sa valeur est une map dont la clé est un string du nom d'une information de l'offre et
+la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*/
 {
     let elementsOffres = document.querySelectorAll(".lienApercuOffre");
 
@@ -7,17 +8,19 @@ function initOffres()
 
     elementsOffres.forEach(element => {
 
-        let mapTempo = new Map();
-        mapTempo.set("id", element.id);
-        mapTempo.set("visibilite", []);         //array qui contiendra des chaines de caractères indiquant les filtres/tri/recherche qui ont 
-                                                //besoin de l'afficher. Si vide, alors l'offre ne sera pas affichée
-        mapTempo.set("element", element);
-        mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);
+        let mapTempo = new Map();                       //map temporaire qui stock les informations de l'élément
+
+        mapTempo.set("id", element.id);                 //l'id de l'offre
+        mapTempo.set("visibilite", true);               /*array qui contiendra des chaines de caractères indiquant les filtres/tri/recherche 
+                                                        qui ont besoin de l'afficher. Si vide, alors l'offre ne sera pas affichée*/
+        mapTempo.set("element", element);               //l'élément dans le DOM
+        mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
+        
         let prix = document.querySelectorAll("#" + element.id + " .text-overlay span")[0].textContent;
         prix = prix.substring(0, prix.length-1);
-        mapTempo.set("prix", parseInt(prix));
-        let ouvert = element.classList.contains("ouvert") ? "ouvert" : "ferme";
-        mapTempo.set("ouverture", ouvert);
+        mapTempo.set("prix", parseInt(prix));   //prix
+
+        mapTempo.set("ouverture", element.classList.contains("ouvert"));        //si l'offre est ouverte ou non
 
         mapOffresInfos.set(element.id, mapTempo);
     });
@@ -27,14 +30,16 @@ function initOffres()
 
 
 function updateAffichageOffres()
+/*met à jour les offres */
 {
     mapOffresInfos.forEach((map, key, value)=>{
-        if(mapOffresInfos.get(key).get("visibilite").length == 0)
+        if(!mapOffresInfos.get(key).get("visibilite"))
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
-        else if(verifConpatibilite(key))
+        else
         {
+            console.log(mapOffresInfos.get(key).get("element"));
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
     });
@@ -42,55 +47,7 @@ function updateAffichageOffres()
     console.log("update faite");
 }
 
-function verifConpatibilite(idOffre)
-{
-    let tabCriteresVisibilite = [];
 
-    mapOffresInfos.forEach((value, key, map)=>{
-        let tabTempo = mapOffresInfos.get(key).get("visibilite");
-        
-        tabTempo.forEach(critere => {
-            if(!tabCriteresVisibilite.includes(critere))
-            {
-                tabCriteresVisibilite.push(critere);
-            }
-        });
-    })
-    let tab = mapOffresInfos.get(idOffre).get("visibilite");
-
-    let i = 0;
-    let identique = tab.length == tabCriteresVisibilite.length;
-
-    while(identique && i < tab.length)
-    {
-        if(!tab.includes(tabCriteresVisibilite[i]))
-        {
-            identique = false;
-        }
-        i++;
-    }
-
-    return identique;
-}
-
-function retireElement(array, valeur)
-{
-    let i = 0;
-    let trouve = false;
-
-    while(i < array.length && !trouve)
-    {
-        if(array[i] == valeur)
-        {
-            array.splice(i, 1);
-            trouve = true;
-        }
-
-        i++;
-    }
-
-    return array;
-}
 
 let mapOffresInfos = initOffres();
 
@@ -111,22 +68,17 @@ function rechercher()
 
             if(mapOffresInfos.get(key).get("titre").toLowerCase().includes(texte))
             {
-                if(!mapOffresInfos.get(key).get("visibilite").includes("recherche"))
-                {
-                    mapOffresInfos.get(key).get("visibilite").push("recherche");
-                }
+                mapOffresInfos.get(key).set("visibilite", true);
             }
             else
             {
-                mapOffresInfos.get(key).set("visibilite", retireElement(mapOffresInfos.get(key).get("visibilite"), "recherche"));
+                console.log("cc");
+                mapOffresInfos.get(key).set("visibilite", false);
             }
         }
         else
         {
-            if(!mapOffresInfos.get(key).get("visibilite").includes("recherche"))
-            {
-                mapOffresInfos.get(key).get("visibilite").push("recherche");
-            }
+            mapOffresInfos.get(key).set("visibilite", true);
         }
     });
     
