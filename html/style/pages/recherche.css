@@ -75,6 +75,114 @@ main h1{
     user-select: none;
 }
 
+/* Filtrer */
+
+.filtrerBarre{
+    background-color: white;
+    width: 390px;
+    height: 65px;
+    border-radius: 48px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 10%;
+}
+
+.filtreHead{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.filtreHead svg{
+    width: 40.34px;
+    height: 39.39px;
+}
+
+.filtreHead p{
+    margin: 1% 9% 0 0;
+}
+
+.filtreGrand{
+    background-color: white;
+    width: 1170px;
+    height: 610px;
+    position: absolute;
+    top: 60px;
+    z-index: 3;
+    border-radius: 0 48px 48px 48px;
+}
+
+.changeBordure{
+    border-radius: 48px 48px 0 0;
+}
+
+/* Quand le filtre est déplié */
+
+.filtreDeplie{
+    padding: 5% 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filtreDeplie > div{
+    width: 30%;
+}
+
+fieldset{
+    border: none;
+}
+
+fieldset > label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 6% 0;
+}
+
+fieldset > label > p{
+    margin: 2% 0 0 5%;
+}
+
+.titreFiltre{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.titreFiltre > hr{
+    background-color: var(--primaryLight);
+    width: 94px;
+    height: 6px;
+    border-radius: 50px;
+    border: none;
+    margin: 3% 7% 0 0;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
+    appearance: none; /* Désactive le style natif */
+    width: 35px; /* Largeur */
+    height: 35px; /* Hauteur */
+    background-color: white; /* Couleur de fond par défaut */
+    border: 3px solid black; /* Bordure */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer; /* Pointeur interactif */
+    position: relative; /* Nécessaire pour positionner le check */
+  }
+
+input[type="checkbox"]:checked::after {
+    content: '✔'; /* Symbole de check */
+    color: black; /* Couleur du symbole */
+    font-size: 25px; /* Taille du symbole */
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 @media screen and (max-width : 428px)
 {

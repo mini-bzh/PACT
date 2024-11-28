@@ -43,6 +43,52 @@ function updateAffichageOffres()
     });
 }
 
+function verifConpatibilite(idOffre)
+{
+    let tab = mapOffresInfos.get(idOffre).get("visibilite");
+
+    let i = 0;
+    compatible = true;
+
+    while((compatible) && (i < tab.length))
+    {
+        if(tab["i"] == "recherche")
+        {
+            let verifRecherche;
+            let texte = barreRecherche.value.toLowerCase();
+            verifRecherche = mapOffresInfos.get(idOffre).get("titre").toLowerCase().includes(texte);
+
+            compatible = compatible && verifRecherche;
+        }
+
+
+
+        i++;
+    }
+
+
+    return compatible;
+}
+
+function retireElement(array, valeur)
+{
+    let i = 0;
+    let trouve = false;
+
+    while((i < array.length) && (!trouve))
+    {
+        if(array[i] == valeur)
+        {
+            array.splice(i, 1);
+            trouve = true;
+        }
+
+        i++;
+    }
+
+    return array;
+}
+
 
 
 let mapOffresInfos = initOffres();
@@ -148,4 +194,20 @@ function trierPrix() {
         })
         triePrix = "";  // Modifie l'état du trie
     }
+    updateAffichageOffres();
+}
+
+
+// Gestion du déroulement du filtre
+
+let filtreBarre = document.getElementsByClassName("filtrerBarre")[0];
+let filtreHead = document.getElementsByClassName("filtreHead")[0];
+let filtreG = document.getElementsByClassName("filtreDeplie")[0];
+
+filtreHead.addEventListener("click", derouleFiltre);
+
+function derouleFiltre() {
+    filtreBarre.classList.toggle("changeBordure");
+    filtreG.classList.toggle("filtreGrand");
+    filtreG.classList.toggle("displayNone");
 }
