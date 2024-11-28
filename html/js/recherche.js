@@ -36,7 +36,7 @@ function updateAffichageOffres()
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
-        else if(!eric(key))
+        else
         {
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
