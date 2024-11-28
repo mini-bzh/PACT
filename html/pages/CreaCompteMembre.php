@@ -70,7 +70,6 @@ $stmt->bindParam(":Nom", $_POST["Nom"]);
  $stmt->bindParam(":codePostal", $_POST["codePostal"]);  // on ajoute le code postal à la requete
 $stmt->bindParam(":Prenom", $_POST["Prenom"]);
 
-print_r($stmt);
 $stmt->execute(); // execution de la requete
 
 // on ferme la base de donnée
@@ -123,7 +122,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
     <!-- Formulaire de création d'offre -->
 
-    <form id="form" name="creation" action="/pages/CreaCompteMembre.php" method="post" enctype="multipart/form-data">
+    <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
         <!-- Login -->
         <div class="champs">
