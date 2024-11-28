@@ -71,7 +71,9 @@ main h1{
     width: 40px;
 }
 
-
+#txtBtnPrix{
+    user-select: none;
+}
 
 
 @media screen and (max-width : 428px)
