@@ -30,10 +30,10 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
 
 function updateAffichageOffres()
-/*met à jour les offres */
+/*met à jour les offres à afficher*/
 {
     mapOffresInfos.forEach((map, key, value)=>{
-        if(!mapOffresInfos.get(key).get("visibilite"))
+        if(!mapOffresInfos.get(key).get("visibilite") && eric(key))
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
@@ -83,6 +83,12 @@ function rechercher()
     });
     
     updateAffichageOffres();
+}
+
+
+function eric(idOffre)
+{
+    return true;
 }
 
 // ================== FONCTIONS TRIES PRIX ========================
