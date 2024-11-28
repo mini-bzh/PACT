@@ -48,8 +48,6 @@ $requete .= ":Nom, ";
 $requete .= ":codePostal,";
 $requete .= ":Prenom); ";
 
-echo $requete;
-
 $stmt = $dbh->prepare($requete);
 $stmt->bindParam(":Login", $_POST["Login"]);
 $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
@@ -66,7 +64,7 @@ $stmt->execute(); // execution de la requete
 // on ferme la base de donnée
 $dbh = null;
 
-header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre créée
+header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre créée
 }
 
 ?>
@@ -113,7 +111,7 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
 
     <!-- Formulaire de création d'offre -->
 
-    <form name="creation" action="/pages/CreaCompteMembre.php" method="post" enctype="multipart/form-data">
+    <form id="form" name="creation" action="/pages/CreaCompteMembre.php" method="post" enctype="multipart/form-data">
 
         <!-- Login -->
         <div class="champs">
@@ -163,71 +161,7 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
         <!-- retenir le mot de passe dans une variable php -->
         <div class="champs">
             <label for="Mot_de_P">Mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Mot_de_P" name="Mot_de_P" required>
-            <?php
-            // Vérification du mot de passe
-            if (isset($_POST['Mot_de_P']))
-            {
-                $mot_de_P = $_POST['Mot_de_P'];
-                $longueur = strlen($mot_de_P);
-                $contient_chiffre = false;
-                $contient_majuscule = false;
-                $contient_minuscule = false;
-                $contient_special = false;
-                
-                // Vérification de la longueur
-                if ($longueur >= 12)
-                {
-                    // Vérification des caractères
-                    for ($i = 0; $i < $longueur; $i++)
-                    {
-                        $caractere = $mot_de_P[$i];
-                        
-                        if (ctype_digit($caractere))
-                        {
-                            $contient_chiffre = true;
-                        }
-                        elseif (ctype_upper($caractere))
-                        {
-                            $contient_majuscule = true;
-                        }
-                        elseif (ctype_lower($caractere))
-                        {
-                            $contient_minuscule = true;
-                        }
-                        elseif (!ctype_alnum($caractere))
-                        {
-                            $contient_special = true;
-                        }
-                    }
-                
-                    // Affichage des messages d'erreur
-                    if (!$contient_chiffre)
-                    {
-                        echo '<div class="erreur">Le mot de passe doit
-                        contenir au moins un chiffre.</div>';
-                    }
-                    if (!$contient_majuscule)
-                    {
-                        echo '<div class="erreur">Le mot de passe doit
-                        contenir au moins une majuscule.</div>';
-                    }
-                    if (!$contient_minuscule)
-                    {
-                        echo '<div class="erreur">Le mot de passe doit
-                        contenir au moins une minuscule.</div>';
-                    }
-                    if (!$contient_special)
-                    {
-                        echo '<div class="erreur">Le mot de passe doit
-                        contenir au moins un caractère spécial.</div>';
-                    }
-                    if (!$contient_chiffre &&!$contient_majuscule &&!$contient_minuscule &&!$contient_special)
-                    {
-                        echo '<div class="erreur">Veuillez entrer un mot de passe
-                        adéquat.</div>';
-                    }}}
-                    ?>
+            <input type="password" id="Mot_de_P" name="Mot_de_P" minlength="12" maxlength="50" required>
         </div>
 
         <div class="RequisMDP">
@@ -245,7 +179,7 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
         <!-- Mot de Passe -->
         <div class="champs">
             <label for="Confirm_Mot_de_P">Confirmation du mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" required>
+            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" minlength="12" maxlength="50" required>
         </div>
         <?php 
         // Vérification de la confirmation du mot de passe
@@ -282,8 +216,8 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
     include "../composants/footer/footer.php";
 ?>
 
-</body>
-</html>
+
+
 
 
 <script>
@@ -302,4 +236,42 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
             label.textContent = "📷 Ajouter une photo de profil"; // Remet le texte original
         }
     }
+
+    const form = document.getElementById('form'); // Élément du formulaire
+    const password = document.getElementById('Mot_de_P'); // Champ mot de passe
+    const confirmPassword = document.getElementById('Confirm_Mot_de_P'); // Champ confirmation
+    const regexMdp = /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).+$/; // Regex pour validation
+
+    // Écoute de la soumission du formulaire
+    form.addEventListener('submit', function (e) {
+        // Vérifie si les champs sont remplis
+        if (!password.value || !confirmPassword.value) {
+            e.preventDefault(); // Empêche le formulaire de s'enregistrer
+            alert('Tous les champs sont obligatoires.'); // Affiche une alerte
+            return; // Sort de la fonction
+        }
+
+        // Vérifie si les mots de passe correspondent
+        if (password.value !== confirmPassword.value) {
+            e.preventDefault(); // Empêche le formulaire de s'enregistrer
+            alert('Les mots de passe ne correspondent pas.'); // Affiche une alerte
+            return; // Sort de la fonction
+        }
+
+        // Vérifie si le mot de passe respecte les critères (chiffre et caractère spécial)
+        if (!regexMdp.test(password.value)) {
+            e.preventDefault(); // Empêche la soumission du formulaire
+            alert("Le mot de passe doit contenir au moins un chiffre et un caractère spécial.");
+            return; // Sort de la fonction
+        }
+    });
 </script>
+
+
+
+</body>
+</html>
+
+
+
+
