@@ -192,6 +192,7 @@
                         <?php
                         if($avis[$key]["imageavis"] != null){
                         ?>
+                        <hr>
                         <div class="conteneurAvisImage">
                             <img src="/images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" alt="image de l'avis">
                         </div>

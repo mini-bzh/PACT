@@ -222,11 +222,19 @@
 
 .avis .conteneurAvisTexte{
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .avis .conteneurAvisTexte p{
     font-size: var(--typescale-text);
+}
+
+.avis .conteneurAvisImage{
+    margin-top: 40px;
+}
+
+.avis .conteneurAvisImage img{
+    border: 2px solid black;
 }
 
 .circular-image {
