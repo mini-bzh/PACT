@@ -91,53 +91,37 @@ function eric(idOffre)
 let triePrix = "";
 
 function trierPrix() {
-    if (triePrix === "asc") {
-        trierPrixDecroissant();
+    if (triePrix == "") {
+        let mapTrieAcs = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
+        
+        let index = 0;
+        mapTrieAcs.forEach((map, key, value)=>{
+            let elem = document.getElementById(mapTrieAcs.get(key).get("id"));
+            elem.style.order = index;
+            index++;
+        })
+        
+        triePrix = "asc";
     }
-    if (triePrix === "decs") {
-        trierPrixCroissant();
+    else if(triePrix == "asc") {
+        let mapTrieDesc = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix")));
+
+        let index = 0;
+        mapTrieDesc.forEach((map, key, value)=>{
+            let elem = document.getElementById(mapTrieDesc.get(key).get("id"));
+            elem.style.order = index;
+            index++;
+        })
+        triePrix = "decs";
     }
-    else{
-        trierPrixCroissant();
+    else if(triePrix == "decs"){
+        let index = 0;
+
+        mapOffresInfos.forEach((map, key, value)=>{
+            let elem = document.getElementById(mapOffresInfos.get(key).get("id"));
+            elem.style.order = index;
+            index++;
+        })
+        triePrix = ""
     }
-}
-
-function trierPrixCroissant() {
-    let mapTrié = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
-    
-    let i = 0;
-    mapTrié.forEach((map, key, value)=>{
-        mapTrié.get(key).get("element").classList.add("order"+i);
-        console.log(mapTrié.get(key).get("element"));
-        i++;
-    })
-
-    let index = 0;
-    mapTrié.forEach((map, key, value)=>{
-        let elem = document.getElementById(mapTrié.get(key).get("id"));
-        elem.style.order = index;
-        index++;
-    })
-
-    triePrix = "asc";
-}
-
-function trierPrixDecroissant() {
-    let mapTrié = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix")));
-    
-    let i = 0;
-    mapTrié.forEach((map, key, value)=>{
-        mapTrié.get(key).get("element").classList.add("order"+i);
-        console.log(mapTrié.get(key).get("element"));
-        i++;
-    })
-
-    let index = 0;
-    mapTrié.forEach((map, key, value)=>{
-        let elem = document.getElementById(mapTrié.get(key).get("id"));
-        elem.style.order = index;
-        index++;
-    })
-
-    triePrix = "decs";
 }
