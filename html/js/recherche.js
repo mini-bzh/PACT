@@ -11,8 +11,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         let mapTempo = new Map();                       //map temporaire qui stock les informations de l'élément
 
         mapTempo.set("id", element.id);                 //l'id de l'offre
-        mapTempo.set("visibilite", true);               /*array qui contiendra des chaines de caractères indiquant les filtres/tri/recherche 
-                                                        qui ont besoin de l'afficher. Si vide, alors l'offre ne sera pas affichée*/
+        mapTempo.set("visibilite", true);               //indique si l'élément doit être montré par la recherche
         mapTempo.set("element", element);               //l'élément dans le DOM
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
         
@@ -30,21 +29,18 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
 
 function updateAffichageOffres()
-/*met à jour les offres à afficher*/
+/*masque les offres qui doivent être affichées par la recherche et les filtrer, masque les autres*/
 {
     mapOffresInfos.forEach((map, key, value)=>{
         if(!mapOffresInfos.get(key).get("visibilite") && eric(key))
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
-        else
+        else if(!eric(key))
         {
-            console.log(mapOffresInfos.get(key).get("element"));
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
     });
-
-    console.log("update faite");
 }
 
 
@@ -53,36 +49,35 @@ let mapOffresInfos = initOffres();
 
 
 
-let barreRecherche = document.getElementById("searchbar");
-barreRecherche.addEventListener("keyup", rechercher);
+let barreRecherche = document.getElementById("searchbar");      //récupère la barre de recherche dans le DOM
+barreRecherche.addEventListener("keyup", rechercher);           //déclenche la fonction rechercher quand une touche est appuyée (quand qqn écrit dans la barre)
 
 
 function rechercher()
+/*repère les offres dont le titre contient le texte écrit dans la barre de recherhe, et les affiche. N'affiche pas les autres*/
 {
-    let texte = barreRecherche.value.toLowerCase();
-    console.log(mapOffresInfos);
+    let texte = barreRecherche.value.toLowerCase();             //récupère le texte de la barre de recherche et le converti en minuscule
 
     mapOffresInfos.forEach((map, key, value)=>{
-        if(texte.length >= 1)
+        if(texte.length >= 1)                                   //si la barre de recherche n'est pas vide
         {
 
-            if(mapOffresInfos.get(key).get("titre").toLowerCase().includes(texte))
+            if(mapOffresInfos.get(key).get("titre").toLowerCase().includes(texte))      //si le titre de l'offre contient le texte de la barre
             {
                 mapOffresInfos.get(key).set("visibilite", true);
             }
             else
             {
-                console.log("cc");
                 mapOffresInfos.get(key).set("visibilite", false);
             }
         }
-        else
+        else                                                    //si la barre est vide, affiche toutes les offres
         {
             mapOffresInfos.get(key).set("visibilite", true);
         }
     });
     
-    updateAffichageOffres();
+    updateAffichageOffres();                                    //met à jour l'affichage des offres
 }
 
 
