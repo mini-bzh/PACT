@@ -90,7 +90,10 @@
                 <input type="searchbar" id="searchbar" placeholder="Rechercher">
             </section>
             <section id="conteneurBouton">
-            <button onclick="trierPrix()">trier prix</button> 
+            <div onclick="trierPrix()">
+                <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
+                <p>prix</p>
+            </div> 
             </section>
             <section id="conteneurOffres">
                 <article>
