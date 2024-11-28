@@ -129,6 +129,12 @@ main h1{
 
 .filtreDeplie > div{
     width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.justifyEvenly{
+    justify-content: space-evenly;
 }
 
 fieldset{
@@ -161,7 +167,7 @@ fieldset > label > p{
     margin: 3% 7% 0 0;
 }
 
-input[type="checkbox"] {
+.filtreDeplie label input[type="checkbox"] {
     -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
     appearance: none; /* Désactive le style natif */
     width: 35px; /* Largeur */
@@ -173,7 +179,7 @@ input[type="checkbox"] {
     position: relative; /* Nécessaire pour positionner le check */
   }
 
-input[type="checkbox"]:checked::after {
+.filtreDeplie label input[type="checkbox"]:checked::after {
     content: '✔'; /* Symbole de check */
     color: black; /* Couleur du symbole */
     font-size: 25px; /* Taille du symbole */
@@ -181,6 +187,156 @@ input[type="checkbox"]:checked::after {
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#lieu {
+    width: 95%; /* Prendre toute la largeur du parent */
+    height: 40px; /* Hauteur de l'input */
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 6%;
+}
+
+#filtreDate{
+    height: 100%;
+}
+
+.remplirDate > div{
+    display: flex;
+    flex-direction: column;
+    height: 139px;
+    justify-content: space-around;
+    margin-bottom: 3%;
+}
+
+.remplirDate input[type="date"]{
+    width: 288px;
+    height: 84px;
+    border: black solid 2px;
+    border-radius: 20px;
+    font-size: 26px;
+    appearance: none; /* Masque l'icône native du calendrier */
+    -webkit-appearance: none; /* Pour Safari */
+    padding-left: 7%;
+}
+
+/* Masquer le calendrier natif dans les navigateurs basés sur Webkit */
+.remplirDate input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none; /* Masque l'icône et le calendrier */
+}
+
+.filtreDeplie input[type="number"] {
+    all: unset;
+    -webkit-appearance: none; /* Pour Safari et Chrome */
+    -moz-appearance: textfield; /* Pour Firefox */
+    appearance: none; /* Pour les autres navigateurs */
+}
+
+/* Enlever les flèches sur Firefox */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.datePerso{
+    position: relative;
+}
+
+.prixFiltre{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.prixFiltre > div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prixFiltre > div > p{
+    position: absolute;
+    top: 55px;
+    right: 40px;
+    color: grey
+}
+
+.prixFiltre input[type="number"]{
+    width: 84px;
+    height: 75px;
+    border: black solid 2px;
+    border-radius: 20px;
+    font-size: 26px;
+    padding: 0 58px 0 15px;
+}
+
+.number-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+}
+
+.number-input button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    user-select: none;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.number-input button:focus {
+    outline: none;
+}
+
+.datePerso svg{
+    width: 68px;
+    height: 68px;
+    position: absolute;
+    right: 55px;
+    top: 7px;
+}
+
+.interEtoile{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3%;
+}
+
+.interEtoile > div{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.interEtoile > div > svg {
+    width: 21px;
+    height: 21px;
+    position: absolute;
+    top: 70px;
+    right: 25px;
+    pointer-events: none;
+}
+
+.interEtoile select{
+    width: 107px;
+    height: 41px;
+    border: black solid 2px;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 0 5px;
+    margin-top: 8%;
 }
 
 

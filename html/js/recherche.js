@@ -132,6 +132,127 @@ function eric(idOffre)
     return true;
 }
 
+
+// ================== FILTRER ========================
+
+let dateInput1 = document.querySelector("#dateDeb");
+let dateInput2 = document.querySelector("#dateFin");
+let calendarIcon1 = document.querySelector("#dateDeb + svg");
+let calendarIcon2 = document.querySelector("#dateFin + svg");
+
+calendarIcon1.addEventListener("click", () => {
+    dateInput1.showPicker();
+});
+
+calendarIcon2.addEventListener("click", () => {
+    dateInput2.showPicker();
+});
+
+function adjustValue(increment, prix) {
+    // Trouver l'élément 'input' associé au bouton cliqué via l'ID
+    let inputElement = document.getElementById(prix);
+
+    let min = document.getElementById("prixMin").value;
+    let max = document.getElementById("prixMax").value;
+    
+    // Récupérer la valeur actuelle et la convertir en nombre entier
+    let currentValue = parseInt(inputElement.value, 10) || 0;
+
+    // Si currentValue est NaN ou null, définir à 0
+    if (isNaN(currentValue) || currentValue === null) {
+        currentValue = 0;
+    }
+    
+    // Ajuster la valeur en fonction de l'incrément
+    if ((prix == "prixMin") && (currentValue + increment <= max)) {
+        currentValue += increment;
+    } else if ((prix == "prixMax") && (currentValue + increment >= min)) {
+        currentValue += increment;
+    }
+    
+    // Empêcher les valeurs négatives
+    inputElement.value = Math.max(0, currentValue);
+}
+
+
+// Récupérer les éléments des champs de date
+let dateDeb = document.getElementById('dateDeb');
+let dateFin = document.getElementById('dateFin');
+
+// Fonction pour ajuster les dates
+function adjustDates(event) {
+    let minDate = new Date(dateDeb.value);
+    let maxDate = new Date(dateFin.value);
+
+    // Si la date de fin est antérieure à la date de début, ajuster la date de fin
+    if ((maxDate < minDate) && (event.target == dateFin)) {
+        dateFin.value = dateDeb.value; // Réinitialiser la date de fin pour correspondre à la date de début
+    }
+
+    // Si la date de début est postérieure à la date de fin, ajuster la date de début
+    if ((minDate > maxDate) && (event.target == dateDeb)) {
+        dateDeb.value = dateFin.value; // Réinitialiser la date de début pour correspondre à la date de fin
+    }
+}
+
+// Ajouter des écouteurs d'événements pour les changements de valeur
+dateDeb.addEventListener('change', adjustDates);
+dateFin.addEventListener('change', adjustDates);
+
+
+let etoileMin = document.getElementById('etoileMin');
+let etoileMax = document.getElementById('etoileMax');
+
+// Fonction pour ajuster les valeurs possibles du filtre des étoiles
+function adjustOptions(event) {
+    let min = parseInt(etoileMin.value, 10);
+    let max = parseInt(etoileMax.value, 10);
+
+    // Empêcher que max soit inférieur à min
+    if ((event.target == etoileMax) && (max < min)) {
+        etoileMax.value = etoileMin.value; // Réinitialiser max pour correspondre à min
+    }
+
+    // Empêcher que min soit supérieur à max
+    if ((event.target == etoileMin) && (min > max)) {
+        etoileMin.value = etoileMax.value; // Réinitialiser min pour correspondre à max
+    }
+}
+
+// Écouter les changements de valeur dans les deux sélecteurs
+etoileMin.addEventListener('change', adjustOptions);
+etoileMax.addEventListener('change', adjustOptions);
+
+
+
+let prixMin = document.getElementById('prixMin');
+let prixMax = document.getElementById('prixMax');
+
+// Fonction pour ajuster les valeurs possibles du filtre des étoiles
+function ajustePrix(event) {
+    let min = parseInt(prixMin.value, 10);
+    let max = parseInt(prixMax.value, 10);
+
+    // Empêcher que max soit inférieur à min
+    if (event.target == prixMax) {
+        if (max < min) {
+            prixMax.value = prixMin.value; // Réinitialiser max pour correspondre à min
+        }
+    }
+
+    // Empêcher que min soit supérieur à max
+    if (event.target == prixMin) {
+        if (min > max) {
+            prixMin.value = prixMax.value; // Réinitialiser min pour correspondre à max
+        }
+    }
+}
+
+// Écouter les changements de valeur dans les deux sélecteurs
+prixMin.addEventListener('change', ajustePrix);
+prixMax.addEventListener('change', ajustePrix);
+
+
 // ================== FONCTIONS TRIES PRIX ========================
 
 let triePrix = "";  // Pour connaitre l'état du trie

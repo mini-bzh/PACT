@@ -53,6 +53,8 @@
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/recherche.css">
+        <script src="../js/recherche.js" defer></script>
+
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -148,14 +150,27 @@
                                 <hr>
                                 <h3>Lieu</h3>
                             </div>
+
+                            <input id="lieu" type="text" name="lieu" placeholder="Commune / Lieu-dit">
                         </div>
                     </div>
                     <div>
-                    <div id="filtreOuverture">
+                        <div id="filtreOuverture">
                             <div class="titreFiltre">
                                 <hr>
                                 <h3>Ouverture</h3>
                             </div>
+
+                            <fieldset id="ouverture">
+                                <label>
+                                    <input type="checkbox" name="ouverture" value="ouvert">
+                                    <p>Ouvert</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="ouverture" value="ferme">
+                                    <p>Fermé</p>
+                                </label>
+                            </fieldset>
                         </div>
 
                         <div id="filtreDate">
@@ -163,22 +178,122 @@
                                 <hr>
                                 <h3>Dates</h3>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                    <div id="filtrePrix">
-                            <div class="titreFiltre">
-                                <hr>
-                                <h3>Prix</h3>
+                            <div class="remplirDate">
+                                <div>
+                                    <label for="dateDeb"><p>Date de début :</p></label>
+                                    <div class="datePerso">
+                                        <input type="date" id="dateDeb" name="dateDeb">
+                                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M33.3334 8.33325V24.9999" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 8.33325V24.9999" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M79.1667 16.6667H20.8333C16.231 16.6667 12.5 20.3977 12.5 25.0001V83.3334C12.5 87.9358 16.231 91.6667 20.8333 91.6667H79.1667C83.769 91.6667 87.5 87.9358 87.5 83.3334V25.0001C87.5 20.3977 83.769 16.6667 79.1667 16.6667Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M12.5 41.6667H87.5" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M33.3334 58.3333H33.375" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M50 58.3333H50.0417" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 58.3333H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M33.3334 75H33.375" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M50 75H50.0417" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 75H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="dateFin"><p>Date de fin :</p></label>
+                                    <div class="datePerso">
+                                        <input type="date" id="dateFin" name="dateFin">
+                                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M33.3334 8.33325V24.9999" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 8.33325V24.9999" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M79.1667 16.6667H20.8333C16.231 16.6667 12.5 20.3977 12.5 25.0001V83.3334C12.5 87.9358 16.231 91.6667 20.8333 91.6667H79.1667C83.769 91.6667 87.5 87.9358 87.5 83.3334V25.0001C87.5 20.3977 83.769 16.6667 79.1667 16.6667Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M12.5 41.6667H87.5" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M33.3334 58.3333H33.375" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M50 58.3333H50.0417" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 58.3333H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M33.3334 75H33.375" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M50 75H50.0417" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M66.6666 75H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="justifyEvenly">
 
                         <div id="filtreEtoile">
                             <div class="titreFiltre">
                                 <hr>
                                 <h3>Étoiles</h3>
                             </div>
+                            <div class="interEtoile">
+
+                                <div>
+                                    <label for="etoileMin"><p>Étoile(s)<br>minimum</p></label>
+                                    <select name="etoileMin" id="etoileMin">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+
+                                    <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M53 3L68.45 35.9127L103 41.2229L78 66.8275L83.9 103L53 85.9127L22.1 103L28 66.8275L3 41.2229L37.55 35.9127L53 3Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="fill: rgb(223, 223, 17);"/>
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <label for="etoileMax"><p>Étoile(s)<br>maximum</p></label>
+                                    <select name="etoileMax" id="etoileMax">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+
+                                    <svg width="106" height="106" viewBox="0 0 106 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M53 3L68.45 35.9127L103 41.2229L78 66.8275L83.9 103L53 85.9127L22.1 103L28 66.8275L3 41.2229L37.55 35.9127L53 3Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="fill: rgb(223, 223, 17);"/>
+                                    </svg>
+                                </div>
+
+                            </div>
+
+
                         </div>
+
+                        <div id="filtrePrix">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Prix</h3>
+                            </div>
+                            <div class="prixFiltre">
+                                <div>
+                                    <label for="prixMin"><p>Minimum</p></label>
+                                    <input type="number" id="prixMin" name="prixMin" value="" min="0" step="1" placeholder="ex : 70">
+                                    <div class="number-input">
+                                        <button class="increment" onclick="adjustValue(1, 'prixMin')">⯅</button>
+                                        <button class="decrement" onclick="adjustValue(-1, 'prixMin')">⯆</button>
+                                    </div>
+                                    <p>€</p>
+                                </div>
+                                <div>
+                                    <label for="prixMax"><p>Maximum</p></label>
+                                    <input type="number" id="prixMax" name="prixMax" value="" min="0" step="1" placeholder="ex : 300">
+                                    <div class="number-input">
+                                        <button class="increment" onclick="adjustValue(1, 'prixMax')">⯅</button>
+                                        <button class="decrement" onclick="adjustValue(-1, 'prixMax')">⯆</button>
+                                    </div>
+                                    <p>€</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 
@@ -218,5 +333,4 @@
             include "../composants/footer/footer.php";
         ?>
     </body>
-    <script src="/js/recherche.js"></script>
 </html>
