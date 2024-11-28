@@ -52,7 +52,7 @@ $stmt = $dbh->prepare($requete);
 $stmt->bindParam(":Login", $_POST["Login"]);
 $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
 $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
-$stmt->bindParam(":fichier1", $nom_img[0]);
+$stmt->bindParam(":fichier1", $nom_img['fichier1']);
 $stmt->bindParam(":Telephone", $_POST["Telephone"]);
 $stmt->bindParam(":Nom", $_POST["Nom"]);
 $stmt->bindParam(":Prenom", $_POST["Prenom"]);
