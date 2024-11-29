@@ -176,6 +176,10 @@
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
+                    <a href="creaAvis.php?idOffre=<?php echo $idOffre;?>" id="btnAjouterAvis" class="grossisQuandHover">
+                        <img src="../icones/ajouterSVG.svg" alt="ajouter">
+                        <h3>Ajouter un avis</h3>
+                    </a>
                     <!-- Code pour un avis -->
                     <?php
                     $i=0;

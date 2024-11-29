@@ -27,6 +27,8 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
+print_r($_POST);
+
 
 $requete = "INSERT INTO tripskell.avis(";
 $requete .= "commentaire, ";
@@ -48,12 +50,17 @@ $requete.= ":titreavis);";
 
 echo $requete;
 
+$datePublication = date("d/m/Y");
+
+echo("|" . strlen($_POST["imageAvis"]) . "|");
+
+
 $stmt = $dbh->prepare($requete);
 $stmt->bindParam(":commentaire", $_POST["commentaire"]);
-$stmt->bindParam(":imageavis", $_POST["imageavis"]);
-$stmt->bindParam(":dateexperience", $_POST["dateexperience"]);
-$stmt->bindParam(":datepublication", $nom_img['datepublication']);
-$stmt->bindParam(":id_c", $_POST["id_c"]);
+$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
+$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
+$stmt->bindParam(":datepublication", $datePublication);
+$stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 $stmt->bindParam(":idoffre", $_POST["idoffre"]);
 $stmt->bindParam(":titreavis", $_POST["titreavis"]);  // on ajoute le code postal à la requete
 
@@ -85,7 +92,8 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
         ?>
 <body class="fondVisiteur">
 
-    <form name="creation" action="/pages/creaAvis.php" method="post" enctype="multipart/form-data">
+    <form name="creation" action="/pages/creaAvis.php?idOffre=<?php echo $_GET["idOffre"]?>" method="post" enctype="multipart/form-data">
+        <p><?php print_r($_SESSION)?></p>
         <div id="conteneurTitreForm">
             <h3>Ajouter un avis</h3>
             <div>
@@ -110,7 +118,7 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
             <textarea type="text" id="commentaire" name="commentaire" placeholder="Qu'avez-vous pensé de <?php 
-                $stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = 1");
+                $stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = ".$_GET["idOffre"]);
                 $stmt->execute();
                 $titreOffre = $stmt->fetchAll()[0]["titreoffre"];
                 echo $titreOffre;
@@ -153,7 +161,7 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
             </label>
         </div>
         <div class="zoneBtn">
-            <a href="/pages/detailOffre.php?idOffre="<?php echo $_GET['idoffre'];?> class="btnAnnuler">
+            <a href="/pages/detailOffre.php?idOffre="<?php echo $_GET['idOffre'];?> class="btnAnnuler">
                 <p class="texteLarge boldArchivo">Annuler</p>
                 <?php
                 include '../icones/croixSVG.svg';

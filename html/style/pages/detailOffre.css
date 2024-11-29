@@ -250,6 +250,27 @@
     overflow: hidden; /* Cache tout ce qui dépasse */
 }
 
+#btnAjouterAvis{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: black;
+    text-decoration: black;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+#btnAjouterAvis img{
+    width: 60px;
+    margin-right: 20px;
+}
+
+#btnAjouterAvis h3{
+    font-size: 2.5rem;
+}
+
 #btnTrieDate{
     display: flex;
     background-color: white;
