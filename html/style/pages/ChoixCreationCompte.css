@@ -75,52 +75,101 @@
     padding: auto;
 }
 
-
-@media screen and (max-width : 428px){
-    header div h4{
-        width: fit-content;
+main{
+    padding-top: 10%;
+}
+@media (max-width: 428px) {
+    /* GÉNÉRAL : corps de la page */
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%; /* Occupe toute la largeur de l'écran */
+        box-sizing: border-box; /* Gère les paddings dans les dimensions */
     }
 
-    .textBulle{
-        display: none;
+    /* Conteneurs principaux */
+    .pageChoixCo {
+        width: 100%; /* Prend 100% de la largeur disponible */
+        padding: 5%; /* Ajoute un peu d'espace intérieur */
+        box-sizing: border-box;
     }
 
-    form div{
-        margin-top: 5%;
+    /* Texte bulle */
+    .textBulle {
+        width: 90%; /* Réduit la largeur pour qu'elle reste centrée */
+        height: auto; /* Ajuste automatiquement la hauteur */
+        padding: 10px; /* Espace intérieur réduit pour mobile */
+        font-size: var(--typescale-body); /* Taille de police réduite */
+        margin: 10px auto; /* Centré avec marges automatiques */
     }
 
-    form div p{
-        font-size: var(--typescale-text);
-        font-family: "Archivo-bold";
+    /* Conteneur ChoixCrea */
+    .ChoixCrea {
+        flex-direction: column; /* Aligne les éléments verticalement */
+        align-items: center; /* Centre les choix */
+        gap: 15px; /* Espace entre les éléments */
     }
 
-    form input{
-        width: 385.12px;
-        height: 61px;
-        padding: 0 2%;
+    /* Bouton entre les choix */
+    .TxtEntreBtn {
+        width: auto; /* S'adapte automatiquement */
+        padding: 5px 10px; /* Marges internes réduites */
+        font-size: var(--typescale-body); /* Taille de police adaptée */
     }
 
-    .zoneBtn{
-        margin: 10% auto 3% auto;
+    /* Bouton Annuler */
+    .btnAnnuler {
+        width: 90%; /* Réduction pour mobile */
+        max-width: 300px; /* Largeur maximale contrôlée */
+        height: auto; /* Ajustement dynamique */
+        padding: 10px; /* Espace intérieur réduit */
+        font-size: var(--typescale-body); /* Taille de police réduite */
+        justify-content: center; /* Centre le contenu */
+        gap: 10px; /* Espace entre texte et icône */
     }
 
-    .btnConfirmer, .btnAnnuler{
-        width: 185px;
-        height: 60px;
-        border-radius: 15px;
+    /* Icônes SVG dans le bouton Annuler */
+    .btnAnnuler > svg {
+        width: 16px; /* Réduction de l'icône */
+        height: 16px;
     }
 
-    .btnConfirmer svg{
-        width: 35px;
-        height: 27px;
+    /* Zone des boutons */
+    .zoneBtn {
+        flex-direction: column; /* Organisation en colonne */
+        align-items: center; /* Centre les boutons */
+        width: 100%; /* Prend toute la largeur disponible */
+        gap: 15px; /* Espacement entre les boutons */
     }
 
-    .btnAnnuler svg{
-        width: 30px;
-        height: 30px;
+    /* Conteneur des éléments en général */
+    .textBulle + div {
+        flex-wrap: wrap; /* Permet d'aller à la ligne si nécessaire */
+        justify-content: center; /* Centre les éléments */
     }
 
-    .btnConfirmer p, .btnAnnuler p{
-        font-size: var(--typescale-text);
+    /* Règles spécifiques pour éviter le débordement */
+    .zoneBtn, .ChoixCrea {
+        width: 100%; /* Toujours dans les limites de l'écran */
+        max-width: 428px; /* Limite stricte pour mobiles */
+    }
+
+    /* Police générale */
+    p {
+        font-size: var(--typescale-body); /* Taille de texte adaptée au mobile */
+        word-wrap: break-word; /* Coupe les mots longs */
+        margin: 5px 0; /* Marges réduites */
+    }
+
+    /* SVG dans les conteneurs */
+    svg {
+        width: 18px; /* Taille globale des icônes */
+        height: auto; /* Conserve le ratio */
+    }
+
+    /* Footer et Header */
+    footer, header {
+        width: 100%; /* S'assure qu'ils occupent toute la largeur */
+        max-width: 428px; /* Respecte les limites pour mobile */
     }
 }
