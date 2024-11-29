@@ -74,3 +74,53 @@
     align-items: center;
     padding: auto;
 }
+
+
+@media screen and (max-width : 428px){
+    header div h4{
+        width: fit-content;
+    }
+
+    .textBulle{
+        display: none;
+    }
+
+    form div{
+        margin-top: 5%;
+    }
+
+    form div p{
+        font-size: var(--typescale-text);
+        font-family: "Archivo-bold";
+    }
+
+    form input{
+        width: 385.12px;
+        height: 61px;
+        padding: 0 2%;
+    }
+
+    .zoneBtn{
+        margin: 10% auto 3% auto;
+    }
+
+    .btnConfirmer, .btnAnnuler{
+        width: 185px;
+        height: 60px;
+        border-radius: 15px;
+    }
+
+    .btnConfirmer svg{
+        width: 35px;
+        height: 27px;
+    }
+
+    .btnAnnuler svg{
+        width: 30px;
+        height: 30px;
+    }
+
+    .btnConfirmer p, .btnAnnuler p{
+        font-size: var(--typescale-text);
+    }
+}

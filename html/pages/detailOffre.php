@@ -25,6 +25,7 @@
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
         $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
         $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
+        $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 
         $categorie = categorie($idOffre);
         
@@ -130,12 +131,11 @@
                                 </div>
                                 <hr> 
                                 <div id="conteneurTagsOffre">
-                                    <p class="tagOffre">Culturel</p>
-                                    <p class="tagOffre">Histoire</p>
-                                    <p class="tagOffre">Patrimoine</p>
-                                    <p class="tagOffre">Famille</p>
-
-
+                                    <?php
+                                    foreach($tags as $key => $tag){
+                                        echo "<p class='tagOffre'>" . $tag["nomtag"] . "</p>";
+                                    }
+                                    ?>
                                 </div>
                             </div> 
                             <div id="partieHoraires">
