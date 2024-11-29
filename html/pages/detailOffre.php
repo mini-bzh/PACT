@@ -156,7 +156,7 @@
                                         <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
                                         <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
                                         <?php
-                                        if($horaire[0]['horaire_aprem_debut'] != NULL){
+                                        if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
                                         ?>
                                         <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
                                         <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
