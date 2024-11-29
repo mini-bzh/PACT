@@ -30,29 +30,28 @@ if (key_exists("idCompte", $_SESSION)) {
 
 // $stock = false; // Stock est lié à la popup mais pour cause de soucis j'ai mit la popup de côté
 ?>
-    <?php
+<?php
 
-    $idOffre = "";
+$idOffre = "";
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
-// ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
-$i = 0;
-foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
+    // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+    $i = 0;
+    foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
 
-    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
+        $nom_img[$key_fichier] = null; // initialistion des noms des images a null
 
-    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
+        if ($fichier["size"] != 0) {  // on verifie que le fichier a ete transmit
 
-        // creation du nom de fichier en utilisant time et le type de fichier
-        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
+            // creation du nom de fichier en utilisant time et le type de fichier
+            $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
 
-        // deplacement du fichier depuis l'espace temporaire
-        move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
-
+            // deplacement du fichier depuis l'espace temporaire
+            move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+        }
     }
-}
 
-/*
+    /*
 $type2 = explode("/", $image2["types"])[1];
 $nom_img2 = time() . "." . $type2;
 if (in_array($type2, ["png", "gif", "jpeg"])) {
@@ -73,140 +72,179 @@ if (in_array($type4, ["png", "gif", "jpeg"])) {
     */
 
 
-// on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
-// requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
+    // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
+    // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
 
-$requete = "INSERT INTO tripskell.offre_pro(";
+    $requete = "INSERT INTO tripskell.offre_pro(";
+    $requete .= "titreOffre, ";
+    $requete .= "resume, ";
+    $requete .= "description_detaille, ";
+    $requete .= "tarifMinimal, ";
+    $requete .= "note, ";
+    $requete .= "accessibilite, ";
+    $requete .= "enLigne, ";
+    $requete .= "id_abo, ";
+    $requete .= "id_option, ";
+    $requete .= "numero, ";
+    $requete .= "rue, ";
+    $requete .= "ville, ";
+    $requete .= "codePostal,";
+    $requete .= "id_c, ";
+    $requete .= "img1, ";
+    $requete .= "img2, ";
+    $requete .= "img3, ";
+    $requete .= "img4, ";
+    $requete .= "dateDebut, ";
+    $requete .= "dateFin, ";
+    //$requete .= "idrepas,";
+    $requete .= "carte,";
+    $requete .= "gammeprix,";
+    $requete .= "_spectacle.duree,";
+    //$requete .= "nomLangue,";
+    $requete .= "_visite.duree,";
+    $requete .= "guidee,";
+    $requete .= "capacite,";
+    $requete .= "plans,";
+    $requete .= "nbattraction,";
+    $requete .= "agemin,";
+    $requete .= "_activite.duree,";
+    $requete .= "ageminimum,";
+    $requete .= "prestation) ";
 
-$requete .= "numero, ";
-$requete .= "rue, ";
-$requete .= "ville, ";
-$requete .= "codePostal,";
+    $requete .= "VALUES (";
+    $requete .= ":titre,";
+    $requete .= ":resume,";
+    $requete .= ":description,";
+    $requete .= ":tarif,";
+    $requete .= ":note,";
+    $requete .= ":accessibilite,";
+    $requete .= ":enLigne,";
+    $requete .= ":id_abo,";
+    $requete .= ":id_option,";
+    $requete .= ":numero,";
+    $requete .= ":rue,";
+    $requete .= ":ville,";
+    $requete .= ":codePostal,";
+    $requete .= ":id_c, ";
+    $requete .= ":img1, ";
+    $requete .= ":img2, ";
+    $requete .= ":img3, ";
+    $requete .= ":img4, ";
+    $requete .= ":dateDebut, ";
+    $requete .= ":dateFin, ";
+    // $requete .= ":idrepas,";
+    $requete .= ":carte,";
+    $requete .= ":gammeprix,";
+    $requete .= ":duree,";
+    $requete .= "_spectacle.duree,";
+    // $requete .= ":nomLangue,";
+    $requete .= ":_visite.duree,";
+    $requete .= ":guidee,";
+    $requete .= ":capacite,";
+    $requete .= ":plans,";
+    $requete .= ":nbattraction,";
+    $requete .= ":agemin,";
+    $requete .= ":_activite.duree,";
+    $requete .= ":ageminimum,";
+    $requete .= ":prestation)";
+    $requete .= "returning idOffre;";
 
-$requete .= "titreOffre, ";
-$requete .= "resume, ";
-$requete .= "description_detaille, ";
-$requete .= "tarifMinimal, ";
-$requete .= "note, ";
-$requete .= "accessibilite, ";
+    // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
+    $stmt = $dbh->prepare($requete);
+    $stmt->bindParam(":titre", $titre);
+    $stmt->bindParam(":resume", $resume);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":tarif", $tarif);
+    $stmt->bindParam(":note", $note);
+    $stmt->bindParam(":accessibilite", $accessible);
+    //$stmt->bindParam(":enLigne", $enLigne);
+    $stmt->bindParam(":id_abo", $id_abo);
+    $stmt->bindParam(":id_option", $id_option);
+    $stmt->bindParam(":numero", $numero);
+    $stmt->bindParam(":rue", $rue);
+    $stmt->bindParam(":ville", $ville);
+    $stmt->bindParam(":codePostal", $codePostal);
+    $stmt->bindParam(":id_c", $id_c);
+    $stmt->bindParam(":img1", $img1);
+    $stmt->bindParam(":img2", $image2);
+    $stmt->bindParam(":img3", $image3);
+    $stmt->bindParam(":img4", $image4);
+    // $stmt->bindParam(":idrepas");
+    $stmt->bindParam(":carte", $carte);
+    $stmt->bindParam(":gammeprix", $gammePrix);
+    $stmt->bindParam(":duree", $duree_v);
+    // $stmt->bindParam(":nomLangue");
+    $stmt->bindParam(":guidee", $guidee);
+    $stmt->bindParam(":capacite", $capacite);
+    $stmt->bindParam(":plans", $plan);
+    $stmt->bindParam(":nbattraction", $nbattraction);
+    $stmt->bindParam(":agemin", $agemin);
+    $stmt->bindParam(":ageminimum", $ageminimum);
+    $stmt->bindParam(":prestation", $prestation);
 
-$requete .= "id_c, ";
-
-$requete .= "img1, ";
-$requete .= "img2, ";
-$requete .= "img3, ";
-$requete .= "img4, ";
-
-$requete .= "id_abo,";
-
-$requete .= "idrepas,";
-$requete .= "carte,";
-$requete .= "gammeprix";
-
-$requete .= ")VALUES (";
-
-$requete .= ":numero,";
-$requete .= ":rue,";
-$requete .= ":ville,";
-$requete .= ":codePostal,";
-
-$requete .= ":titre,";
-$requete .= ":resume,";
-$requete .= ":description,";
-$requete .= ":tarif,";
-$requete .= ":note,";
-$requete .= ":accessibilite,";
-
-$requete .= ":id_c, ";
-
-$requete .= ":img1, ";
-$requete .= ":img2, ";
-$requete .= ":img3, ";
-$requete .= ":img4, ";
-
-$requete .= ":id_abo,";
-
-$requete .= ":idrepas,";
-$requete .= ":carte,";
-$requete .= ":gammeprix";
-
-$requete .= ") returning idOffre;";
-echo $requete;
-// ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
-$stmt = $dbh->prepare($requete);
-
-$stmt->bindParam(":numero", $numero);
-$stmt->bindParam(":rue", $rue);
-$stmt->bindParam(":ville", $ville);
-$stmt->bindParam(":codePostal", $codePostal);
-
-$stmt->bindParam(":titre", $titre);
-$stmt->bindParam(":resume", $resume);
-$stmt->bindParam(":description", $description);
-$stmt->bindParam(":tarif", $tarif);
-$stmt->bindParam(":note", $note);
-$stmt->bindParam(":accessibilite", $accessible);
-
-$stmt->bindParam(":id_c", $id_c);
-
-$stmt->bindParam(":img1", $img1);
-$stmt->bindParam(":img2", $image2);
-$stmt->bindParam(":img3", $image3);
-$stmt->bindParam(":img4", $image4);
-
-$stmt->bindParam(":id_abo", $id_abo);
-
-$stmt->bindParam(":idrepas", $idrepas);
-$stmt->bindParam(":carte", $carte);
-$stmt->bindParam(":gammeprix", $gammeprix);
-
-
-// On definit ici chacune des variables
-
-$numero = $_POST["num"];
-$rue = $_POST["nomRue"];
-$ville = $_POST["ville"];
-$codePostal = $_POST["codePostal"];
-
-$titre = $_POST["titre"];
-$resume = $_POST["resume"];
-$description = $_POST["description"];
-
-$tarif = $_POST["prix-minimal"];
-$tarif = 5;
-
-$note = 5;
-
-$accessible = $_POST["choixAccessible"];
-$accessible = 'Accessible';
-
-//$id_abo = $_POST["id_abo"];
-$id_abo = 'Standard';
-//$id_option = null;
-
-// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-$id_c = $_SESSION["idCompte"];
-
-$img1 = $nom_img["fichier1"];
-$img2 = $nom_img["fichier2"];
-$img3 = $nom_img["fichier3"];
-$img4 = $nom_img["fichier4"];
-
-$idrepas = "2";
-$carte = "crt.png";
-$gammeprix = "€€";
-
-// on execute tout ce qui a été fait précèdement
-$stmt->execute();
-
-$idOffre = $stmt->fetchColumn();
+    // voir pour idrepas et pour les langues... comment faire
 
 
 
-// on ferme la base de donnée
-$dbh = null;
 
-header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+    // On definit ici chacune des variables
+
+    $titre = $_POST["titre"];
+    $resume = $_POST["resume"];
+    $description = $_POST["description"];
+    $tarif = $_POST["prix-minimal"];
+    $note = 5;
+    $accessible = $_POST["choixAccessible"];
+    $enLigne = true;
+    $id_abo = $_POST["offre"];
+    $id_option = $_POST["option"];
+    $id_abo = 'Standard';
+    $id_option = null;
+    $numero = $_POST["num"];
+    $rue = $_POST["nomRue"];
+    $ville = $_POST["ville"];
+    $codePostal = $_POST["codePostal"];
+
+    $img1 = $nom_img["fichier1"];
+    $img2 = $nom_img["fichier2"];
+    $img3 = $nom_img["fichier3"];
+    $img4 = $nom_img["fichier4"];
+
+    $duree_v = $_POST["duree_v"];
+
+    $guide = $_POST["guide"];
+    if ($guide == "YES") {
+        $guidee = true;
+    } else {
+        $guidee = false;
+    }
+
+    $carte = $_POST["carte"];
+    $gammePrix = $_POST["gammeprix"];
+    $nbattraction = $_POST["nbattraction"];
+    $ageminimum = $_POST["ageminimum"];
+    $duree_s = $_POST["duree_s"];
+    $capacite = $_POST["capacite"];
+    $prestation = $_POST["prestation"];
+    $agemin = $_POST["ageminimum"];
+    $duree_a = $_POST["duree_a"];
+    $plan = $_POST["plan"];
+
+
+    // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
+    $id_c = $_SESSION["idCompte"];
+
+    // on execute tout ce qui a été fait précèdement
+    $stmt->execute();
+
+    $idOffre = $stmt->fetchColumn();
+
+
+
+    // on ferme la base de donnée
+    $dbh = null;
+
+    header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
 ?>
 
@@ -221,8 +259,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Creation Offre</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+        <!-- Favicon -->
+        <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
         <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p>
@@ -254,101 +292,366 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Champs pour sélectionner les images -->
                     <div class="champs">
                         <label for="fichier1">Selectionner une image 1 :</label>
-                        <input type="file" id="fichier1" name="fichier1" >
+                        <input type="file" id="fichier1" name="fichier1" required>
                     </div>
+
                     <div class="champs">
                         <label for="fichier2">Selectionner une image 2 :</label>
                         <input type="file" id="fichier2" name="fichier2" />
                     </div>
+
                     <div class="champs">
                         <label for="fichier3">Selectionner une image 3 :</label>
                         <input type="file" id="fichier3" name="fichier3" />
                     </div>
+
                     <div class="champs">
                         <label for="fichier4">Selectionner une image 4 :</label>
                         <input type="file" id="fichier4" name="fichier4" />
                     </div>
 
 
-                    <!-- catégorie et tags -->
+                    <!-- catégorie -->
+
                     <div class="champs">
                         <label for="categorie">Catégorie <span class="required">*</span> :</label>
                         <select id="categorie" name="categorie" required>
                             <option value="">Sélectionnez une catégorie</option>
                             <option value="activite">Activité</option>
                             <option value="visite">Visite</option>
-                            <option value="ParcDattraction">Parc d'attraction</option>
+                            <option value="parcDattraction">Parc d'attraction</option>
                             <option value="spectacle">Spectacle</option>
                             <option value="restauration">Restauration</option>
                         </select>
                     </div>
 
-                    <!--  Champs particuliers aux différentes catégories  -->
+                    <!-- // $stmt->bindParam(":idrepas");
+// $stmt->bindParam(":carte");
+// $stmt->bindParam(":gammeprix");
 
-                    <div id="restauration">
+// $stmt->bindParam(":duree");
+// $stmt->bindParam(":nomLangue");
+// $stmt->bindParam(":guidee");
+// $stmt->bindParam(":capacite");
+// $stmt->bindParam(":plans");
+// $stmt->bindParam(":nbattraction");
+// $stmt->bindParam(":agemin");
+// $stmt->bindParam(":ageminimum");
+// $stmt->bindParam(":prestation"); -->
+
+                    <div id="champsVisite">
+
                         <div class="champs">
-                            <label for="carte">Carte du retaurant <span class="required">*</span> : </label>
-                            <input type="file" id="carte" name="carte" require>
+                            <label for="duree_v">Duree de la visite <span class="required">*</span> :</label>
+                            <input type="time" id="duree_v" name="duree_v" />
+                        </div>
+                        <label>Nom langue <span class="required">*</span> :</label>
+                        <div class="parentVisite">
+                            <div>
+                                <input type="checkbox" id="lang1" name="lang[]" value="FR" />
+                                <label for="lang1">Français</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="lang2" name="lang[]" value="EN" />
+                                <label for="lang2">Anglais</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="lang3" name="lang[]" value="AL" />
+                                <label for="lang3">Allemand</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="lang4" name="lang[]" value="ES" />
+                                <label for="lang4">Espagnol</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="lang5" name="lang[]" value="CH" />
+                                <label for="lang5">chinois</label>
+                            </div>
+                        </div>
+                        <label>Guide :<span class="required">*</span> :</label>
+                        <div class="parentVisite">
+                            <div>
+                                <input type="radio" id="guidePresent" name="guide" value="YES" />
+                                <label for="guidePresent">Oui</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="guidePasPresent" name="guide" value="NO" />
+                                <label for="guidePasPresent">Non</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="champsRestauration">
+                        <div>
+                            <label for="carte">Carte <span class="required">*</span> :</label>
+                            <textarea id="carte" name="carte" placeholder="saisir les élements qu'il y a sur votre carte" maxlength="100"></textarea>
                         </div>
                         <div class="champs">
-                            <label for="categorie">Gamme prix <span class="required">*</span> :</label>
-                            <select id="categorie" name="categorie" required>
-                                <option value="">Sélectionnez une gamme de prix</option>
-                                <option value="gamme1">$</option>
-                                <option value="gamme2">$$</option>
-                                <option value="gamme3">$$$</option>
+                            <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
+                            <select id="categorie" name="categorie">
+                                <option value="$">$</option>
+                                <option value="$$">$$</option>
+                                <option value="$$$">$$$</option>
                             </select>
                         </div>
                     </div>
 
-                    <div id="spectacle">
+                    <div id="champsPA">
                         <div class="champs">
-                            <label for="capacite">Capacité <span class="required">*</span> :</label>
-                            <input type="number" id="capacite" name="capacite" placeholder="Entrez le nombre de place disponible" min=0 require>
+                            <label for="nbAttraction">Nombre Attraction :</label>
+                            <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
                         </div>
                         <div class="champs">
-                            <label for="duree">Durée</label>
-                            <input type="number" id="heures" name="heures" min="0" placeholder="Heures" style="width: 70px;">
-                            <label for="duree">h</label>
-                            <input type="number" id="minutes" name="minutes" min="0" max="59" placeholder="Minutes" style="width: 70px;">
-                            <label for="duree">min</label>
+                            <label for="ageminimum">âge minimum :</label>
+                            <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                        </div>
+                        <div class="champs">
+                            <label for="plan">Selectionner un plan :</label>
+                            <input type="file" id="plan" name="plan">
+                        </div>
+                    </div>
+                    <div id="champsSpectacle">
+                        <div class="champs">
+                            <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
+                            <input type="time" id="duree_s" name="duree_s" />
+                        </div>
+                        <div class="champs">
+                            <label for="capacite">Capacité :</label>
+                            <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
                         </div>
                     </div>
 
-                    <div id="parcattraction">
-                        <div class="champs">
-                            <label for="plan">Plan du parc <span class="required">*</span> : </label>
-                            <input type="file" id="plan" name="plan" >
+                    <div id="champsActivite">
+                        <div>
+                            <label for="prestation">Prestation proposer <span class="required">*</span> :</label>
+                            <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"></textarea>
                         </div>
                         <div class="champs">
-                            <label for="nbattraction">Nombre d'attraction :</label>
-                            <input type="number" id="nbattraction" name="capnbattractionacite" placeholder="Entrez le nombre d'attraction disponible" min=0>
+                            <label for="duree_a">Duree de la Activité <span class="required">*</span> :</label>
+                            <input type="time" id="duree_a" name="duree_a" />
                         </div>
                         <div class="champs">
-                            <label for="agemin">Age minimum :</label>
-                            <input type="number" id="agemin" name="capaagemincite" placeholder="Entrez l'age minimum requis" min=0>
+                            <label for="agemin">âge minimum :</label>
+                            <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
                         </div>
                     </div>
-                    
 
-                    <div class="champs">
-                        <label for="tags">Tags :</label>
-                        <select id="tags" name="tags">
-                            <option value="">Sélectionnez des tags</option>
-                            <option value="tag1">Français</option>
-                            <option value="tag2">Local</option>
-                            <option value="tag2">Rafraichissant</option>
-                            <option value="tag2">cuisine</option>
-                            <option value="tag2">repas</option>
-                            <option value="tag2">divertissant</option>
-                        </select>
+                    <!-- TAG -->
+                    <div id="tagsVisite">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <div>
+                                <input type="checkbox" id="tag1V" name="tag[]" value="test1" />
+                                <label for="lang1">test1</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag2V" name="tag[]" value="Culture" />
+                                <label for="lang2">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag3V" name="tag[]" value="Cuisine" />
+                                <label for="lang3">Culture</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag4V" name="tag[]" value="Amusement" />
+                                <label for="lang4">Cuisine</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag5V" name="tag[]" value="Découverte" />
+                                <label for="lang1">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag6V" name="tag[]" value="Temporaire" />
+                                <label for="lang2">Temporaire</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag7V" name="tag[]" value="Aventure" />
+                                <label for="lang3">Aventure</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag8V" name="tag[]" value="Degustation" />
+                                <label for="lang4">Degustation</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag9V" name="tag[]" value="Revigorant" />
+                                <label for="lang4">Revigorant</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tagsRestauration">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <div>
+                                <input type="checkbox" id="tag1R" name="tag[]" value="test2" />
+                                <label for="lang1">test2</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag2R" name="tag[]" value="Culture" />
+                                <label for="lang2">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag3R" name="tag[]" value="Cuisine" />
+                                <label for="lang3">Culture</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag4R" name="tag[]" value="Amusement" />
+                                <label for="lang4">Cuisine</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag5R" name="tag[]" value="Découverte" />
+                                <label for="lang1">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag6R" name="tag[]" value="Temporaire" />
+                                <label for="lang2">Temporaire</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag7R" name="tag[]" value="Aventure" />
+                                <label for="lang3">Aventure</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag8R" name="tag[]" value="Degustation" />
+                                <label for="lang4">Degustation</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag9R" name="tag[]" value="Revigorant" />
+                                <label for="lang4">Revigorant</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tagsPA">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <div>
+                                <input type="checkbox" id="tag1P" name="tag[]" value="test3" />
+                                <label for="lang1">test3</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag2P" name="tag[]" value="Culture" />
+                                <label for="lang2">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag3P" name="tag[]" value="Cuisine" />
+                                <label for="lang3">Culture</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag4P" name="tag[]" value="Amusement" />
+                                <label for="lang4">Cuisine</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag5P" name="tag[]" value="Découverte" />
+                                <label for="lang1">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag6P" name="tag[]" value="Temporaire" />
+                                <label for="lang2">Temporaire</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag7P" name="tag[]" value="Aventure" />
+                                <label for="lang3">Aventure</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag8P" name="tag[]" value="Degustation" />
+                                <label for="lang4">Degustation</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag9P" name="tag[]" value="Revigorant" />
+                                <label for="lang4">Revigorant</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tagsSpectacle">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <div>
+                                <input type="checkbox" id="tag1S" name="tag[]" value="test4" />
+                                <label for="lang1">test4</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag2S" name="tag[]" value="Culture" />
+                                <label for="lang2">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag3S" name="tag[]" value="Cuisine" />
+                                <label for="lang3">Culture</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag4S" name="tag[]" value="Amusement" />
+                                <label for="lang4">Cuisine</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag5S" name="tag[]" value="Découverte" />
+                                <label for="lang1">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag6S" name="tag[]" value="Temporaire" />
+                                <label for="lang2">Temporaire</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag7S" name="tag[]" value="Aventure" />
+                                <label for="lang3">Aventure</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag8S" name="tag[]" value="Degustation" />
+                                <label for="lang4">Degustation</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag9S" name="tag[]" value="Revigorant" />
+                                <label for="lang4">Revigorant</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tagsActivite">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <div>
+                                <input type="checkbox" id="tag1A" name="tag[]" value="test5" />
+                                <label for="lang1">test5</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag2A" name="tag[]" value="Culture" />
+                                <label for="lang2">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag3A" name="tag[]" value="Cuisine" />
+                                <label for="lang3">Culture</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag4A" name="tag[]" value="Amusement" />
+                                <label for="lang4">Cuisine</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag5A" name="tag[]" value="Découverte" />
+                                <label for="lang1">Découverte</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag6A" name="tag[]" value="Temporaire" />
+                                <label for="lang2">Temporaire</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag7A" name="tag[]" value="Aventure" />
+                                <label for="lang3">Aventure</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag8A" name="tag[]" value="Degustation" />
+                                <label for="lang4">Degustation</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tag9A" name="tag[]" value="Revigorant" />
+                                <label for="lang4">Revigorant</label>
+                            </div>
+                        </div>
                     </div>
 
 
                     <!-- prix minimum -->
                     <div class="champs">
                         <label for="prix-minimal">Prix minimal (euro) :</label>
-                        <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)">
+                        <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)" minlength="1" maxlength="3">
                     </div>
 
                     <!-- résumé -->
@@ -393,17 +696,17 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <input type="time" class="heure-debut" name="heure-debut">
                             <label for="heure-fin">à</label>
                             <input type="time" class="heure-fin" name="heure-fin">
-                        </div>  
+                        </div>
                     </div>
 
 
                     <!-- Adresse -->
                     <div class="champsAdresse">
                         <label for="adresse">Adresse <span class="required">*</span> :</label>
-                        <input type="text" id="num" name="num" placeholder="Numéro" required>
+                        <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
                         <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required>
                     </div>
 
                     <!-- Abonnement -->
@@ -416,16 +719,27 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </select>
                     </div>
 
+                    <div class="champs">
+                        <label for="date_fin_abo">Fin abonnement :</label>
+                        <input type="date" id="date_fin_abo" name="date_fin_abo" placeholder="JJ/MM/AAAA" required>
+                    </div>
+
+
                     <!-- Option -->
                     <div class="champs">
                         <label for="option">Option :</label>
                         <select id="option" name="option">
-                            <option value="">Sélectionnez des options</option>
-                            <option value="Aucune">Aucune</option>
+                            <option value="">Aucune</option>
                             <option value="AlaUne">A la une</option>
                             <option value="EnRelief">En relief</option>
-                            <option value="AlaUneEtEnRelief">A la une et En relief</option>
                         </select>
+                    </div>
+
+                    <div class="champs" id="dateOption">
+                        <label for="date_debut_opt">Date de lancement(l'option débutera à cette date) :</label>
+                        <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA">
+                        <label for="date_fi_opt">Date fin option(l'option se finira à cette date) :</label>
+                        <input type="date" id="date_fi_opt" name="date_fi_opt" placeholder="JJ/MM/AAAA">
                     </div>
 
                     <!-- accessibilité -->
@@ -494,8 +808,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 <?php
                 // }
                 ?> -->
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script src="../js/CreaOffrePro.js"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="../js/creaOffrePro.js"></script>
 
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
@@ -504,6 +818,9 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     ?>
 
                         <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement que vous avez chosis avec en plus les options si vous en avez choisis.</p>
+
+                        <!-- paiement carte bancaire -->
+                        <h3>Paiement carte bancaire</h3>
 
                         <div class="champs">
                             <label for="cb">coordonnée bancaire :<span class="required">*</span> :</label>
@@ -520,6 +837,24 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="champs">
                             <label for="TC">Titulaire de la carte :<span class="required">*</span> :</label>
                             <input type="text" id="TC" name="TC" placeholder="Prenom NOM" required>
+                        </div>
+
+                        <h3>Paiement par paypal</h3>
+
+                        <div class="champs">
+                            <label for="AdM_PP">Adresse mail :<span class="required">*</span> :</label>
+                            <input type="text" id="AdM_PP" name="AdM_PP" required>
+                        </div>
+                        <div class="champs">
+                            <label for="MDP_PP">Mot de Passe :<span class="required">*</span> :</label>
+                            <input type="text" id="MDP_PP" name="MDP_PP" required>
+                        </div>
+
+                        <h3>Paiement par prélèvement bancaire</h3>
+
+                        <div class="champs">
+                            <label for="iban">Iban :<span class="required">*</span> :</label>
+                            <input type="text" id="iban" name="iban" required>
                         </div>
                     <?php
                     }
@@ -541,7 +876,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
 
 
-    
+
 <?php
 }
 ?>

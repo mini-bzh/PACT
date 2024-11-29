@@ -1,28 +1,58 @@
-let prix = document.getElementById("prix-minimal") ;
-let num_adr = document.getElementById("num") ;
-let code_postal = document.getElementById("codePostal") ;
-
-
+let prix = document.getElementById("prix-minimal");
+let num_adr = document.getElementById("num");
+let code_postal = document.getElementById("codePostal");
+let ageminimum = document.getElementById("ageminimum");
+let nbAttraction = document.getElementById("nbAttraction");
+let capacite = document.getElementById("capacite");
+let agemin = document.getElementById("agemin");
 
 prix.onkeydown = (event) => {
-    if((isNaN(event.key) && event.key !== 'Backspace' )|| event.key ===' ') {
-      event.preventDefault();
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
     }
-  };
+};
 
 
 num_adr.onkeydown = (event) => {
-  if((isNaN(event.key) && event.key !== 'Backspace' )|| event.key ===' ') {
-      event.preventDefault();
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
     }
-  };
+};
 
 
 code_postal.onkeydown = (event) => {
-  if((isNaN(event.key) && event.key !== 'Backspace' )|| event.key ===' ') {
-      event.preventDefault();
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
     }
-  };
+};
+
+
+ageminimum.onkeydown = (event) => {
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
+    }
+};
+
+
+nbAttraction.onkeydown = (event) => {
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
+    }
+};
+
+
+capacite.onkeydown = (event) => {
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
+    }
+};
+
+agemin.onkeydown = (event) => {
+    if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
+        event.preventDefault();
+    }
+};
+
 
 
 /* --------------------------------- partie horaires  --------------------------------- */
@@ -48,7 +78,7 @@ const mapNomsJours = new Map([
 
 
 let idOffre = document.getElementById("idOffre").textContent;
-//alert(idOffre);
+alert(idOffre);
 
 //récupération des éléments nécéssaires pour les horaires
 let champJours1 = document.getElementById("heures1");
@@ -75,34 +105,31 @@ const mapJoursHoraires = new Map();
 });
 
 //appelle la fonction jourClique quand l'utilisateur clique sur un bouton jour
-mapJoursElements.forEach((value, key, map)=>{
+mapJoursElements.forEach((value, key, map) => {
     console.log(mapJoursElements);
     mapJoursElements.get(key).addEventListener("click", jourClique);
 })
 
-heureDebut1.addEventListener("keyup", ()=>{horaireEntree(heureDebut1)});
-heureFin1.addEventListener("keyup", ()=>{horaireEntree(heureFin1)});
+heureDebut1.addEventListener("keyup", () => { horaireEntree(heureDebut1) });
+heureFin1.addEventListener("keyup", () => { horaireEntree(heureFin1) });
 
-heureDebut2.addEventListener("keyup", ()=>{horaireEntree(heureDebut2)});
-heureFin2.addEventListener("keyup", ()=>{horaireEntree(heureFin2)});
+heureDebut2.addEventListener("keyup", () => { horaireEntree(heureDebut2) });
+heureFin2.addEventListener("keyup", () => { horaireEntree(heureFin2) });
 
 
-function aDeuxHoraires(idJour)
-{
+function aDeuxHoraires(idJour) {
     let horairesjour = mapJoursHoraires.get(idJour);
     return horairesjour[2].length != 0 && horairesjour[3].length != 0;
 }
 
-function jourClique()
-{
+function jourClique() {
     element = event.currentTarget;
     element.classList.toggle("jourOuvert");
 
     jourSelectionne = element.id;
 
 
-    if(element.classList.contains("jourOuvert"))
-    {
+    if (element.classList.contains("jourOuvert")) {
         champJours1.classList.add("horairesVisibles");
         nomJour1.innerText = mapNomsJours.get(element.id);
 
@@ -111,44 +138,36 @@ function jourClique()
         heureDebut2.value = mapJoursHoraires.get(jourSelectionne)[2];
         heureFin2.value = mapJoursHoraires.get(jourSelectionne)[3];
 
-        if(aDeuxHoraires(jourSelectionne))
-        {
+        if (aDeuxHoraires(jourSelectionne)) {
             champJours2.classList.add("horairesVisibles");
             btnAjoutHoraire.textContent = "-"
         }
-        else
-        {
+        else {
             champJours2.classList.remove("horairesVisibles");
             btnAjoutHoraire.textContent = "+";
         }
     }
-    else
-    {
+    else {
         champJours1.classList.remove("horairesVisibles");
         champJours2.classList.remove("horairesVisibles");
     }
 }
 
 
-function horaireEntree(element)
-{
+function horaireEntree(element) {
     let horairesJour;
     horairesJour = mapJoursHoraires.get(jourSelectionne);
 
-    if(element == heureDebut1)
-    {
+    if (element == heureDebut1) {
         horairesJour[0] = heureDebut1.value;
     }
-    else if(element == heureFin1)
-    {
+    else if (element == heureFin1) {
         horairesJour[1] = heureFin1.value;
     }
-    else if(element == heureDebut2)
-    {
+    else if (element == heureDebut2) {
         horairesJour[2] = heureDebut2.value;
     }
-    else if(element == heureFin2)
-    {
+    else if (element == heureFin2) {
         horairesJour[3] = heureFin2.value;
     }
     mapJoursHoraires.set(jourSelectionne, horairesJour);
@@ -159,15 +178,12 @@ function horaireEntree(element)
 btnAjoutHoraire.addEventListener("click", toggleHoraire2);
 
 
-function toggleHoraire2()
-{
+function toggleHoraire2() {
     champJours2.classList.toggle("horairesVisibles");
-    if(btnAjoutHoraire.textContent == "+")
-    {
+    if (btnAjoutHoraire.textContent == "+") {
         btnAjoutHoraire.textContent = "-";
     }
-    else
-    {
+    else {
         btnAjoutHoraire.textContent = "+";
         heureDebut2.value = "";
         heureFin2.value = "";
@@ -189,58 +205,43 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     let joursHorairesVides = "";                //contiendra les jours déclarés ouverts qui n'ont pas d'horaires
     let joursHorairesInvalides = "";            //contiendra les jours dont l'horaire d'ouverture est antérieure à la date de fermeture
     let joursHorairesIncoherentes = "";         //contiendra les jours dont les 2 horaires sont imbriquées ou dans le mauvais ordre
-    mapJoursHoraires.forEach((value, key)=>{
+    mapJoursHoraires.forEach((value, key) => {
         jour = mapJoursHoraires.get(key);
-        if(mapJoursElements.get(key).classList.contains("jourOuvert"))
-        {
+        if (mapJoursElements.get(key).classList.contains("jourOuvert")) {
             horairesJour = mapJoursHoraires.get(key);
-            if(horairesJour[0].length == 0 || horairesJour[1].length == 0)
-            {
-                if(joursHorairesVides.length == 0)
-                {
+            if (horairesJour[0].length == 0 || horairesJour[1].length == 0) {
+                if (joursHorairesVides.length == 0) {
                     joursHorairesVides += mapNomsJours.get(key);
                 }
-                else
-                {
+                else {
                     joursHorairesVides += ", " + mapNomsJours.get(key);
                 }
             }
-            else if(horairesJour[0] > horairesJour[1])
-            {
-                if(joursHorairesInvalides.length == 0)
-                {
+            else if (horairesJour[0] > horairesJour[1]) {
+                if (joursHorairesInvalides.length == 0) {
                     joursHorairesInvalides += mapNomsJours.get(key);
                 }
-                else
-                {
+                else {
                     joursHorairesInvalides += ", " + mapNomsJours.get(key);
                 }
             }
 
-            if(horairesJour[2].length != 0 || horairesJour[3].length != 0)
-            {
-                if(horairesJour[2].length != 0 ^ horairesJour[3].length != 0)
-                {                    
-                    if(!joursHorairesVides.includes(mapNomsJours.get(key)))
-                    {
-                        if(joursHorairesVides.length == 0)
-                        {
+            if (horairesJour[2].length != 0 || horairesJour[3].length != 0) {
+                if (horairesJour[2].length != 0 ^ horairesJour[3].length != 0) {
+                    if (!joursHorairesVides.includes(mapNomsJours.get(key))) {
+                        if (joursHorairesVides.length == 0) {
                             joursHorairesVides += mapNomsJours.get(key);
                         }
-                        else
-                        {
+                        else {
                             joursHorairesVides += ", " + mapNomsJours.get(key);
                         }
                     }
                 }
-                if(horairesJour[1] > horairesJour[2])
-                {
-                    if(joursHorairesIncoherentes.length == 0)
-                    {
+                if (horairesJour[1] > horairesJour[2]) {
+                    if (joursHorairesIncoherentes.length == 0) {
                         joursHorairesIncoherentes += mapNomsJours.get(key);
                     }
-                    else
-                    {
+                    else {
                         joursHorairesIncoherentes += ", " + mapNomsJours.get(key);
                     }
                 }
@@ -249,31 +250,28 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     });
 
     //afficher messages d'erreur si besoin
-    if(joursHorairesVides.length != 0)
-    {
+    if (joursHorairesVides.length != 0) {
         alert("Veuillez entrer des horaires pour " + joursHorairesVides);
         event.preventDefault();
     }
-    if(joursHorairesInvalides.length != 0)
-    {
+    if (joursHorairesInvalides.length != 0) {
         alert("Veuillez modifier les horaires pour que la date d'ouveture soit antérieure à la date de fermeture pour " + joursHorairesInvalides);
         event.preventDefault();
     }
-    if(joursHorairesIncoherentes.length != 0)
-    {
+    if (joursHorairesIncoherentes.length != 0) {
         alert("Les deux horaires sont incohérentes pour " + joursHorairesIncoherentes);
         event.preventDefault();
     }
 
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
-    if(joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0 
-        && idOffre)
-    {
+    if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0
+        && idOffre) {
 
         $.ajax({
             url: "/php/changeHoraireOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                              // Type de la requête (pour transmettre idOffre au fichier PHP)
-            data: {idOffre: document.idOffre,
+            data: {
+                idOffre: document.idOffre,
                 lundi: mapJoursHoraires.get("btnL"),
                 mardi: mapJoursHoraires.get("btnMa"),
                 mercredi: mapJoursHoraires.get("btnMe"),
@@ -282,11 +280,10 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
                 samedi: mapJoursHoraires.get("btnS"),
                 dimanche: mapJoursHoraires.get("btnD")
             },
-            success: function(response) {
+            success: function (response) {
                 alert(response);                        // Affiche la réponse du script PHP si appelé correctement
             },
-            error: function()
-            {
+            error: function () {
                 alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
             }
         });
@@ -296,40 +293,101 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
 document.getElementsByClassName("zoneBtn")[0].addEventListener("click", verifHorairesCorrectes);
 
 
-/* ----------------------------------------------- Gestion des catégories ----------------------------------------------- */
+/* ----------------------------------------------- categorie et tag ----------------------------------------------- */
 
-let categorieSelect = document.getElementById("categorie");
+let categorie = document.getElementById("categorie");
+categorie.addEventListener("change", changeCategoriesTags);
+function changeCategoriesTags() {
+    if (categorie.value == "visite") {
+        // catégorie
+        document.getElementById("champsVisite").style.display = "contents";
+        document.getElementById("champsSpectacle").style.display = "none";
+        document.getElementById("champsActivite").style.display = "none";
+        document.getElementById("champsPA").style.display = "none";
+        document.getElementById("champsRestauration").style.display = "none";
+        //tags
+        document.getElementById("tagsVisite").style.display = "contents";
+        document.getElementById("tagsSpectacle").style.display = "none";
+        document.getElementById("tagsActivite").style.display = "none";
+        document.getElementById("tagsPA").style.display = "none";
+        document.getElementById("tagsRestauration").style.display = "none";
 
-let divResto = document.getElementById("restauration");
-let divSpect = document.getElementById("spectacle");
-let divParc = document.getElementById("parcattraction");
-
-
-divResto.style.display = "none";
-divSpect.style.display = "none";
-divParc.style.display = "none";
-
-categorieSelect.addEventListener("change", function () {
-    
-    if (categorieSelect.value === "restauration") {
-        divResto.style.display = "block";
-        divSpect.style.display = "none";
-        divParc.style.display = "none";
-    } else 
-    if (categorieSelect.value === "spectacle") {
-        divResto.style.display = "none";
-        divSpect.style.display = "block";
-        divParc.style.display = "none";
-    } else 
-    if (categorieSelect.value === "ParcDattraction") {
-        divResto.style.display = "none";
-        divSpect.style.display = "none";
-        divParc.style.display = "block";
+    } else if (categorie.value == "spectacle") {
+        // catégorie
+        document.getElementById("champsSpectacle").style.display = "contents";
+        document.getElementById("champsActivite").style.display = "none";
+        document.getElementById("champsPA").style.display = "none";
+        document.getElementById("champsRestauration").style.display = "none";
+        document.getElementById("champsVisite").style.display = "none";
+        //tags
+        document.getElementById("tagsSpectacle").style.display = "contents";
+        document.getElementById("tagsVisite").style.display = "none";
+        document.getElementById("tagsActivite").style.display = "none";
+        document.getElementById("tagsPA").style.display = "none";
+        document.getElementById("tagsRestauration").style.display = "none";
+    } else if (categorie.value == "activite") {
+        // catégorie
+        document.getElementById("champsActivite").style.display = "contents";
+        document.getElementById("champsPA").style.display = "none";
+        document.getElementById("champsRestauration").style.display = "none";
+        document.getElementById("champsVisite").style.display = "none";
+        document.getElementById("champsSpectacle").style.display = "none";
+        //tags
+        document.getElementById("tagsActivite").style.display = "contents";
+        document.getElementById("tagsVisite").style.display = "none";
+        document.getElementById("tagsSpectacle").style.display = "none";
+        document.getElementById("tagsPA").style.display = "none";
+        document.getElementById("tagsRestauration").style.display = "none";
+    } else if (categorie.value == "parcDattraction") {
+        // catégorie
+        document.getElementById("champsPA").style.display = "contents";
+        document.getElementById("champsRestauration").style.display = "none";
+        document.getElementById("champsVisite").style.display = "none";
+        document.getElementById("champsSpectacle").style.display = "none";
+        document.getElementById("champsActivite").style.display = "none";
+        //tags
+        document.getElementById("tagsPA").style.display = "contents";
+        document.getElementById("tagsVisite").style.display = "none";
+        document.getElementById("tagsSpectacle").style.display = "none";
+        document.getElementById("tagsActivite").style.display = "none";
+        document.getElementById("tagsRestauration").style.display = "none";
+    } else if (categorie.value == "restauration") {
+        // catégorie
+        document.getElementById("champsRestauration").style.display = "contents";
+        document.getElementById("champsVisite").style.display = "none";
+        document.getElementById("champsSpectacle").style.display = "none";
+        document.getElementById("champsActivite").style.display = "none";
+        document.getElementById("champsPA").style.display = "none";
+        //tags
+        document.getElementById("tagsRestauration").style.display = "contents";
+        document.getElementById("tagsVisite").style.display = "none";
+        document.getElementById("tagsSpectacle").style.display = "none";
+        document.getElementById("tagsActivite").style.display = "none";
+        document.getElementById("tagsPA").style.display = "none";
+    } else if (categorie.value == "") {
+        // catégorie
+        document.getElementById("champsRestauration").style.display = "non";
+        document.getElementById("champsVisite").style.display = "none";
+        document.getElementById("champsSpectacle").style.display = "none";
+        document.getElementById("champsActivite").style.display = "none";
+        document.getElementById("champsPA").style.display = "none";
+        //tags
+        document.getElementById("tagsRestauration").style.display = "none";
+        document.getElementById("tagsVisite").style.display = "none";
+        document.getElementById("tagsSpectacle").style.display = "none";
+        document.getElementById("tagsActivite").style.display = "none";
+        document.getElementById("tagsPA").style.display = "none";
+    } else {
+        alert('Erreur sur les catégories')
     }
-    else {
-        divResto.style.display = "none";
-        divSpect.style.display = "none";
-        divParc.style.display = "none";
-    }
-});
+}
 
+let option = document.getElementById("option");
+option.addEventListener("change", saisieDateOption);
+function saisieDateOption() {
+    if ((option.value == "AlaUne") || (option.value == "EnRelief")) {
+        document.getElementById("dateOption").style.display = "contents";
+    }else{
+        document.getElementById("dateOption").style.display = "none"; 
+    }
+}
