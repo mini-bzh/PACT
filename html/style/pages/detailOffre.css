@@ -133,18 +133,11 @@
     width: 400px;
 }
 .offre #conteneurJoursOffre{
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     margin: 20px 0px;
 }
 
 .offre .jour{
-    border: 2px solid black;
-    border-radius: 100px;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    padding: 8px;
     margin: 0px 5px;
 }
 
@@ -188,6 +181,8 @@
     height: fit-content;
     padding: 40px;
     width: 1000px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .avis .datePublication{
@@ -289,6 +284,19 @@
     user-select: none;
 }
 
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+th, td {
+  padding: 20px;
+  font-size: 0.9em;
+  font-family: 'Archivo';
+}
+
 @media screen and (max-width : 428px){
     .conteneurOffre{
         margin-top: 2.4em;
@@ -308,7 +316,7 @@
     }
 
     .avis{
-        margin: 0px;
+        margin: 20px;
         padding: 10px;
         border-radius: 40px;
         width: 350px;
@@ -436,5 +444,11 @@
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 20px;
+        font-size: 0.8em;
+        font-family: 'Archivo';
     }
 }
