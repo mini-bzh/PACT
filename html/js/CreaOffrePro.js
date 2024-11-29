@@ -78,7 +78,6 @@ const mapNomsJours = new Map([
 
 
 let idOffre = document.getElementById("idOffre").textContent;
-alert(idOffre);
 
 //récupération des éléments nécéssaires pour les horaires
 let champJours1 = document.getElementById("heures1");
