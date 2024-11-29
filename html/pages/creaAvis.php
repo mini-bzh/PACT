@@ -29,35 +29,37 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
 
 
 $requete = "INSERT INTO tripskell.avis(";
-$requete .= "commentaire, ";
-$requete .= "imageavis, ";
-$requete .= "dateexperience, ";
-$requete .= "datepublication, ";
+//$requete .= "commentaire, ";
+//$requete .= "imageavis, ";
+//$requete .= "dateexperience, ";
+//$requete .= "datepublication, ";
+$requete .= "cadreexperience, ";
 $requete .= "id_c, ";
 $requete .= "idoffre,";
 $requete.= "titreavis) ";
 
 $requete .= "VALUES (";
-$requete .= ":commentaire, ";
-$requete .= ":imageavis, ";
-$requete .= ":dateexperience, ";
-$requete .= ":datepublication, ";
+//$requete .= ":commentaire, ";
+//$requete .= ":imageavis, ";
+//$requete .= ":dateexperience, ";
+//$requete .= ":datepublication, ";
+$requete .= ":cadreexperience, ";
 $requete .= ":id_c, ";
 $requete .= ":idoffre,";
 $requete.= ":titreavis);";
 
 echo $requete;
+print_r($_POST);
 
 $datePublication = date("d/m/Y");
 
-echo("|" . strlen($_POST["imageAvis"]) . "|");
-
 
 $stmt = $dbh->prepare($requete);
-$stmt->bindParam(":commentaire", $_POST["commentaire"]);
-$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
-$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
-$stmt->bindParam(":datepublication", $datePublication);
+//$stmt->bindParam(":commentaire", $_POST["commentaire"]);
+//$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
+//$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
+//$stmt->bindParam(":datepublication", $datePublication);
+$stmt->bindParam(":cadreexpreience", $_SESSION["idCompte"]);
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 $stmt->bindParam(":idoffre", $_POST["idoffre"]);
 $stmt->bindParam(":titreavis", $_POST["titreavis"]);  // on ajoute le code postal à la requete

@@ -3,13 +3,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    $driver = "pgsql";
+    include('../php/connection_params.php');
 
-    $server = "postgresdb";
-    $dbname = "postgres";
-
-    $user = "sae";
-    $pass = "ashton-izzY-c0mplet";
 
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') 
