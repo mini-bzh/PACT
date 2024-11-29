@@ -23,7 +23,6 @@
 
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
-        $horaire        = $dbh->query("select * from tripskell._horaire where id_hor=" . $ouverture[0]['id_hor'] . ";")->fetchAll()[0];
         $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
         $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 
@@ -143,20 +142,33 @@
                                     <img src="/icones/horairesSVG.svg" alt="icone horaires">
                                     <h4>Horaires</h4>
                                 </div>
-                                <hr><!-- future jours d'ouverture -->
+                                <hr>
+                                <!-- affichage horaires et jours d'ouverture -->
                                 <div id="conteneurJoursOffre">
-                                    <p class="jour jourOuvert">L</p>
-                                    <p class="jour jourOuvert">Ma</p>
-                                    <p class="jour jourOuvert">Me</p>
-                                    <p class="jour jourOuvert">J</p>
-                                    <p class="jour jourOuvert">V</p>
-                                    <p class="jour jourFerme">S</p>
-                                    <p class="jour jourFerme">D</p>
-                                </div>
-
-                                <!-- Horaires -->
-                                <div id="conteneurPlagesHoraires">
-                                    <p class="plageHoraire">De <span class="horaireEncadre"><?php  ?></span> à <span class="horaireEncadre"><?php ?></span></p>
+                                    <table>
+                                    <tbody>
+                                    <?php
+                                        foreach($ouverture as $key => $value){
+                                            $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $ouverture[$key]["id_hor"] ." where o.idOffre=". $idOffre." and o.id_hor=". $ouverture[$key]["id_hor"] ." and o.id_jour='". $ouverture[$key]["id_jour"] ."';")->fetchAll();
+                                    ?>
+                                    <tr>
+                                        <th><?php echo $ouverture[$key]["id_jour"]; ?></th>
+                                        <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
+                                        <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
+                                        <?php
+                                        if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
+                                        ?>
+                                        <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
+                                        <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                        <?php
+                                        }
+                                        ?>
+                                    <tr>
+                                    <?php
+                                        }
+                                    ?>
+                                    </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
