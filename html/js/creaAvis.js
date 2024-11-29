@@ -42,3 +42,4 @@ function updateFileName() {
         label.textContent = "📷 Ajouter une photo de profil"; // Remet le texte original
     }
 }
+

@@ -101,14 +101,15 @@
             </section>
 
             <section id="conteneurBouton">
-            <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
-                <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
-                <p id="txtBtnPrix">prix</p>
-            </div> 
+                <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
+                    <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
+                    <p id="txtBtnPrix">prix</p>
+                </div>
+            </section>
             
             <section class="filtrerBarre">
                 <div class="filtreHead">
-                    <svg width="89" height="81" viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="60" height="62" viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M86.3333 3H3L36.3333 42.4167V69.6667L53 78V42.4167L86.3333 3Z" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <p class="texteLarge">Filtrer les offres</p>

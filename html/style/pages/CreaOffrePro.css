@@ -384,3 +384,11 @@ input[type="radio"]:checked::after {
 #dateOption > label{
     padding-bottom: 10px;
 }
+
+#preventionPaiement{
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: red ridge 5px;
+    border-radius: 10px;
+}
