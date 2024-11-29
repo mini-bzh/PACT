@@ -57,8 +57,8 @@ function trierDate() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
-            // document.getElementById("btnTrieDate").style.border = "solid";
-            // document.getElementById("btnTrieDate").style.borderColor = "blue" ;
+            document.getElementById("btnTrieDate").style.border = "solid";
+            document.getElementById("btnTrieDate").style.borderColor = "blue" ;
 
             index++;
         })
@@ -86,8 +86,8 @@ function trierDate() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
-            // document.getElementById("btnTriePrix").style.border = "solid";
-            // document.getElementById("btnTriePrix").style.borderColor = "pink" ;
+            document.getElementById("btnTrieDate").style.border = "solid";
+            document.getElementById("btnTrieDate").style.borderColor = "red" ;
             index++;
         })
         trieDate = "decs";  // Modifie l'état du trie
@@ -95,14 +95,14 @@ function trierDate() {
     else if(trieDate == "decs"){
         let index = 0;
         // Parcour le tableau mapAvisInfos pour enlever le trie et remettre les offres dans l'ordre normale
-        mapOffresInfos.forEach((map, key, value)=>{
+        mapAvisInfos.forEach((map, key, value)=>{
 
             // Récupère l'élément dans la page
-            let elem = document.getElementById(mapOffresInfos.get(key).get("id"));
+            let elem = document.getElementById(mapAvisInfos.get(key).get("id"));
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
-            //document.getElementById("btnTriePrix").style.border = "none";
+            document.getElementById("btnTrieDate").style.border = "none";
             index++;
         })
         trieDate = "";  // Modifie l'état du trie
