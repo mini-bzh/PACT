@@ -295,7 +295,7 @@ function trierPrix() {
 
             // Rajoute une bordure bleu sur le bouton
             document.getElementById("btnTriePrix").style.border = "solid";
-            document.getElementById("btnTriePrix").style.borderColor = "blue" ;
+            document.getElementById("btnTriePrix").style.borderColor = "pink" ;
             index++;
         })
         triePrix = "decs";  // Modifie l'état du trie
