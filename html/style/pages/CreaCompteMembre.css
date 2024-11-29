@@ -237,10 +237,7 @@ button[type="button"]:hover {
     border: none;
 }
 
-.btnAnnuler > svg{
-    width: 40px;
-    height: 40px;
-}
+
 
 .btnAnnuler{
     background-color: red;
@@ -256,7 +253,46 @@ form > .zoneBtn{
     width: 100%;
 }
 
-.btnConfirmer svg{
-    width: 42px;
-    height: 31px;
+@media (max-width: 428px) {
+
+    .textBulle > p{
+        font-size: 20px;
+    }
+    form{
+        width: 95%;
+    }
+
+    .FirstSentence > p{
+        font-size: 12px;
+    }
+
+    .pageChoixCo .textBulle {
+        width: 100%;
+    }
+
+    svg{
+        width: 15px;
+    }
+
+    .zoneBtn > button >p{
+        font-size: 15px;
+        margin-right: 20%;
+    }
+
+    .zoneBtn > a > p{
+        font-size: 15px;
+    }
+
+    .zoneBtn > a{
+        height: 35px;
+    }
+
+    .zoneBtn > button{
+        height: 35px;
+        margin-left: 8%;
+       }
+
+       .zoneBtn > button > svg{
+        width: 45px;
+       }
 }

@@ -61,7 +61,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
     <div>
         <img src="/images/logo/logo_petit.png" alt="logo petit">
-        <h4>Connexion compte<br>professionnel</h4>
+        <h4>Choix creation<br>compte</h4>
     </div>
 </div>
 
