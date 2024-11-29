@@ -172,10 +172,13 @@
                 <section class="conteneurAvis">
                     <!-- Code pour un avis -->
                     <?php
+                    $i=0;
                     foreach ($avis as $key => $avisM) {
                         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
                     ?>
-                    <article class="avis">
+                    <article id="Avis<?php echo $i?>" class="avis">
+                        <!-- Date de publication-->
+                        <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
                             <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
@@ -204,6 +207,7 @@
                         ?>
                     </article>
                     <?php
+                    $i++;
                     }
                     ?>
                 </section>
@@ -214,6 +218,7 @@
             include "../composants/footer/footer.php";
         ?>
     </body>
+    <script src="/js/detailOffre.js"></script>
     <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->
 </html>
 

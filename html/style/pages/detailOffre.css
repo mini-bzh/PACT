@@ -190,6 +190,10 @@
     width: 1000px;
 }
 
+.avis .datePublication{
+    display: none;
+}
+
 .avis .conteneurMembreAvis{
     display: flex;
     align-items: center;
