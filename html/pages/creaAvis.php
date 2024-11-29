@@ -44,7 +44,7 @@ $requete .= ":dateexperience, ";
 $requete .= ":datepublication, ";
 $requete .= ":id_c, ";
 $requete .= ":idoffre,";
-$requete.= ":titreavis) ";
+$requete.= ":titreavis);";
 
 echo $requete;
 
@@ -97,7 +97,7 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
             <label for="titre">Titre <span class="required">*</span> :</label>
             <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" required>
         </div>
-        <div class="champs">
+        <!--<div class="champs">
         <label for="note">Note <span class="required">*</span> :</label>
 
             <div id="conteneurNote">
@@ -105,7 +105,7 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
                 <p>/5</p>
                 <img src="../icones/etoilePleineSVG.svg" alt="étoile">
             </div>
-        </div>   
+        </div>   -->
 
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
@@ -136,11 +136,11 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
             
             <div class="champs">
                 <label for="dateExperience">Date de la visite<span class="required">*</span> :</label>
-                <input type="date" name="dateExperience" id="dateExperience">
+                <input type="date" name="dateExperience" id="dateExperience" required>
             </div>
         </div>
         <div class="champs" id="selectPhoto">
-            <label for="fichier1">Ajouter une photo</label>
+            <label for="fichier1" id="customFileLabel">Ajouter une photo</label>
             <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
             <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
