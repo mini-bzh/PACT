@@ -6,8 +6,6 @@ let titreSelect = document.querySelectorAll("#menuContexte .conteneurSVGtexte p"
 
 btnDeplierMenu.addEventListener("click", toggleMenuContexte);
 
-console.log(titreSelect);
-
 function toggleMenuContexte()
 {
     menuDeroulant.classList.toggle("deplie");
@@ -19,8 +17,8 @@ optionsContexte.forEach(option => {
 
 function optionSelectionnee()
 {
-    console.log(event.target.textContent);
     titreSelect.textContent = event.target.textContent;
+    inputContexte.value = event.target.textContent;
 
     toggleMenuContexte();
 }

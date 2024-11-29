@@ -5,12 +5,39 @@
     width: 100%;
 }
 
+#conteneurTitreForm h3{
+    border-left: 20px solid var(--secondary);
+    padding-left: 15px;
+}
+
+#conteneurTitreForm p{
+    margin: 25px 0px;
+}
+
 .champs input, .champs textarea{
     font-size: 20px;
 }
 
 #titre{
     width: 450px;
+}
+
+#conteneurNote{
+    display: flex;
+    align-items: center;
+}
+
+#note{
+    width: 65px;
+}
+
+#conteneurNote p{
+    margin-left: 5px;
+}
+#conteneurNote img{
+    height: 25px;
+    margin-left: 2px;
+    transform: translateY(-2px);
 }
 
 #commentaire{
@@ -20,8 +47,9 @@
 }
 
 #conteneurContexteDate{
+    display: flex;
+    flex-wrap: nowrap;
     width: 100%;
-    height: fit-content;
 }
 
 #menuContexte{
@@ -61,6 +89,11 @@
 
 #conteneurContexteDate .deplie #conteneurOptionsContexte{
     display: block;
+    height: fit-content;
+}
+
+#conteneurContexteDate .champs{
+    width: 45%;
 }
 
 .deplie .conteneurSVGtexte img{
@@ -73,9 +106,18 @@
     margin: 0px;
 }
 
+#dateExperience{
+    width: fit-content;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 15px;
+    font-family: "Archivo";
+}
 
+#conteneurConfirmation label{
+    font-size: 14px;
+}
 
-#conteneurTitreForm h3{
-    border-left: 20px solid var(--secondary);
-    padding-left: 15px;
+#selectPhoto{
+    margin-top: 20px;
 }

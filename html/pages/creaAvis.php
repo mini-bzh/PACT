@@ -96,6 +96,15 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
         <div class="champs">
             <label for="titre">Titre <span class="required">*</span> :</label>
             <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" required>
+        </div>
+        <div class="champs">
+        <label for="note">Note <span class="required">*</span> :</label>
+
+            <div id="conteneurNote">
+                <input type="text" id="note" name="note" placeholder="Note" required>
+                <p>/5</p>
+                <img src="../icones/etoilePleineSVG.svg" alt="étoile">
+            </div>
         </div>   
 
         <div class="champs">
@@ -107,24 +116,42 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
                 echo $titreOffre;
             ?> ?" required></textarea>
         </div>
-        <div id="conteneurContexteDate" class="champs">
-            <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
-            <input type="hidden" name="contexte" id="inputContexte">
-            <div id="menuContexte">
-                <div class="conteneurSVGtexte">
-                    <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
-                    <p>Séléctionner un contexte</p>
-                </div>
-                <div id="conteneurOptionsContexte">
-                    <p>en solo</p>
-                    <p>en famille</p>
-                    <p>entre amis</p>
-                    <p>affaires</p>
+        <div id="conteneurContexteDate">
+            <div class="champs">
+                <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
+                <input type="hidden" name="contexte" id="inputContexte">
+                <div id="menuContexte">
+                    <div class="conteneurSVGtexte">
+                        <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
+                        <p>Séléctionner un contexte</p>
+                    </div>
+                    <div id="conteneurOptionsContexte">
+                        <p>en solo</p>
+                        <p>en famille</p>
+                        <p>entre amis</p>
+                        <p>affaires</p>
+                    </div>
                 </div>
             </div>
+            
+            <div class="champs">
+                <label for="dateExperience">Date de la visite<span class="required">*</span> :</label>
+                <input type="date" name="dateExperience" id="dateExperience">
+            </div>
+        </div>
+        <div class="champs" id="selectPhoto">
+            <label for="fichier1">Ajouter une photo</label>
+            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
+            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
 
-
+        <div id="conteneurConfirmation">
+            <input type="checkbox" name="certifAvis" required>
+            <label for="certifAvis">En publiant cet avis, je certifie qu'il reflète ma propre opinion et mon expérience, que je n'ai aucun lien
+                (professionnel ou personnel) avec le professionnel de tourisme de cette offre, et que je n'ai reçu aucune compensation financière
+                ou autre de sa part pour rédiger cet avis.
+            </label>
+        </div>
         <div class="zoneBtn">
             <a href="/pages/detailOffre.php?idOffre="<?php echo $_GET['idoffre'];?> class="btnAnnuler">
                 <p class="texteLarge boldArchivo">Annuler</p>
@@ -140,8 +167,6 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
             ?>
             </button>
         </div>
-
-
     </form>
 
 </body>
