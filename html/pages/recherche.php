@@ -35,7 +35,7 @@
     }
     else
     {
-        $stmt = $dbh->query("SELECT * from tripskell.offre_visite;");
+        $stmt = $dbh->query("SELECT * from tripskell.offre_visiteur;");
     }
 
     $stmt->execute();
