@@ -347,7 +347,8 @@ input[type="number"]::-webkit-inner-spin-button {
         padding: 10px;
     }
     #conteneurOffres>article{
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
     #conteneurOffres .lienApercuOffre{
         margin: 10px;
