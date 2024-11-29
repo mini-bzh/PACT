@@ -27,8 +27,6 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
-print_r($_POST);
-
 
 $requete = "INSERT INTO tripskell.avis(";
 $requete .= "commentaire, ";
@@ -93,7 +91,6 @@ header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on r
 <body class="fondVisiteur">
 
     <form name="creation" action="/pages/creaAvis.php?idOffre=<?php echo $_GET["idOffre"]?>" method="post" enctype="multipart/form-data">
-        <p><?php print_r($_SESSION)?></p>
         <div id="conteneurTitreForm">
             <h3>Ajouter un avis</h3>
             <div>
