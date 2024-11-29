@@ -8,18 +8,19 @@
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
         
         if(!empty( $dbh->query("select * from tripskell._visite where idoffre=" . $idOffre . ";")->fetchAll() )) {
-        return "visite";
+            return "visite";
         }
         if(!empty( $dbh->query("select * from tripskell._spectacle where idoffre=" . $idOffre . ";")->fetchAll() )) {
-        return "spectacle";
+            return "spectacle";
         }
         if(!empty( $dbh->query("select * from tripskell._parcAttraction where idoffre=" . $idOffre . ";")->fetchAll() )) {
-        return "parc d'attraction";
+            return "parc d'attraction";
         } 
         if(!empty( $dbh->query("select * from tripskell._restauration where idoffre=" . $idOffre . ";")->fetchAll() )) {
-        return "restauration";
+            return "restauration";
         } 
         if(!empty( $dbh->query("select * from tripskell._activite where idoffre=" . $idOffre . ";")->fetchAll() )) {
-        return "activité";
+            return "activité";
         }
     }
+?>

@@ -14,7 +14,9 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("visibilite", true);               //indique si l'élément doit être montré par la recherche
         mapTempo.set("element", element);               //l'élément dans le DOM
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
-        
+        mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent)
+        mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent)
+
         let prix = document.querySelectorAll("#" + element.id + " .text-overlay span")[0].textContent;
         prix = prix.substring(0, prix.length-1);
         mapTempo.set("prix", parseInt(prix));   //prix
@@ -23,7 +25,6 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
         mapOffresInfos.set(element.id, mapTempo);
     });
-
     return mapOffresInfos;
 }
 
@@ -32,13 +33,13 @@ function updateAffichageOffres()
 /*masque les offres qui doivent être affichées par la recherche et les filtrer, masque les autres*/
 {
     mapOffresInfos.forEach((map, key, value)=>{
-        if(!mapOffresInfos.get(key).get("visibilite") && eric(key))
+        if((mapOffresInfos.get(key).get("visibilite")) && (verifFiltre(key)))
         {
-            mapOffresInfos.get(key).get("element").classList.add("displayNone");
+            mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
         else
         {
-            mapOffresInfos.get(key).get("element").classList.remove("displayNone");
+            mapOffresInfos.get(key).get("element").classList.add("displayNone");
         }
     });
 }
@@ -127,12 +128,6 @@ function rechercher()
 }
 
 
-function eric(idOffre)
-{
-    return true;
-}
-
-
 // ================== FILTRER ========================
 
 let dateInput1 = document.querySelector("#dateDeb");
@@ -172,6 +167,8 @@ function adjustValue(increment, prix) {
     
     // Empêcher les valeurs négatives
     inputElement.value = Math.max(0, currentValue);
+
+    updateAffichageOffres();
 }
 
 
@@ -193,6 +190,7 @@ function adjustDates(event) {
     if ((minDate > maxDate) && (event.target == dateDeb)) {
         dateDeb.value = dateFin.value; // Réinitialiser la date de début pour correspondre à la date de fin
     }
+    updateAffichageOffres();
 }
 
 // Ajouter des écouteurs d'événements pour les changements de valeur
@@ -217,6 +215,7 @@ function adjustOptions(event) {
     if ((event.target == etoileMin) && (min > max)) {
         etoileMin.value = etoileMax.value; // Réinitialiser min pour correspondre à max
     }
+    updateAffichageOffres();
 }
 
 // Écouter les changements de valeur dans les deux sélecteurs
@@ -246,11 +245,170 @@ function ajustePrix(event) {
             prixMin.value = prixMax.value; // Réinitialiser min pour correspondre à max
         }
     }
+    updateAffichageOffres();
 }
 
 // Écouter les changements de valeur dans les deux sélecteurs
 prixMin.addEventListener('change', ajustePrix);
 prixMax.addEventListener('change', ajustePrix);
+
+
+// VERIFIE SI UNE OFFRE CORRESPOND AUX CRITERES
+
+let critCategorie = [];
+let critOuverture = [];
+let critLieu = "";
+let critDateDeb = null;
+let critDateFin = null;
+let critPrixMin = null;
+let critPrixMax = null;
+
+// liste des cases de catégories cochées
+document.querySelectorAll('#categorie input[type="checkbox"]').forEach((cat) => {
+    cat.addEventListener('change', (event) => {
+
+        let value = event.target.value;
+
+        if (event.target.checked) {
+            // Si la case est cochée, on ajoute sa valeur au tableau
+            if (!critCategorie.includes(value)) {
+                critCategorie.push(value);
+            }
+        } else {
+            // Si la case est décochée, on enlève sa valeur du tableau
+            let index = critCategorie.indexOf(value);
+            if (index !== -1) {
+                critCategorie.splice(index, 1);
+            }
+        }
+
+        updateAffichageOffres();
+    });
+});
+
+// liste des cases d'ouverture cochées
+document.querySelectorAll('#ouverture input[type="checkbox"]').forEach((ouv) => {
+    ouv.addEventListener('change', (event) => {
+
+        let value = event.target.value;
+
+        if (event.target.checked) {
+            // Si la case est cochée, on ajoute sa valeur au tableau
+            if (!critOuverture.includes(value)) {
+                critOuverture.push(value);
+            }
+        } else {
+            // Si la case est décochée, on enlève sa valeur du tableau
+            let index = critOuverture.indexOf(value);
+            if (index !== -1) {
+                critOuverture.splice(index, 1);
+            }
+        }
+        updateAffichageOffres();
+    });
+});
+
+// lieu rentrée en paramètre
+document.getElementById("lieu").addEventListener("keyup", (event) => {
+
+    critLieu = event.target.value;
+    updateAffichageOffres();
+
+});
+
+// date de début / fin entrée
+document.getElementById("dateDeb").addEventListener("change", (event) => {
+
+    critDateDeb = new Date(event.target.value);
+    updateAffichageOffres();
+
+});
+
+document.getElementById("dateFin").addEventListener("change", (event) => {
+
+    critDateFin = new Date(event.target.value);
+    updateAffichageOffres();
+
+});
+
+
+// Prix min / max
+document.getElementById("prixMin").addEventListener("change", (event) => {
+
+    critPrixMin = event.target.value;
+    updateAffichageOffres();
+
+});
+
+document.getElementById("prixMax").addEventListener("change", (event) => {
+
+    critPrixMax = event.target.value;
+    updateAffichageOffres();
+
+});
+
+
+function verifFiltre(idOffre)
+{
+    let valide = false;
+
+    let valideCat = false;
+    let valideLieu = false;
+    let valideOuv = false;
+    let valideDate = false;
+    let validePrix = false;
+
+    let offre = mapOffresInfos.get(idOffre);
+    if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critDateDeb == null) && (critDateFin == null) && (critPrixMin == null) && (critPrixMax == null)){
+        valide = true;
+    } else {
+        if (critCategorie.length > 0) {
+            if (critCategorie.includes(offre.get("categorie"))){
+                valideCat = true;
+                console.log("cat ok");
+            } else{
+                console.log("non1 -> " + offre.get("categorie") + " diff " + critCategorie);
+            }
+        } else {
+            valideCat = true;
+        }
+
+        if (critLieu != "") {
+            if (offre.get("ville").includes(critLieu)) {
+                valideLieu = true;
+                console.log("lieu ok");
+            } else{
+                console.log("non2");
+            }
+        } else {
+            valideLieu = true;
+        }
+
+        if (critOuverture.length > 0) {
+            if ((critOuverture.includes("ouvert")) && (offre.get("ouverture"))){
+                valideOuv = true;
+                console.log("ouv ok");
+            } else if ((critOuverture.includes("ferme")) && (!offre.get("ouverture"))){
+                valideOuv = true;
+                console.log("fer ok");
+            } else{
+                console.log("non3");
+            }
+        } else {
+            valideOuv = true;
+        }
+
+
+
+        if ((valideCat) && (valideLieu) && (valideOuv)) {
+            valide = true;
+        }
+        
+    }
+    console.log(valide);
+
+    return valide;
+}
 
 
 // ================== FONCTIONS TRIES PRIX ========================

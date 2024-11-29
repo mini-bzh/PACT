@@ -21,7 +21,7 @@ function af_offre($row) {
             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
         </div>
         <div class="conteneurSpaceBetween">
-            <p><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
+            <p id="cat"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
             <p class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
         </div>
@@ -35,7 +35,7 @@ function af_offre($row) {
 
         <div class="conteneurSVGtexte">
             <img src="/icones/adresseSVG.svg" alt="adresse">
-            <p><?php echo $row["ville"]?></p>
+            <p id="ville"><?php echo $row["ville"]?></p>
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">

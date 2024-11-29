@@ -1,13 +1,14 @@
 <?php
     session_start(); // recuperation de la sessions
-
+    
     // recuperation des parametre de connection a la BdD
     include('../php/connection_params.php');
-
+    
+    // Inclue la fonction qui verifie la catégorie d'une offre
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
-
+    
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
     // cree $compteMembre qui est true quand on est sur un compte membre et false sinon
@@ -17,8 +18,6 @@
     // contient fonction caf_offre pour afficher les offres
     include('../php/affichage_offre.php');
 
-    // Inclue la fonction qui verifie la catégorie d'une offre
-    // include('../php/verif_categorie.php');
 
     if($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
                          offres sinon */
@@ -124,19 +123,19 @@
 
                             <fieldset id="categorie">
                                 <label>
-                                    <input type="checkbox" name="categorie" value="parcAttr">
+                                    <input type="checkbox" name="categorie" value="parc d'attraction">
                                     <p>Parc d'attractions</p>
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="categorie" value="rest">
+                                    <input type="checkbox" name="categorie" value="restauration">
                                     <p>Restauration</p>
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="categorie" value="spec">
+                                    <input type="checkbox" name="categorie" value="spectacle">
                                     <p>Spectacle</p>
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="categorie" value="activ">
+                                    <input type="checkbox" name="categorie" value="activité">
                                     <p>Activités</p>
                                 </label>
                                 <label>

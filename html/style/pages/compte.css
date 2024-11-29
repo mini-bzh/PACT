@@ -403,7 +403,9 @@ body.no-scroll {
     hr + .textBulle{
         position: relative;
         border-right: none;
-        right: -100px;
+        width: 243px;
+        right: -172px;
+        border-radius: 10px 0 0 10px;
     }
     
     .decaleBulleGauche{
