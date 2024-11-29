@@ -20,10 +20,11 @@ if (!isset($_SESSION["idCompte"])) {
 // On va récupérer ici l'identifiant id_c présent dans les vues pro.
 if (key_exists("idCompte", $_SESSION)) {
     // reccuperation de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+    //$idproprive = $dbh->query("select id_c from tripskell.pro_prive;")->fetchAll()[0];
 
     // reccuperation de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
 }
 
 
@@ -442,39 +443,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="tags">
                             <div>
                                 <input type="checkbox" id="tag1V" name="tag[]" value="test1" />
-                                <label for="lang1">test1</label>
+                                <label for="tag1V">test1</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag2V" name="tag[]" value="Culture" />
-                                <label for="lang2">Découverte</label>
+                                <label for="tag2V">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag3V" name="tag[]" value="Cuisine" />
-                                <label for="lang3">Culture</label>
+                                <label for="tag3V">Culture</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag4V" name="tag[]" value="Amusement" />
-                                <label for="lang4">Cuisine</label>
+                                <label for="tag4V">Cuisine</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag5V" name="tag[]" value="Découverte" />
-                                <label for="lang1">Découverte</label>
+                                <label for="tag5V">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag6V" name="tag[]" value="Temporaire" />
-                                <label for="lang2">Temporaire</label>
+                                <label for="tag6V">Temporaire</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag7V" name="tag[]" value="Aventure" />
-                                <label for="lang3">Aventure</label>
+                                <label for="tag7V">Aventure</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag8V" name="tag[]" value="Degustation" />
-                                <label for="lang4">Degustation</label>
+                                <label for="tag8V">Degustation</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag9V" name="tag[]" value="Revigorant" />
-                                <label for="lang4">Revigorant</label>
+                                <label for="tag9V">Revigorant</label>
                             </div>
                         </div>
                     </div>
@@ -484,39 +485,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="tags">
                             <div>
                                 <input type="checkbox" id="tag1R" name="tag[]" value="test2" />
-                                <label for="lang1">test2</label>
+                                <label for="tag1R">test2</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag2R" name="tag[]" value="Culture" />
-                                <label for="lang2">Découverte</label>
+                                <label for="tag2R">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag3R" name="tag[]" value="Cuisine" />
-                                <label for="lang3">Culture</label>
+                                <label for="tag3R">Culture</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag4R" name="tag[]" value="Amusement" />
-                                <label for="lang4">Cuisine</label>
+                                <label for="tag4R">Cuisine</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag5R" name="tag[]" value="Découverte" />
-                                <label for="lang1">Découverte</label>
+                                <label for="tag5R">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag6R" name="tag[]" value="Temporaire" />
-                                <label for="lang2">Temporaire</label>
+                                <label for="tag6R">Temporaire</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag7R" name="tag[]" value="Aventure" />
-                                <label for="lang3">Aventure</label>
+                                <label for="tag7R">Aventure</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag8R" name="tag[]" value="Degustation" />
-                                <label for="lang4">Degustation</label>
+                                <label for="tag8R">Degustation</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag9R" name="tag[]" value="Revigorant" />
-                                <label for="lang4">Revigorant</label>
+                                <label for="tag9R">Revigorant</label>
                             </div>
                         </div>
                     </div>
@@ -526,39 +527,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="tags">
                             <div>
                                 <input type="checkbox" id="tag1P" name="tag[]" value="test3" />
-                                <label for="lang1">test3</label>
+                                <label for="tag1P">test3</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag2P" name="tag[]" value="Culture" />
-                                <label for="lang2">Découverte</label>
+                                <label for="tag2P">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag3P" name="tag[]" value="Cuisine" />
-                                <label for="lang3">Culture</label>
+                                <label for="tag3P">Culture</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag4P" name="tag[]" value="Amusement" />
-                                <label for="lang4">Cuisine</label>
+                                <label for="tag4P">Cuisine</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag5P" name="tag[]" value="Découverte" />
-                                <label for="lang1">Découverte</label>
+                                <label for="tag5P">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag6P" name="tag[]" value="Temporaire" />
-                                <label for="lang2">Temporaire</label>
+                                <label for="tag6P">Temporaire</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag7P" name="tag[]" value="Aventure" />
-                                <label for="lang3">Aventure</label>
+                                <label for="tag7P">Aventure</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag8P" name="tag[]" value="Degustation" />
-                                <label for="lang4">Degustation</label>
+                                <label for="tag8P">Degustation</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag9P" name="tag[]" value="Revigorant" />
-                                <label for="lang4">Revigorant</label>
+                                <label for="tag9P">Revigorant</label>
                             </div>
                         </div>
                     </div>
@@ -568,39 +569,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="tags">
                             <div>
                                 <input type="checkbox" id="tag1S" name="tag[]" value="test4" />
-                                <label for="lang1">test4</label>
+                                <label for="tag1S">test4</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag2S" name="tag[]" value="Culture" />
-                                <label for="lang2">Découverte</label>
+                                <label for="tag2S">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag3S" name="tag[]" value="Cuisine" />
-                                <label for="lang3">Culture</label>
+                                <label for="tag3S">Culture</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag4S" name="tag[]" value="Amusement" />
-                                <label for="lang4">Cuisine</label>
+                                <label for="tag4S">Cuisine</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag5S" name="tag[]" value="Découverte" />
-                                <label for="lang1">Découverte</label>
+                                <label for="tag5S">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag6S" name="tag[]" value="Temporaire" />
-                                <label for="lang2">Temporaire</label>
+                                <label for="tag6S">Temporaire</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag7S" name="tag[]" value="Aventure" />
-                                <label for="lang3">Aventure</label>
+                                <label for="tag7S">Aventure</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag8S" name="tag[]" value="Degustation" />
-                                <label for="lang4">Degustation</label>
+                                <label for="tag8S">Degustation</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag9S" name="tag[]" value="Revigorant" />
-                                <label for="lang4">Revigorant</label>
+                                <label for="tag9S">Revigorant</label>
                             </div>
                         </div>
                     </div>
@@ -610,39 +611,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="tags">
                             <div>
                                 <input type="checkbox" id="tag1A" name="tag[]" value="test5" />
-                                <label for="lang1">test5</label>
+                                <label for="tag1A">test5</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag2A" name="tag[]" value="Culture" />
-                                <label for="lang2">Découverte</label>
+                                <label for="tag2A">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag3A" name="tag[]" value="Cuisine" />
-                                <label for="lang3">Culture</label>
+                                <label for="tag3A">Culture</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag4A" name="tag[]" value="Amusement" />
-                                <label for="lang4">Cuisine</label>
+                                <label for="tag4A">Cuisine</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag5A" name="tag[]" value="Découverte" />
-                                <label for="lang1">Découverte</label>
+                                <label for="tag5A">Découverte</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag6A" name="tag[]" value="Temporaire" />
-                                <label for="lang2">Temporaire</label>
+                                <label for="tag6A">Temporaire</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag7A" name="tag[]" value="Aventure" />
-                                <label for="lang3">Aventure</label>
+                                <label for="tag7A">Aventure</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag8A" name="tag[]" value="Degustation" />
-                                <label for="lang4">Degustation</label>
+                                <label for="tag8A">Degustation</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="tag9A" name="tag[]" value="Revigorant" />
-                                <label for="lang4">Revigorant</label>
+                                <label for="tag9A">Revigorant</label>
                             </div>
                         </div>
                     </div>
@@ -758,6 +759,53 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                                                                 ?> </label>
                 </div> -->
 
+                <?php
+                    if (in_array($_SESSION["idCompte"], $idproprive)) { // permet de vérifier l'id_c
+                    ?>
+                    <div id="preventionPaiement">
+                        <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement et des options que vous aurez choisis.</p>
+                        <p>La prise d'un abonnement est obligatoire pour la publication d'une offre sur le site.</p>
+                    </div>  
+                        <!-- paiement carte bancaire -->
+                        <h4>Paiement carte bancaire</h4>
+                        <div class="champs">
+                            <label for="cb">coordonnée bancaire :</label>
+                            <input type="text" id="cb" name="cb" placeholder="Entrez vos coordonnées bancaires">
+                        </div>
+                        <div class="champs">
+                            <label for="DE">Date expiration :</label>
+                            <input type="text" id="DE" name="DE" placeholder="MM/AA">
+                        </div>
+                        <div class="champs">
+                            <label for="crypto">Cryptogramme :</label>
+                            <input type="text" id="crypto" name="crypto" placeholder="Ex: 123">
+                        </div>
+                        <div class="champs">
+                            <label for="TC">Titulaire de la carte :-</label>
+                            <input type="text" id="TC" name="TC" placeholder="Prenom NOM">
+                        </div>
+
+                        <!-- paiement paypal -->
+                        <h4>Paiement par paypal</h4>
+                        <div class="champs">
+                            <label for="AdM_PP">Adresse mail :</label>
+                            <input type="text" id="AdM_PP" name="AdM_PP">
+                        </div>
+                        <div class="champs">
+                            <label for="MDP_PP">Mot de Passe :</label>
+                            <input type="text" id="MDP_PP" name="MDP_PP">
+                        </div>
+
+                        <!-- paiement prélèvement bancaire -->
+                        <h4>Paiement par prélèvement bancaire</h4>
+                        <div class="champs">
+                            <label for="iban">Iban :</label>
+                            <input type="text" id="iban" name="iban">
+                        </div>
+                    <?php
+                    }
+                    ?>
+
 
                     <!-- Bouton de confirmation d'ajout d'offre ou d'annulation -->
 
@@ -813,52 +861,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
-                    <?php
-                    if (in_array($id_c, $idproprive)) { // permet de vérifier l'id_c 
-                    ?>
-
-                        <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement que vous avez chosis avec en plus les options si vous en avez choisis.</p>
-
-                        <!-- paiement carte bancaire -->
-                        <h3>Paiement carte bancaire</h3>
-
-                        <div class="champs">
-                            <label for="cb">coordonnée bancaire :<span class="required">*</span> :</label>
-                            <input type="text" id="cb" name="cb" placeholder="Entrez vos coordonnées bancaires" required>
-                        </div>
-                        <div class="champs">
-                            <label for="DE">Date expiration :<span class="required">*</span> :</label>
-                            <input type="text" id="DE" name="DE" placeholder="MM/AA" required>
-                        </div>
-                        <div class="champs">
-                            <label for="crypto">Cryptogramme :<span class="required">*</span> :</label>
-                            <input type="text" id="crypto" name="crypto" placeholder="Ex: 123" required>
-                        </div>
-                        <div class="champs">
-                            <label for="TC">Titulaire de la carte :<span class="required">*</span> :</label>
-                            <input type="text" id="TC" name="TC" placeholder="Prenom NOM" required>
-                        </div>
-
-                        <h3>Paiement par paypal</h3>
-
-                        <div class="champs">
-                            <label for="AdM_PP">Adresse mail :<span class="required">*</span> :</label>
-                            <input type="text" id="AdM_PP" name="AdM_PP" required>
-                        </div>
-                        <div class="champs">
-                            <label for="MDP_PP">Mot de Passe :<span class="required">*</span> :</label>
-                            <input type="text" id="MDP_PP" name="MDP_PP" required>
-                        </div>
-
-                        <h3>Paiement par prélèvement bancaire</h3>
-
-                        <div class="champs">
-                            <label for="iban">Iban :<span class="required">*</span> :</label>
-                            <input type="text" id="iban" name="iban" required>
-                        </div>
-                    <?php
-                    }
-                    ?>
 
                 </form>
             </div>
