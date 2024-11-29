@@ -250,6 +250,24 @@
     overflow: hidden; /* Cache tout ce qui dépasse */
 }
 
+#btnTrieDate{
+    display: flex;
+    background-color: white;
+    width: 100px;
+    height: 45px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#iconeTrieDate{
+    width: 40px;
+}
+
+#txtBtnDate{
+    user-select: none;
+}
+
 @media screen and (max-width : 428px){
     .conteneurOffre{
         margin-top: 2.4em;

@@ -170,6 +170,12 @@
                 <h1>Avis</h1>
                 <!-- Avis -->
                 <section class="conteneurAvis">
+                    <section class="conteneurBtn">
+                        <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
+                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <p id="txtBtnDate">date</p>
+                        </div> 
+                    </section>
                     <!-- Code pour un avis -->
                     <?php
                     $i=0;
