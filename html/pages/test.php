@@ -9,6 +9,10 @@ $stmt = $dbh->prepare("select * from tripskell.avis");
 $stmt->execute();
 $result = $stmt->fetchAll();
 
+$stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = 1");
+$stmt->execute();
+$titreOffre = $stmt->fetchAll()[0]["titreoffre"];
+
 foreach ($result as $row)
 {
     print_r($row);

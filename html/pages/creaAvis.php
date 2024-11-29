@@ -1,0 +1,149 @@
+<?php
+session_start(); // Démarre la session pour récupérer les données de session
+
+// Récupération des paramètres de connexion à la base de données
+include('../php/connection_params.php');
+
+// Connexion à la base de données
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
+
+
+if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
+    
+// ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+$i = 0;
+foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
+
+    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
+
+    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
+
+        // creation du nom de fichier en utilisant time et le type de fichier
+        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
+
+        // deplacement du fichier depuis l'espace temporaire
+        move_uploaded_file($fichier["tmp_name"], "../images/imagesAvis/" . $nom_img[$key_fichier]);
+    }
+}
+
+
+$requete = "INSERT INTO tripskell.avis(";
+$requete .= "commentaire, ";
+$requete .= "imageavis, ";
+$requete .= "dateexperience, ";
+$requete .= "datepublication, ";
+$requete .= "id_c, ";
+$requete .= "idoffre,";
+$requete.= "titreavis) ";
+
+$requete .= "VALUES (";
+$requete .= ":commentaire, ";
+$requete .= ":imageavis, ";
+$requete .= ":dateexperience, ";
+$requete .= ":datepublication, ";
+$requete .= ":id_c, ";
+$requete .= ":idoffre,";
+$requete.= ":titreavis) ";
+
+echo $requete;
+
+$stmt = $dbh->prepare($requete);
+$stmt->bindParam(":commentaire", $_POST["commentaire"]);
+$stmt->bindParam(":imageavis", $_POST["imageavis"]);
+$stmt->bindParam(":dateexperience", $_POST["dateexperience"]);
+$stmt->bindParam(":datepublication", $nom_img['datepublication']);
+$stmt->bindParam(":id_c", $_POST["id_c"]);
+$stmt->bindParam(":idoffre", $_POST["idoffre"]);
+$stmt->bindParam(":titreavis", $_POST["titreavis"]);  // on ajoute le code postal à la requete
+
+print_r($stmt);
+$stmt->execute(); // execution de la requete
+
+// on ferme la base de donnée
+$dbh = null;
+
+header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on redirige vers la page de l'offre créée
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un avis</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+</head>
+<?php include "../composants/header/header.php";        //import navbar
+        ?>
+<body class="fondVisiteur">
+
+    <form name="creation" action="/pages/creaAvis.php" method="post" enctype="multipart/form-data">
+        <div id="conteneurTitreForm">
+            <h3>Ajouter un avis</h3>
+            <div>
+                <p>Les champs qui possède une <span class="Asterisque"> * </span> sont obligatoires.</p> 
+            </div>
+        </div>
+
+        <div class="champs">
+            <label for="titre">Titre <span class="required">*</span> :</label>
+            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" required>
+        </div>   
+
+        <div class="champs">
+            <label for="commentaire">Commentaire <span class="required">*</span> :</label>
+            <textarea type="text" id="commentaire" name="commentaire" placeholder="Qu'avez-vous pensé de <?php 
+                $stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = 1");
+                $stmt->execute();
+                $titreOffre = $stmt->fetchAll()[0]["titreoffre"];
+                echo $titreOffre;
+            ?> ?" required></textarea>
+        </div>
+        <div id="conteneurContexteDate" class="champs">
+            <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
+            <input type="hidden" name="contexte" id="inputContexte">
+            <div id="menuContexte">
+                <div class="conteneurSVGtexte">
+                    <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
+                    <p>Séléctionner un contexte</p>
+                </div>
+                <div id="conteneurOptionsContexte">
+                    <p>en solo</p>
+                    <p>en famille</p>
+                    <p>entre amis</p>
+                    <p>affaires</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="zoneBtn">
+            <a href="/pages/detailOffre.php?idOffre="<?php echo $_GET['idoffre'];?> class="btnAnnuler">
+                <p class="texteLarge boldArchivo">Annuler</p>
+                <?php
+                include '../icones/croixSVG.svg';
+                ?>
+            </a>
+
+            <button type="submit" href="#" class="btnConfirmer">
+                    <p class="texteLarge boldArchivo">Confirmer</p>
+            <?php
+                    include '../icones/okSVG.svg';
+            ?>
+            </button>
+        </div>
+
+
+    </form>
+
+</body>
+<script src="../js/creaAvis.js"></script>
+</html>

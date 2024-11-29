@@ -1,0 +1,81 @@
+@import "creaCompteMembre.css";
+
+
+#conteneurTitreForm{
+    width: 100%;
+}
+
+.champs input, .champs textarea{
+    font-size: 20px;
+}
+
+#titre{
+    width: 450px;
+}
+
+#commentaire{
+    height: 100px;
+    font-family: "Archivo";
+
+}
+
+#conteneurContexteDate{
+    width: 100%;
+    height: fit-content;
+}
+
+#menuContexte{
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px 10px;
+    padding-left: 0px;
+    width: fit-content;
+}
+
+#menuContexte .conteneurSVGtexte{
+    display: flex;
+    align-items: center;
+}
+
+#menuContexte .conteneurSVGtexte img{
+    transform: rotate(180deg);
+}
+
+#menuContexte .conteneurSVGtexte:hover{
+    cursor: pointer;
+}
+
+
+#conteneurContexteDate #conteneurOptionsContexte{
+    display: none;
+}
+
+#conteneurOptionsContexte p{
+    padding: 10px;
+}
+
+#conteneurOptionsContexte p:hover{
+    background-color: var(--grisClair);
+    cursor: pointer;
+}
+
+#conteneurContexteDate .deplie #conteneurOptionsContexte{
+    display: block;
+}
+
+.deplie .conteneurSVGtexte img{
+    transform: rotate(0deg) !important;
+}
+
+#menuContexte img{
+    width: 45px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+#conteneurTitreForm h3{
+    border-left: 20px solid var(--secondary);
+    padding-left: 15px;
+}

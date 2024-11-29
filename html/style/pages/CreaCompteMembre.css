@@ -36,7 +36,8 @@ form {
 .champs input[type="file"],
  .champs input[type="email"],
 .champs input[type="password"],
-.champs input[type="number"] {
+.champs input[type="number"],
+.champs textarea[type="text"] {
     width: 100%;
     padding: 15px; /* Champs plus hauts */
     border: 1px solid #ccc;
@@ -45,7 +46,8 @@ form {
     box-sizing: border-box;
 }
 
-.champs input[type="text"]:focus {
+.champs input[type="text"]:focus,
+.champs textarea[type="text"]:focus {
     border-color: #007bff;
     outline: none;
 }
