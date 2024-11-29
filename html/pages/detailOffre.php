@@ -155,8 +155,14 @@
                                         <th><?php echo $ouverture[$key]["id_jour"]; ?></th>
                                         <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
                                         <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
+                                        <?php
+                                        if($horaire[0]['horaire_aprem_debut'] != NULL){
+                                        ?>
                                         <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
                                         <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                        <?php
+                                        }
+                                        ?>
                                     <tr>
                                     <?php
                                         }
