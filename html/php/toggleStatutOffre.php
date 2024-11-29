@@ -5,7 +5,6 @@
 
     include('../php/connection_params.php');
 
-
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') 
     {

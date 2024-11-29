@@ -86,7 +86,6 @@
                         <!-- Tarif minimal -->
                         <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
                     </div>
-
                     <p id="descriptionOffre">   <!-- insertion description de l'offre -->
                     <?php echo $contentOffre["description_detaille"]; ?>
                     </p>
