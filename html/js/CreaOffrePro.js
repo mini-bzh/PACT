@@ -6,6 +6,8 @@ let nbAttraction = document.getElementById("nbAttraction");
 let capacite = document.getElementById("capacite");
 let agemin = document.getElementById("agemin");
 
+alert("je suis le script !");
+
 prix.onkeydown = (event) => {
     if ((isNaN(event.key) && event.key !== 'Backspace') || event.key === ' ') {
         event.preventDefault();
