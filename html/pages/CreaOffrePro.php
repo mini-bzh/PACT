@@ -136,24 +136,24 @@ echo $requete;
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
-$stmt->bindParam(":numero", $numero);
-$stmt->bindParam(":rue", $rue);
-$stmt->bindParam(":ville", $ville);
-$stmt->bindParam(":codePostal", $codePostal);
+$stmt->bindParam(":numero", $_POST["num"]);
+$stmt->bindParam(":rue", $_POST["nomRue"]);
+$stmt->bindParam(":ville", $_POST["ville"]);
+$stmt->bindParam(":codePostal", $_POST["codePostal"]);
 
-$stmt->bindParam(":titre", $titre);
-$stmt->bindParam(":resume", $resume);
-$stmt->bindParam(":description", $description);
+$stmt->bindParam(":titre", $_POST["titre"]);
+$stmt->bindParam(":resume", $_POST["resume"]);
+$stmt->bindParam(":description", $_POST["description"]);
 $stmt->bindParam(":tarif", $tarif);
 $stmt->bindParam(":note", $note);
 $stmt->bindParam(":accessibilite", $accessible);
 
-$stmt->bindParam(":id_c", $id_c);
+$stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 
-$stmt->bindParam(":img1", $img1);
-$stmt->bindParam(":img2", $image2);
-$stmt->bindParam(":img3", $image3);
-$stmt->bindParam(":img4", $image4);
+$stmt->bindParam(":img1", $nom_img["fichier1"]);
+$stmt->bindParam(":img2", $nom_img["fichier2"]);
+$stmt->bindParam(":img3", $nom_img["fichier3"]);
+$stmt->bindParam(":img4", $nom_img["fichier4"]);
 
 $stmt->bindParam(":id_abo", $id_abo);
 
@@ -163,16 +163,6 @@ $stmt->bindParam(":gammeprix", $gammeprix);
 
 
 // On definit ici chacune des variables
-
-$numero = $_POST["num"];
-$rue = $_POST["nomRue"];
-$ville = $_POST["ville"];
-$codePostal = $_POST["codePostal"];
-
-$titre = $_POST["titre"];
-$resume = $_POST["resume"];
-$description = $_POST["description"];
-
 $tarif = $_POST["prix-minimal"];
 $tarif = 5;
 
@@ -184,14 +174,6 @@ $accessible = 'Accessible';
 //$id_abo = $_POST["id_abo"];
 $id_abo = 'Standard';
 //$id_option = null;
-
-// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-$id_c = $_SESSION["idCompte"];
-
-$img1 = $nom_img["fichier1"];
-$img2 = $nom_img["fichier2"];
-$img3 = $nom_img["fichier3"];
-$img4 = $nom_img["fichier4"];
 
 $idrepas = "2";
 $carte = "crt.png";
