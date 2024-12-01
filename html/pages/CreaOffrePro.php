@@ -76,171 +76,131 @@ if (in_array($type4, ["png", "gif", "jpeg"])) {
     // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
     // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
 
-    $requete = "INSERT INTO tripskell.offre_pro(";
-    $requete .= "titreOffre, ";
-    $requete .= "resume, ";
-    $requete .= "description_detaille, ";
-    $requete .= "tarifMinimal, ";
-    $requete .= "note, ";
-    $requete .= "accessibilite, ";
-    $requete .= "enLigne, ";
-    $requete .= "id_abo, ";
-    $requete .= "id_option, ";
-    $requete .= "numero, ";
-    $requete .= "rue, ";
-    $requete .= "ville, ";
-    $requete .= "codePostal,";
-    $requete .= "id_c, ";
-    $requete .= "img1, ";
-    $requete .= "img2, ";
-    $requete .= "img3, ";
-    $requete .= "img4, ";
-    $requete .= "dateDebut, ";
-    $requete .= "dateFin, ";
-    //$requete .= "idrepas,";
-    $requete .= "carte,";
-    $requete .= "gammeprix,";
-    $requete .= "_spectacle.duree,";
-    //$requete .= "nomLangue,";
-    $requete .= "_visite.duree,";
-    $requete .= "guidee,";
-    $requete .= "capacite,";
-    $requete .= "plans,";
-    $requete .= "nbattraction,";
-    $requete .= "agemin,";
-    $requete .= "_activite.duree,";
-    $requete .= "ageminimum,";
-    $requete .= "prestation) ";
+    
+$requete = "INSERT INTO tripskell.offre_pro(";
 
-    $requete .= "VALUES (";
-    $requete .= ":titre,";
-    $requete .= ":resume,";
-    $requete .= ":description,";
-    $requete .= ":tarif,";
-    $requete .= ":note,";
-    $requete .= ":accessibilite,";
-    $requete .= ":enLigne,";
-    $requete .= ":id_abo,";
-    $requete .= ":id_option,";
-    $requete .= ":numero,";
-    $requete .= ":rue,";
-    $requete .= ":ville,";
-    $requete .= ":codePostal,";
-    $requete .= ":id_c, ";
-    $requete .= ":img1, ";
-    $requete .= ":img2, ";
-    $requete .= ":img3, ";
-    $requete .= ":img4, ";
-    $requete .= ":dateDebut, ";
-    $requete .= ":dateFin, ";
-    // $requete .= ":idrepas,";
-    $requete .= ":carte,";
-    $requete .= ":gammeprix,";
-    $requete .= ":duree,";
-    $requete .= "_spectacle.duree,";
-    // $requete .= ":nomLangue,";
-    $requete .= ":_visite.duree,";
-    $requete .= ":guidee,";
-    $requete .= ":capacite,";
-    $requete .= ":plans,";
-    $requete .= ":nbattraction,";
-    $requete .= ":agemin,";
-    $requete .= ":_activite.duree,";
-    $requete .= ":ageminimum,";
-    $requete .= ":prestation)";
-    $requete .= "returning idOffre;";
+$requete .= "numero, ";
+$requete .= "rue, ";
+$requete .= "ville, ";
+$requete .= "codePostal,";
 
-    // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
-    $stmt = $dbh->prepare($requete);
-    $stmt->bindParam(":titre", $titre);
-    $stmt->bindParam(":resume", $resume);
-    $stmt->bindParam(":description", $description);
-    $stmt->bindParam(":tarif", $tarif);
-    $stmt->bindParam(":note", $note);
-    $stmt->bindParam(":accessibilite", $accessible);
-    //$stmt->bindParam(":enLigne", $enLigne);
-    $stmt->bindParam(":id_abo", $id_abo);
-    $stmt->bindParam(":id_option", $id_option);
-    $stmt->bindParam(":numero", $numero);
-    $stmt->bindParam(":rue", $rue);
-    $stmt->bindParam(":ville", $ville);
-    $stmt->bindParam(":codePostal", $codePostal);
-    $stmt->bindParam(":id_c", $id_c);
-    $stmt->bindParam(":img1", $img1);
-    $stmt->bindParam(":img2", $image2);
-    $stmt->bindParam(":img3", $image3);
-    $stmt->bindParam(":img4", $image4);
-    // $stmt->bindParam(":idrepas");
-    $stmt->bindParam(":carte", $carte);
-    $stmt->bindParam(":gammeprix", $gammePrix);
-    $stmt->bindParam(":duree", $duree_v);
-    // $stmt->bindParam(":nomLangue");
-    $stmt->bindParam(":guidee", $guidee);
-    $stmt->bindParam(":capacite", $capacite);
-    $stmt->bindParam(":plans", $plan);
-    $stmt->bindParam(":nbattraction", $nbattraction);
-    $stmt->bindParam(":agemin", $agemin);
-    $stmt->bindParam(":ageminimum", $ageminimum);
-    $stmt->bindParam(":prestation", $prestation);
+$requete .= "titreOffre, ";
+$requete .= "resume, ";
+$requete .= "description_detaille, ";
+$requete .= "tarifMinimal, ";
+$requete .= "note, ";
+$requete .= "accessibilite, ";
 
-    // voir pour idrepas et pour les langues... comment faire
+$requete .= "id_c, ";
+
+$requete .= "img1, ";
+$requete .= "img2, ";
+$requete .= "img3, ";
+$requete .= "img4, ";
+
+$requete .= "id_abo,";
+
+$requete .= "idrepas,";
+$requete .= "carte,";
+$requete .= "gammeprix";
+
+$requete .= ")VALUES (";
+
+$requete .= ":numero,";
+$requete .= ":rue,";
+$requete .= ":ville,";
+$requete .= ":codePostal,";
+
+$requete .= ":titre,";
+$requete .= ":resume,";
+$requete .= ":description,";
+$requete .= ":tarif,";
+$requete .= ":note,";
+$requete .= ":accessibilite,";
+
+$requete .= ":id_c, ";
+
+$requete .= ":img1, ";
+$requete .= ":img2, ";
+$requete .= ":img3, ";
+$requete .= ":img4, ";
+
+$requete .= ":id_abo,";
+
+$requete .= ":idrepas,";
+$requete .= ":carte,";
+$requete .= ":gammeprix";
+
+$requete .= ") returning idOffre;";
+echo $requete;
+// ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
+$stmt = $dbh->prepare($requete);
+
+$stmt->bindParam(":numero", $numero);
+$stmt->bindParam(":rue", $rue);
+$stmt->bindParam(":ville", $ville);
+$stmt->bindParam(":codePostal", $codePostal);
+
+$stmt->bindParam(":titre", $titre);
+$stmt->bindParam(":resume", $resume);
+$stmt->bindParam(":description", $description);
+$stmt->bindParam(":tarif", $tarif);
+$stmt->bindParam(":note", $note);
+$stmt->bindParam(":accessibilite", $accessible);
+
+$stmt->bindParam(":id_c", $id_c);
+
+$stmt->bindParam(":img1", $img1);
+$stmt->bindParam(":img2", $image2);
+$stmt->bindParam(":img3", $image3);
+$stmt->bindParam(":img4", $image4);
+
+$stmt->bindParam(":id_abo", $id_abo);
+
+$stmt->bindParam(":idrepas", $idrepas);
+$stmt->bindParam(":carte", $carte);
+$stmt->bindParam(":gammeprix", $gammeprix);
 
 
+// On definit ici chacune des variables
 
+$numero = $_POST["num"];
+$rue = $_POST["nomRue"];
+$ville = $_POST["ville"];
+$codePostal = $_POST["codePostal"];
 
-    // On definit ici chacune des variables
+$titre = $_POST["titre"];
+$resume = $_POST["resume"];
+$description = $_POST["description"];
 
-    $titre = $_POST["titre"];
-    $resume = $_POST["resume"];
-    $description = $_POST["description"];
-    $tarif = $_POST["prix-minimal"];
-    $note = 5;
-    $accessible = $_POST["choixAccessible"];
-    $enLigne = true;
-    $id_abo = $_POST["offre"];
-    $id_option = $_POST["option"];
-    $id_abo = 'Standard';
-    $id_option = null;
-    $numero = $_POST["num"];
-    $rue = $_POST["nomRue"];
-    $ville = $_POST["ville"];
-    $codePostal = $_POST["codePostal"];
+$tarif = $_POST["prix-minimal"];
+$tarif = 5;
 
-    $img1 = $nom_img["fichier1"];
-    $img2 = $nom_img["fichier2"];
-    $img3 = $nom_img["fichier3"];
-    $img4 = $nom_img["fichier4"];
+$note = 5;
 
-    $duree_v = $_POST["duree_v"];
+$accessible = $_POST["choixAccessible"];
+$accessible = 'Accessible';
 
-    $guide = $_POST["guide"];
-    if ($guide == "YES") {
-        $guidee = true;
-    } else {
-        $guidee = false;
-    }
+//$id_abo = $_POST["id_abo"];
+$id_abo = 'Standard';
+//$id_option = null;
 
-    $carte = $_POST["carte"];
-    $gammePrix = $_POST["gammeprix"];
-    $nbattraction = $_POST["nbattraction"];
-    $ageminimum = $_POST["ageminimum"];
-    $duree_s = $_POST["duree_s"];
-    $capacite = $_POST["capacite"];
-    $prestation = $_POST["prestation"];
-    $agemin = $_POST["ageminimum"];
-    $duree_a = $_POST["duree_a"];
-    $plan = $_POST["plan"];
+// on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
+$id_c = $_SESSION["idCompte"];
 
+$img1 = $nom_img["fichier1"];
+$img2 = $nom_img["fichier2"];
+$img3 = $nom_img["fichier3"];
+$img4 = $nom_img["fichier4"];
 
-    // on récupère l'id_c de la session dans le but d'identifier quel compte est connecter.
-    $id_c = $_SESSION["idCompte"];
+$idrepas = "2";
+$carte = "crt.png";
+$gammeprix = "€€";
 
-    // on execute tout ce qui a été fait précèdement
-    $stmt->execute();
+// on execute tout ce qui a été fait précèdement
+$stmt->execute();
 
-    $idOffre = $stmt->fetchColumn();
-
-
+$idOffre = $stmt->fetchColumn();
 
     // on ferme la base de donnée
     $dbh = null;
