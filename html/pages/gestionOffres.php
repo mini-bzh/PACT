@@ -47,6 +47,11 @@
         </h1>
         <main id="mainGestionOffres">
 
+        <?php
+            // Un tableau pour stocker les données sur le prix des offres et des option
+            $donneePrix=[];
+        ?>
+
         <section id="conteneurBtnOffres">
         <a href="CreaOffrePro.php" id="btnAjouterOffre" class="grossisQuandHover">
                     <div class="conteneurSVGtexte">
@@ -55,7 +60,15 @@
                     </div>
                 </a>
                 <?php foreach($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
-                {?>
+                {
+                    $prixOffre=[]; // Tableau pour stocker les prix d'une offre et de son option
+
+                    $prixOffre['prixOffre'] = $contentOffre["prix_abo"];
+                    $prixOffre['prixOption'] = $contentOffre["prix_option"];
+
+                    $donneePrix[] = $prixOffre ; // Ajout des données de l'offre dans donneePrix
+                    
+                    ?>
                 <article class="offre" id="offre<?php echo $contentOffre['idoffre']?>">
                     <h2><?php echo $contentOffre["titreoffre"]?></h2>
                     <!-- <p>Visite</p> future categorie -->
@@ -205,6 +218,20 @@
                 </article>
                 <?php }
                 ?>
+        </section>
+
+        <setion id="conteneurDetailPrix">
+
+            <p>Total à payer : 
+            <?php 
+            $total = 0;
+            foreach ($donneePrix as $key => $value) {
+                $total += array_sum($value);
+            }
+            echo $total;
+            ?>
+            </p>
+
         </section>
         
         </main>
