@@ -113,8 +113,8 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
         </div>
 
         <div class="champs">
-            <label for="titre">Titre <span class="required">*</span> :</label>
-            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" required>
+            <label for="titre">Titre<span class="required">*</span> :</label>
+            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis (max 20 caractères)" maxlength="20" required>
         </div>
         <!--<div class="champs">
         <label for="note">Note <span class="required">*</span> :</label>
@@ -128,12 +128,12 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
-            <textarea type="text" id="commentaire" name="commentaire" placeholder="Qu'avez-vous pensé de <?php 
+            <textarea type="text" maxlength="200" id="commentaire" name="commentaire" placeholder="Qu'avez-vous pensé de <?php 
                 $stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = ".$_GET["idOffre"]);
                 $stmt->execute();
                 $titreOffre = $stmt->fetchAll()[0]["titreoffre"];
                 echo $titreOffre;
-            ?> ?" required></textarea>
+            ?> ? (max 200 caractères)" required></textarea>
         </div>
         <div id="conteneurContexteDate">
             <div class="champs">
