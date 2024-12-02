@@ -172,11 +172,24 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]?>"
-                        class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
-                            <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
-                            <p>Itinéraire</p>
-                        </a>
+                        <div id="partieAdresse"><!-- future tag -->
+                            <div class="conteneurSVGtexte">
+                                <img src="/icones/adresseSVG.svg" alt="icone tag">
+                                <h4>Adresse</h4>
+                            </div>
+                            <hr>
+                            <a href="https://www.google.fr/maps/place/<?php 
+                                $adresse = $contentOffre["numero"] . " rue " . $contentOffre["rue"] . ", " . $contentOffre["ville"];
+
+                                echo $adresse;
+                            ?>"
+                            class="conteneurSVGtexte" id="itineraire" target="_blank">
+                                <p><?php
+                                    echo($adresse);
+                                ?></p>
+                            </a>
+                        </div>
+                        
                     </article>
                 </section>
                 <h1>Avis</h1>
