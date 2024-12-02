@@ -161,7 +161,7 @@ $requete .= ":prestation";
 
 
 $requete .= ") returning idOffre;";
-echo $requete;
+
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
@@ -236,7 +236,21 @@ $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 $stmt->execute();
 $idOffre = $stmt->fetchColumn();
 
+//requete pour l'insersion des tags
+/*
+$requete = "INSERT INTO tripskell._possede(";
+$requete .= "idOffre, ";
+$requete .= "idTag";
+$requete .= ") VALUES (";
+$requete .= ":idOffre, ";
+$requete .= ":idTag";
+$requete .= ");";
 
+$stmt = $dbh->prepare($requete);
+
+$stmt->bindparam(":idOffre", $idOffre);
+$stmt->bindparam(":idTag", $idTag);
+*/
     // on ferme la base de donnée
     $dbh = null;
 
@@ -358,14 +372,14 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                                 <label for="lang5">chinois</label>
                             </div>
                         </div>
-                        <label>Guide :<span class="required">*</span> :</label>
+                        <label>La visite est guide :<span class="required">*</span> :</label>
                         <div class="parentVisite">
                             <div>
                                 <input type="radio" id="guidee" name="guidee" value="YES" />
                                 <label for="guidePresent">Oui</label>
                             </div>
                             <div>
-                                <input type="radio" id="guidee" name="guidee" value="NO" />
+                                <input type="radio" id="guidee" name="guidee" value="NO" /> <!-- a enlever et utilisation de checkbox -->
                                 <label for="guidePasPresent">Non</label>
                             </div>
                         </div>
@@ -451,8 +465,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         ];
                     
                     foreach ($tags_cat as $cat => $tags) {
-                        $initial = $tags_cat[0];
-                        
                         
 ?>
                         <div id="tags<?php echo $cat; ?>">
@@ -460,11 +472,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <div class="tags">
 <?php
                             foreach ($tags as $key => $tag) {
-                                $field = "tag".$key.$initial;
 ?>
                                 <div>
-                                    <input type="checkbox" id="<?php echo $field; ?>" name="<?php echo $field; ?>" value="<?php echo $tag; ?>" />
-                                    <label for="<?php echo $field; ?>"><?php echo $tag; ?></label>
+                                    <input type="checkbox" id="<?php echo $tag; ?>" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
+                                    <label for="<?php echo $tag; ?>"><?php echo $tag; ?></label>
                                 </div>
 <?php
                             }
