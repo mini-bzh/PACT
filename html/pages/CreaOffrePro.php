@@ -259,7 +259,7 @@ $requete .= ");";
 
 foreach($liste_tags as $tag) {
     
-    if(!is_null($_POST[$tag["nomtag"]])) {
+    if(isset($_POST[$tag["nomtag"]])) {
         echo $tag["nomtag"];
         $stmt = $dbh->prepare($requete);
         $stmt->bindparam(":idOffre", $idOffre);
