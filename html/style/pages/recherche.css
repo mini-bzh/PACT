@@ -109,7 +109,7 @@ main h1{
 .filtreGrand{
     background-color: white;
     width: 1170px;
-    height: 610px;
+    height: 450px;
     position: absolute;
     top: 45px;
     z-index: 3;
@@ -132,11 +132,9 @@ main h1{
     width: 30%;
     display: flex;
     flex-direction: column;
-}
-
-.justifyEvenly{
     justify-content: space-evenly;
 }
+
 
 fieldset{
     border: none;

@@ -14,9 +14,9 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("visibilite", true);               //indique si l'élément doit être montré par la recherche
         mapTempo.set("element", element);               //l'élément dans le DOM
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
-        mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent)
-        mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent)
-        mapTempo.set("date", document.querySelector("#" + element.id + " #ville").textContent)
+        mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent);
+        mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent);
+        // mapTempo.set("date", document.querySelector("#" + element.id + " #date").textContent);
 
         let prix = document.querySelectorAll("#" + element.id + " .text-overlay span")[0].textContent;
         prix = prix.substring(0, prix.length-1);
@@ -132,18 +132,18 @@ function rechercher()
 
 // ================== FILTRER ========================
 
-let dateInput1 = document.querySelector("#dateDeb");
-let dateInput2 = document.querySelector("#dateFin");
-let calendarIcon1 = document.querySelector("#dateDeb + svg");
-let calendarIcon2 = document.querySelector("#dateFin + svg");
+// let dateInput1 = document.querySelector("#dateDeb");
+// let dateInput2 = document.querySelector("#dateFin");
+// let calendarIcon1 = document.querySelector("#dateDeb + svg");
+// let calendarIcon2 = document.querySelector("#dateFin + svg");
 
-calendarIcon1.addEventListener("click", () => {
-    dateInput1.showPicker();
-});
+// calendarIcon1.addEventListener("click", () => {
+//     dateInput1.showPicker();
+// });
 
-calendarIcon2.addEventListener("click", () => {
-    dateInput2.showPicker();
-});
+// calendarIcon2.addEventListener("click", () => {
+//     dateInput2.showPicker();
+// });
 
 function adjustValue(increment, prix) {
     // Trouver l'élément 'input' associé au bouton cliqué via l'ID
@@ -182,54 +182,54 @@ function adjustValue(increment, prix) {
 
 
 // Récupérer les éléments des champs de date
-let dateDeb = document.getElementById('dateDeb');
-let dateFin = document.getElementById('dateFin');
+// let dateDeb = document.getElementById('dateDeb');
+// let dateFin = document.getElementById('dateFin');
 
 // Fonction pour ajuster les dates
-function adjustDates(event) {
-    let minDate = new Date(dateDeb.value);
-    let maxDate = new Date(dateFin.value);
+// function adjustDates(event) {
+//     let minDate = new Date(dateDeb.value);
+//     let maxDate = new Date(dateFin.value);
 
-    // Si la date de fin est antérieure à la date de début, ajuster la date de fin
-    if ((maxDate < minDate) && (event.target == dateFin)) {
-        dateFin.value = dateDeb.value; // Réinitialiser la date de fin pour correspondre à la date de début
-    }
+//     // Si la date de fin est antérieure à la date de début, ajuster la date de fin
+//     if ((maxDate < minDate) && (event.target == dateFin)) {
+//         dateFin.value = dateDeb.value; // Réinitialiser la date de fin pour correspondre à la date de début
+//     }
 
-    // Si la date de début est postérieure à la date de fin, ajuster la date de début
-    if ((minDate > maxDate) && (event.target == dateDeb)) {
-        dateDeb.value = dateFin.value; // Réinitialiser la date de début pour correspondre à la date de fin
-    }
-    updateAffichageOffres();
-}
+//     // Si la date de début est postérieure à la date de fin, ajuster la date de début
+//     if ((minDate > maxDate) && (event.target == dateDeb)) {
+//         dateDeb.value = dateFin.value; // Réinitialiser la date de début pour correspondre à la date de fin
+//     }
+//     updateAffichageOffres();
+// }
 
 // Ajouter des écouteurs d'événements pour les changements de valeur
-dateDeb.addEventListener('change', adjustDates);
-dateFin.addEventListener('change', adjustDates);
+// dateDeb.addEventListener('change', adjustDates);
+// dateFin.addEventListener('change', adjustDates);
 
 
-let etoileMin = document.getElementById('etoileMin');
-let etoileMax = document.getElementById('etoileMax');
+// let etoileMin = document.getElementById('etoileMin');
+// let etoileMax = document.getElementById('etoileMax');
 
 // Fonction pour ajuster les valeurs possibles du filtre des étoiles
-function adjustOptions(event) {
-    let min = parseInt(etoileMin.value, 10);
-    let max = parseInt(etoileMax.value, 10);
+// function adjustOptions(event) {
+//     let min = parseInt(etoileMin.value, 10);
+//     let max = parseInt(etoileMax.value, 10);
 
-    // Empêcher que max soit inférieur à min
-    if ((event.target == etoileMax) && (max < min)) {
-        etoileMax.value = etoileMin.value; // Réinitialiser max pour correspondre à min
-    }
+//     // Empêcher que max soit inférieur à min
+//     if ((event.target == etoileMax) && (max < min)) {
+//         etoileMax.value = etoileMin.value; // Réinitialiser max pour correspondre à min
+//     }
 
-    // Empêcher que min soit supérieur à max
-    if ((event.target == etoileMin) && (min > max)) {
-        etoileMin.value = etoileMax.value; // Réinitialiser min pour correspondre à max
-    }
-    updateAffichageOffres();
-}
+//     // Empêcher que min soit supérieur à max
+//     if ((event.target == etoileMin) && (min > max)) {
+//         etoileMin.value = etoileMax.value; // Réinitialiser min pour correspondre à max
+//     }
+//     updateAffichageOffres();
+// }
 
 // Écouter les changements de valeur dans les deux sélecteurs
-etoileMin.addEventListener('change', adjustOptions);
-etoileMax.addEventListener('change', adjustOptions);
+// etoileMin.addEventListener('change', adjustOptions);
+// etoileMax.addEventListener('change', adjustOptions);
 
 
 
@@ -267,8 +267,8 @@ prixMax.addEventListener('change', ajustePrix);
 let critCategorie = [];
 let critOuverture = [];
 let critLieu = "";
-let critDateDeb = null;
-let critDateFin = null;
+// let critDateDeb = null;
+// let critDateFin = null;
 let critPrixMin = null;
 let critPrixMax = null;
 
@@ -326,19 +326,19 @@ document.getElementById("lieu").addEventListener("keyup", (event) => {
 });
 
 // date de début / fin entrée
-document.getElementById("dateDeb").addEventListener("change", (event) => {
+// document.getElementById("dateDeb").addEventListener("change", (event) => {
 
-    critDateDeb = new Date(event.target.value);
-    updateAffichageOffres();
+//     critDateDeb = new Date(event.target.value);
+//     updateAffichageOffres();
 
-});
+// });
 
-document.getElementById("dateFin").addEventListener("change", (event) => {
+// document.getElementById("dateFin").addEventListener("change", (event) => {
 
-    critDateFin = new Date(event.target.value);
-    updateAffichageOffres();
+//     critDateFin = new Date(event.target.value);
+//     updateAffichageOffres();
 
-});
+// });
 
 
 // Prix min / max
@@ -373,13 +373,13 @@ function verifFiltre(idOffre)
     let valideCat = false;
     let valideLieu = false;
     let valideOuv = false;
-    let valideDate = false;
+    // let valideDate = false;
     let validePrix = false;
 
     let offre = mapOffresInfos.get(idOffre);
 
     // Si acun critère n'a été sélectionné
-    if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critDateDeb == null) && (critDateFin == null) && (critPrixMin == null) && (critPrixMax == null)){
+    if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critPrixMin == null) && (critPrixMax == null)){
         valide = true;
     // Si au moins 1 critère a été sélectionné
     } else {
@@ -415,17 +415,17 @@ function verifFiltre(idOffre)
         }
 
         // On traite le cas du filtre par date
-        if ((critDateDeb != null) || (critDateFin != null)) {
-            if ((critDateDeb != null) && (critDateFin != null)) {
+        // if ((critDateDeb != null) || (critDateFin != null)) {
+        //     if ((critDateDeb != null) && (critDateFin != null)) {
                 
-            } else if (critDateDeb != null) {
+        //     } else if (critDateDeb != null) {
                 
-            } else if (critDateFin != null) {
+        //     } else if (critDateFin != null) {
                 
-            }
-        } else {
-            valideDate = true;
-        }
+        //     }
+        // } else {
+        //     valideDate = true;
+        // }
 
         // On traite le cas du filtre par fourchette de prix
         if (((critPrixMin != null)) || ((critPrixMax != null))) {
@@ -448,7 +448,7 @@ function verifFiltre(idOffre)
 
 
         // Si l'offre correspond à tout les critères, elle peut être affichées
-        if ((valideCat) && (valideLieu) && (valideOuv) && (valideDate) && (validePrix)) {
+        if ((valideCat) && (valideLieu) && (valideOuv) && (validePrix)) {
             valide = true;
         }
         
