@@ -43,3 +43,34 @@ function updateFileName() {
     }
 }
 
+
+/* ------------------------- vérification validité avant submit ------------------------- */
+let btnSubmit = document.querySelectorAll(".btnConfirmer")[0];
+let champDate = document.getElementById("dateExperience");
+btnSubmit.addEventListener("click", verifAvantSubmit);
+
+const dateActuelle = new Date();
+
+// Extraire l'année, le mois et le jour
+let annee = dateActuelle.getFullYear();
+let mois = String(dateActuelle.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0, donc +1
+let jour = String(dateActuelle.getDate()).padStart(2, '0');
+
+// Construire la date au format aaaa-mm-jj
+let dateAjs = `${annee}-${mois}-${jour}`;
+
+console.log(champDate.value);
+
+function verifAvantSubmit()
+{
+    let valide = true;
+    let messageErreur = "";
+
+    if(titreSelect.textContent == "Séléctionner un contexte")
+    {
+        valide = false;
+    }
+
+    console.log(champDate.value);
+
+}
