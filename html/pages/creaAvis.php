@@ -98,10 +98,10 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
     <!-- Favicon -->
     <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/style/pages/style.css">
-    <link rel="stylesheet" href="/style/pages/creaCompteMembre.css">
+    <link rel="stylesheet" href="../style/pages/style.css">
+    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
 
-    <link rel="stylesheet" href="/style/pages/creaAvis.css">
+    <link rel="stylesheet" href="../style/pages/creaAvis.css">
 </head>
 <?php include "../composants/header/header.php";        //import navbar
         ?>
