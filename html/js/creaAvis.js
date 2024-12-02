@@ -57,9 +57,10 @@ let mois = String(dateActuelle.getMonth() + 1).padStart(2, '0'); // Les mois com
 let jour = String(dateActuelle.getDate()).padStart(2, '0');
 
 // Construire la date au format aaaa-mm-jj
-let dateAjs = `${annee}-${mois}-${jour}`;
+let dateAjd = `${annee}-${mois}-${jour}`;
+console.log(dateAjd);
 
-console.log(champDate.value);
+console.log(champDate.value < dateAjd);
 
 function verifAvantSubmit()
 {
@@ -68,9 +69,25 @@ function verifAvantSubmit()
 
     if(titreSelect.textContent == "Séléctionner un contexte")
     {
+        messageErreur += "Veuillez séléctionner un contexte";
         valide = false;
     }
+    if(champDate.value > dateAjd)
+    {
+        if(!valide)
+        {
+            messageErreur += " et mettre une date d'expérience antérieure à la date d'aujourd'hui";
+        }
+        else
+        {
+            messageErreur += "Veuillez mettre une date d'expérience antérieure à la date d'aujourd'hui";
+            valide = false;
+        }
+    }
 
-    console.log(champDate.value);
-
+    if(!valide)
+    {
+        alert(messageErreur);
+        event.preventDefault();
+    }
 }

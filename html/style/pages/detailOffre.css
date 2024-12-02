@@ -244,6 +244,10 @@
     object-fit: cover;
 }
 
+.texteAvis{
+    word-wrap: break-word;
+}
+
 .circular-image {
     width: 80px;
     height: 80px;

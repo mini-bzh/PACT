@@ -105,11 +105,10 @@ const mapJoursHoraires = new Map();
 
 //appelle la fonction jourClique quand l'utilisateur clique sur un bouton jour
 mapJoursElements.forEach((value, key, map) => {
-    console.log(mapJoursElements);
     mapJoursElements.get(key).addEventListener("click", jourClique);
 })
 
-heureDebut1.addEventListener("keyup", () => { horaireEntree(heureDebut1) });
+heureDebut1.addEventListener("keyup", () => { horaireEntree(heureDebut1)});
 heureFin1.addEventListener("keyup", () => { horaireEntree(heureFin1) });
 
 heureDebut2.addEventListener("keyup", () => { horaireEntree(heureDebut2) });
@@ -248,6 +247,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
         }
     });
 
+    console.log(joursHorairesVides);
     //afficher messages d'erreur si besoin
     if (joursHorairesVides.length != 0) {
         alert("Veuillez entrer des horaires pour " + joursHorairesVides);
@@ -265,7 +265,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
     if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0
         && idOffre) {
-
+        alert("envoi des horaires");
         $.ajax({
             url: "/php/changeHoraireOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                              // Type de la requête (pour transmettre idOffre au fichier PHP)

@@ -23,7 +23,7 @@ function af_offre($row) {
         <div class="conteneurSpaceBetween">
             <p id="cat"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
-            <p class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
+            <p id ="ouvertFerme" class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
         </div>
 
         <div class="conteneurImage">

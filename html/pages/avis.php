@@ -115,7 +115,7 @@
                         <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
                         <!-- Commentaire -->
                         <div class="conteneurAvisTexte">
-                            <p><?php echo $avis[$key]['commentaire'] ?></p>
+                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
                         </div>
                         <!-- Image de l'avis -->
                         <?php
@@ -177,7 +177,7 @@
                         <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
                         <!-- Commentaire -->
                         <div class="conteneurAvisTexte">
-                            <p><?php echo $avis[$key]['commentaire'] ?></p>
+                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
                         </div>
                         <!-- Image de l'avis -->
                         <?php
