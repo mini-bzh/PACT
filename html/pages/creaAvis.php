@@ -27,22 +27,21 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
-
 $requete = "INSERT INTO tripskell.avis(";
-//$requete .= "commentaire, ";
-//$requete .= "imageavis, ";
-//$requete .= "dateexperience, ";
-//$requete .= "datepublication, ";
+$requete .= "commentaire, ";
+$requete .= "imageavis, ";
+$requete .= "dateexperience, ";
+$requete .= "datepublication, ";
 $requete .= "cadreexperience, ";
 $requete .= "id_c, ";
 $requete .= "idoffre,";
 $requete.= "titreavis) ";
 
 $requete .= "VALUES (";
-//$requete .= ":commentaire, ";
-//$requete .= ":imageavis, ";
-//$requete .= ":dateexperience, ";
-//$requete .= ":datepublication, ";
+$requete .= ":commentaire, ";
+$requete .= ":imageavis, ";
+$requete .= ":dateexperience, ";
+$requete .= ":datepublication, ";
 $requete .= ":cadreexperience, ";
 $requete .= ":id_c, ";
 $requete .= ":idoffre,";
@@ -53,16 +52,27 @@ print_r($_POST);
 
 $datePublication = date("d/m/Y");
 
+/*echo("commentaire : " . strlen($_POST["commentaire"]));
+echo("imageavis : " . strlen($nom_img["fichier1"]));
+echo("dateexperience : " . strlen($_POST["dateExperience"]));*/
+echo("datepublication : " . ($datePublication));
+/*echo("cadreexperience : " . strlen($_POST["contexte"]));
+echo("id_c : " . strlen($_SESSION["idCompte"]));
+echo("idoffre : " . strlen($_GET["idOffre"]));
+echo("titreavis : " . strlen($_POST["titre"]));*/
+
+
+$nul = null;
 
 $stmt = $dbh->prepare($requete);
-//$stmt->bindParam(":commentaire", $_POST["commentaire"]);
-//$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
-//$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
-//$stmt->bindParam(":datepublication", $datePublication);
-$stmt->bindParam(":cadreexpreience", $_SESSION["idCompte"]);
+$stmt->bindParam(":commentaire", $_POST["commentaire"]);    
+$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
+$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
+$stmt->bindParam(":datepublication", $datePublication);
+$stmt->bindParam(":cadreexperience", $_POST["contexte"]);
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
-$stmt->bindParam(":idoffre", $_POST["idoffre"]);
-$stmt->bindParam(":titreavis", $_POST["titreavis"]);  // on ajoute le code postal à la requete
+$stmt->bindParam(":idoffre", $_GET["idoffre"]);
+$stmt->bindParam(":titreavis", $_POST["titre"]);
 
 print_r($stmt);
 $stmt->execute(); // execution de la requete

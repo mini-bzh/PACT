@@ -108,7 +108,7 @@
     padding: 20px 0px;
 }
 
-.offre #partieTags{
+.offre #partieTags, .offre #partieAdresse{
     width: 450px;
 }
 
@@ -159,11 +159,14 @@
 
 .offre #itineraire{
     width: fit-content;
-    text-decoration: none;
-    background-color: var(--primaryDark);
-    border-radius: 30px;
-    padding: 15px;
-    color: white;
+    color: black;
+    transition: transform 0.2s ease;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.offre #itineraire:hover{
+    transform: translateY(-2px);
 }
 
 .conteneurAvis{
