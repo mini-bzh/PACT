@@ -319,7 +319,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                     </svg>
                     <a href="modifComptemembre.php=<?php echo $infos['id_c']?>">
                     <p class="boldArchivo displayNone">Modifier les informations</p>
-            </a>
+                    </a>
                 </button>
 
                 <!-- Bouton de supression compte portable -->
@@ -379,12 +379,14 @@ if ((!$comptePro) && (!$compteMembre)) {
         <!-- div des boutons de consultation / modification données de compte-->
         <div>
             <!-- Bouton de modification -->
+            <a href="modifComptemembre.php=<?php echo $infos['id_c']?>">
             <button class="btnModifCompte">
             <?php
                 include '../icones/modifierSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier le profil</p>
             </button>
+        </a>
 
             <!-- Bouton de données -->
             <button class="btnDataCompte">
