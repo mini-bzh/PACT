@@ -440,216 +440,40 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         -------------------------------------- | || (_| | (_| | -------------------------------------
                         -------------------------------------- \__\__,_|\__,  | -------------------------------------
                         --------------------------------------           |___/  -------------------------------------
-                                        -->
-                    <div id="tagsVisite">
-                        <label>Tags :</label>
-                        <div class="tags">
-                            <div>
-                                <input type="checkbox" id="tag1V" name="tag[]" value="test1" />
-                                <label for="tag1V">test1</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag2V" name="tag[]" value="Culture" />
-                                <label for="tag2V">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag3V" name="tag[]" value="Cuisine" />
-                                <label for="tag3V">Culture</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag4V" name="tag[]" value="Amusement" />
-                                <label for="tag4V">Cuisine</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag5V" name="tag[]" value="Découverte" />
-                                <label for="tag5V">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag6V" name="tag[]" value="Temporaire" />
-                                <label for="tag6V">Temporaire</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag7V" name="tag[]" value="Aventure" />
-                                <label for="tag7V">Aventure</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag8V" name="tag[]" value="Degustation" />
-                                <label for="tag8V">Degustation</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag9V" name="tag[]" value="Revigorant" />
-                                <label for="tag9V">Revigorant</label>
+                    -->
+                    <?php
+                    $tags_cat = [
+                        'Visite'        => ['Découverte', 'Culture', 'Temporaire', 'Aventure', 'Revigorant'],
+                        'Restauration'  => ['Découverte', 'Temporaire', 'Degustation'],
+                        'PA'            => ['Temporaire', 'Aventure', 'Revigorant'],
+                        'Spectacle'     => ['Temporaire', 'Découverte'],
+                        'Activite'      => ['Découverte', 'Culture', 'Temporaire', 'Revigorant', 'Degustation'],
+                        ];
+                    
+                    foreach ($tags_cat as $cat => $tags) {
+                        $initial = $tags_cat[0];
+                        
+                        
+?>
+                        <div id="tags<?php echo $cat; ?>">
+                            <label>Tags :</label>
+                            <div class="tags">
+<?php
+                            foreach ($tags as $key => $tag) {
+                                $field = "tag".$key.$initial;
+?>
+                                <div>
+                                    <input type="checkbox" id="<?php echo $field; ?>" name="<?php echo $field; ?>" value="<?php echo $tag; ?>" />
+                                    <label for="<?php echo $field; ?>"><?php echo $tag; ?></label>
+                                </div>
+<?php
+                            }
+?>
                             </div>
                         </div>
-                    </div>
-
-                    <div id="tagsRestauration">
-                        <label>Tags :</label>
-                        <div class="tags">
-                            <div>
-                                <input type="checkbox" id="tag1R" name="tag[]" value="test2" />
-                                <label for="tag1R">test2</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag2R" name="tag[]" value="Culture" />
-                                <label for="tag2R">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag3R" name="tag[]" value="Cuisine" />
-                                <label for="tag3R">Culture</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag4R" name="tag[]" value="Amusement" />
-                                <label for="tag4R">Cuisine</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag5R" name="tag[]" value="Découverte" />
-                                <label for="tag5R">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag6R" name="tag[]" value="Temporaire" />
-                                <label for="tag6R">Temporaire</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag7R" name="tag[]" value="Aventure" />
-                                <label for="tag7R">Aventure</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag8R" name="tag[]" value="Degustation" />
-                                <label for="tag8R">Degustation</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag9R" name="tag[]" value="Revigorant" />
-                                <label for="tag9R">Revigorant</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="tagsPA">
-                        <label>Tags :</label>
-                        <div class="tags">
-                            <div>
-                                <input type="checkbox" id="tag1P" name="tag[]" value="test3" />
-                                <label for="tag1P">test3</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag2P" name="tag[]" value="Culture" />
-                                <label for="tag2P">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag3P" name="tag[]" value="Cuisine" />
-                                <label for="tag3P">Culture</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag4P" name="tag[]" value="Amusement" />
-                                <label for="tag4P">Cuisine</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag5P" name="tag[]" value="Découverte" />
-                                <label for="tag5P">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag6P" name="tag[]" value="Temporaire" />
-                                <label for="tag6P">Temporaire</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag7P" name="tag[]" value="Aventure" />
-                                <label for="tag7P">Aventure</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag8P" name="tag[]" value="Degustation" />
-                                <label for="tag8P">Degustation</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag9P" name="tag[]" value="Revigorant" />
-                                <label for="tag9P">Revigorant</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="tagsSpectacle">
-                        <label>Tags :</label>
-                        <div class="tags">
-                            <div>
-                                <input type="checkbox" id="tag1S" name="tag[]" value="test4" />
-                                <label for="tag1S">test4</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag2S" name="tag[]" value="Culture" />
-                                <label for="tag2S">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag3S" name="tag[]" value="Cuisine" />
-                                <label for="tag3S">Culture</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag4S" name="tag[]" value="Amusement" />
-                                <label for="tag4S">Cuisine</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag5S" name="tag[]" value="Découverte" />
-                                <label for="tag5S">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag6S" name="tag[]" value="Temporaire" />
-                                <label for="tag6S">Temporaire</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag7S" name="tag[]" value="Aventure" />
-                                <label for="tag7S">Aventure</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag8S" name="tag[]" value="Degustation" />
-                                <label for="tag8S">Degustation</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag9S" name="tag[]" value="Revigorant" />
-                                <label for="tag9S">Revigorant</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="tagsActivite">
-                        <label>Tags :</label>
-                        <div class="tags">
-                            <div>
-                                <input type="checkbox" id="tag1A" name="tag[]" value="test5" />
-                                <label for="tag1A">test5</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag2A" name="tag[]" value="Culture" />
-                                <label for="tag2A">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag3A" name="tag[]" value="Cuisine" />
-                                <label for="tag3A">Culture</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag4A" name="tag[]" value="Amusement" />
-                                <label for="tag4A">Cuisine</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag5A" name="tag[]" value="Découverte" />
-                                <label for="tag5A">Découverte</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag6A" name="tag[]" value="Temporaire" />
-                                <label for="tag6A">Temporaire</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag7A" name="tag[]" value="Aventure" />
-                                <label for="tag7A">Aventure</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag8A" name="tag[]" value="Degustation" />
-                                <label for="tag8A">Degustation</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="tag9A" name="tag[]" value="Revigorant" />
-                                <label for="tag9A">Revigorant</label>
-                            </div>
-                        </div>
-                    </div>
+<?php
+                    }
+?>
 
 
                     <!-- prix minimum -->
