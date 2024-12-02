@@ -102,6 +102,8 @@
             <section id="conteneurBouton">
                 <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
                     <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
+                    <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTriePrix1" class="displayNone">
+                    <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTriePrix2" class="displayNone">
                     <p id="txtBtnPrix">prix</p>
                 </div>
             </section>

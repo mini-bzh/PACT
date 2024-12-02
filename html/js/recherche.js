@@ -478,6 +478,8 @@ function trierPrix() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTriePrix1").classList.toggle("displayNone");
+            document.getElementById("iconeTriePrix").classList.toggle("displayNone");
             document.getElementById("btnTriePrix").style.border = "solid";
             document.getElementById("btnTriePrix").style.borderColor = "blue" ;
 
@@ -500,6 +502,8 @@ function trierPrix() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTriePrix1").classList.toggle("displayNone");
+            document.getElementById("iconeTriePrix2").classList.toggle("displayNone");
             document.getElementById("btnTriePrix").style.border = "solid";
             document.getElementById("btnTriePrix").style.borderColor = "red" ;
             index++;
@@ -516,6 +520,8 @@ function trierPrix() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTriePrix2").classList.toggle("displayNone");
+            document.getElementById("iconeTriePrix").classList.toggle("displayNone");
             document.getElementById("btnTriePrix").style.border = "none";
             index++;
         })
