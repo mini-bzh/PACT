@@ -327,7 +327,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </select>
                     </div>
 
-                    <!-- ----------------- VISITE ------------------- OK -->
+                    <!-- ----------------- VISITE ------------------- -->
 
                     <div id="champsVisite">
 
@@ -371,7 +371,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
-                    <!-- ----------------- RESTAURATION ------------------- OK -->
+                    <!-- ----------------- RESTAURATION ------------------- -->
 
                     <div id="champsRestauration">
                         <div>
@@ -388,7 +388,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
-                    <!-- ----------------- PARC ATTRACTION ------------------- OK -->
+                    <!-- ----------------- PARC ATTRACTION ------------------- -->
 
                     <div id="champsPA">
                         <div class="champs">
@@ -405,7 +405,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
-                    <!-- ----------------- SPECTACLE ------------------- OK -->
+                    <!-- ----------------- SPECTACLE ------------------- -->
 
                     <div id="champsSpectacle">
                         <div class="champs">
