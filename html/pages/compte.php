@@ -417,6 +417,61 @@ if ((!$comptePro) && (!$compteMembre)) {
             }
 ?>
 
+<?php
+            // On affiche le bouton du prix à payer pour le mois en cours
+            if ($comptePro) {
+?>
+
+            <!-- Bouton prix -->
+            <button class="btnDetailPrix">
+                <p class="boldArchivo texteSmall">Montant total à payer</p>
+            </button>
+
+            <div class="detailPrixDeplie displayNone">
+                <?php
+                // connexion a la BdD
+                $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+                $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+                // Creation requete pour recuperer les offres
+                // du professionnel connecte
+                $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
+
+                // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
+                $stmt->bindParam(":id_c", var: $id_c); 
+                $id_c = $_SESSION["idCompte"];
+
+                $stmt->execute();   // execution de la requete
+                
+                // recuperation de la reponse et mise en forme
+                $contentMesOffres = $stmt->fetchAll();
+
+                foreach($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
+                {
+                    $prixOffre=[]; // Tableau pour stocker les prix d'une offre et de son option
+
+                    $prixOffre['prixOffre'] = $contentOffre["prix_abo"];
+                    $prixOffre['prixOption'] = $contentOffre["prix_option"];
+
+                    $donneePrix[] = $prixOffre ; // Ajout des données de l'offre dans donneePrix
+                    
+                }
+                ?>
+                <p>Total à payer : 
+                <?php 
+                $total = 0;
+                foreach ($donneePrix as $key => $value) {
+                    $total += array_sum($value);
+                }
+                echo $total;
+                ?>
+                </p>
+            </div>
+
+<?php
+            }
+?>
+
         </div>
 
         <!-- div des boutons dangereux -->
