@@ -107,8 +107,16 @@ $requete .= "gammeprix,";
 $requete .= "duree_s, ";
 $requete .= "capacite,";
 
+$requete .= "plans,";
+$requete .= "nbAttraction,";
+$requete .= "agemin,";
+
 $requete .= "duree_v,";
-$requete .= "guidee";
+$requete .= "guidee,";
+
+$requete .= "duree_a,";
+$requete .= "ageminimum,";
+$requete .= "prestation";
 
 $requete .= ")VALUES (";
 
@@ -140,8 +148,16 @@ $requete .= ":gammeprix,";
 $requete .= ":duree_s, ";
 $requete .= ":capacite,";
 
+$requete .= ":plans,";
+$requete .= ":nbattraction,";
+$requete .= ":agemin,";
+
 $requete .= ":duree_v,";
-$requete .= ":guidee";
+$requete .= ":guidee,";
+
+$requete .= ":duree_a,";
+$requete .= ":ageminimum,";
+$requete .= ":prestation";
 
 
 $requete .= ") returning idOffre;";
@@ -174,12 +190,19 @@ $stmt->bindParam(":idrepas", $idrepas);
 $stmt->bindParam(":carte", $carte);
 $stmt->bindParam(":gammeprix", $gammeprix);
 
-
 $stmt->bindParam(":duree_s", $duree_s);
 $stmt->bindParam(":capacite", $capacite);
 
+$stmt->bindParam(":plans", $plans);
+$stmt->bindParam(":nbattraction", $nbattraction);
+$stmt->bindParam(":agemin", $agemin);
+
 $stmt->bindParam(":duree_v", $duree_v);
 $stmt->bindParam(":guidee", $guidee);
+
+$stmt->bindParam(":duree_a", $duree_a);
+$stmt->bindParam(":ageminimum", $ageminimum);
+$stmt->bindParam(":prestation", $prestation);
 
 // On definit ici chacune des variables
 $tarif = $_POST["prix-minimal"];
@@ -198,8 +221,16 @@ $gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
 $duree_s     = $_POST["categorie"]=="spectacle"?$_POST["duree_s"]:null;
 $capacite    = $_POST["categorie"]=="spectacle"?$_POST["capacite"]:null;
 
+$plans    = $_POST["categorie"]=="parcDattraction"?"plan.png":null;
+$nbattraction = $_POST["categorie"]=="parcDattraction"?$_POST["nbAttraction"]:null;
+$agemin   = $_POST["categorie"]=="parcDattraction"?$_POST["ageminimum"]:null;
+
 $duree_v     = $_POST["categorie"]=="visite"?$_POST["duree_v"]:null;
-$guidee      = $_POST["categorie"]=="visite"?/*$_POST["guidee"]*/true:null;
+$guidee      = $_POST["categorie"]=="visite"?$_POST["guidee"]=="YES":null;
+
+$duree_a    = $_POST["categorie"]=="activite"?$_POST["duree_a"]:null;
+$ageminimum  = $_POST["categorie"]=="activite"?$_POST["agemin"]:null;
+$prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
@@ -276,12 +307,18 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     </div>
 
 
-                    <!-- catégorie -->
+                    <!-- 
+                    ------------------------------------   ___ __ _| |_ ___  __ _  ___  _ __(_) ___  ___ --------------------------------------- 
+                    ------------------------------------ / __/ _` | __/ _ \/ _` |/ _ \| '__| |/ _ \/ __| ---------------------------------------
+                    ------------------------------------| (_| (_| | ||  __/ (_| | (_) | |  | |  __/\__  ---------------------------------------
+                    ------------------------------------ \___\__,_|\__\___|\__, |\___/|_|  |_|\___||___/ ---------------------------------------
+                    ------------------------------------                    |___/                        ---------------------------------------
+                     -->
 
                     <div class="champs">
                         <label for="categorie">Catégorie <span class="required">*</span> :</label>
                         <select id="categorie" name="categorie" required>
-                            <option value="">Sélectionnez une catégorie</option>
+                            <option value="">Sélectionnez une catégorie</option>    
                             <option value="activite">Activité</option>
                             <option value="visite">Visite</option>
                             <option value="parcDattraction">Parc d'attraction</option>
@@ -289,6 +326,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <option value="restauration">Restauration</option>
                         </select>
                     </div>
+
+                    <!-- ----------------- VISITE ------------------- OK -->
 
                     <div id="champsVisite">
 
@@ -322,15 +361,17 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <label>Guide :<span class="required">*</span> :</label>
                         <div class="parentVisite">
                             <div>
-                                <input type="radio" id="guide" name="guide" value="YES" />
+                                <input type="radio" id="guidee" name="guidee" value="YES" />
                                 <label for="guidePresent">Oui</label>
                             </div>
                             <div>
-                                <input type="radio" id="guide" name="guide" value="NO" />
+                                <input type="radio" id="guidee" name="guidee" value="NO" />
                                 <label for="guidePasPresent">Non</label>
                             </div>
                         </div>
                     </div>
+
+                    <!-- ----------------- RESTAURATION ------------------- OK -->
 
                     <div id="champsRestauration">
                         <div>
@@ -347,6 +388,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
+                    <!-- ----------------- PARC ATTRACTION ------------------- OK -->
+
                     <div id="champsPA">
                         <div class="champs">
                             <label for="nbAttraction">Nombre Attraction :</label>
@@ -361,6 +404,9 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <input type="file" id="plan" name="plan">
                         </div>
                     </div>
+
+                    <!-- ----------------- SPECTACLE ------------------- OK -->
+
                     <div id="champsSpectacle">
                         <div class="champs">
                             <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
@@ -371,6 +417,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
                         </div>
                     </div>
+
+                    <!-- ----------------- ACTIVITE ------------------- -->
 
                     <div id="champsActivite">
                         <div>
@@ -387,7 +435,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
-                    <!-- TAG -->
+                    <!---------------------------------------- | |_ __ _  __ _  -------------------------------------
+                        -------------------------------------- | __/ _` |/ _` | -------------------------------------
+                        -------------------------------------- | || (_| | (_| | -------------------------------------
+                        -------------------------------------- \__\__,_|\__,  | -------------------------------------
+                        --------------------------------------           |___/  -------------------------------------
+                                        -->
                     <div id="tagsVisite">
                         <label>Tags :</label>
                         <div class="tags">
