@@ -263,6 +263,19 @@
     padding: 10px;
 }
 
+.btnAjouterAvisGrise{
+    color: var(--grisClair) !important;
+
+}
+
+.btnAjouterAvisGrise:hover{
+    cursor: pointer;
+}
+
+.btnAjouterAvisGrise img{
+    display: none;
+}
+
 #btnAjouterAvis img{
     width: 60px;
     margin-right: 20px;
