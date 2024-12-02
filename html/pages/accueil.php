@@ -29,7 +29,7 @@
     }
     else
     {
-        $stmt = $dbh->query("SELECT * from tripskell.offre_visiteur;"); // utilisez offre_visiteur a terme
+        $stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p where p.id_option='A la une';");
     }
 
     $stmt->execute();
@@ -96,7 +96,7 @@
                 else
                 {
                     ?>
-                    <h1>Toutes les offres</h1>
+                    <h1>À la Une</h1>
                     <?php
                 }
             ?>
@@ -104,14 +104,13 @@
             <section id="conteneurOffres">
                 <article>
                     <?php
-                        // recuperation des parametre de connection a la BdD
-
-                        foreach($rows as $offre)          // parcourt les offres pour les afficher
-                        {
-                            ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"];?>" class="lienApercuOffre grossisQuandHover"><?php
-                            af_offre($offre);
-                            ?></a><?php
-                        }
+                    
+                    foreach($rows as $offre)          // parcourt les offres pour les afficher
+                    {
+                        ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"];?>" class="lienApercuOffre grossisQuandHover"><?php
+                        af_offre($offre);
+                        ?></a><?php
+                    }
                     ?>
                 </article>
             </section>
