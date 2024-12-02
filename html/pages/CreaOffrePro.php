@@ -234,26 +234,42 @@ $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
-$idOffre = $stmt->fetchColumn();
+//$idOffre = $stmt;
+
+// requete pour avoir la liste des tags
+$stmt = $dbh->prepare("select * from tripskell._tags");
+$stmt->execute();
+$liste_tags = $stmt->fetchAll();
+
+// requete pour avoir l'offre qui vient d'être creé
+$stmt = $dbh->prepare("select max(idOffre) from tripskell.offre_pro");
+$stmt->execute();
+$idOffre = $stmt->fetchAll()[0]["max"];
 
 //requete pour l'insersion des tags
-/*
+
 $requete = "INSERT INTO tripskell._possede(";
 $requete .= "idOffre, ";
-$requete .= "idTag";
+$requete .= "nomTag";
 $requete .= ") VALUES (";
 $requete .= ":idOffre, ";
-$requete .= ":idTag";
+$requete .= ":nomTag";
 $requete .= ");";
 
-$stmt = $dbh->prepare($requete);
 
-$stmt->bindparam(":idOffre", $idOffre);
-$stmt->bindparam(":idTag", $idTag);
-*/
-    // on ferme la base de donnée
-    $dbh = null;
+foreach($liste_tags as $tag) {
+    
+    if(!is_null($_POST[$tag["nomtag"]])) {
+        echo $tag["nomtag"];
+        $stmt = $dbh->prepare($requete);
+        $stmt->bindparam(":idOffre", $idOffre);
+        $stmt->bindparam(":nomTag", $tag["nomtag"]);
+        $stmt->execute();
+    }
+}
 
+// on ferme la base de donnée
+$dbh = null;
     header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
 ?>
