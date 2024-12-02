@@ -79,6 +79,14 @@
             ?>
               <section class="mainAvis">
               <section class="mainAvisPro">
+                
+                    <section class="conteneurBtn">
+                        <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
+                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <p id="txtBtnDate">date</p>
+                        </div> 
+                    </section>
+
                 <?php
                 foreach ($offre as $key => $value){
                     $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key]['idoffre'] . ";")->fetchAll();
@@ -87,10 +95,11 @@
                 <h2 class="titreOffre"><?php echo $offre[$key]['titreoffre']?></h2>
                 <section class="conteneurAvis">
                     <?php
+                    $i = 0;
                     foreach ($avis as $key => $value){
                         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
                     ?>
-                    <article class="avis">
+                    <article id="Avis<?php echo $i;$i++;?>" class="avis">
                     <!-- Date de publication-->
                     <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
@@ -137,13 +146,22 @@
             ?>
                 <section class="mainAvis">
                 <section class="conteneurAvis">
+
+                <section class="conteneurBtn">
+                        <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
+                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <p id="txtBtnDate">date</p>
+                        </div> 
+                    </section>
+
                 <?php
+                $i=0;
                 foreach ($avis as $key => $value){
                     $offre = $dbh->query("select * from tripskell._offre where idoffre=" . $avis[$key]['idoffre'] . ";")->fetchAll()[0];
 
                 ?>
                 <h2 class="titreOffre"><?php echo $offre['titreoffre']?></h2>
-                <article class="avis">
+                <article id="Avis<?php echo $i;$i++;?>" class="avis">
                     <!-- Date de publication-->
                     <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
@@ -185,5 +203,6 @@
     <?php                                                   //import footer
             include "../composants/footer/footer.php";
     ?>
+    <script src="../js/avis.js"></script>
 </body>
 </html>
