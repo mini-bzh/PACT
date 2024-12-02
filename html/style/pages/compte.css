@@ -365,6 +365,76 @@ body.no-scroll {
     stroke-width: 8px;
 }
 
+.btnDataBanc{
+    background-color: var(--primaryLight);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnDataBanc{
+    background-color: var(--primaryLight);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+/* affichage du bouton facture */
+
+.btnAccesFacture:hover{
+    cursor: pointer;
+}
+
+.btnAccesFacture p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btnAccesFacture svg{
+    width: 35px;
+    height: 35px;
+    margin-left: 3%;
+}
+
+.btnAccesFacture svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
+.btnAccesFacture{
+    background-color: var(--primaryLight);
+    width: 486px;
+    height: 50px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btnAccesFacture a{
+    text-decoration: none;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    /* padding-top: 1%; */
+}
+
 .resizeShow{
     display: none;
 }

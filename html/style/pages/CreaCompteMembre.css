@@ -296,3 +296,19 @@ form > .zoneBtn{
         width: 45px;
        }
 }
+
+.image-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    margin-left: 2%;
+}
+
+.pdp_champs{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}

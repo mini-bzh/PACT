@@ -111,7 +111,7 @@ main h1{
     width: 1170px;
     height: 610px;
     position: absolute;
-    top: 50px;
+    top: 45px;
     z-index: 3;
     border-radius: 0 48px 48px 48px;
 }

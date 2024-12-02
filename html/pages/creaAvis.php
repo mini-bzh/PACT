@@ -54,12 +54,14 @@ $datePublication = date("d/m/Y");
 
 /*echo("commentaire : " . strlen($_POST["commentaire"]));
 echo("imageavis : " . strlen($nom_img["fichier1"]));
-echo("dateexperience : " . strlen($_POST["dateExperience"]));*/
+echo("dateexperience : " . strlen($_POST["dateExperience"]));
 echo("datepublication : " . ($datePublication));
-/*echo("cadreexperience : " . strlen($_POST["contexte"]));
+echo("cadreexperience : " . strlen($_POST["contexte"]));*/
+
+print_r($_SESSION);
 echo("id_c : " . strlen($_SESSION["idCompte"]));
-echo("idoffre : " . strlen($_GET["idOffre"]));
-echo("titreavis : " . strlen($_POST["titre"]));*/
+echo("idoffre : " . ($_GET["idOffre"]));
+//echo("titreavis : " . ($_POST["titre"]));
 
 
 $nul = null;
@@ -71,7 +73,7 @@ $stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
 $stmt->bindParam(":datepublication", $datePublication);
 $stmt->bindParam(":cadreexperience", $_POST["contexte"]);
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
-$stmt->bindParam(":idoffre", $_GET["idoffre"]);
+$stmt->bindParam(":idoffre", $_GET["idOffre"]);
 $stmt->bindParam(":titreavis", $_POST["titre"]);
 
 print_r($stmt);
@@ -80,7 +82,7 @@ $stmt->execute(); // execution de la requete
 // on ferme la base de donnée
 $dbh = null;
 
-header("Location: /pages/detailOffre.php?idOffre=" + $_POST["idoffre"]); // on redirige vers la page de l'offre créée
+header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on redirige vers la page de l'offre créée
 }
 
 ?>

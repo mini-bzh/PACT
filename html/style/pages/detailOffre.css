@@ -239,6 +239,9 @@
 
 .avis .conteneurAvisImage img{
     border: 2px solid black;
+    width: 360px;
+    height: 225px;
+    object-fit: cover;
 }
 
 .circular-image {
@@ -258,6 +261,19 @@
     text-decoration: black;
     border-radius: 40px;
     padding: 10px;
+}
+
+.btnAjouterAvisGrise{
+    color: var(--grisClair) !important;
+
+}
+
+.btnAjouterAvisGrise:hover{
+    cursor: pointer;
+}
+
+.btnAjouterAvisGrise img{
+    display: none;
 }
 
 #btnAjouterAvis img{

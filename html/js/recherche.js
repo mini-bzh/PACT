@@ -16,6 +16,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
         mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent)
         mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent)
+        mapTempo.set("date", document.querySelector("#" + element.id + " #ville").textContent)
 
         let prix = document.querySelectorAll("#" + element.id + " .text-overlay span")[0].textContent;
         prix = prix.substring(0, prix.length-1);
@@ -154,19 +155,26 @@ function adjustValue(increment, prix) {
     let currentValue = parseInt(inputElement.value, 10) || 0;
 
     // Si currentValue est NaN ou null, définir à 0
-    if (isNaN(currentValue) || currentValue === null) {
-        currentValue = 0;
+    if (isNaN(currentValue) || currentValue == "") {
+        if ((prix == "prixMax") && (min != "")) {
+            currentValue = parseInt(min, 10);
+        } else {
+            currentValue = 0;
+        }
     }
     
     // Ajuster la valeur en fonction de l'incrément
-    if ((prix == "prixMin") && (currentValue + increment <= max)) {
+    if ((prix == "prixMin") && ((currentValue + increment <= max) || (max == "") || (isNaN(max)))) {
         currentValue += increment;
-    } else if ((prix == "prixMax") && (currentValue + increment >= min)) {
+        critPrixMin = parseInt(currentValue, 10);
+    } else if ((prix == "prixMax") && ((currentValue + increment >= min) || (min == ""))) {
         currentValue += increment;
+        critPrixMax = parseInt(currentValue, 10);
     }
     
     // Empêcher les valeurs négatives
     inputElement.value = Math.max(0, currentValue);
+
 
     updateAffichageOffres();
 }
@@ -365,20 +373,14 @@ function verifFiltre(idOffre)
         if (critCategorie.length > 0) {
             if (critCategorie.includes(offre.get("categorie"))){
                 valideCat = true;
-                console.log("cat ok");
-            } else{
-                console.log("non1 -> " + offre.get("categorie") + " diff " + critCategorie);
             }
         } else {
             valideCat = true;
         }
 
         if (critLieu != "") {
-            if (offre.get("ville").includes(critLieu)) {
+            if (offre.get("ville").toLowerCase().includes(critLieu.toLowerCase())) {
                 valideLieu = true;
-                console.log("lieu ok");
-            } else{
-                console.log("non2");
             }
         } else {
             valideLieu = true;
@@ -387,20 +389,46 @@ function verifFiltre(idOffre)
         if (critOuverture.length > 0) {
             if ((critOuverture.includes("ouvert")) && (offre.get("ouverture"))){
                 valideOuv = true;
-                console.log("ouv ok");
             } else if ((critOuverture.includes("ferme")) && (!offre.get("ouverture"))){
                 valideOuv = true;
-                console.log("fer ok");
-            } else{
-                console.log("non3");
             }
         } else {
             valideOuv = true;
         }
 
+        if ((critDateDeb != null) || (critDateFin != null)) {
+            if ((critDateDeb != null) && (critDateFin != null)) {
+                
+            } else if (critDateDeb != null) {
+                
+            } else if (critDateFin != null) {
+                
+            }
+        } else {
+            valideDate = true;
+        }
+
+        if (((critPrixMin != null) && (critPrixMin != 0)) || ((critPrixMax != null) && (critPrixMax != 0))) {
+            if (((critPrixMin != null) && (critPrixMax != null))) {
+                if ((critPrixMin <= parseInt(offre.get("prix"), 10)) && (critPrixMax >= parseInt(offre.get("prix"), 10))) {
+                    validePrix = true;
+                }
+            } else if (critPrixMin != null) {
+                if (critPrixMin <= parseInt(offre.get("prix"), 10)) {
+                    validePrix = true;
+                }
+            } else if (critPrixMax != null) {
+                if (critPrixMax >= parseInt(offre.get("prix"), 10)) {
+                    validePrix = true;
+                }
+            }
+        } else {
+            validePrix = true;
+        }
 
 
-        if ((valideCat) && (valideLieu) && (valideOuv)) {
+
+        if ((valideCat) && (valideLieu) && (valideOuv) && (valideDate) && (validePrix)) {
             valide = true;
         }
         

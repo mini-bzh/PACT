@@ -10,6 +10,8 @@
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
+    include('../php/verif_compte_membre.php');
+
     include('../php/verif_categorie.php');
     
 
@@ -201,10 +203,42 @@
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
-                    <a href="creaAvis.php?idOffre=<?php echo $idOffre;?>" id="btnAjouterAvis" class="grossisQuandHover">
-                        <img src="../icones/ajouterSVG.svg" alt="ajouter">
-                        <h3>Ajouter un avis</h3>
-                    </a>
+                    <?php 
+                        
+                        if($_SESSION["idCompte"] !== null && $compteMembre)
+                        {   
+                            $avisDejaAjoute = false;
+
+                            $stmt = $dbh->prepare("select * from tripskell._avis where id_c = 7");
+                            $stmt->execute();
+                            $result = $stmt->fetchAll();
+
+                            if(sizeof($result) > 0)
+                            {
+                                $avisDejaAjoute = true;
+                            }
+
+                            ?>
+                            <a <?php 
+                                if(!$avisDejaAjoute)
+                                {
+                                    ?>
+                                    href="creaAvis.php?idOffre=<?php echo $idOffre;?>";
+                                    <?php
+                                }
+                            ?> id="btnAjouterAvis" 
+                            class="grossisQuandHover <?php       //ajoute la classe btnAvisGrisé quand le memebre a déjà ajouté un avis
+                                    if($avisDejaAjoute)
+                                    {
+                                        echo ("btnAjouterAvisGrise");
+                                    }
+                                ?>">
+                                <img src="../icones/ajouterSVG.svg" alt="ajouter">
+                                <h3>Ajouter un avis</h3>
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <!-- Code pour un avis -->
                     <?php
                     $i=0;

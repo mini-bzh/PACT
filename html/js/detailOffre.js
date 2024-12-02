@@ -20,7 +20,6 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
             date[i] = parseInt(element);
             i++;
         });
-        console.log(date);
         mapTempo.set("date", date);   //date
 
         mapAvisInfos.set(element.id, mapTempo);
@@ -30,7 +29,6 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 }
 
 let mapAvisInfos = initAvis();
-console.log(mapAvisInfos);
 
 let trieDate = "";
 
@@ -107,7 +105,18 @@ function trierDate() {
         })
         trieDate = "";  // Modifie l'état du trie
     }
-
 }
+
+
+/* ------------------------ empêcher ajouter 2e avis ------------------------*/
+
+let btnAjouterAvis = document.getElementById("btnAjouterAvis");
+
+console.log(btnAjouterAvis);
+btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre 'event'
+    if (btnAjouterAvis.classList.contains("btnAjouterAvisGrise")) {
+        alert("Veuillez supprimer votre ancien avis si vous voulez ajouter un nouvel avis");
+    }
+});
 
 
