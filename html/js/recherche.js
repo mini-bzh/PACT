@@ -453,7 +453,6 @@ function verifFiltre(idOffre)
         }
         
     }
-    console.log(valide);
 
     return valide;
 }

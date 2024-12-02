@@ -13,8 +13,18 @@ function af_offre($row) {
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
     
+    $stmt = $dbh->prepare("select idoffre from tripskell.offre_pro as p where p.id_option='En relief';");
+    $stmt->execute();
+    $enRelief = $stmt->fetchAll();
+    $enRelief = array_column($enRelief, 'idoffre');
 ?>
-    <article class="apercuOffre">
+    <article class="apercuOffre
+<?php
+    if (in_array($row["idoffre"], $enRelief)) {
+        echo " relief";
+    }
+?>
+    ">
         <h3><?php echo $row["titreoffre"];?></h3>
         <div class="conteneurSVGtexte">
             <img src="/icones/logoUserSVG.svg" alt="pro">

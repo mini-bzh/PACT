@@ -367,6 +367,16 @@ p{
     border: 5px solid rgb(255, 219, 90);
 }
 
+/* Cas de mise en relief */
+.relief{
+    border: 10px solid;
+    border-image: linear-gradient(to right, #DDF289, #B9C549, #6C6E0F) 1;
+    /* border: #B9C549 solid 10px; */
+    padding: 10px;
+    /* border-radius: 20px; */
+}
+
+
 @media screen and (max-width : 428px){
 
     #conteneurOffres{

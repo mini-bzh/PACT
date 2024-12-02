@@ -108,6 +108,7 @@ div:has(> .fakeDiv){
     height: 150px;
     border-radius: 50%;
     overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    object-fit: cover
 }
 
 
@@ -116,12 +117,14 @@ div:has(> .fakeDiv){
     height: 150px;
     border-radius: 50%;
     overflow: hidden; /* Cache tout ce qui dépasse */
+    object-fit: cover
 }
 
 .infoPrinc {
     position: relative;
     left: 50px;
 }
+
 
 /* Bouton de deconnexion */
 
