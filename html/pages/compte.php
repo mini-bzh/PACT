@@ -1,4 +1,7 @@
 <?php
+
+use Dompdf\Dompdf;
+
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
@@ -29,7 +32,6 @@
     <link rel="stylesheet" href="../style/pages/compte.css">
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
-    <script src="../js/ModifCompte.js" defer></script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -269,7 +271,7 @@ if ((!$comptePro) && (!$compteMembre)) {
             <div class="zoneInfosPort">
 <?php
                 if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom
-?>
+?>                
                 <div>
                     <p class="boldArchivo displayNone">Nom : <?php echo $infos["nom"] ?></p>
                     <p class="boldArchivo displayNone">Prenom : <?php echo $infos["prenom"] ?></p>
@@ -315,9 +317,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                         <path d="M88.2249 28.3831C90.4279 26.1807 91.6657 23.1934 91.6661 20.0784C91.6665 16.9633 90.4294 13.9757 88.227 11.7727C86.0246 9.56976 83.0373 8.33193 79.9222 8.33154C76.8071 8.33115 73.8195 9.56823 71.6166 11.7706L16.0082 67.3915C15.0408 68.3561 14.3254 69.5437 13.9249 70.8498L8.42072 88.9831C8.31304 89.3435 8.3049 89.7263 8.39719 90.0909C8.48947 90.4554 8.67872 90.7883 8.94487 91.054C9.21102 91.3197 9.54414 91.5084 9.90888 91.6001C10.2736 91.6918 10.6564 91.6831 11.0166 91.5748L29.1541 86.0748C30.4589 85.6779 31.6464 84.9669 32.6124 84.004L88.2249 28.3831Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M62.5 20.8335L79.1667 37.5002" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <a href="modifComptemembre.php=<?php echo $infos['id_c']?>">
                     <p class="boldArchivo displayNone">Modifier les informations</p>
-                    </a>
                 </button>
 
                 <!-- Bouton de supression compte portable -->
@@ -377,16 +377,12 @@ if ((!$comptePro) && (!$compteMembre)) {
         <!-- div des boutons de consultation / modification données de compte-->
         <div>
             <!-- Bouton de modification -->
-            
-                <a href="ModifComptemembre.php">
-                    <button class="btnModifCompte" onclick="afficherPopUpMdp()">
-                        <?php
-                            include '../icones/modifierSVG.svg';
-                        ?>
-                        <p class="boldArchivo texteSmall">Modifier le profil</p>
-                    </button>
-                </a>
-        </button>
+            <button class="btnModifCompte">
+            <?php
+                include '../icones/modifierSVG.svg';
+            ?>
+                <p class="boldArchivo texteSmall">Modifier le profil</p>
+            </button>
 
             <!-- Bouton de données -->
             <button class="btnDataCompte">
@@ -407,6 +403,14 @@ if ((!$comptePro) && (!$compteMembre)) {
                 include '../icones/creditCardSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
+            </button>
+
+            <!-- Bouton de données bancaires -->
+            <button class="btnAccesFacture">
+            <?php
+                include '../icones/creditCardSVG.svg';
+            ?>
+                <a href="telechargementFacture.php"><p class="boldArchivo texteSmall">Télécharger les factures</p></a>
             </button>
 
 <?php
@@ -445,45 +449,16 @@ if ((!$comptePro) && (!$compteMembre)) {
 
 
 
-    <!-- POP-UP de deconnexion -->
-    <div class="popUpDeco">
+<!-- POP-UP de deconnexion -->
+<div class="popUpDeco">
+    <div>
+        <p>Êtes vous sur de vouloir vous déconnecter ?</p>
         <div>
-            <p>Êtes vous sur de vouloir vous déconnecter ?</p>
-            <div>
-                <button class="btnAnnuler" onclick="fermeConfDeco()">Non</button>
-                <button class="btnValider" onclick="deconnexion()">OK</button>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="overlay" id="overlay">
-    <div class="popUpMdp" id="popUpMdp">
-        <div class="popUpContent">
-            <form id="passwordForm" action="votre_fichier_php.php" method="POST">
-                <p>Veuillez entrer votre mot de passe pour confirmer :</p>
-                <input type="password" id="passwordInput" name="password" placeholder="Mot de passe" required>
-                <div class="popUpButtons">
-                    <button type="button" class="btnAnnuler" onclick="fermerPopUpMdp()">Annuler</button>
-                    <button type="submit" class="btnValider">Confirmer</button>
-                </div>
-            </form>
+            <button class="btnAnnuler" onclick="fermeConfDeco()">Non</button>
+            <button class="btnValider" onclick="deconnexion()">OK</button>
         </div>
     </div>
 </div>
-
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $password = $_POST['password']; // Récupère le mot de passe du formulaire
-    // Effectuez vos actions ici, comme une vérification
-    if ($password === $infos['mot_de_passe']) {
-        echo "Mot de passe correct !";
-    } else {
-        echo "Mot de passe incorrect.";
-    }
-}
-?>
 
 </main>
 
