@@ -306,7 +306,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                 <!-- Formulaire de création d'offre -->
 
-                <form name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
+                <form name="creation" action="" method="post" enctype="multipart/form-data">
 
 
                     <!-- titre -->
