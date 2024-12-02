@@ -213,7 +213,15 @@
                                             <path d="M66.6666 58.3333H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M33.3334 75H33.375" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M50 75H50.0417" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M66.6666 75H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <label>
+                                    <input type="checkbox" name="ouverture" value="ouvert">
+                                    <p>Ouvert</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="ouverture" value="ferme">
+                                    <p>Fermé</p>
+                                </label>
+                            </fieldset>               <path d="M66.6666 75H66.7083" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
 
                                     </div>
@@ -321,6 +329,7 @@
                                 ?>
                                 href="/pages/detailOffre.php?idOffre=<?php echo $row["idoffre"]?>" class="lienApercuOffre grossisQuandHover" 
                                 id="offre<?php echo $row['idoffre']?>">
+                                    <!-- affichage des offrres -->
                                     <?php af_offre($row);?>
                                 </a>
                             <?php
