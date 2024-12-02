@@ -147,35 +147,7 @@
                             </fieldset>
                         </div>
 
-                        <div id="filtreLieu">
-                            <div class="titreFiltre">
-                                <hr>
-                                <h3>Lieu</h3>
-                            </div>
-
-                            <input id="lieu" type="text" name="lieu" placeholder="Commune / Lieu-dit">
-                        </div>
-                    </div>
-                    <div>
-                        <div id="filtreOuverture">
-                            <div class="titreFiltre">
-                                <hr>
-                                <h3>Ouverture</h3>
-                            </div>
-
-                            <fieldset id="ouverture">
-                                <label>
-                                    <input type="checkbox" name="ouverture" value="ouvert">
-                                    <p>Ouvert</p>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="ouverture" value="ferme">
-                                    <p>Fermé</p>
-                                </label>
-                            </fieldset>
-                        </div>
-
-                        <div id="filtreDate">
+                        <!-- <div id="filtreDate">
                             <div class="titreFiltre">
                                 <hr>
                                 <h3>Dates</h3>
@@ -221,11 +193,41 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        
                     </div>
-                    <div class="justifyEvenly">
+                    <div>
+                        <div id="filtreOuverture">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Ouverture</h3>
+                            </div>
 
-                        <div id="filtreEtoile">
+                            <fieldset id="ouverture">
+                                <label>
+                                    <input type="checkbox" name="ouverture" value="ouvert">
+                                    <p>Ouvert</p>
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="ouverture" value="ferme">
+                                    <p>Fermé</p>
+                                </label>
+                            </fieldset>
+                        </div>
+
+                        <div id="filtreLieu">
+                            <div class="titreFiltre">
+                                <hr>
+                                <h3>Lieu</h3>
+                            </div>
+
+                            <input id="lieu" type="text" name="lieu" placeholder="Commune / Lieu-dit">
+                        </div>
+
+                    </div>
+                    <div>
+
+                        <!-- <div id="filtreEtoile">
                             <div class="titreFiltre">
                                 <hr>
                                 <h3>Étoiles</h3>
@@ -267,7 +269,7 @@
                             </div>
 
 
-                        </div>
+                        </div> -->
 
                         <div id="filtrePrix">
                             <div class="titreFiltre">

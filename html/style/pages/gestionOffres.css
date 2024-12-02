@@ -96,6 +96,11 @@ body h1{
     text-decoration: none;
 }
 
+th, td {
+    padding: 20px;
+    font-size: 0.9em;
+    font-family: 'Archivo';
+}
 
 @media screen and (max-width : 428px)
 {
