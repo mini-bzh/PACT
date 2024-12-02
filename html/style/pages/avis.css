@@ -105,6 +105,11 @@ main h1{
     overflow: hidden; /* Cache tout ce qui dépasse */
 }
 
+.texteAvis{
+    word-wrap: break-word;
+}
+
+
 @media screen and (max-width : 428px){
     .titrePrincipale{
         font-size: var(--typescale-h1);
