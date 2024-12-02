@@ -11,6 +11,15 @@
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
 
+    $idCompte = $_SESSION["idCompte"];
+
+    if($comptePro){
+        $offre = $dbh->query("select * from tripskell.offre_pro where id_c='" . $idCompte . "';")->fetchAll();
+    }
+    else{
+        $membre = $dbh->query("select * from tripskell.membre where id_c='" . $idCompte . "';")->fetchAll()[0];
+        $avis = $dbh->query("select * from tripskell._avis where id_c='" . $idCompte . "';")->fetchAll();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,11 +69,119 @@
         <div id="conteneurTitreMobile">
             <!--<img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">-->
             <img src="/images/logo/logo_petit.png" alt="logo petit" id="logoTitreMobile">
-            <h3>Mes avis</h3>
+            <h3 class="titrePrincipale">Mes avis</h3>
         </div>
     </div>
     <main>
-        <h1>Coming soon !</h1>
+    <?php                          //met le bon fond en fonction de l'utilisateur
+            if ($comptePro)
+            {
+            ?>
+            
+              <h1>Avis pro</h1>
+              <section class="mainAvis">
+              <section class="mainAvisPro">
+                <?php
+                foreach ($offre as $key => $value){
+                    $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key]['idoffre'] . ";")->fetchAll();
+                ?>
+                <h2 class="titreOffre"><?php echo $offre[$key]['titreoffre']?></h2>
+                <section class="conteneurAvis">
+                    <?php
+                    foreach ($avis as $key => $value){
+                        $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
+                    ?>
+                    <article class="avis">
+                    <!-- Date de publication-->
+                    <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
+                        <!-- Information du membre -->
+                        <div class="conteneurMembreAvis">
+                            <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                            <div class="infoMembreAvis">
+                                <h3><?php echo $membre['login'] ?></h3>
+                                <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                            </div>
+                        </div>
+                        <!-- Titre de l'avis -->
+                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <!-- Commentaire -->
+                        <div class="conteneurAvisTexte">
+                            <p><?php echo $avis[$key]['commentaire'] ?></p>
+                        </div>
+                        <!-- Image de l'avis -->
+                        <?php
+                        if($avis[$key]["imageavis"] != null){
+                        ?>
+                        <hr>
+                        <div class="conteneurAvisImage">
+                            <img src="/images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" alt="image de l'avis">
+                        </div>
+                        <?php
+                        }
+                        ?>
+                </article>
+                    <?php
+                    }
+                    ?>
+                </section>
+                <?php
+                }
+                ?>
+                </section>
+                </section>
+            <?php
+            }
+            else
+            {
+            ?>
+                <h1>Avis Membre</h1>
+                <section class="mainAvis">
+                <section class="conteneurAvis">
+                <?php
+                foreach ($avis as $key => $value){
+                    $offre = $dbh->query("select * from tripskell._offre where idoffre=" . $avis[$key]['idoffre'] . ";")->fetchAll()[0];
+
+                ?>
+                <h2 class="titreOffre"><?php echo $offre['titreoffre']?></h2>
+                <article class="avis">
+                    <!-- Date de publication-->
+                    <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
+                        <!-- Information du membre -->
+                        <div class="conteneurMembreAvis">
+                            <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                            <div class="infoMembreAvis">
+                                <h3><?php echo $membre['login'] ?></h3>
+                                <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                            </div>
+                        </div>
+                        <!-- Titre de l'avis -->
+                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <!-- Commentaire -->
+                        <div class="conteneurAvisTexte">
+                            <p><?php echo $avis[$key]['commentaire'] ?></p>
+                        </div>
+                        <!-- Image de l'avis -->
+                        <?php
+                        if($avis[$key]["imageavis"] != null){
+                        ?>
+                        <hr>
+                        <div class="conteneurAvisImage">
+                            <img src="/images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" alt="image de l'avis">
+                        </div>
+                        <?php
+                        }
+                        ?>
+                </article>
+                <?php
+                }
+                ?>
+                </section>
+                </section>
+            <?php
+            }
+    ?>
     </main>
     <?php                                                   //import footer
             include "../composants/footer/footer.php";
