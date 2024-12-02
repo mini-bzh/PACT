@@ -379,14 +379,15 @@ if ((!$comptePro) && (!$compteMembre)) {
         <!-- div des boutons de consultation / modification données de compte-->
         <div>
             <!-- Bouton de modification -->
-            <a href="modifComptemembre.php=<?php echo $infos['id_c']?>">
-            <button class="btnModifCompte">
-            <?php
-                include '../icones/modifierSVG.svg';
-            ?>
-                <p class="boldArchivo texteSmall">Modifier le profil</p>
-            </button>
-        </a>
+            <a href="ModifComptemembre.php">
+                    <button class="btnModifCompte" onclick="afficherPopUpMdp()">
+                        <?php
+                            include '../icones/modifierSVG.svg';
+                        ?>
+                        <p class="boldArchivo texteSmall">Modifier le profil</p>
+                    </button>
+                </a>
+        </button>
 
             <!-- Bouton de données -->
             <button class="btnDataCompte">
