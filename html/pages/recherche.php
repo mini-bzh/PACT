@@ -15,7 +15,7 @@
     include('../php/verif_compte_membre.php');
 
 
-    // contient fonction caf_offre pour afficher les offres
+    // contient fonction af_offre pour afficher les offres
     include('../php/affichage_offre.php');
 
 
