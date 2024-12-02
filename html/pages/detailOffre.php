@@ -10,6 +10,8 @@
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_pro.php');
+    include('../php/verif_compte_membre.php');
+
     include('../php/verif_categorie.php');
     
 
@@ -201,10 +203,17 @@
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
-                    <a href="creaAvis.php?idOffre=<?php echo $idOffre;?>" id="btnAjouterAvis" class="grossisQuandHover">
-                        <img src="../icones/ajouterSVG.svg" alt="ajouter">
-                        <h3>Ajouter un avis</h3>
-                    </a>
+                    <?php 
+                        if($_SESSION["idCompte"] !== null && $compteMembre)
+                        {
+                            ?>
+                            <a href="creaAvis.php?idOffre=<?php echo $idOffre;?>" id="btnAjouterAvis" class="grossisQuandHover">
+                                <img src="../icones/ajouterSVG.svg" alt="ajouter">
+                                <h3>Ajouter un avis</h3>
+                            </a>
+                            <?php
+                        }
+                    ?>
                     <!-- Code pour un avis -->
                     <?php
                     $i=0;
