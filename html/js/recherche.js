@@ -22,7 +22,8 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         prix = prix.substring(0, prix.length-1);
         mapTempo.set("prix", parseInt(prix));   //prix
 
-        mapTempo.set("ouverture", element.classList.contains("ouvert"));        //si l'offre est ouverte ou non
+        let ouv = document.querySelector("#" + element.id + " #ouvertFerme");
+        mapTempo.set("ouverture", ouv.classList.contains("ouvert"));        //si l'offre est ouverte ou non
 
         mapOffresInfos.set(element.id, mapTempo);
     });
@@ -343,19 +344,28 @@ document.getElementById("dateFin").addEventListener("change", (event) => {
 // Prix min / max
 document.getElementById("prixMin").addEventListener("change", (event) => {
 
-    critPrixMin = event.target.value;
+    if (event.target.value == "") {
+        critPrixMin = null;
+    } else {
+        critPrixMin = event.target.value;
+    }
     updateAffichageOffres();
 
 });
 
 document.getElementById("prixMax").addEventListener("change", (event) => {
 
-    critPrixMax = event.target.value;
+    if (event.target.value == "") {
+        critPrixMax = null;
+    } else {
+        critPrixMax = event.target.value;
+    }
     updateAffichageOffres();
 
 });
 
 
+// Fonction qui retourne true si une offre correspond au critères sélectionnés
 function verifFiltre(idOffre)
 {
     let valide = false;
@@ -367,9 +377,14 @@ function verifFiltre(idOffre)
     let validePrix = false;
 
     let offre = mapOffresInfos.get(idOffre);
+
+    // Si acun critère n'a été sélectionné
     if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critDateDeb == null) && (critDateFin == null) && (critPrixMin == null) && (critPrixMax == null)){
         valide = true;
+    // Si au moins 1 critère a été sélectionné
     } else {
+
+        // On traite le cas du filtre catégorie
         if (critCategorie.length > 0) {
             if (critCategorie.includes(offre.get("categorie"))){
                 valideCat = true;
@@ -378,6 +393,7 @@ function verifFiltre(idOffre)
             valideCat = true;
         }
 
+        // On traite le cas du filtre lieu
         if (critLieu != "") {
             if (offre.get("ville").toLowerCase().includes(critLieu.toLowerCase())) {
                 valideLieu = true;
@@ -386,16 +402,19 @@ function verifFiltre(idOffre)
             valideLieu = true;
         }
 
+        // On traite le cas du filtre d'ouverture
         if (critOuverture.length > 0) {
             if ((critOuverture.includes("ouvert")) && (offre.get("ouverture"))){
                 valideOuv = true;
-            } else if ((critOuverture.includes("ferme")) && (!offre.get("ouverture"))){
+            }
+            if ((critOuverture.includes("ferme")) && (!offre.get("ouverture"))){
                 valideOuv = true;
             }
         } else {
             valideOuv = true;
         }
 
+        // On traite le cas du filtre par date
         if ((critDateDeb != null) || (critDateFin != null)) {
             if ((critDateDeb != null) && (critDateFin != null)) {
                 
@@ -408,7 +427,8 @@ function verifFiltre(idOffre)
             valideDate = true;
         }
 
-        if (((critPrixMin != null) && (critPrixMin != 0)) || ((critPrixMax != null) && (critPrixMax != 0))) {
+        // On traite le cas du filtre par fourchette de prix
+        if (((critPrixMin != null)) || ((critPrixMax != null))) {
             if (((critPrixMin != null) && (critPrixMax != null))) {
                 if ((critPrixMin <= parseInt(offre.get("prix"), 10)) && (critPrixMax >= parseInt(offre.get("prix"), 10))) {
                     validePrix = true;
@@ -427,7 +447,7 @@ function verifFiltre(idOffre)
         }
 
 
-
+        // Si l'offre correspond à tout les critères, elle peut être affichées
         if ((valideCat) && (valideLieu) && (valideOuv) && (valideDate) && (validePrix)) {
             valide = true;
         }
