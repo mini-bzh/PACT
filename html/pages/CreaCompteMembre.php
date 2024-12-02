@@ -75,7 +75,7 @@ $stmt->execute(); // execution de la requete
 // on ferme la base de donnée
 $dbh = null;
 
-header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre créée
+header("Location: ../pages/connexion.php"); // on redirige vers la page de l'offre créée
 }
 }
 ?>
