@@ -424,10 +424,8 @@ if ((!$comptePro) && (!$compteMembre)) {
 
             <!-- Bouton prix -->
             <div class="btnDetailPrix">
-                <p class="boldArchivo texteSmall">Montant total à payer</p>
-            </div>
-
-            <div class="detailPrixDeplie displayNone">
+                <p class="boldArchivo texteSmall">Montant total à payer : 
+            
                 <?php
                 // connexion a la BdD
                 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -456,9 +454,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                     $donneePrix[] = $prixOffre ; // Ajout des données de l'offre dans donneePrix
                     
                 }
-                ?>
-                <p>Total à payer : 
-                <?php 
+                 
                 $total = 0;
                 foreach ($donneePrix as $key => $value) {
                     $total += array_sum($value);
