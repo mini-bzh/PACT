@@ -203,13 +203,13 @@
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
-                    <?php 
-                        
+                    <?php
                         if($_SESSION["idCompte"] !== null && $compteMembre)
                         {   
+                            //reagrde si le membre a déjà publié un avis pour l'offre
                             $avisDejaAjoute = false;
-
-                            $stmt = $dbh->prepare("select * from tripskell._avis where id_c = 7");
+                            $stmt = $dbh->prepare("select * from tripskell._avis where id_c = " . $_SESSION["idCompte"] . 
+                            " and idOffre = " . $_GET["idOffre"]);
                             $stmt->execute();
                             $result = $stmt->fetchAll();
 
