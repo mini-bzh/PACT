@@ -96,9 +96,9 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
     <title>Ajouter un avis</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+    <link rel="stylesheet" href="/style/pages/creaAvis.css">
 </head>
 <?php include "../composants/header/header.php";        //import navbar
         ?>
@@ -172,7 +172,7 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
             </label>
         </div>
         <div class="zoneBtn">
-            <a href="/pages/detailOffre.php?idOffre="<?php echo $_GET['idOffre'];?> class="btnAnnuler">
+            <a href="/pages/detailOffre.php?idOffre=<?php echo $_GET['idOffre']?>" class="btnAnnuler">
                 <p class="texteLarge boldArchivo">Annuler</p>
                 <?php
                 include '../icones/croixSVG.svg';
