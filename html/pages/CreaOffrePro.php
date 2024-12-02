@@ -234,8 +234,8 @@ $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
-
 $idOffre = $stmt->fetchColumn();
+
 
     // on ferme la base de donnée
     $dbh = null;
@@ -259,7 +259,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
-        <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p>
+        <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p> 
 
     </head>
 

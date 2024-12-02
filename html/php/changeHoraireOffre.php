@@ -1,38 +1,34 @@
 <?php
 include("connection_params.php");
 
-$idOffre = $_POST["idOffre"];
-
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 
+$stmt = $dbh->prepare("select * from tripskell._offre");
+$stmt->execute();
+$result = $stmt->fetchAll();
 
-$jours = ["lundi" => $_POST["lundi"], 
-        "mardi"=> $_POST["mardi"], 
+$idOffre = sizeof($result);
+
+$jours = ["lundi" => $_POST['lundi'],
+        "mardi"=> $_POST["mardi"],
         "mercredi"=> $_POST["mercredi"],
-        "jeudi"=> $_POST["jeudi"], 
-        "vendredi"=> $_POST["vendredi"], 
-        "samedi"=> $_POST["samedi"], 
+        "jeudi"=> $_POST["jeudi"],
+        "vendredi"=> $_POST["vendredi"],
+        "samedi"=> $_POST["samedi"],
         "dimanche"=> $_POST["dimanche"]];
 
-foreach ($jours as $jour => $horaires) 
+
+foreach ($jours as $jour => $horaires)
 {
-    for ($i=0; $i < 4; $i++) 
-    { 
-        if($horaires[$i] == "")
-        {
-            $horaires[$i] == null;
-        }
-    }
+    $query = "SELECT add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+    $stmt = $dbh->prepare($query);
 
-    $stmt = $dbh->prepare("SELECT add_horaire(".
-        $idOffre .",".
-        $horaires[0].",".
-        $horaires[1].",".
-        $horaires[2].",".
-        $horaires[3].",".
-        $jour.");"
-    );
+    // Lier les variables aux paramètres
+    $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
+    $stmt->bindValue(':debMatin', $horaires[0], PDO::PARAM_STR);
+    $stmt->bindValue(':finMatin', $horaires[1], PDO::PARAM_STR);
+    $stmt->bindValue(':debAprem', $horaires[2], PDO::PARAM_STR);
+    $stmt->bindValue(':finAprem', $horaires[3], PDO::PARAM_STR);
+    $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
 
-    $stmt->execute();
-    $nbOffres = $stmt->fetch()["count"]; 
 }

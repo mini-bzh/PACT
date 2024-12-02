@@ -78,6 +78,7 @@ const mapNomsJours = new Map([
 
 
 let idOffre = document.getElementById("idOffre").textContent;
+console.log(idOffre);
 
 //récupération des éléments nécéssaires pour les horaires
 let champJours1 = document.getElementById("heures1");
@@ -262,15 +263,17 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
         event.preventDefault();
     }
 
+
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
-    if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0
-        && idOffre) {
+    console.log(joursHorairesVides.length +", " + joursHorairesInvalides.length + ", " + joursHorairesIncoherentes.length + " " + idOffre);
+    if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0) {
         alert("envoi des horaires");
+
+        console.log(mapJoursHoraires.get("btnL"));
         $.ajax({
             url: "/php/changeHoraireOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                              // Type de la requête (pour transmettre idOffre au fichier PHP)
             data: {
-                idOffre: document.idOffre,
                 lundi: mapJoursHoraires.get("btnL"),
                 mardi: mapJoursHoraires.get("btnMa"),
                 mercredi: mapJoursHoraires.get("btnMe"),
@@ -286,6 +289,11 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
                 alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
             }
         });
+    }
+    else
+    {
+        alert("pas d'envoi :(");
+        event.preventDefault();
     }
 }
 
