@@ -184,7 +184,7 @@ if (!empty($_POST)) {
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="number" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10">
+            <input type="number" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^0[0-9]{9}$">
         </div>
 
         <div class="champs">

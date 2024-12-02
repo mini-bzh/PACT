@@ -423,9 +423,9 @@ if ((!$comptePro) && (!$compteMembre)) {
 ?>
 
             <!-- Bouton prix -->
-            <button class="btnDetailPrix">
+            <div class="btnDetailPrix">
                 <p class="boldArchivo texteSmall">Montant total à payer</p>
-            </button>
+            </div>
 
             <div class="detailPrixDeplie displayNone">
                 <?php

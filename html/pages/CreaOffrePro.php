@@ -102,7 +102,13 @@ $requete .= "id_abo,";
 
 $requete .= "idrepas,";
 $requete .= "carte,";
-$requete .= "gammeprix";
+$requete .= "gammeprix,";
+
+$requete .= "duree_s, ";
+$requete .= "capacite,";
+
+$requete .= "duree_v,";
+$requete .= "guidee";
 
 $requete .= ")VALUES (";
 
@@ -129,7 +135,14 @@ $requete .= ":id_abo,";
 
 $requete .= ":idrepas,";
 $requete .= ":carte,";
-$requete .= ":gammeprix";
+$requete .= ":gammeprix,";
+
+$requete .= ":duree_s, ";
+$requete .= ":capacite,";
+
+$requete .= ":duree_v,";
+$requete .= ":guidee";
+
 
 $requete .= ") returning idOffre;";
 echo $requete;
@@ -146,7 +159,7 @@ $stmt->bindParam(":resume", $_POST["resume"]);
 $stmt->bindParam(":description", $_POST["description"]);
 $stmt->bindParam(":tarif", $tarif);
 $stmt->bindParam(":note", $note);
-$stmt->bindParam(":accessibilite", $accessible);
+$stmt->bindParam(":accessibilite", $_POST["choixAccessible"]);
 
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 
@@ -162,22 +175,31 @@ $stmt->bindParam(":carte", $carte);
 $stmt->bindParam(":gammeprix", $gammeprix);
 
 
+$stmt->bindParam(":duree_s", $duree_s);
+$stmt->bindParam(":capacite", $capacite);
+
+$stmt->bindParam(":duree_v", $duree_v);
+$stmt->bindParam(":guidee", $guidee);
+
 // On definit ici chacune des variables
 $tarif = $_POST["prix-minimal"];
 $tarif = 5;
 
 $note = 5;
 
-$accessible = $_POST["choixAccessible"];
-$accessible = 'Accessible';
-
 //$id_abo = $_POST["id_abo"];
 $id_abo = 'Standard';
 //$id_option = null;
 
-$idrepas = "2";
-$carte = "crt.png";
-$gammeprix = "€€";
+$idrepas = $_POST["categorie"]=="restauration"?"2":null;
+$carte = $_POST["categorie"]=="restauration"?"crt.png":null;
+$gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
+
+$duree_s     = $_POST["categorie"]=="spectacle"?$_POST["duree_s"]:null;
+$capacite    = $_POST["categorie"]=="spectacle"?$_POST["capacite"]:null;
+
+$duree_v     = $_POST["categorie"]=="visite"?$_POST["duree_v"]:null;
+$guidee      = $_POST["categorie"]=="visite"?/*$_POST["guidee"]*/true:null;
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
@@ -268,20 +290,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </select>
                     </div>
 
-                    <!-- // $stmt->bindParam(":idrepas");
-// $stmt->bindParam(":carte");
-// $stmt->bindParam(":gammeprix");
-
-// $stmt->bindParam(":duree");
-// $stmt->bindParam(":nomLangue");
-// $stmt->bindParam(":guidee");
-// $stmt->bindParam(":capacite");
-// $stmt->bindParam(":plans");
-// $stmt->bindParam(":nbattraction");
-// $stmt->bindParam(":agemin");
-// $stmt->bindParam(":ageminimum");
-// $stmt->bindParam(":prestation"); -->
-
                     <div id="champsVisite">
 
                         <div class="champs">
@@ -314,11 +322,11 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <label>Guide :<span class="required">*</span> :</label>
                         <div class="parentVisite">
                             <div>
-                                <input type="radio" id="guidePresent" name="guide" value="YES" />
+                                <input type="radio" id="guide" name="guide" value="YES" />
                                 <label for="guidePresent">Oui</label>
                             </div>
                             <div>
-                                <input type="radio" id="guidePasPresent" name="guide" value="NO" />
+                                <input type="radio" id="guide" name="guide" value="NO" />
                                 <label for="guidePasPresent">Non</label>
                             </div>
                         </div>
@@ -331,7 +339,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                         <div class="champs">
                             <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
-                            <select id="categorie" name="categorie">
+                            <select id="gammeprix" name="gammeprix">
                                 <option value="$">$</option>
                                 <option value="$$">$$</option>
                                 <option value="$$$">$$$</option>
@@ -663,7 +671,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     </div>
 
                     <div class="champs">
-                        <label for="date_fin_abo">Fin abonnement :</label>
+                        <label for="date_fin_abo">Fin abonnement <span class="required">*</span> :</label>
                         <input type="date" id="date_fin_abo" name="date_fin_abo" placeholder="JJ/MM/AAAA" required>
                     </div>
 
@@ -689,7 +697,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <div class="champs">
                         <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
                         <select id="choixAccessible" name="choixAccessible">
-                            <option value="">Sélectionnez un choix</option>
+                            <option value="PasAccessible">Sélectionnez un choix</option>
                             <option value="Accessible">Accessible</option>
                             <option value="PasAccessible">Pas Accessible</option>
                         </select>
