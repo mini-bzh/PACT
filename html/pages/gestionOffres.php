@@ -111,12 +111,12 @@
                             </div>
                             <hr> 
                             <div id="conteneurTagsOffre">
-                                <p class="tagOffre">Culturel</p>
-                                <p class="tagOffre">Histoire</p>
-                                <p class="tagOffre">Patrimoine</p>
-                                <p class="tagOffre">Famille</p>
-
-
+                                <?php
+                                $tags = $dbh->query("select * from tripskell._possede where idoffre='" . $contentOffre['idoffre'] . "';")->fetchAll();
+                                foreach($tags as $key => $tag){
+                                    echo "<p class='tagOffre'>" . $tag["nomtag"] . "</p>";
+                                }
+                                ?>
                             </div>
                         </div>
                         <div id="partieHoraires">
@@ -126,26 +126,50 @@
                             </div>
                             <hr>
                             <div id="conteneurJoursOffre">
-                                <p class="jour jourOuvert">L</p>
-                                <p class="jour jourOuvert">Ma</p>
-                                <p class="jour jourOuvert">Me</p>
-                                <p class="jour jourOuvert">J</p>
-                                <p class="jour jourOuvert">V</p>
-                                <p class="jour jourFerme">S</p>
-                                <p class="jour jourFerme">D</p>
-                            </div>
-
-                            <!-- Horaires -->
-                            <div id="conteneurPlagesHoraires">  <!-- insertion horaires -->
-                                <p class="plageHoraire">De <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[0]; ?></span> à <span class="horaireEncadre"><?php echo explode("-",$contentOffre["horaires"])[1]; ?></span></p>
+                                <table>
+                                <tbody>
+                                <?php
+                                $ouverture = $dbh->query("select * from tripskell._ouverture where idoffre='" . $contentOffre['idoffre'] . "';")->fetchAll();
+                                foreach($ouverture as $key => $value){
+                                    $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $ouverture[$key]["id_hor"] ." where o.idOffre=". $contentOffre['idoffre']." and o.id_hor=". $ouverture[$key]["id_hor"] ." and o.id_jour='". $ouverture[$key]["id_jour"] ."';")->fetchAll();
+                                ?>
+                                <tr>
+                                    <th><?php echo $ouverture[$key]["id_jour"]; ?></th>
+                                    <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
+                                    <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
+                                    <?php
+                                    if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
+                                    ?>
+                                    <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
+                                    <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                    <?php
+                                    }
+                                    ?>
+                                <tr>
+                                <?php
+                                    }
+                                ?>
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <a href="https://www.google.fr/maps/place/<?php echo $contentOffre["ville"]     //lien vers ville de l'offre ?>"
-                    class="conteneurSVGtexte grossisQuandHover" id="itineraire" target="_blank">
-                        <img src="/icones/adresseSVGblanc.svg" alt="icone adresse">
-                        <p>Itinéraire</p>
-                    </a>
+                    <div id="partieAdresse"><!-- future tag -->
+                        <div class="conteneurSVGtexte">
+                            <img src="/icones/adresseSVG.svg" alt="icone tag">
+                            <h4>Adresse</h4>
+                        </div>
+                        <hr>
+                        <a href="https://www.google.fr/maps/place/<?php 
+                            $adresse = $contentOffre["numero"] . " rue " . $contentOffre["rue"] . ", " . $contentOffre["ville"];
+                            echo $adresse;
+                        ?>"
+                        class="conteneurSVGtexte" id="itineraire" target="_blank">
+                            <p><?php
+                                echo($adresse);
+                            ?></p>
+                        </a>
+                    </div>
                     <!--gestion du bouton de mise en/hors ligne-->
                     <hr id="separateurOffreGestion">
                     <div id="conteneurGestion">
