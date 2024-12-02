@@ -620,11 +620,11 @@ body.no-scroll {
     }
 
     .image-container{
-        width: 130px;
-        height: 130px;
-        margin: auto 0 auto 0;
-        position: relative;
-        top: 8%;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden; /* Cache les parties de l'image qui dépassent */
+        margin-left: 2%;
     }
 
     .zoneBtn{

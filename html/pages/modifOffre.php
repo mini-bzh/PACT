@@ -136,10 +136,7 @@ $image4 = $contentOffre["image4"] ?? null;
             <!-- Champs pour sélectionner ou modifier les images avec aperçus préchargés -->
             <div class="champs">
                 <label for="fichier1">Sélectionner une image 1 :</label>
-                <?php if ($image1): ?>
-                    <img id="preview1" src="<?php echo $image1; ?>" alt="Image 1 actuelle" style="width: 100px; height: auto;">
-                <?php endif; ?>
-                <input type="file" id="fichier1" name="fichier1" onchange="updatePreview(event, 'preview1')">
+                <input type="file" id="fichier1" name="fichier1">
             </div>
 
             <div class="champs">
