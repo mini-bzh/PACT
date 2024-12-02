@@ -77,13 +77,12 @@
             if ($comptePro)
             {
             ?>
-            
-              <h1>Avis pro</h1>
               <section class="mainAvis">
               <section class="mainAvisPro">
                 <?php
                 foreach ($offre as $key => $value){
                     $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key]['idoffre'] . ";")->fetchAll();
+                    if($avis != null){
                 ?>
                 <h2 class="titreOffre"><?php echo $offre[$key]['titreoffre']?></h2>
                 <section class="conteneurAvis">
@@ -126,6 +125,7 @@
                     ?>
                 </section>
                 <?php
+                    }
                 }
                 ?>
                 </section>
@@ -135,7 +135,6 @@
             else
             {
             ?>
-                <h1>Avis Membre</h1>
                 <section class="mainAvis">
                 <section class="conteneurAvis">
                 <?php

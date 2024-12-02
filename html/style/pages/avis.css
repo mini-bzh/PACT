@@ -12,6 +12,9 @@ main h1{
 
 .titreOffre{
     font-size: var(--typescale-h1);
+    border-left: 20px solid var(--secondary);
+    padding-left: 20px;
+    margin-left: 10px;
 }
 
 .mainAvis{
