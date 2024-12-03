@@ -280,8 +280,6 @@ $requete .= ":idOffre, ";
 $requete .= ":nomTag";
 $requete .= ");";
 
-print_r($_POST).
-
 
 /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
 
@@ -339,9 +337,8 @@ foreach($liste_tags as $tag) {
 
     // on ferme la base de donnée
     $dbh = null;
-    //header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+    header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
-print_r($_POST);
 ?>
 
 <?php
