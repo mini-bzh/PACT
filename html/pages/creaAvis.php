@@ -48,7 +48,7 @@ $requete .= ":idoffre,";
 $requete.= ":titreavis);";
 
 //echo $requete;
-print_r($_POST);
+//print_r($_POST);
 
 $datePublication = date("d/m/Y");
 
