@@ -227,7 +227,7 @@ if ($_GET['user-tempo'] === 'pro') {
 <!-- POP-UP -->
 <div class="popUp">
     <div>
-        <h2>Connexion réussie</h2>
+        <p>Connexion réussie</p>
     </div>
 </div>
 

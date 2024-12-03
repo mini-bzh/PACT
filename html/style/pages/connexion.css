@@ -123,6 +123,10 @@ input[type="checkbox"]{
     justify-content: center;
 }
 
+.popUp > div > p {
+    font-size:3em;
+}
+
 h2{
     width: fit-content;
     margin-bottom: 3%;
