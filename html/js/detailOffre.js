@@ -55,6 +55,8 @@ function trierDate() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTrieDate1").classList.toggle("displayNone");
+            document.getElementById("iconeTrieDate").classList.toggle("displayNone");
             document.getElementById("btnTrieDate").style.border = "solid";
             document.getElementById("btnTrieDate").style.borderColor = "blue" ;
 
@@ -84,6 +86,8 @@ function trierDate() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTrieDate1").classList.toggle("displayNone");
+            document.getElementById("iconeTrieDate2").classList.toggle("displayNone");
             document.getElementById("btnTrieDate").style.border = "solid";
             document.getElementById("btnTrieDate").style.borderColor = "red" ;
             index++;
@@ -100,6 +104,8 @@ function trierDate() {
             elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
             // Rajoute une bordure bleu sur le bouton
+            document.getElementById("iconeTrieDate2").classList.toggle("displayNone");
+            document.getElementById("iconeTrieDate").classList.toggle("displayNone");
             document.getElementById("btnTrieDate").style.border = "none";
             index++;
         })

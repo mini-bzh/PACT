@@ -295,6 +295,7 @@ foreach ($jours as $jour => $horaires)
 
 foreach($liste_tags as $tag) {
     
+    // quand un des tags a été selectionné on le rajoute
     if(isset($_POST[$tag["nomtag"]])) {
         $stmt = $dbh->prepare($requete);
         $stmt->bindparam(":idOffre", $idOffre);

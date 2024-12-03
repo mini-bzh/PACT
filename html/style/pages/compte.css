@@ -763,7 +763,8 @@ body.no-scroll {
 }
 
 /* Style pour la pop-up */
-#popup {
+.popUpModif {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;

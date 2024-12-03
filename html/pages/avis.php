@@ -78,30 +78,33 @@
             {
             ?>
               <section class="mainAvis">
-              <section class="mainAvisPro">
-                
-                    <section class="conteneurBtn">
+
+              <section class="conteneurBtn">
                         <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="displayNone">
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
-
+              <section class="mainAvisPro">
+              <section class="conteneurAvis">
                 <?php
-                foreach ($offre as $key => $value){
-                    $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key]['idoffre'] . ";")->fetchAll();
+                $i = 0;
+                foreach ($offre as $key1 => $value){
+                    $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key1]['idoffre'] . ";")->fetchAll();
                     if($avis != null){
                 ?>
-                <h2 class="titreOffre"><?php echo $offre[$key]['titreoffre']?></h2>
-                <section class="conteneurAvis">
+                
                     <?php
-                    $i = 0;
+                    
                     foreach ($avis as $key => $value){
                         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis[$key]['id_c'] . ";")->fetchAll()[0];
                     ?>
                     <article id="Avis<?php echo $i;$i++;?>" class="avis">
                     <!-- Date de publication-->
                     <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
+                    <h2 class="titreOffre"><?php echo $offre[$key1]['titreoffre']?></h2>
                         <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
                             <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
@@ -132,11 +135,12 @@
                     <?php
                     }
                     ?>
-                </section>
+                
                 <?php
                     }
                 }
                 ?>
+                </section>
                 </section>
                 </section>
             <?php
@@ -145,14 +149,16 @@
             {
             ?>
                 <section class="mainAvis">
-                <section class="conteneurAvis">
 
                 <section class="conteneurBtn">
                         <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="displayNone">
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
+                <section class="conteneurAvis">
 
                 <?php
                 $i=0;
@@ -160,10 +166,11 @@
                     $offre = $dbh->query("select * from tripskell._offre where idoffre=" . $avis[$key]['idoffre'] . ";")->fetchAll()[0];
 
                 ?>
-                <h2 class="titreOffre"><?php echo $offre['titreoffre']?></h2>
+                
                 <article id="Avis<?php echo $i;$i++;?>" class="avis">
                     <!-- Date de publication-->
                     <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
+                    <h2 class="titreOffre"><?php echo $offre['titreoffre']?></h2>
                         <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
                             <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">

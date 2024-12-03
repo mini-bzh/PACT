@@ -32,6 +32,7 @@ use Dompdf\Dompdf;
     <link rel="stylesheet" href="../style/pages/compte.css">
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
+    <script src="../js/compte.js" defer></script>
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -320,18 +321,6 @@ if ((!$comptePro) && (!$compteMembre)) {
         <p class="boldArchivo">Modifier les informations</p>
     </button>
 
-    <!-- Pop-up -->
-    <div id="popup">
-        <div id="popup-content">
-            <h2>Entrez le mot de passe</h2>
-            <form method="post" action>
-            <input type="password" id="password" placeholder="Mot de passe" />
-            <button onclick="verifyPassword()">Valider</button>
-            </form>
-            <p id="error-message" style="color: red; display: none;">Mot de passe incorrect !</p>
-        </div>
-    </div>
-
                 <!-- Bouton de supression compte portable -->
                 <button class="btnSupPort displayNone">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -389,53 +378,14 @@ if ((!$comptePro) && (!$compteMembre)) {
         <!-- div des boutons de consultation / modification données de compte-->
         <div>
             <!-- Bouton de modification -->
-                    <button class="btnModifCompte" id="trigger-modifier">
+                    <button class="btnModifCompte" onclick="confModif()">
                         <?php
                             include '../icones/modifierSVG.svg';
                         ?>
                         <p class="boldArchivo texteSmall">Modifier le profil</p>
                     </button>
 
-            <!-- Pop-up -->
-    <div id="popup">
-        <div id="popup-content">
-            <h2>Entrez le mot de passe</h2>
-            <form method="post" action>
-            <input type="password" id="password" placeholder="Mot de passe" />
-            <button onclick="verifyPassword()">Valider</button>
-            <p id="error-message" style="color: red; display: none;">Mot de passe incorrect !</p>
-            </form>
-            
-        </div>
-    </div>
-
-    <script>
-            // Mot de passe correct
-        const correctPassword = <?php echo $infos['mot_de_passe'];?> ;
-
-        document.getElementById("trigger-modifier").addEventListener("click", () => {
-    // Affiche la popup de saisie du mot de passe
-    document.getElementById("popup").style.display = "block";
-});
-
-function verifyPassword() {
-    const inputPassword = document.getElementById('password').value;
-    const errorMessage = document.getElementById('error-message');
-    const popup = document.getElementById('popup');
-
-    // Comparer le mot de passe entré avec celui qui est récupéré du serveur
-    const correctPassword = "<?php echo $infos['mot_de_passe']; ?>"; // Passer la variable PHP au JavaScript
-
-    if (inputPassword === correctPassword) {
-        // Si le mot de passe est correct, on cache la popup
-        popup.style.display = "none";
-        window.location.href = "modifComptemembre.php";
-    } else {
-        // Affiche un message d'erreur si le mot de passe est incorrect
-        errorMessage.style.display = "block";
-    }
-}
-    </script>
+           
 
             <!-- Bouton de données -->
             <button class="btnDataCompte">
@@ -563,6 +513,19 @@ function verifyPassword() {
         </div>
     </div>
 </div>
+
+ <!-- Pop-up -->
+ <div class="popUpModif">
+                <div id="popup-content">
+                    <h2>Entrez le mot de passe</h2>
+                    <form method="post" action="/pages/ModifComptemembre.php<?php $infos["id_c"];?>">
+                    <input type="password" id="password" placeholder="Mot de passe" />
+                    <button onclick="verifyPassword()">Valider</button>
+                    <p id="error-message" style="color: red; display: none;">Mot de passe incorrect !</p>
+                    </form>
+                    
+                </div>
+            </div>
 
 </main>
 
