@@ -76,7 +76,6 @@ $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 $stmt->bindParam(":idoffre", $_GET["idOffre"]);
 $stmt->bindParam(":titreavis", $_POST["titre"]);
 
-print_r($stmt);
 $stmt->execute(); // execution de la requete
 
 // on ferme la base de donnée
