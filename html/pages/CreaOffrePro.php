@@ -33,7 +33,11 @@ if (key_exists("idCompte", $_SESSION)) {
 ?>
 <?php
 
-$idOffre = "";
+// requete pour avoir la liste des tags
+$stmt = $dbh->prepare("select * from tripskell._tags");
+$stmt->execute();
+$liste_tags = $stmt->fetchAll();
+
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
     // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
@@ -116,7 +120,12 @@ $requete .= "guidee,";
 
 $requete .= "duree_a,";
 $requete .= "ageminimum,";
-$requete .= "prestation";
+$requete .= "prestation,";
+
+$requete .= "id_option,";
+
+$requete .= "datedebutsouscription,";
+$requete .= "datefinsouscription";
 
 $requete .= ")VALUES (";
 
@@ -157,8 +166,12 @@ $requete .= ":guidee,";
 
 $requete .= ":duree_a,";
 $requete .= ":ageminimum,";
-$requete .= ":prestation";
+$requete .= ":prestation,";
 
+$requete .= ":id_option,";
+
+$requete .= ":datedebutsouscription,";
+$requete .= ":datefinsouscription::DATE + INTERVAL '".$_POST["duree_opt"]." week'";
 
 $requete .= ") returning idOffre;";
 
@@ -204,11 +217,27 @@ $stmt->bindParam(":duree_a", $duree_a);
 $stmt->bindParam(":ageminimum", $ageminimum);
 $stmt->bindParam(":prestation", $prestation);
 
-// On definit ici chacune des variables
+$stmt->bindParam(":id_option", $idoption);
+
+$stmt->bindParam(":datedebutsouscription",$_POST["date_debut_opt"]);
+$stmt->bindParam(":datefinsouscription",$_POST["date_debut_opt"]);
+//$stmt->bindParam(":inter",$_POST["duree_opt"]);
+
+
+// On definit des variables a traiter
 $tarif = $_POST["prix-minimal"];
 $tarif = 5;
 
 $note = 5;
+
+
+if(!is_null($_POST["option"]) && $_POST["option"] == "AlaUne") {
+    $idoption = "A la une";
+}
+
+if(!is_null($_POST["option"]) && $_POST["option"] == "EnRelief") {
+    $idoption = "En relief";
+}
 
 //$id_abo = $_POST["id_abo"];
 $id_abo = 'Standard';
@@ -235,11 +264,6 @@ $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
 //$idOffre = $stmt;
-
-// requete pour avoir la liste des tags
-$stmt = $dbh->prepare("select * from tripskell._tags");
-$stmt->execute();
-$liste_tags = $stmt->fetchAll();
 
 // requete pour avoir l'offre qui vient d'être creé
 $stmt = $dbh->prepare("select max(idOffre) from tripskell.offre_pro");
@@ -312,10 +336,12 @@ foreach($liste_tags as $tag) {
     }
 }
 
-// on ferme la base de donnée
-$dbh = null;
-    header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+
+    // on ferme la base de donnée
+    $dbh = null;
+    //header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
+print_r($_POST);
 ?>
 
 <?php
@@ -517,22 +543,21 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         --------------------------------------           |___/  -------------------------------------
                     -->
                     <?php
-                    $tags_cat = [
-                        'Visite'        => ['Découverte', 'Culture', 'Temporaire', 'Aventure', 'Revigorant'],
-                        'Restauration'  => ['Découverte', 'Temporaire', 'Degustation'],
-                        'PA'            => ['Temporaire', 'Aventure', 'Revigorant'],
-                        'Spectacle'     => ['Temporaire', 'Découverte'],
-                        'Activite'      => ['Découverte', 'Culture', 'Temporaire', 'Revigorant', 'Degustation'],
-                        ];
+                    
+                    
+                    
 
-                    foreach ($tags_cat as $cat => $tags) {
+
+                    $tags_cat = ['Visite','Restauration','PA','Spectacle','Activite'];
+                    
+                    foreach ($tags_cat as $cat) {
                         
 ?>
                         <div id="tags<?php echo $cat; ?>">
                             <label>Tags :</label>
                             <div class="tags">
 <?php
-                            foreach ($tags as $key => $tag) {
+                            foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
 ?>
                                 <div>
                                     <input type="checkbox" id="<?php echo $tag; ?>" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
@@ -644,9 +669,9 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <div class="champs" id="dateOption">
                         <label for="date_debut_opt">Date de lancement(l'option débutera à cette date) :</label>
-                        <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA">
-                        <label for="date_fi_opt">Date fin option(l'option se finira à cette date) :</label>
-                        <input type="date" id="date_fi_opt" name="date_fi_opt" placeholder="JJ/MM/AAAA">
+                        <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA" step=7>
+                        <label for="duree_opt">Durée de l'option (en semaine) :</label>
+                        <input type="number" id="duree_opt" name="duree_opt" value="1" min=1 max=4>
                     </div>
 
                     <!-- accessibilité -->

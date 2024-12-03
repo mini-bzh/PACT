@@ -381,3 +381,15 @@ function saisieDateOption() {
         document.getElementById("dateOption").style.display = "none"; 
     }
 }
+
+function getLastMonday() {
+    let today = new Date();
+    let dayWeek = today.getDay();
+    let daysToLastMonday = (dayWeek === 0 ? 6 : dayWeek - 1);
+    let lastMonday = new Date(today);
+    lastMonday.setDate(today.getDate() - daysToLastMonday); // Reculer jusqu'à lundi
+    return lastMonday.toISOString().split("T")[0]; // Format ISO (AAAA-MM-JJ)
+}
+
+document.getElementById("date_debut_opt").min = getLastMonday();
+document.getElementById("date_fin_abo").min = new Date().toISOString().split("T")[0];
