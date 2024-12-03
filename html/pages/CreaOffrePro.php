@@ -293,6 +293,8 @@ foreach ($jours as $jour => $horaires)
     }
 }
 
+
+//parcours de tous les tags
 foreach($liste_tags as $tag) {
     
     // quand un des tags a été selectionné on le rajoute
