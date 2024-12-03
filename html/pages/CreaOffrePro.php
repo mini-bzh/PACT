@@ -256,9 +256,10 @@ $requete .= ":idOffre, ";
 $requete .= ":nomTag";
 $requete .= ");";
 
-
+// parcour de touts les tags
 foreach($liste_tags as $tag) {
     
+    // quand un des tags a été selectionné on le rajoute
     if(isset($_POST[$tag["nomtag"]])) {
         $stmt = $dbh->prepare($requete);
         $stmt->bindparam(":idOffre", $idOffre);
