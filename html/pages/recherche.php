@@ -52,7 +52,7 @@
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/recherche.css">
-        <script src="../js/recherche.js" defer></script>
+        
 
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
@@ -337,5 +337,6 @@
         <?php
             include "../composants/footer/footer.php";
         ?>
+        <script src="../js/recherche.js" ></script>
     </body>
 </html>

@@ -72,6 +72,14 @@ main h1{
     width: 40px;
 }
 
+#iconeTriePrix1{
+    width: 40px;
+}
+
+#iconeTriePrix2{
+    width: 40px;
+}
+
 #txtBtnPrix{
     user-select: none;
 }
