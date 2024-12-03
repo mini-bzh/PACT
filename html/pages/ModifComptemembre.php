@@ -28,7 +28,7 @@ if (!empty($_POST)) {
         }
 
         // Requête SQL
-        $requete = "UPDATE tripskell.membre SET 
+        $requete = "UPDATE tripskell.membre SET
             login = :Login,
             adresse_mail = :Adresse_Mail,
             mot_de_passe = :Mot_de_P,

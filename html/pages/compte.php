@@ -53,11 +53,18 @@ use Dompdf\Dompdf;
 
     $infos = $result[0];
 
-    if((isset($_POST['userPSW']))){
+    if((isset($_POST['password']))){
     $password = $_POST['password'];
     $realpassword = $infos['mot_de_passe'];
     if($password == $realpassword){
         header("Location: ModifComptemembre.php");
+    }
+    else{
+        ?>
+            <script>
+                alert("Le mot de passe saisi est incorrect!");
+            </script>
+        <?php
     }
 }
 }
@@ -520,8 +527,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                     <form method="post" action="">
                         <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="password" placeholder="Mot de passe" />
-                    <button type="submit" href="#">Valider</button>
-                    <p id="error-message" style="color: red; display: none;">Mot de passe incorrect !</p>
+                    <button type="submit">Valider</button>
                     </form>
                 </div>
             </div>
