@@ -258,7 +258,10 @@ $requete .= ");";
 
 print_r($_POST).
 
-//requête pour ajouter les horaires
+
+/* -------------------------------- ajout horaires dans l'offre -------------------------------- */
+
+//récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
 $jours = ["Lundi" => json_decode($_POST['lundi']),
         "Mardi"=> json_decode($_POST["mardi"]),
         "Mercredi"=> json_decode($_POST["mercredi"]),
@@ -277,7 +280,7 @@ foreach ($jours as $jour => $horaires)
     $debAprem = !empty($horaires[2]) ? $horaires[2] : null;
     $finAprem = !empty($horaires[3]) ? $horaires[3] : null;
 
-    if($debMatin != null && $finMatin != null)
+    if($debMatin != null && $finMatin != null)      //si le jour est ouvert
     {
         $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
         $stmt = $dbh->prepare($query);
@@ -292,6 +295,9 @@ foreach ($jours as $jour => $horaires)
         $stmt->execute();
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
 
 
 //parcours de tous les tags
