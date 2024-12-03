@@ -78,21 +78,23 @@
             {
             ?>
               <section class="mainAvis">
-              <section class="mainAvisPro">
-                
-                    <section class="conteneurBtn">
+
+              <section class="conteneurBtn">
                         <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="displayNone">
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
-
+              <section class="mainAvisPro">
+                
                 <?php
-                foreach ($offre as $key => $value){
-                    $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key]['idoffre'] . ";")->fetchAll();
+                foreach ($offre as $key1 => $value){
+                    $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre[$key1]['idoffre'] . ";")->fetchAll();
                     if($avis != null){
                 ?>
-                <h2 class="titreOffre"><?php echo $offre[$key]['titreoffre']?></h2>
+                <h2 class="titreOffre"><?php echo $offre[$key1]['titreoffre']?></h2>
                 <section class="conteneurAvis">
                     <?php
                     $i = 0;
@@ -145,7 +147,6 @@
             {
             ?>
                 <section class="mainAvis">
-                <section class="conteneurAvis">
 
                 <section class="conteneurBtn">
                         <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
@@ -155,6 +156,7 @@
                             <p id="txtBtnDate">date</p>
                         </div> 
                     </section>
+                <section class="conteneurAvis">
 
                 <?php
                 $i=0;

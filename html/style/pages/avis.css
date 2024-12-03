@@ -19,7 +19,8 @@ main h1{
 
 .mainAvis{
     display: flex;
-    justify-content: center;
+    flex-direction: row-reverse;
+    justify-content: space-around;
 }
 
 .mainAvisPro{
@@ -113,6 +114,7 @@ main h1{
     border-radius: 50px;
     align-items: center;
     justify-content: center;
+    margin-top: 8em;
 }
 
 #iconeTrieDate{
@@ -134,6 +136,15 @@ main h1{
 @media screen and (max-width : 428px){
     .titrePrincipale{
         font-size: var(--typescale-h1);
+    }
+
+    .mainAvis{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #btnTrieDate{
+        margin-top: 0;
     }
 
     .conteneurAvis{
