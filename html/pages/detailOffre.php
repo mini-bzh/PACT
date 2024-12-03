@@ -251,6 +251,7 @@
                         <!-- Date de publication-->
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
+<<<<<<< Updated upstream
                          <div class="conteneurSpaceBetween">
                             <div class="conteneurMembreAvis">
                                     <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
@@ -275,6 +276,15 @@
                                         <?php
                                     }
                                 ?>
+=======
+                        <div class="conteneurMembreAvis">
+                            <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                            <div class="infoMembreAvis">
+                                <h3><?php echo $membre['login'] ?></h3>
+                                <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                <p>Poster le : <?php echo $avis[$key]['datepublication']?></p>
+                                <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                         <!-- Titre de l'avis -->
