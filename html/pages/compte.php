@@ -53,11 +53,13 @@ use Dompdf\Dompdf;
 
     $infos = $result[0];
 
+    if((isset($_POST['userPSW']))){
     $password = $_POST['password'];
     $realpassword = $infos['mot_de_passe'];
     if($password == $realpassword){
         header("Location: ModifComptemembre.php");
     }
+}
 }
     ?>
 <!DOCTYPE html>
