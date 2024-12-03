@@ -77,14 +77,11 @@ const mapNomsJours = new Map([
 
 
 
-let idOffre = document.getElementById("idOffre").textContent;
-console.log("idOffre : " + idOffre);
-
 //récupération des éléments nécéssaires pour les horaires
-let champJours1 = document.getElementById("heures1");
-let champJours2 = document.getElementById("heures2");
+let champJours1 = document.getElementById("heures1");               //inputs pour le 1er couple d'horaires
+let champJours2 = document.getElementById("heures2");               //inputs pour le 2e couple d'horaires
 
-let btnAjoutHoraire = document.getElementById("btnAjoutHoraire");
+let btnAjoutHoraire = document.getElementById("btnAjoutHoraire");   //
 
 let heureDebut1 = document.querySelector("#heures1 .heure-debut");
 let heureFin1 = document.querySelector("#heures1 .heure-fin");
@@ -177,7 +174,8 @@ function horaireEntree(element) {
 btnAjoutHoraire.addEventListener("click", toggleHoraire2);
 
 
-function toggleHoraire2() {
+function toggleHoraire2()                       //toggle l'affichage des champs pour ajouter un 2e couple d'horaires
+{
     champJours2.classList.toggle("horairesVisibles");
     if (btnAjoutHoraire.textContent == "+") {
         btnAjoutHoraire.textContent = "-";
@@ -204,9 +202,10 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     let joursHorairesVides = "";                //contiendra les jours déclarés ouverts qui n'ont pas d'horaires
     let joursHorairesInvalides = "";            //contiendra les jours dont l'horaire d'ouverture est antérieure à la date de fermeture
     let joursHorairesIncoherentes = "";         //contiendra les jours dont les 2 horaires sont imbriquées ou dans le mauvais ordre
+    
     mapJoursHoraires.forEach((value, key) => {
         jour = mapJoursHoraires.get(key);
-        if (mapJoursElements.get(key).classList.contains("jourOuvert")) {
+        if (mapJoursElements.get(key).classList.contains("jourOuvert")) {       //si un jour est ouvert mais n'a pas d'horaire
             horairesJour = mapJoursHoraires.get(key);
             if (horairesJour[0].length == 0 || horairesJour[1].length == 0) {
                 if (joursHorairesVides.length == 0) {
@@ -216,7 +215,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
                     joursHorairesVides += ", " + mapNomsJours.get(key);
                 }
             }
-            else if (horairesJour[0] > horairesJour[1]) {
+            else if (horairesJour[0] > horairesJour[1]) {                       //si la 1ère horaire est supérieure à la deuxième
                 if (joursHorairesInvalides.length == 0) {
                     joursHorairesInvalides += mapNomsJours.get(key);
                 }
@@ -225,7 +224,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
                 }
             }
 
-            if (horairesJour[2].length != 0 || horairesJour[3].length != 0) {
+            if (horairesJour[2].length != 0 || horairesJour[3].length != 0) {   //si le champ du 2e couple d'horaires est ouvert mais qu'au moins un champ est vide
                 if (horairesJour[2].length != 0 ^ horairesJour[3].length != 0) {
                     if (!joursHorairesVides.includes(mapNomsJours.get(key))) {
                         if (joursHorairesVides.length == 0) {
@@ -236,7 +235,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
                         }
                     }
                 }
-                if (horairesJour[1] > horairesJour[2]) {
+                if (horairesJour[1] > horairesJour[2]) {                        //si le 2e couple d'horaire commence avant que le 1er ne se termine
                     if (joursHorairesIncoherentes.length == 0) {
                         joursHorairesIncoherentes += mapNomsJours.get(key);
                     }
@@ -248,8 +247,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
         }
     });
 
-    console.log(joursHorairesVides);
-    //afficher messages d'erreur si besoin
+    //afficher les messages d'erreur si besoin
     if (joursHorairesVides.length != 0) {
         alert("Veuillez entrer des horaires pour " + joursHorairesVides);
         event.preventDefault();
@@ -265,41 +263,24 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
 
 
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
-    console.log(joursHorairesVides.length +", " + joursHorairesInvalides.length + ", " + joursHorairesIncoherentes.length + " " + idOffre);
+    console.log(joursHorairesVides.length +", " + joursHorairesInvalides.length + ", " + joursHorairesIncoherentes.length);
     if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0) {
         alert("envoi des horaires");
 
-        console.log(mapJoursHoraires.get("btnL"));
-        $.ajax({
-            url: "/php/changeHoraireOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
-            type: 'POST',                              // Type de la requête (pour transmettre idOffre au fichier PHP)
-            data: {
-                lundi: mapJoursHoraires.get("btnL"),
-                mardi: mapJoursHoraires.get("btnMa"),
-                mercredi: mapJoursHoraires.get("btnMe"),
-                jeudi: mapJoursHoraires.get("btnJ"),
-                vendredi: mapJoursHoraires.get("btnV"),
-                samedi: mapJoursHoraires.get("btnS"),
-                dimanche: mapJoursHoraires.get("btnD")
-            },
-            success: function (response) {
-                alert(response);                        // Affiche la réponse du script PHP si appelé correctement
-                console.log(response);
-            },
-            error: function () {
-                alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
-            }
-        });
+        let tabInputsJour = document.getElementsByClassName("inputJour");       //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
+        let i = 0;
+        for(let key of mapJoursHoraires.keys())
+        {
+            tabInputsJour[i].value = JSON.stringify(mapJoursHoraires.get(key));     //ajoute les horaires du jour dans les champs input, converties en string avec JSON
+            i++;
+        }
     }
     else
     {
-        alert("pas d'envoi :(");
+        alert("erreur dans l'envoi des horaires");
         event.preventDefault();
     }
 }
-
-document.getElementsByClassName("zoneBtn")[0].addEventListener("click", verifHorairesCorrectes);
-
 
 /* ----------------------------------------------- categorie et tag ----------------------------------------------- */
 

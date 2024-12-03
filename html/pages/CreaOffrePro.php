@@ -256,6 +256,42 @@ $requete .= ":idOffre, ";
 $requete .= ":nomTag";
 $requete .= ");";
 
+print_r($_POST).
+
+//requête pour ajouter les horaires
+$jours = ["Lundi" => json_decode($_POST['lundi']),
+        "Mardi"=> json_decode($_POST["mardi"]),
+        "Mercredi"=> json_decode($_POST["mercredi"]),
+        "Jeudi"=> json_decode($_POST["jeudi"]),
+        "Vendredi"=> json_decode($_POST["vendredi"]),
+        "Samedi"=> json_decode($_POST["samedi"]),
+        "Dimanche"=> json_decode($_POST["dimanche"])];
+
+
+
+foreach ($jours as $jour => $horaires)
+{
+    // Remplacez les valeurs vides par NULL
+    $debMatin = !empty($horaires[0]) ? $horaires[0] : null;
+    $finMatin = !empty($horaires[1]) ? $horaires[1] : null;
+    $debAprem = !empty($horaires[2]) ? $horaires[2] : null;
+    $finAprem = !empty($horaires[3]) ? $horaires[3] : null;
+
+    if($debMatin != null && $finMatin != null)
+    {
+        $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+        $stmt = $dbh->prepare($query);
+    
+        // Lier les variables aux paramètres
+        $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
+        $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+        $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+        $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+        $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+        $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+}
 
 foreach($liste_tags as $tag) {
     
@@ -479,7 +515,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         'Spectacle'     => ['Temporaire', 'Découverte'],
                         'Activite'      => ['Découverte', 'Culture', 'Temporaire', 'Revigorant', 'Degustation'],
                         ];
-                    
+
                     foreach ($tags_cat as $cat => $tags) {
                         
 ?>
@@ -528,12 +564,19 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <label for="horaires">Horaires d'ouverture :</label>
                         <div class="jours">
                             <button type="button" id="btnL">L</button>
+                            <input type="hidden" name="lundi" class="inputJour">
                             <button type="button" id="btnMa">Ma</button>
+                            <input type="hidden" name="mardi" class="inputJour">
                             <button type="button" id="btnMe">Me</button>
+                            <input type="hidden" name="mercredi" class="inputJour">
                             <button type="button" id="btnJ">J</button>
+                            <input type="hidden" name="jeudi" class="inputJour">
                             <button type="button" id="btnV">V</button>
+                            <input type="hidden" name="vendredi" class="inputJour">
                             <button type="button" id="btnS">S</button>
+                            <input type="hidden" name="samedi" class="inputJour">
                             <button type="button" id="btnD">D</button>
+                            <input type="hidden" name="dimanche" class="inputJour">
                         </div>
 
                         <div class="heures" id="heures1">

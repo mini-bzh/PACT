@@ -204,7 +204,7 @@
                         </div> 
                     </section>
                     <?php
-                        if($_SESSION["idCompte"] !== null && $compteMembre)
+                        if(isset($_SESSION["idCompte"]) && $_SESSION["idCompte"] !== null && $compteMembre)
                         {   
                             //reagrde si le membre a déjà publié un avis pour l'offre
                             $avisDejaAjoute = false;

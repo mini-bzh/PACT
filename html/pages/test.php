@@ -7,14 +7,7 @@ include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("SELECT tripskell.add_horaire(
-    1,               -- idOffre
-    '08:00',         -- deb_matin
-    '12:00',         -- fin_matin
-    '14:00',         -- deb_aprem
-    '18:00',         -- fin_aprem
-    'Lundi'          -- jour
-);");
+$stmt = $dbh->prepare("select * from tripskell._offre");
 $stmt->execute();
 $result = $stmt->fetchAll();
 

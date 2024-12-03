@@ -1,10 +1,42 @@
-<br />
-<b>Fatal error</b>:  Uncaught PDOException: SQLSTATE[42703]: Undefined column: 7 ERROR:  column &quot;horaire_debut&quot; of relation &quot;_horaire&quot; does not exist
-LINE 1: INSERT INTO tripskell._horaire (horaire_debut, horaire_fin) ...
-                                        ^
-QUERY:  INSERT INTO tripskell._horaire (horaire_debut, horaire_fin) VALUES (deb_matin::TIME, fin_matin::TIME) returning id_hor
-CONTEXT:  PL/pgSQL function tripskell.add_horaire(integer,character varying,character varying,character varying,character varying,character varying) line 5 at SQL statement in C:\Users\bapti\OneDrive\Documents\SAE_PACT\PACT\html\php\changeHoraireOffre.php:34
-Stack trace:
-#0 C:\Users\bapti\OneDrive\Documents\SAE_PACT\PACT\html\php\changeHoraireOffre.php(34): PDOStatement-&gt;execute()
-#1 {main}
-  thrown in <b>C:\Users\bapti\OneDrive\Documents\SAE_PACT\PACT\html\php\changeHoraireOffre.php</b> on line <b>34</b><br />
+<?php
+if(!empty($_POST))
+{
+  $tab = json_decode($_POST["horaire"]);
+  print_r($tab);
+}
+else
+{
+
+
+  ?>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="form" action="test2.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" id="inputH" name="horaire">
+
+      <p id="btn">clique stp</p>
+      <button type="submit">submit le form</button>
+    </form>
+  </body>
+  <script>
+    let btn = document.getElementById("btn");
+    let inputH =document.getElementById("inputH");
+
+    btn.addEventListener("click", ()=>{
+      inputH.value =JSON.stringify(["10:10", "12:12", "", ""]);
+      console.log(inputH.value);
+    })
+  </script>
+  </html>
+
+  <?php
+}
+
+?>
