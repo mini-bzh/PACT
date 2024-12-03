@@ -19,6 +19,7 @@ use Dompdf\Dompdf;
 
     $idCompte = $_SESSION['idCompte'];
 
+    if(isset($idCompte)){
     if ($comptePro) {
 
         $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
@@ -57,6 +58,7 @@ use Dompdf\Dompdf;
     if($password == $realpassword){
         header("Location: ModifComptemembre.php");
     }
+}
     ?>
 <!DOCTYPE html>
 <html lang="fr">
