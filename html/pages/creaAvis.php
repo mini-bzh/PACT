@@ -59,8 +59,7 @@ echo("datepublication : " . ($datePublication));
 echo("cadreexperience : " . strlen($_POST["contexte"]));*/
 
 //print_r($_SESSION);
-echo("id_c : " . strlen($_SESSION["idCompte"]));
-echo("idoffre : " . ($_GET["idOffre"]));
+
 //echo("titreavis : " . ($_POST["titre"]));
 
 
