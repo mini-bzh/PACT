@@ -66,7 +66,7 @@ echo("cadreexperience : " . strlen($_POST["contexte"]));*/
 $nul = null;
 
 $stmt = $dbh->prepare($requete);
-$stmt->bindParam(":commentaire", $_POST["commentaire"]);    
+$stmt->bindParam(":commentaire", $_POST["commentaire"]);
 $stmt->bindParam(":imageavis", $nom_img["fichier1"]);
 $stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
 $stmt->bindParam(":datepublication", $datePublication);

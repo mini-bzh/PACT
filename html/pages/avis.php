@@ -111,7 +111,7 @@
                             <div class="infoMembreAvis">
                                 <h3><?php echo $membre['login'] ?></h3>
                                 <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
-                                <p>Poster le : <?php echo $avis[$key]['datepublication']?></p>
+                                <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                                 <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
                             </div>
                         </div>
