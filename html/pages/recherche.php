@@ -100,13 +100,14 @@
             </section>
 
             <section id="conteneurBouton">
-                <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
-                    <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
-                    <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTriePrix1" class="displayNone">
-                    <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTriePrix2" class="displayNone">
-                    <p id="txtBtnPrix">prix</p>
-                </div>
-            </section>
+                <section id="conteneurTrie">
+                    <div id="btnTriePrix" class="grossisQuandHover" onclick="trierPrix()">
+                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix">
+                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTriePrix1" class="displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTriePrix2" class="displayNone">
+                        <p id="txtBtnPrix">prix</p>
+                    </div>
+                </section>
             
             <section class="filtrerBarre">
                 <div class="filtreHead">
@@ -301,6 +302,7 @@
                     </div>
                 </div>
                 
+            </section>
             </section>
             <section id="conteneurOffres">
                 <article>
