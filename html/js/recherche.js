@@ -1,3 +1,41 @@
+// Fonction pour récupérer les données JSON depuis le fichier PHP
+function getData() {
+    var xhr = new XMLHttpRequest(); // Création d'une instance XMLHttpRequest
+    xhr.open("GET", "../php/listeTagsOffres.php", false); // false rend la requête synchrone
+    xhr.setRequestHeader("Content-Type", "application/json"); // Définition de l'en-tête Content-Type
+    xhr.send(); // Envoi de la requête
+    
+    if (xhr.status == 200) {
+        // Si la requête réussit (status 200), on retourne les données JSON
+        return JSON.parse(xhr.responseText);
+    } else {
+        console.error("Erreur lors de la récupération des données");
+        return [];
+    }
+}
+  
+// Fonction pour transformer les données en dictionnaire avec les nomtag associés à chaque idoffre
+function transformDataToDictionary(data) {
+    var dictionary = {}; // Initialisation du dictionnaire vide
+
+    // On parcourt chaque élément du tableau
+    data.forEach(function(item) {
+        // Si la clé 'idoffre' n'existe pas encore, on la crée
+        if (!dictionary[item.idoffre]) {
+        dictionary[item.idoffre] = [];
+        }
+        
+        // On ajoute le 'nomtag' à la liste associée à 'idoffre'
+        // On ajoute seulement si ce nomtag n'est pas déjà présent dans la liste
+        if (!dictionary[item.idoffre].includes(item.nomtag)) {
+        dictionary[item.idoffre].push(item.nomtag);
+        }
+    });
+
+    return dictionary;
+}
+
+
 function initOffres()
 /*renvoie la map mapOffreInfos : sa clé est un id offre et sa valeur est une map dont la clé est un string du nom d'une information de l'offre et
 la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*/
@@ -18,6 +56,19 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent);
         // mapTempo.set("date", document.querySelector("#" + element.id + " #date").textContent);
 
+        // Récupérer les données des tags
+        let data = getData();
+
+        // Transformer les données des tags en dictionnaire
+        let dicTag = transformDataToDictionary(data);
+
+
+        if (mapTempo.get("id").substring(5) in dicTag){
+            mapTempo.set("tags", dicTag[mapTempo.get("id").substring(5)]);
+        } else {
+            mapTempo.set("tags", []);
+        }
+        
         let prix = document.querySelectorAll("#" + element.id + " .text-overlay span")[0].textContent;
         prix = prix.substring(0, prix.length-1);
         mapTempo.set("prix", parseInt(prix));   //prix
@@ -35,7 +86,7 @@ function updateAffichageOffres()
 /*masque les offres qui doivent être affichées par la recherche et les filtrer, masque les autres*/
 {
     mapOffresInfos.forEach((map, key, value)=>{
-        if((mapOffresInfos.get(key).get("visibilite")) && (verifFiltre(key)))
+        if((mapOffresInfos.get(key).get("visibilite")) && (verifFiltre(key)) && (verifTags(key)))
         {
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
@@ -378,7 +429,7 @@ function verifFiltre(idOffre)
 
     let offre = mapOffresInfos.get(idOffre);
 
-    // Si acun critère n'a été sélectionné
+    // Si aucun critère n'a été sélectionné
     if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critPrixMin == null) && (critPrixMax == null)){
         valide = true;
     // Si au moins 1 critère a été sélectionné
@@ -460,9 +511,52 @@ function verifFiltre(idOffre)
 
 
 // ================== FONCTIONS FILTRE PAR TAGS ========================
+
+let listeTags = [];
+
+// liste des cases de tags cochées
+document.querySelectorAll('#fieldsetTag input[type="checkbox"]').forEach((tag) => {
+    tag.addEventListener('change', (event) => {
+
+        let value = event.target.value;
+
+        if (event.target.checked) {
+            // Si la case est cochée, on ajoute sa valeur au tableau
+            if (!listeTags.includes(value)) {
+                listeTags.push(value);
+            }
+        } else {
+            // Si la case est décochée, on enlève sa valeur du tableau
+            let index = listeTags.indexOf(value);
+            if (index !== -1) {
+                listeTags.splice(index, 1);
+            }
+        }
+
+        updateAffichageOffres();
+    });
+});
+
+
+// Fonction qui vérifie si une offre correspond au filtre des tags
 function verifTags(idOffre){
 
     let offre = mapOffresInfos.get(idOffre);
+    let valideTag = false;
+
+    // Si aucun critère n'a été sélectionné
+    if (listeTags.length == 0){
+        valideTag = true;
+    // Si au moins 1 critère a été sélectionné
+    } else {
+        if (listeTags.some(tag => offre.get("tags").includes(tag))){
+            valideTag = true;
+        } else {
+            console.log(offre.get("id") + " - > " + offre.get("tags") + " pas dans " + listeTags);
+        }
+    }
+
+    return valideTag;
 
 }
 
