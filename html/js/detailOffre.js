@@ -118,7 +118,6 @@ function trierDate() {
 
 let btnAjouterAvis = document.getElementById("btnAjouterAvis");
 
-console.log(btnAjouterAvis);
 btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre 'event'
     if (btnAjouterAvis.classList.contains("btnAjouterAvisGrise")) {
         alert("Veuillez supprimer votre ancien avis si vous voulez ajouter un nouvel avis");
@@ -126,3 +125,35 @@ btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre '
 });
 
 
+/* ------------------------ supprimer avis ------------------------*/
+
+let btnSupprimerAvis = document.getElementById("btnSupprimerAvis");
+let idAvis = document.querySelectorAll("#btnSupprimerAvis p")[1].textContent;
+
+btnSupprimerAvis.addEventListener("click", supprimerAvis);
+
+function supprimerAvis()
+{
+    if(confirm("Voulez-vous supprimer votre avis ?\nVous pourrez en déposer un autre."))
+    {
+        $.ajax({
+            url: "/php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+            data: {idAvis: idAvis},
+            success: function(response) {
+    
+                //alert(response);                        // Affiche la réponse du script PHP si appelé correctement
+            },
+            error: function()
+            {
+                alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
+            }
+        });
+
+        location.reload();
+    }
+    else
+    {
+        alert("Votre avis n'est pas supprimé.");
+    }
+}

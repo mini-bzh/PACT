@@ -251,12 +251,30 @@
                         <!-- Date de publication-->
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
-                        <div class="conteneurMembreAvis">
-                            <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                            <div class="infoMembreAvis">
-                                <h3><?php echo $membre['login'] ?></h3>
-                                <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
-                                <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                         <div class="conteneurSpaceBetween">
+                            <div class="conteneurMembreAvis">
+                                    <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                                    <div class="infoMembreAvis">
+                                        <h3><?php echo $membre['login'] ?></h3>
+                                        <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                        <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                                    </div>
+                            </div>
+                            <div class="conteneurBtnGestionAvis">
+                                <?php
+                                    $idCompteConnecte = $_SESSION["idCompte"];
+
+                                    if($avis[$key]["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
+                                    {
+                                        ?>
+                                            <div id="btnSupprimerAvis">
+                                                <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
+                                                <p>Supprimer</p>
+                                                <p hidden><?php echo $avis[$key]["id_avis"]?></p>
+                                            </div>
+                                        <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                         <!-- Titre de l'avis -->
@@ -289,6 +307,7 @@
             include "../composants/footer/footer.php";
         ?>
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/detailOffre.js"></script>
     <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->
 </html>
