@@ -78,7 +78,7 @@ const mapNomsJours = new Map([
 
 
 let idOffre = document.getElementById("idOffre").textContent;
-console.log(idOffre);
+console.log("idOffre : " + idOffre);
 
 //récupération des éléments nécéssaires pour les horaires
 let champJours1 = document.getElementById("heures1");
@@ -284,6 +284,7 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
             },
             success: function (response) {
                 alert(response);                        // Affiche la réponse du script PHP si appelé correctement
+                console.log(response);
             },
             error: function () {
                 alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon

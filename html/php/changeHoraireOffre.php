@@ -20,7 +20,7 @@ $jours = ["lundi" => $_POST['lundi'],
 
 foreach ($jours as $jour => $horaires)
 {
-    $query = "SELECT add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+    $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
     $stmt = $dbh->prepare($query);
 
     // Lier les variables aux paramètres
@@ -30,5 +30,7 @@ foreach ($jours as $jour => $horaires)
     $stmt->bindValue(':debAprem', $horaires[2], PDO::PARAM_STR);
     $stmt->bindValue(':finAprem', $horaires[3], PDO::PARAM_STR);
     $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
+
+    $stmt->execute();
 
 }

@@ -288,11 +288,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
-        <p id="idOffre" class="displayNone"><?php echo $idOffre; ?></p> 
 
     </head>
 
     <body class="fondPro">
+
+        <p id="idOffre"><?php echo $idOffre; ?></p>
 
         <?php include "../composants/header/header.php";        //import navbar
         ?>
