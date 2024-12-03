@@ -116,6 +116,17 @@ th, td {
     /* padding-top: 1%; */
 } 
 
+#conteneurDetailPrix{
+    background-color: white;
+    border-style: solid;
+    border: 1px;
+    border-radius: 10em;
+    border-style: solid;
+    border-color: red;
+    padding-inline: 25px;
+  
+}
+
 @media screen and (max-width : 428px)
 {
     .conteneurBtnOffres{
