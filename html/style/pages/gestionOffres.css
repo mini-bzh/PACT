@@ -77,6 +77,10 @@ body h1{
     font-size: 1.5em;
 }
 
+.styleBtn {
+    text-decoration: none;
+    color: black;
+}
 
 #conteneurBtnGestion{
     margin-top: 20px;
@@ -101,6 +105,16 @@ th, td {
     font-size: 0.9em;
     font-family: 'Archivo';
 }
+
+/* bouton facture */
+.btnAccesFacture a{
+    text-decoration: none;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    /* padding-top: 1%; */
+} 
 
 @media screen and (max-width : 428px)
 {
