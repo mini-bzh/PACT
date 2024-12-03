@@ -131,9 +131,6 @@ main h1{
     border-radius: 0 48px 48px 48px;
 }
 
-.changeBordure{
-    border-radius: 48px 48px 0 0;
-}
 
 /* Quand le filtre est déplié */
 
@@ -181,7 +178,7 @@ fieldset > label > p{
     margin: 3% 7% 0 0;
 }
 
-.filtreDeplie label input[type="checkbox"] {
+.filtreDeplie label input[type="checkbox"], .filtreTagDeplie label input[type="checkbox"] {
     -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
     appearance: none; /* Désactive le style natif */
     width: 35px; /* Largeur */
@@ -191,9 +188,10 @@ fieldset > label > p{
     border-radius: 10px; /* Coins arrondis */
     cursor: pointer; /* Pointeur interactif */
     position: relative; /* Nécessaire pour positionner le check */
-  }
+    flex: 0 0 auto; /* Empêche l'étirement et le rétrécissement */
+}
 
-.filtreDeplie label input[type="checkbox"]:checked::after {
+.filtreDeplie label input[type="checkbox"]:checked::after, .filtreTagDeplie label input[type="checkbox"]:checked::after {
     content: '✔'; /* Symbole de check */
     color: black; /* Couleur du symbole */
     font-size: 25px; /* Taille du symbole */
@@ -353,6 +351,70 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-top: 8%;
 }
 
+
+/* Filtrer par tags */
+
+.filtreTag{
+    background-color: white;
+    width: 340px;
+    height: 50px;
+    border-radius: 48px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 10%;
+}
+
+.filtreTagHead{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.filtreTagHead svg{
+    width: 25.0px;
+    height: 39.39px;
+}
+
+.filtreTagHead p{
+    margin: 1% 9% 0 0;
+}
+
+.filtreGrandTag{
+    background-color: white;
+    width: 750px;
+    height: fit-content;
+    position: absolute;
+    top: 45px;
+    z-index: 3;
+    border-radius: 0 48px 48px 48px;
+    padding: 5% 10%;
+}
+
+.changeBordure{
+    border-radius: 48px 48px 0 0;
+}
+
+/* Quand le filtre des tags est déplié */
+
+.filtreTagDeplie label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 6% 0;
+    width: 30%;
+}
+
+.filtreTagDeplie label > p{
+    margin: 2% 0 0 5%;
+}
+
+.filtreTagDeplie > div{
+    display: flex;
+    flex-direction: row;
+}
 
 @media screen and (max-width : 428px)
 {
