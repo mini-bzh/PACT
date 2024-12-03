@@ -211,7 +211,7 @@
 }
 
 .avis .conteneurMembreAvis .infoMembreAvis h3{
-    font-size: var(--typescale-h5);
+    font-size: var(--typescale-h4);
 }
 
 .avis .conteneurMembreAvis .infoMembreAvis p{
@@ -265,6 +265,7 @@
     text-decoration: black;
     border-radius: 40px;
     padding: 10px;
+    margin: 20px 10px;
 }
 
 .btnAjouterAvisGrise{
@@ -326,6 +327,39 @@ th, td {
     padding: 20px;
     font-size: 0.9em;
     font-family: 'Archivo';
+}
+
+#btnSupprimerAvis{
+    border: 2px solid red;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+#btnSupprimerAvis{
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+
+    transition: transform 0.2s ease;
+}
+
+#btnSupprimerAvis img{
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+    transform: translateY(-1px);
+}
+
+
+#btnSupprimerAvis p{
+    font-size: var(--typescale-small-text);
+    transform: translateY(1px);
+}
+
+#btnSupprimerAvis:hover{
+    cursor: pointer;
+    transform: translateY(-5px);
 }
 
 @media screen and (max-width : 428px){
