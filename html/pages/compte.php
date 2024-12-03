@@ -17,7 +17,49 @@ use Dompdf\Dompdf;
     // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_membre.php');
 
-?>
+    $idCompte = $_SESSION['idCompte'];
+
+    if(isset($idCompte)){
+    if ($comptePro) {
+
+        $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
+
+        $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+
+        if (count($result) === 0) {
+
+            $stmt = $dbh->prepare("SELECT * from tripskell.pro_public where id_c = :id");
+
+            $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+        }
+    } else {
+        
+        $stmt = $dbh->prepare("SELECT * from tripskell.membre where id_c = :id");
+
+        $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+    }
+
+    $infos = $result[0];
+
+    $password = $_POST['password'];
+    $realpassword = $infos['mot_de_passe'];
+    if($password == $realpassword){
+        header("Location: ModifComptemembre.php");
+    }
+}
+    ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -135,49 +177,6 @@ if ((!$comptePro) && (!$compteMembre)) {
 <!------ MAIN  ------>
 <main>
 
-<?php
-
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
-
-    $idCompte = $_SESSION['idCompte'];
-
-    if ($comptePro) {
-
-        $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
-
-        $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
-
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-
-        if (count($result) === 0) {
-
-            $stmt = $dbh->prepare("SELECT * from tripskell.pro_public where id_c = :id");
-
-            $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
-
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-
-        }
-    } else {
-        
-        $stmt = $dbh->prepare("SELECT * from tripskell.membre where id_c = :id");
-
-        $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
-
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-    }
-
-    $infos = $result[0];
-
-
-?>
-
 <!-- div principale -->
 <div class="informationsCompte">
 
@@ -289,7 +288,6 @@ if ((!$comptePro) && (!$compteMembre)) {
 
                 <!-- Mot de passe -->
                 <p class="boldArchivo displayNone">Mot de passe : <?php echo $cache ?></p>
-
                 <!-- Téléphone -->
                 <p class="boldArchivo displayNone">Téléphone : <?php echo $tel ?></p>
 
@@ -517,16 +515,17 @@ if ((!$comptePro) && (!$compteMembre)) {
  <!-- Pop-up -->
  <div class="popUpModif">
                 <div id="popup-content">
-                    <h2>Entrez le mot de passe</h2>
-                    <form method="post" action="/pages/ModifComptemembre.php<?php $infos["id_c"];?>">
-                    <input type="password" id="password" placeholder="Mot de passe" />
-                    <button onclick="verifyPassword()">Valider</button>
+                    <form method="post" action="">
+                        <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" placeholder="Mot de passe" />
+                    <button type="submit" href="#">Valider</button>
                     <p id="error-message" style="color: red; display: none;">Mot de passe incorrect !</p>
                     </form>
-                    
                 </div>
             </div>
 
+
+           
 </main>
 
 <?php
