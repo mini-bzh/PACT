@@ -78,10 +78,10 @@ const mapNomsJours = new Map([
 
 
 //récupération des éléments nécéssaires pour les horaires
-let champJours1 = document.getElementById("heures1");               //inputs pour le 1er couple d'horaires
-let champJours2 = document.getElementById("heures2");               //inputs pour le 2e couple d'horaires
+let champJours1 = document.getElementById("heures1");
+let champJours2 = document.getElementById("heures2");
 
-let btnAjoutHoraire = document.getElementById("btnAjoutHoraire");   //
+let btnAjoutHoraire = document.getElementById("btnAjoutHoraire");   
 
 let heureDebut1 = document.querySelector("#heures1 .heure-debut");
 let heureFin1 = document.querySelector("#heures1 .heure-fin");
@@ -150,7 +150,8 @@ function jourClique() {
 }
 
 
-function horaireEntree(element) {
+function horaireEntree(element)                 //met à jour la map mapJoursHoraires
+{
     let horairesJour;
     horairesJour = mapJoursHoraires.get(jourSelectionne);
 
