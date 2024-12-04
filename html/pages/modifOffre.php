@@ -16,6 +16,21 @@ if (!isset($_SESSION["idCompte"])) {
     exit();
 }
 
+// on cherche dans quelle catégorie est l'offre
+if (isset($_GET["idOffre"])) {
+    foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
+        $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
+        $stmt->execute([ ':idOffre' => $_GET["idOffre"]]);
+        if(isset($stmt->fetch()['idoffre'])){?>
+            <script>
+                let categorie_offre = '<?php echo $nom_cat; ?>';
+            </script>
+        <?php }
+    }
+} else {
+    die("ID d'offre invalide.");
+}
+
 if (!empty($_POST)) {
     // Préparation de la requête de mise à jour de l'offre
     $requete = "UPDATE tripskell.offre_pro SET ";
@@ -161,16 +176,117 @@ $image4 = $contentOffre["image4"] ?? null;
                 <input type="file" id="fichier4" name="fichier4" onchange="updatePreview(event, 'preview4')">
             </div>
 
+            <!--------------------- > CATEGORIES < --------------------->
 
-                <!-- <div class="champs">
-                    <label for="categorie">Catégorie <span class="required">*</span> :</label>
-                    <select id="categorie" name="categorie" required>
-                        <option value="">Sélectionnez une catégorie</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
+            <!-- ----------------- VISITE ------------------- -->
+
+            <div id="champsVisite">
+
+                <div class="champs">
+                    <label for="duree_v">Duree de la visite <span class="required">*</span> :</label>
+                    <input type="time" id="duree_v" name="duree_v" />
+                </div>
+                <label>Nom langue <span class="required">*</span> :</label>
+                <div class="parentVisite">
+                    <div>
+                        <input type="checkbox" id="lang1" name="lang[]" value="FR" />
+                        <label for="lang1">Français</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="lang2" name="lang[]" value="EN" />
+                        <label for="lang2">Anglais</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="lang3" name="lang[]" value="AL" />
+                        <label for="lang3">Allemand</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="lang4" name="lang[]" value="ES" />
+                        <label for="lang4">Espagnol</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="lang5" name="lang[]" value="CH" />
+                        <label for="lang5">chinois</label>
+                    </div>
+                </div>
+                <label>La visite est guide :<span class="required">*</span> :</label>
+                <div class="parentVisite">
+                    <div>
+                        <input type="radio" id="guidee" name="guidee" value="YES" />
+                        <label for="guidePresent">Oui</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="guidee" name="guidee" value="NO" /> <!-- a enlever et utilisation de checkbox -->
+                        <label for="guidePasPresent">Non</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ----------------- RESTAURATION ------------------- -->
+
+            <div id="champsRestauration">
+                <div>
+                    <label for="carte">Carte <span class="required">*</span> :</label>
+                    <textarea id="carte" name="carte" placeholder="saisir les élements qu'il y a sur votre carte" maxlength="100"></textarea>
+                </div>
+                <div class="champs">
+                    <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
+                    <select id="gammeprix" name="gammeprix">
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
                     </select>
                 </div>
+            </div>
 
+            <!-- ----------------- PARC ATTRACTION ------------------- -->
+
+            <div id="champsPA">
+                <div class="champs">
+                    <label for="nbAttraction">Nombre Attraction :</label>
+                    <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
+                </div>
+                <div class="champs">
+                    <label for="ageminimum">âge minimum :</label>
+                    <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                </div>
+                <div class="champs">
+                    <label for="plan">Selectionner un plan :</label>
+                    <input type="file" id="plan" name="plan">
+                </div>
+            </div>
+
+            <!-- ----------------- SPECTACLE ------------------- -->
+
+            <div id="champsSpectacle">
+                <div class="champs">
+                    <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
+                    <input type="time" id="duree_s" name="duree_s" />
+                </div>
+                <div class="champs">
+                    <label for="capacite">Capacité :</label>
+                    <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
+                </div>
+            </div>
+
+            <!-- ----------------- ACTIVITE ------------------- -->
+
+            <div id="champsActivite">
+                <div>
+                    <label for="prestation">Prestation proposer <span class="required">*</span> :</label>
+                    <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"></textarea>
+                </div>
+                <div class="champs">
+                    <label for="duree_a">Duree de la Activité <span class="required">*</span> :</label>
+                    <input type="time" id="duree_a" name="duree_a" />
+                </div>
+                <div class="champs">
+                    <label for="agemin">âge minimum :</label>
+                    <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                </div>
+            </div>
+
+                <!-- ----------------- TAGS ------------------- 
                 <div class="champs">
                     <label for="tags">Tags :</label>
                     <select id="tags" name="tags">
@@ -212,10 +328,10 @@ $image4 = $contentOffre["image4"] ?? null;
                     <div class="heures">
                         <label for="heure-debut">De</label>
                         <!-- Champ de saisie pour l'heure de début avec valeur préremplie -->
-                        <input type="time" id="heure-debut" name="heure-debut" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[0])); ?>">
+                        <input type="time" id="heure-debut" name="heure-debut" value="">
                         <label for="heure-fin">à</label>
                         <!-- Champ de saisie pour l'heure de fin avec valeur préremplie -->
-                        <input type="time" id="heure-fin" name="heure-fin" value="<?php echo implode(":",explode("h",explode("-",$contentOffre["horaires"])[1])); ?>">
+                        <input type="time" id="heure-fin" name="heure-fin" value="">
                     </div>
                 </div>
 
@@ -278,6 +394,7 @@ $image4 = $contentOffre["image4"] ?? null;
 
             </form>
         </div>
+        <script src="/js/modifOffre.js"></script>
     </main>
 
     <?php
@@ -318,7 +435,7 @@ $image4 = $contentOffre["image4"] ?? null;
     }
     ?>
 
-<script>
+
 // Fonction pour simuler le clic sur le champ de fichier
 function selectFile(imageNumber) {
     document.getElementById(`fileInput${imageNumber}`).click();
