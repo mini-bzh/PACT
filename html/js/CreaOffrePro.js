@@ -266,7 +266,6 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
     console.log(joursHorairesVides.length +", " + joursHorairesInvalides.length + ", " + joursHorairesIncoherentes.length);
     if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0) {
-        alert("envoi des horaires");
 
         let tabInputsJour = document.getElementsByClassName("inputJour");       //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
         let i = 0;
