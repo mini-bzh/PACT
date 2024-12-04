@@ -61,6 +61,7 @@ $contentMesOffres = $stmt->fetchAll();
                     <h3>Ajouter une offre</h3>
                 </div>
             </a>
+            <section id="conteneurOffre">
             <?php foreach ($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
             {
                 $prixOffre = []; // Tableau pour stocker les prix d'une offre et de son option
@@ -249,6 +250,7 @@ $contentMesOffres = $stmt->fetchAll();
                 </article>
             <?php }
             ?>
+            </section>
         </section>
 
         <setion id="conteneurDetailPrix">

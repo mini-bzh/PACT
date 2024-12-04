@@ -26,6 +26,7 @@
     padding: 12px;
     border-radius: 40px;
     margin: 20px 0px;
+    order: 0;
 }
 
 #conteneurBtnOffres{
@@ -116,15 +117,19 @@ th, td {
     /* padding-top: 1%; */
 } 
 
+#conteneurOffre{
+    order: 2;
+}
+
 #conteneurDetailPrix{
     background-color: white;
     border-style: solid;
     border: 1px;
     border-radius: 10em;
     border-style: solid;
-    border-color: red;
+    border-color: black;
     padding-inline: 25px;
-  
+    order: 1;
 }
 
 @media screen and (max-width : 428px)
