@@ -39,6 +39,11 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
+    if ($_GET['user-tempo'] == 'pro') {
+        echo 'fondPro';
+    } else {
+        echo 'fondVisiteur';
+    }
 header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers la page de l'offre créée
 }
 }
