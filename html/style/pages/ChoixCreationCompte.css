@@ -75,9 +75,6 @@
     padding: auto;
 }
 
-main{
-    padding-top: 10%;
-}
 @media (max-width: 428px) {
     /* GÉNÉRAL : corps de la page */
     body {
