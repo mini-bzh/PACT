@@ -171,10 +171,12 @@ $requete .= ":prestation,";
 $requete .= ":id_option,";
 
 $requete .= ":datedebutsouscription,";
-$requete .= ":datefinsouscription::DATE + INTERVAL '".$_POST["duree_opt"]." week'";
+$requete .= ":datefinsouscription::DATE + INTERVAL '";
+$requete .= $_POST["date_debut_opt"] !== ""?$_POST["duree_opt"]:"0";
+$requete .= " week'";
 
 $requete .= ") returning idOffre;";
-
+echo $requete;
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
@@ -219,18 +221,23 @@ $stmt->bindParam(":prestation", $prestation);
 
 $stmt->bindParam(":id_option", $idoption);
 
-$stmt->bindParam(":datedebutsouscription",$_POST["date_debut_opt"]);
-$stmt->bindParam(":datefinsouscription",$_POST["date_debut_opt"]);
+$stmt->bindParam(":datedebutsouscription",$date_option);
+$stmt->bindParam(":datefinsouscription",$date_option);
 //$stmt->bindParam(":inter",$_POST["duree_opt"]);
 
+$date_option = $_POST["date_debut_opt"]!==""?$_POST["date_debut_opt"]:null;
+
+print_r($_POST);
+echo 'post' . ($_POST["date_debut_opt"] === "");
 
 // On definit des variables a traiter
-$tarif = $_POST["prix-minimal"];
-$tarif = 5;
+$tarif = !isset($_POST["prix-minimal"])?$_POST["prix-minimal"]:"0";
+echo $tarif;
 
 $note = 5;
 
 
+$idoption = null;
 if(!is_null($_POST["option"]) && $_POST["option"] == "AlaUne") {
     $idoption = "A la une";
 }
