@@ -157,7 +157,7 @@ function rechercher()
 /*repère les offres dont le titre contient le texte écrit dans la barre de recherhe, et les affiche. N'affiche pas les autres*/
 {
     let texte = barreRecherche.value.toLowerCase();             //récupère le texte de la barre de recherche et le converti en minuscule
-
+    
     mapOffresInfos.forEach((map, key, value)=>{
         if(texte.length >= 1)                                   //si la barre de recherche n'est pas vide
         {
@@ -325,48 +325,51 @@ let critPrixMax = null;
 
 // liste des cases de catégories cochées
 document.querySelectorAll('#categorie input[type="checkbox"]').forEach((cat) => {
-    cat.addEventListener('change', (event) => {
-
-        let value = event.target.value;
-
-        if (event.target.checked) {
-            // Si la case est cochée, on ajoute sa valeur au tableau
-            if (!critCategorie.includes(value)) {
-                critCategorie.push(value);
-            }
-        } else {
-            // Si la case est décochée, on enlève sa valeur du tableau
-            let index = critCategorie.indexOf(value);
-            if (index !== -1) {
-                critCategorie.splice(index, 1);
-            }
-        }
-
-        updateAffichageOffres();
-    });
+    cat.addEventListener('change', listeCategorie);
 });
+
+function listeCategorie(event) {
+
+    let value = event.target.value;
+
+    if (event.target.checked) {
+        // Si la case est cochée, on ajoute sa valeur au tableau
+        if (!critCategorie.includes(value)) {
+            critCategorie.push(value);
+        }
+    } else {
+        // Si la case est décochée, on enlève sa valeur du tableau
+        let index = critCategorie.indexOf(value);
+        if (index !== -1) {
+            critCategorie.splice(index, 1);
+        }
+    }
+    updateAffichageOffres();
+}
 
 // liste des cases d'ouverture cochées
 document.querySelectorAll('#ouverture input[type="checkbox"]').forEach((ouv) => {
-    ouv.addEventListener('change', (event) => {
-
-        let value = event.target.value;
-
-        if (event.target.checked) {
-            // Si la case est cochée, on ajoute sa valeur au tableau
-            if (!critOuverture.includes(value)) {
-                critOuverture.push(value);
-            }
-        } else {
-            // Si la case est décochée, on enlève sa valeur du tableau
-            let index = critOuverture.indexOf(value);
-            if (index !== -1) {
-                critOuverture.splice(index, 1);
-            }
-        }
-        updateAffichageOffres();
-    });
+    ouv.addEventListener('change', listeOuverture);
 });
+
+function listeOuverture(event) {
+
+    let value = event.target.value;
+
+    if (event.target.checked) {
+        // Si la case est cochée, on ajoute sa valeur au tableau
+        if (!critOuverture.includes(value)) {
+            critOuverture.push(value);
+        }
+    } else {
+        // Si la case est décochée, on enlève sa valeur du tableau
+        let index = critOuverture.indexOf(value);
+        if (index !== -1) {
+            critOuverture.splice(index, 1);
+        }
+    }
+    updateAffichageOffres();
+}
 
 // lieu rentrée en paramètre
 document.getElementById("lieu").addEventListener("keyup", (event) => {
@@ -551,8 +554,6 @@ function verifTags(idOffre){
     } else {
         if (listeTags.some(tag => offre.get("tags").includes(tag))){
             valideTag = true;
-        } else {
-            console.log(offre.get("id") + " - > " + offre.get("tags") + " pas dans " + listeTags);
         }
     }
 
@@ -696,3 +697,20 @@ function closeTag(event) {
         }
     }
 }
+
+window.addEventListener("pageshow", function() {
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.checked = checkbox.defaultChecked; // Restaure l'état initial défini dans le HTML
+    });
+
+
+    document.querySelectorAll('input[type="number"]').forEach((input) => {
+        input.value = '';
+    });
+
+    document.querySelectorAll('input[type="text"]').forEach((input) => {
+        input.value = '';
+    });
+    
+    barreRecherche.value = '';
+});

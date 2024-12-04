@@ -315,7 +315,7 @@
                     <div id="fieldsetTag" class="filtreTagDeplie displayNone">
 <?php
                     // SELECTION DE TOUS LES TAGS
-                    $stmt2 = $dbh->prepare("select DISTINCT tripskell._tags.nomTag from tripskell._tags UNION select DISTINCT tripskell._repas.typeRepas from tripskell._repas");
+                    $stmt2 = $dbh->prepare("select DISTINCT tripskell._tags.nomTag from tripskell._tags");
 
                     $stmt2->execute();
                     $tags = $stmt2->fetchAll();

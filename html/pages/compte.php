@@ -418,14 +418,6 @@ if ((!$comptePro) && (!$compteMembre)) {
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
             </button>
 
-            <!-- Bouton de données bancaires -->
-            <button class="btnAccesFacture">
-            <?php
-                include '../icones/creditCardSVG.svg';
-            ?>
-                <a href="telechargementFacture.php"><p class="boldArchivo texteSmall">Télécharger les factures</p></a>
-            </button>
-
 <?php
             }
 ?>
