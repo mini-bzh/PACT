@@ -224,7 +224,7 @@ h1{
 }
 
 .avis .conteneurMembreAvis .infoMembreAvis h3{
-    font-size: var(--typescale-h4);
+    font-size: var(--typescale-h3);
 }
 
 .avis .conteneurMembreAvis .infoMembreAvis p{
