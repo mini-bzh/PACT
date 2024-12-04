@@ -170,7 +170,7 @@ if (!empty($_POST)) {
             </div>
 
             <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
+            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg, image/jpg" onchange="updateFileName()" >
             <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
 
