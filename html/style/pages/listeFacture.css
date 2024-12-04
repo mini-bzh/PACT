@@ -40,3 +40,7 @@ body{
 main > h1{
     margin: 2em;
 }
+
+a{
+    color: black;
+}

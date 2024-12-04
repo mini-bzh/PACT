@@ -17,7 +17,10 @@ use Dompdf\Dompdf;
     // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_membre.php');
 
-    $idCompte = $_SESSION['idCompte'];
+    if(array_key_exists("idCompte", $_SESSION))
+    {
+        $idCompte = $_SESSION['idCompte'];
+    }
 
     if(isset($idCompte)){
     if ($comptePro) {
