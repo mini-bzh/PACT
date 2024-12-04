@@ -131,13 +131,13 @@ use Dompdf\Dompdf;
                 if(($comptePro) || ($compteMembre))
                 {
 ?>
-                <h3>Profil</h3>
+                <h1>Profil</h1>
 <?php
                 } 
                 else
                 {
 ?>
-                <h3>Connexion</h3>
+                <h1>Connexion</h1>
                 <?php } ?>
             </div>
         </div>
