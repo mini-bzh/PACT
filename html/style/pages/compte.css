@@ -455,8 +455,9 @@ body.no-scroll {
     flex-direction: row;
     align-items: center;
     /*border: none;*/
-    border: solid;
-    border-width: 1px;
+    /*border: solid;
+    border-width: 1px;*/
+    background-color: white;
 }
 
 .btnDetailPrix:hover{
@@ -758,6 +759,10 @@ body.no-scroll {
 
     .infoPrinc {
         left: 0;
+    }
+
+    .btnDetailPrix{
+        width: 411px;
     }
 
 }
