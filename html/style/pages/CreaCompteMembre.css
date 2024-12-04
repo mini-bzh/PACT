@@ -312,3 +312,59 @@ form > .zoneBtn{
     justify-content: center;
     margin: 2%;
 }
+
+.coBancaires{
+    display: flex;
+    flex-direction: column;
+}
+
+.coBancaires > p {
+    font-size: small;
+}
+
+
+.champsAdresse{
+    margin-top: 2%;
+    display: flex;
+}
+
+.champsAdresse>input{
+    margin-bottom: 10px;
+    margin-left: 5px;
+    border-radius: 5%;
+    border: 1px solid #ccc;
+    font-size: 16px; 
+    box-sizing: border-box;
+}
+
+#num{
+    width: 10%; 
+}
+
+#nomRue{
+    width: 35%; 
+}
+
+#ville{
+    width: 25%; 
+}
+
+#codePostal{
+    width: 13%; 
+}
+
+.labelAdresse{
+    margin-top: 2%;
+}
+
+.hidden {
+    display: none;
+  }
+
+
+.choixPro{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5%;
+}

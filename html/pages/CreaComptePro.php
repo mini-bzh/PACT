@@ -88,6 +88,22 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
     <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
+        <div class="choixPro">
+            <div class="propriv">
+                <label>
+                Domaine Privé 
+                <input type="checkbox" id="showCheckbox">
+                </label>
+            </div>
+
+            <div class="propub">
+                <label>
+                Domaine Public
+                <input type="checkbox" id="hideCheckbox">    
+                </label>
+            </div> 
+        </div>
+
         <!-- Login -->
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
@@ -101,14 +117,8 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
          <!-- Nom  -->
          <div class="champs">
-            <label for="Nom">Nom <span class="required">*</span> :</label>
-            <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom" required>
-        </div>
-
-         <!-- prenom  -->
-         <div class="champs">
-            <label for="prenom">Prenom <span class="required">*</span> :</label>
-            <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prenom" required>
+            <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
+            <input type="text" id="RaisonSociale" name="RaisonSociale" placeholder="Entrez votre nom" required>
         </div>
 
         <!-- Champs pour sélectionner les images -->
@@ -129,11 +139,6 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
             <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
-        </div>
-
-        <div class="champs">
-        <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
-        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
         </div>
 
 
@@ -173,9 +178,57 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             }
         }
         ?>
+
+        <div class="champs">
+            <label for="codeSiren">Code SIREN  <span class="required"></span> :</label>
+            <input type="text" id="codeSiren" name="codeSiren" placeholder="CodeSiren" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
+        </div>
+
+        <div id="extraFields" class="hidden">
+        <div class="pageChoixCo">
+            <div class="textBulle decaleBulleGauche">
+                <div class="coBancaires">
+                    <h2>Coordonnées bancaires :</h2>
+                    <p>Vous devrez compléter ces champs si vous souhaitez publier une offre à l’avenir. </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="champs">
+            <label for="NumeroCB">Numéro de carte :  <span class="required"></span> </label>
+            <input type="text" id="NumeroCB" name="NumeroCB" placeholder="Numero de votre carte" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
+        </div>
     
+        <div class="champs">
+            <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
+            <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
+        </div>
+
+        <div class="champs">
+            <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
+            <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" minlength="3" maxlength="" pattern="^^\d{3}$"> 
+        </div>
+
+
+            <div class="champs">
+            <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
+            <input type="text" id="TitulaireCB" name="TitulaireCB">
+
+            <!-- Adresse -->
+            <div class="labelAdresse">
+                        <label for="adresse">Adresse :</label>
+                    </div>
+                <div class="champsAdresse">
+                    
+                    <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" pattern="^^^\d{3}$" >
+                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" >
+                    <input type="text" id="ville" name="ville" placeholder="Ville" >
+                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
+                </div>
+        </div>
+    </div> 
         <hr>
-    
+
         <div class="zoneBtn">
                         <a href="ChoixCreationCompte.php" class="btnAnnuler">
                             <p class="texteLarge boldArchivo">Annuler</p>
@@ -256,6 +309,27 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             alert("Le mot de passe doit contenir au moins un chiffre et un caractère spécial.");
             return; // Sort de la fonction
         }
+    });
+
+    
+    // Récupération des éléments
+    const showCheckbox = document.getElementById('showCheckbox');
+    const hideCheckbox = document.getElementById('hideCheckbox');
+    const extraFields = document.getElementById('extraFields');
+
+    // Gestionnaire d'événements pour les deux checkbox
+    showCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        extraFields.classList.remove('hidden');
+        hideCheckbox.checked = false; // Décoche la deuxième checkbox
+      }
+    });
+
+    hideCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        extraFields.classList.add('hidden');
+        showCheckbox.checked = false; // Décoche la première checkbox
+      }
     });
 </script>
 
