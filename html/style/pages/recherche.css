@@ -88,7 +88,13 @@ main h1{
 #conteneurBouton{
     display: flex;
     flex-direction: row-reverse;
-    justify-content: left;
+    justify-content: space-evenly;
+}
+
+#conteneurFiltres{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Filtrer */
@@ -101,7 +107,6 @@ main h1{
     display: flex;
     align-items: center;
     position: relative;
-    margin-left: 10%;
 }
 
 .filtreHead{
@@ -362,7 +367,6 @@ input[type="number"]::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     position: relative;
-    margin-left: 10%;
 }
 
 .filtreTagHead{
@@ -426,13 +430,9 @@ input[type="number"]::-webkit-inner-spin-button {
         margin-bottom: 5px;
     }
 
-    #conteneurBouton{
-        display: flex;
-        flex-direction: column;
-    }
-
     .filtrerBarre{
         margin-left: 0;
+        margin-bottom: 5%;
     }
 
     #conteneurOffres>article{
@@ -448,5 +448,85 @@ input[type="number"]::-webkit-inner-spin-button {
         border-left: 10px solid var(--secondary);
         padding-left: 10px;
         margin-left: 5px;
+    }
+
+    #conteneurFiltres{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    #conteneurBouton{
+        flex-direction: column;
+    }
+
+    #conteneurTrie{
+        margin-bottom: 5%;
+    }
+
+    .filtreDeplie{
+        height: fit-content;
+        width: 340px;
+        flex-direction: column;
+        justify-content: space-around;
+        border-radius: 0 0 48px 48px;
+    }
+
+    .filtreDeplie > div{
+        width: 100%;
+    }
+
+    .prixFiltre{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .number-input{
+        top: 40px;
+        right: 65px;
+    }
+
+    .prixFiltre > div{
+        margin: 4% 0;
+    }
+
+    .prixFiltre > div > p{
+        top: 52px;
+        right: 97px;
+    }
+
+    .titreFiltre{
+        margin-top: 5%;
+    }
+
+    .filtreTagDeplie label > p {
+        margin-left: 20%;
+    }
+
+    .filtreGrandTag {
+        width: 340px;
+        border-radius: 0 0 48px 48px;
+        padding: 5% 0 5% 6%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .filtreTagDeplie > div {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .filtreTagDeplie label > p {
+        margin: 2% 0 0 20%;
+    }
+
+    .filtreTagDeplie label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 9% 0;
+        width: 20%;
     }
 }
