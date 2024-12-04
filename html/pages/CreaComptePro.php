@@ -74,7 +74,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Création d'un compte membre :</p>
+                <p>Création d'un compte Professionnel :</p>
             </div>
     </div>
 
