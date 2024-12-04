@@ -144,7 +144,7 @@ if ($_GET['user-tempo'] === 'pro') {
     </defs>
     </svg>
 
-    <div>
+    <div id="conteneurTitreMobile">
         <img src="/images/logo/logo_petit.png" alt="logo petit">
         <h4>Connexion compte<br>professionnel</h4>
     </div>

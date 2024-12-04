@@ -1,5 +1,3 @@
-
-
 let btnDetailPrix = document.getElementsByClassName("btnDetailPrix");
 let detailPrixDeplie = document.getElementsByClassName("detailPrixDeplie");
 

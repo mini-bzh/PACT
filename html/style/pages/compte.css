@@ -415,7 +415,7 @@ body.no-scroll {
 }
 
 .btnDetailPrix:hover{
-    cursor: pointer;
+    cursor: default;
 }
 
 .btnDetailPrix p{

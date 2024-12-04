@@ -1,5 +1,5 @@
 
- <a href="connexion.php?user-tempo=pro" class="coPro btnCo">
+ <a href="CreaComptePro.php?user-tempo=pro" class="coPro btnCo">
     <div>
         <div>
             <h4 class="texteLarge boldArchivo">Professionnel</h4>

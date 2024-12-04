@@ -1,95 +1,49 @@
 <?php
-session_start(); // Démarre la session
+session_start(); // Démarre la session pour récupérer les données de session
+
+// Récupération des paramètres de connexion à la base de données
+include('../php/connection_params.php');
 
 // Connexion à la base de données
-include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
-$idCompte = $_SESSION['idCompte'];
 
-if (!empty($_POST)) {
-    // Vérifie si le login existe déjà
-    $checkQuery = "SELECT COUNT(*) AS count FROM tripskell.membre WHERE login = :Login";
-    $checkStmt = $dbh->prepare($checkQuery);
-    $checkStmt->bindParam(":Login", $_POST["Login"]);
-    $checkStmt->execute();
-    $result = $checkStmt->fetch();
+if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
+   
 
-    if ($result['count'] > 0 && $idCompte != $_SESSION["idCompte"]) {
-        $error_message = "Le login est déjà utilisé. Veuillez en choisir un autre.";
-    } else {
-        $nom_img = null;
+// Vérifier si le login existe déjà
+$checkQuery = "SELECT COUNT(*) AS count FROM tripskell.membre WHERE login = :Login";
+$checkStmt = $dbh->prepare($checkQuery);
+$checkStmt->bindParam(":Login", $_POST["Login"]);
+$checkStmt->execute();
+$result = $checkStmt->fetch();
 
-        // Traitement de l'image si elle est envoyée
-        if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
-            $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
-            move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
-        }
+if ($result['count'] > 0) {
+    // Si le login existe déjà, définir un message d'erreur
+    $error_message = "Le login est déjà utilisé. Veuillez en choisir un autre.";
+} else {
+// ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
+$i = 0;
+foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
 
-        // Requête SQL
-        $requete = "UPDATE tripskell.membre SET
-            login = :Login,
-            adresse_mail = :Adresse_Mail,
-            mot_de_passe = :Mot_de_P,
-            numero_tel = :Telephone,
-            nom = :Nom,
-            codepostal = :codePostal,
-            prenom = :Prenom";
+    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
 
-        // Ajoute le champ `pdp` uniquement si une nouvelle image a été uploadée
-        if ($nom_img) {
-            $requete .= ", pdp = :pdp";
-        }
+    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
 
-        $requete .= " WHERE id_c = :idCompte;";
+        // creation du nom de fichier en utilisant time et le type de fichier
+        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
 
-        $stmt = $dbh->prepare($requete);
-        $stmt->bindParam(":Login", $_POST["Login"]);
-        $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
-        $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
-        $stmt->bindParam(":Telephone", $_POST["Telephone"]);
-        $stmt->bindParam(":Nom", $_POST["Nom"]);
-        $stmt->bindParam(":codePostal", $_POST["codePostal"]);
-        $stmt->bindParam(":Prenom", $_POST["Prenom"]);
-        $stmt->bindParam(":idCompte", $idCompte);
-
-        // Lier le champ `pdp` si une image a été uploadée
-        if ($nom_img) {
-            $stmt->bindParam(":pdp", $nom_img);
-        }
-
-        $stmt->execute();
-
-        // Fermeture de la base de données
-        $dbh = null;
-
-        // Redirection
-        header("Location: ../pages/accueil.php");
+        // deplacement du fichier depuis l'espace temporaire
+        move_uploaded_file($fichier["tmp_name"], "../images/pdp/" . $nom_img[$key_fichier]);
     }
 }
+
+   
+header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers la page de l'offre créée
+}
+}
 ?>
-<?php
-
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
-
-    $idCompte = $_SESSION['idCompte'];
-      
-        $stmt = $dbh->prepare("SELECT * from tripskell.membre where id_c = :id");
-
-        $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
-
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-    $infos = $result[0];
-?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -111,19 +65,16 @@ if (!empty($_POST)) {
         ?>
 
 <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
-                echo "fondPro";
-            }
-            else
-            {
-                echo "fondVisiteur";
+            if ($_GET['user-tempo'] == 'pro') {
+                echo 'fondPro';
+            } else {
+                echo 'fondVisiteur';
             }
         ?>>
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Création d'un compte membre :</p>
+                <p>Création d'un compte Professionnel :</p>
             </div>
     </div>
 
@@ -135,12 +86,12 @@ if (!empty($_POST)) {
 
     <!-- Formulaire de création d'offre -->
 
-    <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
+    <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
         <!-- Login -->
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
-            <input type="text" id="Login" name="Login" value="<?php echo $infos['login'];?>" required>
+            <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
             <?php
             if (isset($error_message)) {
                 echo '<div class="error">'. $error_message. '</div>';
@@ -151,26 +102,19 @@ if (!empty($_POST)) {
          <!-- Nom  -->
          <div class="champs">
             <label for="Nom">Nom <span class="required">*</span> :</label>
-            <input type="text" id="Nom" name="Nom" value="<?php echo $infos['nom'];?>" required>
+            <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom" required>
         </div>
 
          <!-- prenom  -->
          <div class="champs">
-            <label for="Prenom">Prenom <span class="required">*</span> :</label>
-            <input type="text" id="Prenom" name="Prenom" value="<?php echo $infos['prenom'];?>" required>
+            <label for="prenom">Prenom <span class="required">*</span> :</label>
+            <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prenom" required>
         </div>
 
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
-            <div class = "pdp_champs">
-                <label for="pdp">Votre photo de profil actuelle :</label>
-                <div class="image-container">
-                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                </div>
-            </div>
-
             <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg, image/jpg" onchange="updateFileName()" >
+            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
             <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
 
@@ -178,18 +122,18 @@ if (!empty($_POST)) {
         <!-- Adresse Mail -->
         <div class="champs">
             <label for="Adresse_Mail">E-mail <span class="required">*</span> :</label>
-            <input type="email" id="Adresse_Mail" name="Adresse_Mail" value="<?php echo $infos['adresse_mail'];?>" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
+            <input type="email" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="number" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^0[0-9]{9}$">
+            <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
         </div>
 
         <div class="champs">
         <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
-        <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
         </div>
 
 
@@ -197,7 +141,7 @@ if (!empty($_POST)) {
         <!-- retenir le mot de passe dans une variable php -->
         <div class="champs">
             <label for="Mot_de_P">Mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Mot_de_P" name="Mot_de_P" value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
+            <input type="password" id="Mot_de_P" name="Mot_de_P" minlength="12" maxlength="50" required>
         </div>
 
         <div class="RequisMDP">
@@ -215,7 +159,7 @@ if (!empty($_POST)) {
         <!-- Mot de Passe -->
         <div class="champs">
             <label for="Confirm_Mot_de_P">Confirmation du mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P"  value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
+            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" minlength="12" maxlength="50" required>
         </div>
         <?php 
         // Vérification de la confirmation du mot de passe
@@ -233,7 +177,7 @@ if (!empty($_POST)) {
         <hr>
     
         <div class="zoneBtn">
-                        <a href="compte.php" class="btnAnnuler">
+                        <a href="ChoixCreationCompte.php" class="btnAnnuler">
                             <p class="texteLarge boldArchivo">Annuler</p>
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_208_4609)">
