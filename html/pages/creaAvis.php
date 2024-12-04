@@ -115,7 +115,7 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
         <div class="champs">
             <label for="titre">Titre<span class="required">*</span> :</label>
-            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis (max 20 caractères)" maxlength="20" required>
+            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" maxlength="20" required>
         </div>
         <!--<div class="champs">
         <label for="note">Note <span class="required">*</span> :</label>
@@ -134,7 +134,7 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
                 $stmt->execute();
                 $titreOffre = $stmt->fetchAll()[0]["titreoffre"];
                 echo $titreOffre;
-            ?> ? (max 200 caractères)" required></textarea>
+            ?> ?" required></textarea>
         </div>
         <div id="conteneurContexteDate">
             <div class="champs">
