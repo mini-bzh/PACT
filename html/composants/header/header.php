@@ -101,7 +101,21 @@
                     </a>
                 </li>
                 <li class="liHeaderMobile" id="btAvisMobile">
-                    <a class="aHeaderMobile" href="/pages/avis.php">
+                    <a class="aHeaderMobile" 
+                    <?php
+                        if($comptePro || $compteMembre)
+                        {
+                            ?>
+                            href="/pages/avis.php"
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            href="/pages/compte.php"
+                            <?php
+                        }
+                    ?>>
                     <img src="/icones/commentSVG.svg" alt="icone commentaires">
                     <div class="trait"></div>
                     </a>
