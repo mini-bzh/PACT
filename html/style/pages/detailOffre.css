@@ -16,8 +16,6 @@ h1{
 }
 
 
-
-
 .conteneurOffre{
     display: flex;  
     justify-content: center;
@@ -542,6 +540,7 @@ th, td {
     .avis #btnSupprimerAvis{
         margin: 20px 0px 0px;
         padding: 5px;
+        width: 350px;
     }
 
     .avis #btnSupprimerAvis p{

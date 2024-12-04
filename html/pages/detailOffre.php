@@ -263,8 +263,15 @@
                             </div>
                             <div class="conteneurBtnGestionAvis">
                                 <?php
-                                    $idCompteConnecte = $_SESSION["idCompte"];
-
+                                    if(array_key_exists("idCompte", $_SESSION))
+                                    {
+                                        $idCompteConnecte = $_SESSION["idCompte"];
+                                    }
+                                    else
+                                    {
+                                        $idCompteConnecte = null;
+                                    }
+                                    
                                     if($avis[$key]["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                                     {
                                         ?>
