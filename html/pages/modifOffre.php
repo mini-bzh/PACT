@@ -23,7 +23,6 @@ if (!empty($_POST)) {
     $requete .= "resume = :resume, ";
     $requete .= "description_detaille = :description, ";
     $requete .= "tarifMinimal = :tarif, ";
-    $requete .= "horaires = :horaires, ";
     $requete .= "accessibilite = :accessibilite, ";
     $requete .= "numero = :numero, ";
     $requete .= "rue = :rue, ";
@@ -39,7 +38,6 @@ if (!empty($_POST)) {
     $stmt->bindParam(":resume", $resume);
     $stmt->bindParam(":description", $description);
     $stmt->bindParam(":tarif", $tarif);
-    $stmt->bindParam(":horaires", $horaires);
     $stmt->bindParam(":accessibilite", $accessible);
     $stmt->bindParam(":numero", $numero);
     $stmt->bindParam(":rue", $rue);
