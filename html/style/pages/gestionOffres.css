@@ -123,13 +123,13 @@ th, td {
 
 #conteneurDetailPrix{
     background-color: white;
-    border-style: solid;
-    border: 1px;
     border-radius: 10em;
-    border-style: solid;
-    border-color: black;
-    padding-inline: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     order: 1;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
 }
 
 @media screen and (max-width : 428px)

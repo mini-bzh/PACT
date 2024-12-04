@@ -251,7 +251,7 @@ $contentMesOffres = $stmt->fetchAll();
             <?php }
             ?>
             </section>
-        </section>
+        
 
         <setion id="conteneurDetailPrix">
 
@@ -266,7 +266,7 @@ $contentMesOffres = $stmt->fetchAll();
             </p>
 
             </section>
-
+            </section>
     </main>
     <?php                                                   //footer
     include "../composants/footer/footer.php";
