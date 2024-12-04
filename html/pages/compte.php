@@ -470,7 +470,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                     $total += array_sum($value);
                 }
                 echo $total;
-                ?>
+                ?> €
                 </p>
             </div>
 

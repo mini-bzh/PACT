@@ -262,7 +262,7 @@ $contentMesOffres = $stmt->fetchAll();
                     $total += array_sum($value);
                 }
                 echo $total;
-                ?>
+                ?> €
             </p>
 
             </section>
