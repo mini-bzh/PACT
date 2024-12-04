@@ -22,6 +22,7 @@
     align-items: center;
     padding-left: 2%;
     background-color: white;
+    margin: 3%;
     position: relative;
 }
 
@@ -31,6 +32,7 @@
 
 .textBulle + div{
     display: flex;
+    width: 100%;
     justify-content: space-around;
 }
 
@@ -56,7 +58,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;}
+    align-items: center;
+    padding: auto;
+}
 
 .TxtEntreBtn{
     font-size: var(--typescale-large-text);
