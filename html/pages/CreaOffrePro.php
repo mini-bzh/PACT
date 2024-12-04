@@ -239,19 +239,16 @@ $tarif = !isset($_POST["prix-minimal"])?$_POST["prix-minimal"]:"0";
 
 $note = 5;
 
-
-$idoption = null;
-if(!is_null($_POST["option"]) && $_POST["option"] == "AlaUne") {
+// Traitement pour id_option
+if($_POST["option"] == "AlaUne") {
     $idoption = "A la une";
-}
-
-if(!is_null($_POST["option"]) && $_POST["option"] == "EnRelief") {
+} elseif($_POST["option"] == "EnRelief") {
     $idoption = "En relief";
+} else {
+    $idoption = null;
 }
 
-//$id_abo = $_POST["id_abo"];
-//$id_abo = 'Standard';
-
+// Traitement pour les categories
 $idrepas = $_POST["categorie"]=="restauration"?"2":null;
 $carte = $_POST["categorie"]=="restauration"?"crt.png":null;
 $gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
@@ -288,6 +285,39 @@ $requete .= ") VALUES (";
 $requete .= ":idOffre, ";
 $requete .= ":nomTag";
 $requete .= ");";
+
+//parcours de tous les tags
+foreach($liste_tags as $tag) {
+    
+    // quand un des tags a été selectionné on le rajoute
+    if(isset($_POST[$tag["nomtag"]])) {
+        $stmt = $dbh->prepare($requete);
+        $stmt->bindparam(":idOffre", $idOffre);
+        $stmt->bindparam(":nomTag", $tag["nomtag"]);
+        $stmt->execute();
+    }
+}
+
+// requete pour l'insersion des donnees banquaires
+if (in_array($_SESSION["idCompte"], $idproprive)) {
+    $requete = "update tripskell.pro_prive set ";
+    $requete .= "coordonnee_bancaire = :coordonnee_bancaire, date_exp = :date_exp, cryptogramme = :cryptogramme, nom_titulaire_carte = :nom_titulaire_carte,";
+    $requete .= "addressmail_pp = :addressmail_pp, mdp_pp = :mdp_pp,";
+    $requete .= "iban = :iban";
+    $requete .= " where id_c = ". $_SESSION["idCompte"] .";";
+
+    $stmt = $dbh->prepare($requete);
+
+    $stmt->bindParam(":coordonnee_bancaire", $_POST["cb"]);
+    $stmt->bindParam(":date_exp", $_POST["DE"]);
+    $stmt->bindParam(":cryptogramme", $_POST["crypto"]);
+    $stmt->bindParam(":nom_titulaire_carte", $_POST["TC"]);
+    $stmt->bindParam(":addressmail_pp", $_POST["AdM_PP"]);
+    $stmt->bindParam(":mdp_pp", $_POST["MDP_PP"]);
+    $stmt->bindParam(":iban", $_POST["iban"]);
+    
+    $stmt->execute();
+}
 
 
 /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
@@ -328,21 +358,6 @@ foreach ($jours as $jour => $horaires)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-
-
-//parcours de tous les tags
-foreach($liste_tags as $tag) {
-    
-    // quand un des tags a été selectionné on le rajoute
-    if(isset($_POST[$tag["nomtag"]])) {
-        $stmt = $dbh->prepare($requete);
-        $stmt->bindparam(":idOffre", $idOffre);
-        $stmt->bindparam(":nomTag", $tag["nomtag"]);
-        $stmt->execute();
-    }
-}
-
 
     // on ferme la base de donnée
     $dbh = null;
