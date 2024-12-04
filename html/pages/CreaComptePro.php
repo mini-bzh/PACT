@@ -39,11 +39,7 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
-    if ($_GET['user-tempo'] == 'pro') {
-        echo 'fondPro';
-    } else {
-        echo 'fondVisiteur';
-    }
+   
 header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers la page de l'offre créée
 }
 }
@@ -69,13 +65,10 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         ?>
 
 <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
-                echo "fondPro";
-            }
-            else
-            {
-                echo "fondVisiteur";
+            if ($_GET['user-tempo'] == 'pro') {
+                echo 'fondPro';
+            } else {
+                echo 'fondVisiteur';
             }
         ?>>
 <main>
