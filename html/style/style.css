@@ -359,9 +359,14 @@ p{
     align-items: center;
 }
 
+.etoiles p{
+    margin-right: 5px;
+}
+
 .etoiles img{
     width: 20px;
     height: 20px;
+    transform: translateY(-5px);
 }
 
 .etoileMoitiePleine{
@@ -447,6 +452,7 @@ p{
       .etoiles img{
         width: 10px;
         height: 10px;
+        transform: translateY(-2px);
     }
 
     .apercuOffre .resumeApercu{

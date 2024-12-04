@@ -88,7 +88,7 @@
             <section class="conteneurOffreAvis">
                 <section class="conteneurOffre">
                     <article class="offre">
-                        <h2><?php echo $contentOffre["titreoffre"];?></h2>
+                        <h1><?php echo $contentOffre["titreoffre"];?></h1>
                         <!-- <p>Visite</p> future categorie -->
                         <div class="conteneurSpaceBetween">
                             <div class="noteDetailOffre">
@@ -256,7 +256,7 @@
                                     <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                     <div class="infoMembreAvis">
                                         <h3><?php echo $membre['login'] ?></h3>
-                                        <p>Experience datant du : <?php echo $avis[$key]['dateexperience']?></p>
+                                        <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
                                         <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                                         <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
                                     </div>

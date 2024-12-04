@@ -9,6 +9,15 @@
     display: block;
 }
 
+h1{
+    border-left: none !important;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+}
+
+
+
+
 .conteneurOffre{
     display: flex;  
     justify-content: center;
@@ -379,6 +388,14 @@ th, td {
         padding-bottom: 30px;
     }
 
+    .offre .conteneurSpaceBetween{
+        display: block;
+    }
+
+    .offre h1{
+        margin-bottom: 10px;
+    }
+
     .offre{
         margin: 0px;
         padding: 10px;
@@ -417,11 +434,6 @@ th, td {
     .offre .noteDetailOffre{
         display: flex;
         justify-content: start;
-    }
-
-    .etoiles img{
-        width: 15px;
-        height: 15px;
     }
 
     .offre .resumePrixDetailOffre{
