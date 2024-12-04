@@ -199,7 +199,7 @@ $stmt->bindParam(":img2", $nom_img["fichier2"]);
 $stmt->bindParam(":img3", $nom_img["fichier3"]);
 $stmt->bindParam(":img4", $nom_img["fichier4"]);
 
-$stmt->bindParam(":id_abo", $id_abo);
+$stmt->bindParam(":id_abo", $_POST["offre"]);
 
 $stmt->bindParam(":idrepas", $idrepas);
 $stmt->bindParam(":carte", $carte);
@@ -247,8 +247,7 @@ if(!is_null($_POST["option"]) && $_POST["option"] == "EnRelief") {
 }
 
 //$id_abo = $_POST["id_abo"];
-$id_abo = 'Standard';
-//$id_option = null;
+//$id_abo = 'Standard';
 
 $idrepas = $_POST["categorie"]=="restauration"?"2":null;
 $carte = $_POST["categorie"]=="restauration"?"crt.png":null;
