@@ -38,6 +38,12 @@ $stmt = $dbh->prepare("select * from tripskell._tags");
 $stmt->execute();
 $liste_tags = $stmt->fetchAll();
 
+// requete pour les informations banquaires
+$stmt = $dbh->prepare("select coordonnee_bancaire, date_exp, cryptogramme, nom_titulaire_carte, addressmail_pp, mdp_pp, iban from tripskell.pro_prive where id_c=:idCompte");
+$stmt->bindParam(':idCompte', $_SESSION["idCompte"]);
+$stmt->execute();
+$info_banq = $stmt->fetchAll()[0];
+
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
     // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
@@ -227,12 +233,9 @@ $stmt->bindParam(":datefinsouscription",$date_option);
 
 $date_option = $_POST["date_debut_opt"]!==""?$_POST["date_debut_opt"]:null;
 
-print_r($_POST);
-echo 'post' . ($_POST["date_debut_opt"] === "");
 
 // On definit des variables a traiter
 $tarif = !isset($_POST["prix-minimal"])?$_POST["prix-minimal"]:"0";
-echo $tarif;
 
 $note = 5;
 
@@ -694,7 +697,23 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div> -->
 
                 <?php
-                    if (in_array($_SESSION["idCompte"], $idproprive)) { // permet de vérifier l'id_c
+                //echo true;
+                    if (in_array($_SESSION["idCompte"], $idproprive) &&  // permet de vérifier l'id_c
+                    ( // verifie que les donnees banquaires ne sont pas deja dans la BDD
+                        // verif info carte
+                        (empty($info_banq["coordonnee_bancaire"]) ||
+                        empty($info_banq["date_exp"]) ||
+                        empty($info_banq["cryptogramme"]) ||
+                        empty($info_banq["nom_titulaire_carte"])) &&
+
+                        // verif info paypal
+                        (empty($info_banq["addressmail_pp"]) ||
+                        empty($info_banq["mdp_pp"])) &&
+                        
+                        // verif info virement
+                        empty($info_banq["iban"])
+                        
+                    )) {
                     ?>
                     <div id="preventionPaiement">
                         <p>En confirmant la création de l'offre vous serez facturer au prix de l'abonnement et des options que vous aurez choisis.</p>
