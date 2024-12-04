@@ -234,7 +234,7 @@ h1{
 .avis .titreAvis{
     margin-top: 40px;
     margin-bottom: 20px;
-    font-size: var(--typescale-h4);
+    font-size: var(--typescale-h3);
 }
 
 .avis .conteneurAvisTexte{
@@ -514,7 +514,7 @@ th, td {
     }
 
     .avis .titreAvis{
-        font-size: var(--typescale-h5);
+        font-size: var(--typescale-h3);
     }
 
     .avis .conteneurAvisTexte p{
