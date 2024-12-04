@@ -233,7 +233,7 @@ if (!empty($_POST)) {
         <hr>
     
         <div class="zoneBtn">
-                        <a href="ChoixCreationCompte.php" class="btnAnnuler">
+                        <a href="compte.php" class="btnAnnuler">
                             <p class="texteLarge boldArchivo">Annuler</p>
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_208_4609)">
