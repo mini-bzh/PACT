@@ -1,0 +1,42 @@
+@import "../style.css";
+
+body{
+    font-family: "Archivo";
+    font-size: var(--typescale-text);
+}
+
+.divTab {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5em;
+    margin-top: 5em;
+}
+
+.divTab table {
+    table-layout: fixed;
+    width: 60%;
+    background-color: whitesmoke;
+
+}
+
+.divTab tbody, thead {
+    border-collapse: collapse;
+    border: 3px solid black;
+    text-align: center;
+}
+
+.divTab th{
+    border-collapse: collapse;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.divTab td{
+    border-collapse: collapse;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+main > h1{
+    margin: 2em;
+}
