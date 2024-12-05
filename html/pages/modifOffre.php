@@ -325,14 +325,13 @@ if (!empty($_POST)) {
             }
         }
     }
-    
-
+    ?><script>
+    let categorie_offre = '<?php echo $nom_cat; ?>';
+</script><?php
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
     header("Location: ../pages/gestionOffres.php");
-    ?><script>
-        let categorie_offre = '<?php echo $nom_cat; ?>';
-    </script><?php
+
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 ?>
