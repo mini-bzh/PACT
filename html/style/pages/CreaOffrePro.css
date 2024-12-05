@@ -443,11 +443,70 @@ input[type="radio"]:checked::after {
     background-color: #004080; /* Couleur encore plus foncée au clic */
     transform: translateY(0); /* Réinitialisation de la position */
 }
-
 .champs label[for="fichier1"]::before {
     content: "📷 "; /* Icône avant le texte */
     font-size: 18px;
 }
+
+
+.champs label[for="plan"] {
+    display: inline-block;
+    background-color: #007bff; /* Couleur bleue */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px; /* Taille et espacement du bouton */
+    border-radius: 8px; /* Bords arrondis */
+    cursor: pointer; /* Curseur pointer */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    transition: all 0.3s ease; /* Animation sur hover */
+}
+
+.champs label[for="plan"]:hover {
+    background-color: #0056b3; /* Couleur plus foncée au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    transform: translateY(-2px); /* Effet de survol dynamique */
+}
+
+.champs label[for="plan"]:active {
+    background-color: #004080; /* Couleur encore plus foncée au clic */
+    transform: translateY(0); /* Réinitialisation de la position */
+}
+.champs label[for="plan"]::before {
+    content: "📷 "; /* Icône avant le texte */
+    font-size: 18px;
+}
+
+.champs label[for="carte"] {
+    display: inline-block;
+    background-color: #007bff; /* Couleur bleue */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px; /* Taille et espacement du bouton */
+    border-radius: 8px; /* Bords arrondis */
+    cursor: pointer; /* Curseur pointer */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    transition: all 0.3s ease; /* Animation sur hover */
+}
+
+.champs label[for="carte"]:hover {
+    background-color: #0056b3; /* Couleur plus foncée au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    transform: translateY(-2px); /* Effet de survol dynamique */
+}
+
+.champs label[for="carte"]:active {
+    background-color: #004080; /* Couleur encore plus foncée au clic */
+    transform: translateY(0); /* Réinitialisation de la position */
+}
+.champs label[for="carte"]::before {
+    content: "📷 "; /* Icône avant le texte */
+    font-size: 18px;
+}
+
 
 .champ_Img{
     width: 100%;

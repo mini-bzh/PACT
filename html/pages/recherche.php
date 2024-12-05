@@ -53,6 +53,7 @@
 
         <link rel="stylesheet" href="/style/pages/recherche.css">
         
+        
 
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
