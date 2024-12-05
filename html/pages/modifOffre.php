@@ -121,7 +121,11 @@ if (!empty($_POST)) {
     // Traitement de l'image si elle est envoyée
     if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
         $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
+<<<<<<< Updated upstream
         move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesOffres/" . $nom_img);
+=======
+        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
+>>>>>>> Stashed changes
     }
 
     // Préparation de la requête de mise à jour de l'offre
@@ -228,8 +232,6 @@ if (!empty($_POST)) {
     $stmt->execute();
 
 
-<<<<<<< Updated upstream
-
     // Mise à jour des Tags
     $requete = "delete from tripskell.  _possede where idOffre=:idOffre";
 
@@ -255,9 +257,10 @@ if (!empty($_POST)) {
     
 
     /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
-=======
+
+    
     /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
->>>>>>> Stashed changes
+
 
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = ["Lundi" => json_decode($_POST['lundi']),
@@ -368,9 +371,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                  <!-- Champs pour sélectionner les images -->
 
 =======
+=======
+>>>>>>> Stashed changes
             
 >>>>>>> Stashed changes
                  <!-- Champs pour sélectionner les images -->
