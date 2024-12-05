@@ -1,6 +1,6 @@
 <?php
 // VERIFICATION SI LE MOT DE PASSE A ETE OUBLIE
-// session_start();
+session_start();
 
 
 // recuperation des parametre de connection a la BdD
