@@ -41,7 +41,7 @@ $contentMesOffres = $stmt->fetchAll();
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/style/pages/gestionOffres.css">
+    <link rel=" heet" href="/style/pages/gestionOffres.css">
 </head>
 
 <body class=<?php echo "fondPro"; ?>> <!-- met le bon fond en fonction de l'utilisateur -->
@@ -230,13 +230,13 @@ $contentMesOffres = $stmt->fetchAll();
                                 </p>
                             </div>
                             <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" <?php
-                                                                                                    if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
-                                                                                                    {
-                                                                                                    ?>
-                                class="btnModifCache" ;
-                                <?php
-                                                                                                    }
-                                ?>>
+                                if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
+                                {
+                                    ?>
+                                    class="btnModifCache";
+                                    <?php
+                                }
+                                ?> id="btnModif">
                                 <div class="btnGestionOffre grossisQuandHover">
                                     <img src="/icones/crayonSVG.svg" alt="">
                                     <p>Modifier l'offre </p>
@@ -330,7 +330,7 @@ $contentMesOffres = $stmt->fetchAll();
             </p>
 
             </section>
-            </section>
+        </section>
     </main>
     <?php                                                   //footer
     include "../composants/footer/footer.php";
