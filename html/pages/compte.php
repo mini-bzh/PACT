@@ -406,7 +406,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                     <p class="boldArchivo displayNone">Modifier les informations</p>
                 </button>
 
-                <button class="btnModifCompte" onclick="confModif()">
+                <button class="btnModifCompte" pressed="confModif()">
                         <?php
                             include '../icones/modifierSVG.svg';
                         ?>
