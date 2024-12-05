@@ -49,8 +49,6 @@ $stmt->bindParam(':idCompte', $_SESSION["idCompte"]);
 $stmt->execute();
 $info_banq = $stmt->fetchAll()[0];
 
-print_r($_FILES);
-print_r($_POST);
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
     // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
@@ -66,23 +64,19 @@ if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
             
             // deplacement du fichier depuis l'espace temporaire
             if(in_array($key_fichier, ["fichier1", "fichier2", "fichier3", "fichier4"])) {
-                echo $key_fichier . "-> /imagesOffres";
                 move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
             }
 
             if(trim($key_fichier) == "carte") {
-                echo $key_fichier . "-> /imagesCarte : " . $nom_img[$key_fichier];
                 move_uploaded_file($fichier["tmp_name"], "../images/imagesCarte/" . $nom_img[$key_fichier]);
             }
 
             if(trim($key_fichier) == "plan") {
-                echo $key_fichier . "-> /imagesPlan : " . $nom_img[$key_fichier];
                 move_uploaded_file($fichier["tmp_name"], "../images/imagesPlan/" . $nom_img[$key_fichier]);
             }
             
         }
     }
-
 
     // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
     // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
@@ -250,13 +244,13 @@ if($_POST["option"] == "AlaUne") {
 
 // Traitement pour les categories
 $idrepas = $_POST["categorie"]=="restauration"?"2":null;
-$carte = $_POST["categorie"]=="restauration"?"crt.png":null;
+$carte = $nom_img['carte'];
 $gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
 
 $duree_s     = $_POST["categorie"]=="spectacle"?$_POST["duree_s"]:null;
 $capacite    = $_POST["categorie"]=="spectacle"?$_POST["capacite"]:null;
 
-$plans    = $_POST["categorie"]=="parcDattraction"?"plan.png":null;
+$plans    = $nom_img['plan'];
 $nbattraction = $_POST["categorie"]=="parcDattraction"?$_POST["nbAttraction"]:null;
 $agemin   = $_POST["categorie"]=="parcDattraction"?$_POST["ageminimum"]:null;
 
@@ -371,7 +365,7 @@ foreach ($jours as $jour => $horaires)
 
     // on ferme la base de donnée
     $dbh = null;
-    //header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+    header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
 ?>
 
