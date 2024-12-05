@@ -315,46 +315,21 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                  <!-- Champs pour sélectionner les images -->
 
-                 <?php
-// Supposons que vous avez des colonnes 'image1', 'image2', 'image3', 'image4' dans `offre_pro`
-// pour stocker les chemins d'accès aux images de l'offre. Assurez-vous que ces colonnes existent.
-$image1 = $contentOffre["image1"] ?? null;
-$image2 = $contentOffre["image2"] ?? null;
-$image3 = $contentOffre["image3"] ?? null;
-$image4 = $contentOffre["image4"] ?? null;
-?>
-
-            <!-- Champs pour sélectionner ou modifier les images avec aperçus préchargés -->
-             <!--
-            <div class="champs">
-                <label for="fichier1">Sélectionner une image 1 :</label>
-                <input type="file" id="fichier1" name="fichier1">
+            
+                 <!-- Champs pour sélectionner les images -->
+        <div class="champs">
+        <div class = "pdp_champs">
+                <label for="pdp">Votre photo de profil actuelle :</label>
+                <div class="image-container">
+                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                </div>
             </div>
 
-            <div class="champs">
-                <label for="fichier2">Sélectionner une image 2 :</label>
-                <?php if ($image2): ?>
-                    <img id="preview2" src="<?php echo $image2; ?>" alt="Image 2 actuelle" style="width: 100px; height: auto;">
-                <?php endif; ?>
-                <input type="file" id="fichier2" name="fichier2" onchange="updatePreview(event, 'preview2')">
-            </div>
-
-            <div class="champs">
-                <label for="fichier3">Sélectionner une image 3 :</label>
-                <?php if ($image3): ?>
-                    <img id="preview3" src="<?php echo $image3; ?>" alt="Image 3 actuelle" style="width: 100px; height: auto;">
-                <?php endif; ?>
-                <input type="file" id="fichier3" name="fichier3" onchange="updatePreview(event, 'preview3')">
-            </div>
-
-            <div class="champs">
-                <label for="fichier4">Sélectionner une image 4 :</label>
-                <?php if ($image4): ?>
-                    <img id="preview4" src="<?php echo $image4; ?>" alt="Image 4 actuelle" style="width: 100px; height: auto;">
-                <?php endif; ?>
-                <input type="file" id="fichier4" name="fichier4" onchange="updatePreview(event, 'preview4')">
-            </div>
-                -->
+            <label for="fichier1">Ajouter une photo de profil :</label>
+            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
+            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
+        </div>
+        
             <!--------------------- > CATEGORIES < --------------------->
 
             <!-- ----------------- VISITE ------------------- -->
