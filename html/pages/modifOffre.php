@@ -358,7 +358,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
         <div class="conteneur-formulaire">
             <h1>Modification d'une offre</h1>
-            <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post"  enctype="multipart/form-data">
+            <form name="modification" action="" method="post"  enctype="multipart/form-data">
                 <div class="champs">
                     <label for="titre">Titre :</label>
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
