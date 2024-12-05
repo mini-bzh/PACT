@@ -17,6 +17,7 @@ if (!isset($_SESSION["idCompte"])) {
 }
 
 
+
 if (isset($_GET["idOffre"])) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
@@ -45,11 +46,14 @@ if (isset($_GET["idOffre"])) {
         }
     }
 
+    // Récupération des langues
+    $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._langue;");
+    $stmt->execute();
+    $langues = array_column($stmt->fetchAll(), 'nomlangue');
+
     // Récupération des détails de l'offre à partir de la base de données
     $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
     
-
-    print_r($contentOffre);
 } else {
     die("Error");
 }
@@ -62,7 +66,46 @@ if (key_exists("idCompte", $_SESSION)) {
     $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 }
 
+if (!empty($_FILES) ) {
+    if (isset($_FILES['carte']) && $_FILES['carte']['size'] > 0) {
+        $requete = "UPDATE tripskell.offre_pro SET ";
+        $requete .= "carte = :carte ";
+        $requete .= "WHERE idOffre = :idOffre;";
+
+        $stmt = $dbh->prepare($requete);
+
+        $stmt->bindParam(":carte", $nom_img_carte);
+        $stmt->bindParam(":idOffre", $idOffre);
+
+        $nom_img_carte = time() + $i++ . "." . explode("/", $_FILES['carte']["type"])[1];
+        move_uploaded_file($_FILES['carte']["tmp_name"], "../images/imagesCarte/" . $nom_img_carte);
+        $idOffre = $_GET["idOffre"];
+
+        $stmt->execute();
+    }
+    
+    if (isset($_FILES['plan']) && $_FILES['plan']['size'] > 0) {
+        $requete = "UPDATE tripskell.offre_pro SET ";
+        $requete .= "plans = :plans ";
+        $requete .= "WHERE idOffre = :idOffre;";
+        $stmt = $dbh->prepare($requete);
+        
+        $stmt->bindParam(":plans", $nom_img_plan);
+        $stmt->bindParam(":idOffre", $idOffre);
+
+        $nom_img_plan = time() + $i++ . "." . explode("/", $_FILES['plan']["type"])[1];
+        move_uploaded_file($_FILES['plan']["tmp_name"], "../images/imagesPlan/" . $nom_img_plan);
+        $idOffre = $_GET["idOffre"];
+        
+        $stmt->execute();
+    }
+}
+
+print_r($_POST);
+
+
 if (!empty($_POST)) {
+    
     // Préparation de la requête de mise à jour de l'offre
     $requete = "UPDATE tripskell.offre_pro SET ";
     $requete .= "titreOffre = :titre, ";
@@ -73,8 +116,24 @@ if (!empty($_POST)) {
     $requete .= "numero = :numero, ";
     $requete .= "rue = :rue, ";
     $requete .= "ville = :ville, ";
-    $requete .= "codePostal = :codePostal ";
-    $requete .= "WHERE idOffre = :idOffre;"; // Condition pour mettre à jour l'offre spécifiée
+    $requete .= "codePostal = :codePostal, ";
+
+    $requete .= "gammeprix = :gammeprix,";   // pour restauration
+
+    $requete .= "duree_v = :duree_v,";   // pour visite
+    $requete .= "guidee = :guidee,"; 
+
+    $requete .= "duree_s = :duree_s,";   // pour spectacle
+    $requete .= "capacite = :capacite,"; 
+
+    $requete .= "nbattraction = :nbattraction,";   // pour parcattraction
+    $requete .= "agemin = :agemin,";
+
+    $requete .= "duree_a = :duree_a,";  // pour activite
+    $requete .= "ageminimum = :ageminimum,";
+    $requete .= "prestation = :prestation";
+    
+    $requete .= " WHERE idOffre = :idOffre;";
 
     // Préparation de la requête
     $stmt = $dbh->prepare($requete);
@@ -89,7 +148,24 @@ if (!empty($_POST)) {
     $stmt->bindParam(":rue", $rue);
     $stmt->bindParam(":ville", $ville);
     $stmt->bindParam(":codePostal", $codePostal);
+    
+    $stmt->bindParam(":gammeprix", $gammeprix);
+
+    $stmt->bindParam(":duree_v", $duree_v);
+    $stmt->bindParam(":guidee", $guidee);
+
+    $stmt->bindParam(":duree_s", $duree_s);
+    $stmt->bindParam(":capacite", $capacite);
+
+    $stmt->bindParam(":nbattraction", $nbattraction);
+    $stmt->bindParam(":agemin", $agemin);
+
+    $stmt->bindParam(":duree_a", $duree_a);
+    $stmt->bindParam(":ageminimum", $ageminimum);
+    $stmt->bindParam(":prestation", $prestation);
+
     $stmt->bindParam(":idOffre", $idOffre);
+    
 
     // Récupération des données du formulaire
     $titre = $_POST["titre"];
@@ -104,13 +180,44 @@ if (!empty($_POST)) {
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
+
+    $gammeprix = $_POST['gammeprix'];
+
+    $duree_v = (!empty($_POST['duree_v'])?$_POST['duree_v']:null);
+    $guidee = $_POST['guidee'];
+
+    $duree_s =  (!empty($_POST['duree_s'])?$_POST['duree_s']:null);
+    $capacite = (!empty($_POST['capacite'])?$_POST['capacite']:null);
+
+    $nbattraction = $_POST['nbAttraction'];
+    $agemin = $_POST['ageminimum'];
+
+    $duree_a =  (!empty($_POST['duree_a'])?$_POST['duree_a']:null);
+    $ageminimum = $_POST['agemin'];
+    $prestation = $_POST['prestation'];
+
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
     // Exécution de la mise à jour
     $stmt->execute();
 
+    if(isset($_POST['lang'])) {
+        foreach ($langues as $langue) {
+            // permet de savoir si la langue n'est pas deja dans la BDD
+            $lang_pres = is_null($dbh->query("select nomlangue from tripskell._possedelangue where idOffre=".$idOffre." and nomlangue='".$langue."';")->fetch()["nomlangue"]);
+            if(in_array($langue, $_POST['lang']) && $lang_pres) {
+                $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."',".$idOffre.");");
+            }
+            if(!in_array($langue, $_POST['lang']) && !$lang_pres) {
+                $dbh->query("delete from tripskell._possedelangue where nomlangue='".$langue."' and idOffre=".$idOffre.";");
+            }
+        }
+    }
+    
+
+    
     // Redirection vers gestionOffres.php après la mise à jour réussie
-    header("Location: ../pages/gestionOffres.php");
+    //header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
@@ -142,7 +249,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
         <div class="conteneur-formulaire">
             <h1>Modification d'une offre</h1>
-            <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post">
+            <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post"  enctype="multipart/form-data">
                 <div class="champs">
                     <label for="titre">Titre :</label>
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
@@ -201,37 +308,24 @@ $image4 = $contentOffre["image4"] ?? null;
                     <label for="duree_v">Duree de la visite :</label>
                     <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
                 </div>
-                <label>Nom langue :</label>
+                <label>Langue(s) de la visite :</label>
                 <div class="parentVisite">
+                <?php
+                foreach ($langues as $langue) {?>
                     <div>
-                        <input type="checkbox" id="lang1" name="lang[]" value="FR" <?php echo in_array('Français', $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang1">Français</label>
+                        <input type="checkbox" id="lang" name="lang[]" value="<?php echo $langue; ?>" <?php echo in_array($langue, $langue_preselec) ? 'checked' : ''; ?>/>
+                        <label for="lang"><?php echo $langue; ?></label>
                     </div>
-                    <div>
-                        <input type="checkbox" id="lang2" name="lang[]" value="EN" <?php echo in_array('Anglais', $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang2">Anglais</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="lang3" name="lang[]" value="AL" <?php echo in_array('Allemand', $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang3">Allemand</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="lang4" name="lang[]" value="ES" <?php echo in_array('Espagnol', $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang4">Espagnol</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="lang5" name="lang[]" value="CH" <?php echo in_array('Chinois', $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang5">Chinois</label>
-                    </div>
+                <?php } ?>
                 </div>
-                <label>La visite est guide :<span class="required">*</span> :</label>
+                <label>La visite est guidée :<span class="required">*</span> :</label>
                 <div class="parentVisite">
                     <div>
-                        <input type="radio" id="guidee" name="guidee" value="YES" <?php echo $contentOffre["guidee"] ? 'checked' : ''; ?>/>
+                        <input type="radio" id="guidee" name="guidee" value="true" <?php echo $contentOffre["guidee"] ? 'checked' : ''; ?>/>
                         <label for="guidePresent">Oui</label>
                     </div>
                     <div>
-                        <input type="radio" id="guidee" name="guidee" value="NO" <?php echo !$contentOffre["guidee"] ? 'checked' : ''; ?>/> <!-- a enlever et utilisation de checkbox -->
+                        <input type="radio" id="guidee" name="guidee" value="false" <?php echo !$contentOffre["guidee"] ? 'checked' : ''; ?>/> <!-- a enlever et utilisation de checkbox -->
                         <label for="guidePasPresent">Non</label>
                     </div>
                 </div>
