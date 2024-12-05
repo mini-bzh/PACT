@@ -60,6 +60,9 @@ foreach ($result as $row)
 $stmt = $dbh->prepare($query);
 $stmt->execute();*/
 
+$lang_pres = is_null($dbh->query("select nomlangue from tripskell._possedelangue where idOffre=1 and nomlangue='Français';")->fetch()["nomlangue"]);
+
+echo("français" . $lang_pres);
 
 $stmt = $dbh->prepare("SELECT * FROM tripskell._possedelangue");
 $stmt->execute();
