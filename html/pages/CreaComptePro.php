@@ -84,6 +84,12 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
             $codeSiren = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
         }
 
+        if (!empty($_POST["NumeroCB"]) && preg_match('/^\d{9}$/', $_POST["NumeroCB"])) {
+            $NumeroCB = intval($_POST["NumeroCB"]);
+        } else {
+            $NumeroCB = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
+        }
+
         $stmt = $dbh->prepare($requete);
         $stmt->bindParam(":Login", $_POST["Login"]);
         $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
@@ -94,10 +100,9 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         $stmt->bindParam(":nomRue", $_POST["nomRue"]);
         $stmt->bindParam(":ville", $_POST["ville"]);
         $stmt->bindParam(":codePostal", $_POST["codePostal"]);
-        $stmt->bindParam(":codeSiren", $_POST["codeSiren"]);
+        $stmt->bindParam(":codeSiren", $codeSiren, PDO::PARAM_INT); // Passe la valeur validée
         $stmt->bindParam(":RaisonSociale", $_POST["RaisonSociale"]);
-        $stmt->bindParam(":NumeroCB", $_POST["NumeroCB"]);
-        $stmt->bindParam(":DateCB", $_POST["DateCB"]);
+        $stmt->bindParam(":NumeroCB", $NumeroCB, PDO::PARAM_INT); // Passe la valeur validée        $stmt->bindParam(":DateCB", $_POST["DateCB"]);
         $stmt->bindParam(":CryptoCB", $_POST["CryptoCB"]);
         $stmt->bindParam(":TitulaireCB", $_POST["TitulaireCB"]);
 
