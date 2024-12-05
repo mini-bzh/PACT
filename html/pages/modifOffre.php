@@ -671,7 +671,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         ?>
                     </a>
                      <!-- Bouton pour soumettre le formulaire -->
-                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                    <button type="submit" class="btnConfirmer">
                         <p class="texteLarge boldArchivo">Confirmer</p>
                         <?php
                         include '../icones/okSVG.svg';
