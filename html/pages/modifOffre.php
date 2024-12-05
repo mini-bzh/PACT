@@ -13,7 +13,8 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 // Inclusion du script pour vérifier si l'utilisateur a un compte pro
 include('../php/verif_compte_pro.php');
 
-if (!isset($_SESSION["idCompte"])) {
+if (!isset($_SESSION["idCompte"]))
+{
     header("Location: /pages/erreur404.php");
     exit();
 }
