@@ -38,15 +38,25 @@ if (key_exists("id_facture", $_GET)) {
     $contentFacture = $contentAboOptFacture[0];
 }
 
+$firstDayNextMonth = strtotime('first day of next month', strtotime($contentFacture['date_creation']));
+
 //on récupère dans la base de donnée le nombre de jour et de semaine qui sépare le début et la fin de l'abonnement ou option
 $nbSemaineOption = $dbh->query("SELECT FLOOR(EXTRACT(EPOCH FROM (dateFinSouscription - dateDebutSouscription)) / (7 * 24 * 60 * 60)) AS weeks FROM tripskell.facture where id_facture = " . $id_facture . ";")->fetchAll()[0];
-$nbJourAbo = $dbh->query("SELECT (dateFin - dateDebut)::INTEGER as jours FROM tripskell.facture where id_facture =" . $id_facture . ";")->fetchAll()[0];
 
-// Crée un objet DateTime pour la date actuelle
-$currentDate = new DateTime();
+$firstDayNextMonthFormatted = date('Y-m-d', $firstDayNextMonth);
 
-// Modifie la date pour passer au premier jour du mois prochain
-$currentDate->modify('first day of next month');
+// Préparer la requête
+$sql = "SELECT (DATE('$firstDayNextMonthFormatted') - DATE(date_creation))::INTEGER AS jours FROM tripskell.facture WHERE id_facture = :id_facture;";
+
+// Exécuter la requête avec un paramètre sécurisé
+$stmt = $dbh->prepare($sql);
+$stmt->execute([':id_facture' => $id_facture]);
+
+// Récupérer le résultat
+$nbJourAbo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// echo $contentFacture['date_creation'];
+// echo $nbJourAbo;
 
 // déclaration de deux variables de stockage pour stocker les valeurs HT et TTC
 $valAboHT = 0;
@@ -88,7 +98,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
         <main>
             <div id="enTeteFac">
                 <h2>Facture datant du <?php echo $contentFacture['date_creation']; ?></h2>
-                <p>Le règlement se fera le <?php echo $currentDate->format('Y-m-d'); ?></p>
+                <p>Le règlement se fera le <?php echo date('Y-m-d', $firstDayNextMonth);?></p>
             </div>
             <div class="divTab">
                 <table id="infoClient">

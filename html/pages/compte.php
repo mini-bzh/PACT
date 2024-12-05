@@ -438,12 +438,12 @@ if ((!$comptePro) && (!$compteMembre)) {
            
 
             <!-- Bouton de données -->
-            <button class="btnDataCompte">
+            <!-- <button class="btnDataCompte">
             <?php
-                include '../icones/databaseSVG.svg';
+                //include '../icones/databaseSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Télécharger les données du compte</p>
-            </button>
+            </button> -->
 
 <?php
             // On affiche le bouton de données bancaires si c'est un pro
