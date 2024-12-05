@@ -39,6 +39,112 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
     }
 }
 
+    // Récupération du type de domaine
+    $typeDomaine = $_POST['type_domaine']; // "privé" ou "public"
+
+    // Assurez-vous que le type de domaine a une valeur valide
+    if ($typeDomaine === 'privé') {
+        $requete = "INSERT INTO tripskell.pro_prive(";
+        $requete .= "login, ";
+        $requete .= "adresse_mail, ";
+        $requete .= "mot_de_passe, ";
+        $requete .= "pdp, ";
+        $requete .= "numero_tel, ";
+        $requete .= "numero,";
+        $requete .= "rue, ";
+        $requete .= "ville, ";
+        $requete.= "codepostal, ";
+        $requete .= "num_siren, ";
+        $requete .= "raison_social,";
+        $requete .= "coordonnee_bancaire, ";
+        $requete .= "date_exp,";
+        $requete .= "cryptogramme, ";
+        $requete .= "nom_titulaire_carte)";
+
+        $requete .= "VALUES (";
+        $requete.= ":Login,";
+        $requete.= ":Adresse_Mail,";
+        $requete.= ":Mot_de_P,";
+        $requete.= ":pdp,";
+        $requete.= ":Telephone,";
+        $requete.= ":num,";
+        $requete.= ":nomRue,";
+        $requete.= ":ville, ";
+        $requete.= ":codePostal,";
+        $requete.= ":codeSiren, ";
+        $requete.= ":RaisonSociale, ";
+        $requete.= ":NumeroCB, ";
+        $requete.= ":DateCB, ";
+        $requete.= ":CryptoCB, ";
+        $requete.= ":TitulaireCB)";
+
+        $stmt = $dbh->prepare($requete);
+        $stmt->bindParam(":Login", $_POST["Login"]);
+        $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
+        $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
+        $stmt->bindParam(":pdp", $nom_img['fichier1']);
+        $stmt->bindParam(":Telephone", $_POST["Telephone"]);
+        $stmt->bindParam(":num", $_POST["num"]);
+        $stmt->bindParam(":nomRue", $_POST["nomRue"]);
+        $stmt->bindParam(":ville", $_POST["ville"]);
+        $stmt->bindParam(":codePostal", $_POST["codePostal"]);
+        $stmt->bindParam(":codeSiren", $_POST["codeSiren"]);
+        $stmt->bindParam(":RaisonSociale", $_POST["RaisonSociale"]);
+        $stmt->bindParam(":NumeroCB", $_POST["NumeroCB"]);
+        $stmt->bindParam(":DateCB", $_POST["DateCB"]);
+        $stmt->bindParam(":CryptoCB", $_POST["CryptoCB"]);
+        $stmt->bindParam(":TitulaireCB", $_POST["TitulaireCB"]);
+
+        $stmt->execute(); // execution de la requete
+
+        // on ferme la base de donnée
+        $dbh = null;
+    }
+    elseif($typeDomaine === 'public') {
+        $requete = "INSERT INTO tripskell.pro_prive(";
+        $requete .= "login, ";
+        $requete .= "adresse_mail, ";
+        $requete .= "mot_de_passe, ";
+        $requete .= "pdp, ";
+        $requete .= "numero_tel, ";
+        $requete .= "numero,";
+        $requete .= "rue, ";
+        $requete .= "ville, ";
+        $requete.= "codepostal, ";
+        $requete .= "num_siren, ";
+        $requete .= "raison_social)";
+
+        $requete .= "VALUES (";
+        $requete.= ":Login,";
+        $requete.= ":Adresse_Mail,";
+        $requete.= ":Mot_de_P,";
+        $requete.= ":pdp,";
+        $requete.= ":Telephone,";
+        $requete.= ":num,";
+        $requete.= ":nomRue,";
+        $requete.= ":ville, ";
+        $requete.= ":codePostal,";
+        $requete.= ":codeSiren, ";
+        $requete.= ":RaisonSociale)";
+
+        $stmt = $dbh->prepare($requete);
+        $stmt->bindParam(":Login", $_POST["Login"]);
+        $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
+        $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
+        $stmt->bindParam(":pdp", $nom_img['fichier1']);
+        $stmt->bindParam(":Telephone", $_POST["Telephone"]);
+        $stmt->bindParam(":num", $_POST["num"]);
+        $stmt->bindParam(":nomRue", $_POST["nomRue"]);
+        $stmt->bindParam(":ville", $_POST["ville"]);
+        $stmt->bindParam(":codePostal", $_POST["codePostal"]);
+        $stmt->bindParam(":codeSiren", $_POST["codeSiren"]);
+        $stmt->bindParam(":RaisonSociale", $_POST["RaisonSociale"]);
+
+        $stmt->execute(); // execution de la requete
+
+        // on ferme la base de donnée
+        $dbh = null;
+    }
    
 header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers la page de l'offre créée
 }
@@ -88,21 +194,22 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
     <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
-        <div class="choixPro">
-            <div class="propriv">
-                <label>
-                Domaine Privé 
+    <div class="choixPro">
+        <div class="propriv">
+            <label>
+                Domaine Privé
                 <input type="checkbox" id="showCheckbox">
-                </label>
-            </div>
-
-            <div class="propub">
-                <label>
-                Domaine Public
-                <input type="checkbox" id="hideCheckbox">    
-                </label>
-            </div> 
+                <input type="hidden" name="type_domaine" id="typeDomaine" value="">
+            </label>
         </div>
+
+        <div class="propub">
+            <label>
+                Domaine Public
+                <input type="checkbox" id="hideCheckbox">
+            </label>
+        </div>
+    </div>
 
         <!-- Login -->
         <div class="champs">
@@ -138,7 +245,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
+            <input type="text" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10" pattern="^^\d{10}$">
         </div>
 
 
@@ -184,6 +291,21 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             <input type="text" id="codeSiren" name="codeSiren" placeholder="CodeSiren" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
         </div>
 
+
+         <!-- Adresse -->
+         <div class="champs">
+         <div class="labelAdresse">
+                        <label for="adresse">Adresse :</label>
+                    </div>
+                <div class="champsAdresse">
+                    
+                    <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" >
+                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" >
+                    <input type="text" id="ville" name="ville" placeholder="Ville" >
+                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
+                </div>
+                </div>
+
         <div id="extraFields" class="hidden">
         <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
@@ -214,17 +336,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
             <input type="text" id="TitulaireCB" name="TitulaireCB">
 
-            <!-- Adresse -->
-            <div class="labelAdresse">
-                        <label for="adresse">Adresse :</label>
-                    </div>
-                <div class="champsAdresse">
-                    
-                    <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" pattern="^^^\d{3}$" >
-                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" >
-                    <input type="text" id="ville" name="ville" placeholder="Ville" >
-                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
-                </div>
+           
         </div>
     </div> 
         <hr>
@@ -312,28 +424,49 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
     });
 
     
-    // Récupération des éléments
     const showCheckbox = document.getElementById('showCheckbox');
-    const hideCheckbox = document.getElementById('hideCheckbox');
-    const extraFields = document.getElementById('extraFields');
+const hideCheckbox = document.getElementById('hideCheckbox');
+const typeDomaineInput = document.getElementById('typeDomaine');
+const extraFields = document.getElementById('extraFields');
 
-    // Gestionnaire d'événements pour les deux checkbox
-    showCheckbox.addEventListener('change', function() {
-      if (this.checked) {
+// Fonction pour vérifier et forcer qu'une case est cochée
+function checkCheckboxes() {
+    if (!showCheckbox.checked && !hideCheckbox.checked) {
+        // Si aucune case n'est cochée, on coche par défaut la case "Domaine Privé"
+        showCheckbox.checked = true;
+        typeDomaineInput.value = 'privé';
         extraFields.classList.remove('hidden');
-        hideCheckbox.checked = false; // Décoche la deuxième checkbox
-      }
-    });
+    }
+}
 
-    hideCheckbox.addEventListener('change', function() {
-      if (this.checked) {
+// Mise à jour des champs et sections en fonction des cases cochées
+showCheckbox.addEventListener('change', function () {
+    if (this.checked) {
+        typeDomaineInput.value = 'privé';
+        hideCheckbox.checked = false;
+        extraFields.classList.remove('hidden');
+    } else {
+        typeDomaineInput.value = '';
         extraFields.classList.add('hidden');
-        showCheckbox.checked = false; // Décoche la première checkbox
-      }
-    });
+    }
+    checkCheckboxes();  // Vérifie l'état des cases
+});
+
+hideCheckbox.addEventListener('change', function () {
+    if (this.checked) {
+        typeDomaineInput.value = 'public';
+        showCheckbox.checked = false;
+        extraFields.classList.add('hidden');
+    } else {
+        typeDomaineInput.value = '';
+    }
+    checkCheckboxes();  // Vérifie l'état des cases
+});
+
+// Vérifie initialement si une case est cochée au chargement de la page
+checkCheckboxes();
+
 </script>
-
-
 
 </body>
 </html>
