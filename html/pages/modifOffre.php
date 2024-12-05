@@ -295,7 +295,6 @@ if (!empty($_POST)) {
 
                 $stmt = $dbh->prepare($query);
 
-                print_r($query);
 
                 // Lier les variables aux paramètres
                 $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
