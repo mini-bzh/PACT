@@ -12,7 +12,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 // echo "ouverture <br>";
 // print_r($ouverture);
 
-$stmt = $dbh->prepare("select titreoffre, carte from tripskell.offre_visiteur");
+$stmt = $dbh->prepare("select * from tripskell.offre_visiteur");
 $stmt->execute();
 $result = $stmt->fetchAll();
 

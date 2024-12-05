@@ -182,8 +182,15 @@
                                     <hr>
                                     <?php //print_r($contentOffre); ?>
                                     <section id="secRestaurant" class="displayNone">
-                                        <p class="boldArchivo">Gamme de prix : <?php echo $contentOffre['gammeprix']; ?></p>
+                                        <p>Gamme de prix :<span class="boldArchivo"> <?php echo $contentOffre['gammeprix']; ?></span></p>
                                         <a href="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" target="_blank"><img src="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" alt="Menu"></a>
+                                    </section>
+
+                                    <section id="secParcAttr" class="displayNone">
+                                        <p>Nombre d'attraction : <span class="boldArchivo"><?php echo $contentOffre['nbattraction']; ?></span></p>
+                                        <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['agemin']; ?> ans</span></p>
+                                        <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan"></a>
+
                                     </section>
                                 </div>
                             </div>

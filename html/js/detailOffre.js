@@ -1,9 +1,14 @@
 let nomCat = document.getElementById("nomCat");
 let offreResto = document.getElementById("secRestaurant");
+let offreParc = document.getElementById("secParcAttr");
 
 function infoEnPlus() {
     if (nomCat.textContent === "restauration") {
         offreResto.classList.remove("displayNone");
+    }
+
+    if (nomCat.textContent === "parc d'attraction") {
+        offreParc.classList.remove("displayNone");
     }
 }
 
