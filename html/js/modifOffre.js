@@ -10,8 +10,7 @@ if (categorie_offre == 'visite') {
     document.getElementById('champsSpectacle').style.display = 'block';
 } else if (categorie_offre == 'activite') {
     document.getElementById('champsActivite').style.display = 'block';
-}   
-
+}
 
 /* --------------------------------- partie horaires  --------------------------------- */
 
@@ -22,7 +21,7 @@ const mapJoursElements = new Map();
     mapJoursElements.set(btnJour, document.getElementById(btnJour));
 });
 
-//création et initialisation d'une map associant à chaque id d'un bouton jour le nom complet du jour 
+//création et initialisation d'une map associant à chaque id d'un bouton jour le nom complet du jour
 const mapNomsJours = new Map([
     ["btnL", "lundi"],
     ["btnMa", "mardi"],
@@ -33,6 +32,15 @@ const mapNomsJours = new Map([
     ["btnD", "dimanche"]
 ]);
 
+function getKeyByValue(map, value)          //retourne la clé associée à la valeur value si trouvée, undefined sinon
+{
+    for (const [key, val] of map.entries()) {
+        if (val === value) {
+            return key; // Retourne la clé correspondante
+        }
+    }
+    return undefined; // Retourne undefined si aucune clé ne correspond
+}
 
 
 //récupération des éléments nécéssaires pour les horaires
@@ -53,12 +61,37 @@ let nomJour1 = document.getElementById("nomJour1");
 // variable qui contiendra l'id du bouton du jour séléctionné
 let jourSelectionne;
 
+let tabInputsJour = document.getElementsByClassName("inputJour");       //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
+
+
 
 //création et initialisation d'une map associant à chaque id d'un bouton jour les horaires qui lui sont associées
 const mapJoursHoraires = new Map();
 ["btnL", "btnMa", "btnMe", "btnJ", "btnV", "btnS", "btnD"].forEach(jour => {
     mapJoursHoraires.set(jour, ["", "", "", ""]);
 });
+
+//ajouter données déjà présentes dans la bdd dans mapJoursHoraires
+let element;
+let idBtnEmement;
+
+for (let index = 0; index < tabInputsJour.length; index++) 
+{
+    element = tabInputsJour[index];
+    if(element.value != "")
+    {
+        mapJoursHoraires.set(getKeyByValue(mapNomsJours, element.name), JSON.parse(element.value));
+    }
+}
+
+//colorer les boutons des jours déjà ouverts
+mapJoursElements.forEach((map, key, value)=>{
+    if(mapJoursHoraires.get(key)[0].length != 0)
+    {
+        mapJoursElements.get(key).classList.add("jourOuvert");
+    }
+});
+
 
 //appelle la fonction jourClique quand l'utilisateur clique sur un bouton jour
 mapJoursElements.forEach((value, key, map) => {
@@ -127,6 +160,8 @@ function horaireEntree(element)                 //met à jour la map mapJoursHor
         horairesJour[3] = heureFin2.value;
     }
     mapJoursHoraires.set(jourSelectionne, horairesJour);
+
+    console.log(mapJoursHoraires);
 }
 
 /* ----------------------------------------------- ajout 2e horaire ----------------------------------------------- */

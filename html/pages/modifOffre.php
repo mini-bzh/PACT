@@ -174,7 +174,6 @@ if (!empty($_POST)) {
     $tarif = $_POST["prix-minimal"];
     $heuresDebut = $_POST["heure-debut"];
     $heuresFin = $_POST["heure-fin"];
-    $horaires = $heuresDebut . "-" . $heuresFin; // Formatage des horaires
     $accessible = $_POST["choixAccessible"];
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
@@ -478,17 +477,16 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Lundi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Lundi"]; ?>"
+                                        value='<?php echo $tabJours["Lundi"]; ?>'
                                     <?php
                                 }
                             ?>>
                             <button type="button" id="btnMa">Ma</button>
-                            <input type="hidden" name="mardi" class="inputJour"
-                            <?php
+                            <input type="hidden" name="mardi" class="inputJour" <?php
                                 if(array_key_exists("Mardi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Mardi"]; ?>"
+                                        value='<?php echo $tabJours["Mardi"]; ?>'
                                     <?php
                                 }
                             ?>>
@@ -498,7 +496,7 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Mercredi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Mercredi"]; ?>"
+                                        value='<?php echo $tabJours["Mercredi"]; ?>'
                                     <?php
                                 }
                             ?>>
@@ -508,7 +506,7 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Jeudi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Jeudi"]; ?>"
+                                        value='<?php echo $tabJours["Jeudi"]; ?>'
                                     <?php
                                 }
                             ?>>
@@ -518,7 +516,7 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Vendredi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Vendredi"]; ?>"
+                                        value='<?php echo $tabJours["Vendredi"]; ?>'
                                     <?php
                                 }
                             ?>>
@@ -528,7 +526,7 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Samedi", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Samedi"]; ?>"
+                                        value='<?php echo $tabJours["Samedi"]; ?>'
                                     <?php
                                 }
                             ?>>
@@ -538,7 +536,7 @@ $image4 = $contentOffre["image4"] ?? null;
                                 if(array_key_exists("Dimanche", $tabJours))
                                 {
                                     ?>
-                                        value="<?php echo $tabJours["Dimanche"]; ?>"
+                                        value='<?php echo $tabJours["Dimanche"]; ?>'
                                     <?php
                                 }
                             ?>>

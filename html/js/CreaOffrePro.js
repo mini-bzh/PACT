@@ -94,6 +94,9 @@ let nomJour1 = document.getElementById("nomJour1");
 // variable qui contiendra l'id du bouton du jour séléctionné
 let jourSelectionne;
 
+let tabInputsJour = document.getElementsByClassName("inputJour");   //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
+
+
 
 //création et initialisation d'une map associant à chaque id d'un bouton jour les horaires qui lui sont associées
 const mapJoursHoraires = new Map();
@@ -266,7 +269,6 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
     if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0) {
 
-        let tabInputsJour = document.getElementsByClassName("inputJour");       //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
         let i = 0;
         for(let key of mapJoursHoraires.keys())
         {

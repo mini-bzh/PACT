@@ -223,14 +223,12 @@ $contentMesOffres = $stmt->fetchAll();
                             ?>
                             </p>
                         </div>
-                        <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" <?php
-                                                                                                if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
-                                                                                                {
-                                                                                                ?>
-                            class="btnModifCache";
-                            <?php
-                                                                                                }
-                            ?>>
+                        <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="btnModif <?php
+                                if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
+                                {
+                                    echo "btnModifCache";
+                                }
+                            ?>">
                             <div class="btnGestionOffre grossisQuandHover">
                                 <img src="/icones/crayonSVG.svg" alt="">
                                 <p>Modifier l'offre </p>

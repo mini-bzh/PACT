@@ -92,6 +92,11 @@ body h1{
     cursor: pointer;
 }
 
+.btnModif{
+    color: black;
+    text-decoration: none;
+}
+
 .btnModifCache{
     display: none;
 }
