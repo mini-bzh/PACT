@@ -313,17 +313,17 @@ if (!empty($_POST)) {
     if(isset($_POST['lang'])) {
         foreach ($langues as $langue) {
             // permet de savoir si la langue n'est pas deja dans la BDD
-            $query = "select nomlangue from tripskell._possedelangue where idOffre=".$idOffre." and nomlangue='".$langue."';";
+            $query = "select nomlangue from tripskell._possedelangue where idOffre='".$idOffre."' and nomlangue='".$langue."';";
             $stmt = $dbh->prepare($query);
             $stmt->execute();            
             $lang_pres = is_null($stmt->fetch()["nomlangue"]);
             if(in_array($langue, $_POST['lang']) && $lang_pres)
             {
-                $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."',".$idOffre.");");
+                $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."','".$idOffre."');");
             }
             if(!in_array($langue, $_POST['lang']) && !$lang_pres) 
             {
-                $dbh->query("delete from tripskell._possedelangue where nomlangue='".$langue."' and idOffre=".$idOffre.";");
+                $dbh->query("delete from tripskell._possedelangue where nomlangue='".$langue."' and idOffre='".$idOffre."';");
             }
         }
     }
@@ -331,7 +331,7 @@ if (!empty($_POST)) {
 
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
-    @header("Location: ../pages/gestionOffres.php");
+    header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
