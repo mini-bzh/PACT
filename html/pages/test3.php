@@ -53,23 +53,7 @@ foreach ($result as $row)
     echo "<br>";
 }
 
-$query = "SELECT * from tripskell._ouverture where idoffre = 11";
-$stmt = $dbh->prepare($query);
 
-$stmt->execute();
-
-$result = $stmt->fetchAll();
-
-echo "<br>--------------------------------------<br>";  
-foreach ($result as $row) 
-{
-    $stmt = $dbh->prepare("select * from tripskell._horaire where id_hor = :id_hor");
-    $stmt->bindValue(':id_hor', $row["id_hor"], PDO::PARAM_STR);
-    $stmt->execute();
-
-    
-    print_r($stmt->fetchAll());
-}
 
 /*$query = "UPDATE tripskell._horaire SET horaire_matin_debut = '12:34', horaire_matin_fin = '13:43', horaire_aprem_debut = '16:16:00', horaire_aprem_fin = '17:20' WHERE id_hor = '36'";
 
@@ -77,10 +61,10 @@ $stmt = $dbh->prepare($query);
 $stmt->execute();*/
 
 
-$stmt = $dbh->prepare("SELECT idoffre, titreoffre FROM tripskell._offre");
+$stmt = $dbh->prepare("SELECT * FROM tripskell._possedelangue");
 $stmt->execute();
 
 
-echo("<br>offres<br>");
+echo("<br>_possedelangue<br>");
 print_r($stmt->fetchAll());
 
