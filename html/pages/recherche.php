@@ -28,7 +28,7 @@
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c);
         
-        $stmt = $dbh->prepare("select * from tripskell.offre_pro");
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro where enLigne");
 
         $id_c = $_SESSION["idCompte"];
     }
