@@ -326,7 +326,7 @@ if (!empty($_POST)) {
 
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
-    header("Location: ../pages/gestionOffres.php");
+    @header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
