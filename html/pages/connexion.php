@@ -32,7 +32,7 @@ if ($_GET['user-tempo'] == "pro") {
     $stmt2->bindParam(':username', $username, PDO::PARAM_STR);
 
     $stmt2->execute();
-    $result2 = $stmt->fetchAll();
+    $result2 = $stmt2->fetchAll();
 
 } else {
     $stmt = $dbh->prepare("SELECT * from tripskell.membre where login = :username");

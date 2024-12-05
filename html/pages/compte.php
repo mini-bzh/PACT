@@ -17,14 +17,26 @@ use Dompdf\Dompdf;
     // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
     include('../php/verif_compte_membre.php');
 
+    // On va récupérer ici l'identifiant id_c présent dans les vues pro.
+
+
     if(array_key_exists("idCompte", $_SESSION))
     {
         $idCompte = $_SESSION['idCompte'];
     }
 
+  
     if(isset($idCompte)){
     if ($comptePro) {
-
+        if (key_exists("idCompte", $_SESSION)) {
+            // reccuperation de id_c de pro_prive 
+            $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+            //$idproprive = $dbh->query("select id_c from tripskell.pro_prive;")->fetchAll()[0];
+            if(!isset($idproprive)){
+            // reccuperation de id_c de pro_public
+            $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+            }
+        }
         $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
 
         $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
@@ -56,20 +68,48 @@ use Dompdf\Dompdf;
 
     $infos = $result[0];
 
-    if((isset($_POST['password']))){
-    $password = $_POST['password'];
-    $realpassword = $infos['mot_de_passe'];
-    if($password == $realpassword){
-        header("Location: ModifComptemembre.php");
+    if(isset($idproprive)){
+        if((isset($_POST['password']))){
+            $password = $_POST['password'];
+            $realpassword = $infos['mot_de_passe'];
+            if($password == $realpassword){
+                header("Location: ModifCompteProPrive.php");
+            }
+        }
+            elseif(isset($idpropublic)){
+                if((isset($_POST['password']))){
+                    $password = $_POST['password'];
+                    $realpassword = $infos['mot_de_passe'];
+                    if($password == $realpassword){
+                        header("Location: ModifCompteProPublic.php");
+            }}
+            else{
+                ?>
+                    <script>
+                        alert("Le mot de passe saisi est incorrect!");
+                    </script>
+                <?php
+            }
+        }
     }
     else{
-        ?>
-            <script>
-                alert("Le mot de passe saisi est incorrect!");
-            </script>
-        <?php
+        if((isset($_POST['password']))){
+            $password = $_POST['password'];
+            $realpassword = $infos['mot_de_passe'];
+            if($password == $realpassword){
+                header("Location: ModifComptemembre.php");
+            }
+            else{
+                ?>
+                    <script>
+                        alert("Le mot de passe saisi est incorrect!");
+                    </script>
+                <?php
+            }
+        }
     }
-}
+
+
 }
     ?>
 <!DOCTYPE html>

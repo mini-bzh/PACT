@@ -1,13 +1,61 @@
 <?php
-session_start(); // Démarre la session pour récupérer les données de session
-
-// Récupération des paramètres de connexion à la base de données
-include('../php/connection_params.php');
+session_start(); // Démarre la session
 
 // Connexion à la base de données
+include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+$idCompte = $_SESSION['idCompte'];
+
+    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
+    include('../php/verif_compte_pro.php');
+
+    // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
+    include('../php/verif_compte_membre.php');
+
+
+
+if (!isset($_SESSION["idCompte"])) {
+    header("Location: /pages/erreur404.php");
+    exit();
+}
+// On va récupérer ici l'identifiant id_c présent dans les vues pro.
+if (key_exists("idCompte", $_SESSION)) {
+    // reccuperation de id_c de pro_prive 
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+    //$idproprive = $dbh->query("select id_c from tripskell.pro_prive;")->fetchAll()[0];
+    if(!isset($idproprive)){
+    // reccuperation de id_c de pro_public
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+    }
+}
+
+
+/*-------------------------------------------------------------------------------------------------------------------------
+ *                                     GESTION DES MODIFICATIONS DU COMPTE PRO PRIVÉ                                      *                    
+ *------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+if (isset($idproprive)) {
+    
+    $idCompte = $_SESSION['idCompte'];
+      
+        $stmt2 = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
+
+        $stmt2->bindParam(':id', $idCompte, PDO::PARAM_STR);
+
+        $stmt2->execute();
+        $result = $stmt2->fetchAll();
+
+    $infos = $result[0];
 
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
    
@@ -25,64 +73,48 @@ if ($result['count'] > 0) {
 } else {
 // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
 $i = 0;
-foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
+// Gestion des fichiers
+$nom_img = null; // Initialiser le nom de l'image à null
 
-    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
+if ($_FILES['fichier1']['size'] != 0) { // Vérifie si un fichier a été envoyé
+    $extension = pathinfo($_FILES['fichier1']['name'], PATHINFO_EXTENSION); // Récupère l'extension
+    $nom_img = time() . "_" . uniqid() . "." . $extension; // Génère un nom unique
+    $upload_success = move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
 
-    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
-
-        // creation du nom de fichier en utilisant time et le type de fichier
-        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
-
-        // deplacement du fichier depuis l'espace temporaire
-        move_uploaded_file($fichier["tmp_name"], "../images/pdp/" . $nom_img[$key_fichier]);
+    if (!$upload_success) {
+        $error_message = "Erreur lors du téléchargement de l'image.";
     }
 }
 
-    // Récupération du type de domaine
-    $typeDomaine = $_POST['type_domaine']; // "privé" ou "public"
 
-    // Assurez-vous que le type de domaine a une valeur valide
-    if ($typeDomaine === 'privé') {
-        $requete = "INSERT INTO tripskell.pro_prive(";
-        $requete .= "login, ";
-        $requete .= "adresse_mail, ";
-        $requete .= "mot_de_passe, ";
-        $requete .= "pdp, ";
-        $requete .= "numero_tel, ";
-        $requete .= "numero,";
-        $requete .= "rue, ";
-        $requete .= "ville, ";
-        $requete.= "codepostal, ";
-        $requete .= "num_siren, ";
-        $requete .= "raison_social,";
-        $requete .= "coordonnee_bancaire, ";
-        $requete .= "date_exp,";
-        $requete .= "cryptogramme, ";
-        $requete .= "nom_titulaire_carte)";
+        // Construction de la requête SQL
+        $requete = "UPDATE tripskell.pro_prive SET
+        login = :Login,
+        adresse_mail = :Adresse_Mail,
+        mot_de_passe = :Mot_de_P,
+        numero_tel = :Telephone,
+        numero = :num,
+        rue = :nomRue,
+        ville = :ville,
+        codepostal = :codePostal,
+        num_siren = :codeSiren,
+        raison_social = :RaisonSociale,
+        coordonnee_bancaire = :NumeroCB,
+        date_exp = :DateCB,
+        cryptogramme = :CryptoCB,
+        nom_titulaire_carte = :TitulaireCB";
 
-        $requete .= "VALUES (";
-        $requete.= ":Login,";
-        $requete.= ":Adresse_Mail,";
-        $requete.= ":Mot_de_P,";
-        $requete.= ":pdp,";
-        $requete.= ":Telephone,";
-        $requete.= ":num,";
-        $requete.= ":nomRue,";
-        $requete.= ":ville, ";
-        $requete.= ":codePostal,";
-        $requete.= ":codeSiren, ";
-        $requete.= ":RaisonSociale, ";
-        $requete.= ":NumeroCB, ";
-        $requete.= ":DateCB, ";
-        $requete.= ":CryptoCB, ";
-        $requete.= ":TitulaireCB)";
+        if ($nom_img !== null) { // Ajoute uniquement si une image a été uploadée
+        $requete .= ", pdp = :pdp";
+        }
 
+        $requete .= " WHERE id_c = :idCompte;";
+
+        // Prépare et exécute la requête
         $stmt = $dbh->prepare($requete);
         $stmt->bindParam(":Login", $_POST["Login"]);
         $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
         $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
-        $stmt->bindParam(":pdp", $nom_img['fichier1']);
         $stmt->bindParam(":Telephone", $_POST["Telephone"]);
         $stmt->bindParam(":num", $_POST["num"]);
         $stmt->bindParam(":nomRue", $_POST["nomRue"]);
@@ -95,58 +127,18 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         $stmt->bindParam(":CryptoCB", $_POST["CryptoCB"]);
         $stmt->bindParam(":TitulaireCB", $_POST["TitulaireCB"]);
 
-        $stmt->execute(); // execution de la requete
+        if ($nom_img !== null) { // Lie l'image seulement si elle a été téléchargée
+        $stmt->bindParam(":pdp", $nom_img);
+        }
+
+        $stmt->bindParam(":idCompte", $idCompte, PDO::PARAM_INT);
+        $stmt->execute();
+
 
         // on ferme la base de donnée
         $dbh = null;
-    }
-    elseif($typeDomaine === 'public') {
-        $requete = "INSERT INTO tripskell.pro_public(";
-        $requete .= "login, ";
-        $requete .= "adresse_mail, ";
-        $requete .= "mot_de_passe, ";
-        $requete .= "pdp, ";
-        $requete .= "numero_tel, ";
-        $requete .= "numero,";
-        $requete .= "rue, ";
-        $requete .= "ville, ";
-        $requete.= "codepostal, ";
-        $requete .= "num_siren, ";
-        $requete .= "raison_social)";
-
-        $requete .= "VALUES (";
-        $requete.= ":Login,";
-        $requete.= ":Adresse_Mail,";
-        $requete.= ":Mot_de_P,";
-        $requete.= ":pdp,";
-        $requete.= ":Telephone,";
-        $requete.= ":num,";
-        $requete.= ":nomRue,";
-        $requete.= ":ville, ";
-        $requete.= ":codePostal,";
-        $requete.= ":codeSiren, ";
-        $requete.= ":RaisonSociale)";
-
-        $stmt = $dbh->prepare($requete);
-        $stmt->bindParam(":Login", $_POST["Login"]);
-        $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
-        $stmt->bindParam(":Mot_de_P", $_POST["Mot_de_P"]);
-        $stmt->bindParam(":pdp", $nom_img['fichier1']);
-        $stmt->bindParam(":Telephone", $_POST["Telephone"]);
-        $stmt->bindParam(":num", $_POST["num"]);
-        $stmt->bindParam(":nomRue", $_POST["nomRue"]);
-        $stmt->bindParam(":ville", $_POST["ville"]);
-        $stmt->bindParam(":codePostal", $_POST["codePostal"]);
-        $stmt->bindParam(":codeSiren", $_POST["codeSiren"]);
-        $stmt->bindParam(":RaisonSociale", $_POST["RaisonSociale"]);
-
-        $stmt->execute(); // execution de la requete
-
-        // on ferme la base de donnée
-        $dbh = null;
-    }
    
-header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers la page de l'offre créée
+header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre créée
 }
 }
 ?>
@@ -157,30 +149,34 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creation Compte</title>
+    <title>Modification Compte</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
     <link rel="stylesheet" href="../style/style.css">
+    <script src="../js/ModifCompte.js" defer></script>
 
 </head>
 
 <?php include "../composants/header/header.php";        //import navbar
         ?>
 
-<body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($_GET['user-tempo'] == 'pro') {
-                echo 'fondPro';
-            } else {
-                echo 'fondVisiteur';
+<body class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($comptePro)
+            {
+                echo "fondPro";
+            }
+            else
+            {
+                echo "fondVisiteur";
             }
         ?>>
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Création d'un compte Professionnel :</p>
+                <p>Modification d'un compte Professionnel :</p>
             </div>
     </div>
 
@@ -194,27 +190,10 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
     <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
-    <div class="choixPro">
-        <div class="propriv">
-            <label>
-                Domaine Privé
-                <input type="checkbox" id="showCheckbox">
-                <input type="hidden" name="type_domaine" id="typeDomaine" value="">
-            </label>
-        </div>
-
-        <div class="propub">
-            <label>
-                Domaine Public
-                <input type="checkbox" id="hideCheckbox">
-            </label>
-        </div>
-    </div>
-
         <!-- Login -->
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
-            <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
+            <input type="text" id="Login" name="Login" value="<?php echo $infos['login'];?>" required>
             <?php
             if (isset($error_message)) {
                 echo '<div class="error">'. $error_message. '</div>';
@@ -225,11 +204,18 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
          <!-- Nom  -->
          <div class="champs">
             <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
-            <input type="text" id="RaisonSociale" name="RaisonSociale" placeholder="Entrez votre nom" required>
+            <input type="text" id="RaisonSociale" name="RaisonSociale" value="<?php echo $infos['raison_social'];?>" required>
         </div>
 
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
+        <div class = "pdp_champs">
+                <label for="pdp">Votre photo de profil actuelle :</label>
+                <div class="image-container">
+                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                </div>
+            </div>
+
             <label for="fichier1">Ajouter une photo de profil :</label>
             <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
             <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
@@ -239,13 +225,13 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <!-- Adresse Mail -->
         <div class="champs">
             <label for="Adresse_Mail">E-mail <span class="required">*</span> :</label>
-            <input type="email" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
+            <input type="email" id="Adresse_Mail" name="Adresse Mail" value="<?php echo $infos['adresse_mail'];?>" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="text" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10" pattern="^^\d{10}$">
+            <input type="text" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^^\d{10}$">
         </div>
 
 
@@ -253,7 +239,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <!-- retenir le mot de passe dans une variable php -->
         <div class="champs">
             <label for="Mot_de_P">Mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Mot_de_P" name="Mot_de_P" minlength="12" maxlength="50" required>
+            <input type="password" id="Mot_de_P" name="Mot_de_P" value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
         </div>
 
         <div class="RequisMDP">
@@ -271,7 +257,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <!-- Mot de Passe -->
         <div class="champs">
             <label for="Confirm_Mot_de_P">Confirmation du mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" minlength="12" maxlength="50" required>
+            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
         </div>
         <?php 
         // Vérification de la confirmation du mot de passe
@@ -288,7 +274,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
         <div class="champs">
             <label for="codeSiren">Code SIREN  <span class="required"></span> :</label>
-            <input type="text" id="codeSiren" name="codeSiren" placeholder="CodeSiren" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
+            <input type="text" id="codeSiren" name="codeSiren" value="<?php echo $infos['num_siren'];?>" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
         </div>
 
 
@@ -299,14 +285,13 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
                     </div>
                 <div class="champsAdresse">
                     
-                    <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" >
-                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" >
-                    <input type="text" id="ville" name="ville" placeholder="Ville" >
-                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
+                    <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" >
+                    <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" >
+                    <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" >
+                    <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
                 </div>
                 </div>
 
-        <div id="extraFields" class="hidden">
         <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
                 <div class="coBancaires">
@@ -318,31 +303,30 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
         <div class="champs">
             <label for="NumeroCB">Numéro de carte :  <span class="required"></span> </label>
-            <input type="text" id="NumeroCB" name="NumeroCB" placeholder="Numero de votre carte" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
+            <input type="text" id="NumeroCB" name="NumeroCB" value="<?php echo $infos['coordonnee_bancaire'];?>" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
         </div>
     
         <div class="champs">
             <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
-            <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
+            <input type="text" id="DateCB" name="DateCB" value="<?php echo $infos['date_exp'];?>" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
         </div>
 
         <div class="champs">
             <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
-            <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" minlength="3" maxlength="" pattern="^^\d{3}$"> 
+            <input type="text" id="CryptoCB" name="CryptoCB" value="<?php echo $infos['cryptogramme'];?>" minlength="3" maxlength="" pattern="^^\d{3}$"> 
         </div>
 
 
             <div class="champs">
             <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
-            <input type="text" id="TitulaireCB" name="TitulaireCB">
+            <input type="text" id="TitulaireCB" name="TitulaireCB" value="<?php echo $infos['nom_titulaire_carte'];?>">
 
            
         </div>
-    </div> 
         <hr>
 
         <div class="zoneBtn">
-                        <a href="ChoixCreationCompte.php" class="btnAnnuler">
+                        <a href="compte.php" class="btnAnnuler">
                             <p class="texteLarge boldArchivo">Annuler</p>
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_208_4609)">
@@ -368,17 +352,9 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         </div>
 
     </form>
-        </main>
-<?php
-    include "../composants/footer/footer.php";
-?>
 
-
-
-
-
-<script>
-    function updateFileName() {
+    <script>
+            function updateFileName() {
         const fileInput = document.getElementById('fichier1'); // Champ de fichier
         const fileName = document.getElementById('fileName'); // Zone où afficher le nom
         const label = document.getElementById('customFileLabel'); // Label du bouton
@@ -423,8 +399,9 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         }
     });
 
+
     
-    const showCheckbox = document.getElementById('showCheckbox');
+const showCheckbox = document.getElementById('showCheckbox');
 const hideCheckbox = document.getElementById('hideCheckbox');
 const typeDomaineInput = document.getElementById('typeDomaine');
 const extraFields = document.getElementById('extraFields');
@@ -465,12 +442,15 @@ hideCheckbox.addEventListener('change', function () {
 
 // Vérifie initialement si une case est cochée au chargement de la page
 checkCheckboxes();
-
 </script>
 
-</body>
-</html>
+    
 
 
-
+        </main>
+<?php
+    include "../composants/footer/footer.php";
+?>
+<?php
+}
 
