@@ -398,7 +398,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="checkbox" id="lang" name="lang[]" value="<?php echo $langue; ?>" <?php echo in_array($langue, $langue_preselec) ? 'checked' : ''; ?>/>
                         <label for="lang"><?php echo $langue; ?></label>
                     </div>
-                <?php } ?>
+                <?php }?>
                 </div>
                 <label>La visite est guidée :<span class="required">*</span> :</label>
                 <div class="parentVisite">
