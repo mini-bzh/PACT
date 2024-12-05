@@ -633,6 +633,7 @@ rect{
     color: #333;
     padding: 20px 0;
     border-top: 1px solid #ddd;
+    margin-top: auto;
 }
 
 .footer-container {
@@ -703,7 +704,9 @@ rect{
         transform: translate(30px, -25px);
     }
 }
-
+body, html {
+    height: 100%; /* Garantit que le body et html occupent toute la hauteur de la fenêtre */
+}
 
 .footer-section img {
 

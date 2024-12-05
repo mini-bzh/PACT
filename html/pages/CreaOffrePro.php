@@ -423,21 +423,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="file" id="fichier1" name="fichier1" required>
                     </div>
 
-                    <div class="champs">
-                        <label for="fichier2">Selectionner une image 2 :</label>
-                        <input type="file" id="fichier2" name="fichier2" />
-                    </div>
-
-                    <div class="champs">
-                        <label for="fichier3">Selectionner une image 3 :</label>
-                        <input type="file" id="fichier3" name="fichier3" />
-                    </div>
-
-                    <div class="champs">
-                        <label for="fichier4">Selectionner une image 4 :</label>
-                        <input type="file" id="fichier4" name="fichier4" />
-                    </div>
-
 
                     <!-- 
                     ------------------------------------   ___ __ _| |_ ___  __ _  ___  _ __(_) ___  ___ --------------------------------------- 
