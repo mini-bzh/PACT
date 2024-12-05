@@ -290,7 +290,11 @@ if ((!$comptePro) && (!$compteMembre)) {
             
 
                 // Dans le cas d'un compte pro, on décompose son numéro SIREN
-                $siren = trim(chunk_split($infos["num_siren"], 3, " ")); // On ajoute un esapce entre 3 caractères
+                $siren=null;
+                if ($infos["num_siren"]) {
+                    $siren = trim(chunk_split($infos["num_siren"], 3, " ")); // On ajoute un esapce entre 3 caractères
+                }
+                
 
                 // On concatène les informations de l'adresse d'un pro
                 $adrPro = $infos["numero"] . " " . $infos["rue"] . ", " . $infos["ville"] . " " . $infos["codepostal"];
