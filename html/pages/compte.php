@@ -296,7 +296,6 @@ if ((!$comptePro) && (!$compteMembre)) {
                 // On concatène les informations de l'adresse d'un pro
                 if (($infos["numero"] != "") && ($infos["rue"] != "") && ($infos["ville"] != "") && ($infos["codepostal"] != "")) {
                     $adrPro = $infos["numero"] . " " . $infos["rue"] . ", " . $infos["ville"] . " " . $infos["codepostal"];
-                    print_r("ici : " . $infos["numero"]);
                 }
             }
 
