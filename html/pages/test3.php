@@ -12,7 +12,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 // echo "ouverture <br>";
 // print_r($ouverture);
 
-$stmt = $dbh->prepare("select login from tripskell.membre where login='test'");
+$stmt = $dbh->prepare("select img1, img2, img3, img4 from tripskell._offre");
 $stmt->execute();
 $result = $stmt->fetchAll();
 
