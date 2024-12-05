@@ -78,6 +78,12 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         $requete.= ":CryptoCB, ";
         $requete.= ":TitulaireCB)";
 
+        if (!empty($_POST["codeSiren"]) && preg_match('/^\d{9}$/', $_POST["codeSiren"])) {
+            $codeSiren = intval($_POST["codeSiren"]);
+        } else {
+            $codeSiren = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
+        }
+
         $stmt = $dbh->prepare($requete);
         $stmt->bindParam(":Login", $_POST["Login"]);
         $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
@@ -127,6 +133,13 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         $requete.= ":codeSiren, ";
         $requete.= ":RaisonSociale)";
 
+
+        if (!empty($_POST["codeSiren"]) && preg_match('/^\d{9}$/', $_POST["codeSiren"])) {
+            $codeSiren = intval($_POST["codeSiren"]);
+        } else {
+            $codeSiren = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
+        }
+        
         $stmt = $dbh->prepare($requete);
         $stmt->bindParam(":Login", $_POST["Login"]);
         $stmt->bindParam(":Adresse_Mail", $_POST["Adresse_Mail"]);
