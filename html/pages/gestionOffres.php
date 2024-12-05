@@ -41,7 +41,7 @@ $contentMesOffres = $stmt->fetchAll();
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel=" heet" href="/style/pages/gestionOffres.css">
+    <link rel="stylesheet" href="/style/pages/gestionOffres.css">
 </head>
 
 <body class=<?php echo "fondPro"; ?>> <!-- met le bon fond en fonction de l'utilisateur -->
