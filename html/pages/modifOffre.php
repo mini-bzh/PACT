@@ -18,26 +18,24 @@ if (!isset($_SESSION["idCompte"])) {
     exit();
 }
 
-
-
 if (isset($_GET["idOffre"])) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
-    // on cherche dans quelle catégorie est l'offre
+    // On cherche dans quelle catégorie est l'offre
     foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
         
-        // requete pour chercher la categorie
+        // Requête pour chercher la catégorie
         $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
         $stmt->execute([ ':idOffre' => $idOffre]);
 
-        // Si l'offre appartient à une catégorie, on envoie la categorie au js
+        // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
         if(isset($stmt->fetch()['idoffre'])){?>
             <script>
                 let categorie_offre = '<?php echo $nom_cat; ?>';
             </script>
         <?php 
 
-            // si c'est une visite on reccupère les langues
+            // Si c'est une visite, on récupère les langues
             $langue_preselec = array();
             if($nom_cat === 'visite') {
                 $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._possedelangue WHERE idOffre = :idOffre;");
@@ -73,10 +71,10 @@ if (isset($_GET["idOffre"])) {
 }
 
 if (key_exists("idCompte", $_SESSION)) {
-    // reccuperation de id_c de pro_prive 
+    // Récupération de id_c de pro_prive 
     $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 
-    // reccuperation de id_c de pro_public
+    // Récupération de id_c de pro_public
     $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 }
 
@@ -117,7 +115,15 @@ if (!empty($_FILES) ) {
 
 
 if (!empty($_POST)) {
-    
+
+    $nom_img = null;
+
+    // Traitement de l'image si elle est envoyée
+    if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
+        $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
+        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
+    }
+
     // Préparation de la requête de mise à jour de l'offre
     $requete = "UPDATE tripskell.offre_pro SET ";
     $requete .= "titreOffre = :titre, ";
@@ -130,26 +136,31 @@ if (!empty($_POST)) {
     $requete .= "ville = :ville, ";
     $requete .= "codePostal = :codePostal, ";
 
-    $requete .= "gammeprix = :gammeprix,";   // pour restauration
+    $requete .= "gammeprix = :gammeprix,";   // Pour restauration
 
-    $requete .= "duree_v = :duree_v,";   // pour visite
+    $requete .= "duree_v = :duree_v,";   // Pour visite
     $requete .= "guidee = :guidee,"; 
 
-    $requete .= "duree_s = :duree_s,";   // pour spectacle
+    $requete .= "duree_s = :duree_s,";   // Pour spectacle
     $requete .= "capacite = :capacite,"; 
 
-    $requete .= "nbattraction = :nbattraction,";   // pour parcattraction
+    $requete .= "nbattraction = :nbattraction,";   // Pour parcattraction
     $requete .= "agemin = :agemin,";
 
-    $requete .= "duree_a = :duree_a,";  // pour activite
-    $requete .= "ageminimum = :ageminimum,";
+    $requete .= "duree_a = :duree_a,";  // Pour activité
+    $requete .= "ageminimum = :ageminimum,"; 
     $requete .= "prestation = :prestation";
     
+    // Ajout de la colonne img1 seulement si une image est téléchargée
+    if ($nom_img !== null) {
+        $requete .= ", img1 = :img1"; 
+    }
+
     $requete .= " WHERE idOffre = :idOffre;";
 
     // Préparation de la requête
     $stmt = $dbh->prepare($requete);
-    
+
     // Liaison des paramètres de la requête
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":resume", $resume);
@@ -177,7 +188,11 @@ if (!empty($_POST)) {
     $stmt->bindParam(":prestation", $prestation);
 
     $stmt->bindParam(":idOffre", $idOffre);
-    
+
+    // Lier l'image si elle est présente
+    if ($nom_img !== null) {
+        $stmt->bindParam(":img1", $nom_img);
+    }
 
     // Récupération des données du formulaire
     $titre = $_POST["titre"];
@@ -194,16 +209,16 @@ if (!empty($_POST)) {
 
     $gammeprix = $_POST['gammeprix'];
 
-    $duree_v = (!empty($_POST['duree_v'])?$_POST['duree_v']:null);
+    $duree_v = (!empty($_POST['duree_v']) ? $_POST['duree_v'] : null);
     $guidee = $_POST['guidee'];
 
-    $duree_s =  (!empty($_POST['duree_s'])?$_POST['duree_s']:null);
-    $capacite = (!empty($_POST['capacite'])?$_POST['capacite']:null);
+    $duree_s = (!empty($_POST['duree_s']) ? $_POST['duree_s'] : null);
+    $capacite = (!empty($_POST['capacite']) ? $_POST['capacite'] : null);
 
     $nbattraction = $_POST['nbAttraction'];
     $agemin = $_POST['ageminimum'];
 
-    $duree_a =  (!empty($_POST['duree_a'])?$_POST['duree_a']:null);
+    $duree_a = (!empty($_POST['duree_a']) ? $_POST['duree_a'] : null);
     $ageminimum = $_POST['agemin'];
     $prestation = $_POST['prestation'];
 
@@ -213,6 +228,7 @@ if (!empty($_POST)) {
     $stmt->execute();
 
 
+<<<<<<< Updated upstream
 
     // Mise à jour des Tags
     $requete = "delete from tripskell.  _possede where idOffre=:idOffre";
@@ -239,6 +255,9 @@ if (!empty($_POST)) {
     
 
     /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
+=======
+    /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
+>>>>>>> Stashed changes
 
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = ["Lundi" => json_decode($_POST['lundi']),
@@ -348,20 +367,27 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
+<<<<<<< Updated upstream
                  <!-- Champs pour sélectionner les images -->
 
+=======
+            
+>>>>>>> Stashed changes
                  <!-- Champs pour sélectionner les images -->
         <div class="champs">
-        <div class = "pdp_champs">
-                <label for="pdp">Votre photo de profil actuelle :</label>
-                <div class="image-container">
-                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+            <div class="champ_Img">
+                <div class = "pdp_champs">
+                    <label for="img1">Votre image actuelle :</label>
+                    <div class="image-container">
+                        <img src="../images/imagesOffres/<?php echo $contentOffre["img1"]?>" alt="Image de l'offre" title="Image de l'offre">
+                    </div>
+                </div>
+                <div class="Input_Img">
+                    <label for="fichier1">Modifier l'image de l'offre :</label>
+                    <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
+                    <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
                 </div>
             </div>
-
-            <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
         
             <!--------------------- > CATEGORIES < --------------------->
@@ -674,6 +700,25 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 </body>
 
 </html>
+
+
+<script>
+function updateFileName() {
+    const fileInput = document.getElementById('fichier1'); // Champ de fichier
+    const fileName = document.getElementById('fileName'); // Zone où afficher le nom
+    const label = document.getElementById('customFileLabel'); // Label du bouton
+
+    if (fileInput.files.length > 0) {
+        // Si un fichier est sélectionné, afficher son nom
+        fileName.textContent = fileInput.files[0].name;
+        label.textContent = "Changer la photo"; // Met à jour le texte du bouton
+    } else {
+        // Si aucun fichier n'est sélectionné
+        fileName.textContent = "";
+        label.textContent = "📷 Ajouter une photo de profil"; // Remet le texte original
+    }
+}
+</script>
 
 <?php
 } else { // si id_c n'est pas dans pro_prive ou pro_public, on génère une erreur 404.
