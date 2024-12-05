@@ -97,7 +97,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creation Compte</title>
+    <title>Modification Compte</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
@@ -123,7 +123,7 @@ if (!empty($_POST)) {
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Création d'un compte membre :</p>
+                <p>Modification d'un compte membre :</p>
             </div>
     </div>
 
