@@ -224,6 +224,13 @@ if ($_GET['user-tempo'] === 'pro') {
 
 </form>
 
+<!-- Formulaire de demande de réinitialisation -->
+<form id="resetForm">
+    <label for="email">Email :</label>
+    <input type="email" name="email" id="email" required>
+    <button type="submit">Envoyer un email de réinitialisation</button>
+</form>
+
 <!-- POP-UP -->
 <div class="popUp">
     <div>
