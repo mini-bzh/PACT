@@ -96,9 +96,9 @@ $counter = max(0, $daysElapsed);
 // Affichage du compteur
 // echo "Compteur quotidien : " . $counter . "\n";
 
-if($contentOffre['enLigne'] == false){
+// if($contentOffre['enLigne'] == false){
     
-}
+// }
 
 
 ?>
