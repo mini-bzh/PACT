@@ -54,6 +54,24 @@ agemin.onkeydown = (event) => {
 };
 
 
+/* --------------------------------- Taille max d'une image  --------------------------------- */
+
+
+let inputImg = document.querySelectorAll('#formCreaOffre input[type="file"]');
+inputImg.forEach(element => {
+    element.addEventListener('change', function(event) {
+        let file = event.target.files[0];
+        if (file) {
+            // Vérifier la taille du fichier (par exemple 5 Mo maximum)
+            let maxSize = 1 * 1024 * 1024; // 1 Mo
+            if (file.size > maxSize) {
+                alert("L'image est trop lourde. La taille maximale est de 1 Mo par image.");
+                event.target.value = ''; // Réinitialiser l'input file
+            }
+        }
+    });
+});
+
 
 /* --------------------------------- partie horaires  --------------------------------- */
 

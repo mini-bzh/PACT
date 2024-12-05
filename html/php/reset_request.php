@@ -1,7 +1,7 @@
-<!-- VERIFICATION SI LE MOT DE PASSE A ETE OUBLIE -->
 <?php
-
+// VERIFICATION SI LE MOT DE PASSE A ETE OUBLIE
 session_start();
+
 
 // recuperation des parametre de connection a la BdD
 include('./connection_params.php');
@@ -22,49 +22,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         // Vérifier si l'email existe dans la base de données et correspond au login
-        print_r("login : $login mail : $email");
-        if($comptePro){
-            $stmt = $dbh->prepare("SELECT id_c FROM tripskell.pro_prive WHERE adresse_mail = :email AND login=:loginU");
-
-            $stmt->bindValue(':email', $email);
-            $stmt->bindValue(':loginU', $login);     
-    
+        if ($comptePro) {
+            // Préparation de la requête pour la table pro_prive
+            $stmt = $dbh->prepare("SELECT id_c FROM tripskell.pro_prive WHERE adresse_mail = :email AND login = :loginU");
+        
+            // Liaison des paramètres
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':loginU', $login);
+        
+            // Exécution de la requête
             $stmt->execute();
             $user = $stmt->fetch();
-            
-            
+        
+            // Vérification du résultat
             if (count($user) === 0) {
-                
                 $proPrive = false;
                 $proPublic = true;
-
-                $stmt2 = $dbh->prepare('SELECT id_c FROM tripskell.pro_public WHERE adresse_mail = :email AND login = :loginU');
-    
-                $stmt2->bindValue(':email', $email);
-                $stmt2->bindValue(':loginU', $login);    
-    
-                $stmt2->execute();
-                $user = $stmt2->fetch();
-
+        
+                // Préparation de la requête pour la table pro_public
+                $stmt = $dbh->prepare("SELECT id_c FROM tripskell.pro_public WHERE adresse_mail = :email AND login = :loginU");
+        
+                // Liaison des paramètres
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':loginU', $login);
+        
+                // Exécution de la requête
+                $stmt->execute();
+                $user = $stmt->fetch();
+        
+                // Vérification du résultat pour la table pro_public
                 if (count($user) === 0) {
                     $proPublic = false;
-                } else{
-                    print_r("ok");
                 }
-    
             } else {
                 $proPrive = true;
-                print_r("ok");
             }
         } else {
-            $stmt3 = $dbh->prepare('SELECT id_c FROM tripskell.membre WHERE adresse_mail = :email AND login = :loginU');
-            $stmt3->execute();
+            $stmt = $dbh->prepare('SELECT id_c FROM tripskell.membre WHERE adresse_mail = :email AND login = :loginU');
             
-            $stmt3->bindValue(':email', $email);
-            $stmt3->bindValue(':loginU', $login);    
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':loginU', $login);   
+            
+            $stmt->execute();
 
-            $user = $stmt3->fetch();
-            print_r("ok");
+            $user = $stmt->fetch();
         }
 
              
@@ -76,7 +77,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));  // Expiration dans 1 heure
 
             // Mettre à jour le token et l'expiration dans la base de données
-            $stmt = $dbh->prepare('UPDATE users SET reset_token = :token, reset_token_expiry = :expiry WHERE adresse_mail = :email');
+            if ($comptePro) {
+                if ($proPrive) {
+                    $stmt = $dbh->prepare('UPDATE tripskell.pro_prive SET token = :token, date_expiration = :expiry WHERE adresse_mail = :email');
+                } else if ($proPublic) {
+                    $stmt = $dbh->prepare('UPDATE tripskell.pro_public SET token = :token, date_expiration = :expiry WHERE adresse_mail = :email');
+                } 
+            } else {
+                $stmt = $dbh->prepare('UPDATE tripskell.membre SET token = :token, date_expiration = :expiry WHERE adresse_mail = :email');
+            }
+            
             $stmt->execute([
                 'token' => $token,
                 'expiry' => $expiry,

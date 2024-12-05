@@ -61,32 +61,22 @@ if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
             // creation du nom de fichier en utilisant time et le type de fichier
             $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
-
+            
             // deplacement du fichier depuis l'espace temporaire
-            move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+            if(in_array($key_fichier, ["fichier1", "fichier2", "fichier3", "fichier4"])) {
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+            }
+
+            if(trim($key_fichier) == "carte") {
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesCarte/" . $nom_img[$key_fichier]);
+            }
+
+            if(trim($key_fichier) == "plan") {
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesPlan/" . $nom_img[$key_fichier]);
+            }
+            
         }
     }
-
-    /*
-$type2 = explode("/", $image2["types"])[1];
-$nom_img2 = time() . "." . $type2;
-if (in_array($type2, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
-}
-
-$type3 = explode("/", $image3["types"])[1];
-$nom_img3 = time() . "." . $type3;
-if (in_array($type3, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
-}
-
-$type4 = explode("/", $image4["types"])[1];
-$nom_img4 = time() . "." . $type4;
-if (in_array($type4, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
-}
-    */
-
 
     // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
     // requete va nous servir de variable de stock qui va concatener chaque partie de l'INSERT
@@ -187,8 +177,6 @@ $requete .= $_POST["date_debut_opt"] !== ""?$_POST["duree_opt"]:"0";
 $requete .= " week'";
 
 $requete .= ") returning idOffre;";
-echo $requete;
-print_r($_POST);
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
@@ -256,13 +244,13 @@ if($_POST["option"] == "AlaUne") {
 
 // Traitement pour les categories
 $idrepas = $_POST["categorie"]=="restauration"?"2":null;
-$carte = $_POST["categorie"]=="restauration"?"crt.png":null;
+$carte = $nom_img['carte'];
 $gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
 
 $duree_s     = $_POST["categorie"]=="spectacle"?$_POST["duree_s"]:null;
 $capacite    = $_POST["categorie"]=="spectacle"?$_POST["capacite"]:null;
 
-$plans    = $_POST["categorie"]=="parcDattraction"?"plan.png":null;
+$plans    = $nom_img['plan'];
 $nbattraction = $_POST["categorie"]=="parcDattraction"?$_POST["nbAttraction"]:null;
 $agemin   = $_POST["categorie"]=="parcDattraction"?$_POST["ageminimum"]:null;
 
@@ -420,7 +408,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                 <!-- Formulaire de création d'offre -->
 
-                <form name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
+                <form id="formCreaOffre" name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
 
 
                     <!-- titre -->
