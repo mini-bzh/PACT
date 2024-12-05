@@ -16,19 +16,50 @@ if (!isset($_SESSION["idCompte"])) {
     exit();
 }
 
-// on cherche dans quelle catégorie est l'offre
+
 if (isset($_GET["idOffre"])) {
+    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
+
+    // on cherche dans quelle catégorie est l'offre
     foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
+        
+        // requete pour chercher la categorie
         $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
-        $stmt->execute([ ':idOffre' => $_GET["idOffre"]]);
+        $stmt->execute([ ':idOffre' => $idOffre]);
+
+        // Si l'offre appartient à une catégorie, on envoie la categorie au js
         if(isset($stmt->fetch()['idoffre'])){?>
             <script>
                 let categorie_offre = '<?php echo $nom_cat; ?>';
             </script>
-        <?php }
+        <?php 
+
+            // si c'est une visite on reccupère les langues
+            $langue_preselec = array();
+            if($nom_cat === 'visite') {
+                $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._possedelangue WHERE idOffre = :idOffre;");
+                $stmt->execute([ ':idOffre' => $idOffre]);
+                $langue_preselec = array_column($stmt->fetchAll(), 'nomlangue');
+            }
+
+        }
     }
+
+    // Récupération des détails de l'offre à partir de la base de données
+    $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
+    
+
+    print_r($contentOffre);
 } else {
-    die("ID d'offre invalide.");
+    die("Error");
+}
+
+if (key_exists("idCompte", $_SESSION)) {
+    // reccuperation de id_c de pro_prive 
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+
+    // reccuperation de id_c de pro_public
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 }
 
 if (!empty($_POST)) {
@@ -82,23 +113,7 @@ if (!empty($_POST)) {
     header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
-if (key_exists("idCompte", $_SESSION)) {
-    // reccuperation de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 
-    // reccuperation de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
-}
-
-
-// Récupération de l'identifiant de l'offre si présent dans l'URL
-$idOffre = null;
-if (key_exists("idOffre", $_GET)) {
-    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
-
-    // Récupération des détails de l'offre à partir de la base de données
-    $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
-}
 ?>
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
@@ -129,7 +144,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
             <h1>Modification d'une offre</h1>
             <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post">
                 <div class="champs">
-                    <label for="titre">Titre <span class="required">*</span> :</label>
+                    <label for="titre">Titre :</label>
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
@@ -147,6 +162,7 @@ $image4 = $contentOffre["image4"] ?? null;
 ?>
 
             <!-- Champs pour sélectionner ou modifier les images avec aperçus préchargés -->
+             <!--
             <div class="champs">
                 <label for="fichier1">Sélectionner une image 1 :</label>
                 <input type="file" id="fichier1" name="fichier1">
@@ -175,48 +191,47 @@ $image4 = $contentOffre["image4"] ?? null;
                 <?php endif; ?>
                 <input type="file" id="fichier4" name="fichier4" onchange="updatePreview(event, 'preview4')">
             </div>
-
+                -->
             <!--------------------- > CATEGORIES < --------------------->
 
             <!-- ----------------- VISITE ------------------- -->
 
             <div id="champsVisite">
-
                 <div class="champs">
-                    <label for="duree_v">Duree de la visite <span class="required">*</span> :</label>
-                    <input type="time" id="duree_v" name="duree_v" />
+                    <label for="duree_v">Duree de la visite :</label>
+                    <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
                 </div>
-                <label>Nom langue <span class="required">*</span> :</label>
+                <label>Nom langue :</label>
                 <div class="parentVisite">
                     <div>
-                        <input type="checkbox" id="lang1" name="lang[]" value="FR" />
+                        <input type="checkbox" id="lang1" name="lang[]" value="FR" <?php echo in_array('Français', $langue_preselec) ? 'checked' : ''; ?>/>
                         <label for="lang1">Français</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="lang2" name="lang[]" value="EN" />
+                        <input type="checkbox" id="lang2" name="lang[]" value="EN" <?php echo in_array('Anglais', $langue_preselec) ? 'checked' : ''; ?>/>
                         <label for="lang2">Anglais</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="lang3" name="lang[]" value="AL" />
+                        <input type="checkbox" id="lang3" name="lang[]" value="AL" <?php echo in_array('Allemand', $langue_preselec) ? 'checked' : ''; ?>/>
                         <label for="lang3">Allemand</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="lang4" name="lang[]" value="ES" />
+                        <input type="checkbox" id="lang4" name="lang[]" value="ES" <?php echo in_array('Espagnol', $langue_preselec) ? 'checked' : ''; ?>/>
                         <label for="lang4">Espagnol</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="lang5" name="lang[]" value="CH" />
-                        <label for="lang5">chinois</label>
+                        <input type="checkbox" id="lang5" name="lang[]" value="CH" <?php echo in_array('Chinois', $langue_preselec) ? 'checked' : ''; ?>/>
+                        <label for="lang5">Chinois</label>
                     </div>
                 </div>
                 <label>La visite est guide :<span class="required">*</span> :</label>
                 <div class="parentVisite">
                     <div>
-                        <input type="radio" id="guidee" name="guidee" value="YES" />
+                        <input type="radio" id="guidee" name="guidee" value="YES" <?php echo $contentOffre["guidee"] ? 'checked' : ''; ?>/>
                         <label for="guidePresent">Oui</label>
                     </div>
                     <div>
-                        <input type="radio" id="guidee" name="guidee" value="NO" /> <!-- a enlever et utilisation de checkbox -->
+                        <input type="radio" id="guidee" name="guidee" value="NO" <?php echo !$contentOffre["guidee"] ? 'checked' : ''; ?>/> <!-- a enlever et utilisation de checkbox -->
                         <label for="guidePasPresent">Non</label>
                     </div>
                 </div>
@@ -225,16 +240,16 @@ $image4 = $contentOffre["image4"] ?? null;
             <!-- ----------------- RESTAURATION ------------------- -->
 
             <div id="champsRestauration">
-                <div>
-                    <label for="carte">Carte <span class="required">*</span> :</label>
-                    <textarea id="carte" name="carte" placeholder="saisir les élements qu'il y a sur votre carte" maxlength="100"></textarea>
+                <div class="champs">
+                    <label for="carte">Selectionner la nouvelle carte :</label>
+                    <input type="file" id="carte" name="carte">
                 </div>
                 <div class="champs">
-                    <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
+                    <label for="gammeprix">Gamme de Prix :</label>
                     <select id="gammeprix" name="gammeprix">
-                        <option value="$">$</option>
-                        <option value="$$">$$</option>
-                        <option value="$$$">$$$</option>
+                        <option value="$"<?php echo $contentOffre["gammeprix"]=='$' ? 'selected' : ''; ?>>$</option>
+                        <option value="$$"<?php echo $contentOffre["gammeprix"]=='$$' ? 'selected' : ''; ?>>$$</option>
+                        <option value="$$$"<?php echo $contentOffre["gammeprix"]=='$$$' ? 'selected' : ''; ?>>$$$</option>
                     </select>
                 </div>
             </div>
@@ -244,11 +259,11 @@ $image4 = $contentOffre["image4"] ?? null;
             <div id="champsPA">
                 <div class="champs">
                     <label for="nbAttraction">Nombre Attraction :</label>
-                    <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
+                    <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3" value="<?php echo $contentOffre["nbattraction"]; ?>">
                 </div>
                 <div class="champs">
                     <label for="ageminimum">âge minimum :</label>
-                    <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                    <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["agemin"]; ?>">
                 </div>
                 <div class="champs">
                     <label for="plan">Selectionner un plan :</label>
@@ -260,12 +275,12 @@ $image4 = $contentOffre["image4"] ?? null;
 
             <div id="champsSpectacle">
                 <div class="champs">
-                    <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
-                    <input type="time" id="duree_s" name="duree_s" />
+                    <label for="duree_s">Duree de la Spectacle :</label>
+                    <input type="time" id="duree_s" name="duree_s" value="<?php echo substr($contentOffre["duree_s"], 0, 5); ?>"/>
                 </div>
                 <div class="champs">
                     <label for="capacite">Capacité :</label>
-                    <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
+                    <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite" value="<?php echo $contentOffre["capacite"]; ?>">
                 </div>
             </div>
 
@@ -273,16 +288,16 @@ $image4 = $contentOffre["image4"] ?? null;
 
             <div id="champsActivite">
                 <div>
-                    <label for="prestation">Prestation proposer <span class="required">*</span> :</label>
-                    <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"></textarea>
+                    <label for="prestation">Prestation proposer :</label>
+                    <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"><?php echo $contentOffre["prestation"]; ?></textarea>
                 </div>
                 <div class="champs">
-                    <label for="duree_a">Duree de la Activité <span class="required">*</span> :</label>
-                    <input type="time" id="duree_a" name="duree_a" />
+                    <label for="duree_a">Duree de l'Activité :</label>
+                    <input type="time" id="duree_a" name="duree_a" value="<?php echo substr($contentOffre["duree_a"], 0, 5); ?>"/>
                 </div>
                 <div class="champs">
                     <label for="agemin">âge minimum :</label>
-                    <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                    <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["ageminimum"]; ?>">
                 </div>
             </div>
 
@@ -303,13 +318,13 @@ $image4 = $contentOffre["image4"] ?? null;
                 </div>
 
                 <div>
-                    <label for="resume">Résumé <span class="required">*</span> :</label>
+                    <label for="resume">Résumé :</label>
                      <!-- Champ de saisie pour le résumé avec valeur préremplie -->
                     <textarea id="resume" name="resume"  required><?php echo $contentOffre["resume"];?></textarea>
                 </div>
 
                 <div>
-                    <label for="description">Description détaillée <span class="required">*</span> :</label>
+                    <label for="description">Description détaillée :</label>
                      <!-- Champ de saisie pour la description détaillée avec valeur préremplie -->
                     <textarea id="description" name="description"  required><?php echo $contentOffre["description_detaille"];?></textarea>
                 </div>
@@ -336,9 +351,9 @@ $image4 = $contentOffre["image4"] ?? null;
                 </div>
 
                 <div class="champsAdresse">
-                    <label for="adresse">Adresse <span class="required">*</span> :</label>
+                    <label for="adresse">Adresse :</label>
                      <!-- Champs de saisie pour l'adresse avec valeurs préremplies -->
-                    <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>" required>
+                    <input type="text" id="num" name="num" value="<?php echo $contentOffre["numero"];?>">
                     <input type="text" id="nomRue" name="nomRue" value="<?php echo $contentOffre["rue"];?>" required>
                     <input type="text" id="ville" name="ville" value="<?php echo $contentOffre["ville"];?>" required>
                     <input type="text" id="codePostal" name="codePostal" value="<?php echo $contentOffre["codepostal"];?>" required>

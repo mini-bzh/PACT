@@ -10,4 +10,4 @@ if (categorie_offre == 'visite') {
     document.getElementById('champsSpectacle').style.display = 'block';
 } else if (categorie_offre == 'activite') {
     document.getElementById('champsActivite').style.display = 'block';
-}
+}   
