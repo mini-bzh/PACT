@@ -225,6 +225,17 @@
                                         ?>
                                         <p>Durée de la visite : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
                                     </section>
+
+                                    <section id="secAct" class="displayNone">
+                                        <p><span class="boldArchivo">Prestation(s) proposée(s) :</span><br><?php echo $contentOffre['prestation']; ?></p>
+                                        <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['ageminimum']; ?> ans</span></p>
+                                        <?php
+                                            $parts = explode(':', $contentOffre['duree_a']); // Divise en parties (hh, mm, ss)
+                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                        ?>
+                                        <p>Durée de l'activité : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                    </section>
+
                                 </div>
                             </div>
                         </div>

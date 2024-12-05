@@ -3,6 +3,7 @@ let offreResto = document.getElementById("secRestaurant");
 let offreParc = document.getElementById("secParcAttr");
 let offreSpec = document.getElementById("secSpec");
 let offreVisite = document.getElementById("secVisite");
+let offreAct = document.getElementById("secAct");
 
 function infoEnPlus() {
     if (nomCat.textContent === "restauration") {
@@ -19,6 +20,10 @@ function infoEnPlus() {
 
     if (nomCat.textContent === "visite") {
         offreVisite.classList.remove("displayNone");
+    }
+
+    if (nomCat.textContent === "activité") {
+        offreAct.classList.remove("displayNone");
     }
 }
 

@@ -524,11 +524,11 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <div id="champsActivite">
                         <div>
-                            <label for="prestation">Prestation proposer <span class="required">*</span> :</label>
-                            <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"></textarea>
+                            <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
+                            <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
                         </div>
                         <div class="champs">
-                            <label for="duree_a">Duree de la Activité <span class="required">*</span> :</label>
+                            <label for="duree_a">Durée de la Activité <span class="required">*</span> :</label>
                             <input type="time" id="duree_a" name="duree_a" />
                         </div>
                         <div class="champs">
@@ -578,13 +578,13 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- résumé -->
                     <div>
                         <label for="resume">Résumé <span class="required">*</span> :</label>
-                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (> 140 caractères)" required></textarea>
+                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (< 140 caractères)" required></textarea>
                     </div>
 
                     <!-- description détaillé -->
                     <div>
                         <label for="description">Description détaillée <span class="required">*</span> :</label>
-                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (> 2000 caractères)" required></textarea>
+                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (< 2000 caractères)" required></textarea>
                     </div>
 
 
