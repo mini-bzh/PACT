@@ -74,30 +74,28 @@ if ($todayTimestamp >= $firstDayNextMonthTimestamp) {
     $datePublicationTimestamp = $firstDayNextMonthTimestamp;
     $firstDayNextMonthTimestamp = strtotime('first day of next month', $datePublicationTimestamp);
     // Découper la chaîne de date en utilisant le séparateur '-'
-$dateParts = explode('-', $dateDebutFacture);
-// Assigner les valeurs aux variables
-$year = $dateParts[0]; // Année
-$month = $dateParts[1]; // Mois
-$day = $dateParts[2]; // Jour
-    if(isDateInMonth($dateDebutFacture,$year, $month) == false){
+    $dateParts = explode('-', $dateDebutFacture);
+    // Assigner les valeurs aux variables
+    $year = $dateParts[0]; // Année
+    $month = $dateParts[1]; // Mois
+    $day = $dateParts[2]; // Jour
+    if (isDateInMonth($dateDebutFacture, $month, $year) == false) {
         $stmt = $dbh->prepare(
             "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ", now());"
         );
         $stmt->execute();
         $result = $stmt->fetchAll();
-}
-    
-    
+    }
 }
 
 // Initialisation du compteur (valeur minimale 0)
 $counter = max(0, $daysElapsed);
 
 // Affichage du compteur
-// echo "Compteur quotidien : " . $counter . "\n";
+echo "Compteur quotidien : " . $counter . "\n";
 
 // if($contentOffre['enLigne'] == false){
-    
+
 // }
 
 
@@ -128,30 +126,30 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
         <main>
             <h1>Liste facture</h1>
             <div class="divTab">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Facture</th>
-                        <th>Date facture</th>
-                        <th>Visualiser la facture</th>
-                        <th>télécharger la facture</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($contentOffre as $row){
-                    ?>
+                <table>
+                    <thead>
                         <tr>
-                            <td><?php echo "Facture N°" . $row["id_facture"]; ?></td>
-                            <td><?php echo $row["date_creation"]; ?></td>
-                            <td><a href="visualisationFacture.php?id_facture=<?php echo $row['id_facture']; ?>">Visualiser</a></td>
-                            <td><a href="telechargementFacture.php?id_facture=<?php echo $row['id_facture']; ?>">télécharger</a></td>
+                            <th>Facture</th>
+                            <th>Date facture</th>
+                            <th>Visualiser la facture</th>
+                            <th>télécharger la facture</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($contentOffre as $row) {
+                        ?>
+                            <tr>
+                                <td><?php echo "Facture N°" . $row["id_facture"]; ?></td>
+                                <td><?php echo $row["date_creation"]; ?></td>
+                                <td><a href="visualisationFacture.php?id_facture=<?php echo $row['id_facture']; ?>">Visualiser</a></td>
+                                <td><a href="telechargementFacture.php?id_facture=<?php echo $row['id_facture']; ?>">télécharger</a></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </main>
 
