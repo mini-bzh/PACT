@@ -18,7 +18,57 @@ if (!isset($_SESSION["idCompte"])) {
     exit();
 }
 
+if (isset($_GET["idOffre"])) {
+    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
+    // On cherche dans quelle catégorie est l'offre
+    foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
+        
+        // Requête pour chercher la catégorie
+        $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
+        $stmt->execute([ ':idOffre' => $idOffre]);
+
+        // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
+        if(isset($stmt->fetch()['idoffre'])){?>
+        <script>
+                let categorie_offre = '<?php echo $nom_cat; ?>';
+            </script>
+        <?php
+
+            // Si c'est une visite, on récupère les langues
+            $langue_preselec = array();
+            if($nom_cat === 'visite') {
+                $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._possedelangue WHERE idOffre = :idOffre;");
+                $stmt->execute([ ':idOffre' => $idOffre]);
+                $langue_preselec = array_column($stmt->fetchAll(), 'nomlangue');
+            }
+
+        }
+    }
+
+    // Récupération des langues
+    $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._langue;");
+    $stmt->execute();
+    $langues = array_column($stmt->fetchAll(), 'nomlangue');
+
+    // Récupération des détails de l'offre à partir de la base de données
+    $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
+    
+
+
+    // requete pour avoir la liste des tags
+    $stmt = $dbh->prepare("select * from tripskell._tags");
+    $stmt->execute();
+    $liste_tags = $stmt->fetchAll();
+
+    // requete pour avoir la liste des tags pour préremplir
+    $stmt = $dbh->prepare("select nomtag from tripskell._possede where idOffre=:idOffre");
+    $stmt->execute(["idOffre" => $_GET["idOffre"]]);
+    $liste_tags_preselec = array_column($stmt->fetchAll(),"nomtag");
+    
+} else {
+    die("Error");
+}
 
 if (key_exists("idCompte", $_SESSION)) {
     // Récupération de id_c de pro_prive 
@@ -282,57 +332,6 @@ if (!empty($_POST)) {
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
     header("Location: ../pages/gestionOffres.php");
-    if (isset($_GET["idOffre"])) {
-        $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
-    
-        // On cherche dans quelle catégorie est l'offre
-        foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
-            
-            // Requête pour chercher la catégorie
-            $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
-            $stmt->execute([ ':idOffre' => $idOffre]);
-    
-            // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
-            if(isset($stmt->fetch()['idoffre'])){?>
-                <script>
-                    let categorie_offre = '<?php echo $nom_cat; ?>';
-                </script>
-            <?php
-    
-                // Si c'est une visite, on récupère les langues
-                $langue_preselec = array();
-                if($nom_cat === 'visite') {
-                    $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._possedelangue WHERE idOffre = :idOffre;");
-                    $stmt->execute([ ':idOffre' => $idOffre]);
-                    $langue_preselec = array_column($stmt->fetchAll(), 'nomlangue');
-                }
-    
-            }
-        }
-    
-        // Récupération des langues
-        $stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._langue;");
-        $stmt->execute();
-        $langues = array_column($stmt->fetchAll(), 'nomlangue');
-    
-        // Récupération des détails de l'offre à partir de la base de données
-        $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
-        
-    
-    
-        // requete pour avoir la liste des tags
-        $stmt = $dbh->prepare("select * from tripskell._tags");
-        $stmt->execute();
-        $liste_tags = $stmt->fetchAll();
-    
-        // requete pour avoir la liste des tags pour préremplir
-        $stmt = $dbh->prepare("select nomtag from tripskell._possede where idOffre=:idOffre");
-        $stmt->execute(["idOffre" => $_GET["idOffre"]]);
-        $liste_tags_preselec = array_column($stmt->fetchAll(),"nomtag");
-        
-    } else {
-        die("Error");
-    }
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
