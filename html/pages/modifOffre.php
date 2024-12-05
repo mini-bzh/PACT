@@ -211,29 +211,32 @@ if (!empty($_POST)) {
             "Samedi"=> json_decode($_POST["samedi"]),
             "Dimanche"=> json_decode($_POST["dimanche"])];
 
-    foreach ($jours as $jour => $horaires)
+
+    foreach ($jours as $jour => $horaires)      //pour chaque jour
     {
-        echo $horaires;
         // Remplacez les valeurs vides par NULL
         $debMatin = !empty($horaires[0]) ? $horaires[0] : null;
         $finMatin = !empty($horaires[1]) ? $horaires[1] : null;
         $debAprem = !empty($horaires[2]) ? $horaires[2] : null;
         $finAprem = !empty($horaires[3]) ? $horaires[3] : null;
 
+
         if($debMatin != null && $finMatin != null)      //si le jour est ouvert
         {
-            $query = "SELECT * from tripskell._ouverture where idoffre = :idOffre";
+            $query = "SELECT * from tripskell._ouverture where idoffre = :idOffre and id_jour = :id_jour";      //les horaires du jour id_jour pour l'offre idOffre
             $stmt = $dbh->prepare($query);
+
             $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
+            $stmt->bindValue(':id_jour', $jour, PDO::PARAM_STR);
             $stmt->execute();
 
             $result = $stmt->fetchAll();
 
-            foreach ($result as $row)
+            foreach ($result as $row)       //remplace les anciennes données par celles renvoyées après la modif de l'offre
             {
                 $query =    "UPDATE tripskell._horaire
                             SET horaire_matin_debut = :debMatin, horaire_matin_fin = :finMatin, horaire_aprem_debut = :debAprem, horaire_aprem_fin = :finAprem
-                            WHERE id_hor = :id_hor";
+                            WHERE id_hor = :id_hor ;";
 
                 $stmt = $dbh->prepare($query);
 
@@ -244,9 +247,9 @@ if (!empty($_POST)) {
                 $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                 $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                 $stmt->bindValue(':id_hor', $row["id_hor"], PDO::PARAM_STR);
+
+                print_r($query);
                 $stmt->execute();
-
-
             }
         }
     }
