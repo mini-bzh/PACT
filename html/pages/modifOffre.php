@@ -56,6 +56,18 @@ if (isset($_GET["idOffre"])) {
     // Récupération des détails de l'offre à partir de la base de données
     $contentOffre = $dbh->query("SELECT * FROM tripskell.offre_pro WHERE idOffre='" . $idOffre . "';")->fetchAll()[0];
     
+
+
+    // requete pour avoir la liste des tags
+    $stmt = $dbh->prepare("select * from tripskell._tags");
+    $stmt->execute();
+    $liste_tags = $stmt->fetchAll();
+
+    // requete pour avoir la liste des tags pour préremplir
+    $stmt = $dbh->prepare("select nomtag from tripskell._possede where idOffre=:idOffre");
+    $stmt->execute(["idOffre" => $_GET["idOffre"]]);
+    $liste_tags_preselec = array_column($stmt->fetchAll(),"nomtag");
+    
 } else {
     die("Error");
 }
@@ -200,7 +212,34 @@ if (!empty($_POST)) {
     // Exécution de la mise à jour
     $stmt->execute();
 
-    /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
+
+
+    // Mise à jour des Tags
+    $requete = "delete from tripskell.  _possede where idOffre=:idOffre";
+
+    // Préparation de la requête
+    $stmt = $dbh->prepare($requete);
+
+    // Exécution de la mise à jour
+    $stmt->execute([':idOffre' => $_GET['idOffre']]);
+
+    foreach (array_column($liste_tags, "nomtag") as $tag) {
+        if (in_array($tag, array_values($_POST))) {
+            echo $tag;
+            // Mise à jour des Tags
+            $requete = "insert into tripskell._possede (idOffre, nomtag) values (:idOffre, :nomtag)";
+
+            // Préparation de la requête
+            $stmt = $dbh->prepare($requete);
+
+            // Exécution de la mise à jour
+            $stmt->execute([':idOffre' => $_GET['idOffre'], ':nomtag' => $tag]);
+        }
+    }
+
+    
+
+    /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
 
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = ["Lundi" => json_decode($_POST['lundi']),
@@ -425,15 +464,32 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div>
             </div>
 
-                <!-- ----------------- TAGS ------------------- 
-                <div class="champs">
-                    <label for="tags">Tags :</label>
-                    <select id="tags" name="tags">
-                        <option value="">Sélectionnez des tags</option>
-                        <option value="tag1">Tag 1</option>
-                        <option value="tag2">Tag 2</option>
-                    </select>
-                </div> -->
+                <!-- ----------------- TAGS ------------------- -->
+                <?php
+                    
+                    $tags_cat = ['Visite','Restauration','PA','Spectacle','Activite'];
+                    
+                    foreach ($tags_cat as $cat) {
+                        
+?>
+                        <div id="tags<?php echo $cat; ?>">
+                            <label>Tags :</label>
+                            <div class="tags">
+<?php
+                            foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
+?>
+                                <div>
+                                    <input type="checkbox" id="<?php echo $tag; ?>" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" <?php echo in_array($tag,$liste_tags_preselec)?'checked':''; ?>/>
+                                    <label for="<?php echo $tag; ?>"><?php echo $tag; ?></label>
+                                </div>
+<?php
+                            }
+?>
+                            </div>
+                        </div>
+<?php
+                    }
+?>
 
                 <div class="champs">
                     <label for="prix-minimal">Prix minimal (euro) :</label>

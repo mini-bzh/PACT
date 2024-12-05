@@ -559,11 +559,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         --------------------------------------           |___/  -------------------------------------
                     -->
                     <?php
-                    
-                    
-                    
-
-
                     $tags_cat = ['Visite','Restauration','PA','Spectacle','Activite'];
                     
                     foreach ($tags_cat as $cat) {
