@@ -115,7 +115,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
                         </tr>
                         <tr>
                             <td>Adresse : 12 Rue de l'alma , Rennes</td>
-                            <td>Adresse : <?php echo $contentFacture['numero'] . " " . $contentFacture['rue'] . " " . $contentFacture['ville']; ?></td>
+                            <td>Adresse : <?php echo $contentFacture['pro.numero'] . " " . $contentFacture['pro.rue'] . " " . $contentFacture['pro.ville']; ?></td>
                         </tr>
                         <tr>
                             <td>Code Postal : 35238</td>

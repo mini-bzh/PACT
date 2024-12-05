@@ -200,7 +200,7 @@ header > img{
                         </tr>
                         <tr>
                             <td>Numéro de téléphone : +33 1 23 45 67 89</td>
-                            <td>Numéro SIREN : </td>
+                            <td>Numéro SIREN :  <?php echo $contentFacture['num_siren']; ?></td>
                         </tr>
                         <tr>
                             <td></td>
