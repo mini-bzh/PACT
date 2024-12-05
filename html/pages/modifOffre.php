@@ -310,30 +310,18 @@ if (!empty($_POST)) {
 
     if(isset($_POST['lang'])) {
         foreach ($langues as $langue) {
-            // Check if the language is not already in the database
-            $query = "SELECT nomlangue FROM tripskell._possedelangue WHERE idOffre = :idOffre AND nomlangue = :nomlangue";
+            // permet de savoir si la langue n'est pas deja dans la BDD
+            $query = "select nomlangue from tripskell._possedelangue where idOffre='".$idOffre."' and nomlangue='".$langue."';";
             $stmt = $dbh->prepare($query);
-            $stmt->bindParam(':idOffre', $idOffre);
-            $stmt->bindParam(':nomlangue', $langue);
-            $stmt->execute();
-
-            $row = $stmt->fetch();
-            $lang_pres = $row !== false ? $row['nomlangue'] !== null : false;
-
-            if (in_array($langue, $_POST['lang']) && !$lang_pres) {
-                $insertQuery = "INSERT INTO tripskell._possedelangue (nomlangue, idOffre) VALUES (:nomlangue, :idOffre)";
-                $insertStmt = $dbh->prepare($insertQuery);
-                $insertStmt->bindParam(':nomlangue', $langue);
-                $insertStmt->bindParam(':idOffre', $idOffre);
-                $insertStmt->execute();
+            $stmt->execute();            
+            $lang_pres = !isset($stmt->fetch()['nomlangue']);
+            if(in_array($langue, $_POST['lang']) && $lang_pres)
+            {
+                $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."','".$idOffre."');");
             }
-            
-            if (!in_array($langue, $_POST['lang']) && $lang_pres) {
-                $deleteQuery = "DELETE FROM tripskell._possedelangue WHERE nomlangue = :nomlangue AND idOffre = :idOffre";
-                $deleteStmt = $dbh->prepare($deleteQuery);
-                $deleteStmt->bindParam(':nomlangue', $langue);
-                $deleteStmt->bindParam(':idOffre', $idOffre);
-                $deleteStmt->execute();
+            if(!in_array($langue, $_POST['lang']) && !$lang_pres) 
+            {
+                $dbh->query("delete from tripskell._possedelangue where nomlangue='".$langue."' and idOffre='".$idOffre."';");
             }
         }
     }
