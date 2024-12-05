@@ -49,6 +49,8 @@ $stmt->bindParam(':idCompte', $_SESSION["idCompte"]);
 $stmt->execute();
 $info_banq = $stmt->fetchAll()[0];
 
+print_r($_FILES);
+print_r($_POST);
 if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
     // ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
@@ -61,31 +63,25 @@ if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
             // creation du nom de fichier en utilisant time et le type de fichier
             $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
-
+            
             // deplacement du fichier depuis l'espace temporaire
-            move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+            if(in_array($key_fichier, ["fichier1", "fichier2", "fichier3", "fichier4"])) {
+                echo $key_fichier . "-> /imagesOffres";
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesOffres/" . $nom_img[$key_fichier]);
+            }
+
+            if(trim($key_fichier) == "carte") {
+                echo $key_fichier . "-> /imagesCarte : " . $nom_img[$key_fichier];
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesCarte/" . $nom_img[$key_fichier]);
+            }
+
+            if(trim($key_fichier) == "plan") {
+                echo $key_fichier . "-> /imagesPlan : " . $nom_img[$key_fichier];
+                move_uploaded_file($fichier["tmp_name"], "../images/imagesPlan/" . $nom_img[$key_fichier]);
+            }
+            
         }
     }
-
-    /*
-$type2 = explode("/", $image2["types"])[1];
-$nom_img2 = time() . "." . $type2;
-if (in_array($type2, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image2["tmp_name"], "../images/imagesOffres/" . $nom_img2);
-}
-
-$type3 = explode("/", $image3["types"])[1];
-$nom_img3 = time() . "." . $type3;
-if (in_array($type3, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image3["tmp_name"], "../images/imagesOffres/" . $nom_img3);
-}
-
-$type4 = explode("/", $image4["types"])[1];
-$nom_img4 = time() . "." . $type4;
-if (in_array($type4, ["png", "gif", "jpeg"])) {
-    move_uploaded_file($image4["tmp_name"], "../images/imagesOffres/" . $nom_img4);
-}
-    */
 
 
     // on definie ici la requête INSERT. C'est une étape préparatoire avant d'insérer les valeurs dans la vue. 
@@ -187,8 +183,6 @@ $requete .= $_POST["date_debut_opt"] !== ""?$_POST["duree_opt"]:"0";
 $requete .= " week'";
 
 $requete .= ") returning idOffre;";
-echo $requete;
-print_r($_POST);
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
@@ -377,7 +371,7 @@ foreach ($jours as $jour => $horaires)
 
     // on ferme la base de donnée
     $dbh = null;
-    header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
+    //header("Location: /pages/gestionOffres.php"); // on redirige vers la page de l'offre créée
 }
 ?>
 
