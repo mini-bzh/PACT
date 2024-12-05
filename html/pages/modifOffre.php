@@ -29,9 +29,8 @@ if (isset($_GET["idOffre"])) {
         $stmt->execute([ ':idOffre' => $idOffre]);
 
         // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
-        if(isset($stmt->fetch()['idoffre'])){?><script>
-                let categorie_offre = '<?php echo $nom_cat; ?>';
-            </script>
+        if(isset($stmt->fetch()['idoffre'])){?>
+
         <?php
 
             // Si c'est une visite, on récupère les langues
@@ -331,9 +330,11 @@ if (!empty($_POST)) {
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
     header("Location: ../pages/gestionOffres.php");
+    ?><script>
+        let categorie_offre = '<?php echo $nom_cat; ?>';
+    </script><?php
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
-
 ?>
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
