@@ -31,7 +31,9 @@ if (isset($_GET["idOffre"])) {
         // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
         if(isset($stmt->fetch()['idoffre'])){?>
             <script>
-                let categorie_offre = '<?php echo $nom_cat; ?>';
+                /*
+                let categorie_offre = '<php echo $nom_cat; ?>';
+                */
             </script>
         <?php 
 
