@@ -107,6 +107,8 @@ if ($_GET['user-tempo'] === 'pro') {
 
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/pages/connexion.css">
+
+    <script src="../js/popUpmdpOublie.js" defer></script>
 </head>
 <body class=
 <?php
@@ -193,12 +195,12 @@ if ($_GET['user-tempo'] === 'pro') {
         <input type="password" id="userPSW" name="userPSW" minlength="12" required>
     </div>
 
-    <!-- <a href="#"><p class="texteSmall">Mot de passe oublié ?</p></a> -->
-
 <!-- Ecrit le message "mot de passe incorrect" si nécessaire -->
 <?php
     echo $message2;
 ?>
+    <p id="mdpOublie" onclick="recupMdp()">Mot de passe oublié ?</p>
+
 
     <!-- <div class="accepteSouvenir">
         <input type="checkbox" id="souvenir" name="souvenir">
@@ -224,12 +226,20 @@ if ($_GET['user-tempo'] === 'pro') {
 
 </form>
 
-<!-- Formulaire de demande de réinitialisation -->
-<form id="resetForm">
-    <label for="email">Email :</label>
-    <input type="email" name="email" id="email" required>
-    <button type="submit">Envoyer un email de réinitialisation</button>
-</form>
+<!-- Pop-up du formulaire de demande de réinitialisation -->
+<div id="resetForm" class="displayNone">
+    <form action="../php/reset_request.php" method="POST">
+        <div>
+            <label for="recupLogin"><p>Login :</p></label>
+            <input type="recupLogin" name="recupLogin" id="recupLogin" required>
+        </div>
+        <div>
+            <label for="recupMail"><p>Adresse email :</p></label>
+            <input type="recupMail" name="recupMail" id="recupMail" required>
+        </div>
+        <button type="submit"><p class="boldArchivo">Envoyer un email de<br>réinitialisation</p></button>
+    </form>
+</div>
 
 <!-- POP-UP -->
 <div class="popUp">

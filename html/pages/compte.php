@@ -501,12 +501,12 @@ if ((!$comptePro) && (!$compteMembre)) {
 ?>
 
             <!-- Bouton de données bancaires -->
-            <button class="btnDataBanc">
+            <!-- <button class="btnDataBanc">
             <?php
-                include '../icones/creditCardSVG.svg';
+                // include '../icones/creditCardSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
-            </button>
+            </button> -->
 
 <?php
             }
