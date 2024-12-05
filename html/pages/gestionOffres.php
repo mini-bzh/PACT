@@ -236,7 +236,7 @@ $contentMesOffres = $stmt->fetchAll();
                                     class="btnModifCache";
                                     <?php
                                 }
-                                ?> id="btnModif">
+                                ?>>
                                 <div class="btnGestionOffre grossisQuandHover">
                                     <img src="/icones/crayonSVG.svg" alt="">
                                     <p>Modifier l'offre </p>
