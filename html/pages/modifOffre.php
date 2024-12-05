@@ -316,6 +316,7 @@ if (!empty($_POST)) {
             $query = "select nomlangue from tripskell._possedelangue where idOffre=".$idOffre." and nomlangue='".$langue."';";
             $stmt = $dbh->prepare($query);
             $stmt->execute();
+            print_r($stmt->fetch());
             
             $lang_pres = is_null($stmt->fetch()["nomlangue"]);
             if(in_array($langue, $_POST['lang']) && $lang_pres)
