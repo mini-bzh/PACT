@@ -94,13 +94,12 @@ $day = $dateParts[2]; // Jour
 $counter = max(0, $daysElapsed);
 
 // Affichage du compteur
-echo "Compteur quotidien : " . $counter . "\n";
+// echo "Compteur quotidien : " . $counter . "\n";
 
-
-
-if($counter == 0){
-
+if($contentOffre['enLigne'] == false){
+    
 }
+
 
 ?>
 <?php

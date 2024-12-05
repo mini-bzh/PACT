@@ -160,6 +160,13 @@ header > img{
 #enTeteFac{
     text-align: center;
 }
+
+.logoHeader{
+    width: 135px;
+    height: 75px;
+    position: relative;
+    left: 30px;
+}
 </style>
 
     <body>
