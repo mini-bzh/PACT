@@ -310,11 +310,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
-
-
                  <!-- Champs pour sélectionner les images -->
 
-            
                  <!-- Champs pour sélectionner les images -->
         <div class="champs">
         <div class = "pdp_champs">
