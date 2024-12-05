@@ -1,4 +1,6 @@
 <?php
+
+use Sabberworm\CSS\CSSList\KeyFrame;
 session_start(); // Démarre la session pour récupérer les données de session
 
 // Récupération des paramètres de connexion à la base de données
@@ -101,8 +103,6 @@ if (!empty($_FILES) ) {
     }
 }
 
-print_r($_POST);
-
 
 if (!empty($_POST)) {
     
@@ -200,6 +200,43 @@ if (!empty($_POST)) {
 
     // Exécution de la mise à jour
     $stmt->execute();
+
+    /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
+
+    //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
+    $jours = ["Lundi" => json_decode($_POST['lundi']),
+            "Mardi"=> json_decode($_POST["mardi"]),
+            "Mercredi"=> json_decode($_POST["mercredi"]),
+            "Jeudi"=> json_decode($_POST["jeudi"]),
+            "Vendredi"=> json_decode($_POST["vendredi"]),
+            "Samedi"=> json_decode($_POST["samedi"]),
+            "Dimanche"=> json_decode($_POST["dimanche"])];
+
+    foreach ($jours as $jour => $horaires)
+    {
+        // Remplacez les valeurs vides par NULL
+        $debMatin = !empty($horaires[0]) ? $horaires[0] : null;
+        $finMatin = !empty($horaires[1]) ? $horaires[1] : null;
+        $debAprem = !empty($horaires[2]) ? $horaires[2] : null;
+        $finAprem = !empty($horaires[3]) ? $horaires[3] : null;
+
+        if($debMatin != null && $finMatin != null)      //si le jour est ouvert
+        {
+            $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+            $stmt = $dbh->prepare($query);
+
+            // Lier les variables aux paramètres
+            $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
+            $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
+            $stmt->execute();
+        }
+    }
+
+/* --------------------------------------------------------------------------------------------- */
 
     if(isset($_POST['lang'])) {
         foreach ($langues as $langue) {
@@ -424,24 +461,104 @@ $image4 = $contentOffre["image4"] ?? null;
                 </div>
 
                 <div>
-                    <label for="horaires">Horaires d'ouverture :</label>
-                    <div class="jours">
-                        <button type="button">L</button>
-                        <button type="button">Ma</button>
-                        <button type="button">Me</button>
-                        <button type="button">J</button>
-                        <button type="button">V</button>
-                        <button type="button">S</button>
-                        <button type="button">D</button>
-                    </div>
-                    <div class="heures">
-                        <label for="heure-debut">De</label>
-                        <!-- Champ de saisie pour l'heure de début avec valeur préremplie -->
-                        <input type="time" id="heure-debut" name="heure-debut" value="">
-                        <label for="heure-fin">à</label>
-                        <!-- Champ de saisie pour l'heure de fin avec valeur préremplie -->
-                        <input type="time" id="heure-fin" name="heure-fin" value="">
-                    </div>
+                <label for="horaires">Horaires d'ouverture :</label>
+                <?php       //préremplis les champs cachés des jours avec les horaires de la base de données
+                    $ouverture = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
+                    $tabJours = [];
+                    foreach ($ouverture as $key => $value) {
+                        $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $ouverture[$key]["id_hor"] ." where o.idOffre='" . $idOffre . "' and o.id_hor=". $ouverture[$key]["id_hor"] ." and o.id_jour='". $ouverture[$key]["id_jour"] ."';")->fetchAll()[0];
+                        
+                        $tabJours[$horaire['id_jour']] = json_encode([$horaire["horaire_matin_debut"], $horaire["horaire_matin_fin"], 
+                        $horaire["horaire_aprem_debut"], $horaire["horaire_aprem_fin"]]);
+                    }
+                ?>
+                        <div class="jours">
+                            <button type="button" id="btnL">L</button>
+                            <input type="hidden" name="lundi" class="inputJour" <?php
+                                if(array_key_exists("Lundi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Lundi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnMa">Ma</button>
+                            <input type="hidden" name="mardi" class="inputJour"
+                            <?php
+                                if(array_key_exists("Mardi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Mardi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnMe">Me</button>
+                            <input type="hidden" name="mercredi" class="inputJour"
+                            <?php
+                                if(array_key_exists("Mercredi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Mercredi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnJ">J</button>
+                            <input type="hidden" name="jeudi" class="inputJour"
+                            <?php
+                                if(array_key_exists("Jeudi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Jeudi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnV">V</button>
+                            <input type="hidden" name="vendredi" class="inputJour"
+                            <?php
+                                if(array_key_exists("Vendredi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Vendredi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnS">S</button>
+                            <input type="hidden" name="samedi" class="inputJour"
+                            <?php
+                                if(array_key_exists("Samedi", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Samedi"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                            <button type="button" id="btnD">D</button>
+                            <input type="hidden" name="dimanche" class="inputJour"
+                            <?php
+                                if(array_key_exists("Dimanche", $tabJours))
+                                {
+                                    ?>
+                                        value="<?php echo $tabJours["Dimanche"]; ?>"
+                                    <?php
+                                }
+                            ?>>
+                        </div>
+                        <div class="heures" id="heures1">
+                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
+                            <label for="heure-fin">à</label>
+                            <input type="time" class="heure-fin" name="heure-fin">
+
+                            <h4 id="btnAjoutHoraire">+</h4>
+
+                        </div>
+
+                        <div class="heures" id="heures2">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="heure-debut">
+                            <label for="heure-fin">à</label>
+                            <input type="time" class="heure-fin" name="heure-fin">
+                        </div>
                 </div>
 
                 <div class="champsAdresse">
