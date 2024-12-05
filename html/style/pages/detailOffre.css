@@ -375,6 +375,16 @@ th, td {
     transform: translateY(-5px);
 }
 
+#secRestaurant img{
+    position: relative;
+    top: 50px;
+    margin-bottom: 10%;
+}
+
+#secRestaurant p{
+    margin-top: 5%;
+}
+
 @media screen and (max-width : 428px){
     .conteneurOffre{
         margin-top: 2.4em;
@@ -461,6 +471,7 @@ th, td {
         display: flex;
         flex-wrap: wrap;
         padding: 20px 0px;
+        max-height: 250px;
     }
     
     .offre #partieTags{
