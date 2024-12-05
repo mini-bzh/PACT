@@ -33,7 +33,7 @@ if (isset($_GET["idOffre"])) {
             <script>
                 let categorie_offre = '<?php echo $nom_cat; ?>';
             </script>
-        <?php 
+        <?php
 
             // Si c'est une visite, on récupère les langues
             $langue_preselec = array();
