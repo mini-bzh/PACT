@@ -27,16 +27,31 @@ use Dompdf\Dompdf;
 
   
     if(isset($idCompte)){
-    if ($comptePro) {
-        if (key_exists("idCompte", $_SESSION)) {
-            // reccuperation de id_c de pro_prive 
-            $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
-            //$idproprive = $dbh->query("select id_c from tripskell.pro_prive;")->fetchAll()[0];
-            if(!isset($idproprive)){
-            // reccuperation de id_c de pro_public
-            $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll()[0];
+        if ($comptePro) {
+            if (key_exists("idCompte", $_SESSION)) {
+                // Récupération de id_c de pro_prive
+                $idpropriveResult = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll();
+                
+                if (count($idpropriveResult) > 0) {
+                    $idproprive = $idpropriveResult[0];
+                } else {
+                    // Si aucun résultat n'est trouvé, vous pouvez gérer cette situation ici
+                    $idproprive = null;  // Par exemple, on définit $idproprive comme null
+                }
+        
+                if (!isset($idproprive)) {
+                    // Récupération de id_c de pro_public si pro_prive n'a pas donné de résultat
+                    $idpropublicResult = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll();
+                    
+                    if (count($idpropublicResult) > 0) {
+                        $idpropublic = $idpropublicResult[0];
+                    } else {
+                        // Si aucun résultat n'est trouvé ici aussi, vous pouvez définir $idpropublic comme null
+                        $idpropublic = null;
+                    }
+                }
             }
-        }
+        
         $stmt = $dbh->prepare("SELECT * from tripskell.pro_prive where id_c = :id");
 
         $stmt->bindParam(':id', $idCompte, PDO::PARAM_STR);
@@ -264,13 +279,15 @@ if ((!$comptePro) && (!$compteMembre)) {
             // Si c'est un professionnel
             } else {
                 // On regarde si c'est un professionnel privé
-                if(count($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0]) !== 0) {
+                $query = $dbh->query("SELECT id_c FROM tripskell.pro_prive WHERE id_c='" . $_SESSION["idCompte"] . "';");
+                $result = $query->fetchAll();
+                if (!empty($result)) {
                     $tCompte = "Professionnel privé";
-    
                 // Sinon c'est un professionnel public
                 } else {
                     $tCompte = "Professionnel public";
                 }
+            
 
                 // Dans le cas d'un compte pro, on décompose son numéro SIREN
                 $siren = trim(chunk_split($infos["num_siren"], 3, " ")); // On ajoute un esapce entre 3 caractères
