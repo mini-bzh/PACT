@@ -249,7 +249,6 @@ if (!empty($_POST)) {
                 $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                 $stmt->bindValue(':id_hor', $row["id_hor"], PDO::PARAM_STR);
 
-                print_r($query);
                 $stmt->execute();
             }
         }
