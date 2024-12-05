@@ -18,11 +18,10 @@
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
-        // reccuperation de id de l offre
+        // recuperation de id de l offre
         $idOffre =$_GET["idOffre"];
         
-        // reccuperation du contenu de l offre
-
+        // recuperation du contenu de l offre
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
         $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
@@ -102,7 +101,7 @@
                                     ?>
                                 </div>
                                 <!-- <p>38 avis</p> -->
-                                <p> Categorie : <?php echo $categorie ; ?></p>
+                                <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
                             </div>
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/logoUserSVG.svg" alt="pro">
@@ -182,7 +181,10 @@
                                     </div>
                                     <hr>
                                     <?php //print_r($contentOffre); ?>
-                                    <p>test</p>
+                                    <section id="secRestaurant" class="displayNone">
+                                        <p class="boldArchivo">Gamme de prix : <?php echo $contentOffre['gammeprix']; ?></p>
+                                        <a href="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" target="_blank"><img src="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" alt="Menu"></a>
+                                    </section>
                                 </div>
                             </div>
                         </div>
@@ -329,7 +331,7 @@
         ?>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/js/detailOffre.js"></script>
+    <script src="../js/detailOffre.js"></script>
     <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->
 </html>
 

@@ -107,7 +107,7 @@ if ($_GET['user-tempo'] === 'pro') {
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/pages/connexion.css">
 
-    <script src="../js/popUpmdpOublie.js" defer></script>
+    <!-- <script src="../js/popUpmdpOublie.js" defer></script> -->
 </head>
 <body class=
 <?php
@@ -198,7 +198,7 @@ if ($_GET['user-tempo'] === 'pro') {
 <?php
     echo $message2;
 ?>
-    <p id="mdpOublie" onclick="recupMdp()">Mot de passe oublié ?</p>
+    <!-- <p id="mdpOublie" onclick="recupMdp()">Mot de passe oublié ?</p> -->
 
 
     <!-- <div class="accepteSouvenir">

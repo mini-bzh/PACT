@@ -1,3 +1,14 @@
+let nomCat = document.getElementById("nomCat");
+let offreResto = document.getElementById("secRestaurant");
+
+function infoEnPlus() {
+    if (nomCat.textContent === "restauration") {
+        offreResto.classList.remove("displayNone");
+    }
+}
+
+infoEnPlus();
+
 function initAvis()
 /*renvoie la map mapOffreInfos : sa clé est un id offre et sa valeur est une map dont la clé est un string du nom d'une information de l'offre et
 la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*/

@@ -476,7 +476,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     </div>
                 <?php } ?>
                 </div>
-                <label>La visite est guidée :<span class="required">*</span> :</label>
+                <label>La visite est guidée <span class="required">*</span> :</label>
                 <div class="parentVisite">
                     <div>
                         <input type="radio" id="guidee" name="guidee" value="true"/>
