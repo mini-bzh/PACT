@@ -121,11 +121,7 @@ if (!empty($_POST)) {
     // Traitement de l'image si elle est envoyée
     if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
         $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
-<<<<<<< Updated upstream
         move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesOffres/" . $nom_img);
-=======
-        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
->>>>>>> Stashed changes
     }
 
     // Préparation de la requête de mise à jour de l'offre
@@ -258,7 +254,6 @@ if (!empty($_POST)) {
 
     /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
 
-    
     /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
 
 
@@ -372,9 +367,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                  <!-- Champs pour sélectionner les images -->
 
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
             
