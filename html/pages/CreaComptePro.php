@@ -83,6 +83,11 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         } else {
             $codeSiren = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
         }
+        if (!empty($_POST["CryptoCB"]) && preg_match('/^\d{3}$/', $_POST["CryptoCB"])) {
+            $CryptoCB = intval($_POST["CryptoCB"]);
+        } else {
+            $CryptoCB = null; // Ou déclenchez une erreur si le codeSiren est obligatoire
+        }
 
         
         $stmt = $dbh->prepare($requete);
@@ -99,7 +104,7 @@ foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la
         $stmt->bindParam(":RaisonSociale", $_POST["RaisonSociale"]);
         $stmt->bindParam(":NumeroCB", $_POST["NumeroCB"]);
         $stmt->bindParam(":DateCB", $_POST["DateCB"]);
-        $stmt->bindParam(":CryptoCB", $_POST["CryptoCB"]);
+        $stmt->bindParam(":CryptoCB", $CryptoCB, PDO::PARAM_INT);
         $stmt->bindParam(":TitulaireCB", $_POST["TitulaireCB"]);
 
         $stmt->execute(); // execution de la requete
