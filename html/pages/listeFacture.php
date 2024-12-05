@@ -3,6 +3,7 @@ session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
 include('../php/connection_params.php');
+include('../php/verif_mois.php');
 
 // connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -36,6 +37,71 @@ if (key_exists("idOffre", $_GET)) {
     // Récupération des détails de l'offre à partir de la base de données
     $contentOffre = $dbh->query("SELECT * FROM tripskell.facture WHERE idOffre='" . $idOffre . "';")->fetchAll();
 }
+
+//print_r($contentOffre);
+
+$contentDerniereFacture = $contentOffre[0];
+
+$dateCreaRecente = $dbh->query("SELECT max(date_creation) FROM tripskell.facture;")->fetchAll()[0];
+//print_r($dateCreaRecente);
+
+$dateDebutFacture = $dateCreaRecente['max'];
+//echo $dateDebutFacture;
+
+// Conversion de la date de publication en timestamp
+$datePublicationTimestamp = strtotime($dateDebutFacture);
+
+// Calcul du premier jour du mois suivant à partir de la date de publication
+$firstDayNextMonthTimestamp = strtotime('first day of next month', $datePublicationTimestamp);
+$firstDayNextMonth = date('Y-m-d', $firstDayNextMonthTimestamp);
+//echo $firstDayNextMonth;
+
+
+
+// Timestamp actuel (date du jour)
+$today = date('Y-m-d');
+//echo $today;
+//echo $dateCreaRecente['date_creation'];
+$todayTimestamp = strtotime($today);
+
+// Calcul du nombre de jours écoulés depuis la date de publication
+$daysElapsed = floor(($firstDayNextMonthTimestamp - $todayTimestamp) / (60 * 60 * 24));
+
+//print_r($contentDerniereFacture);
+
+// Vérification pour éviter d'incrémenter après le début du mois suivant
+if ($todayTimestamp >= $firstDayNextMonthTimestamp) {
+    $datePublicationTimestamp = $firstDayNextMonthTimestamp;
+    $firstDayNextMonthTimestamp = strtotime('first day of next month', $datePublicationTimestamp);
+    // Découper la chaîne de date en utilisant le séparateur '-'
+$dateParts = explode('-', $dateDebutFacture);
+// Assigner les valeurs aux variables
+$year = $dateParts[0]; // Année
+$month = $dateParts[1]; // Mois
+$day = $dateParts[2]; // Jour
+    if(isDateInMonth($dateDebutFacture,$year, $month) == false){
+        $stmt = $dbh->prepare(
+            "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ", now());"
+        );
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+}
+    
+    
+}
+
+// Initialisation du compteur (valeur minimale 0)
+$counter = max(0, $daysElapsed);
+
+// Affichage du compteur
+echo "Compteur quotidien : " . $counter . "\n";
+
+
+
+if($counter == 0){
+
+}
+
 ?>
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive)) {
