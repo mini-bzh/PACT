@@ -139,11 +139,14 @@ btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre '
 /* ------------------------ supprimer avis ------------------------*/
 
 let btnSupprimerAvis = document.getElementById("btnSupprimerAvis");
-let textBtnSupprimerAvis = document.querySelectorAll("#btnSupprimerAvis p")[1];
 
-console.log(typeof(textBtnSupprimerAvis));
+let idAvis = document.getElementById("idAvisCache").textContent;
 
-btnSupprimerAvis.addEventListener("click", supprimerAvis);
+if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
+{
+    btnSupprimerAvis.addEventListener("click", supprimerAvis);
+}
+
 
 function supprimerAvis()
 {
