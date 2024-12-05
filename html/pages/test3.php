@@ -7,22 +7,16 @@ include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare("select * from tripskell._ouverture where idoffre = 1");
+// $ouverture = $dbh->query("select * from tripskell.pro_privee")->fetchAll();
+
+echo "ouverture <br>";
+print_r($ouverture);
+
+$stmt = $dbh->prepare("select login from tripskell.membre where login='test'");
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-echo("<br>ouverture<br>");
-foreach ($result as $row)
-{
-    print_r($row);
-    echo "<br>";
-}
-
-$stmt = $dbh->prepare("select * from tripskell._horaire");
-$stmt->execute();
-$result = $stmt->fetchAll();
-
-echo("<br>horaire<br>");
+// echo("<br>horaire<br>");
 foreach ($result as $row)
 {
     print_r($row);
