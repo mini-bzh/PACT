@@ -143,20 +143,19 @@ btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre '
 
 /* ------------------------ supprimer avis ------------------------*/
 
+
 let btnSupprimerAvis = document.getElementById("btnSupprimerAvis");
-
-let idAvis = document.getElementById("idAvisCache").textContent;
-
+console.log(btnSupprimerAvis);
 if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
 {
     btnSupprimerAvis.addEventListener("click", supprimerAvis);
 }
 
-
 function supprimerAvis()
 {
     if(confirm("Voulez-vous supprimer votre avis ?\nVous pourrez en déposer un autre."))
     {
+        let idAvis = document.querySelectorAll("#btnSupprimerAvis p")[1].textContent;
         $.ajax({
             url: "/php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)

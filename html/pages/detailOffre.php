@@ -284,7 +284,6 @@
                                     </div>
                             </div>
                             <div class="conteneurBtnGestionAvis">
-                                <p hidden id="idAvisCache"><?php echo $avis[$key]["id_avis"]?></p>
                                 <?php
                                     if(array_key_exists("idCompte", $_SESSION))
                                     {
@@ -301,6 +300,7 @@
                                             <div id="btnSupprimerAvis">
                                                 <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
                                                 <p>Supprimer</p>
+                                                <p hidden><?php echo $avis[$key]["id_avis"]?></p>
                                             </div>
                                         <?php
                                     }
