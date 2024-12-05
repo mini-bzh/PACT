@@ -38,7 +38,24 @@ if (key_exists("id_facture", $_GET)) {
     $contentFacture = $contentAboOptFacture[0];
 }
 
-    $nbSemaineOption = $dbh->query("SELECT FLOOR(EXTRACT(EPOCH FROM (dateFinSouscription - dateDebutSouscription)) / (7 * 24 * 60 * 60)) AS weeks FROM tripskell.facture where id_facture = " . $id_facture . ";")->fetchAll()[0];
+//on récupère dans la base de donnée le nombre de jour et de semaine qui sépare le début et la fin de l'abonnement ou option
+$nbSemaineOption = $dbh->query("SELECT FLOOR(EXTRACT(EPOCH FROM (dateFinSouscription - dateDebutSouscription)) / (7 * 24 * 60 * 60)) AS weeks FROM tripskell.facture where id_facture = " . $id_facture . ";")->fetchAll()[0];
+$nbJourAbo = $dbh->query("SELECT (dateFin - dateDebut)::INTEGER as jours FROM tripskell.facture where id_facture =" . $id_facture . ";")->fetchAll()[0];
+
+// Crée un objet DateTime pour la date actuelle
+$currentDate = new DateTime();
+
+// Modifie la date pour passer au premier jour du mois prochain
+$currentDate->modify('first day of next month');
+
+// déclaration de deux variables de stockage pour stocker les valeurs HT et TTC
+$valAboHT = 0;
+$valAboTTC = 0;
+$valOptHT = 0;
+$valOptTTC = 0;
+$resHT = 0;
+$resTTC = 0;
+
 ?>
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive)) {
@@ -59,119 +76,131 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
     </head>
 
     <body>
-        <?php print_r($contentFacture);
+        <?php /*print_r($contentFacture);
         echo "echo";
         print_r($nbSemaineOption);
+        print_r($nbJourAbo);*/
         ?>
-        <h1><?php echo "Facture N°" . $contentFacture['id_facture'] . " de l'offre " . $contentFacture['titreoffre']; ?></h1>
-
-        <div class="divTab">
-            <table id="infoClient">
-                <thead>
-                    <tr>
-                        <th>Client</th>
-                        <th>Plateform</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Raison social : <?php echo $contentFacture['raison_social']; ?></td>
-                        <td>Raison social : Tripskell</td>
-                    </tr>
-                    <tr>
-                        <td>Adresse : <?php echo $contentFacture['numero'] . " " . $contentFacture['rue'] . " " . $contentFacture['ville']; ?></td>
-                        <td>Adresse : 12 Rue de l'alma , Rennes, Bretagne</td>
-                    </tr>
-                    <tr>
-                        <td>Code Postal : <?php echo $contentFacture['codepostal']; ?></td>
-                        <td>Code Postal : 35238</td>
-                    </tr>
-                    <tr>
-                        <td>Numéro SIREN : </td>
-                        <td>Numéro de téléphone : +33 1 23 45 67 89</td>
-                    </tr>
-                    <tr>
-                        <td>Numéro de téléphone : <?php echo $contentFacture['numero_tel']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Adresse mail : <?php echo $contentFacture['adresse_mail']; ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="divTexte">
-            <p>Info facture abonnement</p>
-            <p>Date début de l'abonnement : <?php echo $contentFacture['datedebut']; ?>
-            <p>Date d'écheance de l'abonnement: <?php echo $contentFacture['datefin']; ?></p>
-            <p>Date de la prestation : <?php echo $contentFacture['date_creation']; ?></p>
-        </div>
-        <div class="divTab">
-            <table id="infoFacture">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Durée</th>
-                        <th>Prix HT</th>
-                        <th>Total HT</th>
-                        <th>Prix TTC</th>
-                        <th>Total TTC</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><?php echo $contentFacture['id_abo']; ?></td>
-                        <td></td>
-                        <td><?php if ($contentFacture['id_abo'] == 'Standard') {
-                                echo "1,67 € HT";
-                            } else {
-                                echo "3,34 € HT";
-                            } ?></td>
-                        <td></td>
-                        <td><?php if ($contentFacture['id_abo'] == 'Standard') {
-                                echo "2 € HT";
-                            } else {
-                                echo "4 € HT";
-                            } ?></td>
-                        <td></td>
-                    </tr>
-                    <?php foreach ($contentAboOptFacture as $row) { ?>
+        <header>
+            <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
+            <h1><?php echo "Facture N°" . $contentFacture['id_facture'] . " de l'offre " . $contentFacture['titreoffre']; ?></h1>
+        </header>
+        <main>
+            <div id="enTeteFac">
+                <h2>Facture datant du <?php echo $contentFacture['date_creation']; ?></h2>
+                <p>Le règlement se fera le <?php echo $currentDate->format('Y-m-d'); ?></p>
+            </div>
+            <div class="divTab">
+                <table id="infoClient">
+                    <thead>
                         <tr>
-                            <td><?php echo $row['id_option']; ?></td>
-                            <td><?php echo $nbSemaineOption['weeks'] . " semaines"; ?></td>
-                            <?php if ($row['id_option'] == 'En relief') { ?>
-                                <td>
-                                    <?php $val = 8.34; echo "8,34 € HT"; ?>
-                                </td>
-                            <?php } else { ?>
-                                <td>
-                                    <?php $val = 16.69; echo "16,69 € HT"; ?>
-                                </td>
-                            <?php } ?>
-                            <td><?php echo $nbSemaineOption['weeks']*$val . " €"; ?></td>
-                            <?php if ($row['id_option'] == 'En relief') { ?>
-                                <td>
-                                    <?php $val = 10; echo "10 € HT"; ?>
-                                </td>
-                            <?php } else { ?>
-                                <td>
-                                    <?php $val = 20; echo "20 € HT"; ?>
-                                </td>
-                            <?php } ?>
-                            <td><?php echo $nbSemaineOption['weeks']*$val . " €"; ?></td>
+                            <th>Tripskell</th>
+                            <th>Client</th>
                         </tr>
-                    <?php } ?>
-                    <!-- <?php //foreach ($contentOffre as $row) { 
-                            ?>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td>Standard</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Raison social : Tripskell</td>
+                            <td>Raison social : <?php echo $contentFacture['raison_social']; ?></td>
                         </tr>
-                    <?php //} 
-                    ?> -->
-            </table>
-        </div>
+                        <tr>
+                            <td>Adresse : 12 Rue de l'alma , Rennes</td>
+                            <td>Adresse : <?php echo $contentFacture['numero'] . " " . $contentFacture['rue'] . " " . $contentFacture['ville']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Code Postal : 35238</td>
+                            <td>Code Postal : <?php echo $contentFacture['codepostal']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Numéro de téléphone : +33 1 23 45 67 89</td>
+                            <td>Numéro SIREN :  <?php echo $contentFacture['num_siren']; ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Numéro de téléphone : <?php echo $contentFacture['numero_tel']; ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Adresse mail : <?php echo $contentFacture['adresse_mail']; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="divTab">
+                <table id="infoFacture">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Durée</th>
+                            <th>Prix HT</th>
+                            <th>Total HT</th>
+                            <th>Prix TTC</th>
+                            <th>Total TTC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo $contentFacture['id_abo']; ?></td>
+                            <td><?php echo $nbJourAbo['jours'] . " jours"; ?></td>
+                            <td><?php if ($contentFacture['id_abo'] == 'Standard') {
+                                    $valAboHT = 1.67;
+                                    echo "1,67 € HT";
+                                } else {
+                                    $valAboHT = 3.34;
+                                    echo "3,34 € HT";
+                                } ?></td>
+                            <td><?php $resHT += $nbJourAbo['jours'] * $valAboHT; echo $nbJourAbo['jours'] * $valAboHT . " €"; ?></td>
+                            <td><?php if ($contentFacture['id_abo'] == 'Standard') {
+                                    $valAboTTC = 2;
+                                    echo "2 € HT";
+                                } else {
+                                    $valAboTTC = 4;
+                                    echo "4 € HT";
+                                } ?></td>
+                            <td><?php $resTTC += $nbJourAbo['jours'] * $valAboTTC; echo $nbJourAbo['jours'] * $valAboTTC . " €"; ?></td>
+                        </tr>
+                        <?php foreach ($contentAboOptFacture as $row) { ?>
+                            <tr>
+                                <td><?php echo $row['id_option']; ?></td>
+                                <td><?php echo $nbSemaineOption['weeks'] . " semaines"; ?></td>
+                                <?php if ($row['id_option'] == 'En relief') { ?>
+                                    <td>
+                                        <?php $valOptHT = 8.34;
+                                        echo "8,34 € HT"; ?>
+                                    </td>
+                                <?php } else { ?>
+                                    <td>
+                                        <?php $valOptHT = 16.69;
+                                        echo "16,69 € HT"; ?>
+                                    </td>
+                                <?php } ?>
+                                <td><?php $resHT += $nbSemaineOption['weeks'] * $valOptHT; echo $nbSemaineOption['weeks'] * $valOptHT . " €"; ?></td>
+                                <?php if ($row['id_option'] == 'En relief') { ?>
+                                    <td>
+                                        <?php $valOptTTC = 10;
+                                        echo "10 € HT"; ?>
+                                    </td>
+                                <?php } else { ?>
+                                    <td>
+                                        <?php $valOptTTC = 20;
+                                        echo "20 € HT"; ?>
+                                    </td>
+                                <?php } ?>
+                                <td><?php $resTTC += $nbSemaineOption['weeks'] * $valOptTTC; echo $nbSemaineOption['weeks'] * $valOptTTC . " €"; ?></td>
+                            </tr>
+                        <?php } ?>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><?php echo $resHT . " €"; ?></td>
+                                <td></td>
+                                <td><?php echo $resTTC . " €"; ?></td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </body>
 
     </html>

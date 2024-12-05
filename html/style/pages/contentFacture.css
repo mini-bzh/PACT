@@ -1,11 +1,14 @@
 body{
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
     padding-left: 15%;
     padding-right: 15%;
 }
 
 table {
     table-layout: fixed;
-    width: 100%;
+    width: 80%;
+    margin-top: 30px;
 }
 
 #infoFacture{
@@ -27,7 +30,7 @@ table {
 }
 
 #infoClient {
-    background-color: #212121;
+    background-color: #2b2b2b;
     color: white;
     padding: 20px;
 }
@@ -60,4 +63,21 @@ th {
 h1 {
     text-align: center;
     margin: 30px;
+}
+
+header{
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+header > img{
+    width: 135px;
+    height: 75px;
+    position: relative;
+    right: 80px;
+}
+
+#enTeteFac{
+    text-align: center;
 }
