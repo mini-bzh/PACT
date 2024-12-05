@@ -225,7 +225,6 @@ if (!empty($_POST)) {
 
     foreach (array_column($liste_tags, "nomtag") as $tag) {
         if (in_array($tag, array_values($_POST))) {
-            echo $tag;
             // Mise à jour des Tags
             $requete = "insert into tripskell._possede (idOffre, nomtag) values (:idOffre, :nomtag)";
 
