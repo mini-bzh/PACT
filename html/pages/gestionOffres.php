@@ -64,12 +64,15 @@ $contentMesOffres = $stmt->fetchAll();
             <section id="conteneurOffre">
             <?php foreach ($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
             {
-                $prixOffre = []; // Tableau pour stocker les prix d'une offre et de son option
+                if ($contentOffre["enligne"]) {
+                    $prixOffre = []; // Tableau pour stocker les prix d'une offre et de son option
 
-                $prixOffre['prixOffre'] = $contentOffre["prix_abo"];
-                $prixOffre['prixOption'] = $contentOffre["prix_option"];
+                    $prixOffre['prixOffre'] = $contentOffre["prix_abo"];
+                    $prixOffre['prixOption'] = $contentOffre["prix_option"];
 
-                $donneePrix[] = $prixOffre; // Ajout des données de l'offre dans donneePrix
+                    $donneePrix[] = $prixOffre; // Ajout des données de l'offre dans donneePrix
+                }
+                
 
             ?>
                 <article class="offre" id="offre<?php echo $contentOffre['idoffre'] ?>">
