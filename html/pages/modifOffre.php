@@ -29,8 +29,7 @@ if (isset($_GET["idOffre"])) {
         $stmt->execute([ ':idOffre' => $idOffre]);
 
         // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
-        if(isset($stmt->fetch()['idoffre'])){?>
-            <script>
+        if(isset($stmt->fetch()['idoffre'])){?><script>
                 let categorie_offre = '<?php echo $nom_cat; ?>';
             </script>
         <?php
@@ -316,7 +315,7 @@ if (!empty($_POST)) {
             $query = "select nomlangue from tripskell._possedelangue where idOffre='".$idOffre."' and nomlangue='".$langue."';";
             $stmt = $dbh->prepare($query);
             $stmt->execute();            
-            $lang_pres = is_null($stmt->fetch()["nomlangue"]);
+            $lang_pres = is_null($stmt->fetch()['nomlangue']);
             if(in_array($langue, $_POST['lang']) && $lang_pres)
             {
                 $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."','".$idOffre."');");
