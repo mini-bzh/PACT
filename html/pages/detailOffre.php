@@ -19,7 +19,7 @@
     if(key_exists("idOffre", $_GET))
     {
         // reccuperation de id de l offre
-        $idOffre =$_GET["idOffre"]; 
+        $idOffre =$_GET["idOffre"];
         
         // reccuperation du contenu de l offre
 

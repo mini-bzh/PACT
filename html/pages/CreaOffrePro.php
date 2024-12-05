@@ -331,8 +331,6 @@ $jours = ["Lundi" => json_decode($_POST['lundi']),
         "Samedi"=> json_decode($_POST["samedi"]),
         "Dimanche"=> json_decode($_POST["dimanche"])];
 
-
-
 foreach ($jours as $jour => $horaires)
 {
     // Remplacez les valeurs vides par NULL
@@ -385,8 +383,14 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
     <body class="fondPro">
 
-        <p id="idOffre"><?php echo $idOffre; ?></p>
-
+    <?php 
+    if(array_key_exists("idOffre", $_SESSION))
+    {
+        ?>
+            <p id="idOffre"><?php echo $idOffre; ?></p>
+        <?php
+    }
+        ?>
         <?php include "../composants/header/header.php";        //import navbar
         ?>
 
@@ -619,7 +623,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <label for="horaires">Horaires d'ouverture :</label>
                         <div class="jours">
                             <button type="button" id="btnL">L</button>
-                            <input type="hidden" name="lundi" class="inputJour">
+                            <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
                             <button type="button" id="btnMa">Ma</button>
                             <input type="hidden" name="mardi" class="inputJour">
                             <button type="button" id="btnMe">Me</button>
