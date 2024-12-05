@@ -393,3 +393,64 @@ input[type="radio"]:checked::after {
     border-radius: 10px;
 }
 
+.image-container {
+    position: relative;
+    width: 50%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.pdp_champs{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 300px;
+}
+
+.champ
+.champs input[type="text"]:focus,
+.champs textarea[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Bouton stylé pour ajouter une photo */
+.champs input[type="file"] {
+    display: none; /* Cache le champ de fichier par défaut */
+}
+
+.champs label[for="fichier1"] {
+    display: inline-block;
+    background-color: #007bff; /* Couleur bleue */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px; /* Taille et espacement du bouton */
+    border-radius: 8px; /* Bords arrondis */
+    cursor: pointer; /* Curseur pointer */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    transition: all 0.3s ease; /* Animation sur hover */
+}
+
+.champs label[for="fichier1"]:hover {
+    background-color: #0056b3; /* Couleur plus foncée au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    transform: translateY(-2px); /* Effet de survol dynamique */
+}
+
+.champs label[for="fichier1"]:active {
+    background-color: #004080; /* Couleur encore plus foncée au clic */
+    transform: translateY(0); /* Réinitialisation de la position */
+}
+
+.champs label[for="fichier1"]::before {
+    content: "📷 "; /* Icône avant le texte */
+    font-size: 18px;
+}
+
+.champ_Img{
+    width: 100%;
+    height: 100%;
+}
+

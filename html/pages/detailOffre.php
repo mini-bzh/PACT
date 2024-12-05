@@ -125,7 +125,10 @@
                         <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                     
                         <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                            <div id="partieTags"><!-- future tag -->
+                            <div id="partieTags">
+
+                            <!-- tag -->
+
                                 <div class="conteneurSVGtexte">
                                     <img src="/icones/tagSVG.svg" alt="icone tag">
                                     <h4>Tags</h4>
@@ -172,9 +175,18 @@
                                     </tbody>
                                     </table>
                                 </div>
+                                <div id="partieCategorie">
+                                    <div class="conteneurSVGtexte">
+                                        <!--<img src="/icones/.svg" alt="icone tag">-->
+                                        <h4>Information supplémentaire</h4>
+                                    </div>
+                                    <hr>
+                                    <?php //print_r($contentOffre); ?>
+                                    <p>test</p>
+                                </div>
                             </div>
                         </div>
-                        <div id="partieAdresse"><!-- future tag -->
+                        <div id="partieAdresse">
                             <div class="conteneurSVGtexte">
                                 <img src="/icones/adresseSVG.svg" alt="icone tag">
                                 <h4>Adresse</h4>
@@ -191,6 +203,7 @@
                                 ?></p>
                             </a>
                         </div>
+                
                         
                     </article>
                 </section>
