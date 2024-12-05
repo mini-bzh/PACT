@@ -149,12 +149,15 @@ function horaireEntree(element)                 //met à jour la map mapJoursHor
 
     if (element == heureDebut1) {
         horairesJour[0] = heureDebut1.value;
+
     }
     else if (element == heureFin1) {
         horairesJour[1] = heureFin1.value;
+
     }
     else if (element == heureDebut2) {
         horairesJour[2] = heureDebut2.value;
+
     }
     else if (element == heureFin2) {
         horairesJour[3] = heureFin2.value;
@@ -187,7 +190,6 @@ function toggleHoraire2()                       //toggle l'affichage des champs 
 
 /* ----------------------------------------------- vérifications avant submit ----------------------------------------------- */
 let formulaire = document.getElementsByTagName("form")[0];
-
 formulaire.addEventListener("submit", verifHorairesCorrectes);
 
 function verifHorairesCorrectes()               //lorsque l'utilisateur veut submit, vérifie la validité des horaires entrées
@@ -260,13 +262,14 @@ function verifHorairesCorrectes()               //lorsque l'utilisateur veut sub
     //si aucune erreur n'est détectée, envoyer une map des jours ouverts et de leurs horaires au script changeHoraireOffre.php
     if (joursHorairesVides.length == 0 && joursHorairesInvalides.length == 0 && joursHorairesIncoherentes.length == 0) {
 
-        let tabInputsJour = document.getElementsByClassName("inputJour");       //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
         let i = 0;
         for(let key of mapJoursHoraires.keys())
         {
             tabInputsJour[i].value = JSON.stringify(mapJoursHoraires.get(key));     //ajoute les horaires du jour dans les champs input, converties en string avec JSON
             i++;
         }
+
+        console.log(tabInputsJour);
     }
     else
     {

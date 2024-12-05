@@ -200,7 +200,7 @@ if (!empty($_POST)) {
     // Exécution de la mise à jour
     $stmt->execute();
 
-    /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
+    /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
 
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = ["Lundi" => json_decode($_POST['lundi']),
@@ -213,6 +213,7 @@ if (!empty($_POST)) {
 
     foreach ($jours as $jour => $horaires)
     {
+        echo $horaires;
         // Remplacez les valeurs vides par NULL
         $debMatin = !empty($horaires[0]) ? $horaires[0] : null;
         $finMatin = !empty($horaires[1]) ? $horaires[1] : null;
@@ -221,17 +222,32 @@ if (!empty($_POST)) {
 
         if($debMatin != null && $finMatin != null)      //si le jour est ouvert
         {
-            $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+            $query = "SELECT * from tripskell._ouverture where idoffre = :idOffre";
             $stmt = $dbh->prepare($query);
-
-            // Lier les variables aux paramètres
             $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
-            $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
             $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            foreach ($result as $row)
+            {
+                $query =    "UPDATE tripskell._horaire
+                            SET horaire_matin_debut = :debMatin, horaire_matin_fin = :finMatin, horaire_aprem_debut = :debAprem, horaire_aprem_fin = :finAprem
+                            WHERE id_hor = :id_hor";
+
+                $stmt = $dbh->prepare($query);
+
+
+                // Lier les variables aux paramètres
+                $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':id_hor', $row["id_hor"], PDO::PARAM_STR);
+                $stmt->execute();
+
+
+            }
         }
     }
 
@@ -253,7 +269,7 @@ if (!empty($_POST)) {
 
     
     // Redirection vers gestionOffres.php après la mise à jour réussie
-    //header("Location: ../pages/gestionOffres.php");
+    header("Location: ../pages/gestionOffres.php");
     exit(); // Terminer le script après la redirection pour éviter d'exécuter du code inutile
 }
 
