@@ -657,10 +657,10 @@ $image4 = $contentOffre["image4"] ?? null;
             ?>
 <?php
     }
-    ?>
 
 
-// Fonction pour simuler le clic sur le champ de fichier
+
+/* Fonction pour simuler le clic sur le champ de fichier
 function selectFile(imageNumber) {
     document.getElementById(`fileInput${imageNumber}`).click();
 }
@@ -671,5 +671,6 @@ document.getElementById("fileInput1").addEventListener("change", function(event)
 });
 document.getElementById("fileInput2").addEventListener("change", function(event) {
     updatePreview(event, "preview2");
-});
+});*/
 
+    ?>
