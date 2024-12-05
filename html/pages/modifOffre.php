@@ -22,7 +22,8 @@ if (isset($_GET["idOffre"])) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
     // On cherche dans quelle catégorie est l'offre
-    foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
+    foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) 
+    {
         
         // Requête pour chercher la catégorie
         $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
@@ -42,7 +43,6 @@ if (isset($_GET["idOffre"])) {
                 $stmt->execute([ ':idOffre' => $idOffre]);
                 $langue_preselec = array_column($stmt->fetchAll(), 'nomlangue');
             }
-
         }
     }
 
@@ -251,8 +251,6 @@ if (!empty($_POST)) {
     }
 
     
-
-    /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
 
     /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
 
