@@ -121,7 +121,7 @@ if (!empty($_POST)) {
     // Traitement de l'image si elle est envoyée
     if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
         $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
-        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
+        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesOffres/" . $nom_img);
     }
 
     // Préparation de la requête de mise à jour de l'offre
