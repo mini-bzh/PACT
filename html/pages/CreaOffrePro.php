@@ -17,6 +17,11 @@ if (!isset($_SESSION["idCompte"])) {
 }
 
 
+// Récupération des langues
+$stmt = $dbh->prepare("SELECT nomlangue FROM tripskell._langue;");
+$stmt->execute();
+$langues = array_column($stmt->fetchAll(), 'nomlangue');
+
 // On va récupérer ici l'identifiant id_c présent dans les vues pro.
 if (key_exists("idCompte", $_SESSION)) {
     // reccuperation de id_c de pro_prive 
@@ -183,6 +188,7 @@ $requete .= " week'";
 
 $requete .= ") returning idOffre;";
 echo $requete;
+print_r($_POST);
 // ici, on va éxecuter l'INSERT tout en assignant les variables correspondants à celle de la Vue
 $stmt = $dbh->prepare($requete);
 
@@ -261,7 +267,7 @@ $nbattraction = $_POST["categorie"]=="parcDattraction"?$_POST["nbAttraction"]:nu
 $agemin   = $_POST["categorie"]=="parcDattraction"?$_POST["ageminimum"]:null;
 
 $duree_v     = $_POST["categorie"]=="visite"?$_POST["duree_v"]:null;
-$guidee      = $_POST["categorie"]=="visite"?$_POST["guidee"]=="YES":null;
+$guidee      = $_POST["categorie"]=="visite"?$_POST["guidee"]:null;
 
 $duree_a    = $_POST["categorie"]=="activite"?$_POST["duree_a"]:null;
 $ageminimum  = $_POST["categorie"]=="activite"?$_POST["agemin"]:null;
@@ -299,7 +305,19 @@ foreach($liste_tags as $tag) {
 }
 
 // requete pour l'insersion des donnees banquaires
-if (in_array($_SESSION["idCompte"], $idproprive)) {
+$keysToCheck = ["cb", "DE", "crypto", "TC", "AdM_PP", "MDP_PP", "iban"];
+
+
+// Vérifie si au moins un des champs est présent dans $_POST
+$hasFieldPresent = false;
+
+foreach ($keysToCheck as $key) {
+    if (!empty($_POST[$key])) { // Vérifie si le champ est présent (même s'il est vide)
+        $hasFieldPresent = true;
+        break; // Pas besoin de continuer, on a trouvé un champ présent
+    }
+}
+if (in_array($_SESSION["idCompte"], $idproprive) && $hasFieldPresent) {
     $requete = "update tripskell.pro_prive set ";
     $requete .= "coordonnee_bancaire = :coordonnee_bancaire, date_exp = :date_exp, cryptogramme = :cryptogramme, nom_titulaire_carte = :nom_titulaire_carte,";
     $requete .= "addressmail_pp = :addressmail_pp, mdp_pp = :mdp_pp,";
@@ -456,54 +474,39 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- ----------------- VISITE ------------------- -->
 
                     <div id="champsVisite">
-
-                        <div class="champs">
-                            <label for="duree_v">Duree de la visite <span class="required">*</span> :</label>
-                            <input type="time" id="duree_v" name="duree_v" />
-                        </div>
-                        <label>Nom langue <span class="required">*</span> :</label>
-                        <div class="parentVisite">
-                            <div>
-                                <input type="checkbox" id="lang1" name="lang[]" value="FR" />
-                                <label for="lang1">Français</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="lang2" name="lang[]" value="EN" />
-                                <label for="lang2">Anglais</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="lang3" name="lang[]" value="AL" />
-                                <label for="lang3">Allemand</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="lang4" name="lang[]" value="ES" />
-                                <label for="lang4">Espagnol</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="lang5" name="lang[]" value="CH" />
-                                <label for="lang5">chinois</label>
-                            </div>
-                        </div>
-                        <label>La visite est guide :<span class="required">*</span> :</label>
-                        <div class="parentVisite">
-                            <div>
-                                <input type="radio" id="guidee" name="guidee" value="YES" />
-                                <label for="guidePresent">Oui</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="guidee" name="guidee" value="NO" /> <!-- a enlever et utilisation de checkbox -->
-                                <label for="guidePasPresent">Non</label>
-                            </div>
-                        </div>
+                <div class="champs">
+                    <label for="duree_v">Duree de la visite :</label>
+                    <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
+                </div>
+                <label>Langue(s) de la visite :</label>
+                <div class="parentVisite">
+                <?php
+                foreach ($langues as $langue) {?>
+                    <div>
+                        <input type="checkbox" id="lang" name="lang[]" value="<?php echo $langue; ?>" />
+                        <label for="lang"><?php echo $langue; ?></label>
                     </div>
-
+                <?php } ?>
+                </div>
+                <label>La visite est guidée :<span class="required">*</span> :</label>
+                <div class="parentVisite">
+                    <div>
+                        <input type="radio" id="guidee" name="guidee" value="true"/>
+                        <label for="guidePresent">Oui</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="guidee" name="guidee" value="false"/> <!-- a enlever et utilisation de checkbox -->
+                        <label for="guidePasPresent">Non</label>
+                    </div>
+                </div>
+            </div>
                     <!-- ----------------- RESTAURATION ------------------- -->
 
                     <div id="champsRestauration">
-                        <div>
-                            <label for="carte">Carte <span class="required">*</span> :</label>
-                            <textarea id="carte" name="carte" placeholder="saisir les élements qu'il y a sur votre carte" maxlength="100"></textarea>
-                        </div>
+                        <div class="champs">
+                        <label for="carte">Selectionner un scan de la carte des repas :</label>
+                        <input type="file" id="carte" name="carte">
+                    </div>
                         <div class="champs">
                             <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
                             <select id="gammeprix" name="gammeprix">
