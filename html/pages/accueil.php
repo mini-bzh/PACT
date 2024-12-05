@@ -90,7 +90,7 @@
                 if($comptePro)                  //change le titre de la page
                 {
                     ?>
-                    <h1>Mes offres</h1>
+                    <h1>Mes offres en ligne</h1>
                     <?php
                 }
                 else
