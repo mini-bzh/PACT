@@ -315,10 +315,8 @@ if (!empty($_POST)) {
             // permet de savoir si la langue n'est pas deja dans la BDD
             $query = "select nomlangue from tripskell._possedelangue where idOffre=".$idOffre." and nomlangue='".$langue."';";
             $stmt = $dbh->prepare($query);
-            $stmt->execute();
-            print_r($stmt->fetch()['nomlangue']);
-            
-            $lang_pres = is_null($stmt->fetch()["nomlangue"]);
+            $stmt->execute();            
+            @$lang_pres = is_null($stmt->fetch()["nomlangue"]);
             if(in_array($langue, $_POST['lang']) && $lang_pres)
             {
                 $dbh->query("insert into tripskell._possedelangue(nomlangue, idOffre) values ('".$langue."',".$idOffre.");");
