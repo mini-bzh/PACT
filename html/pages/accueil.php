@@ -21,7 +21,7 @@
                          offres sinon */
 
     {
-        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c");
+        $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c and enLigne");
 
         // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
         $stmt->bindParam(":id_c", var: $id_c);
@@ -90,7 +90,7 @@
                 if($comptePro)                  //change le titre de la page
                 {
                     ?>
-                    <h1>Mes offres</h1>
+                    <h1>Mes offres en ligne</h1>
                     <?php
                 }
                 else
