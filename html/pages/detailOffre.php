@@ -190,8 +190,52 @@
                                         <p>Nombre d'attraction : <span class="boldArchivo"><?php echo $contentOffre['nbattraction']; ?></span></p>
                                         <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['agemin']; ?> ans</span></p>
                                         <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan"></a>
-
                                     </section>
+
+                                    <section id="secSpec" class="displayNone">
+                                        <p>Nombre de places maximum : <span class="boldArchivo"><?php echo $contentOffre['capacite']; ?></span></p>
+                                        <?php
+                                            $parts = explode(':', $contentOffre['duree_s']); // Divise en parties (hh, mm, ss)
+                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                        ?>
+                                        <p>Durée du spectacle : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                    </section>
+
+<?php
+
+                                    $stmt = $dbh->prepare("select * from tripskell._possedeLangue where idoffre='" . $idOffre . "';");
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll();
+
+                                    // Extraire les valeurs de la colonne "nomlangue"
+                                    $langues = array_column($result, 'nomlangue');
+
+                                    // Combiner les éléments en une seule chaîne séparée par des virgules
+                                    $languesStr = implode(', ', $langues);
+
+
+?>
+
+                                    <section id="secVisite" class="displayNone">
+                                        <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
+                                        <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
+                                        <?php
+                                            $parts = explode(':', $contentOffre['duree_v']); // Divise en parties (hh, mm, ss)
+                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                        ?>
+                                        <p>Durée de la visite : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                    </section>
+
+                                    <section id="secAct" class="displayNone">
+                                        <p><span class="boldArchivo">Prestation(s) proposée(s) :</span><br><?php echo $contentOffre['prestation']; ?></p>
+                                        <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['ageminimum']; ?> ans</span></p>
+                                        <?php
+                                            $parts = explode(':', $contentOffre['duree_a']); // Divise en parties (hh, mm, ss)
+                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                        ?>
+                                        <p>Durée de l'activité : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                    </section>
+
                                 </div>
                             </div>
                         </div>
