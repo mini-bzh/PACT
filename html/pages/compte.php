@@ -489,6 +489,7 @@ if ((!$comptePro) && (!$compteMembre)) {
                 // recuperation de la reponse et mise en forme
                 $contentMesOffres = $stmt->fetchAll();
 
+                $donneePrix = [];
                 foreach($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
                 {
                     if ($contentOffre["enligne"]) {
