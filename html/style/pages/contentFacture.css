@@ -1,0 +1,63 @@
+body{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#infoFacture{
+    border-collapse: collapse;
+    border: 3px solid black;
+    text-align: center;
+}
+
+#infoFacture>tbody>tr>td,
+#infoFacture>tbody>tr>th{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#infoFacture>thead>tr>td,
+#infoFacture>tbody>tr>th{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#infoClient {
+    background-color: #212121;
+    color: white;
+    padding: 20px;
+}
+
+tr {
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+}
+
+th {
+    padding: 10px;
+}
+
+.divTab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.divTexte{
+    position: relative;
+    left: 10%;
+}
+
+h1 {
+    text-align: center;
+    margin: 30px;
+}

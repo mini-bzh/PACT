@@ -1,189 +1,208 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+session_start(); // recuperation de la sessions
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    table {
-        table-layout: fixed;
-        width: 100%;
-    }
+// recuperation des parametre de connection a la BdD
+include('../php/connection_params.php');
 
-    #infoFactureAbonnement,
-    #infoFactureOption {
-        border-collapse: collapse;
-        border: 3px solid black;
-        text-align: center;
-    }
+// connexion a la BdD
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-    #infoFactureAbonnement>tbody>tr>td,
-    #infoFactureAbonnement>tbody>tr>th,
-    #infoFactureOption>tbody>tr>td,
-    #infoFactureOption>tbody>tr>th {
-        border-collapse: collapse;
-        border: 1px solid black;
-    }
+// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+include('../php/verif_compte_pro.php');
 
-    /* #infoFactureAbonnement > thead > tr > th, #infoFactureOption > thead > tr > th{
-        border-collapse: collapse;
-        border: 1px solid black;
-        padding: 5px;
-    } */
+if (!isset($_SESSION["idCompte"])) {
+    header("Location: /pages/erreur404.php");
+    exit();
+}
 
-    #infoFactureAbonnement>thead>tr>td,
-    #infoFactureAbonnement>tbody>tr>th,
-    #infoFactureOption>thead>tr>td,
-    #infoFactureOption>tbody>tr>th {
-        border-collapse: collapse;
-        border: 1px solid black;
-    }
+// binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
+$id_c = $_SESSION["idCompte"];
 
-    #infoClient {
-        background-color: #212121;
-        color: white;
-        padding: 20px;
-    }
+if (key_exists("idCompte", $_SESSION)) {
+    // reccuperation de id_c de pro_prive 
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
 
-    tr {
-        padding: 10px;
-    }
+    // reccuperation de id_c de pro_public
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+}
 
-    td {
-        padding: 10px;
-    }
 
-    th {
-        padding: 10px;
-    }
+// Récupération de l'identifiant de l'offre si présent dans l'URL
+$idOffre = null;
+if (key_exists("idOffre", $_GET)) {
+    $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
-    .divTab {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin: 30px;
-    }
+    // Récupération des détails de l'offre à partir de la base de données
+    $contentOffre = $dbh->query("SELECT * FROM tripskell.facture WHERE idOffre='" . $idOffre . "';")->fetchAll();
+}
+?>
+<?php
+if (in_array($_SESSION["idCompte"], $idproprive)) {
+?>
 
-    .divTexte{
-        position: relative;
-        left: 20%;
-    }
+    <!DOCTYPE html>
+    <html lang="fr">
 
-    h1 {
-        text-align: center;
-        margin: 30px;
-    }
-</style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gestion des offre</title>
 
-<body>
-    <h1>Je suis une Facture test</h1>
+        <!-- Favicon -->
+        <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <div class="divTab">
-        <table id="infoClient">
-            <thead>
-                <tr>
-                    <th>Client</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Nom :</td>
-                </tr>
-                <tr>
-                    <td>Adress :</td>
-                </tr>
-                <tr>
-                    <td>Numéro SIREN :</td>
-                </tr>
-                <tr>
-                    <td>Numéro de téléphone :</td>
-                </tr>
-                <tr>
-                    <td>Adresse mail :</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="divTexte">
-        <p>facture N°0001</p>
-        <p>date : XX/XX/XXXX</p>
-    </div>
-    <div class="divTab">
-        <table id="infoFactureAbonnement">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prix</th>
-                    <th>Nombre</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Standard</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Premium</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Total</td>
-                    <td>1222220000</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="divTab">
-        <table id="infoFactureOption">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prix</th>
-                    <th>Nombre</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Standard</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Premium</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Total</td>
-                    <td>1222220000</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <link rel="stylesheet" href="/style/pages/contentFacture.css">
+    </head>
 
-    <div class="divTexte">
-        <p> date règlement : </p>
-        
-    </div>
-</body>
+    <body>
+        <h1><?php echo "Facture N°" . $contentOffre['id_facture'] . " de l'offre " . $contentOffre['titreOffre']?></h1>
 
-</html>
+        <div class="divTab">
+            <table id="infoClient">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Plateform</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Raison social : </td>
+                        <td><?php echo $contentOffre['raison_social']?></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Adresse :</td>
+                        <td><?php echo $contentOffre['numero'] . " " . $contentOffre['rue'] . " " . $contentOffre['ville']?></td>
+                    </tr>
+                    <tr>
+                        <td>Code Postal :</td>
+                        <td><?php echo $contentOffre['codePostal']?></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro SIREN :</td>
+                        <td><?php echo $contentOffre['num_siren']?></td>
+                    </tr>
+                    <tr>
+                        <td>Numéro de téléphone :</td>
+                        <td><?php echo $contentOffre['num_tel']?></td>
+                    </tr>
+                    <tr>
+                        <td>Adresse mail :</td>
+                        <td><?php echo $contentOffre['adresse_mail']?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTexte">
+            <p>Info facture abonnement</p>
+            <p>Date début de l'abonnement : <?php echo $contentOffre['dateDebut']?>
+            <p>Date d'écheance de l'abonnement: <?php echo $contentOffre['dateFin']?></p>
+            <p>Date de la prestation : <?php echo $contentOffre['date_creation']?></p>
+        </div>
+        <div class="divTab">
+            <table id="infoFactureAbonnement">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Nombre</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Standard</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Premium</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>1222220000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTab">
+            <table id="infoFactureOption">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Nombre</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Standard</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Premium</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total</td>
+                        <td>1222220000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="divTexte">
+            <p> date règlement : </p>
+
+        </div>
+    </body>
+
+    </html>
+<?php
+} else { // si id_c n'est pas dans pro_prive on génère une erreur 404.
+?>
+    <!DOCTYPE html>
+    <html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Creation Offre</title>
+        <link rel="stylesheet" href="/style/pages/contentFacture.css">
+    </head>
+
+    <body class="fondPro">
+
+        <?
+        include "../composants/header/header.php";        //import navbar
+        ?>
+
+        <main>
+            <h1> ERROR 404 </h1>
+        </main>
+
+        <?php
+        include "../composants/footer/footer.php";
+        ?>
+    <?php
+}
+    ?>

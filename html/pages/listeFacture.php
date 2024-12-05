@@ -79,8 +79,8 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
                         <tr>
                             <td><?php echo "Facture N°" . $row["id_facture"]; ?></td>
                             <td><?php echo $row["date_creation"]; ?></td>
-                            <td><a href="visualisationFacture.php">Visualiser</a></td>
-                            <td><a href="telechargementFacture.php">télécharger</a></td>
+                            <td><a href="visualisationFacture.php?id_facture=<?php echo $row['id_facture']; ?>">Visualiser</a></td>
+                            <td><a href="telechargementFacture.php?id_facture=<?php echo $row['id_facture']; ?>">télécharger</a></td>
                         </tr>
                     <?php
                     }
