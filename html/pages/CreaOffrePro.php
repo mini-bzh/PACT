@@ -263,12 +263,20 @@ $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();
+
 //$idOffre = $stmt;
 
 // requete pour avoir l'offre qui vient d'être creé
 $stmt = $dbh->prepare("select max(idOffre) from tripskell.offre_pro");
 $stmt->execute();
 $idOffre = $stmt->fetchAll()[0]["max"];
+
+// on crée une facture pour l'offre qu'on vient de créer
+$stmt = $dbh->prepare(
+    "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ", now() );"
+);
+$stmt->execute();
+
 
 //requete pour l'insersion des tags
 

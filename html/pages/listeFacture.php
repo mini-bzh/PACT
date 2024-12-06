@@ -35,15 +35,16 @@ if (key_exists("idOffre", $_GET)) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
     // Récupération des détails de l'offre à partir de la base de données
-    $contentOffre = $dbh->query("SELECT * FROM tripskell.facture WHERE idOffre='" . $idOffre . "';")->fetchAll();
+    $contentOffre = $dbh->query("SELECT * FROM tripskell.facture WHERE idOffre = " . $idOffre . ";")->fetchAll();
 }
 
 //print_r($contentOffre);
 
 $contentDerniereFacture = $contentOffre[0];
+// print_r($contentDerniereFacture);
 
-$dateCreaRecente = $dbh->query("SELECT max(date_creation) FROM tripskell.facture;")->fetchAll()[0];
-//print_r($dateCreaRecente);
+$dateCreaRecente = $dbh->query("SELECT max(date_creation) FROM tripskell.facture where idOffre = " . $idOffre . ";")->fetchAll()[0];
+// print_r($dateCreaRecente);
 
 $dateDebutFacture = $dateCreaRecente['max'];
 //echo $dateDebutFacture;
@@ -74,17 +75,17 @@ if ($todayTimestamp >= $firstDayNextMonthTimestamp) {
     $datePublicationTimestamp = $firstDayNextMonthTimestamp;
     $firstDayNextMonthTimestamp = strtotime('first day of next month', $datePublicationTimestamp);
     // Découper la chaîne de date en utilisant le séparateur '-'
-    $dateParts = explode('-', $dateDebutFacture);
+    $dateParts = explode('-', $firstDayNextMonth);
     // Assigner les valeurs aux variables
     $year = $dateParts[0]; // Année
     $month = $dateParts[1]; // Mois
     $day = $dateParts[2]; // Jour
     if (isDateInMonth($dateDebutFacture, $month, $year) == false) {
-        $stmt = $dbh->prepare(
-            "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ", now());"
-        );
-        $stmt->execute();
-        $result = $stmt->fetchAll();
+            $stmt = $dbh->prepare(
+                "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ",'". $firstDayNextMonth ."' );"
+            );
+            $stmt->execute();
+            $result = $stmt->fetchAll();  
     }
 }
 
@@ -92,7 +93,7 @@ if ($todayTimestamp >= $firstDayNextMonthTimestamp) {
 $counter = max(0, $daysElapsed);
 
 // Affichage du compteur
-echo "Compteur quotidien : " . $counter . "\n";
+//echo "Compteur quotidien : " . $counter . "\n";
 
 // if($contentOffre['enLigne'] == false){
 

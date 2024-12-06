@@ -38,23 +38,35 @@ if (key_exists("id_facture", $_GET)) {
     $contentFacture = $contentAboOptFacture[0];
 }
 
+$firstDayNextMonth = strtotime('first day of next month', strtotime($contentFacture['date_creation']));
+
 //on récupère dans la base de donnée le nombre de jour et de semaine qui sépare le début et la fin de l'abonnement ou option
 $nbSemaineOption = $dbh->query("SELECT FLOOR(EXTRACT(EPOCH FROM (dateFinSouscription - dateDebutSouscription)) / (7 * 24 * 60 * 60)) AS weeks FROM tripskell.facture where id_facture = " . $id_facture . ";")->fetchAll()[0];
-$nbJourAbo = $dbh->query("SELECT (dateFin - dateDebut)::INTEGER as jours FROM tripskell.facture where id_facture =" . $id_facture . ";")->fetchAll()[0];
 
-// Crée un objet DateTime pour la date actuelle
-$currentDate = new DateTime();
+$firstDayNextMonthFormatted = date('Y-m-d', $firstDayNextMonth);
 
-// Modifie la date pour passer au premier jour du mois prochain
-$currentDate->modify('first day of next month');
+// Préparer la requête
+$sql = "SELECT (DATE('$firstDayNextMonthFormatted') - DATE(date_creation))::INTEGER AS jours FROM tripskell.facture WHERE id_facture = :id_facture;";
+
+// Exécuter la requête avec un paramètre sécurisé
+$stmt = $dbh->prepare($sql);
+$stmt->execute([':id_facture' => $id_facture]);
+
+// Récupérer le résultat
+$nbJourAbo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// echo $contentFacture['date_creation'];
+// echo $nbJourAbo;
 
 // déclaration de deux variables de stockage pour stocker les valeurs HT et TTC
 $valAboHT = 0;
 $valAboTTC = 0;
 $valOptHT = 0;
 $valOptTTC = 0;
-$resHT = 0;
-$resTTC = 0;
+$resHTopt = 0;
+$resTTCopt = 0;
+$resHTabo = 0;
+$resTTCabo = 0;
 
 ?>
 <?php
@@ -182,7 +194,7 @@ header > img{
         <main>
             <div id="enTeteFac">
                 <h2>Facture datant du <?php echo $contentFacture['date_creation']; ?></h2>
-                <p>Le règlement se fera le <?php echo $currentDate->format('Y-m-d'); ?></p>
+                <p>Le règlement se fera le <?php echo date('Y-m-d', $firstDayNextMonth);?></p>
             </div>
             <div class="divTab">
                 <table id="infoClient">
@@ -230,6 +242,7 @@ header > img{
                             <th>Total HT</th>
                             <th>Prix TTC</th>
                             <th>Total TTC</th>
+                            <th>Total à payer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -243,17 +256,21 @@ header > img{
                                     $valAboHT = 3.34;
                                     echo "3,34 € HT";
                                 } ?></td>
-                            <td><?php $resHT += $nbJourAbo['jours'] * $valAboHT; echo $nbJourAbo['jours'] * $valAboHT . " €"; ?></td>
+                            <td><?php $resHTabo += $nbJourAbo['jours'] * $valAboHT; echo $nbJourAbo['jours'] * $valAboHT . " €"; ?></td>
+                            <!-- <td><?php //echo $resHTabo . " €"; ?></td> -->
                             <td><?php if ($contentFacture['id_abo'] == 'Standard') {
                                     $valAboTTC = 2;
-                                    echo "2 € HT";
+                                    echo "2 € TTC";
                                 } else {
                                     $valAboTTC = 4;
-                                    echo "4 € HT";
+                                    echo "4 € TTC";
                                 } ?></td>
-                            <td><?php $resTTC += $nbJourAbo['jours'] * $valAboTTC; echo $nbJourAbo['jours'] * $valAboTTC . " €"; ?></td>
+                            <td><?php $resTTCabo += $nbJourAbo['jours'] * $valAboTTC; echo $nbJourAbo['jours'] * $valAboTTC . " €"; ?></td>
+                            <td><?php echo $resTTCabo . " €"; ?></td>
                         </tr>
-                        <?php foreach ($contentAboOptFacture as $row) { ?>
+                        <?php 
+                        foreach ($contentAboOptFacture as $row){
+                        if($row['id_option'] != null){ ?>
                             <tr>
                                 <td><?php echo $row['id_option']; ?></td>
                                 <td><?php echo $nbSemaineOption['weeks'] . " semaines"; ?></td>
@@ -268,28 +285,30 @@ header > img{
                                         echo "16,69 € HT"; ?>
                                     </td>
                                 <?php } ?>
-                                <td><?php $resHT += $nbSemaineOption['weeks'] * $valOptHT; echo $nbSemaineOption['weeks'] * $valOptHT . " €"; ?></td>
+                                <td><?php $resHTopt += $nbSemaineOption['weeks'] * $valOptHT; echo $nbSemaineOption['weeks'] * $valOptHT . " €"; ?></td>
                                 <?php if ($row['id_option'] == 'En relief') { ?>
                                     <td>
                                         <?php $valOptTTC = 10;
-                                        echo "10 € HT"; ?>
+                                        echo "10 € TTC"; ?>
                                     </td>
                                 <?php } else { ?>
                                     <td>
                                         <?php $valOptTTC = 20;
-                                        echo "20 € HT"; ?>
+                                        echo "20 € TTC"; ?>
                                     </td>
                                 <?php } ?>
-                                <td><?php $resTTC += $nbSemaineOption['weeks'] * $valOptTTC; echo $nbSemaineOption['weeks'] * $valOptTTC . " €"; ?></td>
+                                <td><?php $resTTCopt += $nbSemaineOption['weeks'] * $valOptTTC; echo $nbSemaineOption['weeks'] * $valOptTTC . " €"; ?></td>
+                                <td><?php echo $resTTCopt . " €"; ?></td>
                             </tr>
-                        <?php } ?>
+                        <?php } } ?>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><?php echo $resHT . " €"; ?></td>
+                                <td><?php echo $resHTopt + $resHTabo . " €"; ?></td>
                                 <td></td>
-                                <td><?php echo $resTTC . " €"; ?></td>
+                                <td><?php echo $resTTCopt + $resTTCabo . " €"; ?></td>
+                                <td><?php echo $resTTCopt + $resTTCabo . " €"; ?></td>
                             </tr>
                     </tbody>
                 </table>
