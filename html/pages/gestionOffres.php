@@ -271,47 +271,6 @@ $contentMesOffres = $stmt->fetchAll();
                     echo $total;
                     ?> €
                 </p>
-<!--
-                            <?php
-                            if ($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
-                            {
-                            ?>
-                                <p id="txtEnHorsLigne">Mettre l'offre hors ligne</p>
-                            <?php
-                            } else {
-                            ?>
-                                <p id="txtEnHorsLigne">Mettre l'offre en ligne</p>
-                            <?php
-                            }
-                            ?>
-                            </p>-->
-                        </div>
-                        <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="btnModif <?php
-                                if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
-                                {
-                                    echo "btnModifCache";
-                                }
-                            ?>">
-                            <div class="btnGestionOffre grossisQuandHover">
-                                <img src="/icones/crayonSVG.svg" alt="">
-                                <p>Modifier l'offre </p>
-
-                            </div>
-                        </a>
-                        <!--gestion du bouton pour redirection pour la facture-->
-                         <!--       
-                        <a href="listeFacture.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="styleBtn">
-                            <div class="btnGestionOffre grossisQuandHover">
-                                <img src="/icones/creditCardSVG.svg" alt="">
-                                <p>Voir facture </p>
-                            </div>
-                        </a>-->
-                    </div>
-
-
-
-                    </div>
-                </article>
             </section>
         
 <!--

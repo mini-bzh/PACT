@@ -72,11 +72,27 @@ if (isset($_GET["idOffre"])) {
 }
 
 if (key_exists("idCompte", $_SESSION)) {
-    // Récupération de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    // Récupération de id_c de pro_prive
+    $idpropriveResult = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll();
+    
+    if (count($idpropriveResult) > 0) {
+        $idproprive = $idpropriveResult[0];
+    } else {
+        // Si aucun résultat n'est trouvé, vous pouvez gérer cette situation ici
+        $idproprive = null;  // Par exemple, on définit $idproprive comme null
+    }
 
-    // Récupération de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    if (!isset($idproprive)) {
+        // Récupération de id_c de pro_public si pro_prive n'a pas donné de résultat
+        $idpropublicResult = $dbh->query("select id_c from tripskell.pro_public where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll();
+        
+        if (count($idpropublicResult) > 0) {
+            $idpropublic = $idpropublicResult[0];
+        } else {
+            // Si aucun résultat n'est trouvé ici aussi, vous pouvez définir $idpropublic comme null
+            $idpropublic = null;
+        }
+    }
 }
 
 if (!empty($_FILES) ) {
