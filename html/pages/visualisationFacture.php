@@ -112,8 +112,8 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Raison social : Tripskell</td>
-                            <td>Raison social : <?php echo $contentFacture['raison_social']; ?></td>
+                            <td>Raison sociale : Tripskell</td>
+                            <td>Raison sociale : <?php echo $contentFacture['raison_social']; ?></td>
                         </tr>
                         <tr>
                             <td>Adresse : 12 Rue de l'alma , Rennes</td>
