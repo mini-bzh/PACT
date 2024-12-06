@@ -91,7 +91,8 @@ use Dompdf\Dompdf;
                 header("Location: ModifCompteProPrive.php");
             }
         }
-            elseif(isset($idpropublic)){
+    }
+    elseif(isset($idpropublic)){
                 if((isset($_POST['password']))){
                     $password = $_POST['password'];
                     $realpassword = $infos['mot_de_passe'];
@@ -106,7 +107,7 @@ use Dompdf\Dompdf;
                 <?php
             }
         }
-    }
+    
     else{
         if((isset($_POST['password']))){
             $password = $_POST['password'];
@@ -280,7 +281,7 @@ if ((!$comptePro) && (!$compteMembre)) {
             // Si c'est un professionnel
             } else {
                 // On regarde si c'est un professionnel privé
-                if(!is_null($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetch())) {
+                if(isset($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0])) {
                     $tCompte = "Professionnel privé";
                 // Sinon c'est un professionnel public
                 } else {
