@@ -271,7 +271,7 @@ $contentMesOffres = $stmt->fetchAll();
                     echo $total;
                     ?> €
                 </p>
-
+<!--
                             <?php
                             if ($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
                             {
@@ -284,7 +284,7 @@ $contentMesOffres = $stmt->fetchAll();
                             <?php
                             }
                             ?>
-                            </p>
+                            </p>-->
                         </div>
                         <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="btnModif <?php
                                 if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
@@ -314,7 +314,7 @@ $contentMesOffres = $stmt->fetchAll();
                 </article>
             </section>
         
-
+<!--
         <setion id="conteneurDetailPrix">
 
             <p>Total à payer :
@@ -327,7 +327,7 @@ $contentMesOffres = $stmt->fetchAll();
                 ?> €
             </p>
 
-            </section>
+            </section>-->
         </section>
     </main>
     <?php                                                   //footer
