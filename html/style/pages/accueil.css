@@ -3,9 +3,8 @@
 main{
     padding: 0px;
 }
+
 main h1{
-    border-left: 20px solid var(--secondary);
-    padding-left: 20px;
     margin: 20px;
 }
 

@@ -17,7 +17,7 @@ form{
 }
 
 .champs input, .champs textarea{
-    font-size: 20px;
+    font-size: var(--typescale-text);
 }
 
 #titre{
@@ -117,7 +117,7 @@ form{
 }
 
 #conteneurConfirmation label{
-    font-size: 14px;
+    font-size: var(--typescale-small-text);
 }
 
 #selectPhoto{

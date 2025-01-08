@@ -17,9 +17,8 @@ main{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h2 {
     text-align: left;
-    font-size: var(--typescale-h4); 
     margin-bottom: 40px;
 }
 
@@ -42,7 +41,7 @@ input{
     width: 40%; 
     border-radius: 5%;
     border: 1px solid #ccc;
-    font-size: 18px; 
+    font-size: var(--typescale-small-text); 
     box-sizing: border-box;
     padding: 10px;
 }
@@ -53,7 +52,7 @@ textarea {
     width: 70%;
     border-radius: 5%;
     border: 1px solid #ccc;
-    font-size: 18px; 
+    font-size: var(--typescale-small-text); 
     box-sizing: border-box;
 }
 
@@ -106,7 +105,7 @@ select{
     height: 60px;
     border-radius: 50%;
     text-align: center;
-    font-size: 16px; 
+    font-size: var(--typescale-small-text); 
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -123,13 +122,13 @@ select{
 }
 
 .heures label {
-    font-size: 18px;
+    font-size: var(--typescale-small-text);
 }
 
 .heures input {
     width: auto;
     padding: 8px;
-    font-size: 16px; 
+    font-size: var(--typescale-small-text); 
 }
 
 .champsAdresse{
@@ -141,7 +140,7 @@ select{
     margin-left: 5px;
     border-radius: 5%;
     border: 1px solid #ccc;
-    font-size: 16px; 
+    font-size: var(--typescale-small-text); 
     box-sizing: border-box;
 }
 
@@ -274,7 +273,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked::after {
     content: '✔'; /* Symbole de check */
     color: black; /* Couleur du symbole */
-    font-size: 25px; /* Taille du symbole */
+    font-size: var(--typescale-large-text); /* Taille du symbole */
     position: absolute;
     top: 48%;
     left: 50%;
@@ -297,7 +296,7 @@ input[type="radio"]{
 input[type="radio"]:checked::after {
     content: '✔'; /* Symbole de check */
     color: black; /* Couleur du symbole */
-    font-size: 25px; /* Taille du symbole */
+    font-size: var(--typescale-large-text); /* Taille du symbole */
     position: absolute;
     top: 48%;
     left: 50%;
@@ -423,7 +422,7 @@ input[type="radio"]:checked::after {
     display: inline-block;
     background-color: #007bff; /* Couleur bleue */
     color: white;
-    font-size: 16px;
+    font-size: var(--typescale-small-text);
     font-weight: bold;
     padding: 10px 20px; /* Taille et espacement du bouton */
     border-radius: 8px; /* Bords arrondis */
@@ -445,7 +444,7 @@ input[type="radio"]:checked::after {
 }
 .champs label[for="fichier1"]::before {
     content: "📷 "; /* Icône avant le texte */
-    font-size: 18px;
+    font-size: var(--typescale-text);
 }
 
 
@@ -453,7 +452,7 @@ input[type="radio"]:checked::after {
     display: inline-block;
     background-color: #007bff; /* Couleur bleue */
     color: white;
-    font-size: 16px;
+    font-size: var(--typescale-small-text);
     font-weight: bold;
     padding: 10px 20px; /* Taille et espacement du bouton */
     border-radius: 8px; /* Bords arrondis */
@@ -475,14 +474,14 @@ input[type="radio"]:checked::after {
 }
 .champs label[for="plan"]::before {
     content: "📷 "; /* Icône avant le texte */
-    font-size: 18px;
+    font-size: var(--typescale-small-text);
 }
 
 .champs label[for="carte"] {
     display: inline-block;
     background-color: #007bff; /* Couleur bleue */
     color: white;
-    font-size: 16px;
+    font-size: var(--typescale-small-text);
     font-weight: bold;
     padding: 10px 20px; /* Taille et espacement du bouton */
     border-radius: 8px; /* Bords arrondis */
@@ -504,7 +503,7 @@ input[type="radio"]:checked::after {
 }
 .champs label[for="carte"]::before {
     content: "📷 "; /* Icône avant le texte */
-    font-size: 18px;
+    font-size: var(--typescale-small-text);
 }
 
 

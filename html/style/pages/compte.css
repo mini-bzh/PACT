@@ -1,3 +1,16 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} /* centrage du contenu du main */
+
+main > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .textBulle{
     width: 450px;
     height: 120px;
@@ -54,7 +67,6 @@ div:has(> .fakeDiv){
 }
 
 .titreLogin{
-    font-size: var(--typescale-h3);
 }
 
 .informationsCompte > div{

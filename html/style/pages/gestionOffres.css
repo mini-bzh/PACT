@@ -38,8 +38,6 @@
 }
 
 body h1{
-    border-left: 20px solid var(--secondary);
-    padding-left: 20px;
     margin: 30px;
 }
 
@@ -75,7 +73,7 @@ body h1{
 }
 
 .btnGestionOffre p{
-    font-size: 1.5em;
+    font-size: var(--typescale-large-text);
 }
 
 .styleBtn {
@@ -109,7 +107,7 @@ body h1{
 
 th, td {
     padding: 20px;
-    font-size: 0.9em;
+    font-size: var(--typescale-small-text);
     font-family: 'Archivo';
 }
 

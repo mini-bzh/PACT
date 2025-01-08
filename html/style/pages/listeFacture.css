@@ -1,10 +1,5 @@
 @import "../style.css";
 
-body{
-    font-family: "Archivo";
-    font-size: var(--typescale-text);
-}
-
 .divTab {
     display: flex;
     justify-content: center;

@@ -9,13 +9,6 @@
     display: block;
 }
 
-h1{
-    border-left: none !important;
-    padding-left: 0px !important;
-    margin-left: 0px !important;
-}
-
-
 .conteneurOffre{
     display: flex;  
     justify-content: center;
@@ -33,7 +26,7 @@ h1{
 }
 
 .offre p{
-    font-size: 1.2em;
+    font-size: var(--typescale-text);
 }
 
 .offre h2+p{
@@ -97,7 +90,7 @@ h1{
 }
 
 .offre .resumePrixDetailOffre p{
-    font-size: 1em;
+    font-size: var(--typescale-small-text);
     color: white;
 }
 
@@ -136,7 +129,7 @@ h1{
 
 .offre .tagOffre{
     padding: 10px 10px 7px;               /* ça rends moins bien si je mets juste 10px partout */
-    font-size: 1.3em;
+    font-size: var(--typescale-small-text);
     border: 1px solid black;
     border-radius: 70px;
     margin: 0px 10px 10px;
@@ -223,18 +216,10 @@ h1{
     margin-left: 20px;
 }
 
-.avis .conteneurMembreAvis .infoMembreAvis h3{
-    font-size: var(--typescale-h3);
-}
-
-.avis .conteneurMembreAvis .infoMembreAvis p{
-    font-size: var(--typescale-small-text);
-}
 
 .avis .titreAvis{
     margin-top: 40px;
     margin-bottom: 20px;
-    font-size: var(--typescale-h3);
 }
 
 .avis .conteneurAvisTexte{
@@ -299,9 +284,7 @@ h1{
     margin-right: 20px;
 }
 
-#btnAjouterAvis h3{
-    font-size: 2.5rem;
-}
+
 
 #btnTrieDate{
     display: flex;
@@ -338,7 +321,7 @@ table {
 
 th, td {
     padding: 20px;
-    font-size: 0.9em;
+    font-size: var(--typescale-small-text);
     font-family: 'Archivo';
 }
 
