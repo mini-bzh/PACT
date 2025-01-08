@@ -181,7 +181,7 @@ function supprimerAvis()
             },
             error: function()
             {
-                alert('Erreur lors de l\'exécution de la fonction PHP');        //affiche un message d'erreur sinon
+                alert("erreur lors de l'appel du script php")       //affiche un message d'erreur sinon
             }
         });
 

@@ -20,6 +20,10 @@
     --rouge : red;
     --jauneEtoile : #DFDF11;
 
+    --ombreNoire : 10px 10px 20px rgba(0, 0, 0, 0.2);
+    --ombrePro : 10px 10px 20px rgba(234, 140, 37, 0.2);
+    --ombreVisiteur : 10px 10px 20px rgba(0, 74, 173, 0.2);
+
 
     /* Textes */
 
@@ -31,4 +35,5 @@
     --typescale-large-text: 1.25rem; 
     --typescale-text: 1rem;
     --typescale-small-text: 0.85rem;
+    --typescale-very-small-text : 0.75rem;
 }

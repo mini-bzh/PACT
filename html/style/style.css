@@ -103,7 +103,8 @@ input{
 }
 
 .grossisQuandHover:hover{
-    transform: scale(1.05);
+    transform: scale(1.03);
+    cursor: pointer;
 }
 
 
@@ -275,8 +276,15 @@ input{
     margin-bottom: 30px;
 
     border-radius: 5px;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
     padding: 10px;
+}
+
+.fondPro .apercuOffre{
+    box-shadow: var(--ombrePro);
+}
+
+.fondVisiteur .apercuOffre{
+    box-shadow: var(--ombreVisiteur);
 }
 
 

@@ -255,6 +255,7 @@
                                     echo($adresse);
                                 ?></p>
                             </a>
+                            
                         </div>
                 
                         
@@ -317,14 +318,12 @@
                         <!-- Date de publication-->
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
-                         <div class="conteneurSpaceBetween">
+                        <div class="conteneurSpaceBetween">
                             <div class="conteneurMembreAvis">
                                     <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                     <div class="infoMembreAvis">
                                         <h3><?php echo $membre['login'] ?></h3>
-                                        <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
-                                        <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
-                                        <p>Contexte : <?php echo $avis[$key]['cadreexperience']?></p>
+                                        <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
                                     </div>
                             </div>
                             <div class="conteneurBtnGestionAvis">
@@ -341,7 +340,7 @@
                                     if($avis[$key]["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                                     {
                                         ?>
-                                            <div id="btnSupprimerAvis">
+                                            <div id="btnSupprimerAvis" class="grossisQuandHover">
                                                 <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
                                                 <p>Supprimer</p>
                                                 <p hidden><?php echo $avis[$key]["id_avis"]?></p>
@@ -350,6 +349,10 @@
                                     }
                                 ?>
                             </div>
+                        </div>
+                        <div class="datesAvis">
+                            <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
+                            <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                         </div>
                         <!-- Titre de l'avis -->
                         <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
