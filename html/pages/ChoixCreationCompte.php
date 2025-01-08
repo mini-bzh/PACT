@@ -87,13 +87,6 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 ?>
     </div>
 
-<div class="zoneBtn">
-        <a href="compte.php" class="btnAnnuler">
-            <p class="texteLarge boldArchivo">Annuler</p>
-<?php
-            include '../icones/croixSVG.svg';
-?>
-</a>    
 </div>
 
 </main>

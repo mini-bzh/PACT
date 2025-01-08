@@ -144,16 +144,8 @@ use Dompdf\Dompdf;
     <script src="../js/menuDeroulant.js" defer></script>
     <script src="../js/compte.js" defer></script>
 </head>
-<body class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
-                echo "fondPro";
-            }
-            else
-            {
-                echo "fondVisiteur";
-            }
-        ?>>
+<body class=<?php echo ($comptePro)?"fondPro":"fondVisiteur";//met le bon fond en fonction de l'utilisateur ?>>
+
 
 <!------ HEADER  ------>
 <?php
@@ -206,36 +198,18 @@ if ((!$comptePro) && (!$compteMembre)) {
 
 <!------ MAIN  ------>
 <main>
-
-    <div class="pageChoixCo">
-        <div class="textBulle decaleBulleGauche">
-            <p>Veuillez sélectionner une option de connexion</p>
-        </div>
-
-        <div>
+    <p class="texteLarge">Veuillez sélectionner une option de connexion</p>
+    <div>
 <?php
-            include '../composants/btnConnexion/btnCoMembre.php';
-            include '../composants/btnConnexion/btnCoPro.php';
+        // boutons pour choisir de ce connecter en tant que membre ou
+        include '../composants/btnConnexion/btnCoMembre.php';
+        include '../composants/btnConnexion/btnCoPro.php';
 ?>
-        </div>
-
-        <hr>
-
-        <div class="textBulle">
-            <p><span>Pas encore de compte ?</span><br>
-               Créez le !</p>
-        </div>
-
-        <div>
-            <div class="fakeDiv"></div>
-<?php
-            include '../composants/btnConnexion/btnNouvCo.php';
-?>
-        </div>
-
     </div>
-
-
+    <div>
+        <h4>Pas encore de compte ?</h4>
+        <a href="ChoixCreationCompte.php"><p>Créez le !</p></a>
+    </div>
 </main>
 
 <?php
@@ -303,7 +277,7 @@ if ((!$comptePro) && (!$compteMembre)) {
             if ($compteMembre){  // Si c'est un membre on affiche son nom / prénom / login
 ?>
             <div class="infoPrinc">
-                <p class="boldArchivo titreLogin"><?php echo $infos["login"] ?></p>
+                <h3 class="boldArchivo titreLogin"><?php echo $infos["login"] ?></h3>
                 <div>
                     <p class="resizeHide"><span class="boldArchivo">Nom : </span><?php echo $infos["nom"] ?></p>
                     <p class="resizeHide"><span class="boldArchivo">Prenom : </span><?php echo $infos["prenom"] ?></p>
