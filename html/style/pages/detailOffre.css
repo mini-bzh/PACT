@@ -22,7 +22,7 @@
     border-radius: 40px;
     height: fit-content;
     padding: 40px;
-    width: 1000px;
+    max-width: 1000px;
 }
 
 .offre p{
@@ -57,29 +57,27 @@
     margin-left: 0px;
 }
 
-.offre .imgChg{
-    margin: 0px;
-    padding: 0px;
-    height: 390px;
-}
 
-.offre .imgChg img{
+.offre .imgResume img{
     border-radius: 15px 15px 0px 0px;
-    width: 920px;
-    height: 390px;
+    width: 100%;
+    max-height: 350px;
     object-fit: cover;
-    margin: 0px;
     transition: opacity 1s ease-in-out;
     opacity: 1;
 }
 
-
+.offre .imgResume{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    padding: 0px;
+}
 
 .offre .resumePrixDetailOffre{
-    margin: 0px;
-    width: 920px;
-    padding: 15px;
     height: fit-content;
+    width: 100%;
     border-radius: 0px 0px 15px 15px;
     background-color: var(--primaryDark);
     text-align: center;
@@ -405,11 +403,8 @@ th, td {
     .offre h2{
         font-size: var(--typescale-h4);
     }
-    .offre .imgChg{
-        height: 150px;
-    }
     
-    .offre .imgChg img{
+    .offre .imgResume img{
         width: 920px;
         height: 150px;
     }

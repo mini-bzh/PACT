@@ -267,7 +267,7 @@ input{
 
 .apercuOffre{
     width: 350px;
-    height: 450px;
+    height: 500px;
 
     background-color: white;
 
@@ -278,6 +278,7 @@ input{
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
     padding: 10px;
 }
+
 
 .apercuOffre h2{
     margin: 0px;

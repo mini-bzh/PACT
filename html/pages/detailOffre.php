@@ -108,18 +108,18 @@
                                 <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                             </div>
                         </div>
-                        <div class="imgChg">
-                            <!-- image de l'offre -->
+                        
+                        <div class="imgResume">
                             <img src="/images/imagesOffres/<?php echo $contentOffre["img1"]; ?>" alt="" id="imageChangeante">
-                        </div>
-                        <div class="resumePrixDetailOffre">
-                            <!-- Resume -->
-                            <p><?php echo $contentOffre["resume"];?></p>
-                            <hr>
-                            <!-- Tarif minimal -->
-                            <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
-                        </div>
 
+                            <div class="resumePrixDetailOffre">
+                                <!-- Resume -->
+                                <p><?php echo $contentOffre["resume"];?></p>
+                                <hr>
+                                <!-- Tarif minimal -->
+                                <p>À partir de <?php echo $contentOffre["tarifminimal"];?>€/pers</p>
+                            </div>
+                        </div>
                         <!-- Offre detaille -->
                         <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                     
