@@ -126,36 +126,42 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
 
     <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
 
-        <!-- Login -->
-        <div class="champs">
-            <label for="Login">Login <span class="required">*</span> :</label>
-            <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
-            <?php
-            if (isset($error_message)) {
-                echo '<div class="error">'. $error_message. '</div>';
-            }
-            ?>
-        </div>
+        <div class="LogetPdP">
+            <!-- Login -->
+            <div class="champs">
+                <div class="champlogin">
+                    <label for="Login">Login <span class="required">*</span> :</label>
+                    <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
+                    <?php
+                    if (isset($error_message)) {
+                        echo '<div class="error">'. $error_message. '</div>';
+                    }
+                    ?>
+                </div>
+            </div>
 
-         <!-- Nom  -->
-         <div class="champs">
-            <label for="Nom">Nom <span class="required">*</span> :</label>
-            <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom" required>
-        </div>
+            <!-- Champs pour sélectionner les images -->
+            <div class="champs">
+                <label for="fichier1">Ajouter une photo de profil :</label>
+                <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
+                <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
+            </div>
 
-         <!-- prenom  -->
-         <div class="champs">
-            <label for="prenom">Prenom <span class="required">*</span> :</label>
-            <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prenom" required>
-        </div>
+        </div> 
 
-        <!-- Champs pour sélectionner les images -->
-        <div class="champs">
-            <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
-        </div>
+        <div class="InfoPerso">
+            <!-- Nom  -->
+            <div class="champs">
+                <label for="Nom">Nom <span class="required">*</span> :</label>
+                <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom" required>
+            </div>
 
+            <!-- prenom  -->
+            <div class="champs">
+                <label for="prenom">Prenom <span class="required">*</span> :</label>
+                <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prenom" required>
+            </div>
+        </div>
 
         <!-- Adresse Mail -->
         <div class="champs">

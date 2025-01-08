@@ -359,10 +359,90 @@ form > .zoneBtn{
     display: none;
   }
 
-
-.choixPro{
-    width: 50%;
+/* Donner un style sympa aux checkbox */
+.choixPro {
     display: flex;
-    justify-content: space-between;
-    padding: 5%;
+    border: 1px solid #ccc;
+    border-top-left-radius: 15px; /* Arrondi en haut à gauche */
+    border-top-right-radius: 15px; /* Arrondi en haut à droite */
+    overflow: hidden;
+    width: 100%; /* Prend toute la largeur disponible */
+    background-color: #f0f0f0;
+}
+
+.choixPro > div {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.choixPro > div label {
+    display: block;
+    color: black;
+    font-weight: 500;
+    margin: 0;
+}
+.propriv {
+    background-color: #f0f0f0; /* Couleur par défaut */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.propub {
+    background-color: #f0f0f0; /* Couleur par défaut */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.propriv.active {
+    background-color: #007bff;/* Fond bleu pour Domaine Privé */
+    color: white; /* Texte blanc pour contraste */
+    font-weight: bold;
+}
+
+.propub.active {
+    background-color: #007bff; /* Fond vert pour Domaine Public */
+    color: white; /* Texte blanc pour contraste */
+    font-weight: bold;
+}
+
+/* Effet de survol uniquement sur les options non actives */
+.propriv:hover:not(.active),
+.propub:hover:not(.active) {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Cache les checkboxes */
+#showCheckbox, #hideCheckbox {
+    display: none;
+}
+
+/* Centrer le conteneur de choix au-dessus du formulaire */
+form {
+    position: relative;
+}
+
+.champs{
+    margin-top: 2%;
+}
+.choixPro {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    margin-bottom: 20%;
+}
+
+.LogetPdP{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.InfoPerso{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }

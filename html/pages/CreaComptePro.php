@@ -447,6 +447,8 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 const hideCheckbox = document.getElementById('hideCheckbox');
 const typeDomaineInput = document.getElementById('typeDomaine');
 const extraFields = document.getElementById('extraFields');
+const propriv = document.querySelector(".propriv");
+const propub = document.querySelector(".propub");
 
 // Fonction pour vérifier et forcer qu'une case est cochée
 function checkCheckboxes() {
@@ -456,9 +458,24 @@ function checkCheckboxes() {
         typeDomaineInput.value = 'privé';
         extraFields.classList.remove('hidden');
     }
+    updateActiveStyles(); // Met à jour les styles visuels
 }
 
-// Mise à jour des champs et sections en fonction des cases cochées
+// Fonction pour appliquer les styles visuels en fonction de l'état des cases
+function updateActiveStyles() {
+    if (showCheckbox.checked) {
+        propriv.classList.add("active");
+        propub.classList.remove("active");
+    } else if (hideCheckbox.checked) {
+        propub.classList.add("active");
+        propriv.classList.remove("active");
+    } else {
+        propriv.classList.remove("active");
+        propub.classList.remove("active");
+    }
+}
+
+// Mise à jour des styles et du contenu en fonction des changements sur "Domaine Privé"
 showCheckbox.addEventListener('change', function () {
     if (this.checked) {
         typeDomaineInput.value = 'privé';
@@ -468,9 +485,11 @@ showCheckbox.addEventListener('change', function () {
         typeDomaineInput.value = '';
         extraFields.classList.add('hidden');
     }
-    checkCheckboxes();  // Vérifie l'état des cases
+    updateActiveStyles(); // Met à jour les styles visuels
+    checkCheckboxes();    // Vérifie l'état des cases
 });
 
+// Mise à jour des styles et du contenu en fonction des changements sur "Domaine Public"
 hideCheckbox.addEventListener('change', function () {
     if (this.checked) {
         typeDomaineInput.value = 'public';
@@ -479,12 +498,13 @@ hideCheckbox.addEventListener('change', function () {
     } else {
         typeDomaineInput.value = '';
     }
-    checkCheckboxes();  // Vérifie l'état des cases
+    updateActiveStyles(); // Met à jour les styles visuels
+    checkCheckboxes();    // Vérifie l'état des cases
 });
 
-// Vérifie initialement si une case est cochée au chargement de la page
-checkCheckboxes();
-
+// Initialisation au chargement de la page
+checkCheckboxes();    // Vérifie l'état initial des cases
+updateActiveStyles(); // Met à jour les styles visuels initialement
 </script>
 
 </body>
