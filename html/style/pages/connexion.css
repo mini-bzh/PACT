@@ -1,8 +1,6 @@
 .textBulle{
-    background-color: white;
     width: 674px;
     height: 82px;
-    border: var(--primaryLight) solid 2px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -14,19 +12,21 @@
 }
 
 form input{
-    width: 847px;
-    height: 60px;
-    border: solid 1px black;
+    width: 100%;
+    height: 45px;
+    border: solid 1px var(--grisClair);
     border-radius: 10px;
     padding: 0 2%;
     font-size: var(--typescale-text);
+    margin-top: 3%;
+
 }
 
 form{
-    margin: 0 auto;
-    width: fit-content;
-    margin: 0 auto;
+    width: 400px;
+    margin: 200px auto;
 }
+
 
 form div{
     margin-top: 3%;
@@ -83,6 +83,22 @@ input[type="checkbox"]{
 
 .btnConfirmer{
     background-color: var(--accentDark);
+}
+
+.btnConnexion{
+    background-color: var(--primaryLight);
+    border-radius: 25px;
+    width: 100%;
+    height: 45px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    margin-top: 10%;
+    cursor: pointer;
+    border: none;
 }
 
 .zoneBtn{
