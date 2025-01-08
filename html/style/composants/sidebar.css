@@ -1,0 +1,277 @@
+@import "fonts/fonts.css";
+@import "/style/abstract/_variables.css";
+
+
+/* Style pour la barre latérale gauche */
+aside {
+    
+    height: 100%;
+    padding: 1%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ddd;
+    
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse */
+
+    z-index: 1;
+    background-color: #fff;
+
+    visibility: visible;
+}
+
+.main-for-menu-opened {
+    align-items: end;
+    padding: 0;
+}
+
+.main-for-menu-opened > * {
+    width: 60%;
+}
+
+#menu-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 2%;
+}
+
+#filtres-aside {
+    width: 35%;
+    
+}
+
+aside > * {
+    margin-top: 80px;    /* Décale le contenu vers le bas pour ne pas qu'il soit sous la nav bar */
+}
+
+.content-aside{
+    padding: 3%;
+    box-sizing: initial
+}
+
+/* Style optionnel pour le contenu de la barre latérale */
+aside h2 {
+    font-size: 1.5rem; /* Taille de police adaptative */
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+aside ul {
+    list-style: none; /* Supprime les puces */
+    padding: 0;
+}
+
+aside ul li {
+    margin-bottom: 0.5rem;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    display: block;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+aside ul li a:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+svg {
+    margin: 8px;
+}
+
+svg > path {
+    stroke: var(--grisClair);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Style pour le label du bouton */
+.toggle-button {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Style pour l'input checkbox (caché) */
+.toggle-button input[type="checkbox"] {
+    display: none; /* Masque le checkbox natif */
+}
+
+/* Style pour le bouton */
+.toggle-button span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Style quand le checkbox est coché */
+.toggle-button input[type="checkbox"]:checked + span {
+    background-color: #007bff; /* Bleu */
+    color: white;
+    border-color: #007bff;
+}
+
+/* Style pour la légende */
+legend {
+    font-size: 1.2rem; /* Taille légèrement plus grande */
+    font-weight: bold; /* Texte en gras */
+    color: #555; /* Couleur douce pour le texte */
+    padding: 0.5rem; /* Espacement interne */
+    border-bottom: 2px solid #007bff; /* Ligne décorative */
+    margin-bottom: 1rem; /* Espacement avec le contenu en dessous */
+    display: inline-block; /* S'assure que la bordure n'occupe que la largeur du texte */
+}
+
+fieldset {
+    border: none;
+    margin: auto;
+    
+}
+
+/* Conteneur principal */
+#prix {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Style du label */
+#prix label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style pour le slider */
+#prix input[type="range"] {
+    -webkit-appearance: none; /* Supprime le style par défaut */
+    appearance: none;
+    width: 200px;
+    height: 6px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+/* Style du curseur du slider */
+#prix input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #007bff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#prix input[type="range"]::-webkit-slider-thumb:hover {
+    background: #0056b3;
+}
+
+/* Style pour la valeur du prix */
+.price-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Style pour le bouton */
+.apply-price {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.apply-price:hover {
+    background-color: #0056b3;
+}
+
+/* Style général pour le fieldset 
+.status {
+    border: 2px solid #007bff; 
+    border-radius: 8px; 
+    padding: 1.5rem; 
+    margin: 1rem 0; 
+    background-color: #f9f9f9; /
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}*/
+
+
+/* Style pour le groupe d'entrée */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Espacement entre le label et l'input */
+}
+
+/* Style pour le label */
+.input-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style pour l'input */
+.input-group input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au focus de l'input */
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.button{    
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 100px;
+
+    font-size: 2em;
+
+    color: var(--grisClair);
+    border: solid 2px white;
+
+    float: right;
+}
+
+.button:hover{
+    /*background-color: var(--grisClair);*/
+    border: solid 2px var(--grisClair);
+    
+}
