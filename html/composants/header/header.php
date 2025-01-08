@@ -26,12 +26,6 @@
             </a>
 
             <ul class="ulHeader">
-                <li class="liHeader" id="btAccueil">
-                    <a class="aHeader" href="/pages/accueil.php">
-                    <img src="/icones/homeSVG.svg" alt="icone home">
-                    <h3>Accueil</h3>
-                    </a>
-                </li>
                 <li class="liHeader" id="btRech">
                     <a class="aHeader" href="recherche.php">
                     <img src="/icones/rechercherSVG.svg" alt="icone rechercher">
