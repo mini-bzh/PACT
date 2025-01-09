@@ -291,34 +291,6 @@
     margin-right: 20px;
 }
 
-
-
-#btnTrieDate{
-    display: flex;
-    background-color: white;
-    width: 100px;
-    height: 45px;
-    border-radius: 50px;
-    align-items: center;
-    justify-content: center;
-}
-
-#iconeTrieDate{
-    width: 40px;
-}
-
-#iconeTrieDate1{
-    width: 40px;
-}
-
-#iconeTrieDate2{
-    width: 40px;
-}
-
-#txtBtnDate{
-    user-select: none;
-}
-
 table {
     table-layout: fixed;
     width: 100%;

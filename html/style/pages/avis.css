@@ -95,33 +95,6 @@ main h1{
     overflow: hidden; /* Cache tout ce qui dépasse */
 }
 
-#btnTrieDate{
-    display: flex;
-    background-color: white;
-    width: 100px;
-    height: 45px;
-    border-radius: 50px;
-    align-items: center;
-    justify-content: center;
-    margin-top: 8em;
-}
-
-#iconeTrieDate{
-    width: 40px;
-}
-
-#iconeTrieDate1{
-    width: 40px;
-}
-
-#iconeTrieDate2{
-    width: 40px;
-}
-
-#txtBtnDate{
-    user-select: none;
-}
-
 @media screen and (max-width : 428px){
     .titrePrincipale{
         font-size: var(--typescale-h1);
@@ -132,7 +105,7 @@ main h1{
         flex-direction: column;
     }
 
-    #btnTrieDate{
+    .btnTrie{
         margin-top: 0;
     }
 
