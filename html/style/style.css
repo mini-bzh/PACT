@@ -724,3 +724,28 @@ rect{
     height: 45px;
     width: 45px;
 }
+
+
+
+/*------------------- BOUTONS DE TRIE ----------------------*/
+
+.btnTrie{
+    display: flex;
+    background-color: white;
+    width: 100px;
+    height: 45px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.iconeTrie{
+    width: 40px;
+}
+
+.txtBtnTrie{
+    user-select: none;
+}
+
+/*--------------------------------------------------------*/
