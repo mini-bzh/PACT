@@ -61,85 +61,71 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
 let mapAvisInfos = initAvis();
 
-let trieDate = "";
+function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
 
-function trierDate() {
-    if (trieDate == "") {
+    // Rajoute une bordure bleu sur le bouton
+    document.getElementById(icone1).classList.toggle("displayNone");
+    document.getElementById(icone2).classList.toggle("displayNone");
 
+    if (sens == "asc") {
         // Trie le Tableau mapAvisInfos dans l'ordre croissant dans le tableau mapTrieAcs
-        let mapTrieAcs = new Map(
+        var mapTrie = new Map(
             [...mapAvisInfos.entries()].sort((a,b) => {
               // Tri selon la somme des éléments
-              const sumA = a[1].get("date").reduce((acc, val) => acc + val, 0);
-              const sumB = b[1].get("date").reduce((acc, val) => acc + val, 0);
+              const sumA = a[1].get(paramTrie).reduce((acc, val) => acc + val, 0);
+              const sumB = b[1].get(paramTrie).reduce((acc, val) => acc + val, 0);
               return sumA - sumB; // Ordre croissant
             })
           );
 
-        
-        let index = 0;
-        // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
-        mapTrieAcs.forEach((map, key, value)=>{
-
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapTrieAcs.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
-
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTrieDate1").classList.toggle("displayNone");
-            document.getElementById("iconeTrieDate").classList.toggle("displayNone");
-            document.getElementById("btnTrieDate").style.border = "solid";
-            document.getElementById("btnTrieDate").style.borderColor = "blue" ;
-
-            index++;
-        })
-        
-        trieDate = "asc";   // Modifie l'état du trie
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderColor = "blue" ;
     }
-    else if(trieDate == "asc") {
-
+    if (sens == "decs") {
         // Trie le Tableau mapAvisInfos dans l'ordre décroissant dans le tableau mapTrieDesc
-        let mapTrieDesc = new Map(
+        var mapTrie = new Map(
             [...mapAvisInfos.entries()].sort((a,b) => {
               // Tri selon la somme des éléments
-              const sumA = a[1].get("date").reduce((acc, val) => acc + val, 0);
-              const sumB = b[1].get("date").reduce((acc, val) => acc + val, 0);
+              const sumA = a[1].get(paramTrie).reduce((acc, val) => acc + val, 0);
+              const sumB = b[1].get(paramTrie).reduce((acc, val) => acc + val, 0);
               return sumB - sumA; // Ordre croissant
             })
           );
 
-        let index = 0;
-        // Parcour le tableau mapTrieDesc
-        mapTrieDesc.forEach((map, key, value)=>{
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderColor = "red" ;
+    }
+    if (sens == "default") {
+        var mapTrie = mapAvisInfos;
+        document.getElementById(idBouton).style.border = "none";
+    }
+    
+    let index = 0;
+    // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
+    mapTrie.forEach((map, key, value)=>{
 
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapTrieDesc.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+        // Récupère l'élément dans la page
+        let elem = document.getElementById(mapTrie.get(key).get("id"));
+        elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
 
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTrieDate1").classList.toggle("displayNone");
-            document.getElementById("iconeTrieDate2").classList.toggle("displayNone");
-            document.getElementById("btnTrieDate").style.border = "solid";
-            document.getElementById("btnTrieDate").style.borderColor = "red" ;
-            index++;
-        })
+        index++;
+    })
+}
+
+
+let trieDate ="";
+
+function trierDate() {
+    if (trieDate == "") {
+        toogleTrie("date","iconeTrieDate1","iconeTrieDate","btnTrieDate","asc");
+        trieDate = "asc";   // Modifie l'état du trie
+    }
+    else if(trieDate == "asc") {
+        toogleTrie("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
         trieDate = "decs";  // Modifie l'état du trie
     }
     else if(trieDate == "decs"){
-        let index = 0;
-        // Parcour le tableau mapAvisInfos pour enlever le trie et remettre les offres dans l'ordre normale
-        mapAvisInfos.forEach((map, key, value)=>{
-
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapAvisInfos.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
-
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTrieDate2").classList.toggle("displayNone");
-            document.getElementById("iconeTrieDate").classList.toggle("displayNone");
-            document.getElementById("btnTrieDate").style.border = "none";
-            index++;
-        })
+        toogleTrie("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
         trieDate = "";  // Modifie l'état du trie
     }
 }
