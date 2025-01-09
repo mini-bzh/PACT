@@ -58,33 +58,6 @@ main h1{
     background-size: contain; 
 }
 
-#btnTriePrix{
-    display: flex;
-    background-color: white;
-    width: 100px;
-    height: 45px;
-    border-radius: 50px;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-
-#iconeTriePrix{
-    width: 40px;
-}
-
-#iconeTriePrix1{
-    width: 40px;
-}
-
-#iconeTriePrix2{
-    width: 40px;
-}
-
-#txtBtnPrix{
-    user-select: none;
-}
-
 #conteneurBouton{
     display: flex;
     flex-direction: row-reverse;
@@ -98,7 +71,7 @@ main h1{
         padding: 10px;
     }
 
-    #btnTriePrix{
+    .btnTrie{
         margin-bottom: 5px;
     }
 
