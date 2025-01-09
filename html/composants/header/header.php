@@ -28,8 +28,7 @@
             <ul class="ulHeader">
                 <li class="liHeader" id="btRech">
                     <a class="aHeader" href="recherche.php">
-                    <img src="/icones/rechercherSVG.svg" alt="icone rechercher">
-                    <h3>Rechercher</h3>
+                        <h3>Rechercher</h3>
                     </a>
                 </li>
                 <?php if($comptePro || $compteMembre)
@@ -51,13 +50,12 @@
                     }
                 ?>>
                     <a class="aHeader" href="/pages/gestionOffres.php">
-                    <img src="/icones/offreSVG.svg" alt="icone offres">
-                    <h3>Gestion des offres</h3>
+                        <h3>Gestion des offres</h3>
                     </a>
                 </li>
+                
                 <li class="liHeader" id="btCompte">
                     <a class="aHeader" href="/pages/compte.php">
-                    <img src="/icones/compteSVG.svg" alt="icone compte">
                     <?php
                         if($comptePro || $compteMembre)
                         {
@@ -75,6 +73,7 @@
                     
                     </a>
                 </li>
+                
             </ul>
         </nav>
     </header> 

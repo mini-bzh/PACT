@@ -637,10 +637,10 @@ function trierPrix() {
 // Gestion du déroulement du filtre
 
 let filtreBarre = document.getElementsByClassName("filtrerBarre")[0];
-let filtreHead = document.getElementsByClassName("filtreHead")[0];
+//let filtreHead = document.getElementsByClassName("filtreHead")[0];
 let filtreG = document.getElementsByClassName("filtreDeplie")[0];
 
-filtreHead.addEventListener("click", derouleFiltre);
+//filtreHead.addEventListener("click", derouleFiltre);
 filtreBarre.addEventListener("mouseout", closeFiltre);
 
 function derouleFiltre() {
@@ -669,10 +669,10 @@ function closeFiltre(event) {
 // Gestion du déroulement du filtre des Tags
 
 let filtreTag = document.getElementsByClassName("filtreTag")[0];
-let filtreHeadTag = document.getElementsByClassName("filtreTagHead")[0];
+//let filtreHeadTag = document.getElementsByClassName("filtreTagHead")[0];
 let filtreG2 = document.getElementsByClassName("filtreTagDeplie")[0];
 
-filtreHeadTag.addEventListener("click", derouleTag);
+//filtreHeadTag.addEventListener("click", derouleTag);
 filtreTag.addEventListener("mouseout", closeTag);
 
 function derouleTag() {
@@ -713,4 +713,17 @@ window.addEventListener("pageshow", function() {
     });
     
     barreRecherche.value = '';
+});
+
+
+document.getElementById('bn-sidebar-exit').addEventListener("click", function() {
+    document.getElementById('filtres-aside').classList.add('displayNone');
+    document.getElementById('menu-aside').classList.remove('displayNone');
+    document.querySelector('main').classList.remove('main-for-menu-opened');
+});
+
+document.getElementById('bn-sidebar-filtres').addEventListener("click", function() {
+    document.getElementById('menu-aside').classList.add('displayNone');
+    document.getElementById('filtres-aside').classList.remove('displayNone');
+    document.querySelector('main').classList.add('main-for-menu-opened');
 });

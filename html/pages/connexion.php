@@ -147,7 +147,7 @@ if ($_GET['user-tempo'] === 'pro') {
 
     <div id="conteneurTitreMobile">
         <img src="/images/logo/logo_petit.png" alt="logo petit">
-        <h4>Connexion compte<br>professionnel</h4>
+        <h2>Connexion compte<br>professionnel</h2>
     </div>
 </div>
 
@@ -156,8 +156,9 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <main>
 
-<div class=textBulle>
-    <p class="texteLarge">Connexion à un compte 
+<!-- Formulaire de connexion -->
+<form action="" method="post">
+    <p class="texteLarge"> Se connecter à un compte 
 <?php
     if ($_GET["user-tempo"] === 'pro') {
         echo 'professionnel';
@@ -165,61 +166,36 @@ if ($_GET['user-tempo'] === 'pro') {
         echo 'membre';
     }
 ?>
-    :</p>
-</div>
-
-<!-- Formulaire de connexion -->
-<form action="" method="post">
-
+    </p>
     <div>
-        <label for="userName"><p class="texteLarge">
+        <!--<label for="userName"><p class="texteLarge"></p></label>-->
+        <input type="text" id="userName" name="userName" maxlength="40" placeholder="
 <?php
     if ($_GET['user-tempo'] == "pro"){
-            echo "Login de l'entreprise :";
+            echo "Login de l'entreprise";
     } else {
-            echo "Nom d'utilisateur :";
+            echo "Nom d'utilisateur";
     }
 ?>
-        </p></label><br>
-        <input type="text" id="userName" name="userName" maxlength="40" required>
-    </div>
+        " required>
+
 
 <!-- Ecrit le message "utilisateur inexistant si nécessaire" -->
 <?php
     echo $message1;
 ?>
 
-    <div>
-        <label for="userPSW"><p class="texteLarge">Mot de passe :</p></label><br>
-        <input type="password" id="userPSW" name="userPSW" minlength="12" required>
+        <!--<label for="userPSW"><p class="texteLarge"></p></label>-->
+        <input type="password" id="userPSW" name="userPSW" minlength="12" placeholder="Mot de passe" required>
     </div>
 
 <!-- Ecrit le message "mot de passe incorrect" si nécessaire -->
 <?php
     echo $message2;
 ?>
-    <!-- <p id="mdpOublie" onclick="recupMdp()">Mot de passe oublié ?</p> -->
 
-
-    <!-- <div class="accepteSouvenir">
-        <input type="checkbox" id="souvenir" name="souvenir">
-        <p class="texteLarge">Se souvenir de moi</p>
-    </div> -->
-
-    <div class="zoneBtn">
-        <a href="compte.php" class="btnAnnuler">
-            <p class="texteLarge boldArchivo">Annuler</p>
-<?php
-            include '../icones/croixSVG.svg';
-?>
-        </a>
-
-        <button type="submit" href="#" class="btnConfirmer">
-            <p class="texteLarge boldArchivo">Confirmer</p>
-<?php
-            include '../icones/okSVG.svg';
-?>
-
+        <button type="submit" href="#" class="btnConnexion">
+            <p class="texteLarge boldArchivo">Se connecter</p>
         </button>
     </div>
 
