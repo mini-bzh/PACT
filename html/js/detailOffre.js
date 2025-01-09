@@ -160,7 +160,6 @@ btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre '
 
 
 let btnSupprimerAvis = document.getElementById("btnSupprimerAvis");
-console.log(btnSupprimerAvis);
 if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
 {
     btnSupprimerAvis.addEventListener("click", supprimerAvis);
@@ -172,20 +171,20 @@ function supprimerAvis()
     {
         let idAvis = document.querySelectorAll("#btnSupprimerAvis p")[1].textContent;
         $.ajax({
-            url: "/php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            url: "../php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
             data: {idAvis: idAvis},
             success: function(response) {
     
                 //alert(response);                        // Affiche la réponse du script PHP si appelé correctement
+                location.reload();
+
             },
-            error: function()
-            {
-                alert("erreur lors de l'appel du script php")       //affiche un message d'erreur sinon
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Erreur AJAX : ", textStatus, errorThrown);
+                alert("Erreur lors de l'appel du script PHP : " + textStatus);
             }
         });
-
-        location.reload();
     }
     else
     {

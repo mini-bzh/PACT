@@ -1,4 +1,8 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
+    
     // Récupération des paramètres de connexion à la base de données
     include('../php/connection_params.php');
 
