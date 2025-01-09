@@ -633,6 +633,7 @@ function trierPrix() {
     updateAffichageOffres();
 }
 
+//============================================================================================
 
 // Gestion du déroulement du filtre
 
