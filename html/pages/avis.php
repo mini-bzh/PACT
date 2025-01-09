@@ -152,12 +152,12 @@
                 <section class="mainAvis">
 
                 <section class="conteneurBtn">
-                        <div id="btnTrieDate" class="grossisQuandHover" onclick="trierDate()">
-                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate">
-                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="displayNone">
-                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="displayNone">
-                            <p id="txtBtnDate">date</p>
-                        </div> 
+                        <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
+                            <p id="txtBtnDate" class="txtBtnTrie">date</p>
+                        </div>
                     </section>
                 <section class="conteneurAvis">
 
