@@ -176,23 +176,33 @@
 
 .conteneurAvis{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 0px;
     margin-top: 50px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .avis{
-    margin: 15px;
+    margin: 15px 0px;
     background-color: white;
     border-radius: 5px;
     box-shadow: var(--ombreNoire);
     height: fit-content;
     padding: 10px;
-    width: 100%;
+    width: 40%;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.avis .datesAvis{
+    display: flex;
+}
+
+.avis .datesAvis p{
+    margin-right: 10px;
+    font-size: var(--typescale-very-small-text);
 }
 
 .conteneurBtn{
@@ -208,6 +218,11 @@
     align-items: center;
     margin: 10px 0px;
 }
+/*
+<div class="datesAvis">
+<p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
+<p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
+</div>*/
 
 .avis .conteneurMembreAvis img{
     width: 80px;
@@ -219,7 +234,7 @@
 
 .avis .conteneurMembreAvis .infoMembreAvis{
     display: block;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 
@@ -269,8 +284,8 @@
     text-decoration: black;
     border-radius: 5px;
     box-shadow: var(--ombreVisiteur);
-    padding: 10px;
-    margin: 20px 10px;
+    padding: 10px 0px;
+    margin: 20px 0px;
 }
 
 .btnAjouterAvisGrise{
