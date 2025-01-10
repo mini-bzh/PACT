@@ -54,6 +54,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
         mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent);
         mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent);
+        mapTempo.set("note", parseFloat(document.querySelector("#" + element.id + " #note").textContent));
         // mapTempo.set("date", document.querySelector("#" + element.id + " #date").textContent);
 
         // Récupérer les données des tags
@@ -564,71 +565,93 @@ function verifTags(idOffre){
 
 // ================== FONCTIONS TRIES PRIX ========================
 
-let triePrix = "";  // Pour connaitre l'état du trie
+console.log(mapOffresInfos);
+
+function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
+
+    // Rajoute une bordure bleu sur le bouton
+    document.getElementById(icone1).classList.toggle("displayNone");
+    document.getElementById(icone2).classList.toggle("displayNone");
+
+    if (sens == "asc") {
+        // Trie le Tableau mapOffresInfos dans l'ordre croissant dans le tableau mapTrieAcs
+        var mapTrie = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get(paramTrie) - b[1].get(paramTrie)));
+
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderColor = "blue" ;
+    }
+    if (sens == "decs") {
+        // Trie le Tableau mapOffresInfos dans l'ordre décroissant dans le tableau mapTrieDesc
+        var mapTrie = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get(paramTrie) - a[1].get(paramTrie)));
+
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderColor = "red" ;
+    }
+    if (sens == "default") {
+        var mapTrie = mapOffresInfos;
+        document.getElementById(idBouton).style.border = "none";
+    }
+    
+    let index = 0;
+    // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
+    mapTrie.forEach((map, key, value)=>{
+
+        // Récupère l'élément dans la page
+        let elem = document.getElementById(mapTrie.get(key).get("id"));
+        elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+
+        index++;
+    })
+}
+
+function clearBouton(icone,icone1,icone2,idBouton){
+    if (document.getElementById(icone).classList.contains("displayNone")) {
+        document.getElementById(icone).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone1).classList.contains("displayNone")==false) {
+        document.getElementById(icone1).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone2).classList.contains("displayNone")==false) {
+        document.getElementById(icone2).classList.toggle("displayNone");
+    }
+    document.getElementById(idBouton).style.border = "none";
+}
+
+triePrix="";
+trieNote="";
 
 function trierPrix() {
+    clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
+    trieNote ="";
     if (triePrix == "") {
-
-        // Trie le Tableau mapOffresInfos dans l'ordre croissant dans le tableau mapTrieAcs
-        let mapTrieAcs = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get("prix") - b[1].get("prix")));
-        
-        let index = 0;
-        // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
-        mapTrieAcs.forEach((map, key, value)=>{
-
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapTrieAcs.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
-
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTriePrix1").classList.toggle("displayNone");
-            document.getElementById("iconeTriePrix").classList.toggle("displayNone");
-            document.getElementById("btnTriePrix").style.border = "solid";
-            document.getElementById("btnTriePrix").style.borderColor = "blue" ;
-
-            index++;
-        })
-        
+        toogleTrie("prix","iconeTriePrix1","iconeTriePrix","btnTriePrix","asc");
         triePrix = "asc";   // Modifie l'état du trie
     }
     else if(triePrix == "asc") {
-
-        // Trie le Tableau mapOffresInfos dans l'ordre décroissant dans le tableau mapTrieDesc
-        let mapTrieDesc = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix")));
-
-        let index = 0;
-        // Parcour le tableau mapTrieDesc
-        mapTrieDesc.forEach((map, key, value)=>{
-
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapTrieDesc.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
-
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTriePrix1").classList.toggle("displayNone");
-            document.getElementById("iconeTriePrix2").classList.toggle("displayNone");
-            document.getElementById("btnTriePrix").style.border = "solid";
-            document.getElementById("btnTriePrix").style.borderColor = "red" ;
-            index++;
-        })
+        toogleTrie("prix","iconeTriePrix1","iconeTriePrix2","btnTriePrix","decs");
         triePrix = "decs";  // Modifie l'état du trie
     }
     else if(triePrix == "decs"){
-        let index = 0;
-        // Parcour le tableau mapOffresInfos pour enlever le trie et remettre les offres dans l'ordre normale
-        mapOffresInfos.forEach((map, key, value)=>{
-
-            // Récupère l'élément dans la page
-            let elem = document.getElementById(mapOffresInfos.get(key).get("id"));
-            elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
-
-            // Rajoute une bordure bleu sur le bouton
-            document.getElementById("iconeTriePrix2").classList.toggle("displayNone");
-            document.getElementById("iconeTriePrix").classList.toggle("displayNone");
-            document.getElementById("btnTriePrix").style.border = "none";
-            index++;
-        })
+        toogleTrie("prix","iconeTriePrix2","iconeTriePrix","btnTriePrix","default");
         triePrix = "";  // Modifie l'état du trie
+    }
+    updateAffichageOffres();
+}
+
+function trierNote() {
+    clearBouton("iconeTriePrix","iconeTriePrix1","iconeTriePrix2","btnTriePrix");
+    triePrix="";
+    if (trieNote == "") {
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote","btnTrieNote","asc");
+        trieNote = "asc";   // Modifie l'état du trie
+    }
+    else if(trieNote == "asc") {
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote2","btnTrieNote","decs");
+        trieNote = "decs";  // Modifie l'état du trie
+    }
+    else if(trieNote == "decs"){
+        toogleTrie("note","iconeTrieNote2","iconeTrieNote","btnTrieNote","default");
+        trieNote = "";  // Modifie l'état du trie
     }
     updateAffichageOffres();
 }

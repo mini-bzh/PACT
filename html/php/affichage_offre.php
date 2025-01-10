@@ -49,7 +49,7 @@ function af_offre($row) {
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
-                <p>4.7</p>
+                <p id="note"><?php echo $row["note"]?></p>
                 <img src="/icones/etoilePleineSVG.svg" alt="">
                 <img src="/icones/etoilePleineSVG.svg" alt="">
                 <img src="/icones/etoilePleineSVG.svg" alt="">

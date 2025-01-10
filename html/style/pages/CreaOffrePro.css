@@ -422,7 +422,11 @@ input[type="radio"]:checked::after {
     display: inline-block;
     background-color: #007bff; /* Couleur bleue */
     color: white;
+<<<<<<< Updated upstream
     font-size: var(--typescale-small-text);
+=======
+    font-size: 16px;
+>>>>>>> Stashed changes
     font-weight: bold;
     padding: 10px 20px; /* Taille et espacement du bouton */
     border-radius: 8px; /* Bords arrondis */
@@ -442,6 +446,7 @@ input[type="radio"]:checked::after {
     background-color: #004080; /* Couleur encore plus foncée au clic */
     transform: translateY(0); /* Réinitialisation de la position */
 }
+<<<<<<< Updated upstream
 .champs label[for="fichier1"]::before {
     content: "📷 "; /* Icône avant le texte */
     font-size: var(--typescale-text);
@@ -507,6 +512,14 @@ input[type="radio"]:checked::after {
 }
 
 
+=======
+
+.champs label[for="fichier1"]::before {
+    content: "📷 "; /* Icône avant le texte */
+    font-size: 18px;
+}
+
+>>>>>>> Stashed changes
 .champ_Img{
     width: 100%;
     height: 100%;
