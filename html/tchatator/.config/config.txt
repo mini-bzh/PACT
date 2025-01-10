@@ -1,0 +1,10 @@
+taille_message=1000
+cle_api_admin=9a3f76b8c42de1f5b0d7e8a1c9f432ed
+mess_max_min=12
+mess_max_heure=90
+max_historique=20
+duree_bloquage_heure=24
+duree_ban_jour=60
+fic_logs_path=../logs/server.log
+file_attente=1
+port=8888

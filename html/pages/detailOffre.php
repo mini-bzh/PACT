@@ -89,24 +89,22 @@
                     <article class="offre">
                         <h1><?php echo $contentOffre["titreoffre"];?></h1>
                         <!-- <p>Visite</p> future categorie -->
-                        <div class="conteneurSpaceBetween">
-                            <div class="noteDetailOffre">
-                                <div class="etoiles">
-                                    <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
-                                    <?php
-                                    //
-                                    //  affichage de la note avec des etoiles
-                                    //
-                                        include "../php/etoiles.php";
-                                    ?>
-                                </div>
-                                <!-- <p>38 avis</p> -->
-                                <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
+                        <div class="noteDetailOffre">
+                            <div class="etoiles">
+                                <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
+                                <?php
+                                //
+                                //  affichage de la note avec des etoiles
+                                //
+                                    include "../php/etoiles.php";
+                                ?>
                             </div>
-                            <div class="conteneurSVGtexte">
-                                <img src="/icones/logoUserSVG.svg" alt="pro">
-                                <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
-                            </div>
+                            <!-- <p>38 avis</p> -->
+                            <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
+                        </div>
+                        <div class="conteneurSVGtexte">
+                            <img src="/icones/logoUserSVG.svg" alt="pro">
+                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
                         </div>
                         
                         <div class="imgResume">
@@ -261,8 +259,9 @@
                         
                     </article>
                 </section>
-                <h1>Avis</h1>
                 <!-- Avis -->
+
+                <h1>Avis</h1>
                 <section class="conteneurAvis">
                     <section class="conteneurBtn">
                         <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
@@ -282,33 +281,42 @@
                             $stmt->execute();
                             $result = $stmt->fetchAll();
 
-                            if(sizeof($result) > 0)
-                            {
-                                $avisDejaAjoute = true;
-                            }
-
-                            ?>
-                            <a <?php 
-                                if(!$avisDejaAjoute)
+                                if(sizeof($result) > 0)
                                 {
-                                    ?>
-                                    href="creaAvis.php?idOffre=<?php echo $idOffre;?>";
-                                    <?php
+                                    $avisDejaAjoute = true;
                                 }
-                            ?> id="btnAjouterAvis" 
-                            class="grossisQuandHover <?php       //ajoute la classe btnAvisGrisé quand le memebre a déjà ajouté un avis
-                                    if($avisDejaAjoute)
+
+                                ?>
+                                <a <?php 
+                                    if(!$avisDejaAjoute)
                                     {
-                                        echo ("btnAjouterAvisGrise");
+                                        ?>
+                                        href="creaAvis.php?idOffre=<?php echo $idOffre;?>";
+                                        <?php
                                     }
-                                ?>">
-                                <img src="../icones/ajouterSVG.svg" alt="ajouter">
-                                <h3>Ajouter un avis</h3>
-                            </a>
-                            <?php
-                        }
-                    ?>
+                                ?> id="btnAjouterAvis" 
+                                class="grossisQuandHover <?php       //ajoute la classe btnAvisGrisé quand le memebre a déjà ajouté un avis
+                                        if($avisDejaAjoute)
+                                        {
+                                            echo ("btnAjouterAvisGrise");
+                                        }
+                                    ?>">
+                                    <img src="../icones/ajouterSVG.svg" alt="ajouter">
+                                    <h3>Ajouter un avis</h3>
+                                </a>
+                                <?php
+                            }
+                        ?>
+                <section class="conteneurAvis">
+                    
+                        
                     <!-- Code pour un avis -->
+                     <div id="overlay">
+                            <img src="" alt="image overlay">
+                            <div id="btnFermerOverlay">
+                                <p>Fermer</p>
+                            </div>
+                     </div>
                     <?php
                     $i=0;
                     foreach ($avis as $key => $avisM) {
@@ -318,13 +326,42 @@
                         <!-- Date de publication-->
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
-                        <div class="conteneurSpaceBetween">
-                            <div class="conteneurMembreAvis">
-                                    <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                                    <div class="infoMembreAvis">
-                                        <h3><?php echo $membre['login'] ?></h3>
-                                        <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
+                        <div class="conteneurMembreAvis">
+                                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                                <div class="infoMembreAvis">
+                                    <h3><?php echo $membre['login'] ?></h3>
+                                    <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
+                                    <div class="datesAvis">
+                                        <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
+                                        <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                                     </div>
+                                </div>
+                        </div>
+
+                        <!-- Titre de l'avis -->
+                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <!-- Commentaire -->
+                        <div class="conteneurAvisTexte">
+                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
+                        </div>
+                        <hr>
+                        <!-- Image de l'avis -->
+                        <section class="conteneurSpaceBetween">
+                            <div class="conteneurAvisImage">
+                                <?php
+                                    if($avis[$key]["imageavis"] != null)
+                                    {
+                                    ?>
+                                        <img src="../images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" class="imageAvis" alt="image de l'avis">
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                            <img src="../icones/noImageSVG.svg" alt="pas d'image">
+                                        <?php
+                                    }
+                                ?>
                             </div>
                             <div class="conteneurBtnGestionAvis">
                                 <?php
@@ -349,28 +386,9 @@
                                     }
                                 ?>
                             </div>
-                        </div>
-                        <div class="datesAvis">
-                            <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
-                            <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
-                        </div>
-                        <!-- Titre de l'avis -->
-                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
-                        <!-- Commentaire -->
-                        <div class="conteneurAvisTexte">
-                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
-                        </div>
-                        <!-- Image de l'avis -->
-                        <?php
-                        if($avis[$key]["imageavis"] != null){
-                        ?>
-                        <hr>
-                        <div class="conteneurAvisImage">
-                            <img src="/images/imagesAvis/<?php echo $avis[$key]['imageavis'] ?>" alt="image de l'avis">
-                        </div>
-                        <?php
-                        }
-                        ?>
+                            
+                        </section>
+                       
                     </article>
                     <?php
                     $i++;

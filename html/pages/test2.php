@@ -18,6 +18,7 @@ else
     <title>Document</title>
   </head>
   <body>
+    <p>test tooltip</p>
     <form name="form" action="test2.php" method="post" enctype="multipart/form-data">
       <input type="hidden" id="inputH" name="horaire">
 
