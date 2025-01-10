@@ -23,16 +23,25 @@ if (isset($_GET["idOffre"])) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
     // On cherche dans quelle catégorie est l'offre
+<<<<<<< Updated upstream
     foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) 
     {
+=======
+    foreach(['visite', 'restauration', 'spectacle', 'parcattraction', 'activite'] as $nom_cat) {
+>>>>>>> Stashed changes
         
         // Requête pour chercher la catégorie
         $stmt = $dbh->prepare("SELECT idoffre FROM tripskell._" . $nom_cat . " WHERE idOffre = :idOffre;");
         $stmt->execute([ ':idOffre' => $idOffre]);
 
         // Si l'offre appartient à une catégorie, on envoie la catégorie au JS
+<<<<<<< Updated upstream
         if(isset($stmt->fetch()['idoffre']) && empty($_POST)){?>
         <script>
+=======
+        if(isset($stmt->fetch()['idoffre'])){?>
+            <script>
+>>>>>>> Stashed changes
                 let categorie_offre = '<?php echo $nom_cat; ?>';
             </script>
         <?php
@@ -72,6 +81,7 @@ if (isset($_GET["idOffre"])) {
 }
 
 if (key_exists("idCompte", $_SESSION)) {
+<<<<<<< Updated upstream
     // Récupération de id_c de pro_prive
     $idpropriveResult = $dbh->query("select id_c from tripskell.pro_prive where id_c=" . $_SESSION["idCompte"] . ";")->fetchAll();
     
@@ -93,6 +103,13 @@ if (key_exists("idCompte", $_SESSION)) {
             $idpropublic = null;
         }
     }
+=======
+    // Récupération de id_c de pro_prive 
+    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+
+    // Récupération de id_c de pro_public
+    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+>>>>>>> Stashed changes
 }
 
 if (!empty($_FILES) ) {
@@ -138,7 +155,11 @@ if (!empty($_POST)) {
     // Traitement de l'image si elle est envoyée
     if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
         $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
+<<<<<<< Updated upstream
         move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesOffres/" . $nom_img);
+=======
+        move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
+>>>>>>> Stashed changes
     }
 
     // Préparation de la requête de mise à jour de l'offre
@@ -245,6 +266,7 @@ if (!empty($_POST)) {
     $stmt->execute();
 
 
+<<<<<<< Updated upstream
     // Mise à jour des Tags
     $requete = "delete from tripskell.  _possede where idOffre=:idOffre";
 
@@ -269,6 +291,8 @@ if (!empty($_POST)) {
 
     
 
+=======
+>>>>>>> Stashed changes
     /* -------------------------------- modifs horaires dans l'offre -------------------------------- */
 
 
@@ -384,6 +408,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
+<<<<<<< Updated upstream
+=======
+            
+>>>>>>> Stashed changes
                  <!-- Champs pour sélectionner les images -->
         <div class="champs">
             <div class="champ_Img">

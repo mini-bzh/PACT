@@ -230,42 +230,55 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         </div>
     </div>
 
-        <!-- Login -->
-        <div class="champs">
-            <label for="Login">Login <span class="required">*</span> :</label>
-            <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
-            <?php
-            if (isset($error_message)) {
-                echo '<div class="error">'. $error_message. '</div>';
-            }
-            ?>
+        <div class="LogetPdP">
+                <!-- Login -->
+                <div class="champs">
+                    <label for="Login">Login <span class="required">*</span> :</label>
+                    <input type="text" id="Login" name="Login" placeholder="Entrez un pseudonyme" required>
+                    <?php
+                    if (isset($error_message)) {
+                        echo '<div class="error">'. $error_message. '</div>';
+                    }
+                    ?>
+                </div>
+
+                <!-- Champs pour sélectionner les images -->
+                <div class="champs">
+                    <div class ="PhotoDeProfil">
+                        <img id="previewImage" src="../images/logo/ajoutimage.png" 
+                            alt="Cliquez pour ajouter une image"
+                            style="cursor: pointer; width: 200px; height: auto;" 
+                            onclick="document.getElementById('fichier1').click()">
+                        <input type="file" id="fichier1" name="fichier1" 
+                            accept="image/png, image/jpeg" 
+                            style="display: none;" 
+                            onchange="updatePreview()">
+                    </div>    
+                </div>
+
+            </div>
+        
+        <div class="InfoPerso">
+            <!-- Nom  -->
+            <div class="champs">
+                <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
+                <input type="text" id="RaisonSociale" name="RaisonSociale" placeholder="Entrez votre raison sociale" required>
+            </div>
+
+                <!-- Telephone -->
+                <div class="champs">
+                <label for="Telephone">Téléphone :</label>
+                <input type="text" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10" pattern="^^\d{10}$">
+            </div>
         </div>
-
-         <!-- Nom  -->
-         <div class="champs">
-            <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
-            <input type="text" id="RaisonSociale" name="RaisonSociale" placeholder="Entrez votre nom" required>
-        </div>
-
-        <!-- Champs pour sélectionner les images -->
-        <div class="champs">
-            <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
-        </div>
-
-
+        
         <!-- Adresse Mail -->
         <div class="champs">
             <label for="Adresse_Mail">E-mail <span class="required">*</span> :</label>
             <input type="email" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
-            <!-- Telephone -->
-        <div class="champs">
-            <label for="Telephone">Téléphone :</label>
-            <input type="text" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10" pattern="^^\d{10}$">
-        </div>
+        
 
 
         <!-- Mot de Passe -->
@@ -329,7 +342,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
                 <div class="coBancaires">
-                    <h2>Coordonnées bancaires :</h2>
+                    <h3>Coordonnées bancaires :</h3>
                     <p>Vous devrez compléter ces champs si vous souhaitez publier une offre à l’avenir. </p>
                 </div>
             </div>
@@ -340,16 +353,17 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             <input type="text" id="NumeroCB" name="NumeroCB" placeholder="Numero de votre carte" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
         </div>
     
-        <div class="champs">
-            <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
-            <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
-        </div>
+        <div class="InfoCB">
+            <div class="champs">
+                <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
+                <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
+            </div>
 
-        <div class="champs">
-            <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
-            <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" minlength="3" maxlength="" pattern="^^\d{3}$"> 
+            <div class="champs">
+                <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
+                <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" minlength="3" maxlength="" pattern="^^\d{3}$"> 
+            </div>
         </div>
-
 
             <div class="champs">
             <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
@@ -505,6 +519,31 @@ hideCheckbox.addEventListener('change', function () {
 // Initialisation au chargement de la page
 checkCheckboxes();    // Vérifie l'état initial des cases
 updateActiveStyles(); // Met à jour les styles visuels initialement
+</script>
+
+<script>
+    function updatePreview() {
+        const input = document.getElementById('fichier1');
+        const fileName = document.getElementById('fileName');
+        const previewImage = document.getElementById('previewImage');
+
+        // Vérifie si un fichier a été sélectionné
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            // Quand le fichier est chargé, met à jour l'image
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // Change la source de l'image
+            }
+            
+            reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
+            
+            // Met à jour le nom du fichier
+            fileName.textContent = input.files[0].name;
+        } else {
+            fileName.textContent = ''; // Efface le nom si aucun fichier sélectionné
+        }
+    }
 </script>
 
 </body>

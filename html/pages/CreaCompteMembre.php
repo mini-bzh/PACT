@@ -140,12 +140,20 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
                 </div>
             </div>
 
-            <!-- Champs pour sélectionner les images -->
+           <!-- Champs pour sélectionner les images -->
             <div class="champs">
-                <label for="fichier1">Ajouter une photo de profil :</label>
-                <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-                <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
+                <div class ="PhotoDeProfil">
+                    <img id="previewImage" src="../images/logo/ajoutimage.png" 
+                        alt="Cliquez pour ajouter une image" 
+                        style="cursor: pointer; width: 200px; height: auto;" 
+                        onclick="document.getElementById('fichier1').click()">
+                    <input type="file" id="fichier1" name="fichier1" 
+                        accept="image/png, image/jpeg" 
+                        style="display: none;" 
+                        onchange="updatePreview()">
+                </div>    
             </div>
+
 
         </div> 
 
@@ -169,15 +177,17 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
             <input type="email" id="Adresse_Mail" name="Adresse Mail" placeholder="jean.claude05@gmail.com" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
-            <!-- Telephone -->
-        <div class="champs">
-            <label for="Telephone">Téléphone :</label>
-            <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
-        </div>
+        <div class="InfoPerso">
+                <!-- Telephone -->
+            <div class="champs">
+                <label for="Telephone">Téléphone :</label>
+                <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
+            </div>
 
-        <div class="champs">
-        <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
-        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+            <div class="champs">
+            <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
+            <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+            </div>
         </div>
 
 
@@ -257,21 +267,6 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
 
 
 <script>
-    function updateFileName() {
-        const fileInput = document.getElementById('fichier1'); // Champ de fichier
-        const fileName = document.getElementById('fileName'); // Zone où afficher le nom
-        const label = document.getElementById('customFileLabel'); // Label du bouton
-
-        if (fileInput.files.length > 0) {
-            // Si un fichier est sélectionné, afficher son nom
-            fileName.textContent = fileInput.files[0].name;
-            label.textContent = "Changer la photo"; // Met à jour le texte du bouton
-        } else {
-            // Si aucun fichier n'est sélectionné
-            fileName.textContent = "";
-            label.textContent = "📷 Ajouter une photo de profil"; // Remet le texte original
-        }
-    }
 
     const form = document.getElementById('form'); // Élément du formulaire
     const password = document.getElementById('Mot_de_P'); // Champ mot de passe
@@ -303,6 +298,30 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
     });
 </script>
 
+<script>
+    function updatePreview() {
+        const input = document.getElementById('fichier1');
+        const fileName = document.getElementById('fileName');
+        const previewImage = document.getElementById('previewImage');
+
+        // Vérifie si un fichier a été sélectionné
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            // Quand le fichier est chargé, met à jour l'image
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // Change la source de l'image
+            }
+            
+            reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
+            
+            // Met à jour le nom du fichier
+            fileName.textContent = input.files[0].name;
+        } else {
+            fileName.textContent = ''; // Efface le nom si aucun fichier sélectionné
+        }
+    }
+</script>
 
 
 </body>
