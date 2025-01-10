@@ -1,3 +1,30 @@
+/*---------------------------- preview image ----------------------------*/
+let triggerAffichage = document.querySelectorAll(".imageAvis");
+let overlay = document.getElementById("overlay");
+let imageOverlay = document.querySelector("#overlay img");
+console.log
+let btnfermerOverlay = document.getElementById("btnFermerOverlay");
+
+triggerAffichage.forEach(element => {
+    element.addEventListener("click", afficheOverlayImage);
+});
+
+btnfermerOverlay.addEventListener("click", fermerOverlayImage);
+
+function afficheOverlayImage()
+{
+    let image = event.target.currentSrc;
+    imageOverlay.src = image;
+    overlay.style.display = "flex";
+}
+
+function fermerOverlayImage()
+{
+    overlay.style.display = "none";
+}
+
+/*------------------ categories ------------------*/
+
 let nomCat = document.getElementById("nomCat");
 let offreResto = document.getElementById("secRestaurant");
 let offreParc = document.getElementById("secParcAttr");
@@ -149,11 +176,15 @@ function trierDate() {
 
 let btnAjouterAvis = document.getElementById("btnAjouterAvis");
 
-btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre 'event'
+if(btnAjouterAvis != null)
+{
+    btnAjouterAvis.addEventListener("click", (event) => { // Ajouter le paramètre 'event'
     if (btnAjouterAvis.classList.contains("btnAjouterAvisGrise")) {
         alert("Veuillez supprimer votre ancien avis si vous voulez ajouter un nouvel avis");
     }
-});
+    });
+}
+
 
 
 /* ------------------------ supprimer avis ------------------------*/
