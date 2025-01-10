@@ -48,17 +48,11 @@
 
 .offre .noteDetailOffre{
     display: flex;
-    justify-content: center;
 }
 
 .offre .noteDetailOffre p{
-    margin-left: 20px;
+    margin-right: 20px;
 }
-
-.offre .noteDetailOffre .etoiles p{
-    margin-left: 0px;
-}
-
 
 .offre .imgResume img{
     border-radius: 15px 15px 0px 0px;
@@ -83,6 +77,7 @@
     border-radius: 0px 0px 15px 15px;
     background-color: var(--primaryDark);
     text-align: center;
+    padding: 10px;
 }
 
 .offre .resumePrixDetailOffre hr{
@@ -198,7 +193,11 @@
 }
 
 .avis hr{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.avis .conteneurSpaceBetween{
+    align-items: end;
 }
 
 .avis .datesAvis{
@@ -220,20 +219,27 @@
 
 .avis .conteneurMembreAvis{
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     flex-direction: column;
 }
 
 
 .avis .conteneurMembreAvis .infoMembreAvis{
-    display: block;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.avis .conteneurMembreAvis .infoMembreAvis h3{
     margin-left: 10px;
 }
 
 .avis .texteAvis{
-    font-size: var(--typescale-text);
-    margin: 3px 0px 10px;
+    font-size: var(--typescale-small-text);
+    margin: 7px 0px 16px;
+    word-wrap: break-word;
+    height: 60px;
 }
 
 .avis .conteneurAvisImage img{
@@ -286,14 +292,10 @@
     color: white;
 }
 
-.texteAvis{
-    word-wrap: break-word;
-    height: 90px;
-}
 
 .circular-image {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden; /* Cache tout ce qui dépasse */
     object-fit: cover;
@@ -335,17 +337,24 @@ table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid black;
+    border: 1px solid black;
+}
+
+thead{
+    background-color: var(--primaryDark);
+    color: white;
 }
 
 th, td {
-    padding: 20px;
     font-size: var(--typescale-small-text);
     font-family: 'Archivo';
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
 }
 
 #btnSupprimerAvis{
-    border: 2px solid red;
+    border: 1px solid red;
     width: fit-content;
     border-radius: 15px;
     padding: 5px;
@@ -355,9 +364,9 @@ th, td {
 }
 
 #btnSupprimerAvis img{
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
     transform: translateY(-1px);
 }
 

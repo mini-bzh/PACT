@@ -379,17 +379,17 @@ input{
 
 .etoiles{
     display: flex;
-    align-items: center;
 }
 
 .etoiles p{
     margin-right: 5px;
+    font-size: var(--typescale-small-text);
+    transform: translateY(3px);
 }
 
 .etoiles img{
-    width: 20px;
-    height: 20px;
-    transform: translateY(-5px);
+    width: 15px;
+    height: 15px;
 }
 
 .etoileMoitiePleine{

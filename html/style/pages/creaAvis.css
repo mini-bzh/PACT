@@ -3,6 +3,15 @@ form{
     margin-bottom: 80px;
 }
 
+#conteneurTitreNote{
+    display: flex;
+    width: 100%;
+}
+
+#conteneurTitreNote .champs:first-of-type{
+    margin-right: 50px;
+}
+
 #conteneurTitreForm{
     width: 100%;
 }
@@ -30,7 +39,7 @@ form{
 }
 
 #note{
-    width: 65px;
+    max-width: 90px;
 }
 
 #conteneurNote p{

@@ -91,13 +91,14 @@
                         <!-- <p>Visite</p> future categorie -->
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
+                                <!-- affichage de la note -->
                                 <?php
                                 //
                                 //  affichage de la note avec des etoiles
                                 //
                                     include "../php/etoiles.php";
                                 ?>
+                                <p>(<?php echo $contentOffre["note"];?>)</p> 
                             </div>
                             <!-- <p>38 avis</p> -->
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
@@ -148,6 +149,14 @@
                                 <!-- affichage horaires et jours d'ouverture -->
                                 <div id="conteneurJoursOffre">
                                     <table>
+                                    <thead>
+                                        <th>Jour</th>
+                                        <th>Ouverture</th>
+                                        <th>Fermeture</th>
+                                        <th>Ouverture</th>
+                                        <th>Fermeture</th>
+
+                                    </thead>
                                     <tbody>
                                     <?php
                                         foreach($ouverture as $key => $value){
@@ -327,8 +336,8 @@
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
-                                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                 <div class="infoMembreAvis">
+                                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                     <h3><?php echo $membre['login'] ?></h3>
                                 </div>
                                 <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
@@ -339,7 +348,7 @@
                         </div>
                         <hr>
                         <!-- Titre de l'avis -->
-                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <h4 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h4>
                         <!-- Commentaire -->
                         <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
                         <hr>
