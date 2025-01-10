@@ -159,6 +159,12 @@
                             <p id="txtBtnDate" class="txtBtnTrie">date</p>
                         </div>
                     </section>
+                    <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
+                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
+                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
+                        <p id="txtBtnNote" class="txtBtnTrie" >note</p>
+                    </div>
                 <section class="conteneurAvis">
 
                 <?php

@@ -81,6 +81,18 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
     })
 }
 
+function clearBouton(icone,icone1,icone2,idBouton){
+    if (document.getElementById(icone).classList.contains("displayNone")) {
+        document.getElementById(icone).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone1).classList.contains("displayNone")==false) {
+        document.getElementById(icone1).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone2).classList.contains("displayNone")==false) {
+        document.getElementById(icone2).classList.toggle("displayNone");
+    }
+    document.getElementById(idBouton).style.border = "none";
+}
 
 let trieDate ="";
 
