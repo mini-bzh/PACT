@@ -110,7 +110,7 @@
                         <p id="txtBtnPrix" class="txtBtnTrie" >prix</p>
                     </div>
 
-                    <div id="btnTriePrix" class="btnTrie grossisQuandHover" onclick="trierNote()">
+                    <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
                         <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
                         <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
                         <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">

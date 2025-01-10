@@ -584,12 +584,12 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
         // Trie le Tableau mapOffresInfos dans l'ordre décroissant dans le tableau mapTrieDesc
         var mapTrie = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get(paramTrie) - a[1].get(paramTrie)));
 
-        document.getElementById("btnTriePrix").style.border = "solid";
-        document.getElementById("btnTriePrix").style.borderColor = "red" ;
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderColor = "red" ;
     }
     if (sens == "default") {
         var mapTrie = mapOffresInfos;
-        document.getElementById("btnTriePrix").style.border = "none";
+        document.getElementById(idBouton).style.border = "none";
     }
     
     let index = 0;
@@ -604,10 +604,25 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
     })
 }
 
+function clearBouton(icone,icone1,icone2,idBouton){
+    if (document.getElementById(icone).classList.contains("displayNone")) {
+        document.getElementById(icone).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone1).classList.contains("displayNone")==false) {
+        document.getElementById(icone1).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone2).classList.contains("displayNone")==false) {
+        document.getElementById(icone2).classList.toggle("displayNone");
+    }
+    document.getElementById(idBouton).style.border = "none";
+}
 
-let triePrix = "";  // Pour connaitre l'état du trie
+triePrix="";
+trieNote="";
 
 function trierPrix() {
+    clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
+    trieNote ="";
     if (triePrix == "") {
         toogleTrie("prix","iconeTriePrix1","iconeTriePrix","btnTriePrix","asc");
         triePrix = "asc";   // Modifie l'état du trie
@@ -619,6 +634,24 @@ function trierPrix() {
     else if(triePrix == "decs"){
         toogleTrie("prix","iconeTriePrix2","iconeTriePrix","btnTriePrix","default");
         triePrix = "";  // Modifie l'état du trie
+    }
+    updateAffichageOffres();
+}
+
+function trierNote() {
+    clearBouton("iconeTriePrix","iconeTriePrix1","iconeTriePrix2","btnTriePrix");
+    triePrix="";
+    if (trieNote == "") {
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote","btnTrieNote","asc");
+        trieNote = "asc";   // Modifie l'état du trie
+    }
+    else if(trieNote == "asc") {
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote2","btnTrieNote","decs");
+        trieNote = "decs";  // Modifie l'état du trie
+    }
+    else if(trieNote == "decs"){
+        toogleTrie("note","iconeTrieNote2","iconeTrieNote","btnTrieNote","default");
+        trieNote = "";  // Modifie l'état du trie
     }
     updateAffichageOffres();
 }
