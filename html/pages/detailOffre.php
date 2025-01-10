@@ -330,20 +330,18 @@
                                 <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                 <div class="infoMembreAvis">
                                     <h3><?php echo $membre['login'] ?></h3>
-                                    <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
-                                    <div class="datesAvis">
-                                        <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
-                                        <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
-                                    </div>
+                                </div>
+                                <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
+                                <div class="datesAvis">
+                                    <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
+                                    <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                                 </div>
                         </div>
-
+                        <hr>
                         <!-- Titre de l'avis -->
                         <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
                         <!-- Commentaire -->
-                        <div class="conteneurAvisTexte">
-                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
-                        </div>
+                        <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
                         <hr>
                         <!-- Image de l'avis -->
                         <section class="conteneurSpaceBetween">

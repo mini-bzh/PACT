@@ -1,6 +1,12 @@
 @import "fonts/fonts.css";
 @import "abstract/_variables.css";
 
+* {     /*reset d'éventuelles mises en style appliquées par le navigateur */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     font-family: "Archivo";
     margin: 0px;
@@ -268,7 +274,7 @@ input{
 
 .apercuOffre{
     width: 350px;
-    height: 500px;
+    height: 400px;
 
     background-color: white;
 
@@ -311,7 +317,7 @@ input{
 
 
 .apercuOffre .conteneurSVGtexte p{
-    font-size: var(--typescale-large-text);
+    font-size: var(--typescale-text);
     margin-left: 5px;
 }
 
@@ -335,7 +341,7 @@ input{
 }
 
 .apercuOffre .conteneurImage img{
-    width: 350px;
+    width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -361,7 +367,7 @@ input{
     position: absolute;
     bottom: 0px;
     right: 0px;
-    padding: 10px;
+    padding: 5px;
     background-color: var(--primaryDark);
     color: white; 
     font-size: var(--typescale-text);
@@ -391,7 +397,7 @@ input{
 }
 
 .apercuOffre .resumeApercu{
-    font-size: var(--typescale-large-text);
+    font-size: var(--typescale-text);
     margin: 10px 0px;
     height: 55px;
 }

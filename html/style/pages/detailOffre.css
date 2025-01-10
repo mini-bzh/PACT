@@ -1,4 +1,5 @@
 @import "../style.css";
+  
 /*-------------/ page détail offre /--------------*/
 .mainDetail{
     display: flex;
@@ -196,6 +197,10 @@
     margin-bottom: 20px;
 }
 
+.avis hr{
+    margin-bottom: 20px;
+}
+
 .avis .datesAvis{
     display: flex;
 }
@@ -216,33 +221,19 @@
 .avis .conteneurMembreAvis{
     display: flex;
     align-items: center;
-    margin: 10px 0px;
+    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-
-
-.avis .conteneurMembreAvis img{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    object-fit: cover;
-}
 
 .avis .conteneurMembreAvis .infoMembreAvis{
     display: block;
     margin-left: 10px;
 }
 
-
-.avis .conteneurAvisTexte{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.avis .conteneurAvisTexte p{
+.avis .texteAvis{
     font-size: var(--typescale-text);
+    margin: 3px 0px 10px;
 }
 
 .avis .conteneurAvisImage img{
@@ -297,14 +288,15 @@
 
 .texteAvis{
     word-wrap: break-word;
-    height: 70px;
+    height: 90px;
 }
 
 .circular-image {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden; /* Cache tout ce qui dépasse */
+    object-fit: cover;
 }
 
 #btnAjouterAvis{
@@ -526,7 +518,7 @@ th, td {
         font-size: var(--typescale-h3);
     }
 
-    .avis .conteneurAvisTexte p{
+    .avis .texteAvis{
         font-size: var(--typescale-small-text);
     }
 
