@@ -353,6 +353,54 @@ th, td {
     padding: 5px;
 }
 
+
+.conteneurBtnGestionAvis{
+    display: flex;
+}
+
+/* btn pouces */
+
+.conteneurPouces{
+    display: flex;
+    align-items: center;
+}
+
+.conteneurPouces div{
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+}
+
+.conteneurPouces div img{
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+
+    transition: transform 0.2s ease;
+}
+
+.conteneurPouces .pouceLike img{
+    transform: translateY(-2px);
+}
+
+.conteneurPouces .pouceDislike img{
+    transform: translateY(2px);
+}
+
+/* animations de survol des pouces*/
+
+.conteneurPouces .pouceLike img:hover{
+    transform: rotate(-20deg) translateY(-6px);
+    cursor: pointer;
+}
+
+.conteneurPouces .pouceDislike img:hover{
+    transform: rotate(-20deg) translateY(6px);
+    cursor: pointer;
+}
+
+
+
 #btnSupprimerAvis{
     border: 1px solid red;
     width: fit-content;

@@ -208,3 +208,128 @@ function supprimerAvis()
         alert("Votre avis n'est pas supprimé.");
     }
 }
+
+
+/* ------------------------ like/dislike avis ------------------------*/
+
+let avis = document.querySelectorAll(".avis");
+
+let mapBtnCptId = new Map();      //map qui associe à chaque bouton like/dislike son compteur de likes/dislike et l'id de l'avis concerné
+
+avis.forEach(element =>{
+    let btnLike = element.querySelector(".conteneurPouces .pouceLike img");
+    let cptLike = element.querySelector(".conteneurPouces .pouceLike p");
+    let btnDislike = element.querySelector(".conteneurPouces .pouceDislike img");
+    let cptDislike = element.querySelector(".conteneurPouces .pouceDislike p");
+
+    let idAvis = element.id.slice(4);
+
+    mapBtnCptId.set(btnLike, [cptLike, idAvis]);
+    mapBtnCptId.set(btnDislike, [cptDislike, idAvis]);
+
+    btnLike.addEventListener("click", ()=>{ pouceClique("like")});
+    btnDislike.addEventListener("click", ()=>{ pouceClique("dislike")});
+});
+
+
+function pouceClique(pouce)     // lorsqu'un pouce est cliqué, incrémente son compteur et met à jour la BDD
+{                               // pouce induque si un like ou dislike a été cliqué
+    let cpt = mapBtnCptId.get(event.target)[0];
+    let avisParent = document.getElementById("Avis" + mapBtnCptId.get(event.target)[1]);
+
+    if(pouce == "like")
+    {
+        if(avisParent.classList.contains("avisLike"))
+        {
+            avisParent.classList.remove("avisLike");
+
+            cpt.textContent = parseInt(cpt.textContent) - 1;
+            event.target.src = "../icones/pouceHautSVG.svg";
+
+            updatePoucesAvis(mapBtnCptId.get(event.target)[1], "like", -1);
+        }
+        else
+        {
+            avisParent.classList.add("avisLike");
+
+            cpt.textContent = parseInt(cpt.textContent) + 1;
+            event.target.src = "../icones/pouceHaut2.png";
+
+            updatePoucesAvis(mapBtnCptId.get(event.target)[1], "like", 1);
+
+
+            if(avisParent.classList.contains("avisDislike"))
+            {
+                avisParent.classList.remove("avisDislike");
+                let btnDislike = avisParent.querySelector(".pouceDislike img");
+                let cptDislike = avisParent.querySelector(".pouceDislike p");
+
+                cptDislike.textContent = parseInt(cptDislike.textContent) - 1;
+                btnDislike.src = "../icones/pouceBasSVG.svg";
+
+                updatePoucesAvis(mapBtnCptId.get(event.target)[1], "dislike", -1);
+            }
+        }
+    }
+    else if(pouce == "dislike")
+    {
+        if(avisParent.classList.contains("avisDislike"))
+        {
+            avisParent.classList.remove("avisDislike");
+
+            cpt.textContent = parseInt(cpt.textContent) - 1;
+            event.target.src = "../icones/pouceBasSVG.svg";
+
+            updatePoucesAvis(mapBtnCptId.get(event.target)[1], "dislike", -1);
+
+        }
+        else
+        {
+            avisParent.classList.add("avisDislike");
+
+            cpt.textContent = parseInt(cpt.textContent) + 1;
+            event.target.src = "../icones/pouceBas2.png";
+
+            updatePoucesAvis(mapBtnCptId.get(event.target)[1], "dislike", 1);
+
+
+            if(avisParent.classList.contains("avisLike"))
+            {
+                avisParent.classList.remove("avisLike");
+                let btnLike = avisParent.querySelector(".pouceLike img");
+                let cptLike = avisParent.querySelector(".pouceLike p");
+
+                cptLike.textContent = parseInt(cptLike.textContent) - 1;
+                btnLike.src = "../icones/pouceHautSVG.svg";
+
+                updatePoucesAvis(mapBtnCptId.get(event.target)[1], "like", -1);
+
+            }
+        }
+    }
+}
+
+
+function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteur de like/dislike de l'avis idAvis
+                                                        // pouce indique s'il faut mettre à jour les likes ou dislikes
+                                                        //changement vaut 1 ou -1 et indique s'il faut incrémenter ou décrémenter
+{
+    $.ajax({
+        url: "../php/updatePoucesAvis.php",         // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+        data:  {                                    //données transférées au script php
+            idAvis: idAvis,
+            pouce: pouce,
+            changement, changement
+        },
+        success: function(response) {
+
+            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            console.log("Erreur AJAX : ", textStatus, errorThrown);
+            alert("Erreur lors de l'appel du script PHP : " + textStatus);
+        }
+    });
+}

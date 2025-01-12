@@ -368,7 +368,7 @@
                                 ?>
                             </div>
                             <div class="conteneurBtnGestionAvis">
-                                <?php
+                                <?php                                               //bouton supprimer avis
                                     if(array_key_exists("idCompte", $_SESSION))
                                     {
                                         $idCompteConnecte = $_SESSION["idCompte"];
@@ -389,6 +389,17 @@
                                         <?php
                                     }
                                 ?>
+                                <div class="conteneurPouces">
+                                    <div class="pouceLike">
+                                        <img src="../icones/pouceHautSVG.svg" alt="pouce vers le haut">
+                                        <p>10</p>
+                                    </div>
+                                    <div class="pouceDislike">
+                                        <img src="../icones/pouceBasSVG.svg" alt="pouce vers le bas">
+                                        <p>2</p>
+                                    </div>
+                                    
+                                </div>
                             </div>
                             
                         </section>
