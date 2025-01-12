@@ -219,10 +219,7 @@
 
                                     // Combiner les éléments en une seule chaîne séparée par des virgules
                                     $languesStr = implode(', ', $langues);
-
-
 ?>
-
                                     <section id="secVisite" class="displayNone">
                                         <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
                                         <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
