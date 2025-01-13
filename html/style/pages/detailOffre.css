@@ -387,12 +387,12 @@ th, td {
 /* animations de survol des pouces*/
 
 .conteneurPouces .pouceLike img:hover{
-    transform: rotate(-20deg) translateY(-6px);
+    transform: rotate(-20deg) translateY(-4px);
     cursor: pointer;
 }
 
 .conteneurPouces .pouceDislike img:hover{
-    transform: rotate(-20deg) translateY(6px);
+    transform: rotate(-20deg) translateY(4px);
     cursor: pointer;
 }
 

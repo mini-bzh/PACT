@@ -19,7 +19,7 @@ main {
     /* Pour quand la sidebar apparait */
     display: flex;
     flex-direction: column;
-    padding: 0 15%;
+    padding: 0 10%;
 }
 
 h1{
@@ -354,11 +354,11 @@ input{
     cursor: pointer;
 }
 
-#mainAvis .conteneurAvis{
+.fondPro #mainAvis .conteneurAvis{
     display: none;
 }
 
-#mainAvis .nouvelAvis{
+.fondPro #mainAvis .nouvelAvis{
     border: 2px solid var(--accent);
 }
 

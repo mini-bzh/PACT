@@ -81,11 +81,11 @@
                     <div class="conteneurPouces">
                         <div class="pouceLike">
                             <img src="../icones/pouceHautSVG.svg" alt="pouce vers le haut">
-                            <p>10</p>
+                            <p><?php echo $avis["nbpoucesbleu"] ?></p>
                         </div>
                         <div class="pouceDislike">
                             <img src="../icones/pouceBasSVG.svg" alt="pouce vers le bas">
-                            <p>2</p>
+                            <p><?php echo $avis["nbpoucesrouge"] ?></p>
                         </div>
                         
                     </div>
