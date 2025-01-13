@@ -26,7 +26,7 @@
         // recuperation du contenu de l offre
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
-        $avis           = $dbh->query("select * from tripskell.avis where idoffre='" . $idOffre . "';")->fetchAll();
+        $avis           = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "';")->fetchAll();
         $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 
         $categorie = categorie($idOffre);

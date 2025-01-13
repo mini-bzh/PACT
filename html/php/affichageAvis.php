@@ -13,7 +13,6 @@
         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis['id_c'] . ";")->fetchAll()[0];
         ?>
         <article id="Avis<?php echo $avis["id_avis"]?>" class="avis <?php 
-        print_r($avis);
             if(!$avis["luparpro"])                              //ajoute la classe nouvelAvis si l'avis n'a pas encore été vu par le pro"
             {
                 echo "nouvelAvis";
