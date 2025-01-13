@@ -91,13 +91,14 @@
                         <!-- <p>Visite</p> future categorie -->
                         <div class="noteDetailOffre">
                             <div class="etoiles">
-                                <p><?php echo $contentOffre["note"];?></p> <!-- affichage de la note -->
+                                <!-- affichage de la note -->
                                 <?php
                                 //
                                 //  affichage de la note avec des etoiles
                                 //
                                     include "../php/etoiles.php";
                                 ?>
+                                <p>(<?php echo $contentOffre["note"];?>)</p> 
                             </div>
                             <!-- <p>38 avis</p> -->
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
@@ -148,6 +149,14 @@
                                 <!-- affichage horaires et jours d'ouverture -->
                                 <div id="conteneurJoursOffre">
                                     <table>
+                                    <thead>
+                                        <th>Jour</th>
+                                        <th>Ouverture</th>
+                                        <th>Fermeture</th>
+                                        <th>Ouverture</th>
+                                        <th>Fermeture</th>
+
+                                    </thead>
                                     <tbody>
                                     <?php
                                         foreach($ouverture as $key => $value){
@@ -210,10 +219,7 @@
 
                                     // Combiner les éléments en une seule chaîne séparée par des virgules
                                     $languesStr = implode(', ', $langues);
-
-
 ?>
-
                                     <section id="secVisite" class="displayNone">
                                         <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
                                         <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
@@ -327,23 +333,21 @@
                         <p class="datePublication"><?php echo $avis[$key]['datepublication']?></p>
                         <!-- Information du membre -->
                         <div class="conteneurMembreAvis">
-                                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                 <div class="infoMembreAvis">
+                                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                                     <h3><?php echo $membre['login'] ?></h3>
-                                    <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
-                                    <div class="datesAvis">
-                                        <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
-                                        <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
-                                    </div>
+                                </div>
+                                <p>Contexte de la visite : <?php echo $avis[$key]['cadreexperience']?></p>
+                                <div class="datesAvis">
+                                    <p>Visité le : <?php echo $avis[$key]['dateexperience']?></p>
+                                    <p>Posté le : <?php echo $avis[$key]['datepublication']?></p>
                                 </div>
                         </div>
-
+                        <hr>
                         <!-- Titre de l'avis -->
-                        <h3 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h3>
+                        <h4 class="titreAvis"><?php echo $avis[$key]['titreavis'] ?></h4>
                         <!-- Commentaire -->
-                        <div class="conteneurAvisTexte">
-                            <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
-                        </div>
+                        <p class="texteAvis"><?php echo $avis[$key]['commentaire'] ?></p>
                         <hr>
                         <!-- Image de l'avis -->
                         <section class="conteneurSpaceBetween">
@@ -364,7 +368,7 @@
                                 ?>
                             </div>
                             <div class="conteneurBtnGestionAvis">
-                                <?php
+                                <?php                                               //bouton supprimer avis
                                     if(array_key_exists("idCompte", $_SESSION))
                                     {
                                         $idCompteConnecte = $_SESSION["idCompte"];
@@ -385,6 +389,17 @@
                                         <?php
                                     }
                                 ?>
+                                <div class="conteneurPouces">
+                                    <div class="pouceLike">
+                                        <img src="../icones/pouceHautSVG.svg" alt="pouce vers le haut">
+                                        <p>10</p>
+                                    </div>
+                                    <div class="pouceDislike">
+                                        <img src="../icones/pouceBasSVG.svg" alt="pouce vers le bas">
+                                        <p>2</p>
+                                    </div>
+                                    
+                                </div>
                             </div>
                             
                         </section>

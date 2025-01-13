@@ -113,19 +113,21 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
             </div>
         </div>
 
-        <div class="champs">
-            <label for="titre">Titre<span class="required">*</span> :</label>
-            <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" maxlength="20" required>
-        </div>
-        <!--<div class="champs">
-        <label for="note">Note <span class="required">*</span> :</label>
-
-            <div id="conteneurNote">
-                <input type="text" id="note" name="note" placeholder="Note" required>
-                <p>/5</p>
-                <img src="../icones/etoilePleineSVG.svg" alt="étoile">
+        <div id="conteneurTitreNote">
+            <div class="champs">
+                <label for="titre">Titre<span class="required">*</span> :</label>
+                <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" maxlength="20" required>
             </div>
-        </div>   -->
+            <div class="champs">
+                <label for="note">Note <span class="required">*</span> :</label>
+                <div id="conteneurNote">
+                    <input type="number" id="note" name="note" placeholder="Note" min="1" max="5" step="0.5" required>
+                    <p>/5</p>
+                    <img src="../icones/etoilePleineSVG.svg" alt="étoile">
+                </div>
+            </div>
+        </div>
+        
 
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
