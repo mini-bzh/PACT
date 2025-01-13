@@ -33,7 +33,7 @@
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/style/pages/avis.css">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -74,7 +74,7 @@
             <h1 class="titrePrincipale">Mes avis</h1>
         </div>
     </div>
-    <main>
+    <main id="mainAvis">
     <?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
             {
