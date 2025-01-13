@@ -61,6 +61,22 @@ $tags = array_column($tags, 'nomtag');
                     <span class="price-value">100 €</span>
                 </fieldset>
 
+                <fieldset id="note">
+                    <legend>Note</legend>
+                    <div class="double_range_slider_box">
+                        <div class="double_range_slider">
+                            <span class="range_track" id="range_track"></span>
+                    
+                            <input type="range" class="inputNote min" min="0" max="5" value="0" step="0" />
+                            <input type="range" class="inputNote max" min="0" max="5" value="5" step="0" />
+
+                            <div class="minvalue"></div>
+                            <div class="maxvalue"></div>
+    
+                        </div>
+                    </div>
+                </fieldset>
+
                 <fieldset id="filtreLieu">
                     <legend>Lieu</legend>
                     <div class="input-group">
@@ -90,3 +106,4 @@ $tags = array_column($tags, 'nomtag');
                 </svg>
             </div>
         </aside>
+        
