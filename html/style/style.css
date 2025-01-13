@@ -261,6 +261,52 @@ input{
 }
 
 
+/* ------------/ accueil /------------ */
+#accueil h1{
+    margin: 20px;
+}
+
+#accueil #conteneurOffres{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+#accueil #conteneurOffres .lienApercuOffre{
+    margin: 15px;
+}
+
+#accueil #conteneurOffres>article{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+@media screen and (max-width : 428px)
+{
+    #accueil #conteneurOffres>article{
+        display: block;
+    }
+    #accueil #conteneurOffres .lienApercuOffre{
+        margin: 10px;
+    }
+
+    #accueil>h1{
+        font-size: 2em;
+        border-left: 10px solid var(--secondary);
+        padding-left: 10px;
+        margin-left: 5px;
+    }
+
+    #accueil #logoTitreMobile{
+        width: 200px;
+        height: auto;
+        transform: translate(30px, -25px);
+    }
+}
+
+
 
 /*-------------/ apercu offre /--------------*/
 
@@ -643,6 +689,13 @@ input{
 
 rect{
     fill: var(--secondary);
+}
+
+@media screen and (max-width : 428px)
+{
+    main{
+        padding: 10px;
+    }
 }
 
 
