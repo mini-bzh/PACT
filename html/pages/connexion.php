@@ -114,7 +114,16 @@ if ($_GET['user-tempo'] === 'pro') {
 
     <!-- <script src="../js/popUpmdpOublie.js" defer></script> -->
 </head>
-<body class=<?php echo ($comptePro)?"fondPro":"fondVisiteur";//met le bon fond en fonction de l'utilisateur ?>>
+<body class=
+<?php
+    if ($_GET['user-tempo'] == 'pro') {
+        echo 'fondPro';
+    } else {
+        echo 'fondVisiteur';
+    }
+
+?>
+>
 
 <!------ HEADER  ------>
 <?php
