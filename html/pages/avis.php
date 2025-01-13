@@ -20,6 +20,8 @@
         $membre = $dbh->query("select * from tripskell.membre where id_c='" . $idCompte . "';")->fetchAll()[0];
         $avis = $dbh->query("select * from tripskell._avis where id_c='" . $idCompte . "';")->fetchAll();
     }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
