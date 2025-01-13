@@ -690,11 +690,13 @@ function MaxVlaueBubbleStyle () {
 function setMinValueOutput () {
     minRange = parseInt(rangeInput[0].value);
     minval.innerHTML = rangeInput[0].value;
+    minval.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
   }
 
 function setMaxValueOutput () {
     maxRange = parseInt(rangeInput[1].value);
     maxval.innerHTML = rangeInput[1].value;
+    maxval.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
   }
 
   setMinValueOutput()

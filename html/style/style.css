@@ -798,7 +798,7 @@ rect{
     background-color: white;
     width: 60px;
     height: 30px;
-    border-radius: 50px;
+    border-radius: 10px;
     align-items: center;
     justify-content: center;
     margin-left: 5px;
@@ -822,6 +822,8 @@ rect{
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
    
   .double_range_slider {
@@ -837,28 +839,37 @@ rect{
     border-radius: 20px;
   }
 
-  .minvalue {
+  .value-popup{
+    display: flex;
+    flex-direction: row-reverse;
     position: absolute;
-    background: black;
-    border-radius: 1rem;
-    color: white;
+    color: #007bff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .minvalue {
     bottom: 0;
     transform: translate(0, -100%);
     left: 0;
-    font-size: 1rem;
     will-change: left, transform;
   }
   
   .maxvalue {
-    position: absolute;
-    background: black;
-    border-radius: 1rem;
-    color: white;
     top: 0;
     transform: translate(0, 100%);
     right: 0;
-    font-size: 1rem;
     will-change: right, transform;
+  }
+
+  .maxvalue img{
+    width: 12px;
+  }
+
+  .minvalue img{
+    width: 12px;
   }
 
   #note input {
