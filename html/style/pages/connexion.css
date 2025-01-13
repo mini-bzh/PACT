@@ -125,36 +125,6 @@ input[type="checkbox"]{
     text-decoration: underline; /* Ajout d'un soulignement */
 }
 
-/* POP-UP si correct */
-.popUp{
-    display: none;
-    z-index: 10;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    align-items: center;
-    justify-content: center;
-}
-
-.popUp > div{
-    background-color: white;
-    border-radius: 20px;
-    width: 700px;
-    height: 300px;
-    border: var(--accent) solid 2px;
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.popUp > div > p {
-    font-size:3em;
-}
-
 h2{
     width: fit-content;
     margin-bottom: 3%;
@@ -256,14 +226,5 @@ body.no-scroll {
 
     .btnConfirmer p, .btnAnnuler p{
         font-size: var(--typescale-text);
-    }
-
-    .popUp > div{
-        width: 220px;
-        height: 120px;
-    }
-
-    .popUp h2{
-        font-size: 1.4rem;
     }
 }

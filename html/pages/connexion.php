@@ -69,6 +69,11 @@ if ($_GET['user-tempo'] == "pro") {
     }
 }
 
+// Traite si les logins sont corrects
+if ($correspond === true) {
+    header('Location: /pages/accueil.php');
+}
+
 $message1 = "";
 $message2 = "";
 
@@ -216,29 +221,8 @@ if ($_GET['user-tempo'] === 'pro') {
     </form>
 </div>
 
-<!-- POP-UP -->
-<div class="popUp">
-    <div>
-        <p>Connexion réussie</p>
-    </div>
-</div>
-
 </main>
 
 </body>
 
-<script src="../js/connexion.js"></script>
-
 </html>
-
-<?php
-
-// Traite si les logins sont corrects
-if ($correspond === true) {
-?>
-    <script>
-        validerCorrect();
-    </script>
-<?php
-}
-?>
