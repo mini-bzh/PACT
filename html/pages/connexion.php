@@ -69,6 +69,11 @@ if ($_GET['user-tempo'] == "pro") {
     }
 }
 
+// Traite si les logins sont corrects
+if ($correspond === true) {
+    header('Location: /pages/accueil.php');
+}
+
 $message1 = "";
 $message2 = "";
 
@@ -109,16 +114,7 @@ if ($_GET['user-tempo'] === 'pro') {
 
     <!-- <script src="../js/popUpmdpOublie.js" defer></script> -->
 </head>
-<body class=
-<?php
-    if ($_GET['user-tempo'] == 'pro') {
-        echo 'fondPro';
-    } else {
-        echo 'fondVisiteur';
-    }
-
-?>
->
+<body class=<?php echo ($comptePro)?"fondPro":"fondVisiteur";//met le bon fond en fonction de l'utilisateur ?>>
 
 <!------ HEADER  ------>
 <?php
@@ -216,29 +212,8 @@ if ($_GET['user-tempo'] === 'pro') {
     </form>
 </div>
 
-<!-- POP-UP -->
-<div class="popUp">
-    <div>
-        <p>Connexion réussie</p>
-    </div>
-</div>
-
 </main>
 
 </body>
 
-<script src="../js/connexion.js"></script>
-
 </html>
-
-<?php
-
-// Traite si les logins sont corrects
-if ($correspond === true) {
-?>
-    <script>
-        validerCorrect();
-    </script>
-<?php
-}
-?>
