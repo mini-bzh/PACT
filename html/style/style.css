@@ -1113,9 +1113,8 @@ rect{
     display: flex;
     flex-direction: row-reverse;
     position: absolute;
-    color: #007bff;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+    border: 1px solid var(--grisClair);
+    border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
   }

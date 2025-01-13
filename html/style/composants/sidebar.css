@@ -35,7 +35,8 @@ aside {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 2%;
+    transition: background-color 0.3s, color 0.3s;
+    width: 3%;
 }
 
 #filtres-aside {
@@ -75,7 +76,6 @@ aside ul li a {
     display: block;
     padding: 0.5em;
     border-radius: 0.25em;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 aside ul li a:hover {
@@ -88,8 +88,8 @@ svg {
 }
 
 svg > path {
-    stroke: var(--grisClair);
-    stroke-width: 4;
+    stroke: var(--primaryDark);
+    stroke-width: 6;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
@@ -168,7 +168,6 @@ fieldset {
     background: #ddd;
     border-radius: 5px;
     outline: none;
-    transition: background 0.3s ease;
 }
 
 /* Style du curseur du slider */
@@ -181,7 +180,6 @@ fieldset {
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
 #prix input[type="range"]::-webkit-slider-thumb:hover {
@@ -204,7 +202,6 @@ fieldset {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
 }
 
 .apply-price:hover {
@@ -260,7 +257,7 @@ fieldset {
     justify-content: center;
     align-items: center;
 
-    border-radius: 100px;
+    border-radius: 15px;
 
     font-size: 2em;
 
@@ -271,7 +268,5 @@ fieldset {
 }
 
 .button:hover{
-    /*background-color: var(--grisClair);*/
-    border: solid 2px var(--grisClair);
-    
+    background-color: #f1f1f1;
 }

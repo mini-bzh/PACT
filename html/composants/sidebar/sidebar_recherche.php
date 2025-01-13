@@ -15,9 +15,14 @@ $tags = array_column($tags, 'nomtag');
 
         <aside id="filtres-aside" class="displayNone">
             <div id="bn-sidebar-exit" class="button">
-                <span>x</span>
+                
+                <svg viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 10 L79 71 M79 10 L10 71" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+
             </div>
             <div class="content-aside">
+                <h2 class="title-aside">Filtres</h2>
                 <fieldset id="ouverture">
                     <legend>Ouverture du site</legend>
                     <label class="toggle-button">
