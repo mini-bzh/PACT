@@ -317,12 +317,12 @@
                     
                         
                     <!-- Code pour un avis -->
-                     <div id="overlay">
-                            <img src="" alt="image overlay">
-                            <div id="btnFermerOverlay">
-                                <p>Fermer</p>
-                            </div>
-                     </div>
+                    <div id="overlay">
+                        <img src="" alt="image overlay">
+                        <div id="btnFermerOverlay">
+                            <p>Fermer</p>
+                        </div>
+                    </div>
                     <?php
                     $i=0;
                     foreach ($avis as $key => $avisM) {
@@ -381,7 +381,7 @@
                                     if($avis[$key]["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                                     {
                                         ?>
-                                            <div id="btnSupprimerAvis" class="grossisQuandHover">
+                                            <div class="btnSupprimerAvis grossisQuandHover">
                                                 <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
                                                 <p>Supprimer</p>
                                                 <p hidden><?php echo $avis[$key]["id_avis"]?></p>
@@ -405,6 +405,7 @@
                         </section>
                        
                     </article>
+
                     <?php
                     $i++;
                     }

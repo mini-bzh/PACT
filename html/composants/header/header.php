@@ -4,8 +4,6 @@
     include('../php/verif_compte_pro.php');
     include('../php/verif_compte_membre.php');
 ?>
-    
-    <link rel="stylesheet" href="../style/style.css">
     <header class="headerPC-Tab <?php
         if($comptePro)
         {

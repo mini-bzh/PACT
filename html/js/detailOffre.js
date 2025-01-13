@@ -176,7 +176,7 @@ if(btnAjouterAvis != null)
 /* ------------------------ supprimer avis ------------------------*/
 
 
-let btnSupprimerAvis = document.getElementById("btnSupprimerAvis");
+let btnSupprimerAvis = document.querySelector(".btnSupprimerAvis");
 if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
 {
     btnSupprimerAvis.addEventListener("click", supprimerAvis);
@@ -317,7 +317,7 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
     $.ajax({
         url: "../php/updatePoucesAvis.php",         // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
-        data:  {                                    //données transférées au script php
+        data:  {                                    // données transférées au script php
             idAvis: idAvis,
             pouce: pouce,
             changement, changement

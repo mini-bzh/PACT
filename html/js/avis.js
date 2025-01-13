@@ -112,3 +112,64 @@ function trierDate() {
 }
 
 
+/* ------------------------ supprimer avis ------------------------*/
+
+
+let btnSupprimerAvis = document.querySelectorAll(".btnSupprimerAvis");
+
+btnSupprimerAvis.forEach(btn =>{
+    btn.addEventListener("click", supprimerAvis);
+})
+
+function supprimerAvis()
+{
+    if(confirm("Voulez-vous supprimer votre avis ?\nVous pourrez en déposer un autre."))
+    {
+        let idAvis = document.querySelectorAll(".btnSupprimerAvis p")[1].textContent;
+        $.ajax({
+            url: "../php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+            data: {idAvis: idAvis},
+            success: function(response) {
+    
+                //alert(response);                        // Affiche la réponse du script PHP si appelé correctement
+                location.reload();
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Erreur AJAX : ", textStatus, errorThrown);
+                alert("Erreur lors de l'appel du script PHP : " + textStatus);
+            }
+        });
+    }
+    else
+    {
+        alert("Votre avis n'est pas supprimé.");
+    }
+}
+
+
+/*---------------------------- preview image ----------------------------*/
+let triggerAffichage = document.querySelectorAll(".imageAvis");
+let overlay = document.getElementById("overlay");
+let imageOverlay = document.querySelector("#overlay img");
+console.log
+let btnfermerOverlay = document.getElementById("btnFermerOverlay");
+
+triggerAffichage.forEach(element => {
+    element.addEventListener("click", afficheOverlayImage);
+});
+
+btnfermerOverlay.addEventListener("click", fermerOverlayImage);
+
+function afficheOverlayImage()
+{
+    let image = event.target.currentSrc;
+    imageOverlay.src = image;
+    overlay.style.display = "flex";
+}
+
+function fermerOverlayImage()
+{
+    overlay.style.display = "none";
+}

@@ -170,6 +170,61 @@
     transform: translateY(-2px);
 }
 
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+thead{
+    background-color: var(--primaryDark);
+    color: white;
+}
+
+th, td {
+    font-size: var(--typescale-small-text);
+    font-family: 'Archivo';
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+.conteneurBtn{
+    width: 100%;
+}
+
+#btnAjouterAvis{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: black;
+    text-decoration: black;
+    border-radius: 5px;
+    box-shadow: var(--ombreVisiteur);
+    padding: 10px 0px;
+    margin: 20px 0px;
+}
+
+.btnAjouterAvisGrise{
+    color: var(--grisClair) !important;
+}
+
+.btnAjouterAvisGrise:hover{
+    cursor: pointer;
+}
+
+.btnAjouterAvisGrise img{
+    display: none;
+}
+
+#btnAjouterAvis img{
+    width: 60px;
+    margin-right: 20px;
+}
+
 .conteneurAvis{
     display: flex;
     justify-content: space-between;
@@ -192,6 +247,7 @@
     margin-bottom: 20px;
 }
 
+
 .avis hr{
     margin-bottom: 10px;
 }
@@ -209,9 +265,7 @@
     font-size: var(--typescale-very-small-text);
 }
 
-.conteneurBtn{
-    width: 100%;
-}
+
 
 .avis .datePublication{
     display: none;
@@ -249,7 +303,6 @@
     display: block;
 }
 
-
 .avis .conteneurAvisImage .text-overlay-avis{
     position: absolute;
     top: 50%;
@@ -262,8 +315,7 @@
     border-radius: 5px;
 }
 
-#overlay
-{
+#overlay{
     display: none;
     position: fixed;
     top: 0;
@@ -298,60 +350,8 @@
     height: 80px;
 }
 
-#btnAjouterAvis{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    color: black;
-    text-decoration: black;
-    border-radius: 5px;
-    box-shadow: var(--ombreVisiteur);
-    padding: 10px 0px;
-    margin: 20px 0px;
-}
 
-.btnAjouterAvisGrise{
-    color: var(--grisClair) !important;
-
-}
-
-.btnAjouterAvisGrise:hover{
-    cursor: pointer;
-}
-
-.btnAjouterAvisGrise img{
-    display: none;
-}
-
-#btnAjouterAvis img{
-    width: 60px;
-    margin-right: 20px;
-}
-
-table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-thead{
-    background-color: var(--primaryDark);
-    color: white;
-}
-
-th, td {
-    font-size: var(--typescale-small-text);
-    font-family: 'Archivo';
-    border: 1px solid black;
-    text-align: center;
-    padding: 5px;
-}
-
-
-.conteneurBtnGestionAvis{
+.avis .conteneurBtnGestionAvis{
     display: flex;
 }
 
