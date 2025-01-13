@@ -173,3 +173,35 @@ function fermerOverlayImage()
 {
     overlay.style.display = "none";
 }
+
+
+/*---------------------------- déplier avis pour offres  ----------------------------*/
+
+let avisOffres = document.querySelectorAll("#mainAvis .conteneurAvisOffre");
+
+let mapBtnConteneurAvis = new Map(); //map qui associe à un bouton pour déplier les avis le conteneur d'avis qui sera déplié
+
+avisOffres.forEach(element =>{
+    let btn = element.querySelector(".conteneurBtnTitre img");
+    let conteneurAvis = element.querySelector(".conteneurAvis");
+
+    mapBtnConteneurAvis.set(btn, conteneurAvis);
+
+    btn.addEventListener("click", toggleAvisOffre);
+})
+
+function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
+{
+    let conteneurAvis = mapBtnConteneurAvis.get(event.target);
+
+    if(window.getComputedStyle(conteneurAvis).display == "none")
+    {
+        conteneurAvis.style.display = "flex";
+        event.target.style.transform = "rotate(180deg)";
+    }
+    else
+    {
+        conteneurAvis.style.display = "none";
+        event.target.style.transform = "rotate(0deg)";
+    }
+}

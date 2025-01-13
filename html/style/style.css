@@ -336,17 +336,31 @@ input{
 
 #mainAvis .mainAvisPro{
     display: block;
+    width: 100%;
+    margin: 20px;
 }
 
-/*#mainAvis .conteneurAvis{
+#mainAvis .conteneurBtnTitre{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0px;
-    margin-top: 50px;
-    width: 100%;
-    flex-wrap: wrap;
-}*/
+    margin-top: 30px;
+    align-items: center;
+}
+
+#mainAvis .conteneurBtnTitre img{
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+#mainAvis .conteneurBtnTitre img:hover{
+    cursor: pointer;
+}
+
+#mainAvis .conteneurAvis{
+    display: none;
+}
+
+#mainAvis .nouvelAvis{
+    border: 2px solid var(--accent);
+}
 
 @media screen and (max-width : 428px){
     #mainAvis .titrePrincipale{
@@ -401,7 +415,6 @@ input{
     justify-content: space-between;
     align-items: center;
     padding: 0px;
-    margin-top: 50px;
     width: 100%;
     flex-wrap: wrap;
 }
