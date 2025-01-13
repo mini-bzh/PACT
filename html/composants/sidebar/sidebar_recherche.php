@@ -70,8 +70,8 @@ $tags = array_column($tags, 'nomtag');
                             <input type="range" class="inputNote min" min="0" max="5" value="0" step="0" />
                             <input type="range" class="inputNote max" min="0" max="5" value="5" step="0" />
 
-                            <div class="minvalue"></div>
-                            <div class="maxvalue"></div>
+                            <div class="value-popup minvalue"></div>
+                            <div class="value-popup maxvalue"></div>
     
                         </div>
                     </div>

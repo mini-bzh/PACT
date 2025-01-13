@@ -1066,7 +1066,7 @@ rect{
     background-color: white;
     width: 60px;
     height: 30px;
-    border-radius: 50px;
+    border-radius: 10px;
     align-items: center;
     justify-content: center;
     margin-left: 5px;
@@ -1091,6 +1091,8 @@ rect{
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
    
   .double_range_slider {
@@ -1104,30 +1106,40 @@ rect{
     height: 100%;
     position: absolute;
     border-radius: 20px;
+    background-color: #007bff;
+  }
+
+  .value-popup{
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    color: #007bff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .minvalue {
-    position: absolute;
-    background: black;
-    border-radius: 1rem;
-    color: white;
     bottom: 0;
     transform: translate(0, -100%);
     left: 0;
-    font-size: 1rem;
     will-change: left, transform;
   }
   
   .maxvalue {
-    position: absolute;
-    background: black;
-    border-radius: 1rem;
-    color: white;
     top: 0;
     transform: translate(0, 100%);
     right: 0;
-    font-size: 1rem;
     will-change: right, transform;
+  }
+
+  .maxvalue img{
+    width: 12px;
+  }
+
+  .minvalue img{
+    width: 12px;
   }
 
   #note input {
@@ -1141,9 +1153,12 @@ rect{
     top: 50%;
     transform: translateY(-50%);
   }
+
   #note input::-webkit-slider-thumb {
-    height: 25px;
-    width: 25px;
+    height: 18px;
+    width: 18px;
+    background-color: #007bff;
+    border: none;
     border-radius: 50%;
     pointer-events: auto;
     -webkit-appearance: none;
@@ -1153,12 +1168,13 @@ rect{
   #note input::-moz-range-thumb {
     height: 18px;
     width: 18px;
+    background-color: #007bff;
+    border: none;
     border-radius: 50%;
     pointer-events: auto;
     -moz-appearance: none;
     cursor: pointer;
     margin-top: 30%;
   }
-
 
   /*-----------------------------------------------------*/
