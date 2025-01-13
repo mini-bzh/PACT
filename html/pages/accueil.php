@@ -48,7 +48,7 @@
 
         <link rel="stylesheet" href="/style/style.css">
     </head>
-    <body id="accueil" class=<?php                          //met le bon fond en fonction de l'utilisateur
+    <body id="mainAccueil" class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
             {
                 echo "fondPro";
