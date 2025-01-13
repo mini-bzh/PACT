@@ -672,7 +672,7 @@ function minRangeFill () {
 
 function maxRangeFill () {
     range.style.right =
-      100 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
+      5 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
   }
 
 function MinVlaueBubbleStyle () {
@@ -708,6 +708,7 @@ function setMaxValueOutput () {
 
 rangeInput.forEach((input) => {
     input.addEventListener("input", (e) => {
+        
         setMinValueOutput();
         setMaxValueOutput();
 
@@ -717,22 +718,30 @@ rangeInput.forEach((input) => {
         MinVlaueBubbleStyle();
         MaxVlaueBubbleStyle();
 
-        if (maxRange - minRange < minRangeValueGap) {
+        if (maxRange - minRange <= minRangeValueGap) {
             if (e.target.className === "min") {
                 rangeInput[0].value = maxRange - minRangeValueGap;
                 setMinValueOutput();
                 minRangeFill();
                 MinVlaueBubbleStyle();
-                e.target.style.zIndex = "2"
             }
             else {
                 rangeInput[1].value = minRange + minRangeValueGap;
-                e.target.style.zIndex = "2"
                 setMaxValueOutput();
                 maxRangeFill();
                 MaxVlaueBubbleStyle();
             }
         }
+
+        if (rangeInput[0].value == 5) {
+            rangeInput[0].style.zIndex = "2";
+            rangeInput[1].style.zIndex = "1";
+        }
+        if (rangeInput[1].value == 0) {
+            rangeInput[1].style.zIndex = "2";
+            rangeInput[0].style.zIndex = "1";
+        }
+
 
         mapOffresInfos.forEach((map, key, value)=>{
             if(mapOffresInfos.get(key).get("note") >=rangeInput[0].value && mapOffresInfos.get(key).get("note")<=rangeInput[1].value)
