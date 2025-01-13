@@ -672,7 +672,7 @@ function minRangeFill () {
 
 function maxRangeFill () {
     range.style.right =
-      5 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
+      100 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";
   }
 
 function MinVlaueBubbleStyle () {

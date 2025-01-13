@@ -976,6 +976,7 @@ rect{
     height: 100%;
     position: absolute;
     border-radius: 20px;
+    background-color: #007bff;
   }
 
   .value-popup{
