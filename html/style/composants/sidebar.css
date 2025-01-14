@@ -126,16 +126,16 @@ svg > path {
 
 /* Style quand le checkbox est coché */
 .toggle-button input[type="checkbox"]:checked + span {
-    background-color: #007bff;
+    background-color: var(--primaryLight);
     color: white;
-    border-color: #007bff;
+    border-color: var(--primaryLight);
 }
 
 /* Style quand le checkbox est coché */
 .toggle-button input[type="radio"]:checked + span {
-    background-color: #007bff;
+    background-color: var(--primaryLight);
     color: white;
-    border-color: #007bff;
+    border-color: var(--primaryLight);
 }
 
 /* Style pour la légende */
@@ -144,7 +144,7 @@ legend {
     font-weight: bold; /* Texte en gras */
     color: #555; /* Couleur douce pour le texte */
     padding: 0.5rem; /* Espacement interne */
-    border-bottom: 2px solid #007bff; /* Ligne décorative */
+    border-bottom: 2px solid var(--primaryLight); /* Ligne décorative */
     margin-bottom: 1rem; /* Espacement avec le contenu en dessous */
     display: inline-block; /* S'assure que la bordure n'occupe que la largeur du texte */
 }
@@ -180,7 +180,7 @@ fieldset {
     height: 100%;
     position: absolute;
     border-radius: 20px;
-    background-color: #007bff;
+    background-color:  var(--primaryLight);
   }
 
   .value-popup{
@@ -229,7 +229,7 @@ fieldset {
   .double-range-slider-box input::-webkit-slider-thumb {
     height: 18px;
     width: 18px;
-    background-color: #007bff;
+    background-color: var(--primaryLight);
     border: none;
     border-radius: 50%;
     pointer-events: auto;
@@ -240,7 +240,7 @@ fieldset {
   .double-range-slider-box input::-moz-range-thumb {
     height: 18px;
     width: 18px;
-    background-color: #007bff;
+    background-color: var(--primaryLight);
     border: none;
     border-radius: 50%;
     pointer-events: auto;
@@ -288,7 +288,7 @@ fieldset {
 
 /* Effet au focus de l'input */
 .input-group input:focus {
-    border-color: #007bff;
+    border-color: var(--primaryLight);
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
