@@ -29,7 +29,7 @@ if (key_exists("idCompte", $_SESSION)) {
 }
 
 
-// Récupération de l'identifiant de l'offre si présent dans l'URL
+/*// Récupération de l'identifiant de l'offre si présent dans l'URL
 $idOffre = null;
 if (key_exists("idOffre", $_GET)) {
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
@@ -71,7 +71,7 @@ $daysElapsed = floor(($firstDayNextMonthTimestamp - $todayTimestamp) / (60 * 60 
 //print_r($contentDerniereFacture);
 
 // Vérification pour éviter d'incrémenter après le début du mois suivant
-if ($todayTimestamp >= $firstDayNextMonthTimestamp) {
+if ($todayTimestamp >= $fristDayNextMonthTimestamp) {
     $datePublicationTimestamp = $firstDayNextMonthTimestamp;
     $firstDayNextMonthTimestamp = strtotime('first day of next month', $datePublicationTimestamp);
     // Découper la chaîne de date en utilisant le séparateur '-'
@@ -98,6 +98,13 @@ $counter = max(0, $daysElapsed);
 // if($contentOffre['enLigne'] == false){
 
 // }
+*/
+
+
+/* On récupère ici toute les factures qui existe sous l'id_c */
+$contentFacture = $dbh->query("SELECT id_facture, date_creation from tripskell.facture where id_c = " . $id_c . " ;")->fetchAll();
+//var_dump($contentFacture);
+
 
 
 ?>
@@ -138,7 +145,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($contentOffre as $row) {
+                        foreach ($contentFacture as $row) {
                         ?>
                             <tr>
                                 <td><?php echo "Facture N°" . $row["id_facture"]; ?></td>
