@@ -3,6 +3,9 @@
 
     // recuperation des parametre de connection a la BdD
     include('../php/connection_params.php');
+
+    // contient fonction affichage_etoiles pour afficher les etoiles
+    include('../php/etoiles.php'); 
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -94,13 +97,8 @@
                         <div class="noteDetailOffre">
                             <div class="etoiles">
                                 <!-- affichage de la note -->
-                                <?php
-                                //
-                                //  affichage de la note avec des etoiles
-                                //
-                                    include "../php/etoiles.php";
-                                ?>
-                                <p>(<?php echo $contentOffre["note"];?>)</p> 
+                                <p><?php echo $contentOffre["note"];?></p> 
+                                <?php affichage_etoiles($contentOffre["note"]); ?>
                             </div>
                             <!-- <p>38 avis</p> -->
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
