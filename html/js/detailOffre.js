@@ -238,7 +238,7 @@ function getCookie()
 
 function supprimerCookiePouces() 
 {
-    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
+    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 }
 
 function setCookiePouce(idAvis, pouce)
@@ -249,7 +249,7 @@ function setCookiePouce(idAvis, pouce)
         poucesAvis.push([idAvis, pouce]);
         console.log(poucesAvis);
 
-        document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/pages/detailOffre.php;SameSite=Lax`;
+        document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/;SameSite=Lax`;
     }
     else
     {
@@ -276,7 +276,7 @@ function setCookiePouce(idAvis, pouce)
                     poucesAvis.push([idAvis, pouce]);
                 }
 
-                document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/pages/detailOffre.php;SameSite=Lax`;
+                document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/;SameSite=Lax`;
             }
         }
 
