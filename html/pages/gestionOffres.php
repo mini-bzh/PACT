@@ -11,6 +11,9 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
 include('../php/verif_compte_pro.php');
 
+// contient fonction affichage_etoiles pour afficher les etoiles
+include('../php/etoiles.php'); 
+
 // Creation requete pour recuperer les offres
 // du professionnel connecte
 $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
@@ -90,7 +93,7 @@ $contentMesOffres = $stmt->fetchAll();
                         </div>
                         
                         <div class="etoiles">
-                            <?php include "../php/etoiles.php"; ?>
+                            <?php affichage_etoiles($contentOffre["note"]); ?>
                         </div>
 
                         <!--gestion du bouton de mise en/hors ligne-->

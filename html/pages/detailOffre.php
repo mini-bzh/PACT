@@ -3,6 +3,9 @@
 
     // recuperation des parametre de connection a la BdD
     include('../php/connection_params.php');
+
+    // contient fonction affichage_etoiles pour afficher les etoiles
+    include('../php/etoiles.php'); 
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -47,16 +50,7 @@
 
     <link rel="stylesheet" href="/style/pages/detailOffre.css">
 </head>
-    <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
-                echo "fondPro";
-            }
-            else
-            {
-                echo "fondVisiteur";
-            }
-        ?>>
+    <body  class=<?php echo "fondPro"; ?>> <!-- met le bon fond en fonction de l'utilisateur -->
         <?php
             // ajout du header
             include "../composants/header/header.php";
@@ -95,15 +89,9 @@
                         <div class="noteDetailOffre">
                             <div class="etoiles">
                                 <!-- affichage de la note -->
-                                <?php
-                                //
-                                //  affichage de la note avec des etoiles
-                                //
-                                    include "../php/etoiles.php";
-                                ?>
-                                <p>(<?php echo $contentOffre["note"];?>)</p> 
+                                <p><?php echo $contentOffre["note"];?></p> 
+                                <?php affichage_etoiles($contentOffre["note"]); ?>
                             </div>
-                            <!-- <p>38 avis</p> -->
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
                         </div>
                         <div class="conteneurSVGtexte">

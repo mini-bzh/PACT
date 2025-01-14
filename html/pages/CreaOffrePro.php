@@ -406,7 +406,9 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <!-- Favicon -->
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
+        <link rel="stylesheet" href="/style/style.css">
         <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
+        <link rel="stylesheet" href="/style/composants/sidebar.css">
 
     </head>
 
@@ -475,24 +477,36 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
                 </div>
                 <label>Langue(s) de la visite :</label>
+
+
                 <div class="parentVisite">
                 <?php
                 foreach ($langues as $langue) {?>
                     <div>
-                        <input type="checkbox" id="lang" name="lang[]" value="<?php echo $langue; ?>" />
-                        <label for="lang"><?php echo $langue; ?></label>
+                        <label class="toggle-button">
+                                    <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $langue; ?>"
+                                    />
+                                    <span><?php echo $langue; ?></span>
+                                </label>
                     </div>
+
                 <?php } ?>
+
                 </div>
+
                 <label>La visite est guidée <span class="required">*</span> :</label>
                 <div class="parentVisite">
                     <div>
+                    <label class="toggle-button">
                         <input type="radio" id="guidee" name="guidee" value="true"/>
-                        <label for="guidePresent">Oui</label>
+                        <span>Oui</span>
+                    </label>
                     </div>
                     <div>
+                    <label class="toggle-button">
                         <input type="radio" id="guidee" name="guidee" value="false"/> <!-- a enlever et utilisation de checkbox -->
-                        <label for="guidePasPresent">Non</label>
+                        <span>Non</span>
+                    </label>
                     </div>
                 </div>
             </div>
@@ -578,10 +592,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 <?php
                             foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
 ?>
-                                <div>
-                                    <input type="checkbox" id="<?php echo $tag; ?>" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
-                                    <label for="<?php echo $tag; ?>"><?php echo $tag; ?></label>
-                                </div>
+                                <label class="toggle-button">
+                                    <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
+                                    <span><?php echo $tag; ?></span>
+                                </label>
 <?php
                             }
 ?>
@@ -669,12 +683,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <option value="Premium">Premium</option>
                         </select>
                     </div>
-
-                    <div class="champs">
-                        <label for="date_fin_abo">Fin abonnement <span class="required">*</span> :</label>
-                        <input type="date" id="date_fin_abo" name="date_fin_abo" placeholder="JJ/MM/AAAA" required>
-                    </div>
-
 
                     <!-- Option -->
                     <div class="champs">

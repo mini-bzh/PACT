@@ -1096,7 +1096,7 @@ rect{
 
 /*------------------------ DOUBLE SLIDE BAR --------------------------------*/
 
-.double_range_slider_box {
+.double-range-slider-box {
     position: relative;
     width: 300px;
     background: white;
@@ -1108,14 +1108,14 @@ rect{
     margin-bottom: 30px;
   }
    
-  .double_range_slider {
+  .double-range-slider {
     width: 90%;
     height: 5px;
     position: relative;
     background-color: #dddddd;
     border-radius: 20px;
   }
-  .range_track {
+  .range-bar {
     height: 100%;
     position: absolute;
     border-radius: 20px;
@@ -1124,7 +1124,6 @@ rect{
 
   .value-popup{
     display: flex;
-    flex-direction: row-reverse;
     position: absolute;
     border: 1px solid var(--grisClair);
     border-radius: 5px;
