@@ -89,6 +89,7 @@
             <section class="conteneurOffreAvis">
                 <section class="conteneurOffre">
                     <article class="offre">
+                        <p hidden id="idOffreCache"><?php echo $idOffre?></p>
                         <h1><?php echo $contentOffre["titreoffre"];?></h1>
                         <!-- <p>Visite</p> future categorie -->
                         <div class="noteDetailOffre">

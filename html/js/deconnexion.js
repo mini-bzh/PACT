@@ -1,4 +1,8 @@
-function deconnexion() {
+function deconnexion() 
+{
+    //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
+
     // Permet de faire des requêtes sans recharger la page
     let xhr = new XMLHttpRequest(); // Initialisation
     xhr.open("POST", "../php/gestionDeconnexion.php", true); // Via la méthode POST et transmet à gestionDeconnexion.php

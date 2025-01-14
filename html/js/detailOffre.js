@@ -175,8 +175,9 @@ if(btnAjouterAvis != null)
 
 /* ------------------------ supprimer avis ------------------------*/
 
-
 let btnSupprimerAvis = document.querySelector(".btnSupprimerAvis");
+
+
 if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
 {
     btnSupprimerAvis.addEventListener("click", supprimerAvis);
@@ -186,7 +187,8 @@ function supprimerAvis()
 {
     if(confirm("Voulez-vous supprimer votre avis ?\nVous pourrez en déposer un autre."))
     {
-        let idAvis = document.querySelectorAll("#btnSupprimerAvis p")[1].textContent;
+        let idAvis = document.querySelectorAll(".btnSupprimerAvis p")[1].textContent;
+        
         $.ajax({
             url: "../php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
@@ -195,7 +197,6 @@ function supprimerAvis()
     
                 //alert(response);                        // Affiche la réponse du script PHP si appelé correctement
                 location.reload();
-
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log("Erreur AJAX : ", textStatus, errorThrown);
@@ -212,6 +213,123 @@ function supprimerAvis()
 
 /* ------------------------ like/dislike avis ------------------------*/
 
+//partie cookies
+
+function cookieContientCle(cle)
+{
+    const cookies = document.cookie.split("; ");
+    for(let cookie of cookies)
+    {
+        const [key, value] = cookie.split("=");
+        if(key == cle)
+        {
+            return true
+        }
+    }
+    return false;
+}
+
+console.log(document.cookie);
+
+function getCookie()
+{
+    const cookies = document.cookie.split("; ");
+}
+
+function supprimerCookiePouces() 
+{
+    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
+}
+
+function setCookiePouce(idAvis, pouce)
+{
+    if(!cookieContientCle("poucesAvis"))
+    {
+        let poucesAvis = [];
+        poucesAvis.push([idAvis, pouce]);
+        console.log(poucesAvis);
+
+        document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/pages/detailOffre.php;SameSite=Lax`;
+    }
+    else
+    {
+        const cookies = document.cookie.split("; ");
+        for(let cookie of cookies)
+        {
+            const [key, value] = cookie.split("=");
+            if(key == "poucesAvis")
+            {
+                let poucesAvis = JSON.parse(value);
+                let trouve = false;
+                for(let pouceAvis of poucesAvis)
+                {
+                    if(pouceAvis[0] == idAvis)
+                    {
+                        pouceAvis[1] = pouce;
+                        trouve = true;
+                        console.log("trouvé");
+                    }
+                }
+
+                if(!trouve)
+                {
+                    poucesAvis.push([idAvis, pouce]);
+                }
+
+                document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/pages/detailOffre.php;SameSite=Lax`;
+            }
+        }
+
+        console.log(document.cookie);
+    }
+}
+
+function updateAffichageLikes()     //va vérifier dans les cookies si des pouces ont déjà été cliqués
+{
+    let poucesAvis = [];
+    const cookies = document.cookie.split("; ");
+    for(let cookie of cookies)
+    {
+        const [key, value] = cookie.split("=");
+        if(key == "poucesAvis")
+        {
+            poucesAvis = JSON.parse(value);
+            console.log(poucesAvis);
+        }
+    }
+
+    if(poucesAvis != [])
+    {
+        poucesAvis.forEach(element => {             //element = [idAvis, pouce]
+            let idAvis = element[0];
+            let pouce = element[1];
+            let avis = document.getElementById(`Avis${idAvis}`);
+            
+            if(avis != undefined)
+            {
+                if(pouce == "dislike")
+                {
+                    let btnDislike = avis.querySelector(".conteneurPouces .pouceDislike img");
+
+                    avis.classList.add("avisDislike");
+
+                    btnDislike.src = "../icones/pouceBas2.png";
+                }
+                else if(pouce == "like")
+                {
+                    let btnLike = avis.querySelector(".conteneurPouces .pouceLike img");
+
+                    avis.classList.add("avisLike");
+
+                    btnLike.src = "../icones/pouceHaut2.png";
+                }
+            }
+        })
+    }
+}
+
+document.addEventListener("DOMContentLoaded", updateAffichageLikes);
+//partie likes
 let avis = document.querySelectorAll(".avis");
 
 let mapBtnCptId = new Map();      //map qui associe à chaque bouton like/dislike son compteur de likes/dislike et l'id de l'avis concerné
@@ -241,6 +359,8 @@ function pouceClique(pouce)     // lorsqu'un pouce est cliqué, incrémente son 
     {
         if(avisParent.classList.contains("avisLike"))
         {
+            setCookiePouce(mapBtnCptId.get(event.target)[1], "none");
+
             avisParent.classList.remove("avisLike");
 
             cpt.textContent = parseInt(cpt.textContent) - 1;
@@ -250,6 +370,8 @@ function pouceClique(pouce)     // lorsqu'un pouce est cliqué, incrémente son 
         }
         else
         {
+            setCookiePouce(mapBtnCptId.get(event.target)[1], "like");
+
             avisParent.classList.add("avisLike");
 
             cpt.textContent = parseInt(cpt.textContent) + 1;
@@ -275,6 +397,8 @@ function pouceClique(pouce)     // lorsqu'un pouce est cliqué, incrémente son 
     {
         if(avisParent.classList.contains("avisDislike"))
         {
+            setCookiePouce(mapBtnCptId.get(event.target)[1], "none");
+
             avisParent.classList.remove("avisDislike");
 
             cpt.textContent = parseInt(cpt.textContent) - 1;
@@ -285,6 +409,8 @@ function pouceClique(pouce)     // lorsqu'un pouce est cliqué, incrémente son 
         }
         else
         {
+            setCookiePouce(mapBtnCptId.get(event.target)[1], "dislike");
+
             avisParent.classList.add("avisDislike");
 
             cpt.textContent = parseInt(cpt.textContent) + 1;
@@ -324,7 +450,7 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
         },
         success: function(response) {
 
-            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            //console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
         },
         error: function(jqXHR, textStatus, errorThrown) 
         {

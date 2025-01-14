@@ -70,7 +70,15 @@ if ($_GET['user-tempo'] == "pro") {
 }
 
 // Traite si les logins sont corrects
-if ($correspond === true) {
+if ($correspond === true)
+{
+    ?>
+    <script>
+        //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+        document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
+    </script>
+    <?php
+
     header('Location: /pages/accueil.php');
 }
 
@@ -198,7 +206,6 @@ if ($_GET['user-tempo'] === 'pro') {
 <?php
     echo $message2;
 ?>
-
         <button type="submit" href="#" class="btnConnexion">
             <p class="texteLarge boldArchivo">Se connecter</p>
         </button>
