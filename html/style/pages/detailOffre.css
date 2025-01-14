@@ -566,6 +566,25 @@ th, td {
         display: block;
     }
 
+<<<<<<< Updated upstream
+=======
+    .avis #btnSupprimerAvis{
+        margin: 20px 0px 0px;
+        padding: 5px;
+        width: 350px;
+    }
+
+    .avis #btnSupprimerAvis p{
+        font-size: 13px;
+    }
+
+    .avis #btnSupprimerAvis img{
+        width: 15px;
+        height: 15px;
+    }
+
+
+>>>>>>> Stashed changes
     #btnAjouterAvis h3{
         font-size: var(--typescale-h2);
         transform: translateY(-2px);
