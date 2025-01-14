@@ -20,7 +20,7 @@ function deconnexion()
 
             console.log(document.cookie);
 
-            console.log("Déconnexion réussie");
+            console.log("Déconnexion réussie cc");
             window.location.href = "../pages/accueil.php";
         } else { // Cas d'échec
             console.error("Erreur lors de la déconnexion.");
