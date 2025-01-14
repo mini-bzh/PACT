@@ -38,7 +38,7 @@ int create_socket(ConfigSocketMessages *configSocket);
 
 // Prototypes des menus
 int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte);
-int menu_principal();
+int menu_principal(int cnx);
 
 // Fonction principale
 
@@ -89,6 +89,12 @@ int main() {
     while (quitter == false)
     {
         menu_connexion(cnx, &quitter, configSocket, &compte);
+
+        if (compte != 0) {
+            menu_principal(cnx);
+            quitter = true;
+        }
+        
     }
     
 
@@ -210,8 +216,10 @@ int create_socket(ConfigSocketMessages *configSocket) {
     return sock;
 }
 
+// Fonction pour gérer le menu de connexion
 int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte) {
     char buff[50];
+    // Menu de connexion
     char menu[250] = 
         "+-------------------------------------+\n"
         "|            Se connecter             |\n"
@@ -221,7 +229,6 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
         "> Entrez votre clé API : ";
 
     while ((*compte == 0) && (*quitter == false)) {
-        write(cnx, config.cle_api_admin, strlen(config.cle_api_admin));
         write(cnx, menu, strlen(menu));
         int len = read(cnx, buff, sizeof(buff) - 1);
         if (len < 0) {
@@ -234,15 +241,15 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
         char texte_ajoute[] = "\r\n";
         char cle_combinee[60];
 
-        snprintf(cle_combinee, sizeof(cle_combinee), "%s%s", config.cle_api_admin, texte_ajoute);      
+        snprintf(cle_combinee, sizeof(cle_combinee), "%s%s", config.cle_api_admin, texte_ajoute); // ajout de \r\n pour la clé administrateur
 
-        if (strcmp(buff, cle_combinee) == 0) {
+        if (strcmp(buff, cle_combinee) == 0) { // Se connecter en tant qu'administrateur
             *compte = 1; // Utilisateur administrateur
             write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
-        } else if (strcmp(buff, "-1\r\n") == 0) {
+        } else if (strcmp(buff, "-1\r\n") == 0) { // Se déconnecter
             write(cnx, "Fin de la connexion\n", strlen("Fin de la connexion\n"));
             *quitter = true;
-        } else {
+        } else {  // Clé API incorrecte
             strcpy(menu,
             "+-------------------------------------+\n"
             "|            Se connecter             |\n"
@@ -256,8 +263,18 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
     return 0;
 }
 
-int menu_principal() {
+int menu_principal(int cnx) {
+    char menu[350] = 
+        "+-------------------------------------+\n"
+        "|            Se connecter             |\n"
+        "+-------------------------------------+\n"
+        "| [1] Bloquer un utilisateur          |\n"
+        "| [2] Bannir un utilisateur           |\n"
+        "| [3] Quitter                         |\n"
+        "+-------------------------------------+\n"
+        "> Entrez votre choix : ";
 
+    write(cnx, menu, strlen(menu));
 
     return 0;
 }
