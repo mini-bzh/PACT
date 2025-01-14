@@ -10,13 +10,13 @@
             text-align: center;
             color: #333;
             background-color: #f4f4f4;
-            background-image: url("/images/404/emmanuel.png");
         }
         .error-container {
             background-color:  #f4f4f4;
             padding: 20px;
             margin: 20% 30% 0;
             border-radius: 10px;
+            box-shadow: 20px 10px 100px 5px #ff6b6b;
         }
         h1 {
             font-size: 3em;
@@ -41,11 +41,9 @@
     </style>
 </head>
 <body>
-    <div class="error-container">
-        <h1>404</h1>
-        <p>Oops! La page que vous cherchez n'existe pas.</p>
-        <a href="/">Retour à l'accueil</a>
+    <h1>404</h1>
+    <p>Oops! La page que vous cherchez n'existe pas.</p>
+    <a href="/">Retour à l'accueil</a>
 
-    </div>
 </body>
 </html>

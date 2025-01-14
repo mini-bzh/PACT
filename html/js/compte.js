@@ -11,6 +11,7 @@ function confModif() {
     document.body.classList.add('no-scroll');
 }
 
+
 /*
 <script>
 // Mot de passe correct

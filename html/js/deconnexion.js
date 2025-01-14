@@ -1,4 +1,15 @@
-function deconnexion() {
+
+let btnDeconnexion = document.querySelector(".btnDeconnexion");
+console.log(btnDeconnexion);
+btnDeconnexion.addEventListener("click", ()=>{
+    //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+
+    console.log("cc");
+    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+})
+
+function deconnexion() 
+{
     // Permet de faire des requêtes sans recharger la page
     let xhr = new XMLHttpRequest(); // Initialisation
     xhr.open("POST", "../php/gestionDeconnexion.php", true); // Via la méthode POST et transmet à gestionDeconnexion.php
@@ -6,7 +17,10 @@ function deconnexion() {
     // Gérer la réponse du serveur
     xhr.onload = function() {  // Quand la réponse du serveur est reçue, la fonction est lancée
         if (xhr.status === 200) { // Cas de succès
-            console.log("Déconnexion réussie");
+
+            console.log(document.cookie);
+
+            console.log("Déconnexion réussie cc");
             window.location.href = "../pages/accueil.php";
         } else { // Cas d'échec
             console.error("Erreur lors de la déconnexion.");

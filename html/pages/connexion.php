@@ -70,7 +70,8 @@ if ($_GET['user-tempo'] == "pro") {
 }
 
 // Traite si les logins sont corrects
-if ($correspond === true) {
+if ($correspond === true)
+{
     header('Location: /pages/accueil.php');
 }
 
@@ -198,7 +199,6 @@ if ($_GET['user-tempo'] === 'pro') {
 <?php
     echo $message2;
 ?>
-
         <button type="submit" href="#" class="btnConnexion">
             <p class="texteLarge boldArchivo">Se connecter</p>
         </button>
@@ -224,5 +224,18 @@ if ($_GET['user-tempo'] === 'pro') {
 </main>
 
 </body>
+<script>
+        let btnConnexion =document.querySelector(".btnConnexion");
+        console.log(btnConnexion);
+        if(btnConnexion != undefined)
+        {
+            btnConnexion.addEventListener("click", ()=>{
+                //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+                document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+                console.log(document.cookie);
+            })
+        }
+
+    </script>
 
 </html>

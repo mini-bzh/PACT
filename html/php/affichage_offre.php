@@ -5,9 +5,13 @@
 // contient fonction caf_offre pour afficher les offres
 include('../php/verif_categorie.php');
 
+// contient fonction affichage_etoiles pour afficher les etoiles
+include('../php/etoiles.php'); 
+
 function af_offre($row) {
     // recuperation des parametre de connection a la BdD
     include('../php/connection_params.php');
+    
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -50,11 +54,7 @@ function af_offre($row) {
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
                 <p id="note"><?php echo $row["note"]?></p>
-                <img src="/icones/etoilePleineSVG.svg" alt="">
-                <img src="/icones/etoilePleineSVG.svg" alt="">
-                <img src="/icones/etoilePleineSVG.svg" alt="">
-                <img src="/icones/etoilePleineSVG.svg" alt="">
-                <img src="/icones/etoileMoitiePleineSVG.svg" alt="">
+                <?php affichage_etoiles($row["note"]);?>
             </div>
             <p>439 avis</p>
         </div>
