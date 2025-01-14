@@ -229,7 +229,7 @@ if ($_GET['user-tempo'] === 'pro') {
         if(btnConnexion != undefined)
     {
         //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
-        document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
+        document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
     }
 
     </script>

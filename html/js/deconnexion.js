@@ -8,8 +8,8 @@ function deconnexion()
     xhr.onload = function() {  // Quand la réponse du serveur est reçue, la fonction est lancée
         if (xhr.status === 200) { // Cas de succès
             //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
-            document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/pages/detailOffre.php;SameSite=Lax";
-            
+            document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+
             console.log("Déconnexion réussie");
             window.location.href = "../pages/accueil.php";
         } else { // Cas d'échec
