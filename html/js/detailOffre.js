@@ -247,7 +247,6 @@ function setCookiePouce(idAvis, pouce)
     {
         let poucesAvis = [];
         poucesAvis.push([idAvis, pouce]);
-        console.log(poucesAvis);
 
         document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/;SameSite=Lax`;
     }
@@ -267,7 +266,6 @@ function setCookiePouce(idAvis, pouce)
                     {
                         pouceAvis[1] = pouce;
                         trouve = true;
-                        console.log("trouvé");
                     }
                 }
 
@@ -279,8 +277,6 @@ function setCookiePouce(idAvis, pouce)
                 document.cookie = `poucesAvis=${JSON.stringify(poucesAvis)};path=/;SameSite=Lax`;
             }
         }
-
-        console.log(document.cookie);
     }
 }
 
@@ -294,7 +290,6 @@ function updateAffichageLikes()     //va vérifier dans les cookies si des pouce
         if(key == "poucesAvis")
         {
             poucesAvis = JSON.parse(value);
-            console.log(poucesAvis);
         }
     }
 

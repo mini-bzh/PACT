@@ -228,8 +228,12 @@ if ($_GET['user-tempo'] === 'pro') {
         let btnConnexion =document.querySelector("btnConnexion");
         if(btnConnexion != undefined)
     {
-        //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
-        document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+
+        btnConnexion.addEventListener("click", ()=>{
+            //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+            document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+            console.log(document.cookie);
+        })
     }
 
     </script>
