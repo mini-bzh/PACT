@@ -229,8 +229,6 @@ function cookieContientCle(cle)
     return false;
 }
 
-console.log(document.cookie);
-
 function getCookie()
 {
     const cookies = document.cookie.split("; ");
