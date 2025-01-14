@@ -460,13 +460,21 @@ if (isset($idCompte)) {
                         if ($comptePro) {
                         ?>
 
+<<<<<<< Updated upstream
                             <!-- Bouton de données bancaires -->
                             <!-- <button class="btnDataBanc">
             <?php
                             // include '../icones/creditCardSVG.svg';
+=======
+            <!-- Bouton de données bancaires -->
+             
+            <button class="btnDataBanc">
+            <?php
+                 include '../icones/creditCardSVG.svg';
+>>>>>>> Stashed changes
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
-            </button> -->
+            </button>
 
                         <?php
                         }
