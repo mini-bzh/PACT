@@ -109,7 +109,7 @@
                             <section class="conteneurAvisOffre">
                                 <div class="conteneurBtnTitre">
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
-                                    <h1><?php echo $of["titreoffre"] ?></h1>
+                                    <h3><?php echo $of["titreoffre"] ?></h3>
                                 </div>
                                 <hr>
                                 <div class="conteneurAvis">
@@ -174,6 +174,7 @@
     <?php                                                   //import footer
             include "../composants/footer/footer.php";
     ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/avis.js"></script>
 </body>
 </html>

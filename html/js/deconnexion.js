@@ -4,8 +4,6 @@ console.log(btnDeconnexion);
 btnDeconnexion.addEventListener("click", ()=>{
     //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
 
-    console.log("cc");
-    document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 })
 
 function deconnexion() 
@@ -19,8 +17,11 @@ function deconnexion()
         if (xhr.status === 200) { // Cas de succès
 
             console.log(document.cookie);
+            
+            console.log("cc");
+            document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 
-            console.log("Déconnexion réussie cc");
+            console.log("Déconnexion réussie");
             window.location.href = "../pages/accueil.php";
         } else { // Cas d'échec
             console.error("Erreur lors de la déconnexion.");
