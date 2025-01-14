@@ -155,69 +155,101 @@ fieldset {
     
 }
 
-/* Conteneur principal */
-#prix {
+/*------------------------ DOUBLE SLIDE BAR --------------------------------*/
+
+.double-range-slider-box {
+    position: relative;
+    width: 300px;
+    background: white;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
-    font-family: Arial, sans-serif;
-}
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+   
+  .double-range-slider {
+    width: 90%;
+    height: 5px;
+    position: relative;
+    background-color: #dddddd;
+    border-radius: 20px;
+  }
+  .range-bar {
+    height: 100%;
+    position: absolute;
+    border-radius: 20px;
+    background-color: #007bff;
+  }
 
-/* Style du label */
-#prix label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Style pour le slider */
-#prix input[type="range"] {
-    -webkit-appearance: none; /* Supprime le style par défaut */
-    appearance: none;
-    width: 200px;
-    height: 6px;
-    background: #ddd;
+  .value-popup{
+    display: flex;
+    position: absolute;
+    border: 1px solid var(--grisClair);
     border-radius: 5px;
-    outline: none;
-}
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-/* Style du curseur du slider */
-#prix input[type="range"]::-webkit-slider-thumb {
+  .value-popupMin {
+    bottom: 0;
+    transform: translate(0, -100%);
+    left: 0;
+    will-change: left, transform;
+  }
+  
+  .value-popupMax {
+    top: 0;
+    transform: translate(0, 100%);
+    right: 0;
+    will-change: right, transform;
+  }
+
+  .value-popupMin img{
+    width: 12px;
+  }
+
+  .value-popupMax img{
+    width: 12px;
+  }
+
+  .double-range-slider-box input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: none;
+    pointer-events: none;
     -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    background: #007bff;
+    -moz-appearance: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .double-range-slider-box input::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
+    background-color: #007bff;
     border: none;
     border-radius: 50%;
+    pointer-events: auto;
+    -webkit-appearance: none;
     cursor: pointer;
-}
-
-#prix input[type="range"]::-webkit-slider-thumb:hover {
-    background: #0056b3;
-}
-
-/* Style pour la valeur du prix */
-.price-value {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #007bff;
-}
-
-/* Style pour le bouton */
-.apply-price {
+    margin-bottom: 1px;
+  }
+  .double-range-slider-box input::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
     background-color: #007bff;
-    color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border-radius: 50%;
+    pointer-events: auto;
+    -moz-appearance: none;
     cursor: pointer;
-    font-size: 1rem;
-}
+    margin-top: 30%;
+  }
 
-.apply-price:hover {
-    background-color: #0056b3;
-}
+  /*-----------------------------------------------------*/
 
 /* Style général pour le fieldset 
 .status {

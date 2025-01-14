@@ -61,22 +61,30 @@ $tags = array_column($tags, 'nomtag');
 
                 <fieldset id="prix">
                     <legend>Prix</legend>
-                    <span class="price-value">0 €</span>
-                    <input type="range" id="price" name="price" min="0" max="100" value="50" step="1">
-                    <span class="price-value">100 €</span>
+                    <div class="double-range-slider-box">
+                        <div class="double-range-slider">
+                            <span class="range-bar" id="range-barPrix"></span>
+                    
+                            <div class="input-box"></div>
+
+                            <div class="value-popup value-popupMin minvaluePrix"></div>
+                            <div class="value-popup value-popupMax maxvaluePrix"></div>
+    
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset id="note">
                     <legend>Note</legend>
                     <div class="double-range-slider-box">
                         <div class="double-range-slider">
-                            <span class="range-bar" id="range-bar"></span>
+                            <span class="range-bar" id="range-barNote"></span>
                     
-                            <input type="range" class="inputNote min" min="0" max="5" value="0" step="0" />
-                            <input type="range" class="inputNote max" min="0" max="5" value="5" step="0" />
+                            <input type="range" class="inputNote minNote" min="0" max="5" value="0" step="0" />
+                            <input type="range" class="inputNote maxNote" min="0" max="5" value="5" step="0" />
 
-                            <div class="value-popup minvalue"></div>
-                            <div class="value-popup maxvalue"></div>
+                            <div class="value-popup value-popupMin minvalueNote"></div>
+                            <div class="value-popup value-popupMax maxvalueNote"></div>
     
                         </div>
                     </div>

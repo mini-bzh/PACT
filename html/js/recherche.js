@@ -658,94 +658,207 @@ function trierNote() {
 
 //========================================= DOUBLE SLIDER POUR NOTE ===================================================
 
-let ecartMinimum = 0;   // écart minimum entre les deux curseurs
-const range = document.getElementById("range-bar");   // la bar entre les deux curseurs
-const minval = document.querySelector(".minvalue");     // la bulle avec la petite valeur
-const maxval = document.querySelector(".maxvalue");     // la bulle avec la grande valeur
-const rangeInput = document.querySelectorAll(".inputNote");     // les deux sliders
+let ecartMinimumNote = 0;   // écart minimum entre les deux curseurs
+const rangeNote = document.getElementById("range-barNote");   // la bar entre les deux curseurs
+const minvalNote = document.querySelector(".minvalueNote");     // la bulle avec la petite valeur
+const maxvalNote = document.querySelector(".maxvalueNote");     // la bulle avec la grande valeur
+const rangeInputNote = document.querySelectorAll(".inputNote");     // les deux sliders pour prix
 
-let minRange, maxRange, pourcentageMin, pourcentageMax;
+let minRangeNote, maxRangeNote, pourcentageMinNote, pourcentageMaxNote;
 
-function minRangeFill () {
-    range.style.left = (rangeInput[0].value / rangeInput[0].max) * 100 + "%";   // détermine la taille de la bar range du coté gauche 
+function minRangeFillNote () {
+    rangeNote.style.left = (rangeInputNote[0].value / rangeInputNote[0].max) * 100 + "%";   // détermine la taille de la bar range du coté gauche 
   }
 
-function maxRangeFill () {
-    range.style.right =
-      100 - (rangeInput[1].value / rangeInput[1].max) * 100 + "%";  // détermine la taille de la bar range du coté droit 
+function maxRangeFillNote () {
+    rangeNote.style.right = 100 - (rangeInputNote[1].value / rangeInputNote[1].max) * 100 + "%";  // détermine la taille de la bar range du coté droit 
   }
 
-function MinVlaueBubbleStyle () {   // détermine la marge necessaire à gauche pour bouger la bulle en même temps que le curseur 
-    pourcentageMin = (minRange / rangeInput[0].max) * 100;
-    minval.style.left = pourcentageMin + "%";
-    minval.style.transform = `translate(-${pourcentageMin / 2}%, -100%)`;
+function MinVlaueBubbleStyleNote () {   // détermine la marge necessaire à gauche pour bouger la bulle en même temps que le curseur 
+    pourcentageMinNote = (minRangeNote / rangeInputNote[0].max) * 100;
+    minvalNote.style.left = pourcentageMinNote + "%";
+    minvalNote.style.transform = `translate(-${pourcentageMinNote / 2}%, -100%)`;
   }
 
-function MaxVlaueBubbleStyle () {   // détermine la marge necessaire à droite pour bouger l'autre bulle en même temps que le curseur 
-    pourcentageMax = 100 - (maxRange / rangeInput[1].max) * 100;
-    maxval.style.right = pourcentageMax + "%";
-    maxval.style.transform = `translate(${pourcentageMax / 2}%, 100%)`;
+function MaxVlaueBubbleStyleNote () {   // détermine la marge necessaire à droite pour bouger l'autre bulle en même temps que le curseur 
+    pourcentageMaxNote = 100 - (maxRangeNote / rangeInputNote[1].max) * 100;
+    maxvalNote.style.right = pourcentageMaxNote + "%";
+    maxvalNote.style.transform = `translate(${pourcentageMaxNote / 2}%, 100%)`;
   }
   
-function setMinValueOutput () {     // remplie la bulle de droite
-    minRange = parseInt(rangeInput[0].value);
-    minval.innerHTML = rangeInput[0].value;
-    minval.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
+function setMinValueOutputNote () {     // remplie la bulle de droite
+    minRangeNote = parseInt(rangeInputNote[0].value);
+    minvalNote.innerHTML = rangeInputNote[0].value;
+    minvalNote.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
   }
 
-function setMaxValueOutput () {     // remplie la bulle de gauche
-    maxRange = parseInt(rangeInput[1].value);
-    maxval.innerHTML = rangeInput[1].value;
-    maxval.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
+function setMaxValueOutputNote () {     // remplie la bulle de gauche
+    maxRangeNote = parseInt(rangeInputNote[1].value);
+    maxvalNote.innerHTML = rangeInputNote[1].value;
+    maxvalNote.innerHTML += '<img src="/icones/etoilePleineSVG.svg" alt="icone étoile" >';
   }
 
-  setMinValueOutput()
-  setMaxValueOutput()
-  minRangeFill()
-  maxRangeFill()
-  MinVlaueBubbleStyle()
-  MaxVlaueBubbleStyle()
+  setMinValueOutputNote()
+  setMaxValueOutputNote()
+  minRangeFillNote()
+  maxRangeFillNote()
+  MinVlaueBubbleStyleNote()
+  MaxVlaueBubbleStyleNote()
 
-rangeInput.forEach((input) => {
+rangeInputNote.forEach((input) => {
     input.addEventListener("input", (e) => {
         
-        setMinValueOutput();
-        setMaxValueOutput();
+        setMinValueOutputNote();
+        setMaxValueOutputNote();
 
-        minRangeFill();
-        maxRangeFill();
+        minRangeFillNote();
+        maxRangeFillNote();
 
-        MinVlaueBubbleStyle();
-        MaxVlaueBubbleStyle();
+        MinVlaueBubbleStyleNote();
+        MaxVlaueBubbleStyleNote();
 
-        if (maxRange - minRange <= ecartMinimum) {  // si l'écart entre les deux n'est pas supérieur à l'écart maximum définit
-            if (e.target.className === "min") {     
-                rangeInput[0].value = maxRange - ecartMinimum;  // on définit la petite valeur
-                setMinValueOutput();
-                minRangeFill();
-                MinVlaueBubbleStyle();
+        if (maxRangeNote - minRangeNote <= ecartMinimumNote) {  // si l'écart entre les deux n'est pas supérieur à l'écart maximum définit
+            if (e.target.className === "minNote") {     
+                rangeInputNote[0].value = maxRangeNote - ecartMinimumNote;  // on définit la petite valeur
+                setMinValueOutputNote();
+                minRangeFillNote();
+                MinVlaueBubbleStyleNote();
             }
             else {
-                rangeInput[1].value = minRange + ecartMinimum;  // on définit la grande valeur
-                setMaxValueOutput();
-                maxRangeFill();
-                MaxVlaueBubbleStyle();
+                rangeInputNote[1].value = minRangeNote + ecartMinimumNote;  // on définit la grande valeur
+                setMaxValueOutputNote();
+                maxRangeFillNote();
+                MaxVlaueBubbleStyleNote();
             }
         }
 
-        if (rangeInput[0].value == 5) {     // si le curseur de gauche est totalement à droite
-            rangeInput[0].style.zIndex = "2";   // on le met plus en avant que l'autre
-            rangeInput[1].style.zIndex = "1";
+        if (rangeInputNote[0].value == 5) {     // si le curseur de gauche est totalement à droite
+            rangeInputNote[0].style.zIndex = "2";   // on le met plus en avant que l'autre
+            rangeInputNote[1].style.zIndex = "1";
         }
-        if (rangeInput[1].value == 0) {     // on fait l'inverse d'au dessus
-            rangeInput[1].style.zIndex = "2";
-            rangeInput[0].style.zIndex = "1";
+        if (rangeInputNote[1].value == 0) {     // on fait l'inverse d'au dessus
+            rangeInputNote[1].style.zIndex = "2";
+            rangeInputNote[0].style.zIndex = "1";
         }
 
 
         mapOffresInfos.forEach((map, key, value)=>{
             // si la note de l'offre est dans l'interval de la slide bar
-            if(mapOffresInfos.get(key).get("note") >=rangeInput[0].value && mapOffresInfos.get(key).get("note")<=rangeInput[1].value)
+            if(mapOffresInfos.get(key).get("note") >=rangeInputNote[0].value && mapOffresInfos.get(key).get("note")<=rangeInputNote[1].value)
+            {
+                // si ceux qui doivent être affiché ne le sont pas on les affiches
+                if (document.getElementById(key).classList.contains("displayNone")) { 
+                    document.getElementById(key).classList.toggle("displayNone");
+                }
+            }
+            else
+            {
+                // si ceux qui ne doivent pas être affiché le sont on les caches
+                if (!document.getElementById(key).classList.contains("displayNone")) {
+                    document.getElementById(key).classList.toggle("displayNone");
+                }
+            }
+        });
+
+    });
+});
+
+//============================================================================================
+
+//========================================= DOUBLE SLIDER POUR PRIX ===================================================
+
+// le prix le plus grand parmis toutes les offres disponibles
+const maxPrix = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get("prix") - a[1].get("prix"))).entries().next().value[1].get("prix");
+
+// ajout dans le HTML des deux input avec le prix maximum
+document.querySelector(".input-box").innerHTML = `<input type="range" class="inputPrix minPrix" min="0" max="${maxPrix}" value="0" step="0" />`;
+document.querySelector(".input-box").innerHTML += `<input type="range" class="inputPrix maxPrix" min="0" max="${maxPrix}" value="${maxPrix}" step="0" />`;
+
+let ecartMinimumPrix = 0;   // écart minimum entre les deux curseurs
+const rangePrix = document.getElementById("range-barPrix");   // la bar entre les deux curseurs
+const minvalPrix = document.querySelector(".minvaluePrix");     // la bulle avec la petite valeur
+const maxvalPrix = document.querySelector(".maxvaluePrix");     // la bulle avec la grande valeur
+const rangeInputPrix = document.querySelectorAll(".inputPrix");     // les deux sliders pour prix
+
+let minRangePrix, maxRangePrix, pourcentageMinPrix, pourcentageMaxPrix;
+
+function minRangeFillPrix () {
+    rangePrix.style.left = (rangeInputPrix[0].value / rangeInputPrix[0].max) * 100 + "%";   // détermine la taille de la bar range du coté gauche 
+  }
+
+function maxRangeFillPrix () {
+    rangePrix.style.right = 100 - (rangeInputPrix[1].value / rangeInputPrix[1].max) * 100 + "%";  // détermine la taille de la bar range du coté droit 
+  }
+
+function MinVlaueBubbleStylePrix () {   // détermine la marge necessaire à gauche pour bouger la bulle en même temps que le curseur 
+    pourcentageMinPrix = (minRangePrix / rangeInputPrix[0].max) * 100;
+    minvalPrix.style.left = pourcentageMinPrix + "%";
+    minvalPrix.style.transform = `translate(-${pourcentageMinPrix / 2}%, -100%)`;
+  }
+
+function MaxVlaueBubbleStylePrix () {   // détermine la marge necessaire à droite pour bouger l'autre bulle en même temps que le curseur 
+    pourcentageMaxPrix = 100 - (maxRangePrix / rangeInputPrix[1].max) * 100;
+    maxvalPrix.style.right = pourcentageMaxPrix + "%";
+    maxvalPrix.style.transform = `translate(${pourcentageMaxPrix / 2}%, 100%)`;
+  }
+  
+function setMinValueOutputPrix () {     // remplie la bulle de droite
+    minRangePrix = parseInt(rangeInputPrix[0].value);
+    minvalPrix.innerHTML = `${rangeInputPrix[0].value} €`;
+  }
+
+function setMaxValueOutputPrix () {     // remplie la bulle de gauche
+    maxRangePrix = parseInt(rangeInputPrix[1].value);
+    maxvalPrix.innerHTML = `${rangeInputPrix[1].value} €`;
+  }
+
+  setMinValueOutputPrix()
+  setMaxValueOutputPrix()
+  minRangeFillPrix()
+  maxRangeFillPrix()
+  MinVlaueBubbleStylePrix()
+  MaxVlaueBubbleStylePrix()
+
+rangeInputPrix.forEach((input) => {
+    input.addEventListener("input", (e) => {
+        
+        setMinValueOutputPrix();
+        setMaxValueOutputPrix();
+
+        minRangeFillPrix();
+        maxRangeFillPrix();
+
+        MinVlaueBubbleStylePrix();
+        MaxVlaueBubbleStylePrix();
+
+        if (maxRangePrix - minRangePrix <= ecartMinimumPrix) {  // si l'écart entre les deux n'est pas supérieur à l'écart maximum définit
+            if (e.target.className === "minPrix") {     
+                rangeInputPrix[0].value = maxRangePrix - ecartMinimumPrix;  // on définit la petite valeur
+                setMinValueOutputPrix();
+                minRangeFillPrix();
+                MinVlaueBubbleStylePrix();
+            }
+            else {
+                rangeInputPrix[1].value = minRangePrix + ecartMinimumPrix;  // on définit la grande valeur
+                setMaxValueOutputPrix();
+                maxRangeFillPrix();
+                MaxVlaueBubbleStylePrix();
+            }
+        }
+
+        if (rangeInputPrix[0].value == maxPrix) {     // si le curseur de gauche est totalement à droite
+            rangeInputPrix[0].style.zIndex = "2";   // on le met plus en avant que l'autre
+            rangeInputPrix[1].style.zIndex = "1";
+        }
+        if (rangeInputPrix[1].value == 0) {     // on fait l'inverse d'au dessus
+            rangeInputPrix[1].style.zIndex = "2";
+            rangeInputPrix[0].style.zIndex = "1";
+        }
+
+
+        mapOffresInfos.forEach((map, key, value)=>{
+            // si le prix de l'offre est dans l'interval de la slide bar
+            if(mapOffresInfos.get(key).get("prix") >=rangeInputPrix[0].value && mapOffresInfos.get(key).get("prix")<=rangeInputPrix[1].value)
             {
                 // si ceux qui doivent être affiché ne le sont pas on les affiches
                 if (document.getElementById(key).classList.contains("displayNone")) { 
