@@ -175,7 +175,9 @@ function fermerOverlayImage()
 }
 
 
-/*---------------------------- déplier avis pour offres  ----------------------------*/
+/*---------------------------- déplier avis pour offres + mettre en vu  ----------------------------*/
+
+//déplier les avis par offre
 
 let avisOffres = document.querySelectorAll("#mainAvis .conteneurAvisOffre");
 
@@ -204,4 +206,40 @@ function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
         conteneurAvis.style.display = "none";
         event.target.style.transform = "rotate(0deg)";
     }
+}
+
+//mettre les avis en lu
+
+let avisLisibles = document.querySelectorAll(".conteneurAvis .nouvelAvis");
+
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry => {
+        if(entry.isIntersecting)
+        {
+            let idAvis = entry.target.id.slice(4);
+            avisLuBDD(idAvis);
+        }
+    });
+})
+
+avisLisibles.forEach(avisPasLu=>{
+    observer.observe(avisPasLu);
+})
+
+
+function avisLuBDD(idAvis)
+{
+    $.ajax({
+        url: "../php/avisLuParPro.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+        data: {idAvis: idAvis},
+        success: function(response)
+        {
+            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Erreur AJAX : ", textStatus, errorThrown);         //affiche une erreur sinon
+            alert("Erreur lors de l'appel du script PHP : " + textStatus);
+        }
+    });
 }
