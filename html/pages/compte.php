@@ -134,6 +134,8 @@ if (isset($idCompte)) {
     <link rel="stylesheet" href="../style/pages/compte.css">
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
+
+    <script>let id_c = <?php echo $idCompte;?>; // donne l'id_c au javascript</script> 
     <script src="../js/compte.js" defer></script>
 </head>
 
@@ -366,7 +368,7 @@ if (isset($idCompte)) {
                         <!-- div des boutons -->
                         <div class="zoneBtnPort">
                             <!-- Bouton de modification portable -->
-                            <button class="btnModifPort displayNone " onclick="confModif()">
+                            <button class="btnModifPort displayNone " onclick="confModifProfil()">
                                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M88.2249 28.3831C90.4279 26.1807 91.6657 23.1934 91.6661 20.0784C91.6665 16.9633 90.4294 13.9757 88.227 11.7727C86.0246 9.56976 83.0373 8.33193 79.9222 8.33154C76.8071 8.33115 73.8195 9.56823 71.6166 11.7706L16.0082 67.3915C15.0408 68.3561 14.3254 69.5437 13.9249 70.8498L8.42072 88.9831C8.31304 89.3435 8.3049 89.7263 8.39719 90.0909C8.48947 90.4554 8.67872 90.7883 8.94487 91.054C9.21102 91.3197 9.54414 91.5084 9.90888 91.6001C10.2736 91.6918 10.6564 91.6831 11.0166 91.5748L29.1541 86.0748C30.4589 85.6779 31.6464 84.9669 32.6124 84.004L88.2249 28.3831Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M62.5 20.8335L79.1667 37.5002" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
@@ -438,7 +440,7 @@ if (isset($idCompte)) {
                     <!-- div des boutons de consultation / modification données de compte-->
                     <div>
                         <!-- Bouton de modification -->
-                        <button class="btnModifCompte" onclick="confModif()">
+                        <button class="btnModifCompte" onclick="confModifProfil()">
                             <?php
                             include '../icones/modifierSVG.svg';
                             ?>
@@ -461,14 +463,14 @@ if (isset($idCompte)) {
                         ?>
 
             <!-- Bouton de données bancaires -->
-            <a href="ModifInfoBancaire.php">
-            <button class="btnDataBanc">
+            <!--<a href="ModifInfoBancaire.php">-->
+            <button class="btnDataBanc"  onclick="confModifBanc()">
             <?php
                  include '../icones/creditCardSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
             </button>
-            </a>
+            <!--</a>-->
 
 
                         <?php
@@ -590,9 +592,9 @@ if (isset($idCompte)) {
                 </div>
             </div>
 
-            <!-- Pop-up -->
+            <!-- Pop-up modif profil -->
             <div class="popUpModif">
-                <div id="popup-content">
+                <div class="popup-content">
                     <form method="post" action="">
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" placeholder="Mot de passe" />
@@ -601,6 +603,15 @@ if (isset($idCompte)) {
                 </div>
             </div>
 
+            <!-- Pop-up modif bancaire -->
+            <div class="popUpModifBancaire">
+                <div class="popup-content">
+                    <label for="password_for_banc">Mot de passe :</label>
+                    <input type="password" id="password_for_banc" placeholder="Mot de passe" />
+                    <p class="displayNone" id="erreur_mdp" style="color: red;">Mots de passe incorrect</p>
+                    <button onclick="verif_pass()">Valider</button>
+                </div>
+            </div>
 
 
         </main>
@@ -616,5 +627,7 @@ if (isset($idCompte)) {
     ?>
 
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </html>
