@@ -28,8 +28,8 @@
                     </div>
                     <p>Contexte de la visite : <?php echo $avis['cadreexperience']?></p>
                     <div class="datesAvis">
-                        <p>Visité le : <?php echo $avis['dateexperience']?></p>
-                        <p>Posté le : <?php echo $avis['datepublication']?></p>
+                        <p>Visité le : <?php echo implode("-",array_reverse(explode("-",$avis['dateexperience'])))?></p>
+                        <p>Posté le : <?php echo implode("-",array_reverse(explode("-",$avis['datepublication'])))?></p>
                     </div>
             </div>
             <hr>
