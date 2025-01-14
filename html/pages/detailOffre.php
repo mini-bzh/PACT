@@ -50,7 +50,16 @@
 
     <link rel="stylesheet" href="/style/pages/detailOffre.css">
 </head>
-    <body  class=<?php echo "fondPro"; ?>> <!-- met le bon fond en fonction de l'utilisateur -->
+    <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
+            if ($comptePro)
+            {
+                echo "fondPro";
+            }
+            else
+            {
+                echo "fondVisiteur";
+            }
+        ?>>
         <?php
             // ajout du header
             include "../composants/header/header.php";
