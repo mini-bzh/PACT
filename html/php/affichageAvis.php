@@ -77,6 +77,17 @@
                                 </div>
                             <?php
                         }
+
+                        if($avis["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
+                        {
+                            ?>
+                                <div class="btnSupprimerAvis grossisQuandHover">
+                                    <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
+                                    <p>Modifier</p>
+                                    <p hidden><?php echo $avis["id_avis"]?></p>
+                                </div>
+                            <?php
+                        }
                     ?>
                     <div class="conteneurPouces">
                         <div class="pouceLike">

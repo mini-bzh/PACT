@@ -461,13 +461,15 @@ if (isset($idCompte)) {
                         ?>
 
             <!-- Bouton de données bancaires -->
-             
+            <a href="ModifInfoBancaire.php">
             <button class="btnDataBanc">
             <?php
                  include '../icones/creditCardSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
             </button>
+            </a>
+
 
                         <?php
                         }
