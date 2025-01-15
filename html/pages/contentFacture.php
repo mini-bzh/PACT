@@ -28,295 +28,199 @@ if (key_exists("idCompte", $_SESSION)) {
 }
 
 
+
 // Récupération de l'identifiant de la facture si présent dans l'URL
 $id_facture = null;
 if (key_exists("id_facture", $_GET)) {
     $id_facture = $_GET["id_facture"]; // Récupération de l'identifiant de la facture
 
     // Récupération des détails de la facture à partir de la base de données
-    $contentAboOptFacture = $dbh->query("SELECT * FROM tripskell.facture WHERE id_facture=" . $id_facture . ";")->fetchAll();
-    $contentFacture = $contentAboOptFacture[0];
+    $contentFacture = $dbh->query("SELECT * FROM tripskell.facture WHERE id_facture=" . $id_facture . ";")->fetchAll();
+    // Récupération des détails de la facture à partir de la base de données
+    $infoClient = $dbh->query("SELECT * FROM tripskell.facture WHERE id_facture=" . $id_facture . ";")->fetchAll()[0];
+    // On prend la date de création de la facture et on souhaite voir juste le mois
+    $dateFacture = $dbh->query("SELECT 
+    EXTRACT(MONTH FROM date_creation - INTERVAL '1 month') AS mois,
+    EXTRACT(YEAR FROM date_creation - INTERVAL '1 month') AS annee,
+    EXTRACT(MONTH FROM date_creation + INTERVAL '1 month') AS mois_suivant,
+    EXTRACT(YEAR FROM date_creation + INTERVAL '1 month') AS annee_suivant
+FROM 
+    tripskell.facture WHERE id_facture=" . $id_facture . ";")->fetchAll()[0];
 }
 
-$firstDayNextMonth = strtotime('first day of next month', strtotime($contentFacture['date_creation']));
-
-//on récupère dans la base de donnée le nombre de jour et de semaine qui sépare le début et la fin de l'abonnement ou option
-$nbSemaineOption = $dbh->query("SELECT FLOOR(EXTRACT(EPOCH FROM (dateFinSouscription - dateDebutSouscription)) / (7 * 24 * 60 * 60)) AS weeks FROM tripskell.facture where id_facture = " . $id_facture . ";")->fetchAll()[0];
-
-$firstDayNextMonthFormatted = date('Y-m-d', $firstDayNextMonth);
-
-// Préparer la requête
-$sql = "SELECT (DATE('$firstDayNextMonthFormatted') - DATE(date_creation))::INTEGER AS jours FROM tripskell.facture WHERE id_facture = :id_facture;";
-
-// Exécuter la requête avec un paramètre sécurisé
-$stmt = $dbh->prepare($sql);
-$stmt->execute([':id_facture' => $id_facture]);
-
-// Récupérer le résultat
-$nbJourAbo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// echo $contentFacture['date_creation'];
-// echo $nbJourAbo;
-
-// déclaration de deux variables de stockage pour stocker les valeurs HT et TTC
-$valAboHT = 0;
-$valAboTTC = 0;
-$valOptHT = 0;
-$valOptTTC = 0;
-$resHTopt = 0;
-$resTTCopt = 0;
-$resHTabo = 0;
-$resTTCabo = 0;
-
+$valHT = 0;
+$valTTC = 0;
+$resHT = 0;
+$resTTC = 0;
 ?>
+
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive)) {
+    print_r($contentFacture);
+    print_r($dateFacture);
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+    <link rel="stylesheet" href="../style/pages/contentFacture.css">
+</head>
 
-    <!DOCTYPE html>
-    <html lang="fr">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>gestion des offre</title>
-
-        <!-- Favicon -->
-        <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
-
-        <link rel="stylesheet" href="/style/pages/contentFacture.css">
-    </head>
-    <style>
-        body{
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+<!-- J'ai besoin du style ici sinon à la génération pdf cela ne l'applique pas ),: -->
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
-table {
-    table-layout: fixed;
-    width: 100%;
-    margin-top: 15px;
+.contentFacture {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 5%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#infoFacture{
-    border-collapse: collapse;
-    border: 3px solid black;
-    text-align: center;
-}
-
-#infoFacture>tbody>tr>td,
-#infoFacture>tbody>tr>th{
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-#infoFacture>thead>tr>td,
-#infoFacture>tbody>tr>th{
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-#infoClient {
-    background-color: #2b2b2b;
-    color: white;
-    padding: 10px;
-    border: 3px solid white;
-
-}
-
-tr {
-    padding: 10px;
-}
-
-td {
-    padding: 10px;
-}
-
-th {
-    padding: 10px;
-}
-
-.divTab {
+header {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 30px;
-}
-
-.divTexte{
-    position: relative;
-    left: 10%;
-}
-
-h1 {
-    text-align: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
     margin: 10px;
 }
 
-header{
-    margin: 0.5em;
-    display: flex;
-    justify-content: center;
+header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
 }
 
-header > img{
-    width: 135px;
-    height: 75px;
-    position: relative;
-    right: 80px;
+.detailFacture {
+    margin-bottom: 20px;
 }
 
-#enTeteFac{
-    text-align: center;
+.detailFacture p {
+    margin: 0;
+    font-size: 14px;
 }
 
-.logoHeader{
-    width: 135px;
-    height: 75px;
-    position: relative;
-    left: 30px;
+.tableFacture {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
+
+.tableFacture th,
+.tableFacture td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.tableFacture th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.tableFacture tfoot td {
+    font-weight: bold;
+    background-color: #f9f9f9;
+}
+
+.tableFacture .espaceVide{
+    background-color: #555;
+}
+
 </style>
-
-    <body>
-        <?php /*print_r($contentFacture);
-        echo "echo";
-        print_r($nbSemaineOption);
-        print_r($nbJourAbo);*/
-        ?>
+<body>
+    <div class="contentFacture">
         <header>
-            <img class="logoHeader" src="/images/logo/logo_grand.png" alt="logo PACT">
-            <h1><?php echo "Facture N°" . $contentFacture['id_facture'] . " de l'offre " . $contentFacture['titreoffre']; ?></h1>
+            <div class="infoFournisseur">
+                <h2>Entreprise proposant les services</h2>
+                <p>Raison social : Tripskell</p>
+                <p>Adresse : 12 Rue de l'alma , Rennes</p>
+                <p>Code Postal  : 35238</p>
+                <p>Numéro de téléphone : +33 1 23 45 67 89</p>
+                <p>Adresse mail : tripskell.ventdouest@gmail.com</p>
+            </div>
+            <div class="infoClient">
+                <h2>Client</h2>
+                <p>Nom : <?php echo $infoClient['raison_social']; ?></p>
+                <p>Adresse : <?php echo $infoClient['numero'] . " " . $infoClient['rue'] . " " . $infoClient['ville']; ?></p>
+                <p>Code Postal  : <?php echo $infoClient['codepostal']; ?></p>
+                <p>Numéro Siren : <?php echo $infoClient['num_siren']; ?></p>
+                <p>Numéro de téléphone : <?php echo $infoClient['numero_tel']; ?></p>
+                <p>Adresse mail : <?php echo $infoClient['adresse_mail']; ?></p>
+            </div>
         </header>
-        <main>
-            <div id="enTeteFac">
-                <h2>Facture datant du <?php echo $contentFacture['date_creation']; ?></h2>
-                <p>Le règlement se fera le <?php echo date('Y-m-d', $firstDayNextMonth);?></p>
-            </div>
-            <div class="divTab">
-                <table id="infoClient">
-                    <thead>
-                        <tr>
-                            <th>Tripskell</th>
-                            <th>Client</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Raison sociale : Tripskell</td>
-                            <td>Raison sociale : <?php echo $contentFacture['raison_social']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Adresse : 12 Rue de l'alma , Rennes</td>
-                            <td>Adresse : <?php echo $contentFacture['numero'] . " " . $contentFacture['rue'] . " " . $contentFacture['ville']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Code Postal : 35238</td>
-                            <td>Code Postal : <?php echo $contentFacture['codepostal']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Numéro de téléphone : +33 1 23 45 67 89</td>
-                            <td>Numéro SIREN :  <?php echo $contentFacture['num_siren']; ?></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Numéro de téléphone : <?php echo $contentFacture['numero_tel']; ?></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Adresse mail : <?php echo $contentFacture['adresse_mail']; ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="divTab">
-                <table id="infoFacture">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Durée</th>
-                            <th>Prix HT</th>
-                            <th>Total HT</th>
-                            <th>Prix TTC</th>
-                            <th>Total TTC</th>
-                            <th>Total à payer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><?php echo $contentFacture['id_abo']; ?></td>
-                            <td><?php echo $nbJourAbo['jours'] . " jours"; ?></td>
-                            <td><?php if ($contentFacture['id_abo'] == 'Standard') {
-                                    $valAboHT = 1.67;
-                                    echo "1,67 € HT";
-                                } else {
-                                    $valAboHT = 3.34;
-                                    echo "3,34 € HT";
-                                } ?></td>
-                            <td><?php $resHTabo += $nbJourAbo['jours'] * $valAboHT; echo $nbJourAbo['jours'] * $valAboHT . " €"; ?></td>
-                            <!-- <td><?php //echo $resHTabo . " €"; ?></td> -->
-                            <td><?php if ($contentFacture['id_abo'] == 'Standard') {
-                                    $valAboTTC = 2;
-                                    echo "2 € TTC";
-                                } else {
-                                    $valAboTTC = 4;
-                                    echo "4 € TTC";
-                                } ?></td>
-                            <td><?php $resTTCabo += $nbJourAbo['jours'] * $valAboTTC; echo $nbJourAbo['jours'] * $valAboTTC . " €"; ?></td>
-                            <td><?php echo $resTTCabo . " €"; ?></td>
-                        </tr>
-                        <?php 
-                        foreach ($contentAboOptFacture as $row){
-                        if($row['id_option'] != null){ ?>
-                            <tr>
-                                <td><?php echo $row['id_option']; ?></td>
-                                <td><?php echo $nbSemaineOption['weeks'] . " semaines"; ?></td>
-                                <?php if ($row['id_option'] == 'En relief') { ?>
-                                    <td>
-                                        <?php $valOptHT = 8.34;
-                                        echo "8,34 € HT"; ?>
-                                    </td>
-                                <?php } else { ?>
-                                    <td>
-                                        <?php $valOptHT = 16.69;
-                                        echo "16,69 € HT"; ?>
-                                    </td>
-                                <?php } ?>
-                                <td><?php $resHTopt += $nbSemaineOption['weeks'] * $valOptHT; echo $nbSemaineOption['weeks'] * $valOptHT . " €"; ?></td>
-                                <?php if ($row['id_option'] == 'En relief') { ?>
-                                    <td>
-                                        <?php $valOptTTC = 10;
-                                        echo "10 € TTC"; ?>
-                                    </td>
-                                <?php } else { ?>
-                                    <td>
-                                        <?php $valOptTTC = 20;
-                                        echo "20 € TTC"; ?>
-                                    </td>
-                                <?php } ?>
-                                <td><?php $resTTCopt += $nbSemaineOption['weeks'] * $valOptTTC; echo $nbSemaineOption['weeks'] * $valOptTTC . " €"; ?></td>
-                                <td><?php echo $resTTCopt . " €"; ?></td>
-                            </tr>
-                        <?php } } ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><?php echo $resHTopt + $resHTabo . " €"; ?></td>
-                                <td></td>
-                                <td><?php echo $resTTCopt + $resTTCabo . " €"; ?></td>
-                                <td><?php echo $resTTCopt + $resTTCabo . " €"; ?></td>
-                            </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
-    </body>
 
-    </html>
+        <div class="detailFacture">
+            <p><strong>Facture N°<?php echo $id_facture?></strong></p>
+            <p><strong>Date : <?php echo $dateFacture['mois'] . " " . $dateFacture['annee'];?></strong></p>
+        </div>
+
+        <table class="tableFacture">
+            <thead>
+                <tr>
+                    <th>Désignation</th>
+                    <th>Durée</th>
+                    <th>Prix HT</th>
+                    <th>Total HT</th>
+                    <th>Prix TTC</th>
+                    <th>Total TTC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($contentFacture as $row){
+                ?>
+                <tr>
+                    <td><?php echo $row['titreoffre'];?></td>
+                    <td><?php echo $row['nbjourenligne'];?></td>
+                    <td><p>1,67 €<p></td>
+                    <td><?php echo 1.67*$row['nbjourenligne'];?></td>
+                    <td><p>2 €<p></td>
+                    <td><?php echo 2*$row['nbjourenligne'];?></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><?php echo $row['nbjourenligne'];?></td>
+                    <td><p>3,34 €</p></td>
+                    <td><?php echo 3.34*($row['duree_option']/7);?></td>
+                    <td><p>4 €<p></td>
+                    <td><?php echo 4*($row['duree_option']/7);?></td>
+                </tr>
+                <?php
+                    }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="espaceVide"></td>
+                    <td><strong>TOTAL HT</strong></td>
+                    <td></td>
+                    <td><strong>TOTAL TTC</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="detailFacture">
+            <p><strong>Date maximum de règlement : <?php echo  "1/" . $dateFacture['mois_suivant'] . "/" . $dateFacture['annee_suivant']; ?></strong></p>
+        </div>
+    </div>
+</body>
+</html>
+
 <?php
 } else { // si id_c n'est pas dans pro_prive on génère une erreur 404.
 ?>
@@ -343,6 +247,7 @@ header > img{
         <?php
         include "../composants/footer/footer.php";
         ?>
-    <?php
+    </body>
+<?php
 }
-    ?>
+?>
