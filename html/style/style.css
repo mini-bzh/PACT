@@ -330,7 +330,7 @@ input{
 
 #mainAvis .mainAvis{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: space-around;
 }
 
@@ -1141,8 +1141,6 @@ rect{
 
 .conteneurBtn{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .btnTrie{
@@ -1153,7 +1151,7 @@ rect{
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20%;
+    margin-left: 2%;
     padding: 5px;
 }
 
