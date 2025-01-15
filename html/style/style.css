@@ -479,6 +479,8 @@ input{
     height: 13px;
     margin-right: 2px;
     transform: translateY(-1px);
+    user-select: none;
+    pointer-events: none;
 }
 
 .avis .btnModifierAvis img{
@@ -501,6 +503,8 @@ input{
     font-size: var(--typescale-very-small-text);
     margin: 0px;
     padding: 0px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .avis .btnModifierAvis p{
