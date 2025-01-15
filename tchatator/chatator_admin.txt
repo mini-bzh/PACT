@@ -1,0 +1,56 @@
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+> Entrez votre clé API : _
+
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+Clé API incorrect !
+> Entrez votre clé API : _
+
+
+
++-------------------------------------+
+|      Tchatator Administrateur       |
++-------------------------------------+
+| [1] Bloquer un utilisateur          |
+| [2] Bannir un utilisateur           |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+---- 2 ----
+
++-------------------------------------+
+|      Tchatator Administrateur       |
++-------------------------------------+
+|       Liste des utilisateurs        |
+| 1- Nova Solutions                   |
+| 2- CYIM                             |
+| 3- Margogo                          |
+| 4- TitouDu22                        |
++-------------------------------------+
+> Saisissez le numéro de l'utilisateur à bannir : _
+> Êtes vous sûr de vouloir Bannir Margogo ? (O / N) : _
+
+> Margogo à été Banni pendant 6 mois
+
++-------------------------------------+
+|      Tchatator Administrateur       |
++-------------------------------------+
+|       Liste des utilisateurs        |
+| 1- Nova Solutions                   |
+| 2- CYIM                             |
+| 3- Margogo (banni(e))               |
+| 4- TitouDu22                        |
++-------------------------------------+
+
++-------------------------------------+
+|      Tchatator Administrateur       |
++-------------------------------------+
+| [1] Bloquer un utilisateur          |
+| [2] Bannir un utilisateur           |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _

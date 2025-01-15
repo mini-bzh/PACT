@@ -38,8 +38,8 @@ int create_socket(ConfigSocketMessages *configSocket);  // Crée un socket
 void afficher_tout(PGresult *res);  // Fonction de debug pour afficher le resultat d'une requête
 
 // Prototypes des menus
-int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte, PGconn *conn);  // Menu de connexion
-int menu_principal(int cnx, int compte, bool *quitter);  // Menu principal (choix des actions possibles)
+int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn);  // Menu de connexion
+int menu_principal(int cnx, int compte);  // Menu principal (choix des actions possibles)
 
 // Fonction principale
 int main() {
@@ -48,8 +48,6 @@ int main() {
     ConfigBDD configBDD;
 
     int compte = 0;
-
-    bool quitter = false;
 
     printf("Lecture de la configuration...\n");
     if (lire_config("../.config/config.txt", &configSocket, &configBDD) != 0) {
@@ -76,34 +74,34 @@ int main() {
     char *dbname = PQdb(conn);
     printf("Connecté à la base de données : %s\n", dbname);
 
-    // Acceptation de la connexion
-    printf("Acceptation de la connexion...\n");
     struct sockaddr_in conn_addr;
     int size = sizeof(conn_addr);
-    int cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
-    if (cnx < 0) {
-        perror("Erreur lors de l'acceptation de la connexion");
-        close(sock);
-        PQfinish(conn);
-        return -1;
-    }
 
     // Boucle principale
-    while (quitter == false)
-    {
-        menu_connexion(cnx, &quitter, configSocket, &compte, conn);
+    while (true) {
+        // Acceptation de la connexion
+        printf("Acceptation de la connexion...\n");
+        int cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
+        if (cnx < 0) {
+            perror("Erreur lors de l'acceptation de la connexion");
+            close(sock);
+            PQfinish(conn);
+            return -1;
+        }
+
+        printf("Connexion réussi au client : %d\n", cnx);
+
+        menu_connexion(cnx, configSocket, &compte, conn);
 
         if (compte != 0) {
-            menu_principal(cnx, compte, &quitter);
-            quitter = true;
+            menu_principal(cnx, compte);
         }
         
     }
     
 
 
-    // Fermeture du socket et de la connexion
-    close(cnx);
+    // Fermeture du socket
     close(sock);
 
     // Fermeture de la connexion à la BDD
@@ -260,12 +258,14 @@ void afficher_tout(PGresult *res) {
 //////////////////////////////
 
 // Fonction pour gérer le menu de connexion
-int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte, PGconn *conn) {
+int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn) {
     PGresult *res;
     PGresult *res2;
     PGresult *res3;
     char buff[50];
     char query[256];
+
+    bool quitter = false;
 
     // Menu de connexion
     char menu[250] = 
@@ -276,7 +276,7 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
         "+-------------------------------------+\n"
         "> Entrez votre clé API : ";
 
-    while ((*compte == 0) && (*quitter == false)) {
+    while ((*compte == 0) && (quitter == false)) {
         write(cnx, menu, strlen(menu));
         int len = read(cnx, buff, sizeof(buff) - 1);
         if (len < 0) {
@@ -285,6 +285,7 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
         }
 
         buff[strcspn(buff, "\r\n")] = 0;
+        buff[len] = '\0';
 
         // Construire la requête SQL avec une variable
         snprintf(query, sizeof(query), "SELECT * FROM tripskell.membre WHERE membre.clefAPI = '%s';", buff);
@@ -304,19 +305,18 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
             return -1;
         }
 
+
+
         if (PQntuples(res) > 0)
         {
             *compte = 1; // Utilisateur membre
-            write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
         } else if ((PQntuples(res2) > 0) || (PQntuples(res3) > 0)) {
             *compte = 2; // Utilisateur professionnel
-            write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
         } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
             *compte = 3; // Utilisateur administrateur
-            write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
-            write(cnx, "Fin de la connexion\n", strlen("Fin de la connexion\n"));
-            *quitter = true;
+            quitter = true;
+            close(cnx);
         } else {  // Clé API incorrecte
             strcpy(menu,
             "+-------------------------------------+\n"
@@ -334,7 +334,7 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
     return 0;
 }
 
-int menu_principal(int cnx, int compte, bool *quitter) {
+int menu_principal(int cnx, int compte) {
     char menu[350];
     char buff[50];
 
@@ -374,16 +374,20 @@ int menu_principal(int cnx, int compte, bool *quitter) {
     }
 
     write(cnx, menu, strlen(menu));
+    
+    bool quitter = false;
+    while (quitter == false) {
+    
+        int len = read(cnx, buff, sizeof(buff) - 1);
+        if (len < 0) {
+            perror("Erreur lors de la lecture");
+            return -1;
+        }
 
-    int len = read(cnx, buff, sizeof(buff) - 1);
-    if (len < 0) {
-        perror("Erreur lors de la lecture");
-        return -1;
-    }
-
-    if (strcmp(buff, "-1") == 0) { // Se déconnecter
-        write(cnx, "Fin de la connexion\n", strlen("Fin de la connexion\n"));
-        *quitter = true;
+        if (strcmp(buff, "-1") == 0) { // Se déconnecter
+            quitter = true;
+            close(cnx);
+        }
     }
 
     return 0;

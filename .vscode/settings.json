@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.sqlbook": "sql",
+        "*.ndjson": "jsonl",
+        "*.dbclient-js": "javascript",
+        "*.tcc": "c",
+        "string.h": "c",
+        "inet.h": "c",
+        "socket.h": "c",
+        "stdbool.h": "c",
+        "stdlib.h": "c",
+        "libpq-fe.h": "c",
+        "types.h": "c"
+    }
+}

@@ -331,9 +331,11 @@ function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulati
 
 function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis, le motif du signalement et l'id de la personne qui signal
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    console.log(btnValider);
     let motifSignalement = document.getElementById("motifSignalement").value;
     let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
     let idAvis = btnValider.id;
+    console.log(idAvis);
 
     if(motifSignalement != ""){
         $.ajax({
@@ -341,7 +343,7 @@ function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis,
             type: 'POST',                               // Type de la requête (pour transmettre
             data: {idCompte: idCompte, motifSignalement: motifSignalement, idAvis: idAvis},
             success: function(reponse){
-                alert("Signalement envoyé");;
+                alert("Signalement envoyé");
                 location.reload();
             },
             error: function(jqXHR, textStatus, errorThrown) {
