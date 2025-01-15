@@ -3,6 +3,9 @@
     // Inclusion du script pour vérifier si l'utilisateur a un compte pro
     include('../php/verif_compte_pro.php');
     include('../php/verif_compte_membre.php');
+
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 ?>
     <header class="headerPC-Tab <?php
         if($comptePro)
@@ -36,9 +39,36 @@
                             <a class="aHeader" href="avis.php">
                             <img src="/icones/commentSVG.svg" alt="icone commentaires">
                             <h3>Mes avis</h3>
+                            <?php
+                                $query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
+                                             WHERE tripskell._offre.id_c = :idCompte AND luparpro = false"; //compte le nombre d'avis déposés sur les offres du pro qu'il n'a pas encore lu
+                                
+                                $stmt = $dbh->prepare($query);
+                                $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
+                                $stmt->execute();
+
+                                $cptAvisNonLus = $stmt->fetch()["count"];
+
+                                if($comptePro)
+                                {
+                                    if(0 < $cptAvisNonLus && $cptAvisNonLus < 10)
+                                    {
+                                    ?>
+                                        <p id="pastilleCptAvisNonLus"><?php echo $cptAvisNonLus ?></p>
+                                    <?php
+                                    }
+                                    else if($cptAvisNonLus >= 10)
+                                    {
+                                    ?>
+                                        <p id="pastilleCptAvisNonLus">9+</p>
+                                    <?php
+                                    }
+                                   
+                                }
+                            ?>
                             </a>
                         </li>
-                    <?php 
+                    <?php
                 } 
                 ?>
                 <li class="liHeader" id="btOffres"    <?php 
