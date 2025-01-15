@@ -165,34 +165,39 @@ let trieNote ="";
 let trieDate ="";
 
 function trierDate() {
-    clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
-    trieNote="";
+    if(trieDate == "desc"){
+        toogleTrieDate("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
+        trieDate="";
+    }
     if (trieDate == "") {
         toogleTrieDate("date","iconeTrieDate1","iconeTrieDate","btnTrieDate","asc");
         trieDate = "asc";   // Modifie l'état du trie
     }
-    else if(trieDate == "asc") {
+    else if(trieDate == "asc"){
+        clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
+        trieNote="";
         toogleTrieDate("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
-        trieDate = "decs";  // Modifie l'état du trie
-    }
-    else if(trieDate == "decs"){
-        toogleTrieDate("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
-        trieDate = "";  // Modifie l'état du trie
+        trieDate = "desc";  // Modifie l'état du trie
     }
 }
+
+trierDate();
 
 function trierNote() {
     clearBouton("iconeTrieDate","iconeTrieDate1","iconeTrieDate2","btnTrieDate");
     trieDate="";
     if (trieNote == "") {
+        trierDate();
         toogleTrie("note","iconeTrieNote1","iconeTrieNote","btnTrieNote","asc");
         trieNote = "asc";   // Modifie l'état du trie
     }
     else if(trieNote == "asc") {
+        trierDate();
         toogleTrie("note","iconeTrieNote1","iconeTrieNote2","btnTrieNote","decs");
         trieNote = "decs";  // Modifie l'état du trie
     }
     else if(trieNote == "decs"){
+        trierDate();
         toogleTrie("note","iconeTrieNote2","iconeTrieNote","btnTrieNote","default");
         trieNote = "";  // Modifie l'état du trie
     }
