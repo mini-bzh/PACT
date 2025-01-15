@@ -247,6 +247,32 @@ function supprimerAvis()
     }
 }
 
+/* ------------------------ signaler avis ------------------------*/
+
+
+let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
+console.log(btnSignalerAvis);
+
+
+btnSignalerAvis.forEach(btn =>{
+    if(typeof(btnSignalerAvis) !== 'undefined' && btnSignalerAvis !== null)
+        {
+            btn.addEventListener("click", confSignaler);
+        }
+})
+
+
+function confSignaler(){
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'flex';
+    document.body.classList.add('no-scroll');
+}
+
+function fermeConfSignaler(){
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+}
 
 /*---------------------------- preview image ----------------------------*/
 let triggerAffichage = document.querySelectorAll(".imageAvis");
