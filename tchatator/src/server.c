@@ -32,16 +32,16 @@ typedef struct {
 } ConfigBDD;
 
 // Prototypes des fonctions
-int lire_config(const char *filename, ConfigSocketMessages *configSocket, ConfigBDD *configBDD);
-PGconn *connect_to_db(ConfigBDD *configBDD);
-int create_socket(ConfigSocketMessages *configSocket);
+int lire_config(const char *filename, ConfigSocketMessages *configSocket, ConfigBDD *configBDD);  // Lit la configuration du server
+PGconn *connect_to_db(ConfigBDD *configBDD);  // Connexion à la BDD
+int create_socket(ConfigSocketMessages *configSocket);  // Crée un socket
+void afficher_tout(PGresult *res);  // Fonction de debug pour afficher le resultat d'une requête
 
 // Prototypes des menus
-int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte);
-int menu_principal(int cnx);
+int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte, PGconn *conn);  // Menu de connexion
+int menu_principal(int cnx, int compte, bool *quitter);  // Menu principal (choix des actions possibles)
 
 // Fonction principale
-
 int main() {
 
     ConfigSocketMessages configSocket;
@@ -59,11 +59,11 @@ int main() {
     // Connection à la BDD
     printf("Connexion à la base de données...\n");
     PGconn *conn = connect_to_db(&configBDD);
-    if (!conn) {
-        return -1;
+    if (PQstatus(conn) != CONNECTION_OK) {
+        fprintf(stderr, "Connection failed: %s\n", PQerrorMessage(conn));
+        PQfinish(conn);
+        exit(EXIT_FAILURE);
     }
-    PGresult *res;
-
 
     // Création du socket
     printf("Création du socket...\n");
@@ -72,6 +72,9 @@ int main() {
         PQfinish(conn);
         return -1;
     }
+
+    char *dbname = PQdb(conn);
+    printf("Connecté à la base de données : %s\n", dbname);
 
     // Acceptation de la connexion
     printf("Acceptation de la connexion...\n");
@@ -88,10 +91,10 @@ int main() {
     // Boucle principale
     while (quitter == false)
     {
-        menu_connexion(cnx, &quitter, configSocket, &compte);
+        menu_connexion(cnx, &quitter, configSocket, &compte, conn);
 
         if (compte != 0) {
-            menu_principal(cnx);
+            menu_principal(cnx, compte, &quitter);
             quitter = true;
         }
         
@@ -216,9 +219,54 @@ int create_socket(ConfigSocketMessages *configSocket) {
     return sock;
 }
 
+// Fonction pour afficher le resultat d'une requête SQL
+void afficher_tout(PGresult *res) {
+    int nRows = PQntuples(res);  // Nombre de lignes
+    int nCols = PQnfields(res); // Nombre de colonnes
+
+    printf("\n");
+    // Vérification si le résultat est vide
+    if (nRows == 0) {
+        const char *msg = "Aucun résultat à afficher.\r\n";
+        printf(msg);
+        return;
+    }
+
+    char buffer[1024]; // Tampon pour la sortie
+
+    // Afficher les noms des colonnes
+    for (int col = 0; col < nCols; col++) {
+        snprintf(buffer, sizeof(buffer), "%s\t", PQfname(res, col));
+        printf(buffer);
+    }
+    printf( "\r\n");
+
+    // Afficher les valeurs de chaque ligne
+    for (int row = 0; row < nRows; row++) {
+        for (int col = 0; col < nCols; col++) {
+            snprintf(buffer, sizeof(buffer), "%s\t", PQgetvalue(res, row, col));
+            printf(buffer);
+        }
+        printf("\r\n");
+    }
+    printf("\n");
+}
+
+
+
+
+//////////////////////////////
+//          MENUS           //
+//////////////////////////////
+
 // Fonction pour gérer le menu de connexion
-int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte) {
+int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *compte, PGconn *conn) {
+    PGresult *res;
+    PGresult *res2;
+    PGresult *res3;
     char buff[50];
+    char query[256];
+
     // Menu de connexion
     char menu[250] = 
         "+-------------------------------------+\n"
@@ -236,17 +284,37 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
             return -1;
         }
 
-        buff[len] = '\0'; // Ajout de la terminaison
+        buff[strcspn(buff, "\r\n")] = 0;
 
-        char texte_ajoute[] = "\r\n";
-        char cle_combinee[60];
+        // Construire la requête SQL avec une variable
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.membre WHERE membre.clefAPI = '%s';", buff);
+        res = PQexec(conn, query); // Exécuter la requête SQL d'un membre
 
-        snprintf(cle_combinee, sizeof(cle_combinee), "%s%s", config.cle_api_admin, texte_ajoute); // ajout de \r\n pour la clé administrateur
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.pro_public WHERE pro_public.clefAPI = '%s';", buff);
+        res2 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel public
 
-        if (strcmp(buff, cle_combinee) == 0) { // Se connecter en tant qu'administrateur
-            *compte = 1; // Utilisateur administrateur
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.pro_prive WHERE pro_prive.clefAPI = '%s';", buff);
+        res3 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel privee
+        
+        if ((PQresultStatus(res) != PGRES_TUPLES_OK) || (PQresultStatus(res2) != PGRES_TUPLES_OK) || (PQresultStatus(res3) != PGRES_TUPLES_OK)) {
+            fprintf(stderr, "Échec de l'exécution de la requête : %s\n", PQerrorMessage(conn));
+            PQclear(res);
+            PQclear(res2);
+            PQclear(res3);
+            return -1;
+        }
+
+        if (PQntuples(res) > 0)
+        {
+            *compte = 1; // Utilisateur membre
             write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
-        } else if (strcmp(buff, "-1\r\n") == 0) { // Se déconnecter
+        } else if ((PQntuples(res2) > 0) || (PQntuples(res3) > 0)) {
+            *compte = 2; // Utilisateur professionnel
+            write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
+        } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
+            *compte = 3; // Utilisateur administrateur
+            write(cnx, "Connexion réussie\n", strlen("Connexion réussie\n"));
+        } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             write(cnx, "Fin de la connexion\n", strlen("Fin de la connexion\n"));
             *quitter = true;
         } else {  // Clé API incorrecte
@@ -260,21 +328,63 @@ int menu_connexion(int cnx, bool *quitter, ConfigSocketMessages config, int *com
         }
     }
 
+    PQclear(res);
+    PQclear(res2);
+    PQclear(res3);
     return 0;
 }
 
-int menu_principal(int cnx) {
-    char menu[350] = 
-        "+-------------------------------------+\n"
-        "|            Se connecter             |\n"
-        "+-------------------------------------+\n"
-        "| [1] Bloquer un utilisateur          |\n"
-        "| [2] Bannir un utilisateur           |\n"
-        "| [3] Quitter                         |\n"
-        "+-------------------------------------+\n"
-        "> Entrez votre choix : ";
+int menu_principal(int cnx, int compte, bool *quitter) {
+    char menu[350];
+    char buff[50];
+
+    if (compte == 1) { // Utilisateur membre
+        strcpy(menu,"+-------------------------------------+\n"
+                    "|          Tchatator Membre           |\n"
+                    "+-------------------------------------+\n"
+                    "| [1] Voir les messages non lus       |\n"
+                    "| [2] Voir ma conversation avec       |\n"
+                    "|     un professionnel                |\n"
+                    "| [-1] Quitter                        |\n"
+                    "+-------------------------------------+\n"
+                    "> Entrez votre choix : ");
+
+    } else if (compte == 2) { // Utilisateur professionnel
+        strcpy(menu,"+-------------------------------------+\n"
+                    "|       Tchatator professionnel       |\n"
+                    "+-------------------------------------+\n"
+                    "| [1] Voir les messages non lus       |\n"
+                    "| [2] Voir ma conversation avec       |\n"
+                    "|     un professionnel                |\n"
+                    "| [-1] Quitter                        |\n"
+                    "+-------------------------------------+\n"
+                    "> Entrez votre choix : ");
+
+    } else if (compte == 3) { // Utilisateur administrateur
+        strcpy(menu,"+-------------------------------------+\n"
+                    "|      Tchatator Administrateur       |\n"
+                    "+-------------------------------------+\n"
+                    "| [1] Bloquer un utilisateur          |\n"
+                    "| [2] Bannir un utilisateur           |\n"
+                    "| [-1] Quitter                        |\n"
+                    "+-------------------------------------+\n"
+                    "> Entrez votre choix : ");
+    } else {
+        return -1; // Utilisateur non connecté
+    }
 
     write(cnx, menu, strlen(menu));
+
+    int len = read(cnx, buff, sizeof(buff) - 1);
+    if (len < 0) {
+        perror("Erreur lors de la lecture");
+        return -1;
+    }
+
+    if (strcmp(buff, "-1") == 0) { // Se déconnecter
+        write(cnx, "Fin de la connexion\n", strlen("Fin de la connexion\n"));
+        *quitter = true;
+    }
 
     return 0;
 }

@@ -246,6 +246,54 @@ function supprimerAvis()
     }
 }
 
+/* ------------------------ signaler avis ------------------------*/
+
+
+let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
+
+
+function confSignaler(event){ //fonction pour afficher une pop up
+    let idAvis = event.target.id; // on récupère l'id de l'avis
+    console.log(idAvis);
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'flex';
+    let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    document.body.classList.add('no-scroll');
+    btnValider.id = idAvis;  //l'id de l'avis est mis dans le bouton bouton valider
+    console.log(btnValider);
+}
+
+function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulation
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+}
+
+function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis, le motif du signalement et l'id de la personne qui signal
+    let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    let motifSignalement = document.getElementById("motifSignalement").value;
+    let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
+    let idAvis = btnValider.id;
+
+    if(motifSignalement != ""){
+        $.ajax({
+            url: "../php/signalerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            type: 'POST',                               // Type de la requête (pour transmettre
+            data: {idCompte: idCompte, motifSignalement: motifSignalement, idAvis: idAvis},
+            success: function(reponse){
+                alert("Signalement envoyé");;
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Erreur AJAX : ", textStatus, errorThrown);
+                alert("Erreur lors de l'appel du script PHP : " + textStatus);
+            }
+        });
+    }
+    else{
+        alert("Veuillez renseigner un motif de signalement");
+    }
+}
 
 /*---------------------------- preview image ----------------------------*/
 let triggerAffichage = document.querySelectorAll(".imageAvis");
