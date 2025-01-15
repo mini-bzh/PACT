@@ -133,7 +133,7 @@ input{
     object-fit: cover;
 }
 
-/* boutons */
+/* ------------/ boutons /------------ */
 
 .coMembre h4{
     color: var(--primary);
@@ -267,7 +267,8 @@ input{
 }
 
 
-/* ------------/ accueil /------------ */
+/* ------------/ page accueil /------------ */
+
 #mainAccueil h1{
     margin: 20px;
 }
@@ -312,7 +313,7 @@ input{
     }
 }
 
-/*-------------/ avis /--------------*/
+/*-------------/ page avis /--------------*/
 
 #mainAvis h1{
     padding: 20px;
@@ -1141,9 +1142,7 @@ rect{
     width: 45px;
 }
 
-
-
-/*------------------- BOUTONS DE TRIE ----------------------*/
+/*-------------/ BOUTON DE TRIE /--------------*/
 
 #conteneurTrie{
     display: flex;
@@ -1172,4 +1171,304 @@ rect{
 
 .txtBtnTrie{
     user-select: none;
+}
+
+/*              __________________              */
+/*-------------/ BAR DES FILTRES /--------------*/
+/*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
+aside {
+    
+    height: 100%;
+    padding: 1%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ddd;
+    
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse */
+
+    z-index: 1;
+    background-color: #fff;
+
+    visibility: visible;
+}
+
+.main-for-menu-opened {
+    align-items: end;
+    padding: 0;
+}
+
+.main-for-menu-opened > * {
+    width: 60%;
+}
+
+#menu-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    width: 3%;
+}
+
+#filtres-aside {
+    width: 35%;
+    
+}
+
+aside > * {
+    margin-top: 80px;    /* Décale le contenu vers le bas pour ne pas qu'il soit sous la nav bar */
+}
+
+.content-aside{
+    padding: 3%;
+    box-sizing: initial
+}
+
+/* Style optionnel pour le contenu de la barre latérale */
+aside h2 {
+    font-size: 1.5rem; /* Taille de police adaptative */
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+aside ul {
+    list-style: none; /* Supprime les puces */
+    padding: 0;
+}
+
+aside ul li {
+    margin-bottom: 0.5rem;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    display: block;
+    padding: 0.5em;
+    border-radius: 0.25em;
+}
+
+aside ul li a:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+aside svg {
+    margin: 8px;
+}
+
+aside svg > path {
+    stroke: var(--primaryDark);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Style pour le label du bouton */
+.toggle-button {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Style pour l'input checkbox (caché) */
+.toggle-button input[type="checkbox"] {
+    display: none; /* Masque le checkbox natif */
+}
+
+.toggle-button input[type="radio"] {
+    display: none; /* Masque le checkbox natif */
+}
+
+/* Style pour le bouton */
+.toggle-button span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Style quand le checkbox est coché */
+.toggle-button input[type="checkbox"]:checked + span {
+    background-color: var(--primaryLight);
+    color: white;
+    border-color: var(--primaryLight);
+}
+
+/* Style quand le checkbox est coché */
+.toggle-button input[type="radio"]:checked + span {
+    background-color: var(--primaryLight);
+    color: white;
+    border-color: var(--primaryLight);
+}
+
+/* Style pour la légende */
+aside legend {
+    font-size: 1.2rem; /* Taille légèrement plus grande */
+    font-weight: bold; /* Texte en gras */
+    color: #555; /* Couleur douce pour le texte */
+    padding: 0.5rem; /* Espacement interne */
+    border-bottom: 2px solid var(--primaryLight); /* Ligne décorative */
+    margin-bottom: 1rem; /* Espacement avec le contenu en dessous */
+    display: inline-block; /* S'assure que la bordure n'occupe que la largeur du texte */
+}
+
+aside fieldset {
+    border: none;
+    margin: auto;
+    
+}
+
+/*Style pour les double slide bar*/
+.double-range-slider-box {
+    position: relative;
+    width: 300px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+   
+  .double-range-slider {
+    width: 90%;
+    height: 5px;
+    position: relative;
+    background-color: #dddddd;
+    border-radius: 20px;
+  }
+  .range-bar {
+    height: 100%;
+    position: absolute;
+    border-radius: 20px;
+    background-color:  var(--primaryLight);
+  }
+
+  .value-popup{
+    display: flex;
+    position: absolute;
+    border: 1px solid var(--grisClair);
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .value-popupMin {
+    bottom: 0;
+    transform: translate(0, -100%);
+    left: 0;
+    will-change: left, transform;
+  }
+  
+  .value-popupMax {
+    top: 0;
+    transform: translate(0, 100%);
+    right: 0;
+    will-change: right, transform;
+  }
+
+  .value-popupMin img{
+    width: 12px;
+  }
+
+  .value-popupMax img{
+    width: 12px;
+  }
+
+  .double-range-slider-box input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .double-range-slider-box input::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
+    background-color: var(--primaryLight);
+    border: none;
+    border-radius: 50%;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    cursor: pointer;
+    margin-bottom: 1px;
+  }
+  .double-range-slider-box input::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    background-color: var(--primaryLight);
+    border: none;
+    border-radius: 50%;
+    pointer-events: auto;
+    -moz-appearance: none;
+    cursor: pointer;
+    margin-top: 30%;
+  }
+
+/* Style pour le groupe d'entrée */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Espacement entre le label et l'input */
+}
+
+/* Style pour le label */
+.input-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style pour l'input */
+.input-group input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au focus de l'input */
+.input-group input:focus {
+    border-color: var(--primaryLight);
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.button{    
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+
+    font-size: 2em;
+
+    color: var(--grisClair);
+    border: solid 2px white;
+
+    float: right;
+}
+
+.button:hover{
+    background-color: #f1f1f1;
 }
