@@ -27,16 +27,15 @@ foreach ($result as $row)
 }
 
 
-
-$idCompte = 1;
-$query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
-                                            WHERE tripskell._offre.id_c = :idCompte AND luparpro = false";
+$idOffre = 1;
+$query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
 $stmt = $dbh->prepare($query);
 
-
-$stmt->bindParam(":idCompte", $idCompte);
+$stmt->bindParam(":idOffre", $idOffre);
 
 $stmt->execute();
+
+$nbAvisNonLusOffre = $stmt->fetch()["count"];
 echo("resultat count");/*
 print_r($stmt->fetch());*/
 

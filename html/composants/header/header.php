@@ -54,7 +54,7 @@
                                     if(0 < $nbAvisNonLus /*&& $nbAvisNonLus < 10*/)
                                     {
                                     ?>
-                                        <p id="pastilleCptAvisNonLus"><?php /*echo $nbAvisNonLus*/ ?></p>
+                                        <p class="pastilleCptAvisNonLus"><?php /*echo $nbAvisNonLus*/ ?></p>
                                     <?php
                                     }
                                     /*else if($nbAvisNonLus >= 10)
