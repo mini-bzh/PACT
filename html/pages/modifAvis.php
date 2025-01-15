@@ -3,71 +3,60 @@ session_start(); // Démarre la session pour récupérer les données de session
 
 // Récupération des paramètres de connexion à la base de données
 include('../php/connection_params.php');
-
+include_once("../php/affichageAvis.php");
 // Connexion à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
+if (isset($_GET['id_avis'])) {
 
+    // Récupérer et sécuriser l'id_avis
+    $idAvis = htmlspecialchars($_GET['id_avis']);
+    $avis = $dbh->query("select * from tripskell._avis where id_avis='" . $idAvis . "';")->fetchAll()[0];
 
-if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
-    
-// ici on exploite les fichier image afin de les envoyer dans un dossier du git dans le but de stocker les images reçus
-$i = 0;
-foreach ($_FILES as $key_fichier => $fichier) { // on parcour les fichiers de la super globale $_FILES
-
-    $nom_img[$key_fichier] = null; // initialistion des noms des images a null
-
-    if ($fichier["size"]!=0) {  // on verifie que le fichier a ete transmit
-
-        // creation du nom de fichier en utilisant time et le type de fichier
-        $nom_img[$key_fichier] = time() + $i++ . "." . explode("/", $_FILES[$key_fichier]["type"])[1];
-
-        // deplacement du fichier depuis l'espace temporaire
-        move_uploaded_file($fichier["tmp_name"], "../images/imagesAvis/" . $nom_img[$key_fichier]);
-    }
 }
 
-$requete = "INSERT INTO tripskell.avis(";
-$requete .= "commentaire, ";
-$requete .= "imageavis, ";
-$requete .= "dateexperience, ";
-$requete .= "datepublication, ";
-$requete .= "cadreexperience, ";
-$requete .= "id_c, ";
-$requete .= "idoffre,";
-$requete.= "titreavis) ";
+if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
-$requete .= "VALUES (";
-$requete .= ":commentaire, ";
-$requete .= ":imageavis, ";
-$requete .= ":dateexperience, ";
-$requete .= ":datepublication, ";
-$requete .= ":cadreexperience, ";
-$requete .= ":id_c, ";
-$requete .= ":idoffre,";
-$requete.= ":titreavis);";
+// Sécurisation des entrées pour éviter des injections SQL
+$titre = htmlspecialchars($_POST['titre']);
+$note = htmlspecialchars($_POST['note']);
+$commentaire = htmlspecialchars($_POST['commentaire']);
+$contexte = htmlspecialchars($_POST['contexte']);
+$dateExperience = htmlspecialchars($_POST['dateExperience']);
+
+// Si une image est envoyée, gérer l'upload du fichier
+$nom_img = null; // Initialisation
+if (isset($_FILES['fichier1']) && $_FILES['fichier1']['size'] != 0) {
+    $nom_img = time() . '.' . pathinfo($_FILES['fichier1']['name'], PATHINFO_EXTENSION);
+    move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesAvis/" . $nom_img);
+}
+
+// Requête SQL pour mettre à jour l'avis dans la base de données
+$stmt = $dbh->prepare("
+    UPDATE tripskell._avis 
+    SET titreavis = :titre, 
+        note = :note, 
+        commentaire = :commentaire, 
+        cadreexperience = :contexte, 
+        dateexperience = :dateExperience, 
+        imageavis = :imageAvis
+    WHERE id_avis = :idAvis
+");
+
+// Exécution de la requête avec les valeurs préparées
+$stmt->execute([
+    ':titre' => $titre,
+    ':note' => $note,
+    ':commentaire' => $commentaire,
+    ':contexte' => $contexte,
+    ':dateExperience' => $dateExperience,
+    ':imageAvis' => $nom_img, // Nom de l'image (peut être null)
+    ':idAvis' => $idAvis
+]);
 
 
-$datePublication = date("d/m/Y");
 
-$nul = null;
-
-$stmt = $dbh->prepare($requete);
-$stmt->bindParam(":commentaire", $_POST["commentaire"]);
-$stmt->bindParam(":imageavis", $nom_img["fichier1"]);
-$stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
-$stmt->bindParam(":datepublication", $datePublication);
-$stmt->bindParam(":cadreexperience", $_POST["contexte"]);
-$stmt->bindParam(":id_c", $_SESSION["idCompte"]);
-$stmt->bindParam(":idoffre", $_GET["idOffre"]);
-$stmt->bindParam(":titreavis", $_POST["titre"]);
-
-$stmt->execute(); // execution de la requete
-
-// on ferme la base de donnée
-$dbh = null;
-
-header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on redirige vers la page de l'offre créée
+header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre créée
 }
 
 ?>
@@ -92,9 +81,9 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
         ?>
 <body class="fondVisiteur">
 
-    <form name="creation" action="/pages/creaAvis.php?idOffre=<?php echo $_GET["idOffre"]?>" method="post" enctype="multipart/form-data">
+    <form name="creation" action="" method="post">
         <div id="conteneurTitreForm">
-            <h3>Ajouter un avis</h3>
+            <h3>Modifier un avis</h3>
             <div>
                 <p>Les champs qui possède une <span class="Asterisque"> * </span> sont obligatoires.</p> 
             </div>
@@ -103,12 +92,12 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
         <div id="conteneurTitreNote">
             <div class="champs">
                 <label for="titre">Titre<span class="required">*</span> :</label>
-                <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" maxlength="20" required>
+                <input type="text" id="titre" name="titre" placeholder="Entrez le titre de votre avis" value="<?php echo $avis['titreavis'] ?>" maxlength="20" required>
             </div>
             <div class="champs">
                 <label for="note">Note <span class="required">*</span> :</label>
                 <div id="conteneurNote">
-                    <input type="number" id="note" name="note" placeholder="Note" min="1" max="5" step="0.5" required>
+                    <input type="number" id="note" name="note" placeholder="Note" value="<?php echo $avis['note'] ?>" min="1" max="5" step="0.5" required>
                     <p>/5</p>
                     <img src="../icones/etoilePleineSVG.svg" alt="étoile">
                 </div>
@@ -118,41 +107,44 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
-            <textarea type="text" maxlength="200" id="commentaire" name="commentaire" placeholder="Qu'avez-vous pensé de <?php 
-                $stmt = $dbh->prepare("select titreOffre from tripskell.offre_visiteur where idoffre = ".$_GET["idOffre"]);
-                $stmt->execute();
-                $titreOffre = $stmt->fetchAll()[0]["titreoffre"];
-                echo $titreOffre;
-            ?> ?" required></textarea>
+            <textarea type="text" maxlength="200" id="commentaire" name="commentaire" required><?php echo $avis['commentaire']; ?></textarea>
         </div>
         <div id="conteneurContexteDate">
-            <div class="champs">
-                <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
-                <input type="hidden" name="contexte" id="inputContexte">
-                <div id="menuContexte">
-                    <div class="conteneurSVGtexte">
-                        <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
-                        <p>Séléctionner un contexte</p>
-                    </div>
-                    <div id="conteneurOptionsContexte">
-                        <p>en solo</p>
-                        <p>en famille</p>
-                        <p>entre amis</p>
-                        <p>affaires</p>
-                    </div>
-                </div>
+    <div class="champs">
+        <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
+        <input type="hidden" name="contexte" id="inputContexte" value="<?php echo $avis['cadreexperience']; ?>">
+        <div id="menuContexte">
+            <div class="conteneurSVGtexte">
+                <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
+                <p id="selectedContexte"><?php echo $avis['cadreexperience']; ?></p>
             </div>
+            <div id="conteneurOptionsContexte">
+                <p onclick="selectContexte('en solo')">en solo</p>
+                <p onclick="selectContexte('en famille')">en famille</p>
+                <p onclick="selectContexte('entre amis')">entre amis</p>
+                <p onclick="selectContexte('affaires')">affaires</p>
+            </div>
+        </div>
+    </div>
             
             <div class="champs">
                 <label for="dateExperience">Date de la visite<span class="required">*</span> :</label>
-                <input type="date" name="dateExperience" id="dateExperience" required>
+                <input type="date" name="dateExperience" id="dateExperience" value="<?php echo $avis['dateexperience']; ?>" required>
             </div>
         </div>
-        <div class="champs" id="selectPhoto">
-            <label for="fichier1" id="customFileLabel">Ajouter une photo</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
-        </div>
+        <!-- Champs pour sélectionner les images -->
+        <div class="champs">
+                <div class ="PhotoAvis">
+                    <img id="previewImage" src="../images/imagesAvis/<?php echo $contentOffre["imageAvis"]?>" 
+                        alt="Cliquez pour ajouter une image" 
+                        style="cursor: pointer; width: 200px; height: auto;" 
+                        onclick="document.getElementById('fichier1').click()">
+                    <input type="file" id="fichier1" name="fichier1" 
+                        accept="image/png, image/jpeg" 
+                        style="display: none;" 
+                        onchange="updatePreview()">
+                </div>    
+            </div>
 
         <div id="conteneurConfirmation">
             <input type="checkbox" name="certifAvis" required>
@@ -162,12 +154,6 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
             </label>
         </div>
         <div class="zoneBtn">
-            <a href="/pages/detailOffre.php?idOffre=<?php echo $_GET['idOffre']?>" class="btnAnnuler">
-                <p class="texteLarge boldArchivo">Annuler</p>
-                <?php
-                include '../icones/croixSVG.svg';
-                ?>
-            </a>
 
             <button type="submit" href="#" class="btnConfirmer">
                     <p class="texteLarge boldArchivo">Confirmer</p>
@@ -179,5 +165,37 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
     </form>
 
 </body>
-<script src="../js/creaAvis.js"></script>
+<script src="../js/creaAvis.js">
+    function selectContexte(contexte) {
+    // Met à jour la valeur dans l'input caché
+    document.getElementById('inputContexte').value = contexte;
+    
+    // Met à jour le texte visible
+    document.getElementById('selectedContexte').innerText = contexte;
+}
+</script>
+<script>
+    function updatePreview() {
+        const input = document.getElementById('fichier1');
+        const fileName = document.getElementById('fileName');
+        const previewImage = document.getElementById('previewImage');
+
+        // Vérifie si un fichier a été sélectionné
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            // Quand le fichier est chargé, met à jour l'image
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // Change la source de l'image
+            }
+            
+            reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
+            
+            // Met à jour le nom du fichier
+            fileName.textContent = input.files[0].name;
+        } else {
+            fileName.textContent = ''; // Efface le nom si aucun fichier sélectionné
+        }
+    }
+</script>
 </html>
