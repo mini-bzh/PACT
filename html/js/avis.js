@@ -53,6 +53,7 @@ function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
           );
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "blue" ;
     }
     if (sens == "decs") {
@@ -67,6 +68,7 @@ function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
           );
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "red" ;
     }
     if (sens == "default") {
@@ -117,6 +119,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
         var mapTrie = new Map([...mapAvisInfos.entries()].sort((a,b) => a[1].get(paramTrie)[0] - b[1].get(paramTrie)[0]));
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "blue" ;
     }
     if (sens == "decs") {
@@ -124,6 +127,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
         var mapTrie = new Map([...mapAvisInfos.entries()].sort((a,b) => b[1].get(paramTrie)[0] - a[1].get(paramTrie)[0]));
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "red" ;
     }
     if (sens == "default") {
