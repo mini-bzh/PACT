@@ -185,7 +185,7 @@ input{
 }
 
 
-/**/
+/*---------------------/ MAIN /---------------------*/
 
 .titrePortable{
     display: none;
@@ -1402,7 +1402,7 @@ aside fieldset {
         display: none;
     }
 
-    /**/
+    /*------------------/ MAIN /-------------------*/
 
     .titrePortable{
         display: block;
