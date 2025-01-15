@@ -88,7 +88,7 @@
             <section class="mainAvis">
 
             <section class="conteneurBtn">
-                <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                <!--<div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
                     <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieDate" class="iconeTrie">
                     <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
                     <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
@@ -99,9 +99,38 @@
                     <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
                     <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
                     <p id="txtBtnNote" class="txtBtnTrie" >note</p>
-                </div>
+                </div>-->
             </section>
               <section class="mainAvisPro">
+                <?php
+                    $query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
+                    WHERE tripskell._offre.id_c = :idCompte AND luparpro = false"; //compte le nombre d'avis déposés sur les offres du pro qu'il n'a pas encore lu
+        
+                    $stmt = $dbh->prepare($query);
+                    $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
+                    $stmt->execute();
+
+                    $nbAvisNonLus = $stmt->fetch()["count"];
+
+                    if($nbAvisNonLus == 0)
+                    {
+                        ?>
+                            <h3 id="cptAvisNonLus">Vous n'avez pas de nouvel avis</h3>
+                        <?php
+                    }
+                    else if($nbAvisNonLus == 1)
+                    {
+                        ?>
+                        <h3 id="cptAvisNonLus">Vous avec <span>1</span> nouvel avis</h3>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                            <h3 id="cptAvisNonLus">Vous avec <span><?php echo $nbAvisNonLus ?></span> nouveaux avis !</h3>
+                        <?php
+                    }
+                ?>
                 <?php
                     foreach($offre as $of)
                     {
@@ -111,7 +140,6 @@
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
                                     <h3><?php echo $of["titreoffre"] ?></h3>
                                 </div>
-                                <hr>
                                 <div class="conteneurAvis">
                                     <?php
                                         $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $of['idoffre'] . ";")->fetchAll();
@@ -145,19 +173,20 @@
 
                 <section class="mainAvis">
                 <section class="conteneurBtn">
-                        <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                        <!--<div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
                             <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
                             <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
                             <p id="txtBtnDate" class="txtBtnTrie">date</p>
                         </div>
-                    </section>
                     <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
                         <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
                         <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
                         <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
                         <p id="txtBtnNote" class="txtBtnTrie" >note</p>
-                    </div>
+                    </div>-->
+                </section>
+
                 <section class="conteneurAvis">
 
                 <?php

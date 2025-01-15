@@ -342,8 +342,11 @@ input{
 
 #mainAvis .conteneurBtnTitre{
     display: flex;
-    margin-top: 30px;
+    margin-top: 40px;
     align-items: center;
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid black;
 }
 
 #mainAvis .conteneurBtnTitre img{
@@ -355,6 +358,10 @@ input{
 }
 #mainAvis .conteneurBtnTitre img:hover{
     cursor: pointer;
+}
+
+.fondPro #mainAvis .conteneurAvisOffre{
+    max-width: 1100px;
 }
 
 .fondPro #mainAvis .conteneurAvis{
@@ -829,16 +836,26 @@ input{
 
 /*-------------/ HEADER PC-TAB /--------------*/
 
+#cptAvisNonLus{
+    width: fit-content;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+
+    margin: 20px 0px;
+}
+
+#cptAvisNonLus span{
+    color: var(--accentDark);
+}
+
 #pastilleCptAvisNonLus{
 
     position: absolute;
-    top: -10px;
-    right: -20px;
+    top: -5px;
+    right: -10px;
     border-radius: 50%;
     background-color: var(--accentDark);
-    padding: 4px;
-    width: 20px;
-    height: 20px;
+    padding: 5px;
 
     color: white;
     font-family: "Luciole";

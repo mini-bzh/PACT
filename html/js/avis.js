@@ -301,13 +301,35 @@ function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
 //mettre les avis en lu
 
 let avisLisibles = document.querySelectorAll(".conteneurAvis .nouvelAvis");
+let cptAvisNonLus = document.getElementById("cptAvisNonLus");
+
+let nouveauxDejaVus = [];   //tableau qui contiendra les nouveaux avis ayant déjà été passés en lu par l'observeur (évite qu'afficher et masquer en boucle un avis ne déclenche plusieurs fois le traitement)
 
 const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry => {
         if(entry.isIntersecting)
         {
-            let idAvis = entry.target.id.slice(4);
-            avisLuBDD(idAvis);
+            if(!nouveauxDejaVus.includes(entry.target))
+            {
+                let nbAvisNonLus = cptAvisNonLus.querySelector("span");
+                if(nbAvisNonLus.textContent == 1)
+                {
+                    cptAvisNonLus.textContent = "Vous n'avez pas de nouvel avis";
+                }
+                else if(nbAvisNonLus.textContent == 2)
+                {
+                    cptAvisNonLus.innerHTML = "Vous avez <span>1</span> nouvel avis";
+                }
+                else
+                {
+                    nbAvisNonLus.textContent = parseInt(nbAvisNonLus.textContent)-1;
+                }
+
+                let idAvis = entry.target.id.slice(4);
+                avisLuBDD(idAvis);
+
+                nouveauxDejaVus.push(entry.target);
+            }
         }
     });
 })

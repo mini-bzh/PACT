@@ -47,22 +47,22 @@
                                 $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
                                 $stmt->execute();
 
-                                $cptAvisNonLus = $stmt->fetch()["count"];
+                                $nbAvisNonLus = $stmt->fetch()["count"];
 
                                 if($comptePro)
                                 {
-                                    if(0 < $cptAvisNonLus && $cptAvisNonLus < 10)
+                                    if(0 < $nbAvisNonLus /*&& $nbAvisNonLus < 10*/)
                                     {
                                     ?>
-                                        <p id="pastilleCptAvisNonLus"><?php echo $cptAvisNonLus ?></p>
+                                        <p id="pastilleCptAvisNonLus"><?php /*echo $nbAvisNonLus*/ ?></p>
                                     <?php
                                     }
-                                    else if($cptAvisNonLus >= 10)
+                                    /*else if($nbAvisNonLus >= 10)
                                     {
                                     ?>
                                         <p id="pastilleCptAvisNonLus">9+</p>
                                     <?php
-                                    }
+                                    }*/
                                    
                                 }
                             ?>

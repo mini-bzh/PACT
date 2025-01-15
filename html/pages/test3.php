@@ -7,7 +7,7 @@ include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-$stmt = $dbh->prepare( "UPDATE tripskell._avis SET luparpro = false WHERE id_avis = 1 OR id_avis = 2");
+$stmt = $dbh->prepare( "UPDATE tripskell._avis SET luparpro = false WHERE id_avis = 1 OR id_avis = 2 OR id_avis = 3");
 
 $stmt->execute();
 $result = $stmt->fetchAll();
