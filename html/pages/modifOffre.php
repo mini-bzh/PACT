@@ -484,7 +484,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
             <div id="champsActivite">
                 <div>
-                    <label for="prestation">Prestation proposer :</label>
+                    <label for="prestation">Prestation proposée :</label>
                     <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"><?php echo $contentOffre["prestation"]; ?></textarea>
                 </div>
                 <div class="champs">

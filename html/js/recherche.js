@@ -578,6 +578,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
         var mapTrie = new Map([...mapOffresInfos.entries()].sort((a,b) => a[1].get(paramTrie) - b[1].get(paramTrie)));
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "blue" ;
     }
     if (sens == "decs") {
@@ -585,6 +586,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
         var mapTrie = new Map([...mapOffresInfos.entries()].sort((a,b) => b[1].get(paramTrie) - a[1].get(paramTrie)));
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "red" ;
     }
     if (sens == "default") {

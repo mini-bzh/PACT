@@ -101,6 +101,7 @@
                     <p id="txtBtnNote" class="txtBtnTrie" >note</p>
                 </div>
             </section>
+            
               <section class="mainAvisPro">
                 <?php
                     $query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
@@ -131,6 +132,20 @@
                         <?php
                     }
                 ?>
+                <section class="conteneurBtn">
+                    <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieDate" class="iconeTrie">
+                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
+                        <p id="txtBtnDate" class="txtBtnTrie">date</p>
+                    </div> 
+                    <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
+                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
+                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
+                        <p id="txtBtnNote" class="txtBtnTrie" >note</p>
+                    </div>
+                </section>
                 <?php
                     foreach($offre as $of)
                     {

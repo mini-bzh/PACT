@@ -80,6 +80,11 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         });
         mapTempo.set("date", date);   //date
 
+        mapTempo.set("note", [
+            parseFloat(document.querySelector("#" + element.id + " .pouceLike p").textContent),
+            parseFloat(document.querySelector("#" + element.id + " .pouceDislike p").textContent)
+        ]);
+
         mapAvisInfos.set(element.id, mapTempo);
     });
 
@@ -88,7 +93,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
 let mapAvisInfos = initAvis();
 
-function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
+function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
 
     // Rajoute une bordure bleu sur le bouton
     document.getElementById(icone1).classList.toggle("displayNone");
@@ -106,6 +111,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
           );
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "blue" ;
     }
     if (sens == "decs") {
@@ -120,6 +126,7 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
           );
 
         document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
         document.getElementById(idBouton).style.borderColor = "red" ;
     }
     if (sens == "default") {
@@ -140,20 +147,102 @@ function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
 }
 
 
+//--------- trie note ------------
+
+console.log(mapAvisInfos);
+
+function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
+
+    // Rajoute une bordure bleu sur le bouton
+    document.getElementById(icone1).classList.toggle("displayNone");
+    document.getElementById(icone2).classList.toggle("displayNone");
+
+    if (sens == "asc") {
+        // Trie le Tableau mapAvisInfos dans l'ordre croissant dans le tableau mapTrieAcs
+        var mapTrie = new Map([...mapAvisInfos.entries()].sort((a,b) => a[1].get(paramTrie)[0] - b[1].get(paramTrie)[0]));
+
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
+        document.getElementById(idBouton).style.borderColor = "blue" ;
+    }
+    if (sens == "decs") {
+        // Trie le Tableau mapAvisInfos dans l'ordre décroissant dans le tableau mapTrieDesc
+        var mapTrie = new Map([...mapAvisInfos.entries()].sort((a,b) => b[1].get(paramTrie)[0] - a[1].get(paramTrie)[0]));
+
+        document.getElementById(idBouton).style.border = "solid";
+        document.getElementById(idBouton).style.borderWidth = "1px";
+        document.getElementById(idBouton).style.borderColor = "red" ;
+    }
+    if (sens == "default") {
+        var mapTrie = mapAvisInfos;
+        document.getElementById(idBouton).style.border = "none";
+    }
+    
+    let index = 0;
+    // Parcour le tableau mapTrieAcs pour ajouter un attribut order dans le style des élément
+    mapTrie.forEach((map, key, value)=>{
+
+        // Récupère l'élément dans la page
+        let elem = document.getElementById(mapTrie.get(key).get("id"));
+        elem.style.order = index;   // Rajoute l'attribut css order égal à sa position dans le tableau 
+
+        index++;
+    })
+}
+
+function clearBouton(icone,icone1,icone2,idBouton){
+    if (document.getElementById(icone).classList.contains("displayNone")) {
+        document.getElementById(icone).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone1).classList.contains("displayNone")==false) {
+        document.getElementById(icone1).classList.toggle("displayNone");
+    }
+    if (document.getElementById(icone2).classList.contains("displayNone")==false) {
+        document.getElementById(icone2).classList.toggle("displayNone");
+    }
+    document.getElementById(idBouton).style.border = "none";
+}
+
+
+let trieNote ="";
 let trieDate ="";
 
 function trierDate() {
+    if(trieDate == "desc"){
+        toogleTrieDate("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
+        trieDate="";
+    }
     if (trieDate == "") {
-        toogleTrie("date","iconeTrieDate1","iconeTrieDate","btnTrieDate","asc");
+        toogleTrieDate("date","iconeTrieDate1","iconeTrieDate","btnTrieDate","asc");
         trieDate = "asc";   // Modifie l'état du trie
     }
-    else if(trieDate == "asc") {
-        toogleTrie("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
-        trieDate = "decs";  // Modifie l'état du trie
+    else if(trieDate == "asc"){
+        clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
+        trieNote="";
+        toogleTrieDate("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
+        trieDate = "desc";  // Modifie l'état du trie
     }
-    else if(trieDate == "decs"){
-        toogleTrie("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
-        trieDate = "";  // Modifie l'état du trie
+}
+
+trierDate();
+
+function trierNote() {
+    clearBouton("iconeTrieDate","iconeTrieDate1","iconeTrieDate2","btnTrieDate");
+    trieDate="";
+    if (trieNote == "") {
+        trierDate();
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote","btnTrieNote","asc");
+        trieNote = "asc";   // Modifie l'état du trie
+    }
+    else if(trieNote == "asc") {
+        trierDate();
+        toogleTrie("note","iconeTrieNote1","iconeTrieNote2","btnTrieNote","decs");
+        trieNote = "decs";  // Modifie l'état du trie
+    }
+    else if(trieNote == "decs"){
+        trierDate();
+        toogleTrie("note","iconeTrieNote2","iconeTrieNote","btnTrieNote","default");
+        trieNote = "";  // Modifie l'état du trie
     }
 }
 
