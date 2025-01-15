@@ -66,9 +66,7 @@
                         {
                             $idCompteConnecte = null;
                         }
-                        
-                        $avisSignaler = $dbh->query("select * from tripskell._signalerAvis where id_c=" . $idCompteConnecte . " and id_avis=". $avis["id_avis"].";")->fetchAll();
-                        
+                                                
                         if($avis["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                         {
                             ?>
@@ -86,6 +84,7 @@
                             <?php
                         }
                         else if($avis["id_c"] != $idCompteConnecte && $idCompteConnecte != null){
+                            $avisSignaler = $dbh->query("select * from tripskell._signalerAvis where id_c=" . $idCompteConnecte . " and id_avis=". $avis["id_avis"].";")->fetchAll();
                             if($avisSignaler == null){
                             ?>
                                 <div id="<?php echo $avis["id_avis"]?>" class="btnSignalerAvis grossisQuandHover" onclick="confSignaler(event)">
