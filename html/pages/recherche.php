@@ -51,7 +51,7 @@
         <!-- Favicon -->
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-        <link rel="stylesheet" href="/style/pages/recherche.css">
+        <link rel="stylesheet" href="/style/style.css">
 
     </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
@@ -93,7 +93,7 @@
             </div>
         </div>
 <?php include "../composants/sidebar/sidebar_recherche.php"; ?>
-        <main>
+        <main class="main-recherche">
             <section id="conteneurBarre">
                 <label for="searchbar"></label>
                 <input type="searchbar" id="searchbar" placeholder="Rechercher">
