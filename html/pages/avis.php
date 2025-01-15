@@ -146,7 +146,7 @@
 
                         ?>
                             <section class="conteneurAvisOffre">
-                                <div class="conteneurBtnTitre">
+                                <div class="conteneurBtnTitre" id="offre<?php echo $of["idoffre"];?>">
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
                                     <div class="conteneurTitrePastille">
                                         <h3><?php echo $of["titreoffre"] ?></h3>

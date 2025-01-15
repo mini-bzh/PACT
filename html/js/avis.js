@@ -314,6 +314,7 @@ let cptAvisNonLus = document.getElementById("cptAvisNonLus");
 
 let nouveauxDejaVus = [];   //tableau qui contiendra les nouveaux avis ayant déjà été passés en lu par l'observeur (évite qu'afficher et masquer en boucle un avis ne déclenche plusieurs fois le traitement)
 
+
 const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry => {
         if(entry.isIntersecting)
@@ -346,7 +347,6 @@ const observer = new IntersectionObserver((entries)=>{
 avisLisibles.forEach(avisPasLu=>{
     observer.observe(avisPasLu);
 })
-
 
 function avisLuBDD(idAvis)
 {
