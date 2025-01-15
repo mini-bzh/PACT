@@ -86,7 +86,6 @@
             {
             ?>
             <section class="mainAvis">
-
             
               <section class="mainAvisPro">
                 <?php
@@ -135,14 +134,53 @@
                 <?php
                     foreach($offre as $of)
                     {
+                        $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
+                        $stmt = $dbh->prepare($query);
+
+                        $stmt->bindParam(":idOffre", $of['idoffre']);
+
+                        $stmt->execute();
+
+                        $nbAvisNonLusOffre = $stmt->fetch()["count"];
+
+
                         ?>
                             <section class="conteneurAvisOffre">
                                 <div class="conteneurBtnTitre">
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
-                                    <h3><?php echo $of["titreoffre"] ?></h3>
+                                    <div class="conteneurTitrePastille">
+                                        <h3><?php echo $of["titreoffre"] ?></h3>
+                                        <?php
+                                            if($nbAvisNonLusOffre > 0)
+                                            {
+                                                ?>
+                                                <p class="pastilleCptAvisNonLus"></p>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    
+                                    
                                 </div>
                                 <div class="conteneurAvis">
                                     <?php
+                                        $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
+                                        $stmt = $dbh->prepare($query);
+                                        
+                                        $stmt->bindParam(":idOffre", $of[""]);
+                                        
+                                        $stmt->execute();
+                                        
+                                        $nbAvisNonLusOffre = $stmt->fetch()["count"];
+
+                                        if($nbAvisNonLus)
+                                        {
+
+                                        }
+                                    ?>  
+
+                                        <?php
+
                                         $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $of['idoffre'] . ";")->fetchAll();
                                         if($avis != null)
                                         {
@@ -174,7 +212,7 @@
 
                 <section class="mainAvis">
                 <section class="conteneurBtn">
-                        <!--<div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                        <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
                             <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
                             <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
@@ -185,13 +223,14 @@
                         <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
                         <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
                         <p id="txtBtnNote" class="txtBtnTrie" >note</p>
-                    </div>-->
+                    </div>
                 </section>
 
                 <section class="conteneurAvis">
 
                 <?php
-                foreach ($avis as $value){
+                foreach ($avis as $value)
+                {
                     afficheAvis($value);
                 }
                 ?>

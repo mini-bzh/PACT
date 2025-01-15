@@ -350,6 +350,16 @@ input{
     border-bottom: 1px solid black;
 }
 
+#mainAvis .conteneurTitrePastille{
+    position: relative;
+}
+
+
+#mainAvis .conteneurBtnTitre .pastilleCptAvisNonLus{
+    right: -15px;
+    top: -10px;
+}
+
 #mainAvis .conteneurBtnTitre img{
     width: 40px;
     height: 40px;
@@ -357,6 +367,7 @@ input{
     transform: rotate(0deg);
     margin-right: 10px;
 }
+
 #mainAvis .conteneurBtnTitre img:hover{
     cursor: pointer;
 }
@@ -849,7 +860,7 @@ input{
     color: var(--accentDark);
 }
 
-#pastilleCptAvisNonLus{
+.pastilleCptAvisNonLus{
 
     position: absolute;
     top: -5px;
