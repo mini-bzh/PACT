@@ -28,8 +28,8 @@
                     </div>
                     <p>Contexte de la visite : <?php echo $avis['cadreexperience']?></p>
                     <div class="datesAvis">
-                        <p>Visité le : <?php echo $avis['dateexperience']?></p>
-                        <p>Posté le : <?php echo $avis['datepublication']?></p>
+                        <p>Visité le : <?php echo implode("-",array_reverse(explode("-",$avis['dateexperience'])))?></p>
+                        <p>Posté le : <?php echo implode("-",array_reverse(explode("-",$avis['datepublication'])))?></p>
                     </div>
             </div>
             <hr>
@@ -81,11 +81,13 @@
                         if($avis["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                         {
                             ?>
-                                <div class="btnSupprimerAvis grossisQuandHover">
-                                    <img src="../icones/supprimerSVG.svg" alt="icone supprimer">
+                            <a href="modifAvis.php">
+                                <div class="btnModifierAvis grossisQuandHover">
+                                    <img src="../icones/modifierSVG.svg" alt="icone modifier">
                                     <p>Modifier</p>
                                     <p hidden><?php echo $avis["id_avis"]?></p>
                                 </div>
+                            </a>
                             <?php
                         }
                     ?>

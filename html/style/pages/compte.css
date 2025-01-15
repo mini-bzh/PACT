@@ -795,7 +795,7 @@ body.no-scroll {
     z-index: 10000;
 }
 
-#popup-content {
+.popup-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -805,13 +805,14 @@ body.no-scroll {
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
 }
 
-#popup-content h2 {
+.popup-content h2 {
     margin-bottom: 10px;
 }
 
-#popup-content input {
+.popup-content input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -819,7 +820,7 @@ body.no-scroll {
     border-radius: 4px;
 }
 
-#popup-content button {
+.popup-content button {
     padding: 10px 20px;
     background-color: #28a745;
     color: white;
@@ -828,6 +829,6 @@ body.no-scroll {
     cursor: pointer;
 }
 
-#popup-content button:hover {
+.popup-content button:hover {
     background-color: #218838;
 }
