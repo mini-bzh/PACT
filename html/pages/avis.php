@@ -163,6 +163,7 @@
                                     
                                 </div>
                                 <div class="conteneurAvis">
+                                    <p hidden id="idOffreCache"><?php echo $of['idoffre']?></p>
                                     <?php
                                         $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
                                         $stmt = $dbh->prepare($query);
@@ -239,6 +240,16 @@
             <?php
             }
     ?>
+    <!-- Pop-up Signaler un avis -->
+<div class="popUpSignaler">
+    <div>
+        <textarea name="motifSignalement" id="motifSignalement" cols="30" rows="10" placeholder="Entrez un motif de signalement"></textarea>
+        <div>
+            <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
+            <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
+        <div>
+    </div>
+</div>
     </main>
     <?php                                                   //import footer
             include "../composants/footer/footer.php";

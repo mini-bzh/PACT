@@ -247,6 +247,62 @@ function supprimerAvis()
     }
 }
 
+/* ------------------------ signaler avis ------------------------*/
+
+
+let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
+
+
+// btnSignalerAvis.forEach(btn =>{
+//     if(typeof(btnSignalerAvis) !== 'undefined' && btnSignalerAvis !== null)
+//         {
+//             btn.addEventListener("click", confSignaler);
+//         }
+// })
+
+
+function confSignaler(event){
+    let idAvis = event.target.id;
+    console.log(idAvis);
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'flex';
+    let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    document.body.classList.add('no-scroll');
+    btnValider.id = idAvis;
+    console.log(btnValider);
+}
+
+function fermeConfSignaler(){
+    let pop = document.querySelector('.popUpSignaler');
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+}
+
+function signalerAvis(){
+    let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    let motifSignalement = document.getElementById("motifSignalement").value;
+    let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
+    let idAvis = btnValider.id;
+
+    if(motifSignalement != ""){
+        $.ajax({
+            url: "../php/signalerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            type: 'POST',                               // Type de la requête (pour transmettre
+            data: {idCompte: idCompte, motifSignalement: motifSignalement, idAvis: idAvis},
+            success: function(reponse){
+                alert("Signalement envoyé");;
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Erreur AJAX : ", textStatus, errorThrown);
+                alert("Erreur lors de l'appel du script PHP : " + textStatus);
+            }
+        });
+    }
+    else{
+        alert("Veuillez renseigner un motif de signalement");
+    }
+}
 
 /*---------------------------- preview image ----------------------------*/
 let triggerAffichage = document.querySelectorAll(".imageAvis");
