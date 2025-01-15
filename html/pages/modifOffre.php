@@ -152,27 +152,20 @@ if (!empty($_POST)) {
     $requete .= "rue = :rue, ";
     $requete .= "ville = :ville, ";
     $requete .= "codePostal = :codePostal, ";
-
     $requete .= "gammeprix = :gammeprix,";   // Pour restauration
-
     $requete .= "duree_v = :duree_v,";   // Pour visite
     $requete .= "guidee = :guidee,"; 
-
     $requete .= "duree_s = :duree_s,";   // Pour spectacle
     $requete .= "capacite = :capacite,"; 
-
     $requete .= "nbattraction = :nbattraction,";   // Pour parcattraction
     $requete .= "agemin = :agemin,";
-
     $requete .= "duree_a = :duree_a,";  // Pour activité
     $requete .= "ageminimum = :ageminimum,"; 
     $requete .= "prestation = :prestation";
-    
     // Ajout de la colonne img1 seulement si une image est téléchargée
     if ($nom_img !== null) {
         $requete .= ", img1 = :img1"; 
     }
-
     $requete .= " WHERE idOffre = :idOffre;";
 
     // Préparation de la requête
@@ -223,22 +216,16 @@ if (!empty($_POST)) {
     $rue = $_POST["nomRue"];
     $ville = $_POST["ville"];
     $codePostal = $_POST["codePostal"];
-
     $gammeprix = $_POST['gammeprix'];
-
     $duree_v = (!empty($_POST['duree_v']) ? $_POST['duree_v'] : null);
     $guidee = $_POST['guidee'];
-
     $duree_s = (!empty($_POST['duree_s']) ? $_POST['duree_s'] : null);
     $capacite = (!empty($_POST['capacite']) ? $_POST['capacite'] : null);
-
     $nbattraction = $_POST['nbAttraction'];
     $agemin = $_POST['ageminimum'];
-
     $duree_a = (!empty($_POST['duree_a']) ? $_POST['duree_a'] : null);
     $ageminimum = $_POST['agemin'];
     $prestation = $_POST['prestation'];
-
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
     // Exécution de la mise à jour

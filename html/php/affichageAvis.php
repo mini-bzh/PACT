@@ -75,7 +75,7 @@
                                     <p>Supprimer</p>
                                     <p hidden><?php echo $avis["id_avis"]?></p>
                                 </div>
-                            <a href="modifAvis.php">
+                            <a href="modifAvis.php?id_avis=<?php echo $avis["id_avis"]?>">
                                 <div class="btnModifierAvis grossisQuandHover">
                                     <img src="../icones/modifierSVG.svg" alt="icone modifier">
                                     <p>Modifier</p>

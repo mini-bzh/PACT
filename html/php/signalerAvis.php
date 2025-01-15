@@ -16,3 +16,4 @@
 
     $stmt = $dbh->prepare("INSERT INTO tripskell._signaleravis (id_avis, id_c, content) VALUES (". $idAvis . "," . $idCompte . ", '" . $motifSignalement . "');"); //ajout dans la bdd du signalement
     $stmt->execute();
+?>

@@ -12,52 +12,46 @@ if (isset($_GET['id_avis'])) {
     // Récupérer et sécuriser l'id_avis
     $idAvis = htmlspecialchars($_GET['id_avis']);
     $avis = $dbh->query("select * from tripskell._avis where id_avis='" . $idAvis . "';")->fetchAll()[0];
-
+    print_r($avis);
 }
 
-if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
+if (!empty($_POST)) { // Vérification si le formulaire est soumis
 
-// Sécurisation des entrées pour éviter des injections SQL
-$titre = htmlspecialchars($_POST['titre']);
-$note = htmlspecialchars($_POST['note']);
-$commentaire = htmlspecialchars($_POST['commentaire']);
-$contexte = htmlspecialchars($_POST['contexte']);
-$dateExperience = htmlspecialchars($_POST['dateExperience']);
+    // Sécurisation des entrées
+    $titre = htmlspecialchars($_POST['titre']);
+    $note = htmlspecialchars($_POST['note']);
+    $commentaire = htmlspecialchars($_POST['commentaire']);
+    $contexte = htmlspecialchars($_POST['contexte']);
+    $dateExperience = htmlspecialchars($_POST['dateExperience']);
 
-// Si une image est envoyée, gérer l'upload du fichier
-$nom_img = null; // Initialisation
-if (isset($_FILES['fichier1']) && $_FILES['fichier1']['size'] != 0) {
-    $nom_img = time() . '.' . pathinfo($_FILES['fichier1']['name'], PATHINFO_EXTENSION);
-    move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesAvis/" . $nom_img);
+
+
+    // Requête SQL pour mettre à jour l'avis dans la base de données
+    $stmt = $dbh->prepare("
+        UPDATE tripskell._avis 
+        SET titreavis = :titre, 
+            note = :note, 
+            commentaire = :commentaire, 
+            cadreexperience = :contexte, 
+            dateexperience = :dateExperience,
+        WHERE id_avis = :idAvis
+    ");
+
+    // Exécution de la requête avec les paramètres
+    $stmt->execute([
+        ':titre' => $titre,
+        ':note' => $note,
+        ':commentaire' => $commentaire,
+        ':contexte' => $contexte,
+        ':dateExperience' => $dateExperience,
+        ':idAvis' => $idAvis,
+    ]);
+
+    // Redirection vers une autre page après succès
+    header("Location: /pages/accueil.php");
+    exit();
 }
 
-// Requête SQL pour mettre à jour l'avis dans la base de données
-$stmt = $dbh->prepare("
-    UPDATE tripskell._avis 
-    SET titreavis = :titre, 
-        note = :note, 
-        commentaire = :commentaire, 
-        cadreexperience = :contexte, 
-        dateexperience = :dateExperience, 
-        imageavis = :imageAvis
-    WHERE id_avis = :idAvis
-");
-
-// Exécution de la requête avec les valeurs préparées
-$stmt->execute([
-    ':titre' => $titre,
-    ':note' => $note,
-    ':commentaire' => $commentaire,
-    ':contexte' => $contexte,
-    ':dateExperience' => $dateExperience,
-    ':imageAvis' => $nom_img, // Nom de l'image (peut être null)
-    ':idAvis' => $idAvis
-]);
-
-
-
-header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre créée
-}
 
 ?>
 
@@ -135,14 +129,16 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
                 <div class ="PhotoAvis">
-                    <img id="previewImage" src="../images/imagesAvis/<?php echo $contentOffre["imageAvis"]?>" 
+                    <img id="previewImage" 
                         alt="Cliquez pour ajouter une image" 
                         style="cursor: pointer; width: 200px; height: auto;" 
                         onclick="document.getElementById('fichier1').click()">
                     <input type="file" id="fichier1" name="fichier1" 
                         accept="image/png, image/jpeg" 
                         style="display: none;" 
-                        onchange="updatePreview()">
+                        onchange="updatePreview()"
+                        />
+                        <p id="fileName" style="margin-top: 10px; color: #555;">Aucune image sélectionnée</p>
                 </div>    
             </div>
 
@@ -176,26 +172,29 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
 </script>
 <script>
     function updatePreview() {
-        const input = document.getElementById('fichier1');
-        const fileName = document.getElementById('fileName');
-        const previewImage = document.getElementById('previewImage');
+    const input = document.getElementById('fichier1');
+    const previewImage = document.getElementById('previewImage');
+    const fileName = document.getElementById('fileName');
 
-        // Vérifie si un fichier a été sélectionné
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            
-            // Quand le fichier est chargé, met à jour l'image
-            reader.onload = function (e) {
-                previewImage.src = e.target.result; // Change la source de l'image
-            }
-            
-            reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
-            
-            // Met à jour le nom du fichier
-            fileName.textContent = input.files[0].name;
-        } else {
-            fileName.textContent = ''; // Efface le nom si aucun fichier sélectionné
-        }
+    // Vérifie si un fichier a été sélectionné
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        // Met à jour l'aperçu de l'image
+        reader.onload = function (e) {
+            previewImage.src = e.target.result; // Change la source de l'image
+        };
+        reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
+
+        // Met à jour le nom du fichier
+        fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+    } else {
+        // Si aucun fichier sélectionné, réinitialise l'aperçu et le nom
+        previewImage.src = "../images/imagesAvis/<?php echo $avis['imageavis']; ?>";
+        fileName.textContent = "Aucune image sélectionnée";
     }
+}
+
+
 </script>
 </html>
