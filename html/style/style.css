@@ -242,9 +242,22 @@ textarea{
 }
 
 #mainAvis .mainAvisPro{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     width: 100%;
     margin: 20px;
+    padding: 5%;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+}
+
+.conteneurBtn {
+    display: flex;
 }
 
 #mainAvis .conteneurBtnTitre{
@@ -279,7 +292,7 @@ textarea{
 }
 
 .fondPro #mainAvis .conteneurAvisOffre{
-    max-width: 1100px;
+    width: 100%;
 }
 
 .fondPro #mainAvis .conteneurAvis{
