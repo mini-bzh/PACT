@@ -108,7 +108,6 @@ $requete .= "titreOffre, ";
 $requete .= "resume, ";
 $requete .= "description_detaille, ";
 $requete .= "tarifMinimal, ";
-$requete .= "note, ";
 $requete .= "accessibilite, ";
 
 $requete .= "id_c, ";
@@ -120,7 +119,6 @@ $requete .= "img4, ";
 
 $requete .= "id_abo,";
 
-$requete .= "idrepas,";
 $requete .= "carte,";
 $requete .= "gammeprix,";
 
@@ -154,7 +152,6 @@ $requete .= ":titre,";
 $requete .= ":resume,";
 $requete .= ":description,";
 $requete .= ":tarif,";
-$requete .= ":note,";
 $requete .= ":accessibilite,";
 
 $requete .= ":id_c, ";
@@ -166,7 +163,7 @@ $requete .= ":img4, ";
 
 $requete .= ":id_abo,";
 
-$requete .= ":idrepas,";
+
 $requete .= ":carte,";
 $requete .= ":gammeprix,";
 
@@ -204,7 +201,6 @@ $stmt->bindParam(":titre", $_POST["titre"]);
 $stmt->bindParam(":resume", $_POST["resume"]);
 $stmt->bindParam(":description", $_POST["description"]);
 $stmt->bindParam(":tarif", $tarif);
-$stmt->bindParam(":note", $note);
 $stmt->bindParam(":accessibilite", $_POST["choixAccessible"]);
 
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
@@ -216,7 +212,7 @@ $stmt->bindParam(":img4", $nom_img["fichier4"]);
 
 $stmt->bindParam(":id_abo", $_POST["offre"]);
 
-$stmt->bindParam(":idrepas", $idrepas);
+
 $stmt->bindParam(":carte", $carte);
 $stmt->bindParam(":gammeprix", $gammeprix);
 
@@ -246,7 +242,6 @@ $date_option = $_POST["date_debut_opt"]!==""?$_POST["date_debut_opt"]:null;
 // On definit des variables a traiter
 $tarif = !isset($_POST["prix-minimal"])?$_POST["prix-minimal"]:"0";
 
-$note = 5;
 
 // Traitement pour id_option
 if($_POST["option"] == "AlaUne") {
@@ -258,7 +253,6 @@ if($_POST["option"] == "AlaUne") {
 }
 
 // Traitement pour les categories
-$idrepas = $_POST["categorie"]=="restauration"?"2":null;
 $carte = $nom_img['carte'];
 $gammeprix   = $_POST["categorie"]=="restauration"?$_POST["gammeprix"]:null;
 
@@ -286,11 +280,6 @@ $stmt = $dbh->prepare("select max(idOffre) from tripskell.offre_pro");
 $stmt->execute();
 $idOffre = $stmt->fetchAll()[0]["max"];
 
-// on crée une facture pour l'offre qu'on vient de créer
-$stmt = $dbh->prepare(
-    "insert into tripskell.facture (id_facture,idOffre, date_creation) values (DEFAULT," . $idOffre . ", now() );"
-);
-$stmt->execute();
 
 
 //requete pour l'insersion des tags
@@ -425,14 +414,11 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
     }
         ?>
 
-
-                <h1>Création d'une offre</h1>
-
                 <!-- Formulaire de création d'offre -->
 
                 <form id="formCreaOffre" name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
 
-
+                <div class="InfoPerso">
                     <!-- titre -->
                     <div class="champs">
                         <label for="titre">Titre <span class="required">*</span> :</label>
@@ -441,9 +427,18 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <!-- Champs pour sélectionner les images -->
                     <div class="champs">
-                        <label for="fichier1">Selectionner une image 1 :</label>
-                        <input type="file" id="fichier1" name="fichier1" required>
-                    </div>
+                    <div class ="PhotoOffre">
+                        <img id="previewImage" src="../images/logo/ajoutimage.png" 
+                            alt="Cliquez pour ajouter une image"
+                            style="cursor: pointer;" 
+                            onclick="document.getElementById('fichier1').click()">
+                        <input type="file" id="fichier1" name="fichier1" 
+                            accept="image/png, image/jpeg" 
+                            style="display: none;" 
+                            onchange="updatePreview()">
+                    </div>  
+</div>    
+            </div>
 
 
                     <!-- 
@@ -453,24 +448,31 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     ------------------------------------ \___\__,_|\__\___|\__, |\___/|_|  |_|\___||___/ ---------------------------------------
                     ------------------------------------                    |___/                        ---------------------------------------
                      -->
+                    <div class="InfoPerso">
+                        <div class="champs">
+                            <label for="categorie">Catégorie <span class="required">*</span> :</label>
+                            <select id="categorie" name="categorie" required>
+                                <option value="">Sélectionnez une catégorie</option>    
+                                <option value="activite">Activité</option>
+                                <option value="visite">Visite</option>
+                                <option value="parcDattraction">Parc d'attraction</option>
+                                <option value="spectacle">Spectacle</option>
+                                <option value="restauration">Restauration</option>
+                            </select>
+                        </div>
 
-                    <div class="champs">
-                        <label for="categorie">Catégorie <span class="required">*</span> :</label>
-                        <select id="categorie" name="categorie" required>
-                            <option value="">Sélectionnez une catégorie</option>    
-                            <option value="activite">Activité</option>
-                            <option value="visite">Visite</option>
-                            <option value="parcDattraction">Parc d'attraction</option>
-                            <option value="spectacle">Spectacle</option>
-                            <option value="restauration">Restauration</option>
-                        </select>
+                        <!-- prix minimum -->
+                        <div class="champs">
+                            <label for="prix-minimal">Prix minimal (euro) :</label>
+                            <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)" minlength="1" maxlength="3">
+                        </div>
                     </div>
 
                     <!-- ----------------- VISITE ------------------- -->
 
                     <div id="champsVisite">
                 <div class="champs">
-                    <label for="duree_v">Duree de la visite :</label>
+                    <label for="duree_v">Durée de la visite :</label>
                     <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
                 </div>
                 <label>Langue(s) de la visite :</label>
@@ -561,15 +563,17 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
                             <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
                         </div>
+                        <div class="InfoPerso">
                         <div class="champs">
-                            <label for="duree_a">Durée de la Activité <span class="required">*</span> :</label>
+                            <label for="duree_a">Durée de l'Activité <span class="required">*</span> :</label>
                             <input type="time" id="duree_a" name="duree_a" />
                         </div>
                         <div class="champs">
-                            <label for="agemin">âge minimum :</label>
+                            <label for="agemin">Âge minimum :</label>
                             <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
                         </div>
-                    </div>
+                        </div>
+                </div>
 
                     <!---------------------------------------- | |_ __ _  __ _  -------------------------------------
                         -------------------------------------- | __/ _` |/ _` | -------------------------------------
@@ -603,28 +607,24 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 ?>
 
 
-                    <!-- prix minimum -->
-                    <div class="champs">
-                        <label for="prix-minimal">Prix minimal (euro) :</label>
-                        <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)" minlength="1" maxlength="3">
-                    </div>
+                    
+                    <div class="TextAreaOffre">
+                        <!-- résumé -->
+                        <div>
+                            <label for="resume">Résumé <span class="required">*</span> :</label>
+                            <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (< 140 caractères)" required></textarea>
+                        </div>
 
-                    <!-- résumé -->
-                    <div>
-                        <label for="resume">Résumé <span class="required">*</span> :</label>
-                        <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (< 140 caractères)" required></textarea>
+                        <!-- description détaillé -->
+                        <div>
+                            <label for="description">Description détaillée <span class="required">*</span> :</label>
+                            <textarea id="description" name="description" placeholder="Écrivez une description détaillée (< 2000 caractères)" required></textarea>
                     </div>
-
-                    <!-- description détaillé -->
-                    <div>
-                        <label for="description">Description détaillée <span class="required">*</span> :</label>
-                        <textarea id="description" name="description" placeholder="Écrivez une description détaillée (< 2000 caractères)" required></textarea>
-                    </div>
-
+                </div> 
 
                     <!-- jours ouvertures et heures d'ouverture -->
                     <div>
-
+                       <div class="ChoixJours"> 
                         <label for="horaires">Horaires d'ouverture :</label>
                         <div class="jours">
                             <button type="button" id="btnL">L</button>
@@ -642,7 +642,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <button type="button" id="btnD">D</button>
                             <input type="hidden" name="dimanche" class="inputJour">
                         </div>
-
+                </div> 
                         <div class="heures" id="heures1">
                             <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
                             <input type="time" class="heure-debut" name="heure-debut">
@@ -663,6 +663,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
 
                     <!-- Adresse -->
+                    <div class="champs">
                     <div class="champsAdresse">
                         <label for="adresse">Adresse <span class="required">*</span> :</label>
                         <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
@@ -670,7 +671,9 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="text" id="ville" name="ville" placeholder="Ville" required>
                         <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required>
                     </div>
+                    </div>
 
+                    <div class="InfoPerso">
                     <!-- Abonnement -->
                     <div class="champs">
                         <label for="offre">Type offre :</label>
@@ -680,6 +683,16 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <option value="Premium">Premium</option>
                         </select>
                     </div>
+
+                    <!-- accessibilité -->
+                    <div class="champs">
+                        <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
+                        <select id="choixAccessible" name="choixAccessible">
+                            <option value="PasAccessible">Sélectionnez un choix</option>
+                            <option value="Accessible">Accessible</option>
+                            <option value="PasAccessible">Pas Accessible</option>
+                        </select>
+                </div></div>
 
                     <!-- Option -->
                     <div class="champs">
@@ -695,18 +708,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <label for="date_debut_opt">Date de lancement(l'option débutera à cette date) :</label>
                         <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA" step=7>
                         <label for="duree_opt">Durée de l'option (en semaine) :</label>
+                        <div class="Dureeoption">
                         <input type="number" id="duree_opt" name="duree_opt" value="1" min=1 max=4>
+                        </div>
                     </div>
 
-                    <!-- accessibilité -->
-                    <div class="champs">
-                        <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
-                        <select id="choixAccessible" name="choixAccessible">
-                            <option value="PasAccessible">Sélectionnez un choix</option>
-                            <option value="Accessible">Accessible</option>
-                            <option value="PasAccessible">Pas Accessible</option>
-                        </select>
-                    </div>
+                    
 
 
                     <!-- <div class="champs">
@@ -829,6 +836,21 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 ?> -->
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                     <script src="/js/CreaOffrePro.js"></script>
+                    <script> function updatePreview() {
+            const input = document.getElementById('fichier1');
+            const previewImage = document.getElementById('previewImage');
+            const fileName = document.getElementById('fileName');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+            } 
+        }
+       </script> 
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
 
                 </form>
@@ -839,12 +861,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
     </body>
 
     </html>
-
-
-
-
-
-
 
 <?php
 }

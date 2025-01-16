@@ -35,7 +35,8 @@ form {
 .champs input[type="email"],
 .champs input[type="password"],
 .champs input[type="number"],
-.champs textarea[type="text"] {
+.champs textarea[type="text"] 
+.champs input[type="time"] {
     width: 100%;
     padding: 15px; /* Champs plus hauts */
     border: 1px solid #ccc;
@@ -146,7 +147,7 @@ button[type="submit"] {
 
 button[type="button"] {
     background-color: #dc3545;
-    color: white;
+    color: black;
 }
 
 button[type="submit"]:hover {
@@ -276,7 +277,6 @@ form > .zoneBtn{
     margin-left: 5px;
     border-radius: 5%;
     border: 1px solid #ccc;
-    font-size: 16px; 
     box-sizing: border-box;
 }
 
@@ -404,6 +404,16 @@ form {
     width: 125px;
     height: 125px;
     border-radius: 50%;
+    margin-left: 55%;
+    margin-top: -4%;
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+}
+
+.PhotoOffre{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 200px;
+    height: 125px;
     margin-left: 55%;
     margin-top: -4%;
     overflow: hidden; /* Cache les parties de l'image qui dépassent */
@@ -592,13 +602,22 @@ form {
    Style Crea Offre
    ================================================================= */
 
-
-   .jours {
+   .SelecHoraires{
+    margin: 5%;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    justify-content: space-around;
     width: 100%;
-}
+    }
+
+    .ChoixJours{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 6%;
+    }
+   
+
 
 .jours button {
     background-color: #fff;
@@ -750,9 +769,6 @@ form {
     cursor: pointer;
 }
 
-
-
-
 .parentVisite{
    padding-top: 20px;
    display: flex;
@@ -762,7 +778,6 @@ form {
     display: flex;
     flex-direction: row;
 }
-
 
 input[type="checkbox"] {
     -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
@@ -774,7 +789,7 @@ input[type="checkbox"] {
     border-radius: 10px; /* Coins arrondis */
     cursor: pointer; /* Pointeur interactif */
     position: relative; /* Nécessaire pour positionner le check */
-  }
+}
 
 input[type="checkbox"]:checked::after {
     content: '✔'; /* Symbole de check */
@@ -796,8 +811,7 @@ input[type="radio"]{
     border-radius: 10px; /* Coins arrondis */
     cursor: pointer; /* Pointeur interactif */
     position: relative; /* Nécessaire pour positionner le check */
-  }
-
+}
 
 input[type="radio"]:checked::after {
     content: '✔'; /* Symbole de check */
@@ -809,27 +823,23 @@ input[type="radio"]:checked::after {
     transform: translate(-50%, -50%);
 }
 
-
 #description , #resume{
     resize: none;
     height: 200px;
     width: 100%;
-    border-radius: 5%;
+    border-radius: 5px;
     border: 1px solid #ccc;
     font-size: var(--typescale-small-text); 
     box-sizing: border-box;
     padding: 10px;
 }
 
-
 select{
-    width: 35%; 
-    height: 2.5em;
-    padding-left: 10px;
-    border-radius: 5%;
+    padding: 15px;
     border: 1px solid #ccc;
     font-size: var(--typescale-small-text); 
-    box-sizing: border-box;
+    border-radius: 8px;
+
 }
 
 .haut-de-page{
@@ -856,3 +866,35 @@ select{
     border: red ridge 5px;
     border-radius: 10px;
 }
+
+.champsAdresse{
+    margin-top: 2%;
+    display: flex;
+}
+
+
+#num{
+    width: 10%; 
+}
+
+#nomRue{
+    width: 35%; 
+}
+
+#ville{
+    width: 25%; 
+}
+
+#codePostal{
+    width: 13%; 
+}
+
+.TextAreaOffre{
+    width: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.Dureeoption{
+    width: 10%;
+align-items: center;}
