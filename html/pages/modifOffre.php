@@ -674,22 +674,12 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     futur data de mise en ligne
                 </div> -->
 
-                <div class="zoneBtn">
-                     <!-- Bouton pour annuler la modification -->
-                    <a href="gestionOffres.php" class="btnAnnuler">
-                        <p class="texteLarge boldArchivo">Annuler</p>
-                        <?php
-                        include '../icones/croixSVG.svg';
-                        ?>
-                    </a>
-                     <!-- Bouton pour soumettre le formulaire -->
-                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
-                        <p class="texteLarge boldArchivo">Confirmer</p>
-                        <?php
-                        include '../icones/okSVG.svg';
-                        ?>
-                    </button>
-                </div>
+                
+                <!-- Bouton pour soumettre le formulaire -->
+                <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                    <p class="texteLarge boldArchivo">Valider</p>
+                </button>
+                
 
             </form>
         </div>

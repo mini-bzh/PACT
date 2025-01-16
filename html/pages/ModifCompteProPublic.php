@@ -160,12 +160,6 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             }
         ?>>
 <main>
-    <div class="pageChoixCo">
-            <div class="textBulle decaleBulleGauche">
-                <p>Modification d'un compte professionnel :</p>
-            </div>
-    </div>
-
     <div class = FirstSentence>
         <p>Les champs qui possède une </p> 
         <div class="Asterisque"> * </div> 
@@ -175,7 +169,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
     <!-- Formulaire de création d'offre -->
 
     <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
-
+    <p>Modification d'un compte professionnel</p>
     <div class="LogetPdP">
         <!-- Login -->
         <div class="champs">

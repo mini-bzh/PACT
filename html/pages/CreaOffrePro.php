@@ -413,11 +413,15 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <?php
     }
         ?>
+            <div class = FirstSentence>
+                <p>Les champs qui possède une </p> 
+                <div class="Asterisque"> * </div> 
+                <p>sont obligatoires.</p>
+            </div>
+            <!-- Formulaire de création d'offre -->
 
-                <!-- Formulaire de création d'offre -->
-
-                <form id="formCreaOffre" name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
-
+            <form id="formCreaOffre" name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
+                <p>Creation d'une offre</p>
                 <div class="InfoPerso">
                     <!-- titre -->
                     <div class="champs">
@@ -720,8 +724,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         </div>
                     </div>
 
-                    
-
 
                     <!-- <div class="champs">
                     <label for="prixOffre">Prix de l'offre : <?php // echo 
@@ -729,7 +731,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div> -->
 
                 <?php
-                //echo true;
                     if (in_array($_SESSION["idCompte"], $idproprive) &&  // permet de vérifier l'id_c
                     ( // verifie que les donnees banquaires ne sont pas deja dans la BDD
                         // verif info carte
@@ -794,71 +795,32 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <!-- Bouton de confirmation d'ajout d'offre ou d'annulation -->
 
-                    <div class="zoneBtn">
-                        <a href="gestionOffres.php" class="btnAnnuler">
-                            <p class="texteLarge boldArchivo">Annuler</p>
-                            <?php
-                            include '../icones/croixSVG.svg';
-                            ?>
-                        </a>
+                    
 
-                        <button type="submit" href="gestionOffres.php" class="btnConfirmer">
-                            <p class="texteLarge boldArchivo">Confirmer</p>
-                            <?php
-                            include '../icones/okSVG.svg';
-                            ?>
-                    </div>
+                    <button type="submit" href="gestionOffres.php" class="btnConfirmer">
+                        <p class="texteLarge boldArchivo">Confirmer</p>
+                    </button>
+                    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/js/CreaOffrePro.js"></script>
+        <script> 
+            
+            function updatePreview() {
+                const input = document.getElementById('fichier1');
+                const previewImage = document.getElementById('previewImage');
+                const fileName = document.getElementById('fileName');
 
-
-                    <!-- POPUP de confirmation (problème de placement de la popup, à revoir comment la faire) -->
-
-                    <!-- <?php
-                            // if (!empty($_POST)) {
-                            ?>
-                    <div id="popup">
-
-                        <div>
-                            <p>le prix de l'offre est de :</p>
-                        </div>
-
-                        <div class="zoneBtn">
-                            <a href="CreaOffrePro.php" class="btnAnnuler">
-                                <p class="texteLarge boldArchivo">Annuler</p>
-                                <?php
-                                // include '../icones/croixSVG.svg';
-                                ?>
-                            </a>
-
-                            <button type="submit" href="gestionOffres.php" class="btnConfirmer">
-                                <p class="texteLarge boldArchivo">Confirmer</p>
-                                <?php
-                                // include '../icones/okSVG.svg';
-                                // $stock = true;
-                                ?>
-                            </button>
-                        </div>
-                    </div>
-                <?php
-                // }
-                ?> -->
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                    <script src="/js/CreaOffrePro.js"></script>
-                    <script> function updatePreview() {
-            const input = document.getElementById('fichier1');
-            const previewImage = document.getElementById('previewImage');
-            const fileName = document.getElementById('fileName');
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
-            } 
-        }
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                    fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+                } 
+            }
        </script> 
-                    <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
+                    
 
                 </form>
 
