@@ -46,18 +46,36 @@ if (key_exists("id_facture", $_GET)) {
     EXTRACT(YEAR FROM date_creation + INTERVAL '1 month') AS annee_suivant
 FROM 
     tripskell.facture WHERE id_facture=" . $id_facture . ";")->fetchAll()[0];
+
+    // formatage des donnees
+    $contentFactureFormat = array();
+    $exceptions = ['id_facture','date_creation', 'id_c', 'adresse_mail', 'numero_tel', 'num_siren', 'raison_social', 'numero', 'rue', 'ville', 'codepostal'];
+ 
+    foreach ($contentFacture[0] as $key0 => $value0) {
+        $contentFactureFormat[$key0] = array();
+     
+        if(!in_array($key0, $exceptions)) {
+            foreach ($contentFacture as $key => $value) {
+                array_push($contentFactureFormat[$key0], $value[$key0]);
+            }
+        } else {
+            $contentFactureFormat[$key0] = $value0;
+        }
+    }
+ 
+    $id_offres = array_unique($contentFactureFormat['idoffre']);
+
+    $date = new DateTime( $dateFacture['annee']. "-" . $dateFacture['mois'] . "-01");
+ 
+    //echo '<pre>' .  .'</pre>';
 }
 
-$valHT = 0;
-$valTTC = 0;
-$resHT = 0;
-$resTTC = 0;
 ?>
 
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive)) {
-    print_r($contentFacture);
-    print_r($dateFacture);
+    //print_r($contentFacture);
+    //print_r($dateFacture);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -68,7 +86,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
     <link rel="stylesheet" href="../style/pages/contentFacture.css">
 </head>
 
-<!-- J'ai besoin du style ici sinon à la génération pdf cela ne l'applique pas ),: -->
+<!-- Style ici pour génération pdf  -->
 <style>
     body {
     font-family: Arial, sans-serif;
@@ -124,6 +142,7 @@ header h2 {
     padding: 8px;
     text-align: left;
     font-size: 14px;
+    max-width: 100px;
 }
 
 .tableFacture th {
@@ -172,44 +191,70 @@ header h2 {
             <thead>
                 <tr>
                     <th>Désignation</th>
-                    <th>Durée</th>
-                    <th>Prix HT</th>
+                    <th>Nombre de jours en ligne</th>
+                    <th>Prix abonnement HT</th>
+                    <th>Durée option</th>
+                    <th>Prix option HT</th>
                     <th>Total HT</th>
-                    <th>Prix TTC</th>
                     <th>Total TTC</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    foreach($contentFacture as $row){
-                ?>
+                    $prix_HT = 0;
+                    $prix_TTC = 0;
+
+                    $nb_jour_mois = $date->format('t');
+                    foreach($id_offres as $key => $id_offre_facturee){
+                        $keys_offre = array_keys($contentFactureFormat['idoffre'], $id_offre_facturee);
+                        
+
+                        $tailleCell = count($keys_offre);
+                        $titre_offre = $contentFacture[$key]['titreoffre'];
+                        $prix_abonnement = $contentFacture[$key]['prix_abo'];
+                        $nbJourEnLigne = $contentFacture[$key]['nbjourenligne'];
+
+                        $ttl_prix_option = array_sum(array_map(function ($key_offre) use ($contentFactureFormat) {
+                            return (intval($contentFactureFormat['duree_option'][$key_offre] - $contentFactureFormat['duree_option_debut_annulation'][$key_offre])/7)*$contentFactureFormat['prix_option'][$key_offre];
+                        },$keys_offre));
+
+                        $ttl_prix_abo = $nbJourEnLigne/$nb_jour_mois*$prix_abonnement;
+
+                        $ttl_HT = $ttl_prix_option + $ttl_prix_abo;
+
+                        $ttl_TTC = $ttl_HT * 1.2;
+
+                        $prix_HT += $ttl_HT;
+                        $prix_TTC += $ttl_TTC;
+?>
                 <tr>
-                    <td><?php echo $row['titreoffre'];?></td>
-                    <td><?php echo $row['nbjourenligne'];?></td>
-                    <td><p>1,67 €<p></td>
-                    <td><?php echo 1.67*$row['nbjourenligne'];?></td>
-                    <td><p>2 €<p></td>
-                    <td><?php echo 2*$row['nbjourenligne'];?></td>
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo $titre_offre;?></td>
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo $nbJourEnLigne; ?> jour</td>
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo $prix_abonnement; ?> €</td>
+                    <td><?php echo intval(($contentFacture[$key]['duree_option'] - $contentFacture[$key]['duree_option_debut_annulation'])/7); ?> semaine</td>
+                    <td><?php echo is_null($contentFacture[$key]['prix_option']) ? "/" : $contentFacture[$key]['prix_option']; ?> €</td> <!-- gestion du cas où il n'y a pas d'option -->
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo round($ttl_HT,2);?> €</td>
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo round($ttl_TTC,2);?> €</td>
                 </tr>
+                <?php 
+                foreach ($contentFacture as $key_for_option => $offre_for_options) {
+                    if ($key_for_option != $key  && $offre_for_options['idoffre'] == $id_offre_facturee) {
+                    ?>
                 <tr>
-                    <td></td>
-                    <td><?php echo $row['nbjourenligne'];?></td>
-                    <td><p>3,34 €</p></td>
-                    <td><?php echo 3.34*($row['duree_option']/7);?></td>
-                    <td><p>4 €<p></td>
-                    <td><?php echo 4*($row['duree_option']/7);?></td>
+                    <td><?php echo intval(($offre_for_options['duree_option'] - $contentFacture[$key]['duree_option_debut_annulation'])/7);?> semaine</td>
+                    <td><?php echo $offre_for_options['prix_option'];?> €</td>
                 </tr>
                 <?php
+                }
+                }
                     }
                 ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2" class="espaceVide"></td>
-                    <td><strong>TOTAL HT</strong></td>
-                    <td></td>
-                    <td><strong>TOTAL TTC</strong></td>
-                    <td></td>
+                    <td colspan="5" class="espaceVide"></td>
+                    <td><?php echo round($prix_HT,2); ?> €</td>
+                    <td><?php echo round($prix_TTC,2); ?> €</td>
                 </tr>
             </tfoot>
         </table>
