@@ -617,6 +617,7 @@ textarea{
     height: 75px;
     margin: 5px 0px;
     border-radius: 5px;
+    resize: none;
 }
 
 .formReponse .btnRepondre{
