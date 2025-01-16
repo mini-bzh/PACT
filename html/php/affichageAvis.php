@@ -45,6 +45,63 @@
             <!-- Commentaire -->
             <p class="texteAvis"><?php echo $avis['commentaire'] ?></p>
             <hr>
+            <?php
+                $query = "SELECT * FROM tripskell._reponseAvis WHERE id_avis = :idAvis";
+                $stmt = $dbh->prepare($query);
+                $stmt->bindParam(":idAvis", $avis["id_avis"]);
+                $stmt->execute();
+
+                $resultReponse = $stmt->fetch();
+
+                if($resultReponse != [])
+                {                    
+                    $idPro = $resultReponse["id_c"];
+                    
+                    $nomPro = "professionnel";
+                    $pdpPro = "compteSVG.svg";
+
+
+                    $query = "SELECT raison_social, pdp FROM tripskell.pro_prive WHERE id_c = :idPro";
+                    $stmt = $dbh->prepare($query);
+                    $stmt->bindParam(":idPro", $idPro);
+
+                    $stmt->execute();
+                    $result = $stmt->fetch();
+
+                    if($result != [])
+                    {
+                        $nomPro = $result["raison_social"];
+                        $pdpPro = $result["pdp"];
+                    }
+                    else
+                    {
+                        $query = "SELECT raison_social, pdp FROM tripskell.pro_public WHERE id_c = 3";
+                        $stmt = $dbh->prepare($query);
+
+                        $stmt->execute();
+                        $result = $stmt->fetch();
+
+                        if($result != [])
+                        {
+                            $nomPro = $result["raison_social"];
+                            $pdpPro = $result["pdp"];
+                        }
+                    }
+                    ?>
+                    <div class="reponse">
+                        <div class="proReponse">
+                            <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo du pro">
+
+                            <h4>Réponse de <?php echo $nomPro?></h4>
+                        </div>
+                        <p><?php echo $resultReponse["textereponseavis"];?></p>
+                    </div>
+                    <hr>
+                    <?php
+                }
+
+                
+            ?>
             <!-- Image de l'avis -->
             <section class="conteneurSpaceBetween">
                 <div class="conteneurAvisImage">
