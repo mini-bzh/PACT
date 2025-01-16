@@ -468,6 +468,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
             <!-- ----------------- ACTIVITE ------------------- -->
 
+            <div id="champsActivite">
                 <div class="HardToResize">
                     <label for="prestation">Prestation proposée :</label>
                     <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"><?php echo $contentOffre["prestation"]; ?></textarea>
@@ -481,7 +482,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <label for="agemin">âge minimum :</label>
                     <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["agemin"]; ?>">
                 </div>
-                </div>
+            </div>
 
                 <!-- ----------------- TAGS ------------------- -->
                 <?php

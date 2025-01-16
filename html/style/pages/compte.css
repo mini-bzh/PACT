@@ -124,6 +124,7 @@ body.no-scroll {
 
 .btnFacture{
     color: var(--grisClair);
+    background-color: var(--primaryLight);
 }
 
 /* Bouton de modification profil */
