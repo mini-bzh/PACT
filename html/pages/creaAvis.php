@@ -33,8 +33,8 @@ $requete .= "imageavis, ";
 $requete .= "dateexperience, ";
 $requete .= "cadreexperience, ";
 $requete .= "id_c, ";
-$requete .= "idoffre,";
 $requete .= "note,";
+$requete .= "idoffre,";
 $requete.= "titreavis) ";
 
 
@@ -52,7 +52,7 @@ $requete.= ":titreavis);";
 //echo $requete;
 //print_r($_POST);
 
-$datePublication = date("Y-m-d");
+$datePublication = date("d-m-Y");
 
 /*echo("commentaire : " . strlen($_POST["commentaire"]));
 echo("imageavis : " . strlen($nom_img["fichier1"]));
@@ -99,9 +99,7 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
     <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
-
-    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
 </head>
 <?php include "../composants/header/header.php";        //import navbar
         ?>
@@ -195,4 +193,5 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
 </body>
 <script src="../js/creaAvis.js"></script>
+
 </html>

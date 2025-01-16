@@ -14,7 +14,7 @@ function ChangerBtnLigne(idOffre)
     }
 
     // met à jour le texte du bouton
-    const texteBtnLigne = document.querySelector("#offre" + idOffre + " #conteneurGestion p");
+    const texteBtnLigne = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion p");
     if (texteBtnLigne.innerText === "Mettre l'offre hors ligne") 
     {
         texteBtnLigne.innerText = "Mettre l'offre en ligne";
@@ -24,7 +24,7 @@ function ChangerBtnLigne(idOffre)
     }
 
     // met à jour le statut de l'offre (texte et couleur)
-    const texteStatutOffre = document.querySelector("#offre" + idOffre + " #conteneurGestion h4 span");
+    const texteStatutOffre = document.querySelector("#offre" + idOffre + " h4 span");
     if (texteStatutOffre.innerText === "En ligne")
     {
         texteStatutOffre.innerText = "Hors ligne";
@@ -38,7 +38,7 @@ function ChangerBtnLigne(idOffre)
     }
 
     // cache ou non le bouton modifier
-    const boutonModif = document.querySelector("#offre" + idOffre + " #conteneurGestion a");
+    const boutonModif = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion a");
     boutonModif.classList.toggle("btnModifCache");
 }
 

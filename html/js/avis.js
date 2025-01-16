@@ -23,8 +23,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("date", date);   //date
 
         mapTempo.set("note", [
-            parseFloat(document.querySelector("#" + element.id + " .pouceLike p").textContent),
-            parseFloat(document.querySelector("#" + element.id + " .pouceDislike p").textContent)
+            parseFloat(document.querySelector("#" + element.id + " .etoiles p").textContent.slice(1, -1))
         ]);
 
         mapAvisInfos.set(element.id, mapTempo);
@@ -34,6 +33,8 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 }
 
 let mapAvisInfos = initAvis();
+
+console.log(mapAvisInfos);
 
 function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
 

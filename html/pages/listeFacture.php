@@ -30,7 +30,7 @@ if (key_exists("idCompte", $_SESSION)) {
 
 
 /* On récupère ici toute les factures qui existe sous l'id_c */
-$contentFacture = $dbh->query("SELECT id_facture, date_creation from tripskell.facture where id_c = " . $id_c . " order by date_creation DESC;")->fetchAll();
+$contentFacture = $dbh->query("SELECT DISTINCT id_facture, date_creation from tripskell.facture where id_c = " . $id_c . " order by date_creation DESC;")->fetchAll();
 //var_dump($contentFacture);
 
 

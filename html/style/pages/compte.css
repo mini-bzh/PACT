@@ -11,39 +11,9 @@ main > div {
     align-items: center;
 }
 
-.textBulle{
-    width: 450px;
-    height: 120px;
-    border: var(--primaryLight) solid 2px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    padding-left: 2%;
-    background-color: white;
-    margin: 3%;
-    position: relative;
-}
-
-.textBulle > p{
-    font-size: var(--typescale-large-text);
-}
-
-.textBulle + div{
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
 div:has(> .fakeDiv){
     position: relative;
     bottom: 100px;
-}
-
-.fakeDiv{
-    width: 541px;
-    height: 159px;
-    margin-left: 2%;
-    stroke-width: 6px;
 }
 
 .pageChoixCo > hr{
@@ -57,29 +27,27 @@ div:has(> .fakeDiv){
 /* Si connecté */
 
 .informationsCompte{
-    width: 1369px;
-    height: 786px;
+    width: 100%;
+    height: 80vh;
     border-radius: 40px;
-    margin: 6% auto;
     background-color: white;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    padding: 3%;
 }
 
-.informationsCompte > div{
-    margin: 0 auto;
+.zoneInfos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60vh;
+
 }
 
 .infoId{
     display: flex;
     flex-direction: row;
-}
-
-.resteInfos{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 60%;
 }
 
 .infoId > div{
@@ -88,10 +56,11 @@ div:has(> .fakeDiv){
     justify-content: space-evenly;
 }
 
-.zoneInfos{
+.resteInfos {
+    min-height: 30vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .zoneBtn{
@@ -139,127 +108,12 @@ div:has(> .fakeDiv){
 
 .btnDeconnexion{
     background-color: #D80303;
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnDeconnexion:hover{
-    cursor: pointer;
-}
-
-.btnDeconnexion p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnDeconnexion svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnDeconnexion svg path{
-    stroke: white;
-    stroke-width: 8px;
 }
 
 /* Bouton de suppression de compte */
 
 .btnSupCompte{
     background-color: #D80303;
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnSupCompte:hover{
-    cursor: pointer;
-}
-
-.btnSupCompte p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnSupCompte svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnSupCompte svg path{
-    stroke: white;
-    stroke-width: 8px;
-}
-
-
-.popUpDeco{
-    display: none;
-    z-index: 10;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    align-items: center;
-    justify-content: center;
-}
-
-.popUpDeco > div{
-    width: 323px;
-    height: 198px;
-    border: black solid 1px;
-    border-radius: 10px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 0 2%;
-}
-
-.popUpDeco button {
-    border: black solid 2px;
-    border-radius: 10px;
-    width: 74px;
-    height: 45px;
-    font-family: "Archivo";
-    font-size: var(--typescale-text);
-    margin: 1% 3%;
-    cursor: pointer;
-}
-
-.popUpDeco > div > div{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.btnAnnuler{
-    background-color: #C6C6C6;
-    color: black;
-}
-
-.btnValider{
-    background-color: #FF0101;
-    color: white;
 }
 
 body.no-scroll {
@@ -270,176 +124,19 @@ body.no-scroll {
 
 .btnFacture{
     background-color: lightslategray;
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnFacture:hover{
-    cursor: pointer;
-}
-
-.btnFacture p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnFacture svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnFacture svg path{
-    stroke: white;
-    stroke-width: 8px;
 }
 
 /* Bouton de modification profil */
 
 .btnModifCompte{
     background-color: var(--accent);
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
 }
 
-.btnModifCompte:hover{
-    cursor: pointer;
-}
-
-.btnModifCompte p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnModifCompte svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnModifCompte svg path{
-    stroke: white;
-    stroke-width: 8px;
-}
-
-/* Bouton de récuperation de données */
-
-.btnDataCompte{
-    background-color: var(--accent);
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnDataCompte:hover{
-    cursor: pointer;
-}
-
-.btnDataCompte p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnDataCompte svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnDataCompte svg path{
-    stroke: white;
-    stroke-width: 8px;
-}
 
 /* Bouton de données bancaires */
 
 .btnDataBanc{
     background-color: var(--primaryLight);
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnDataBanc:hover{
-    cursor: pointer;
-}
-
-.btnDataBanc p{
-    width: 100%;
-    color: white;
-    text-align: center;
-    padding-right: 4%;
-    padding-top: 1%;
-}
-
-.btnDataBanc svg{
-    width: 35px;
-    height: 35px;
-    margin-left: 3%;
-}
-
-.btnDataBanc svg path{
-    stroke: white;
-    stroke-width: 8px;
-}
-
-.btnDataBanc{
-    background-color: var(--primaryLight);
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.btnDataBanc{
-    background-color: var(--primaryLight);
-    width: 486px;
-    height: 50px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-}
-
-.resizeShow{
-    display: none;
 }
 
 
@@ -447,7 +144,6 @@ body.no-scroll {
 
 .btnDetailPrix{
     /*background-color: var(--primaryLight);*/
-    width: 486px;
     height: 50px;
     border-radius: 48px;
     padding: 0 1%;
@@ -472,8 +168,124 @@ body.no-scroll {
     padding-top: 1%;
 }
 
+.btn {
+    min-width: 300px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+
+.btn p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btn svg{
+    width: 30px;
+    height: 30px;
+    margin-left: 3%;
+}
+
+.btn svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
 .resizeShow{
     display: none;
+}
+
+
+/* Style pour les pop-up */
+.popUp {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+}
+
+.popup-content h2 {
+    margin-bottom: 10px;
+}
+
+.popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content button {
+    padding: 5px 15px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popUpDeco{
+    align-items: center;
+    justify-content: center;
+}
+
+.popUpDeco > div{
+    height: 198px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2%;
+}
+
+.popUpDeco button {
+    font-family: "Archivo";
+    font-size: var(--typescale-text);
+}
+
+.btnAnnulerDeco{
+    background-color: #C6C6C6;
+    color: black;
+}
+
+.popUpDeco .btnValiderDeco{
+    background-color: #FF0101;
+    color: white;
+}
+
+.popUpModif .btnValider, .popUpModifBancaire .btnValider{
+    background-color: #28a745;
+    color: white;
+}
+
+.popUpModif .btnValider:hover, .popUpModifBancaire .btnValider:hover{
+    background-color: #218838;
 }
 
 @media screen and (max-width : 428px){
@@ -770,65 +582,4 @@ body.no-scroll {
         width: 411px;
     }
 
-}
-
-/* Style pour la pop-up */
-.popUpModif {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 10000;
-}
-
-.popUpModifBancaire{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 10000;
-}
-
-.popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 30%;
-}
-
-.popup-content h2 {
-    margin-bottom: 10px;
-}
-
-.popup-content input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.popup-content button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.popup-content button:hover {
-    background-color: #218838;
 }
