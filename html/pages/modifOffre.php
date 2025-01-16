@@ -159,8 +159,8 @@ if (!empty($_POST)) {
     $requete .= "capacite = :capacite,"; 
     $requete .= "nbattraction = :nbattraction,";   // Pour parcattraction
     $requete .= "agemin = :agemin,";
-    $requete .= "duree_a = :duree_a,";  // Pour activité
     $requete .= "ageminimum = :ageminimum,"; 
+    $requete .= "duree_a = :duree_a,";  // Pour activité
     $requete .= "prestation = :prestation";
     // Ajout de la colonne img1 seulement si une image est téléchargée
     if ($nom_img !== null) {
@@ -221,10 +221,10 @@ if (!empty($_POST)) {
     $guidee = $_POST['guidee'];
     $duree_s = (!empty($_POST['duree_s']) ? $_POST['duree_s'] : null);
     $capacite = (!empty($_POST['capacite']) ? $_POST['capacite'] : null);
-    $nbattraction = $_POST['nbAttraction'];
-    $agemin = $_POST['ageminimum'];
+    $nbattraction = (!empty($_POST['nbAttraction']) ? $_POST['nbAttraction'] : null);
+    $agemin = (!empty($_POST['agemin']) ? $_POST['agemin']: null);
     $duree_a = (!empty($_POST['duree_a']) ? $_POST['duree_a'] : null);
-    $ageminimum = $_POST['agemin'];
+    $ageminimum = (!empty($_POST['ageminimum']) ? $_POST['ageminimum'] : null);
     $prestation = $_POST['prestation'];
     $idOffre = $_GET["idOffre"]; // Récupération de l'identifiant de l'offre
 
@@ -353,7 +353,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="../style/pages/CreaOffrePro.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
 </head>
 
 <body class=<?php echo "fondPro"; ?>>                        
@@ -361,32 +361,31 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
     <?php include "../composants/header/header.php";        //import navbar
     ?>
 
-    <main>
 
         <div class="conteneur-formulaire">
-            <h1>Modification d'une offre</h1>
             <form name="modification" action="/pages/modifOffre.php?idOffre=<?php echo $idOffre; ?>" method="post"  enctype="multipart/form-data">
+                
+            <div class="InfoPerso">
                 <div class="champs">
                     <label for="titre">Titre :</label>
                     <!-- Champ de saisie pour le titre avec valeur préremplie -->
                     <input type="text" id="titre" name="titre" value="<?php echo $contentOffre["titreoffre"];?>"   required>
                 </div>
-                 <!-- Champs pour sélectionner les images -->
-        <div class="champs">
-            <div class="champ_Img">
-                <div class = "pdp_champs">
-                    <label for="img1">Votre image actuelle :</label>
-                    <div class="image-container">
-                        <img src="../images/imagesOffres/<?php echo $contentOffre["img1"]?>" alt="Image de l'offre" title="Image de l'offre">
-                    </div>
+
+                <div class="champs">
+                <div class ="PhotoOffre">
+                    <img id="previewImage" 
+                        src="../images/imagesOffres/<?php echo htmlspecialchars($contentOffre['img1']); ?>" 
+                        alt="Cliquez pour ajouter une image"  
+                        onclick="document.getElementById('fichier1').click()">
+                    <input type="file" id="fichier1" name="fichier1" 
+                        accept="image/png, image/jpeg" 
+                        style="display: none;" 
+                        onchange="updatePreview()">
+                </div>    
                 </div>
-                <div class="Input_Img">
-                    <label for="fichier1">Modifier l'image de l'offre :</label>
-                    <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-                    <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
-                </div>
+            
             </div>
-        </div>
         
             <!--------------------- > CATEGORIES < --------------------->
 
@@ -401,22 +400,22 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 <div class="parentVisite">
                 <?php
                 foreach ($langues as $langue) {?>
-                    <div>
+                    <label class="toggle-button">
                         <input type="checkbox" id="lang" name="lang[]" value="<?php echo $langue; ?>" <?php echo in_array($langue, $langue_preselec) ? 'checked' : ''; ?>/>
-                        <label for="lang"><?php echo $langue; ?></label>
-                    </div>
+                        <span><?php echo $langue; ?></span>
+                    </label>
                 <?php }?>
                 </div>
                 <label>La visite est guidée :<span class="required">*</span> :</label>
                 <div class="parentVisite">
-                    <div>
+                    <label class="toggle-button">
                         <input type="radio" id="guidee" name="guidee" value="true" <?php echo $contentOffre["guidee"] ? 'checked' : ''; ?>/>
-                        <label for="guidePresent">Oui</label>
-                    </div>
-                    <div>
+                        <span>Oui</span>
+                    </label>
+                    <label class="toggle-button">
                         <input type="radio" id="guidee" name="guidee" value="false" <?php echo !$contentOffre["guidee"] ? 'checked' : ''; ?>/> <!-- a enlever et utilisation de checkbox -->
-                        <label for="guidePasPresent">Non</label>
-                    </div>
+                        <span>Non</span>
+                    </label>
                 </div>
             </div>
 
@@ -446,7 +445,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div>
                 <div class="champs">
                     <label for="ageminimum">âge minimum :</label>
-                    <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["agemin"]; ?>">
+                    <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["ageminimum"]; ?>">
                 </div>
                 <div class="champs">
                     <label for="plan">Selectionner un plan :</label>
@@ -469,20 +468,20 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
             <!-- ----------------- ACTIVITE ------------------- -->
 
-            <div id="champsActivite">
-                <div>
+                <div class="HardToResize">
                     <label for="prestation">Prestation proposée :</label>
                     <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"><?php echo $contentOffre["prestation"]; ?></textarea>
                 </div>
+                <div class="InfoPerso">
                 <div class="champs">
                     <label for="duree_a">Duree de l'Activité :</label>
                     <input type="time" id="duree_a" name="duree_a" value="<?php echo substr($contentOffre["duree_a"], 0, 5); ?>"/>
                 </div>
                 <div class="champs">
                     <label for="agemin">âge minimum :</label>
-                    <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["ageminimum"]; ?>">
+                    <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["agemin"]; ?>">
                 </div>
-            </div>
+                </div>
 
                 <!-- ----------------- TAGS ------------------- -->
                 <?php
@@ -498,10 +497,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 <?php
                             foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
 ?>
-                                <div>
+                                <label class="toggle-button">
                                     <input type="checkbox" id="<?php echo $tag; ?>" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" <?php echo in_array($tag,$liste_tags_preselec)?'checked':''; ?>/>
-                                    <label for="<?php echo $tag; ?>"><?php echo $tag; ?></label>
-                                </div>
+                                    <span><?php echo $tag; ?></span>
+                                </label>
 <?php
                             }
 ?>
@@ -516,7 +515,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Champ de saisie pour le prix minimal avec valeur préremplie -->
                     <input type="text" id="prix-minimal" name="prix-minimal" value="<?php echo $contentOffre["tarifminimal"];?>">
                 </div>
-
+                
+                <div class="TextAreaOffre">
                 <div>
                     <label for="resume">Résumé :</label>
                      <!-- Champ de saisie pour le résumé avec valeur préremplie -->
@@ -528,8 +528,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                      <!-- Champ de saisie pour la description détaillée avec valeur préremplie -->
                     <textarea id="description" name="description"  required><?php echo $contentOffre["description_detaille"];?></textarea>
                 </div>
+                </div>
 
                 <div>
+                <div class="ChoixJours">
                 <label for="horaires">Horaires d'ouverture :</label>
                 <?php       //préremplis les champs cachés des jours avec les horaires de la base de données
                     $ouverture = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
@@ -611,6 +613,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                                 }
                             ?>>
                         </div>
+                        </div>
                         <div class="heures" id="heures1">
                             <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
                             <input type="time" class="heure-debut" name="heure-debut">
@@ -628,7 +631,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             <input type="time" class="heure-fin" name="heure-fin">
                         </div>
                 </div>
-
+                
+                <div class="champs">
                 <div class="champsAdresse">
                     <label for="adresse">Adresse :</label>
                      <!-- Champs de saisie pour l'adresse avec valeurs préremplies -->
@@ -636,6 +640,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <input type="text" id="nomRue" name="nomRue" value="<?php echo $contentOffre["rue"];?>" required>
                     <input type="text" id="ville" name="ville" value="<?php echo $contentOffre["ville"];?>" required>
                     <input type="text" id="codePostal" name="codePostal" value="<?php echo $contentOffre["codepostal"];?>" required>
+                </div>
                 </div>
                 
                 <!--
@@ -689,7 +694,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
             </form>
         </div>
         <script src="/js/modifOffre.js"></script>
-    </main>
 
     <?php
     include "../composants/footer/footer.php";
@@ -700,24 +704,21 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 </html>
 
 
-<script>
-function updateFileName() {
-    const fileInput = document.getElementById('fichier1'); // Champ de fichier
-    const fileName = document.getElementById('fileName'); // Zone où afficher le nom
-    const label = document.getElementById('customFileLabel'); // Label du bouton
+<script> function updatePreview() {
+            const input = document.getElementById('fichier1');
+            const previewImage = document.getElementById('previewImage');
+            const fileName = document.getElementById('fileName');
 
-    if (fileInput.files.length > 0) {
-        // Si un fichier est sélectionné, afficher son nom
-        fileName.textContent = fileInput.files[0].name;
-        label.textContent = "Changer la photo"; // Met à jour le texte du bouton
-    } else {
-        // Si aucun fichier n'est sélectionné
-        fileName.textContent = "";
-        label.textContent = "📷 Ajouter une photo de profil"; // Remet le texte original
-    }
-}
-</script>
-
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+            } 
+        }
+       </script> 
 <?php
 } else { // si id_c n'est pas dans pro_prive ou pro_public, on génère une erreur 404.
 ?>

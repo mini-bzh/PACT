@@ -107,7 +107,7 @@ $requete .= "codePostal,";
 $requete .= "titreOffre, ";
 $requete .= "resume, ";
 $requete .= "description_detaille, ";
-$requete .= "tarifMinimal, ";
+$requete .= "tarifminimal, ";
 $requete .= "accessibilite, ";
 
 $requete .= "id_c, ";
@@ -471,10 +471,10 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- ----------------- VISITE ------------------- -->
 
                     <div id="champsVisite">
-                <div class="champs">
-                    <label for="duree_v">Durée de la visite :</label>
-                    <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
-                </div>
+                        <div class="champs">
+                            <label for="duree_v">Durée de la visite :</label>
+                            <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>"/>
+                        </div>
                 <label>Langue(s) de la visite :</label>
 
 
@@ -529,6 +529,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- ----------------- PARC ATTRACTION ------------------- -->
 
                     <div id="champsPA">
+                        <div class="InfoPerso">
                         <div class="champs">
                             <label for="nbAttraction">Nombre Attraction :</label>
                             <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
@@ -536,6 +537,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <div class="champs">
                             <label for="ageminimum">âge minimum :</label>
                             <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                        </div>
                         </div>
                         <div class="champs">
                             <label for="plan">Selectionner un plan :</label>
@@ -546,22 +548,26 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- ----------------- SPECTACLE ------------------- -->
 
                     <div id="champsSpectacle">
-                        <div class="champs">
-                            <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
-                            <input type="time" id="duree_s" name="duree_s" />
-                        </div>
-                        <div class="champs">
-                            <label for="capacite">Capacité :</label>
-                            <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
+                        <div class="InfoPerso">
+                            <div class="champs">
+                                <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
+                                <input type="time" id="duree_s" name="duree_s" />
+                            </div>
+                            <div class="champs">
+                                <label for="capacite">Capacité :</label>
+                                <input type="text" id="capacite" name="capacite" placeholder="Entrez la capacite">
+                            </div>
                         </div>
                     </div>
 
                     <!-- ----------------- ACTIVITE ------------------- -->
 
                     <div id="champsActivite">
-                        <div>
-                            <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
-                            <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
+                        <div class="TextAreaOffre">
+                            <div>
+                                <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
+                                <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
+                            </div>
                         </div>
                         <div class="InfoPerso">
                         <div class="champs">
@@ -625,24 +631,25 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- jours ouvertures et heures d'ouverture -->
                     <div>
                        <div class="ChoixJours"> 
-                        <label for="horaires">Horaires d'ouverture :</label>
-                        <div class="jours">
-                            <button type="button" id="btnL">L</button>
-                            <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
-                            <button type="button" id="btnMa">Ma</button>
-                            <input type="hidden" name="mardi" class="inputJour">
-                            <button type="button" id="btnMe">Me</button>
-                            <input type="hidden" name="mercredi" class="inputJour">
-                            <button type="button" id="btnJ">J</button>
-                            <input type="hidden" name="jeudi" class="inputJour">
-                            <button type="button" id="btnV">V</button>
-                            <input type="hidden" name="vendredi" class="inputJour">
-                            <button type="button" id="btnS">S</button>
-                            <input type="hidden" name="samedi" class="inputJour">
-                            <button type="button" id="btnD">D</button>
-                            <input type="hidden" name="dimanche" class="inputJour">
-                        </div>
-                </div> 
+                            <label for="horaires">Horaires d'ouverture :</label>
+                            <div class="jours">
+                                <button type="button" id="btnL">L</button>
+                                <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
+                                <button type="button" id="btnMa">Ma</button>
+                                <input type="hidden" name="mardi" class="inputJour">
+                                <button type="button" id="btnMe">Me</button>
+                                <input type="hidden" name="mercredi" class="inputJour">
+                                <button type="button" id="btnJ">J</button>
+                                <input type="hidden" name="jeudi" class="inputJour">
+                                <button type="button" id="btnV">V</button>
+                                <input type="hidden" name="vendredi" class="inputJour">
+                                <button type="button" id="btnS">S</button>
+                                <input type="hidden" name="samedi" class="inputJour">
+                                <button type="button" id="btnD">D</button>
+                                <input type="hidden" name="dimanche" class="inputJour">
+                            </div>
+                        </div> 
+
                         <div class="heures" id="heures1">
                             <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
                             <input type="time" class="heure-debut" name="heure-debut">
@@ -664,13 +671,13 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
 
                     <!-- Adresse -->
                     <div class="champs">
-                    <div class="champsAdresse">
-                        <label for="adresse">Adresse <span class="required">*</span> :</label>
-                        <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
-                        <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
-                        <input type="text" id="ville" name="ville" placeholder="Ville" required>
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required>
-                    </div>
+                        <div class="champsAdresse">
+                            <label for="adresse">Adresse <span class="required">*</span> :</label>
+                            <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" required>
+                            <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
+                            <input type="text" id="ville" name="ville" placeholder="Ville" required>
+                            <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required>
+                        </div>
                     </div>
 
                     <div class="InfoPerso">

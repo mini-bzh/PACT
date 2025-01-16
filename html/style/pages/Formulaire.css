@@ -35,7 +35,7 @@ form {
 .champs input[type="email"],
 .champs input[type="password"],
 .champs input[type="number"],
-.champs textarea[type="text"] 
+.champs textarea[type="text"], 
 .champs input[type="time"] {
     width: 100%;
     padding: 15px; /* Champs plus hauts */
@@ -45,6 +45,9 @@ form {
     box-sizing: border-box;
 }
 
+.champs input[type="time"] {
+    align-items: start;
+}
 .champs input[type="text"]:focus,
 .champs textarea[type="text"]:focus {
     border-color: #007bff;
@@ -893,8 +896,18 @@ select{
     width: 100%;
     margin-left: 2%;
     margin-right: 2%;
+    resize: none;
 }
 
 .Dureeoption{
     width: 10%;
 align-items: center;}
+
+.HardToResize > textarea{
+    width: 950px !important; 
+    resize: none;
+    height: 100px;
+    margin-bottom: 3%;
+    margin-top: 1%;
+    border-radius: 5px;
+}
