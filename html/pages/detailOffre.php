@@ -196,7 +196,7 @@
                                     <section id="secParcAttr" class="displayNone">
                                         <p>Nombre d'attraction : <span class="boldArchivo"><?php echo $contentOffre['nbattraction']; ?></span></p>
                                         <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['agemin']; ?> ans</span></p>
-                                        <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan"></a>
+                                        <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan" class="plan"></a>
                                     </section>
 
                                     <section id="secSpec" class="displayNone">
