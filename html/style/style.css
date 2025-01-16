@@ -326,6 +326,10 @@ input{
     font-size: var(--typescale-very-small-text);
 }
 
+.avis .conteneurTitreEtoiles h4{
+    margin-right: 10px;
+}
+
 
 
 .avis .datePublication{

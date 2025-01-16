@@ -35,6 +35,13 @@
             <hr>
             <!-- Titre de l'avis -->
             <h4 class="titreAvis"><?php echo $avis['titreavis'] ?></h4>
+            <div class="etoiles">
+            <?php
+                    include_once("etoiles.php");
+                    echo affichage_etoiles($avis["note"]);
+                ?>
+                <p>(<?php echo $avis["note"] ?>)</p>
+            </div>
             <!-- Commentaire -->
             <p class="texteAvis"><?php echo $avis['commentaire'] ?></p>
             <hr>
