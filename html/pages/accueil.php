@@ -123,6 +123,8 @@ $allOffres = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } else { ?>
+                <h1>À la Une</h1>
+
                 <div class="small-carousel">
                     <div class="card">
                         <?php
@@ -140,9 +142,6 @@ $allOffres = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } ?>
-
-            <h1>À la Une</h1>
-
         <?php
         }
         ?>

@@ -350,15 +350,13 @@ avis.forEach(av => {
         console.log(btnRepondre, reponseAvis, idAvis, erreurReponseVide);
     
         btnRepondre.addEventListener("click", ()=>{
-            console.log(idAvis, reponseAvis.value);
             if(reponseAvis.value.length == 0)
             {
                 erreurReponseVide.hidden = false;
             }
             else
             { 
-                console.log(idAvis, reponseAvis.value);
-                envoyerReponse(idAvis, reponseAvis);
+                envoyerReponse(idAvis, reponseAvis.value);
             }
         });
     
@@ -374,15 +372,16 @@ avis.forEach(av => {
 function envoyerReponse(idAvis, reponseAvis)
 {
     $.ajax({
-        url: "../php/reponseAvis.php.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "../php/reponseAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: {idAvis: idAvis, reponseAvis : reponseAvis},
         success: function(response)
         {
             console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            location.reload();
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log("Erreur AJAX : ", textStatus, errorThrown);         //affiche une erreur sinon
+            console.log("Erreur AJAX : " + textStatus + errorThrown);         //affiche une erreur sinon
             alert("Erreur lors de l'appel du script PHP : " + textStatus);
         }
     });
