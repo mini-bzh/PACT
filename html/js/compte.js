@@ -10,13 +10,13 @@ if(btnDetailPrix != undefined)
 
 
 function confModifProfil() {
-    let pop = document.querySelector('.popUpModif');
+    let pop = document.getElementById('popUpModif');
     pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 }
 
 function confModifBanc() {
-    let pop = document.querySelector('.popUpModifBancaire');
+    let pop = document.getElementById('popUpModifBancaire');
     pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 }
@@ -95,3 +95,12 @@ function generateApiKey() {
 const correctPassword = <?php echo $infos['mot_de_passe'];?> ;
 </script>
 */
+
+/* Pour la fermeture des pop Up */
+document.getElementById('bn-modif-exit').addEventListener("click", function() {
+    document.getElementById('popUpModif').style.display = "none";
+});
+
+document.getElementById('bn-modifBanc-exit').addEventListener("click", function() {
+    document.getElementById('popUpModifBancaire').style.display = "none";
+});

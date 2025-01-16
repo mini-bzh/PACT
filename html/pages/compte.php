@@ -546,8 +546,15 @@ if (isset($idCompte)) {
             </div>
 
             <!-- Pop-up modif profil -->
-            <div class="popUpModif popUp">
+            <div id="popUpModif" class="popUp">
                 <div class="popup-content">
+                    <div id="bn-modif-exit" class="button">
+                        
+                        <svg viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 10 L79 71 M79 10 L10 71" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+
+                    </div>
                     <form method="post" action="">
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" placeholder="Mot de passe" />
@@ -557,8 +564,15 @@ if (isset($idCompte)) {
             </div>
 
             <!-- Pop-up modif bancaire -->
-            <div class="popUpModifBancaire popUp">
+            <div id="popUpModifBancaire" class="popUp">
                 <div class="popup-content">
+                    <div id="bn-modifBanc-exit" class="button">
+                        
+                        <svg viewBox="0 0 89 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 10 L79 71 M79 10 L10 71" stroke="black" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+
+                    </div>
                     <label for="password_for_banc">Mot de passe :</label>
                     <input type="password" id="password_for_banc" placeholder="Mot de passe" />
                     <p class="displayNone" id="erreur_mdp" style="color: red;">Mots de passe incorrect</p>

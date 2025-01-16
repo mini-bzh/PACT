@@ -1131,10 +1131,6 @@ aside ul li a:hover {
     color: #000;
 }
 
-aside svg {
-    margin: 8px;
-}
-
 aside svg > path {
     stroke: var(--primaryDark);
     stroke-width: 6;
@@ -1348,6 +1344,10 @@ aside fieldset {
 
 .button:hover{
     background-color: #f1f1f1;
+}
+
+.button svg {
+    margin: 8px;
 }
 
 
