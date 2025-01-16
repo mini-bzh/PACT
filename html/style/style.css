@@ -1361,7 +1361,7 @@ aside fieldset {
 
 
 /*---------------------/ page chois création compte /-----------------------*/
-/*
+
 .btnAnnuler{
     border-radius: 25px;
     width: 320px;
@@ -1377,7 +1377,7 @@ aside fieldset {
     border: none;
     background-color: red;
 }
-*/
+
 .textBulle{
     width: 450px;
     height: 120px;
@@ -1401,12 +1401,12 @@ aside fieldset {
     justify-content: space-around;
 }
 
-/*
+
 .btnAnnuler > svg{
     width: 40px;
     height: 40px;
 }
-    */
+
 
 .zoneBtn{
     display: flex;

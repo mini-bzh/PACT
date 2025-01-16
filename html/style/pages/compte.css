@@ -269,12 +269,12 @@ body.no-scroll {
     font-size: var(--typescale-text);
 }
 
-.popup-content .btnAnnuler{
+.btnAnnulerDeco{
     background-color: #C6C6C6;
     color: black;
 }
 
-.popUpDeco .btnValider{
+.popUpDeco .btnValiderDeco{
     background-color: #FF0101;
     color: white;
 }

@@ -533,8 +533,8 @@ if (isset($idCompte)) {
                 <div class="popup-content">
                     <p>Êtes vous sur de vouloir vous déconnecter ?</p>
                     <div>
-                        <button class="btnAnnuler" onclick="fermeConfDeco()">Non</button>
-                        <button class="btnValider" onclick="deconnexion()">OK</button>
+                        <button class="btnAnnulerDeco" onclick="fermeConfDeco()">Non</button>
+                        <button class="btnValiderDeco" onclick="deconnexion()">OK</button>
                     </div>
                 </div>
             </div>
