@@ -559,7 +559,7 @@ if (isset($idCompte)) {
                             <?php
                             include '../icones/deconnexionSVG.svg';
                             ?>
-                            <p class="boldArchivo">Déconnexion</p>
+                            <p class="boldArchivo texteSmall">Déconnexion</p>
                         </button>
 
                         <!-- Bouton de suppression compte -->

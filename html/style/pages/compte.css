@@ -57,17 +57,14 @@ div:has(> .fakeDiv){
 /* Si connecté */
 
 .informationsCompte{
-    width: 1369px;
-    height: 786px;
+    width: 100%;
+    height: 100%;
     border-radius: 40px;
-    margin: 6% auto;
     background-color: white;
     display: flex;
     flex-direction: row;
-}
-
-.informationsCompte > div{
-    margin: 0 auto;
+    justify-content: space-around;
+    padding: 3%;
 }
 
 .infoId{
@@ -75,20 +72,7 @@ div:has(> .fakeDiv){
     flex-direction: row;
 }
 
-.resteInfos{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 60%;
-}
-
 .infoId > div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.zoneInfos{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
