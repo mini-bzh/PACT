@@ -17,7 +17,9 @@ Clé API incorrect !
 | [1] Voir les messages non lus       |
 | [2] Voir ma conversation avec       |
 |     un professionnel                |
-| [3] Quitter                         |
+| [3] Envoyer un message à            |
+|     un professionnel                |
+| [4] Quitter                         |
 +-------------------------------------+
 > Entrez votre choix : _
 

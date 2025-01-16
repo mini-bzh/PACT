@@ -47,6 +47,7 @@ int main(int argc, char const *argv[])
     printf("Connexion établie avec le serveur\n");
 
     // Recevoir le message initial
+    system("clear");
     read_size = read(sock, server_reply, sizeof(server_reply) - 1);
     if (read_size > 0) {
         server_reply[read_size] = '\0';
@@ -68,6 +69,7 @@ int main(int argc, char const *argv[])
         }
 
         // Lire la réponse du serveur
+        system("clear");
         read_size = read(sock, server_reply, sizeof(server_reply) - 1);
         if (read_size <= 0) {
             printf("Le serveur a fermé la connexion.\n");

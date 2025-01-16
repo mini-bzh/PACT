@@ -104,14 +104,14 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 <?php include "../composants/header/header.php";        //import navbar
         ?>
 <body class="fondVisiteur">
-
+    <div class = FirstSentence>
+        <p>Les champs qui possède une </p> 
+        <div class="Asterisque"> * </div> 
+        <p>sont obligatoires.</p>
+    </div>
     <form name="creation" action="/pages/creaAvis.php?idOffre=<?php echo $_GET["idOffre"]?>" method="post" enctype="multipart/form-data">
-        <div id="conteneurTitreForm">
-            <h3>Ajouter un avis</h3>
-            <div>
-                <p>Les champs qui possède une <span class="Asterisque"> * </span> sont obligatoires.</p> 
-            </div>
-        </div>
+        
+        <p class="titreFrom">Ajouter un avis</p>
 
         <div id="conteneurTitreNote">
             <div class="champs">
@@ -174,21 +174,10 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
                 ou autre de sa part pour rédiger cet avis.
             </label>
         </div>
-        <div class="zoneBtn">
-            <a href="/pages/detailOffre.php?idOffre=<?php echo $_GET['idOffre']?>" class="btnAnnuler">
-                <p class="texteLarge boldArchivo">Annuler</p>
-                <?php
-                include '../icones/croixSVG.svg';
-                ?>
-            </a>
-
-            <button type="submit" href="#" class="btnConfirmer">
-                    <p class="texteLarge boldArchivo">Confirmer</p>
-            <?php
-                    include '../icones/okSVG.svg';
-            ?>
-            </button>
-        </div>
+        
+        <button type="submit" href="#" class="btnConfirmer">
+            <p class="texteLarge boldArchivo">Valider</p>
+        </button>
     </form>
 
 </body>

@@ -160,12 +160,6 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             }
         ?>>
 <main>
-    <div class="pageChoixCo">
-            <div class="textBulle decaleBulleGauche">
-                <p>Modification d'un compte professionnel :</p>
-            </div>
-    </div>
-
     <div class = FirstSentence>
         <p>Les champs qui possède une </p> 
         <div class="Asterisque"> * </div> 
@@ -175,7 +169,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
     <!-- Formulaire de création d'offre -->
 
     <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
-
+    <p class="titreFrom">Modification d'un compte professionnel</p>
     <div class="LogetPdP">
         <!-- Login -->
         <div class="champs">
@@ -295,32 +289,9 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
         <hr>
     
-        <div class="zoneBtn">
-                        <a href="compte.php" class="btnAnnuler">
-                            <p class="texteLarge boldArchivo">Annuler</p>
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_208_4609)">
-                            <path d="M0 60L60 0.000228972" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M0 0L60 59.9998" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_208_4609">
-                            <rect width="60" height="60" fill="white"/>
-                            </clipPath>
-                            </defs>
-                            </svg>
-
-                        </a>
-
-                        <button type="submit" href="compte.php" class="btnConfirmer">
-                            <p class="texteLarge boldArchivo">Confirmer</p>
-                            <svg width="60" height="60" viewBox="0 0 75 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M70.6667 4L24.8333 49.8333L4 29" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-
-        </div>
-
+        <button type="submit" href="compte.php" class="btnConfirmer">
+            <p class="texteLarge boldArchivo">Valider</p>
+        </button>
     </form>
         </main>
 <?php

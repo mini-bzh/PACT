@@ -13,7 +13,6 @@ form {
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée */
     margin-bottom: 3%;
-    margin-top: 5%;
 }
 
 
@@ -35,7 +34,7 @@ form {
 .champs input[type="email"],
 .champs input[type="password"],
 .champs input[type="number"],
-.champs textarea[type="text"] 
+.champs textarea[type="text"], 
 .champs input[type="time"] {
     width: 100%;
     padding: 15px; /* Champs plus hauts */
@@ -45,6 +44,9 @@ form {
     box-sizing: border-box;
 }
 
+.champs input[type="time"] {
+    align-items: start;
+}
 .champs input[type="text"]:focus,
 .champs textarea[type="text"]:focus {
     border-color: #007bff;
@@ -98,7 +100,7 @@ form {
     align-items: center;
     justify-content: center;
     font-size: var(--typescale-text); /* Texte agrandi */
-    margin-bottom: 30px;
+    margin: 3vh;
 }
 
 .Asterisque {
@@ -141,7 +143,7 @@ button {
 }
 
 button[type="submit"] {
-    background-color: #28a745;
+    background-color: var(--primaryLight);
     color: white;
 }
 
@@ -151,13 +153,17 @@ button[type="button"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: var(--primary);
 }
 
 button[type="button"]:hover {
     background-color: #c82333;
 }
 
+.titreFrom {
+    margin-bottom: 5vh;
+    font-size: var(--typescale-large-text);
+}
 
 .file-name {
     margin-top: 10px;
@@ -169,17 +175,10 @@ button[type="button"]:hover {
 
 .btnAnnuler, .btnConfirmer{
     border-radius: 25px;
-    width: 320px;
-    height: 88px;
+    width: 100%;
     text-decoration: none;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    justify-content: space-evenly;
-    margin-top: 3%;
-    cursor: pointer;
-    border: none;
+    justify-content: center;
 }
 
 
@@ -452,19 +451,6 @@ form {
 
 #conteneurTitreNote .champs:first-of-type{
     margin-right: 50px;
-}
-
-#conteneurTitreForm{
-    width: 100%;
-}
-
-#conteneurTitreForm h3{
-    border-left: 20px solid var(--secondary);
-    padding-left: 15px;
-}
-
-#conteneurTitreForm p{
-    margin: 25px 0px;
 }
 
 .champs input, .champs textarea{
@@ -885,16 +871,22 @@ select{
     width: 25%; 
 }
 
-#codePostal{
-    width: 13%; 
-}
-
 .TextAreaOffre{
     width: 100%;
     margin-left: 2%;
     margin-right: 2%;
+    resize: none;
 }
 
 .Dureeoption{
     width: 10%;
 align-items: center;}
+
+.HardToResize > textarea{
+    width: 950px !important; 
+    resize: none;
+    height: 100px;
+    margin-bottom: 3%;
+    margin-top: 1%;
+    border-radius: 5px;
+}

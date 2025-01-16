@@ -39,7 +39,9 @@ void afficher_tout(PGresult *res);  // Fonction de debug pour afficher le result
 
 // Prototypes des menus
 int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn);  // Menu de connexion
-int menu_principal(int cnx, int compte);  // Menu principal (choix des actions possibles)
+int menu_principal(int cnx, int compte, int id, PGconn *conn);  // Menu principal (choix des actions possibles)
+
+int menu_listePro(int cnx, int id, PGconn *conn);  // menu de la liste des pros à contacter (renvoie l'id du pro à contacter)
 
 // Fonction principale
 int main() {
@@ -48,6 +50,9 @@ int main() {
     ConfigBDD configBDD;
 
     int compte = 0;
+    int id;
+
+    system("clear");
 
     printf("Lecture de la configuration...\n");
     if (lire_config("../.config/config.txt", &configSocket, &configBDD) != 0) {
@@ -91,12 +96,13 @@ int main() {
 
         printf("Connexion réussi au client : %d\n", cnx);
 
-        menu_connexion(cnx, configSocket, &compte, conn);
+        id = menu_connexion(cnx, configSocket, &compte, conn);
 
         if (compte != 0) {
-            menu_principal(cnx, compte);
+            menu_principal(cnx, compte, id, conn);
         }
         
+        close(cnx);
     }
     
 
@@ -265,6 +271,8 @@ int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
     char buff[50];
     char query[256];
 
+    int id;
+
     bool quitter = false;
 
     // Menu de connexion
@@ -306,12 +314,16 @@ int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
         }
 
 
-
         if (PQntuples(res) > 0)
         {
             *compte = 1; // Utilisateur membre
-        } else if ((PQntuples(res2) > 0) || (PQntuples(res3) > 0)) {
-            *compte = 2; // Utilisateur professionnel
+            id = atoi(PQgetvalue(res, 0, PQfnumber(res, "id_c")));
+        } else if (PQntuples(res2) > 0) {
+            *compte = 2; // Utilisateur professionnel (public)
+            id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
+        } else if (PQntuples(res3) > 0) {
+            *compte = 2; // Utilisateur professionnel (privee)
+            id = atoi(PQgetvalue(res3, 0, PQfnumber(res, "id_c")));
         } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
             *compte = 3; // Utilisateur administrateur
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
@@ -331,12 +343,15 @@ int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
     PQclear(res);
     PQclear(res2);
     PQclear(res3);
-    return 0;
+
+    return id;
 }
 
-int menu_principal(int cnx, int compte) {
-    char menu[350];
+int menu_principal(int cnx, int compte, int id, PGconn *conn) {
+    char affichage[500];
+    char menu[500];
     char buff[50];
+    int id_c = -1;
 
     if (compte == 1) { // Utilisateur membre
         strcpy(menu,"+-------------------------------------+\n"
@@ -345,9 +360,10 @@ int menu_principal(int cnx, int compte) {
                     "| [1] Voir les messages non lus       |\n"
                     "| [2] Voir ma conversation avec       |\n"
                     "|     un professionnel                |\n"
+                    "| [3] Contacter un nouveau            |\n"
+                    "|     professionnel                   |\n"
                     "| [-1] Quitter                        |\n"
-                    "+-------------------------------------+\n"
-                    "> Entrez votre choix : ");
+                    "+-------------------------------------+\n");
 
     } else if (compte == 2) { // Utilisateur professionnel
         strcpy(menu,"+-------------------------------------+\n"
@@ -357,8 +373,7 @@ int menu_principal(int cnx, int compte) {
                     "| [2] Voir ma conversation avec       |\n"
                     "|     un professionnel                |\n"
                     "| [-1] Quitter                        |\n"
-                    "+-------------------------------------+\n"
-                    "> Entrez votre choix : ");
+                    "+-------------------------------------+\n");
 
     } else if (compte == 3) { // Utilisateur administrateur
         strcpy(menu,"+-------------------------------------+\n"
@@ -367,29 +382,174 @@ int menu_principal(int cnx, int compte) {
                     "| [1] Bloquer un utilisateur          |\n"
                     "| [2] Bannir un utilisateur           |\n"
                     "| [-1] Quitter                        |\n"
-                    "+-------------------------------------+\n"
-                    "> Entrez votre choix : ");
+                    "+-------------------------------------+\n");
     } else {
         return -1; // Utilisateur non connecté
     }
 
-    write(cnx, menu, strlen(menu));
+    strcpy(affichage, menu);
+    strcat(affichage, "> Entrez votre choix : ");
+
     
     bool quitter = false;
     while (quitter == false) {
+        write(cnx, affichage, strlen(affichage));
     
+        int len = read(cnx, buff, sizeof(buff) - 1);
+
+        buff[strcspn(buff, "\r\n")] = 0;
+        buff[len] = '\0';
+
+        if (len < 0) {
+            perror("Erreur lors de la lecture");
+            return -1;
+        }
+
+        // Differents choix
+        
+        // Pour un membre
+        if (compte == 1)
+        {
+            if (strcmp(buff, "1") == 0) {
+                /* code */
+            } else if (strcmp(buff, "2") == 0) {
+                /* code */
+            } else if (strcmp(buff, "3") == 0) {
+                id_c = menu_listePro(cnx, id, conn);
+
+            } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
+                quitter = true;
+                close(cnx);
+            } else {
+                strcpy(affichage, menu);
+                strcat(affichage, "Choix non valide, réessayez : ");
+            }
+            strcpy(buff, "");
+        } else if (compte == 2) {
+            if (strcmp(buff, "-1") == 0) { // Se déconnecter
+                quitter = true;
+                close(cnx);
+            } else {
+                strcpy(affichage, menu);
+                strcat(affichage, "Choix non valide, réessayez : ");
+            }
+        } else if (compte == 3) {
+
+        }        
+        
+    }
+
+    return 0;
+}
+
+int menu_listePro(int cnx, int id, PGconn *conn){
+    PGresult *res;
+    char query[512]; // Buffer statique de taille fixe pour la requête
+    int rows;
+    char liste[2048];
+    char buff[10];
+    bool quitter = false;
+    char ident[10];
+
+    char demande[100] = "> Saisissez le numéro du professionnel à contacter : ";
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "SELECT p.id_c, p.raison_social "
+        "FROM tripskell.pro_prive p "
+        "WHERE p.id_c NOT IN ("
+        "    SELECT m.idreceveur "
+        "    FROM tripskell._message m "
+        "    WHERE m.idenvoyeur = %d"
+        ") "
+        "UNION "
+        "SELECT p.id_c, p.raison_social "
+        "FROM tripskell.pro_public p "
+        "WHERE p.id_c NOT IN ("
+        "    SELECT m.idreceveur "
+        "    FROM tripskell._message m "
+        "    WHERE m.idenvoyeur = %d"
+        ");", id, id);
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+        return -1; // Retourner une erreur
+    }
+
+    // Récupérer les noms des colonnes pour les utiliser dans l'affichage
+    int rais_soc_col = PQfnumber(res, "raison_social");
+    if (rais_soc_col == -1) {
+        fprintf(stderr, "Les colonnes 'id' ou 'nom' sont introuvables dans le résultat\n");
+        return -1;
+    }
+
+    rows = PQntuples(res);
+
+    int id_col = PQfnumber(res, "id_c");
+
+    while (quitter == false) {
+        strcpy(liste,
+        "+-------------------------------------+\n"
+        "|          Tchatator Membre           |\n"
+        "+-------------------------------------+\n"
+        "|      Liste des professionnels       |\n");
+
+        for (int i = 0; i < rows; i++)
+        {
+            char *rais_soc = PQgetvalue(res, i, rais_soc_col);
+
+            // Formater chaque ligne avec snprintf
+            char ligne[128]; // Tampon pour une ligne
+            snprintf(ligne, sizeof(ligne), "|  %d - %s", i + 1, rais_soc);
+
+            // Calculer l'espace vide pour aligner
+            int longueur = snprintf(NULL, 0, "%d", i + 1); // Obtenir la longueur de `i+1`
+            int espace_vide = 32 - strlen(rais_soc) - longueur;
+
+            // Ajouter des espaces
+            for (int j = 0; j < espace_vide; j++) {
+                strcat(ligne, " ");
+            }
+            strcat(ligne, "|\n");
+
+            // Ajouter la ligne formatée à la liste
+            strcat(liste, ligne);
+        }
+        strcat(liste, "| [-1] Quitter                        |\n"
+                    "+-------------------------------------+\n");
+
+        strcat(liste, demande);
+        
+        write(cnx, liste, strlen(liste));
         int len = read(cnx, buff, sizeof(buff) - 1);
         if (len < 0) {
             perror("Erreur lors de la lecture");
             return -1;
         }
 
-        if (strcmp(buff, "-1") == 0) { // Se déconnecter
-            quitter = true;
-            close(cnx);
+        buff[len] = '\0';
+
+        if (strcmp(buff, "-1") == 0) { // Quitter
+            return -1;
         }
+        
+        if (atoi(buff) > rows) {
+            strcpy(demande, "> La sélection ne correspond à aucun professionnel, réessayez : ");
+        } else {
+            quitter = true;
+            char *tempo = PQgetvalue(res, atoi(buff) - 1, id_col);  // Choix - 1 car l'index commence à 0
+            strcpy(ident, tempo);
+        }
+        
     }
 
-    return 0;
-}
+    // Libérer les ressources
+    PQclear(res);
 
+    return atoi(ident);
+}

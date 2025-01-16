@@ -108,6 +108,10 @@ textarea{
     font-family: "Luciole-bold";
 }
 
+.centerText{
+    text-align: center;
+}
+
 
 .grossisQuandHover{
     transition: transform 0.3s ease;
@@ -243,9 +247,22 @@ textarea{
 }
 
 #mainAvis .mainAvisPro{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     width: 100%;
     margin: 20px;
+    padding: 5%;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+}
+
+.conteneurBtn {
+    display: flex;
 }
 
 #mainAvis .conteneurBtnTitre{
@@ -280,7 +297,7 @@ textarea{
 }
 
 .fondPro #mainAvis .conteneurAvisOffre{
-    max-width: 1100px;
+    width: 100%;
 }
 
 .fondPro #mainAvis .conteneurAvis{
@@ -446,6 +463,7 @@ textarea{
     align-items: center;
 }
 
+
 .avis .btnSignalerAvis{
     border: 1px solid black;
     width: fit-content;
@@ -491,6 +509,13 @@ textarea{
     transform: translateY(-1px);
     user-select: none;
     pointer-events: none;
+}
+
+.avis .btnModifierAvis img{
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    transform: translateY(-1px);
 }
 
 .avis .btnModifierAvis img{
@@ -605,6 +630,7 @@ textarea{
     height: 75px;
     margin: 5px 0px;
     border-radius: 5px;
+    resize: none;
 }
 
 .formReponse .btnRepondre{
@@ -622,6 +648,12 @@ textarea{
 .formReponse .erreurReponseVide{
     font-size: var(--typescale-very-small-text);
     color: red;
+}
+
+.avis .btnModifierAvis p{
+    font-size: var(--typescale-very-small-text);
+    padding: 0px;
+    text-decoration: none;
 }
 
 /*-------------/ apercu offre /--------------*/
@@ -1132,10 +1164,6 @@ aside ul li a:hover {
     color: #000;
 }
 
-aside svg {
-    margin: 8px;
-}
-
 aside svg > path {
     stroke: var(--primaryDark);
     stroke-width: 6;
@@ -1351,6 +1379,10 @@ aside fieldset {
     background-color: #f1f1f1;
 }
 
+.button svg {
+    margin: 8px;
+}
+
 
 /*              _________________              */
 /*-------------/ PAGE RECHERCHE /--------------*/
@@ -1494,6 +1526,60 @@ aside fieldset {
     align-items: center;
     padding: auto;
 }
+
+/*
+#######################################################
+########         CARROUSSEL ACCEUIL       #############
+#######################################################
+*/
+
+/* container qui contenir tout les card du .carousel */
+.carousel {
+    width: 100%;
+    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    display: flex;
+    height: 500px;
+    margin: 2%;
+  }
+
+  /* card du carroussel, représente une offre A La Une */
+  .card {
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    width: 100%;
+    animation: scroll 15s linear infinite alternate;
+  }
+
+  
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    25% {
+        transform: translateX(-25%);
+      }
+    50% {
+        transform: translateX(-50%);
+      }
+    75% {
+        transform: translateX(-75%);
+      }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+.small-carousel {
+    width: 60%;
+    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    display: flex;
+    align-self: center;
+    height: 500px;
+    margin: 2%;
+}
+
 
 /*
 #######################################################

@@ -9,13 +9,6 @@ include('../php/connection_params.php');
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-// cree $comptePro qui est true quand on est sur un compte pro et false sinon
-include('../php/verif_compte_pro.php');
-
-// cree $compteMembre qui est true quand on est sur un compte pro et false sinon
-include('../php/verif_compte_membre.php');
-
-// On va récupérer ici l'identifiant id_c présent dans les vues pro.
 
 
 if (array_key_exists("idCompte", $_SESSION)) {
@@ -25,8 +18,9 @@ if (array_key_exists("idCompte", $_SESSION)) {
 // Vérifier si la clé API a été envoyée
 if (isset($_POST['apiKey'])) {
     
-    $apiKey = $_POST['apiKey'];
+    $apiKey = $_POST['apiKey']; // on récupère la clé API
 
+    // Requête qui permet l'envoie de la clé API dans la base
     $stmt = $dbh->prepare("UPDATE tripskell._compte set clefAPI = '" . $apiKey . "' where id_c  = " . $idCompte . " ;");
     $stmt->execute();
 

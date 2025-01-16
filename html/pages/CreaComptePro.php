@@ -181,7 +181,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
     <link rel="stylesheet" href="../style/style.css">
 
 </head>
@@ -197,11 +197,6 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             }
         ?>>
 <main>
-    <div class="pageChoixCo">
-            <div class="textBulle decaleBulleGauche">
-                <p>Création d'un compte Professionnel :</p>
-            </div>
-    </div>
 
     <div class = FirstSentence>
     <p>Les champs qui possède une </p> 
@@ -209,10 +204,9 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
     <p>sont obligatoires.</p>
     </div>
 
-    <!-- Formulaire de création d'offre -->
+    <!-- Formulaire de création de compte professionnel -->
 
     <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
-
     <div class="choixPro">
         <div class="propriv">
             <label>
@@ -374,31 +368,9 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
     </div> 
         <hr>
 
-        <div class="zoneBtn">
-                        <a href="ChoixCreationCompte.php" class="btnAnnuler">
-                            <p class="texteLarge boldArchivo">Annuler</p>
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_208_4609)">
-                            <path d="M0 60L60 0.000228972" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M0 0L60 59.9998" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_208_4609">
-                            <rect width="60" height="60" fill="white"/>
-                            </clipPath>
-                            </defs>
-                            </svg>
-
-                        </a>
-
-                        <button type="submit" href="compte.php" class="btnConfirmer">
-                            <p class="texteLarge boldArchivo">Confirmer</p>
-                            <svg width="60" height="60" viewBox="0 0 75 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M70.6667 4L24.8333 49.8333L4 29" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-
-        </div>
+        <button type="submit" href="compte.php" class="btnConfirmer">
+            <p class="texteLarge boldArchivo">Valider</p>
+        </button>
 
     </form>
         </main>
