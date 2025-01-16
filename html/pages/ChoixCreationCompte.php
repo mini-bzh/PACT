@@ -22,14 +22,14 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/pages/compte.css">
-    <link rel="stylesheet" href="/style/pages/ChoixCreationCompte.css">
+    <!-- <link rel="stylesheet" href="/style/pages/ChoixCreationCompte.css"> -->
 </head>
 
 <?php include "../composants/header/header.php";        //import navbar
         ?>
 
 
-<body  class=<?php                          //met le bon fond en fonction de l'utilisateur
+<body id="body-choixCreaCompte" class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
             {
                 echo "fondPro";

@@ -1356,6 +1356,82 @@ aside fieldset {
 }
 
 
+/*---------------------/ page chois création compte /-----------------------*/
+
+.btnAnnuler{
+    border-radius: 25px;
+    width: 320px;
+    height: 60px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    margin: 3%;
+    cursor: pointer;
+    border: none;
+    background-color: red;
+}
+
+.textBulle{
+    width: 450px;
+    height: 120px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    background-color: white;
+    margin: 3%;
+    position: relative;
+}
+
+.textBulle > p{
+    font-size: var(--typescale-large-text);
+}
+
+.textBulle + div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
+.btnAnnuler > svg{
+    width: 40px;
+    height: 40px;
+}
+
+.zoneBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3%;
+}
+
+
+.ChoixCrea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+}
+
+.TxtEntreBtn{
+    font-size: var(--typescale-large-text);
+    width: 60px;
+    height: 50px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+}
+
 /*
 #######################################################
 ############        MEDIA QUERY        ################
@@ -1725,6 +1801,134 @@ aside fieldset {
         align-items: center;
         margin: 9% 0;
         width: 20%;
+    }
+
+    /*----------------/ page choix création compte /------------------*/
+
+        /* GÉNÉRAL : corps de la page */
+        #body-choixCreaCompte {
+            margin: 0;
+            padding: 0;
+            width: 100%; /* Occupe toute la largeur de l'écran */
+            box-sizing: border-box; /* Gère les paddings dans les dimensions */
+        }
+    
+        /* Conteneurs principaux */
+        .pageChoixCo {
+            width: 100%; /* Prend 100% de la largeur disponible */
+            padding: 5%; /* Ajoute un peu d'espace intérieur */
+            box-sizing: border-box;
+        }
+    
+        /* Texte bulle */
+        .textBulle {
+            width: 90%; /* Réduit la largeur pour qu'elle reste centrée */
+            height: auto; /* Ajuste automatiquement la hauteur */
+            padding: 10px; /* Espace intérieur réduit pour mobile */
+            font-size: var(--typescale-body); /* Taille de police réduite */
+            margin: 10px auto; /* Centré avec marges automatiques */
+        }
+    
+        /* Conteneur ChoixCrea */
+        .ChoixCrea {
+            flex-direction: column; /* Aligne les éléments verticalement */
+            align-items: center; /* Centre les choix */
+            gap: 15px; /* Espace entre les éléments */
+        }
+    
+        /* Bouton entre les choix */
+        .TxtEntreBtn {
+            width: auto; /* S'adapte automatiquement */
+            padding: 5px 10px; /* Marges internes réduites */
+            font-size: var(--typescale-body); /* Taille de police adaptée */
+        }
+    
+        /* Bouton Annuler */
+        .btnAnnuler {
+            width: 90%; /* Réduction pour mobile */
+            max-width: 300px; /* Largeur maximale contrôlée */
+            height: auto; /* Ajustement dynamique */
+            padding: 10px; /* Espace intérieur réduit */
+            font-size: var(--typescale-body); /* Taille de police réduite */
+            justify-content: center; /* Centre le contenu */
+            gap: 10px; /* Espace entre texte et icône */
+        }
+    
+        /* Icônes SVG dans le bouton Annuler */
+        .btnAnnuler > svg {
+            width: 16px; /* Réduction de l'icône */
+            height: 16px;
+        }
+    
+        /* Zone des boutons */
+        .zoneBtn {
+            flex-direction: column; /* Organisation en colonne */
+            align-items: center; /* Centre les boutons */
+            width: 100%; /* Prend toute la largeur disponible */
+            gap: 15px; /* Espacement entre les boutons */
+        }
+    
+        /* Conteneur des éléments en général */
+        .textBulle {
+            flex-wrap: wrap; /* Permet d'aller à la ligne si nécessaire */
+            justify-content: center; /* Centre les éléments */
+        }
+    
+        /* Règles spécifiques pour éviter le débordement */
+        .zoneBtn, .ChoixCrea {
+            width: 100%; /* Toujours dans les limites de l'écran */
+            max-width: 428px; /* Limite stricte pour mobiles */
+        }
+    
+        /* Police générale */
+        #body-choixCreaCompte p {
+            font-size: var(--typescale-body); /* Taille de texte adaptée au mobile */
+            word-wrap: break-word; /* Coupe les mots longs */
+            margin: 5px 0; /* Marges réduites */
+        }
+    
+        /* SVG dans les conteneurs */
+        #body-choixCreaCompte svg {
+            width: 18px; /* Taille globale des icônes */
+            height: auto; /* Conserve le ratio */
+        }
+        #body-choixCreaCompte button{
+        width: 25px;
+       }
+    
+    
+       .titrePortable{
+        display: block;
+    }
+    
+    .titrePortable div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        left: 1%;
+        top: 3.5%;
+    }
+    
+    .titrePortable img{
+        width: 85px;
+        height: 85px;
+    }
+    
+    #conteneurTitreMobile #logoTitreMobile{
+        width: 100px;
+        height: auto;
+        transform: translate(0px, -25px);
+    }
+    
+    #conteneurTitreMobile{
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .titrePortable > svg{
+        width: 400px;
+        height: 200px;
     }
 
 }
