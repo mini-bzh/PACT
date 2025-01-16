@@ -1533,8 +1533,8 @@ aside fieldset {
 #######################################################
 */
 
-/* container qui contenir tout les card du .carousel */
-.carousel {
+/* container qui contenir tout les card du .carroussel */
+.carroussel {
     width: 100%;
     overflow: hidden; /* Cache les éléments en dehors du cadre */
     display: flex;
@@ -1548,14 +1548,15 @@ aside fieldset {
     flex-direction: row;
     margin: 2%;
     width: 100%;
-    animation: scroll 15s linear infinite alternate;
+    animation: scroll 15s linear infinite alternate; /* permet de mettre en mouvement les carroussels
+    + de le faire tourner à l'infinie */
   }
 
   .small-carousel .apercuOffre{
     margin: 0px 20px;
   }
   
-
+/* Ici on gère l'animation, c'est à dire le mouvement que fait les offres de gauche à droite*/
   @keyframes scroll {
     0% {
       transform: translateX(0%);
@@ -1574,13 +1575,17 @@ aside fieldset {
     }
   }
 
-.small-carousel {
-    width: 60%;
+.small-carroussel {
+    width: 70%;
     overflow: hidden; /* Cache les éléments en dehors du cadre */
     display: flex;
     align-self: center;
     height: 500px;
     margin: 2%;
+}
+
+.offreALaUne{
+    display: none;
 }
 
 
@@ -2082,4 +2087,25 @@ aside fieldset {
         width: 400px;
         height: 200px;
     }
+
+
+    /*----------------/ Carroussel /------------------*/
+
+
+    .carroussel{
+        visibility: hidden;
+    }
+
+    .card{
+        visibility: hidden;
+    }
+
+    .small-carroussel{
+        visibility: hidden;
+    }
+
+    .offreALaUne{
+        display:initial;
+    }
+
 }

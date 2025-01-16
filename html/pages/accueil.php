@@ -107,7 +107,7 @@ $offreALaUne = $stmt->fetchAll();
             <h1>À la Une</h1>
             <!-- ici on va vérifier qu'il y a plus de 3 offres A La Une sinon le carroussel ne s'affichera pas -->
             <?php if ($nbOffreALaUne['count'] > 4) { ?>
-                <div class="carousel">
+                <div class="carroussel">
                     <div class="card">
                         <?php
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
@@ -124,8 +124,12 @@ $offreALaUne = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } else { ?>
+<<<<<<< Updated upstream
 
                 <div class="small-carousel">
+=======
+                <div class="small-carroussel">
+>>>>>>> Stashed changes
                     <div class="card">
                         <?php
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
@@ -142,9 +146,30 @@ $offreALaUne = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } ?>
+<<<<<<< Updated upstream
         <?php
         }
         ?>
+=======
+
+        <!-- cette partie là sera afficher quand le site sera en version téléphone     -->
+        <div class="offreALaUne">
+            <h1>À La Une</h1>
+                <?php
+
+                foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                {
+                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                        <?php
+                        af_offre($offre);
+                        ?></a><?php
+                    }
+                        ?>
+        </div>
+
+        <h1>Autres offres</h1>
+        <?php } ?>
+>>>>>>> Stashed changes
 
         <section id="conteneurOffres">
             <article>
