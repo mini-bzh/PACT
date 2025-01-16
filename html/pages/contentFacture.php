@@ -218,7 +218,7 @@ header h2 {
                             return (intval($contentFactureFormat['duree_option'][$key_offre] - $contentFactureFormat['duree_option_debut_annulation'][$key_offre])/7)*$contentFactureFormat['prix_option'][$key_offre];
                         },$keys_offre));
 
-                        $ttl_prix_abo = $nbJourEnLigne/$nb_jour_mois*$prix_abonnement;
+                        $ttl_prix_abo = $nbJourEnLigne*$prix_abonnement;
 
                         $ttl_HT = $ttl_prix_option + $ttl_prix_abo;
 
