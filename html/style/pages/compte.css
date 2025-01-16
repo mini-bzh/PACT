@@ -269,7 +269,7 @@ body.no-scroll {
     font-size: var(--typescale-text);
 }
 
-.btnAnnuler{
+.popup-content .btnAnnuler{
     background-color: #C6C6C6;
     color: black;
 }
