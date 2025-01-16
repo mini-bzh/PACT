@@ -615,21 +615,23 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                             ?>>
                         </div>
                         </div>
-                        <div class="heures" id="heures1">
-                            <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="heure-debut">
-                            <label for="heure-fin">à</label>
-                            <input type="time" class="heure-fin" name="heure-fin">
+                        <div class="InfoPerso">
+                            <div class="heures" id="heures1">
+                                <label for="heure-debut">Le <span id="nomJour1"></span>, vous êtes ouvert de </label>
+                                <input type="time" class="heure-debut" name="heure-debut">
+                                <label for="heure-fin">à</label>
+                                <input type="time" class="heure-fin" name="heure-fin">
 
-                            <h4 id="btnAjoutHoraire">+</h4>
+                                <h4 id="btnAjoutHoraire">+</h4>
 
-                        </div>
+                            </div>
 
-                        <div class="heures" id="heures2">
-                            <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="heure-debut">
-                            <label for="heure-fin">à</label>
-                            <input type="time" class="heure-fin" name="heure-fin">
+                            <div class="heures" id="heures2">
+                                <label for="heure-debut">et de </label>
+                                <input type="time" class="heure-debut" name="heure-debut">
+                                <label for="heure-fin">à</label>
+                                <input type="time" class="heure-fin" name="heure-fin">
+                            </div>
                         </div>
                 </div>
                 
