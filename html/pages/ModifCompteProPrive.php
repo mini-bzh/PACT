@@ -143,7 +143,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
     <link rel="stylesheet" href="../style/style.css">
 
 </head>
@@ -164,7 +164,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Modification d'un compte membre :</p>
+                <p>Modification d'un compte professionnel :</p>
             </div>
     </div>
 
@@ -279,7 +279,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             <input type="text" id="codeSiren" name="codeSiren" value="<?php echo $infos['num_siren'];?>" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
         </div>
 
-        
+
         <!-- Adresse -->
         <div class="champs">
            <div class="labelAdresse">

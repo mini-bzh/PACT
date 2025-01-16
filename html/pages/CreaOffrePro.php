@@ -407,11 +407,13 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
         <link rel="stylesheet" href="/style/style.css">
-        <link rel="stylesheet" href="/style/pages/CreaOffrePro.css">
         <link rel="stylesheet" href="/style/composants/sidebar.css">
+        <link rel="stylesheet" href="/style/pages/Formulaire.css">
+
 
     </head>
-
+    <?php include "../composants/header/header.php";        //import navbar
+        ?>
     <body class="fondPro">
 
     <?php 
@@ -422,12 +424,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
         <?php
     }
         ?>
-        <?php include "../composants/header/header.php";        //import navbar
-        ?>
 
-        <main>
-
-            <div class="conteneur-formulaire">
 
                 <h1>Création d'une offre</h1>
 
@@ -835,8 +832,6 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <!-- Données bancaire pour le pro privé. Cette partie ne s'affiche que si l'id_c est dans la table pro_prive -->
 
                 </form>
-            </div>
-        </main>
 
         <?php
         include "../composants/footer/footer.php";

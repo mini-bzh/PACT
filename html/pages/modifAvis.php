@@ -89,8 +89,7 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
     <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
-    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
 </head>
 
 <?php include "../composants/header/header.php"; // Import navbar ?>
