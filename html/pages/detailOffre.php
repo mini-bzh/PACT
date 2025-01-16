@@ -269,7 +269,7 @@
 
                 <h1>Avis</h1>
                 <section class="conteneurAvis">
-                    <section class="conteneurTrie">
+                    <section id="conteneurTrie">
                         <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
                             <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
                             <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">

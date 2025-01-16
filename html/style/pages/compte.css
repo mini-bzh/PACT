@@ -270,22 +270,22 @@ body.no-scroll {
 }
 
 .btnAnnulerDeco{
-    background-color: #C6C6C6;
+    background-color: var(--grisClair);
     color: black;
 }
 
 .popUpDeco .btnValiderDeco{
-    background-color: #FF0101;
+    background-color: var(--rouge);
     color: white;
 }
 
 .popUpModif .btnValider, .popUpModifBancaire .btnValider{
-    background-color: #28a745;
+    background-color: var(--accent);
     color: white;
 }
 
 .popUpModif .btnValider:hover, .popUpModifBancaire .btnValider:hover{
-    background-color: #218838;
+    background-color: var(--accentDark);
 }
 
 @media screen and (max-width : 428px){
