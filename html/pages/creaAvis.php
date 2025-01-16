@@ -31,26 +31,28 @@ $requete = "INSERT INTO tripskell.avis(";
 $requete .= "commentaire, ";
 $requete .= "imageavis, ";
 $requete .= "dateexperience, ";
-$requete .= "datepublication, ";
 $requete .= "cadreexperience, ";
 $requete .= "id_c, ";
+$requete .= "note,";
 $requete .= "idoffre,";
 $requete.= "titreavis) ";
+
+
 
 $requete .= "VALUES (";
 $requete .= ":commentaire, ";
 $requete .= ":imageavis, ";
 $requete .= ":dateexperience, ";
-$requete .= ":datepublication, ";
 $requete .= ":cadreexperience, ";
 $requete .= ":id_c, ";
+$requete .= ":note, ";
 $requete .= ":idoffre,";
 $requete.= ":titreavis);";
 
 //echo $requete;
 //print_r($_POST);
 
-$datePublication = date("d/m/Y");
+$datePublication = date("d-m-Y");
 
 /*echo("commentaire : " . strlen($_POST["commentaire"]));
 echo("imageavis : " . strlen($nom_img["fichier1"]));
@@ -69,8 +71,8 @@ $stmt = $dbh->prepare($requete);
 $stmt->bindParam(":commentaire", $_POST["commentaire"]);
 $stmt->bindParam(":imageavis", $nom_img["fichier1"]);
 $stmt->bindParam(":dateexperience", $_POST["dateExperience"]);
-$stmt->bindParam(":datepublication", $datePublication);
 $stmt->bindParam(":cadreexperience", $_POST["contexte"]);
+$stmt->bindParam(":note", $_POST["note"]);
 $stmt->bindParam(":id_c", $_SESSION["idCompte"]);
 $stmt->bindParam(":idoffre", $_GET["idOffre"]);
 $stmt->bindParam(":titreavis", $_POST["titre"]);
@@ -97,9 +99,7 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
     <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
-
-    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
 </head>
 <?php include "../composants/header/header.php";        //import navbar
         ?>
@@ -193,4 +193,5 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
 </body>
 <script src="../js/creaAvis.js"></script>
+
 </html>

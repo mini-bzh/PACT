@@ -140,14 +140,6 @@ $contentMesOffres = $stmt->fetchAll();
 
                                 </div>
                             </a>
-                            <!--gestion du bouton pour redirection pour la facture-->
-                            
-                            <a href="listeFacture.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="styleBtn">
-                                <div class="btnGestionOffre grossisQuandHover">
-                                    <img src="/icones/creditCardSVG.svg" alt="">
-                                    <p>Voir facture </p>
-                                </div>
-                            </a>
                         </div>
 
                     </article>

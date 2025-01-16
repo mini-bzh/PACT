@@ -1,8 +1,5 @@
-body {
-    font-size: var(--typescale-small-text);
-    background-color: #d4e6fc; /* Couleur de fond bleu clair */
-}
-
+/* corps de la page */
+@import "../style.css";
 
 form {
     display: flex;
@@ -588,4 +585,274 @@ form {
     #menuContexte{
         width: fit-content;
     }
+}
+
+
+/* =================================================================
+   Style Crea Offre
+   ================================================================= */
+
+
+   .jours {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.jours button {
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 15px;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: var(--typescale-small-text); 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.jours button:hover {
+    background-color: #f0f0f0;
+}
+
+.heures {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-between;
+    max-width: 30%;*/
+}
+
+.heures label {
+    font-size: var(--typescale-small-text);
+}
+
+.heures input {
+    width: auto;
+    padding: 8px;
+    font-size: var(--typescale-small-text); 
+}
+
+/* GESTION DES CATEGORIES AFFICHER OU NON */
+
+#champsRestauration{
+    display: none;
+}
+
+#champsVisite{
+    display: none;
+}
+
+#champsActivite{
+    display: none;
+}
+
+#champsPA{
+    display: none;
+}
+
+#champsSpectacle{
+    display:none;
+}
+
+#tagsRestauration{
+    display: none;
+}
+
+#tagsVisite{
+    
+    display: none;
+}
+
+#tagsActivite{
+    display: none;
+}
+
+#tagsPA{
+    display: none;
+}
+
+#tagsSpectacle{
+    display: none;
+}
+
+#dateOption{
+    display: none;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tags > div {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+#tagsVisite > label{
+    padding-bottom: 10px;
+}
+
+#tagsActivite > label{
+    padding-bottom: 10px;
+}
+
+#tagsPA > label{
+    padding-bottom: 10px;
+}
+
+#tagsSpectacle > label{
+    padding-bottom: 10px;
+}
+
+#dateOption > label{
+    padding-bottom: 10px;
+}
+
+/* partie horaires */
+
+.jours .jourOuvert{
+    background-color: var(--primaryDark);
+    color: white;
+}
+
+.jours .jourOuvert:hover{
+    background-color: var(--primaryDark);
+}
+
+.jours .jourSelectionne{
+    background-color: var(--primaryDark);
+}
+
+.heures{
+    display: none;
+}
+
+.horairesVisibles{
+    display: flex;
+}
+
+.heures > label:first-child{
+    text-align: start;
+}
+
+#btnAjoutHoraire{
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+#btnAjoutHoraire:hover{
+    cursor: pointer;
+}
+
+
+
+
+.parentVisite{
+   padding-top: 20px;
+   display: flex;
+}
+
+.parentVisite > div{
+    display: flex;
+    flex-direction: row;
+}
+
+
+input[type="checkbox"] {
+    -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
+    appearance: none; /* Désactive le style natif */
+    width: 35px; /* Largeur */
+    height: 35px; /* Hauteur */
+    background-color: white; /* Couleur de fond par défaut */
+    border: 3px solid black; /* Bordure */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer; /* Pointeur interactif */
+    position: relative; /* Nécessaire pour positionner le check */
+  }
+
+input[type="checkbox"]:checked::after {
+    content: '✔'; /* Symbole de check */
+    color: black; /* Couleur du symbole */
+    font-size: var(--typescale-large-text); /* Taille du symbole */
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input[type="radio"]{
+    -webkit-appearance: none; /* Désactive le style natif pour Chrome/Safari */
+    appearance: none; /* Désactive le style natif */
+    width: 35px; /* Largeur */
+    height: 35px; /* Hauteur */
+    background-color: white; /* Couleur de fond par défaut */
+    border: 3px solid black; /* Bordure */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer; /* Pointeur interactif */
+    position: relative; /* Nécessaire pour positionner le check */
+  }
+
+
+input[type="radio"]:checked::after {
+    content: '✔'; /* Symbole de check */
+    color: black; /* Couleur du symbole */
+    font-size: var(--typescale-large-text); /* Taille du symbole */
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#description , #resume{
+    resize: none;
+    height: 200px;
+    width: 100%;
+    border-radius: 5%;
+    border: 1px solid #ccc;
+    font-size: var(--typescale-small-text); 
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+select{
+    width: 35%; 
+    height: 2.5em;
+    padding-left: 10px;
+    border-radius: 5%;
+    border: 1px solid #ccc;
+    font-size: var(--typescale-small-text); 
+    box-sizing: border-box;
+}
+
+.haut-de-page{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.haut-de-page>div{
+    display: flex;
+    flex-direction: row;
+}
+
+#popup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#preventionPaiement{
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: red ridge 5px;
+    border-radius: 10px;
 }

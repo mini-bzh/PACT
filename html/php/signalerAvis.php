@@ -14,5 +14,6 @@
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
-    $stmt = $dbh->prepare("INSERT INTO tripskell._signaleravis (id_avis, id_c, content) VALUES (". $idAvis . "," . $idCompte . ", '" . $motifSignalement . "');");
+    $stmt = $dbh->prepare("INSERT INTO tripskell._signaleravis (id_avis, id_c, content) VALUES (". $idAvis . "," . $idCompte . ", '" . $motifSignalement . "');"); //ajout dans la bdd du signalement
     $stmt->execute();
+?>

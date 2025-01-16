@@ -1,0 +1,69 @@
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+> Entrez votre clé API : _
+
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+Clé API incorrect !
+> Entrez votre clé API : _
+
++-------------------------------------+
+|       Tchatator professionnel       |
++-------------------------------------+
+| [1] Voir les messages non lus       |
+| [2] Voir ma conversation avec       |
+|     un professionnel                |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+
+Message 1 : Margogo - 8/01/2025
++----------------------------------------------------------------+
+| Bonjour, j’ai vu que vous proposez des séances de coaching     |
+| sportif en extérieur. Est-ce qu’il reste des places pour la    |
+| session de samedi matin ?                                      |
++----------------------------------------------------------------+
+
+Message 1 : TitouDu22 - 8/01/2025
++----------------------------------------------------------------+
+| Bonjour, j’ai vu que vous proposez des séances de coaching     |
+| sportif en intérieur. Est-ce qu’il reste des places pour la    |
+| session de samedi matin ?                                      |
++----------------------------------------------------------------+
+
+
++-------------------------------------+
+|       Tchatator professionnel       |
+|                                     |
+| Conversation avec Margogo           |
++-------------------------------------+
+| [1] Voir l'historique des messages  |
+| [2] Envoyer un message              |
+| [3] Supprimer un message            |
+| [4] Modifier un message             |
+| [5] Bloquer le membre               |
+| [6] Quitter                         |
++-------------------------------------+
+
+
+---- 5 ----
+
+> Êtes vous sûr de vouloir bloquer Margogo ? (O / N) : _
+
+> Margogo à été bloqué pendant 24h
+
++-------------------------------------+
+|       Tchatator professionnel       |
+|                                     |
+| Conversation avec Margogo           |
++-------------------------------------+
+| [1] Voir l'historique des messages  |
+| [2] Envoyer un message              |
+| [3] Supprimer un message            |
+| [4] Modifier un message             |
+| [5] Bloquer le membre               |
+| [6] Quitter                         |
++-------------------------------------+

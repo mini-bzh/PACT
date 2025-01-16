@@ -27,17 +27,17 @@ foreach ($result as $row)
 }
 
 
-$idOffre = 1;
-$query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
+$query =    "SELECT * from tripskell._reponseAvis";
 $stmt = $dbh->prepare($query);
 
-$stmt->bindParam(":idOffre", $idOffre);
-
 $stmt->execute();
+$result = $stmt->fetchAll();
 
-$nbAvisNonLusOffre = $stmt->fetch()["count"];
-echo("resultat count");/*
-print_r($stmt->fetch());*/
+echo("resultat reponses");
+foreach ($result as $row)
+{
+    print_r($row);
+    echo "<br>";
+}
 
-echo $stmt->fetch()["count"];
 

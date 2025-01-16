@@ -312,28 +312,30 @@ let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
 // })
 
 
-function confSignaler(event){
-    let idAvis = event.target.id;
+function confSignaler(event){ //fonction pour afficher une pop up
+    let idAvis = event.target.id; // on récupère l'id de l'avis
     console.log(idAvis);
     let pop = document.querySelector('.popUpSignaler');
     pop.style.display = 'flex';
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
     document.body.classList.add('no-scroll');
-    btnValider.id = idAvis;
+    btnValider.id = idAvis;  //l'id de l'avis est mis dans le bouton bouton valider
     console.log(btnValider);
 }
 
-function fermeConfSignaler(){
+function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulation
     let pop = document.querySelector('.popUpSignaler');
     pop.style.display = 'none';
     document.body.classList.remove('no-scroll');
 }
 
-function signalerAvis(){
+function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis, le motif du signalement et l'id de la personne qui signal
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    console.log(btnValider);
     let motifSignalement = document.getElementById("motifSignalement").value;
     let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
     let idAvis = btnValider.id;
+    console.log(idAvis);
 
     if(motifSignalement != ""){
         $.ajax({
@@ -341,7 +343,7 @@ function signalerAvis(){
             type: 'POST',                               // Type de la requête (pour transmettre
             data: {idCompte: idCompte, motifSignalement: motifSignalement, idAvis: idAvis},
             success: function(reponse){
-                alert("Signalement envoyé");;
+                alert("Signalement envoyé");
                 location.reload();
             },
             error: function(jqXHR, textStatus, errorThrown) {

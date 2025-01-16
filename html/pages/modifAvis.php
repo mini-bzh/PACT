@@ -4,61 +4,77 @@ session_start(); // Démarre la session pour récupérer les données de session
 // Récupération des paramètres de connexion à la base de données
 include('../php/connection_params.php');
 include_once("../php/affichageAvis.php");
+
 // Connexion à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
-if (isset($_GET['id_avis'])) {
 
+if (isset($_GET['id_avis'])) {
     // Récupérer et sécuriser l'id_avis
     $idAvis = htmlspecialchars($_GET['id_avis']);
-    $avis = $dbh->query("select * from tripskell._avis where id_avis='" . $idAvis . "';")->fetchAll()[0];
-
+    $avis = $dbh->query("SELECT * FROM tripskell._avis WHERE id_avis='" . $idAvis . "';")->fetchAll()[0];
 }
 
-if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
+if (!empty($_POST)) { // Vérification si le formulaire est soumis
 
-// Sécurisation des entrées pour éviter des injections SQL
-$titre = htmlspecialchars($_POST['titre']);
-$note = htmlspecialchars($_POST['note']);
-$commentaire = htmlspecialchars($_POST['commentaire']);
-$contexte = htmlspecialchars($_POST['contexte']);
-$dateExperience = htmlspecialchars($_POST['dateExperience']);
+    // Sécurisation des entrées
+    $titre = htmlspecialchars($_POST['titre']);
+    $note = htmlspecialchars($_POST['note']);
+    $commentaire = htmlspecialchars($_POST['commentaire']);
+    $contexte = htmlspecialchars($_POST['contexte']);
+    $dateExperience = htmlspecialchars($_POST['dateExperience']);
 
-// Si une image est envoyée, gérer l'upload du fichier
-$nom_img = null; // Initialisation
-if (isset($_FILES['fichier1']) && $_FILES['fichier1']['size'] != 0) {
-    $nom_img = time() . '.' . pathinfo($_FILES['fichier1']['name'], PATHINFO_EXTENSION);
-    move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/imagesAvis/" . $nom_img);
+    // Gestion de l'image
+    if (isset($_FILES['fichier1']) && $_FILES['fichier1']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = '../images/imagesAvis/';
+        $fileTmpPath = $_FILES['fichier1']['tmp_name'];
+        $fileName = basename($_FILES['fichier1']['name']);
+        $filePath = $uploadDir . $fileName;
+
+        // Vérifiez le type de fichier
+        $allowedTypes = ['image/jpeg', 'image/png'];
+        if (in_array($_FILES['fichier1']['type'], $allowedTypes)) {
+            // Déplacez le fichier dans le répertoire cible
+            if (move_uploaded_file($fileTmpPath, $filePath)) {
+                // Mettez à jour le champ image dans la base de données
+                $imageName = $fileName;
+            } else {
+                $imageName = $avis['imageavis']; // Conserver l'image existante en cas d'échec
+            }
+        } else {
+            $imageName = $avis['imageavis']; // Conserver l'image existante si type invalide
+        }
+    } else {
+        $imageName = $avis['imageavis']; // Conserver l'image existante si aucun fichier sélectionné
+    }
+
+    // Requête SQL pour mettre à jour l'avis dans la base de données
+    $stmt = $dbh->prepare("
+        UPDATE tripskell._avis 
+        SET titreavis = :titre, 
+            note = :note, 
+            commentaire = :commentaire, 
+            cadreexperience = :contexte, 
+            dateexperience = :dateExperience,
+            imageavis = :imageavis
+        WHERE id_avis = :idAvis
+    ");
+
+    // Exécution de la requête avec les paramètres
+    $stmt->execute([
+        ':titre' => $titre,
+        ':note' => $note,
+        ':commentaire' => $commentaire,
+        ':contexte' => $contexte,
+        ':dateExperience' => $dateExperience,
+        ':imageavis' => $imageName,
+        ':idAvis' => $idAvis,
+    ]);
+
+    // Redirection vers une autre page après succès
+    header("Location: /pages/accueil.php");
+    exit();
 }
-
-// Requête SQL pour mettre à jour l'avis dans la base de données
-$stmt = $dbh->prepare("
-    UPDATE tripskell._avis 
-    SET titreavis = :titre, 
-        note = :note, 
-        commentaire = :commentaire, 
-        cadreexperience = :contexte, 
-        dateexperience = :dateExperience, 
-        imageavis = :imageAvis
-    WHERE id_avis = :idAvis
-");
-
-// Exécution de la requête avec les valeurs préparées
-$stmt->execute([
-    ':titre' => $titre,
-    ':note' => $note,
-    ':commentaire' => $commentaire,
-    ':contexte' => $contexte,
-    ':dateExperience' => $dateExperience,
-    ':imageAvis' => $nom_img, // Nom de l'image (peut être null)
-    ':idAvis' => $idAvis
-]);
-
-
-
-header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre créée
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -67,25 +83,24 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un avis</title>
+    <title>Modifier un avis</title>
 
     <!-- Favicon -->
     <link rel="icon" href="/icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
-
-    <link rel="stylesheet" href="../style/pages/creaAvis.css">
+    <link rel="stylesheet" href="../style/pages/Formulaire.css">
 </head>
-<?php include "../composants/header/header.php";        //import navbar
-        ?>
+
+<?php include "../composants/header/header.php"; // Import navbar ?>
+
 <body class="fondVisiteur">
 
-    <form name="creation" action="" method="post">
+    <form name="creation" action="" method="post" enctype="multipart/form-data">
         <div id="conteneurTitreForm">
             <h3>Modifier un avis</h3>
             <div>
-                <p>Les champs qui possède une <span class="Asterisque"> * </span> sont obligatoires.</p> 
+                <p>Les champs qui possèdent une <span class="Asterisque"> * </span> sont obligatoires.</p> 
             </div>
         </div>
 
@@ -103,99 +118,92 @@ header("Location: /pages/accueil.php"); // on redirige vers la page de l'offre c
                 </div>
             </div>
         </div>
-        
 
         <div class="champs">
             <label for="commentaire">Commentaire <span class="required">*</span> :</label>
             <textarea type="text" maxlength="200" id="commentaire" name="commentaire" required><?php echo $avis['commentaire']; ?></textarea>
         </div>
+
         <div id="conteneurContexteDate">
-    <div class="champs">
-        <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
-        <input type="hidden" name="contexte" id="inputContexte" value="<?php echo $avis['cadreexperience']; ?>">
-        <div id="menuContexte">
-            <div class="conteneurSVGtexte">
-                <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
-                <p id="selectedContexte"><?php echo $avis['cadreexperience']; ?></p>
+            <div class="champs">
+                <label for="contexte">Contexte de la visite <span class="required">*</span> :</label>
+                <input type="hidden" name="contexte" id="inputContexte" value="<?php echo $avis['cadreexperience']; ?>">
+                <div id="menuContexte">
+                    <div class="conteneurSVGtexte">
+                        <img src="../icones/chevronUpSVG.svg" alt="chevron haut">
+                        <p id="selectedContexte"><?php echo $avis['cadreexperience']; ?></p>
+                    </div>
+                    <div id="conteneurOptionsContexte">
+                        <p onclick="selectContexte('en solo')">en solo</p>
+                        <p onclick="selectContexte('en famille')">en famille</p>
+                        <p onclick="selectContexte('entre amis')">entre amis</p>
+                        <p onclick="selectContexte('affaires')">affaires</p>
+                    </div>
+                </div>
             </div>
-            <div id="conteneurOptionsContexte">
-                <p onclick="selectContexte('en solo')">en solo</p>
-                <p onclick="selectContexte('en famille')">en famille</p>
-                <p onclick="selectContexte('entre amis')">entre amis</p>
-                <p onclick="selectContexte('affaires')">affaires</p>
-            </div>
-        </div>
-    </div>
             
             <div class="champs">
                 <label for="dateExperience">Date de la visite<span class="required">*</span> :</label>
                 <input type="date" name="dateExperience" id="dateExperience" value="<?php echo $avis['dateexperience']; ?>" required>
             </div>
         </div>
+
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
-                <div class ="PhotoAvis">
-                    <img id="previewImage" src="../images/imagesAvis/<?php echo $contentOffre["imageAvis"]?>" 
-                        alt="Cliquez pour ajouter une image" 
-                        style="cursor: pointer; width: 200px; height: auto;" 
-                        onclick="document.getElementById('fichier1').click()">
-                    <input type="file" id="fichier1" name="fichier1" 
-                        accept="image/png, image/jpeg" 
-                        style="display: none;" 
-                        onchange="updatePreview()">
-                </div>    
-            </div>
+        <div class="conteneurAvisImage">
+                <img id="previewImage" 
+                     src="<?php echo '../images/imagesAvis/' . $avis['imageavis']; ?>" 
+                     alt="Cliquez pour ajouter une image" 
+                     style="cursor: pointer; width: 200px; height: auto;" 
+                     onclick="document.getElementById('fichier1').click()">
+                <input type="file" id="fichier1" name="fichier1" 
+                       accept="image/png, image/jpeg" 
+                       style="display: none;" 
+                       onchange="updatePreview()">
+            </div>    
+        </div>
 
         <div id="conteneurConfirmation">
             <input type="checkbox" name="certifAvis" required>
             <label for="certifAvis">En publiant cet avis, je certifie qu'il reflète ma propre opinion et mon expérience, que je n'ai aucun lien
                 (professionnel ou personnel) avec le professionnel de tourisme de cette offre, et que je n'ai reçu aucune compensation financière
                 ou autre de sa part pour rédiger cet avis.
-            </label>
+            </label>        
         </div>
-        <div class="zoneBtn">
 
-            <button type="submit" href="#" class="btnConfirmer">
-                    <p class="texteLarge boldArchivo">Confirmer</p>
-            <?php
-                    include '../icones/okSVG.svg';
-            ?>
+        <div class="zoneBtn">
+            <button type="submit" class="btnConfirmer">
+                <p class="texteLarge boldArchivo">Confirmer</p>
+                <?php include '../icones/okSVG.svg'; ?>
             </button>
         </div>
     </form>
 
-</body>
-<script src="../js/creaAvis.js">
-    function selectContexte(contexte) {
-    // Met à jour la valeur dans l'input caché
-    document.getElementById('inputContexte').value = contexte;
-    
-    // Met à jour le texte visible
-    document.getElementById('selectedContexte').innerText = contexte;
-}
-</script>
-<script>
-    function updatePreview() {
-        const input = document.getElementById('fichier1');
-        const fileName = document.getElementById('fileName');
-        const previewImage = document.getElementById('previewImage');
-
-        // Vérifie si un fichier a été sélectionné
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            
-            // Quand le fichier est chargé, met à jour l'image
-            reader.onload = function (e) {
-                previewImage.src = e.target.result; // Change la source de l'image
-            }
-            
-            reader.readAsDataURL(input.files[0]); // Lit le fichier comme URL de données
-            
-            // Met à jour le nom du fichier
-            fileName.textContent = input.files[0].name;
-        } else {
-            fileName.textContent = ''; // Efface le nom si aucun fichier sélectionné
+    <script src="../js/creaAvis.js"></script>
+    <script>
+        function selectContexte(contexte) {
+            document.getElementById('inputContexte').value = contexte;
+            document.getElementById('selectedContexte').innerText = contexte;
         }
-    }
-</script>
+
+        function updatePreview() {
+            const input = document.getElementById('fichier1');
+            const previewImage = document.getElementById('previewImage');
+            const fileName = document.getElementById('fileName');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+            } else {
+                previewImage.src = "<?php echo '../images/imagesAvis/' . $avis['imageavis']; ?>";
+                fileName.textContent = "Aucune image sélectionnée";
+            }
+        }
+    </script>
+
+</body>
 </html>

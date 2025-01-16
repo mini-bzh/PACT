@@ -302,7 +302,7 @@ if (isset($idCompte)) {
                         }
                         ?>
 
-                        <button class="resizeShow btnDeplie">
+                        <button class="resizeShow btnDeplie btn">
                             <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M75 62.5L50 37.5L25 62.5" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -368,7 +368,7 @@ if (isset($idCompte)) {
                         <!-- div des boutons -->
                         <div class="zoneBtnPort">
                             <!-- Bouton de modification portable -->
-                            <button class="btnModifPort displayNone " onclick="confModifProfil()">
+                            <button class="btnModifPort displayNone btn" onclick="confModifProfil()">
                                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M88.2249 28.3831C90.4279 26.1807 91.6657 23.1934 91.6661 20.0784C91.6665 16.9633 90.4294 13.9757 88.227 11.7727C86.0246 9.56976 83.0373 8.33193 79.9222 8.33154C76.8071 8.33115 73.8195 9.56823 71.6166 11.7706L16.0082 67.3915C15.0408 68.3561 14.3254 69.5437 13.9249 70.8498L8.42072 88.9831C8.31304 89.3435 8.3049 89.7263 8.39719 90.0909C8.48947 90.4554 8.67872 90.7883 8.94487 91.054C9.21102 91.3197 9.54414 91.5084 9.90888 91.6001C10.2736 91.6918 10.6564 91.6831 11.0166 91.5748L29.1541 86.0748C30.4589 85.6779 31.6464 84.9669 32.6124 84.004L88.2249 28.3831Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M62.5 20.8335L79.1667 37.5002" stroke="black" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
@@ -377,7 +377,7 @@ if (isset($idCompte)) {
                             </button>
 
                             <!-- Bouton de supression compte portable -->
-                            <!-- <button class="btnSupPort displayNone">
+                            <!-- <button class="btnSupPort btn displayNone">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.5 25H87.5" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M79.1666 25V83.3333C79.1666 87.5 74.9999 91.6667 70.8333 91.6667H29.1666C24.9999 91.6667 20.8333 87.5 20.8333 83.3333V25" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -440,7 +440,7 @@ if (isset($idCompte)) {
                     <!-- div des boutons de consultation / modification données de compte-->
                     <div>
                         <!-- Bouton de modification -->
-                        <button class="btnModifCompte" onclick="confModifProfil()">
+                        <button class="btnModifCompte btn" onclick="confModifProfil()">
                             <?php
                             include '../icones/modifierSVG.svg';
                             ?>
@@ -464,7 +464,7 @@ if (isset($idCompte)) {
 
             <!-- Bouton de données bancaires -->
             <!--<a href="ModifInfoBancaire.php">-->
-            <button class="btnDataBanc"  onclick="confModifBanc()">
+            <button class="btnDataBanc btn"  onclick="confModifBanc()">
             <?php
                  include '../icones/creditCardSVG.svg';
             ?>
@@ -478,65 +478,12 @@ if (isset($idCompte)) {
                         ?>
 
                         <?php
-                        // On affiche le bouton du prix à payer pour le mois en cours
-                        if ($comptePro) {
-                        ?>
-
-                            <!-- Bouton prix -->
-                            <div class="btnDetailPrix">
-                                <p class="boldArchivo texteSmall">Montant total à payer :
-
-                                    <?php
-                                    // connexion a la BdD
-                                    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-                                    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
-
-                                    // Creation requete pour recuperer les offres
-                                    // du professionnel connecte
-                                    $stmt = $dbh->prepare("select * from tripskell.offre_pro where id_c=:id_c;");
-
-                                    // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
-                                    $stmt->bindParam(":id_c", var: $id_c);
-                                    $id_c = $idCompte;
-
-                                    $stmt->execute();   // execution de la requete
-
-                                    // recuperation de la reponse et mise en forme
-                                    $contentMesOffres = $stmt->fetchAll();
-
-                                    $donneePrix = [];
-                                    foreach ($contentMesOffres as $contentOffre)                   // ajout des offres du professionnel récupérées plus tôt
-                                    {
-                                        if ($contentOffre["enligne"]) {
-                                            $prixOffre = []; // Tableau pour stocker les prix d'une offre et de son option
-
-                                            $prixOffre['prixOffre'] = $contentOffre["prix_abo"];
-                                            $prixOffre['prixOption'] = $contentOffre["prix_option"];
-
-                                            $donneePrix[] = $prixOffre; // Ajout des données de l'offre dans donneePrix
-                                        }
-                                    }
-
-                                    $total = 0;
-                                    foreach ($donneePrix as $key => $value) {
-                                        $total += array_sum($value);
-                                    }
-                                    echo $total;
-                                    ?> €
-                                </p>
-                            </div>
-
-                        <?php
-                        }
-                        ?>
-
-                        <?php
                         // On affiche le bouton de données bancaires si c'est un pro
                         if ($comptePro) {
                         ?>
                             <a href="listeFacture.php">
                                 <!-- Bouton direction page facture -->
-                                <button class="btnFacture">
+                                <button class="btnFacture btn">
 
                                     <?php
                                     include '../icones/infoSVG.svg';
@@ -555,11 +502,11 @@ if (isset($idCompte)) {
                     <div>
 
                         <!-- Bouton de deconnexion -->
-                        <button class="btnDeconnexion" onclick="confDeco()">
+                        <button class="btnDeconnexion btn" onclick="confDeco()">
                             <?php
                             include '../icones/deconnexionSVG.svg';
                             ?>
-                            <p class="boldArchivo">Déconnexion</p>
+                            <p class="boldArchivo texteSmall">Déconnexion</p>
                         </button>
 
                         <!-- Bouton de suppression compte -->
@@ -582,8 +529,8 @@ if (isset($idCompte)) {
 
 
             <!-- POP-UP de deconnexion -->
-            <div class="popUpDeco">
-                <div>
+            <div class="popUpDeco popUp">
+                <div class="popup-content">
                     <p>Êtes vous sur de vouloir vous déconnecter ?</p>
                     <div>
                         <button class="btnAnnuler" onclick="fermeConfDeco()">Non</button>
@@ -593,23 +540,23 @@ if (isset($idCompte)) {
             </div>
 
             <!-- Pop-up modif profil -->
-            <div class="popUpModif">
+            <div class="popUpModif popUp">
                 <div class="popup-content">
                     <form method="post" action="">
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" placeholder="Mot de passe" />
-                        <button type="submit">Valider</button>
+                        <button class="btnValider" type="submit">Valider</button>
                     </form>
                 </div>
             </div>
 
             <!-- Pop-up modif bancaire -->
-            <div class="popUpModifBancaire">
+            <div class="popUpModifBancaire popUp">
                 <div class="popup-content">
                     <label for="password_for_banc">Mot de passe :</label>
                     <input type="password" id="password_for_banc" placeholder="Mot de passe" />
                     <p class="displayNone" id="erreur_mdp" style="color: red;">Mots de passe incorrect</p>
-                    <button onclick="verif_pass()">Valider</button>
+                    <button  class="btnValider" onclick="verif_pass()">Valider</button>
                 </div>
             </div>
 

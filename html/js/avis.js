@@ -106,7 +106,6 @@ function clearBouton(icone,icone1,icone2,idBouton){
 
 //--------- trie note ------------
 
-console.log(mapAvisInfos);
 
 function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
 
@@ -253,32 +252,24 @@ function supprimerAvis()
 let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
 
 
-// btnSignalerAvis.forEach(btn =>{
-//     if(typeof(btnSignalerAvis) !== 'undefined' && btnSignalerAvis !== null)
-//         {
-//             btn.addEventListener("click", confSignaler);
-//         }
-// })
-
-
-function confSignaler(event){
-    let idAvis = event.target.id;
+function confSignaler(event){ //fonction pour afficher une pop up
+    let idAvis = event.target.id; // on récupère l'id de l'avis
     console.log(idAvis);
     let pop = document.querySelector('.popUpSignaler');
     pop.style.display = 'flex';
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
     document.body.classList.add('no-scroll');
-    btnValider.id = idAvis;
+    btnValider.id = idAvis;  //l'id de l'avis est mis dans le bouton bouton valider
     console.log(btnValider);
 }
 
-function fermeConfSignaler(){
+function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulation
     let pop = document.querySelector('.popUpSignaler');
     pop.style.display = 'none';
     document.body.classList.remove('no-scroll');
 }
 
-function signalerAvis(){
+function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis, le motif du signalement et l'id de la personne qui signal
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
     let motifSignalement = document.getElementById("motifSignalement").value;
     let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
@@ -308,7 +299,6 @@ function signalerAvis(){
 let triggerAffichage = document.querySelectorAll(".imageAvis");
 let overlay = document.getElementById("overlay");
 let imageOverlay = document.querySelector("#overlay img");
-console.log
 let btnfermerOverlay = document.getElementById("btnFermerOverlay");
 
 triggerAffichage.forEach(element => {
@@ -336,25 +326,34 @@ function fermerOverlayImage()
 
 let avisOffres = document.querySelectorAll("#mainAvis .conteneurAvisOffre");
 
-let mapBtnConteneurAvis = new Map(); //map qui associe à un bouton pour déplier les avis le conteneur d'avis qui sera déplié
+let mapBtnConteneurAvisOffre = new Map(); //map qui associe à un bouton pour déplier les avis le conteneur d'avis qui sera déplié
 
 avisOffres.forEach(element =>{
     let btn = element.querySelector(".conteneurBtnTitre img");
-    let conteneurAvis = element.querySelector(".conteneurAvis");
 
-    mapBtnConteneurAvis.set(btn, conteneurAvis);
+    mapBtnConteneurAvisOffre.set(btn, element);
 
     btn.addEventListener("click", toggleAvisOffre);
 })
 
 function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
 {
-    let conteneurAvis = mapBtnConteneurAvis.get(event.target);
+    let conteneurAvisOffre = mapBtnConteneurAvisOffre.get(event.target);
+    let conteneurAvis = conteneurAvisOffre.querySelector(".conteneurAvis");
+
+    let pastille = conteneurAvisOffre.querySelector(".pastilleCptAvisNonLus");
+
+    if(pastille != undefined)
+    {
+        pastille.style.display = "none";
+    }
 
     if(window.getComputedStyle(conteneurAvis).display == "none")
     {
         conteneurAvis.style.display = "flex";
         event.target.style.transform = "rotate(180deg)";
+
+        MettreAvisOffreLu(conteneurAvisOffre);
     }
     else
     {
@@ -362,47 +361,39 @@ function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
         event.target.style.transform = "rotate(0deg)";
     }
 }
-
-//mettre les avis en lu
-
-let avisLisibles = document.querySelectorAll(".conteneurAvis .nouvelAvis");
-let cptAvisNonLus = document.getElementById("cptAvisNonLus");
-
 let nouveauxDejaVus = [];   //tableau qui contiendra les nouveaux avis ayant déjà été passés en lu par l'observeur (évite qu'afficher et masquer en boucle un avis ne déclenche plusieurs fois le traitement)
 
+function MettreAvisOffreLu(conteneurAvisOffre)
+{            
+    let avisLisibles = conteneurAvisOffre.querySelectorAll(".conteneurAvis .nouvelAvis");
+    let cptAvisNonLus = document.getElementById("cptAvisNonLus");
 
-const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry => {
-        if(entry.isIntersecting)
+    avisLisibles.forEach(avis=>{
+        if(!nouveauxDejaVus.includes(avis))
         {
-            if(!nouveauxDejaVus.includes(entry.target))
+            let nbAvisNonLus = cptAvisNonLus.querySelector("span");  
+            if(nbAvisNonLus.textContent == 1)
             {
-                let nbAvisNonLus = cptAvisNonLus.querySelector("span");
-                if(nbAvisNonLus.textContent == 1)
-                {
-                    cptAvisNonLus.textContent = "Vous n'avez pas de nouvel avis";
-                }
-                else if(nbAvisNonLus.textContent == 2)
-                {
-                    cptAvisNonLus.innerHTML = "Vous avez <span>1</span> nouvel avis";
-                }
-                else
-                {
-                    nbAvisNonLus.textContent = parseInt(nbAvisNonLus.textContent)-1;
-                }
-
-                let idAvis = entry.target.id.slice(4);
-                avisLuBDD(idAvis);
-
-                nouveauxDejaVus.push(entry.target);
+                cptAvisNonLus.textContent = "Vous n'avez pas de nouvel avis";
             }
-        }
-    });
-})
+            else if(nbAvisNonLus.textContent == 2)
+            {
+                cptAvisNonLus.innerHTML = "Vous avez <span>1</span> nouvel avis";
+            }
+            else
+            {
+                nbAvisNonLus.textContent = parseInt(nbAvisNonLus.textContent)-1;
+            }
+            
+            let idAvis = avis.id.slice(4);
+            avisLuBDD(idAvis);
 
-avisLisibles.forEach(avisPasLu=>{
-    observer.observe(avisPasLu);
-})
+            nouveauxDejaVus.push(avis);
+        }
+    })
+}
+
+//mettre les avis en lu
 
 function avisLuBDD(idAvis)
 {

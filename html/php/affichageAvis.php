@@ -35,6 +35,13 @@
             <hr>
             <!-- Titre de l'avis -->
             <h4 class="titreAvis"><?php echo $avis['titreavis'] ?></h4>
+            <div class="etoiles">
+            <?php
+                    include_once("etoiles.php");
+                    echo affichage_etoiles($avis["note"]);
+                ?>
+                <p>(<?php echo $avis["note"] ?>)</p>
+            </div>
             <!-- Commentaire -->
             <p class="texteAvis"><?php echo $avis['commentaire'] ?></p>
             <hr>
@@ -75,7 +82,7 @@
                                     <p>Supprimer</p>
                                     <p hidden><?php echo $avis["id_avis"]?></p>
                                 </div>
-                            <a href="modifAvis.php">
+                            <a href="modifAvis.php?id_avis=<?php echo $avis["id_avis"]?>">
                                 <div class="btnModifierAvis grossisQuandHover">
                                     <img src="../icones/modifierSVG.svg" alt="icone modifier">
                                     <p>Modifier</p>
@@ -83,11 +90,11 @@
                                 </a>
                             <?php
                         }
-                        else if($avis["id_c"] != $idCompteConnecte && $idCompteConnecte != null){
+                        else if($avis["id_c"] != $idCompteConnecte && $idCompteConnecte != null){ //bouton de signalement d'avis qui s'affiche si l'avis n'est pas de l'utilisateur et si il n'a pas déjà signalé l'avis
                             $avisSignaler = $dbh->query("select * from tripskell._signalerAvis where id_c=" . $idCompteConnecte . " and id_avis=". $avis["id_avis"].";")->fetchAll();
-                            if($avisSignaler == null){
+                            if($avisSignaler == null){ //bouton pour signaler
                             ?>
-                                <div id="<?php echo $avis["id_avis"]?>" class="btnSignalerAvis grossisQuandHover" onclick="confSignaler(event)">
+                                <div id="<?php echo $avis["id_avis"]?>" class="btnSignalerAvis grossisQuandHover" onclick="confSignaler(event)">     
                                     <img src="../icones/signalerSVG.svg" alt="icone signaler">
                                     <p>Signaler</p>
                                     <p hidden><?php echo $idCompteConnecte?></p>
@@ -95,7 +102,7 @@
                                 </div>
                             <?php
                             }
-                            else if($avisSignaler != null){
+                            else if($avisSignaler != null){ // bouton déjà signaler
                                 ?>
                                     <div class="btnDejaSignaler grossisQuandHover">
                                         <img src="../icones/okSVG.svg" alt="icone signaler">

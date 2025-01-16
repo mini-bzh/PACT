@@ -1,0 +1,166 @@
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+| [-1] Quitter                        |
++-------------------------------------+
+> Entrez votre clé API : _
+
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+Clé API incorrect !
+> Entrez votre clé API : _
+
++-------------------------------------+
+|          Tchatator Membre           |
++-------------------------------------+
+| [1] Voir les messages non lus       |
+| [2] Voir ma conversation avec       |
+|     un professionnel                |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+
+
+Message 1 : CYIM - 8/01/2025
++----------------------------------------------------------------+
+| Bonjour, j’ai vu que vous proposez des séances de coaching     |
+| sportif en extérieur. Est-ce qu’il reste des places pour la    |
+| session de samedi matin ?                                      |
++----------------------------------------------------------------+
+
+Message 2 : Nova Soltion - 9/01/2025
++----------------------------------------------------------------+
+| Bonjour ! Oui, il reste encore 2 places pour samedi à 9h.      |
+| Souhaitez-vous réserver ?                                      |
++----------------------------------------------------------------+
+
+
++-------------------------------------+
+|          Tchatator Membre           |
++-------------------------------------+
+| [1] Voir les messages non lus       |
+| [2] Voir ma conversation avec       |
+|     un professionnel                |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Liste des professionnels            |
++-------------------------------------+
+| [1] Cyim                            |
+| [2] Nova Solutions                  |
+| [3] Quitter                         |
++-------------------------------------+
+> Entrez le numéro du professionnel de votre choix : _
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Conversation avec Nova Solutions    |
++-------------------------------------+
+| [1] Voir l'historique des messages  |
+| [2] Envoyer un message              |
+| [3] Supprimer un message            |
+| [4] Modifier  un message            |
+| [5] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+
+---- 1 ----
+
+Message 1 : Vous - 8/01/2025
++----------------------------------------------------------------+
+| Bonjour, j’ai vu que vous proposez des séances de coaching     |
+| sportif en extérieur. Est-ce qu’il reste des places pour la    |
+| session de samedi matin ?                                      |
++----------------------------------------------------------------+
+
+Message 2 : Nova Soltion - 9/01/2025
++----------------------------------------------------------------+
+| Bonjour ! Oui, il reste encore 2 places pour samedi à 9h.      |
+| Souhaitez-vous réserver ?                                      |
++----------------------------------------------------------------+
+
+Message 3 : Nova Soltion - Aujourd'hui 15h36
++----------------------------------------------------------------+
+| Oui, je confirme ma participation. Quels sont les points de    |
+| rendez-vous et le matériel à prévoir ?                         |
++----------------------------------------------------------------+
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Conversation avec Nova Solutions    |
++-------------------------------------+
+| [1] Voir l'historique des messages  |
+| [2] Envoyer un message              |
+| [3] Supprimer un message            |
+| [4] Modifier  un message            |
+| [5] Quitter                         |
++-------------------------------------+
+> Entrez votre choix : _
+
+
+---- 2 ----
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Conversation avec Nova Solutions    |
++-------------------------------------+
+> Saisissez votre message (-1 pour annuler) : _
+
+
+> Message envoyé avec succès !
+
+> Erreur, le message n'a pas pu être envoyé
+
+
+---- 3 ----
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Conversation avec Nova Solutions    |
++-------------------------------------+
+> Entrez le numéro du message à supprimer (-1 pour annuler) : _
+
+
+> Message supprimé avec succès !
+
+> Erreur, le message n'a pas pu être supprimé
+
+> Erreur, le message n'a pas été trouvé
+
+
+---- 4 ----
+
++-------------------------------------+
+|          Tchatator Membre           |
+|                                     |
+| Conversation avec Nova Solutions    |
++-------------------------------------+
+> Entrez le numéro du message à modifier (-1 pour annuler) : _
+
+> Erreur, le message n'a pas pu être envoyé
+
+> Saisissez le nouveau message : _
+
+> Message envoyé avec succès !
+
+> Erreur, le message n'a pas pu être modifié
+
+
+---- 5 ----
+
++-------------------------------------+
+|            Se connecter             |
++-------------------------------------+
+> Entrez votre clé API : _
