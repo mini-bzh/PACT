@@ -1028,10 +1028,6 @@ rect{
     width: 100%;
 }
 
-.conteneurBtn{
-    display: flex;
-}
-
 .btnTrie{
     display: flex;
     background-color: white;
@@ -1271,8 +1267,10 @@ aside fieldset {
     height: 5px;
     background: none;
     pointer-events: none;
+    /*
     -webkit-appearance: none;
     -moz-appearance: none;
+    */
     top: 50%;
     transform: translateY(-50%);
   }

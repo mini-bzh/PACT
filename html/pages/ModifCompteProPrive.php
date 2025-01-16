@@ -190,19 +190,19 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             ?>
         </div>
 
-        <!-- Champs pour sélectionner les images -->
-        <div class="champs">
-                <div class ="PhotoDeProfil">
-                    <img id="previewImage" 
-                        src="../images/pdp/<?php echo $infos['pdp'] ?>" 
-                        alt="Cliquez pour ajouter une image" 
-                        style="cursor: pointer; width: 200px; height: auto;" 
-                        onclick="document.getElementById('fichier1').click()">
-                    <input type="file" id="fichier1" name="fichier1" 
-                        accept="image/png, image/jpeg" 
-                        style="display: none;" 
-                        onchange="updatePreview()">
-                </div>    
+            <!-- Champs pour sélectionner les images -->
+            <div class="champs">
+                    <div class ="PhotoDeProfil">
+                        <img id="previewImage" 
+                            src="../images/pdp/<?php echo $infos['pdp'] ?>" 
+                            alt="Cliquez pour ajouter une image" 
+                            style="cursor: pointer; width: 200px; height: auto;" 
+                            onclick="document.getElementById('fichier1').click()">
+                        <input type="file" id="fichier1" name="fichier1" 
+                            accept="image/png, image/jpeg" 
+                            style="display: none;" 
+                            onchange="updatePreview()">
+                    </div>    
             </div>
         </div>    
 
