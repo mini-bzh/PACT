@@ -581,7 +581,7 @@ input{
 .reponse p{
     border-left: 2px solid var(--secondary);
     padding-left: 5px;
-    margin: 5px 5px 15px;
+    margin: 5px 10px 15px;
 }
 
 /*-------------/ apercu offre /--------------*/
