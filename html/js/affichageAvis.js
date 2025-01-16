@@ -339,34 +339,51 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
 
 avis.forEach(av => {
     let btnRepondre = av.querySelector(".formReponse .btnRepondre");
-    let reponseAvis = av.querySelector(".formReponse .reponseAvis");
-    let erreurReponseVide = av.querySelector(".formReponse .erreurReponseVide");
 
-    let idAvis = av.id.slice(4);
-
-    console.log(btnRepondre, reponseAvis, idAvis, erreurReponseVide);
-
-    btnRepondre.addEventListener("click", ()=>{
-        console.log(idAvis, reponseAvis.value);
-        if(reponseAvis.value.length == 0)
-        {
-            erreurReponseVide.hidden = false;
-        }
-        else
-        { 
+    if(btnRepondre != undefined)
+    {
+        let reponseAvis = av.querySelector(".formReponse .reponseAvis");
+        let erreurReponseVide = av.querySelector(".formReponse .erreurReponseVide");
+    
+        let idAvis = av.id.slice(4);
+    
+        console.log(btnRepondre, reponseAvis, idAvis, erreurReponseVide);
+    
+        btnRepondre.addEventListener("click", ()=>{
             console.log(idAvis, reponseAvis.value);
-        }
-    });
-
-    reponseAvis.addEventListener("keyup", ()=>{             //enlève le message d'erreur si l'utilisateur commence à écrire une réponse
-        if(erreurReponseVide.hidden == false && reponseAvis.value.length > 0)
-        {
-            erreurReponseVide.hidden = true;
-        }
-    })
+            if(reponseAvis.value.length == 0)
+            {
+                erreurReponseVide.hidden = false;
+            }
+            else
+            { 
+                console.log(idAvis, reponseAvis.value);
+                envoyerReponse(idAvis, reponseAvis);
+            }
+        });
+    
+        reponseAvis.addEventListener("keyup", ()=>{             //enlève le message d'erreur si l'utilisateur commence à écrire une réponse
+            if(erreurReponseVide.hidden == false && reponseAvis.value.length > 0)
+            {
+                erreurReponseVide.hidden = true;
+            }
+        })
+    }
 })
 
 function envoyerReponse(idAvis, reponseAvis)
 {
-    
+    $.ajax({
+        url: "../php/reponseAvis.php.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+        data: {idAvis: idAvis, reponseAvis : reponseAvis},
+        success: function(response)
+        {
+            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Erreur AJAX : ", textStatus, errorThrown);         //affiche une erreur sinon
+            alert("Erreur lors de l'appel du script PHP : " + textStatus);
+        }
+    });
 }

@@ -27,25 +27,18 @@ foreach ($result as $row)
 }
 
 
-$query =    "SELECT * from tripskell._offre";
+$query =    "SELECT * from tripskell._reponseAvis";
 $stmt = $dbh->prepare($query);
 
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-echo("<br>resultat offre<br>");
+echo("<br>resultat réponse<br>");
 foreach ($result as $row)
 {
     print_r($row);
     echo "<br>";
 }
 
-$query =    "SELECT * from tripskell._avis";
-$stmt = $dbh->prepare($query);
-
-$stmt->execute();
-$result = $stmt->fetch();
-
-print_r($result);
 
 
