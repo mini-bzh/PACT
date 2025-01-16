@@ -1551,6 +1551,9 @@ aside fieldset {
     animation: scroll 15s linear infinite alternate;
   }
 
+  .small-carousel .apercuOffre{
+    margin: 0px 20px;
+  }
   
 
   @keyframes scroll {

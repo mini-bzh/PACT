@@ -124,6 +124,7 @@ $offreALaUne = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } else { ?>
+
                 <div class="small-carousel">
                     <div class="card">
                         <?php
@@ -141,8 +142,9 @@ $offreALaUne = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } ?>
-
-        <?php } ?>
+        <?php
+        }
+        ?>
 
         <section id="conteneurOffres">
             <article>

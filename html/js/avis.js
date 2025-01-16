@@ -319,7 +319,7 @@ function avisLuBDD(idAvis)
         data: {idAvis: idAvis},
         success: function(response)
         {
-            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            //console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Erreur AJAX : ", textStatus, errorThrown);         //affiche une erreur sinon

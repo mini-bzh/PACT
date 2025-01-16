@@ -29,12 +29,14 @@ div:has(> .fakeDiv){
 .informationsCompte{
     width: 100%;
     height: 80vh;
-    border-radius: 40px;
+    border-radius: 5px;
     background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 3%;
+
+    box-shadow: var(--ombreNoire);
 }
 
 .zoneInfos{
