@@ -33,8 +33,8 @@ $requete .= "imageavis, ";
 $requete .= "dateexperience, ";
 $requete .= "cadreexperience, ";
 $requete .= "id_c, ";
-$requete .= "idoffre,";
 $requete .= "note,";
+$requete .= "idoffre,";
 $requete.= "titreavis) ";
 
 
@@ -52,7 +52,7 @@ $requete.= ":titreavis);";
 //echo $requete;
 //print_r($_POST);
 
-$datePublication = date("Y-m-d");
+$datePublication = date("d-m-Y");
 
 /*echo("commentaire : " . strlen($_POST["commentaire"]));
 echo("imageavis : " . strlen($nom_img["fichier1"]));

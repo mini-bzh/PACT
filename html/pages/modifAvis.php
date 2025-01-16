@@ -151,7 +151,7 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
 
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
-            <div class="PhotoAvis">
+        <div class="conteneurAvisImage">
                 <img id="previewImage" 
                      src="<?php echo '../images/imagesAvis/' . $avis['imageavis']; ?>" 
                      alt="Cliquez pour ajouter une image" 
@@ -161,13 +161,15 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
                        accept="image/png, image/jpeg" 
                        style="display: none;" 
                        onchange="updatePreview()">
-                <p id="fileName" style="margin-top: 10px; color: #555;">Aucune image sélectionnée</p>
             </div>    
         </div>
 
         <div id="conteneurConfirmation">
             <input type="checkbox" name="certifAvis" required>
-            <label for="certifAvis">En publiant cet avis, je certifie qu'il reflète ma propre opinion et mon expérience...</label>
+            <label for="certifAvis">En publiant cet avis, je certifie qu'il reflète ma propre opinion et mon expérience, que je n'ai aucun lien
+                (professionnel ou personnel) avec le professionnel de tourisme de cette offre, et que je n'ai reçu aucune compensation financière
+                ou autre de sa part pour rédiger cet avis.
+            </label>        
         </div>
 
         <div class="zoneBtn">
