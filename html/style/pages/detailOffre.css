@@ -226,15 +226,18 @@ th, td {
 }
 
 .conteneurAvis{
+    /*
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px;
-    margin-top: 50px;
     width: 100%;
     flex-wrap: wrap;
+    */
+    margin-top: 50px;
 }
 
+/*
 .avis{
     margin: 15px 0px;
     background-color: white;
@@ -246,7 +249,6 @@ th, td {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
 
 .avis hr{
     margin-bottom: 10px;
@@ -285,9 +287,11 @@ th, td {
     margin-bottom: 5px;
 }
 
+
 .avis .conteneurMembreAvis .infoMembreAvis h3{
     margin-left: 10px;
 }
+
 
 .avis .texteAvis{
     font-size: var(--typescale-small-text);
@@ -329,6 +333,8 @@ th, td {
     flex-direction: column;
 }
 
+
+
 #overlay img{
     max-width: 80%;
     max-height: 80%;
@@ -343,7 +349,7 @@ th, td {
 #overlay #btnFermerOverlay p{
     color: white;
 }
-
+*/
 
 .circular-image {
     width: 80px;
