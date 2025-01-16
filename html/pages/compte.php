@@ -1,5 +1,7 @@
 <?php
 
+use Dompdf\Dompdf;
+
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
@@ -133,9 +135,7 @@ if (isset($idCompte)) {
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
 
-    <script>
-        let id_c = <?php echo $idCompte; ?>; // donne l'id_c au javascript
-    </script>
+    <script>let id_c = <?php echo $idCompte;?>; // donne l'id_c au javascript</script> 
     <script src="../js/compte.js" defer></script>
 </head>
 
@@ -462,15 +462,15 @@ if (isset($idCompte)) {
                         if ($comptePro) {
                         ?>
 
-                            <!-- Bouton de données bancaires -->
-                            <!--<a href="ModifInfoBancaire.php">-->
-                            <button class="btnDataBanc btn" onclick="confModifBanc()">
-                                <?php
-                                include '../icones/creditCardSVG.svg';
-                                ?>
-                                <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
-                            </button>
-                            <!--</a>-->
+            <!-- Bouton de données bancaires -->
+            <!--<a href="ModifInfoBancaire.php">-->
+            <button class="btnDataBanc btn"  onclick="confModifBanc()">
+            <?php
+                 include '../icones/creditCardSVG.svg';
+            ?>
+                <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
+            </button>
+            <!--</a>-->
 
 
                         <?php
@@ -478,16 +478,18 @@ if (isset($idCompte)) {
                         ?>
 
                         <?php
-                        // On affiche le bouton de la liste des factures si c'est un pro
+                        // On affiche le bouton de données bancaires si c'est un pro
                         if ($comptePro) {
                         ?>
                             <a href="listeFacture.php">
                                 <!-- Bouton direction page facture -->
                                 <button class="btnFacture btn">
+
                                     <?php
                                     include '../icones/infoSVG.svg';
                                     ?>
                                     <p class="boldArchivo texteSmall">Gérer mes factures</p>
+
                                 </button>
                             </a>
                         <?php
@@ -507,7 +509,6 @@ if (isset($idCompte)) {
                     <strong><p id="apiKeyTexte"></p></strong>
                     <p id="apiKey"></p>
                     </div>
-
 
                     <!-- div des boutons dangereux -->
                     <div>
@@ -533,6 +534,11 @@ if (isset($idCompte)) {
                 </div>
 
             </div>
+
+
+
+
+
 
             <!-- POP-UP de deconnexion -->
             <div class="popUpDeco popUp">
@@ -576,7 +582,7 @@ if (isset($idCompte)) {
                     <label for="password_for_banc">Mot de passe :</label>
                     <input type="password" id="password_for_banc" placeholder="Mot de passe" />
                     <p class="displayNone" id="erreur_mdp" style="color: red;">Mots de passe incorrect</p>
-                    <button class="btnValider" onclick="verif_pass()">Valider</button>
+                    <button  class="btnValider" onclick="verif_pass()">Valider</button>
                 </div>
             </div>
 

@@ -48,9 +48,11 @@ function verif_pass() {
     });
 }
 
+// on récupère le clique sur le bouton btnCreaAPI 
 let btnAPIkey = document.getElementsByClassName("btnCreaAPI")[0];
-console.log(btnAPIkey);
 
+// afin de pouvoir executer la fonction generateAPIkey au moment du clique et éviter que le membre ou pro spam clique le bouton
+// il est griser après le déclachement de la fonction
 btnAPIkey.addEventListener("click", () => {
     if (btnAPIkey.classList.contains("btnCreaAPIgris")) {
         alert("Vous avez déjà générer une clé API");
@@ -60,7 +62,10 @@ btnAPIkey.addEventListener("click", () => {
     }
 })
 
+// fonction qui permet de générer des clé API et de les envoyer
 function generateApiKey() {
+
+    // ici on crée la clé API
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let apiKey = '';
     for (let i = 0; i < 32; i++) {
@@ -71,15 +76,15 @@ function generateApiKey() {
     document.getElementById('apiKeyTexte').innerText = "Votre Clé API : ";
     document.getElementById('apiKey').innerText = apiKey;
 
-
+    // permet de lié JS et PHP
     $.ajax({
-        url: "../php/genAPIkey.php",              // Le fichier PHP à appeler, qui met à jour la BDD
-        type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
+        url: "../php/genAPIkey.php",              // Le fichier PHP à appeler, qui met à jour la BDD 
+        type: 'POST',                               
         data: { apiKey: apiKey },
-        success: function (response) {
+        success: function (response) { // en cas de réussite
             console.log("reussite");
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) { // en cas d'erreur
             console.log("Erreur AJAX : ", textStatus, errorThrown);
             alert("Erreur lors de l'appel du script PHP : " + textStatus);
         }

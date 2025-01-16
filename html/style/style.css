@@ -1528,6 +1528,60 @@ aside fieldset {
 
 /*
 #######################################################
+########         CARROUSSEL ACCEUIL       #############
+#######################################################
+*/
+
+/* container qui contenir tout les card du .carousel */
+.carousel {
+    width: 100%;
+    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    display: flex;
+    height: 500px;
+    margin: 2%;
+  }
+
+  /* card du carroussel, représente une offre A La Une */
+  .card {
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+    width: 100%;
+    animation: scroll 15s linear infinite alternate;
+  }
+
+  
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    25% {
+        transform: translateX(-25%);
+      }
+    50% {
+        transform: translateX(-50%);
+      }
+    75% {
+        transform: translateX(-75%);
+      }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+.small-carousel {
+    width: 60%;
+    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    display: flex;
+    align-self: center;
+    height: 500px;
+    margin: 2%;
+}
+
+
+/*
+#######################################################
 ############        MEDIA QUERY        ################
 #######################################################
 */
