@@ -513,7 +513,7 @@ if (isset($idCompte)) {
                     <div>
 
                         <!-- Bouton de deconnexion -->
-                        <button class="btnDeconnexion btn" onclick="confDeco()">
+                        <button id="btnDeconnexion" class="btn" onclick="confDeco()">
                             <?php
                             include '../icones/deconnexionSVG.svg';
                             ?>

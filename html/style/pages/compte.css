@@ -106,7 +106,7 @@ div:has(> .fakeDiv){
 
 /* Bouton de deconnexion */
 
-.btnDeconnexion{
+#btnDeconnexion{
     background-color: #D80303;
 }
 
@@ -279,12 +279,12 @@ body.no-scroll {
     color: white;
 }
 
-.popUpModif .btnValider, .popUpModifBancaire .btnValider{
+#popUpModif .btnValider, #popUpModifBancaire .btnValider{
     background-color: var(--accent);
     color: white;
 }
 
-.popUpModif .btnValider:hover, .popUpModifBancaire .btnValider:hover{
+#popUpModif .btnValider:hover, #popUpModifBancaire .btnValider:hover{
     background-color: var(--accentDark);
 }
 
@@ -370,25 +370,25 @@ body.no-scroll {
 
     /* Si professionel */
 
-    .btnDeconnexion{
+    #btnDeconnexion{
         width: 413px;
         height: 74px;
         padding: 0 7%;
         margin: 2% auto;
     }
 
-    .btnDeconnexion p{
+    #btnDeconnexion p{
         color: black;
         padding-right: 8%;
         padding-top: 0.5%;
     }
     
-    .btnDeconnexion svg{
+    #btnDeconnexion svg{
         width: 60px;
         height: 55px;
     }
 
-    .btnDeconnexion svg path{
+    #btnDeconnexion svg path{
         stroke: black;
     }
 
