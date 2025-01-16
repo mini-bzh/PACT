@@ -192,9 +192,9 @@ header h2 {
                 <tr>
                     <th>Désignation</th>
                     <th>Nombre de jours en ligne</th>
-                    <th>Prix abonnement HT</th>
+                    <th>Prix abonnement HT / par jour </th>
                     <th>Durée option</th>
-                    <th>Prix option HT</th>
+                    <th>Prix option HT / par semaine</th>
                     <th>Total HT</th>
                     <th>Total TTC</th>
                 </tr>
@@ -229,7 +229,7 @@ header h2 {
 ?>
                 <tr>
                     <td rowspan="<?php echo $tailleCell;?>"><?php echo $titre_offre;?></td>
-                    <td rowspan="<?php echo $tailleCell;?>"><?php echo $nbJourEnLigne; ?> jour</td>
+                    <td rowspan="<?php echo $tailleCell;?>"><?php echo $nbJourEnLigne; ?> jour(s)</td>
                     <td rowspan="<?php echo $tailleCell;?>"><?php echo $prix_abonnement; ?> €</td>
                     <td><?php echo intval(($contentFacture[$key]['duree_option'] - $contentFacture[$key]['duree_option_debut_annulation'])/7); ?> semaine</td>
                     <td><?php echo is_null($contentFacture[$key]['prix_option']) ? "/" : $contentFacture[$key]['prix_option']; ?> €</td> <!-- gestion du cas où il n'y a pas d'option -->

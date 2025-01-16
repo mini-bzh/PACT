@@ -288,6 +288,29 @@ body.no-scroll {
     background-color: var(--accentDark);
 }
 
+/* Génération Clé API */
+
+.générationAPI > p {
+    font-size: var(--typescale-small-text);
+}
+
+.btnCreaAPI svg path{
+    stroke-width: 2;
+}
+
+.btnCreaAPIgris{
+    color: var(--grisClair) !important;
+}
+
+.btnCreaAPIgris:hover{
+    cursor: pointer;
+}
+
+.btnCreaAPI img{
+    display: none;
+}
+
+
 @media screen and (max-width : 428px){
 
     #conteneurTitreMobile{
@@ -583,3 +606,5 @@ body.no-scroll {
     }
 
 }
+
+
