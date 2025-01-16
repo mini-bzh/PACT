@@ -63,6 +63,11 @@ input{
     font-size: var(--typescale-text);
 }
 
+textarea{
+    font-size: var(--typescale-small-text);
+    font-family: "Archivo";
+}
+
 
 .fondVisiteur{
     background-color: var(--fondVisiteurMembre);
@@ -575,13 +580,47 @@ input{
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .reponse p{
     border-left: 2px solid var(--secondary);
     padding-left: 5px;
     margin: 5px 10px 15px;
+}
+
+.formReponse{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    margin-bottom: 10px;
+}
+
+.formReponse textarea{
+    color: black;
+    width: 100%;
+    padding: 5px;
+    height: 75px;
+    margin: 5px 0px;
+    border-radius: 5px;
+}
+
+.formReponse .btnRepondre{
+    background-color: var(--primary);
+    padding: 5px;
+    width: fit-content;
+    border-radius: 5px;
+    color: white;
+}
+
+.formReponse .btnRepondre p{
+    font-size: var(--typescale-small-text);
+}
+
+.formReponse .erreurReponseVide{
+    font-size: var(--typescale-very-small-text);
+    color: red;
 }
 
 /*-------------/ apercu offre /--------------*/
@@ -1955,5 +1994,4 @@ aside fieldset {
         width: 400px;
         height: 200px;
     }
-
 }

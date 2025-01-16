@@ -27,13 +27,13 @@ foreach ($result as $row)
 }
 
 
-$query =    "SELECT * from tripskell._professionnel";
+$query =    "SELECT * from tripskell._offre";
 $stmt = $dbh->prepare($query);
 
 $stmt->execute();
 $result = $stmt->fetchAll();
 
-echo("<br>resultat pros<br>");
+echo("<br>resultat offre<br>");
 foreach ($result as $row)
 {
     print_r($row);

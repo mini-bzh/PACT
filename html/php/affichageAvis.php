@@ -53,7 +53,7 @@
 
                 $resultReponse = $stmt->fetch();
 
-                if($resultReponse != [])
+                if($resultReponse != [])                //si il y a une réponse à l'avis
                 {                    
                     $idPro = $resultReponse["id_c"];
                     
@@ -68,7 +68,7 @@
                     $stmt->execute();
                     $result = $stmt->fetch();
 
-                    if($result != [])
+                    if($result != [])           //affiche la réponse
                     {
                         $nomPro = $result["raison_social"];
                         $pdpPro = $result["pdp"];
@@ -99,8 +99,39 @@
                     <hr>
                     <?php
                 }
+                else
+                {
+                    include('../php/verif_compte_pro.php');
+                    
+                    if($comptePro)
+                    {
+                        $query =    "SELECT count(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
+                        WHERE tripskell._offre.id_c = :idCompte AND tripskell._avis.id_avis = :idAvis";         //regarde si le pro connecté possède l'offre sur laquelle on a déposé una vis
 
-                
+                        $stmt = $dbh->prepare($query);
+                        $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
+                        $stmt->bindParam(":idAvis", $avis["id_avis"]);
+                        $stmt->execute();
+
+                        $offreDuPro = $stmt->fetch()["count"];
+                        
+                        if($offreDuPro)
+                        {
+                            ?>
+                            <h5>Voulez-vous répondre à cet avis ?</h5>
+                            <div class="formReponse">
+                                <textarea type=""text name="reponseAvis" maxlength="200" class="reponseAvis" placeholder="Répondez à l'avis de <?php echo $membre["login"];?> !"></textarea>
+                                
+                                <p class="erreurReponseVide" hidden>Veuillez écrire votre réponse !</p>
+                                <div class="btnRepondre grossisQuandHover">
+                                    <p>répondre</p>
+                                </div> 
+                            </div>
+                            <hr>
+                            <?php
+                        }
+                    }
+                }    
             ?>
             <!-- Image de l'avis -->
             <section class="conteneurSpaceBetween">
@@ -181,11 +212,8 @@
                         
                     </div>
                 </div>
-                
             </section>
-            
         </article>
-
         <?php
     }
 
