@@ -95,12 +95,6 @@ if (isset($idCompte)) {
             if ($password == $realpassword) {
                 header("Location: ModifCompteProPublic.php");
             }
-        } else {
-?>
-            <script>
-                alert("Le mot de passe saisi est incorrect!");
-            </script>
-            <?php
         }
     } else {
         if ((isset($_POST['password']))) {
@@ -464,12 +458,14 @@ if (isset($idCompte)) {
 
             <!-- Bouton de données bancaires -->
             <!--<a href="ModifInfoBancaire.php">-->
+            <?php if (isset($idproprive)){?>
             <button class="btnDataBanc btn"  onclick="confModifBanc()">
             <?php
                  include '../icones/creditCardSVG.svg';
             ?>
                 <p class="boldArchivo texteSmall">Modifier les informations bancaires</p>
             </button>
+            <?php } ?>
             <!--</a>-->
 
 
@@ -478,8 +474,9 @@ if (isset($idCompte)) {
                         ?>
 
                         <?php
+
                         // On affiche le bouton de données bancaires si c'est un pro
-                        if ($comptePro) {
+                        if (isset($idproprive)) {
                         ?>
                             <a href="listeFacture.php">
                                 <!-- Bouton direction page facture -->
@@ -496,9 +493,6 @@ if (isset($idCompte)) {
                         }
                         ?>
 
-                    </div>
-
-                    <div class="générationAPI">
                         <!-- On affiche le bouton qui génère des clés API -->
                         <button class="btnCreaAPI btn">
                             <?php
@@ -506,6 +500,11 @@ if (isset($idCompte)) {
                             ?>
                             <p class="boldArchivo texteSmall">Génerer une clé API</p>
                         </button>
+
+                    </div>
+
+                    <div class="générationAPI">
+                        
                     <strong><p id="apiKeyTexte"></p></strong>
                     <p id="apiKey"></p>
                     </div>

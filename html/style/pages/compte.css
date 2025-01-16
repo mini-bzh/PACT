@@ -294,6 +294,10 @@ body.no-scroll {
     font-size: var(--typescale-small-text);
 }
 
+.btnCreaAPI {
+    background-color: var(--accentLight);
+}
+
 .btnCreaAPI svg path{
     stroke-width: 2;
 }
