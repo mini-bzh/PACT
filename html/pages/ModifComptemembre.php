@@ -128,15 +128,16 @@ if (!empty($_POST)) {
     </div>
 
     <div class = FirstSentence>
-    <p>Les champs qui possède une </p> 
-    <div class="Asterisque"> * </div> 
-    <p>sont obligatoires.</p>
+        <p>Les champs qui possède une </p> 
+        <div class="Asterisque"> * </div> 
+        <p>sont obligatoires.</p>
     </div>
 
     <!-- Formulaire de création d'offre -->
 
     <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
 
+    <div class="LogetPdP">
         <!-- Login -->
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
@@ -148,6 +149,22 @@ if (!empty($_POST)) {
             ?>
         </div>
 
+        <!-- Champs pour sélectionner les images -->
+        <div class="champs">
+                <div class ="PhotoDeProfil">
+                    <img id="previewImage" 
+                        src="../images/pdp/<?php echo $infos['pdp'] ?>" 
+                        alt="Cliquez pour ajouter une image" 
+                        style="cursor: pointer; width: 200px; height: auto;" 
+                        onclick="document.getElementById('fichier1').click()">
+                    <input type="file" id="fichier1" name="fichier1" 
+                        accept="image/png, image/jpeg" 
+                        style="display: none;" 
+                        onchange="updatePreview()">
+                </div>    
+            </div>
+        </div>    
+        <div class="InfoPerso">    
          <!-- Nom  -->
          <div class="champs">
             <label for="Nom">Nom <span class="required">*</span> :</label>
@@ -159,19 +176,6 @@ if (!empty($_POST)) {
             <label for="Prenom">Prenom <span class="required">*</span> :</label>
             <input type="text" id="Prenom" name="Prenom" value="<?php echo $infos['prenom'];?>" required>
         </div>
-
-        <!-- Champs pour sélectionner les images -->
-        <div class="champs">
-            <div class = "pdp_champs">
-                <label for="pdp">Votre photo de profil actuelle :</label>
-                <div class="image-container">
-                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                </div>
-            </div>
-
-            <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg, image/jpg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
         </div>
 
 
@@ -181,6 +185,7 @@ if (!empty($_POST)) {
             <input type="email" id="Adresse_Mail" name="Adresse_Mail" value="<?php echo $infos['adresse_mail'];?>" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
+        <div class="InfoPerso">
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
@@ -190,6 +195,7 @@ if (!empty($_POST)) {
         <div class="champs">
         <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
         <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+        </div>
         </div>
 
 
@@ -263,11 +269,6 @@ if (!empty($_POST)) {
 <?php
     include "../composants/footer/footer.php";
 ?>
-
-
-
-
-
 <script>
     function updateFileName() {
         const fileInput = document.getElementById('fichier1'); // Champ de fichier
@@ -313,8 +314,25 @@ if (!empty($_POST)) {
             return; // Sort de la fonction
         }
     });
-</script>
 
+        function updatePreview() {
+            const input = document.getElementById('fichier1');
+            const previewImage = document.getElementById('previewImage');
+            const fileName = document.getElementById('fileName');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+            } else {
+                previewImage.src = "<?php echo '../images/pdp/' . $infos['pdp']; ?>";
+                fileName.textContent = "Aucune image sélectionnée";
+            }
+        }
+    </script>
 
 
 </body>

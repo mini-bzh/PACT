@@ -195,4 +195,5 @@ header("Location: /pages/detailOffre.php?idOffre=" . $_GET["idOffre"]); // on re
 
 </body>
 <script src="../js/creaAvis.js"></script>
+
 </html>

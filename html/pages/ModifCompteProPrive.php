@@ -32,14 +32,6 @@ if (key_exists("idCompte", $_SESSION)) {
  *                                     GESTION DES MODIFICATIONS DU COMPTE PRO PRIVÉ                                      *                    
  *------------------------------------------------------------------------------------------------------------------------*/
 
-
-
-
-
-
-
-
-
 if (isset($idproprive)) {
     
     $idCompte = $_SESSION['idCompte'];
@@ -139,6 +131,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -152,14 +145,13 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
     <link rel="stylesheet" href="../style/pages/CreaCompteMembre.css">
     <link rel="stylesheet" href="../style/style.css">
-    <script src="../js/ModifCompte.js" defer></script>
 
 </head>
 
 <?php include "../composants/header/header.php";        //import navbar
         ?>
 
-<body class=<?php                          //met le bon fond en fonction de l'utilisateur
+<body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
             {
                 echo "fondPro";
@@ -172,20 +164,21 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 <main>
     <div class="pageChoixCo">
             <div class="textBulle decaleBulleGauche">
-                <p>Modification d'un compte Professionnel :</p>
+                <p>Modification d'un compte membre :</p>
             </div>
     </div>
 
     <div class = FirstSentence>
-    <p>Les champs qui possède une </p> 
-    <div class="Asterisque"> * </div> 
-    <p>sont obligatoires.</p>
+        <p>Les champs qui possède une </p> 
+        <div class="Asterisque"> * </div> 
+        <p>sont obligatoires.</p>
     </div>
 
     <!-- Formulaire de création d'offre -->
 
-    <form id="form" name="creation" action="" method="post" enctype="multipart/form-data">
+    <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
 
+    <div class="LogetPdP">
         <!-- Login -->
         <div class="champs">
             <label for="Login">Login <span class="required">*</span> :</label>
@@ -197,37 +190,50 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             ?>
         </div>
 
-         <!-- Nom  -->
-         <div class="champs">
-            <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
-            <input type="text" id="RaisonSociale" name="RaisonSociale" value="<?php echo $infos['raison_social'];?>" required>
-        </div>
-
         <!-- Champs pour sélectionner les images -->
         <div class="champs">
-        <div class = "pdp_champs">
-                <label for="pdp">Votre photo de profil actuelle :</label>
-                <div class="image-container">
-                    <img class="circular-image" src="../images/pdp/<?php echo $infos['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                </div>
+                <div class ="PhotoDeProfil">
+                    <img id="previewImage" 
+                        src="../images/pdp/<?php echo $infos['pdp'] ?>" 
+                        alt="Cliquez pour ajouter une image" 
+                        style="cursor: pointer; width: 200px; height: auto;" 
+                        onclick="document.getElementById('fichier1').click()">
+                    <input type="file" id="fichier1" name="fichier1" 
+                        accept="image/png, image/jpeg" 
+                        style="display: none;" 
+                        onchange="updatePreview()">
+                </div>    
             </div>
+        </div>    
 
-            <label for="fichier1">Ajouter une photo de profil :</label>
-            <input type="file" id="fichier1" name="fichier1" accept="image/png, image/jpeg" onchange="updateFileName()" >
-            <span id="fileName" class="file-name"></span> <!-- Zone pour afficher le nom -->
+
+
+<!-- Nom  -->
+<div class="champs">
+   <label for="RaisonSociale">Raison Sociale <span class="required">*</span> :</label>
+   <input type="text" id="RaisonSociale" name="RaisonSociale" value="<?php echo $infos['raison_social'];?>" required>
+</div>
+        </div>
         </div>
 
 
         <!-- Adresse Mail -->
         <div class="champs">
             <label for="Adresse_Mail">E-mail <span class="required">*</span> :</label>
-            <input type="email" id="Adresse_Mail" name="Adresse Mail" value="<?php echo $infos['adresse_mail'];?>" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
+            <input type="email" id="Adresse_Mail" name="Adresse_Mail" value="<?php echo $infos['adresse_mail'];?>" pattern='(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))' required>
         </div>
 
+        <div class="InfoPerso">
             <!-- Telephone -->
         <div class="champs">
             <label for="Telephone">Téléphone :</label>
-            <input type="text" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^^\d{10}$">
+            <input type="number" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^0[0-9]{9}$">
+        </div>
+
+        <div class="champs">
+        <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
+        <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+        </div>
         </div>
 
 
@@ -253,7 +259,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         <!-- Mot de Passe -->
         <div class="champs">
             <label for="Confirm_Mot_de_P">Confirmation du mot de passe <span class="required">*</span> :</label>
-            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P" value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
+            <input type="password" id="Confirm_Mot_de_P" name="Confirm_Mot_de_P"  value="<?php echo $infos['mot_de_passe'];?>" minlength="12" maxlength="50" required>
         </div>
         <?php 
         // Vérification de la confirmation du mot de passe
@@ -267,60 +273,30 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             }
         }
         ?>
-
-        <div class="champs">
+    
+    <div class="champs">
             <label for="codeSiren">Code SIREN  <span class="required"></span> :</label>
             <input type="text" id="codeSiren" name="codeSiren" value="<?php echo $infos['num_siren'];?>" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
         </div>
 
-
-         <!-- Adresse -->
-         <div class="champs">
-         <div class="labelAdresse">
-                        <label for="adresse">Adresse :</label>
-                    </div>
-                <div class="champsAdresse">
-                    
-                    <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" >
-                    <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" >
-                    <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" >
-                    <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
-                </div>
-                </div>
-
-        <div class="pageChoixCo">
-            <div class="textBulle decaleBulleGauche">
-                <div class="coBancaires">
-                    <h2>Coordonnées bancaires :</h2>
-                    <p>Vous devrez compléter ces champs si vous souhaitez publier une offre à l’avenir. </p>
-                </div>
-            </div>
-        </div>
-
+        
+        <!-- Adresse -->
         <div class="champs">
-            <label for="NumeroCB">Numéro de carte :  <span class="required"></span> </label>
-            <input type="text" id="NumeroCB" name="NumeroCB" value="<?php echo $infos['coordonnee_bancaire'];?>" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
-        </div>
-    
-        <div class="champs">
-            <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
-            <input type="text" id="DateCB" name="DateCB" value="<?php echo $infos['date_exp'];?>" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
-        </div>
-
-        <div class="champs">
-            <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
-            <input type="text" id="CryptoCB" name="CryptoCB" value="<?php echo $infos['cryptogramme'];?>" minlength="3" maxlength="" pattern="^^\d{3}$"> 
-        </div>
-
-
-            <div class="champs">
-            <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
-            <input type="text" id="TitulaireCB" name="TitulaireCB" value="<?php echo $infos['nom_titulaire_carte'];?>">
-
+           <div class="labelAdresse">
+               <label for="adresse">Adresse :</label>
+           </div>
+       <div class="champsAdresse">
            
-        </div>
-        <hr>
+           <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" >
+           <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" >
+           <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" >
+           <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
+       </div>
+       </div>
 
+
+        <hr>
+    
         <div class="zoneBtn">
                         <a href="compte.php" class="btnAnnuler">
                             <p class="texteLarge boldArchivo">Annuler</p>
@@ -348,9 +324,12 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         </div>
 
     </form>
-
-    <script>
-            function updateFileName() {
+        </main>
+<?php
+    include "../composants/footer/footer.php";
+?>
+<script>
+    function updateFileName() {
         const fileInput = document.getElementById('fichier1'); // Champ de fichier
         const fileName = document.getElementById('fileName'); // Zone où afficher le nom
         const label = document.getElementById('customFileLabel'); // Label du bouton
@@ -395,58 +374,29 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
         }
     });
 
+        function updatePreview() {
+            const input = document.getElementById('fichier1');
+            const previewImage = document.getElementById('previewImage');
+            const fileName = document.getElementById('fileName');
 
-    
-const showCheckbox = document.getElementById('showCheckbox');
-const hideCheckbox = document.getElementById('hideCheckbox');
-const typeDomaineInput = document.getElementById('typeDomaine');
-const extraFields = document.getElementById('extraFields');
-
-// Fonction pour vérifier et forcer qu'une case est cochée
-function checkCheckboxes() {
-    if (!showCheckbox.checked && !hideCheckbox.checked) {
-        // Si aucune case n'est cochée, on coche par défaut la case "Domaine Privé"
-        showCheckbox.checked = true;
-        typeDomaineInput.value = 'privé';
-        extraFields.classList.remove('hidden');
-    }
-}
-
-// Mise à jour des champs et sections en fonction des cases cochées
-showCheckbox.addEventListener('change', function () {
-    if (this.checked) {
-        typeDomaineInput.value = 'privé';
-        hideCheckbox.checked = false;
-        extraFields.classList.remove('hidden');
-    } else {
-        typeDomaineInput.value = '';
-        extraFields.classList.add('hidden');
-    }
-    checkCheckboxes();  // Vérifie l'état des cases
-});
-
-hideCheckbox.addEventListener('change', function () {
-    if (this.checked) {
-        typeDomaineInput.value = 'public';
-        showCheckbox.checked = false;
-        extraFields.classList.add('hidden');
-    } else {
-        typeDomaineInput.value = '';
-    }
-    checkCheckboxes();  // Vérifie l'état des cases
-});
-
-// Vérifie initialement si une case est cochée au chargement de la page
-checkCheckboxes();
-</script>
-
-    
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+                fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+            } else {
+                previewImage.src = "<?php echo '../images/pdp/' . $infos['pdp']; ?>";
+                fileName.textContent = "Aucune image sélectionnée";
+            }
+        }
+    </script>
 
 
-        </main>
+</body>
+</html>
+
 <?php
-    include "../composants/footer/footer.php";
+}
 ?>
-<?php
-}
-
