@@ -25,7 +25,7 @@ if ($comptePro)      /* prépare la requête pour récupérer les offres à affi
     $stmt->bindParam(":id_c", var: $id_c);
     $id_c = $_SESSION["idCompte"];
 } else {
-    $stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p where p.id_option='A la une';");
+    $stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p;");
 }
 
 $stmt->execute();
@@ -37,15 +37,15 @@ $stmt = $dbh->prepare("select count(idOffre) from tripskell.offre_visiteur as p 
 $stmt->execute();
 $nbOffreALaUne = $stmt->fetchAll()[0];
 
-/* On récupère toute les offres pour les afficher sur la page */
-$stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p;");
+/* On récupère toute les offres pour les afficher sur la page d'un visiteur ou membre */
+$stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p  where p.id_option='A la une';");
 
 $stmt->execute();
-$allOffres = $stmt->fetchAll();
+$offreALaUne = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -100,16 +100,17 @@ $allOffres = $stmt->fetchAll();
         {
         ?>
             <h1>Mes offres en ligne</h1>
+            
         <?php
         } else {
         ?>
-
+            <h1>À la Une</h1>
             <!-- ici on va vérifier qu'il y a plus de 3 offres A La Une sinon le carroussel ne s'affichera pas -->
             <?php if ($nbOffreALaUne['count'] > 4) { ?>
                 <div class="carousel">
                     <div class="card">
                         <?php
-                        foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
                         {
                         ?>
                             <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
@@ -128,7 +129,7 @@ $allOffres = $stmt->fetchAll();
                 <div class="small-carousel">
                     <div class="card">
                         <?php
-                        foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
                         {
                         ?>
                             <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
