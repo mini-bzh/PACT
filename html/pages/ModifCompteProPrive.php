@@ -172,7 +172,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
     <!-- Formulaire de modification de compte -->
 
     <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
-    <p>Modification d'un compte professionnel</p>
+    <p class="titreFrom">Modification d'un compte professionnel</p>
     <div class="LogetPdP">
         <!-- Login -->
         <div class="champs">

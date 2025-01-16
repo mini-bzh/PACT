@@ -160,6 +160,10 @@ button[type="button"]:hover {
     background-color: #c82333;
 }
 
+.titreFrom {
+    margin-bottom: 5vh;
+    font-size: var(--typescale-large-text);
+}
 
 .file-name {
     margin-top: 10px;
@@ -447,19 +451,6 @@ form {
 
 #conteneurTitreNote .champs:first-of-type{
     margin-right: 50px;
-}
-
-#conteneurTitreForm{
-    width: 100%;
-}
-
-#conteneurTitreForm h3{
-    border-left: 20px solid var(--secondary);
-    padding-left: 15px;
-}
-
-#conteneurTitreForm p{
-    margin: 25px 0px;
 }
 
 .champs input, .champs textarea{

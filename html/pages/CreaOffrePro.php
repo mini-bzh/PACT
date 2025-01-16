@@ -421,7 +421,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
             <!-- Formulaire de création d'offre -->
 
             <form id="formCreaOffre" name="creation" action="/pages/CreaOffrePro.php" method="post" enctype="multipart/form-data">
-                <p>Creation d'une offre</p>
+                <p class="titreFrom">Creation d'une offre</p>
                 <div class="InfoPerso">
                     <!-- titre -->
                     <div class="champs">
@@ -798,7 +798,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     
 
                     <button type="submit" href="gestionOffres.php" class="btnConfirmer">
-                        <p class="texteLarge boldArchivo">Confirmer</p>
+                        <p class="texteLarge boldArchivo">Valider</p>
                     </button>
                     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

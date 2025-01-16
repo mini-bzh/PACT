@@ -121,11 +121,6 @@ if (!empty($_POST)) {
             }
         ?>>
 <main>
-    <div class="pageChoixCo">
-            <div class="textBulle decaleBulleGauche">
-                <p>Modification d'un compte membre :</p>
-            </div>
-    </div>
 
     <div class = FirstSentence>
         <p>Les champs qui possède une </p> 
@@ -136,6 +131,7 @@ if (!empty($_POST)) {
     <!-- Formulaire de création d'offre -->
 
     <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
+    <p class="titreFrom">Modification d'un compte membre</p>
 
     <div class="LogetPdP">
         <!-- Login -->

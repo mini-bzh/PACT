@@ -108,6 +108,10 @@ textarea{
     font-family: "Luciole-bold";
 }
 
+.centerText{
+    text-align: center;
+}
+
 
 .grossisQuandHover{
     transition: transform 0.3s ease;
