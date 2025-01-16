@@ -439,7 +439,8 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                         <input type="file" id="fichier1" name="fichier1" 
                             accept="image/png, image/jpeg" 
                             style="display: none;" 
-                            onchange="updatePreview()">
+                            onchange="updatePreview()"
+                            required>
                     </div>  
 </div>    
             </div>

@@ -182,12 +182,20 @@
                             $avisSignaler = $dbh->query("select * from tripskell._signalerAvis where id_c=" . $idCompteConnecte . " and id_avis=". $avis["id_avis"].";")->fetchAll();
                             if($avisSignaler == null){ //bouton pour signaler
                             ?>
+
                                 <div id="<?php echo $avis["id_avis"]?>" class="btnSignalerAvis grossisQuandHover" onclick="confSignaler(event)">     
                                     <img src="../icones/signalerSVG.svg" alt="icone signaler">
                                     <p>Signaler</p>
                                     <p hidden><?php echo $idCompteConnecte?></p>
+
+                            <a href="modifAvis.php">
+                                <div class="btnModifierAvis grossisQuandHover">
+                                    <img src="../icones/modifierSVG.svg" alt="icone modifier">
+                                    <p>Modifier</p>
+
                                     <p hidden><?php echo $avis["id_avis"]?></p>
                                 </div>
+                            </a>
                             <?php
                             }
                             else if($avisSignaler != null){ // bouton déjà signaler

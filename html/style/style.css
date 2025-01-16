@@ -462,6 +462,7 @@ textarea{
     align-items: center;
 }
 
+
 .avis .btnSignalerAvis{
     border: 1px solid black;
     width: fit-content;
@@ -507,6 +508,13 @@ textarea{
     transform: translateY(-1px);
     user-select: none;
     pointer-events: none;
+}
+
+.avis .btnModifierAvis img{
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    transform: translateY(-1px);
 }
 
 .avis .btnModifierAvis img{
@@ -639,6 +647,12 @@ textarea{
 .formReponse .erreurReponseVide{
     font-size: var(--typescale-very-small-text);
     color: red;
+}
+
+.avis .btnModifierAvis p{
+    font-size: var(--typescale-very-small-text);
+    padding: 0px;
+    text-decoration: none;
 }
 
 /*-------------/ apercu offre /--------------*/
