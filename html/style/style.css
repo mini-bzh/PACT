@@ -308,6 +308,88 @@ textarea{
     border: 4px solid var(--accentLight);
 }
 
+/*-----------------/ choix création compte /------------------*/
+#mainChoixCreaCompte .btnAnnuler{
+    border-radius: 25px;
+    width: 320px;
+    height: 60px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    margin: 3%;
+    cursor: pointer;
+    border: none;
+    background-color: red;
+}
+
+#mainChoixCreaCompte .btnAnnuler > svg{
+    width: 40px;
+    height: 40px;
+}
+
+#mainChoixCreaCompte .textBulle{
+    width: 450px;
+    height: 120px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    background-color: white;
+    margin: 3%;
+    position: relative;
+}
+
+#mainChoixCreaCompte .textBulle > p{
+    font-size: var(--typescale-large-text);
+}
+
+#mainChoixCreaCompte .textBulle + div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+
+#mainChoixCreaCompte .btnAnnuler > svg{
+    width: 40px;
+    height: 40px;
+}
+
+#mainChoixCreaCompte .zoneBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3%;
+}
+
+
+#mainChoixCreaCompte .ChoixCrea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: auto;
+}
+
+
+
+#mainChoixCreaCompte .TxtEntreBtn{
+    font-size: var(--typescale-large-text);
+    width: 60px;
+    height: 50px;
+    border: var(--primaryLight) solid 2px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+}
+
 /*-------------/ affichage avis /--------------*/
 
 .conteneurAvis{
@@ -1731,6 +1813,7 @@ aside fieldset {
     #mainAvis .titreOffre{
         font-size: var(--typescale-h2);
     }
+
 
     /*-----------------/ APERCU OFFRE /------------------*/
 

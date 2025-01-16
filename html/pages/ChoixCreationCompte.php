@@ -68,7 +68,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
 <!------ MAIN  ------>
 
-<main>
+<main id="mainChoixCreaCompte">
 
 
 <div class="pageChoixCo">
