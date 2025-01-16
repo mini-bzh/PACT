@@ -226,7 +226,7 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
         <hr>
 
         <button type="submit" href="compte.php" class="btnConfirmer">
-            <p class="texteLarge boldArchivo">Confirmer</p>
+            <p class="texteLarge boldArchivo">Valider</p>
         </button>
 
         </div>

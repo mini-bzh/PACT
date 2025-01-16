@@ -96,13 +96,14 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
 
 <body class="fondVisiteur">
 
+    <div class = FirstSentence>
+        <p>Les champs qui possède une </p> 
+        <div class="Asterisque"> * </div> 
+        <p>sont obligatoires.</p>
+    </div>
+
     <form name="creation" action="" method="post" enctype="multipart/form-data">
-        <div id="conteneurTitreForm">
-            <h3>Modifier un avis</h3>
-            <div>
-                <p>Les champs qui possèdent une <span class="Asterisque"> * </span> sont obligatoires.</p> 
-            </div>
-        </div>
+        <p class="titreFrom">Modifier un avis</p>
 
         <div id="conteneurTitreNote">
             <div class="champs">
@@ -171,12 +172,9 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
             </label>        
         </div>
 
-        <div class="zoneBtn">
-            <button type="submit" class="btnConfirmer">
-                <p class="texteLarge boldArchivo">Confirmer</p>
-                <?php include '../icones/okSVG.svg'; ?>
-            </button>
-        </div>
+        <button type="submit" class="btnConfirmer">
+            <p class="texteLarge boldArchivo">Valider</p>
+        </button>
     </form>
 
     <script src="../js/creaAvis.js"></script>

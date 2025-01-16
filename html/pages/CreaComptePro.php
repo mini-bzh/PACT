@@ -369,7 +369,7 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         <hr>
 
         <button type="submit" href="compte.php" class="btnConfirmer">
-            <p class="texteLarge boldArchivo">Confirmer</p>
+            <p class="texteLarge boldArchivo">Valider</p>
         </button>
 
     </form>
