@@ -349,7 +349,7 @@ th, td {
 #overlay #btnFermerOverlay p{
     color: white;
 }
-*/
+
 
 .circular-image {
     width: 80px;
@@ -360,9 +360,12 @@ th, td {
 .avis .conteneurBtnGestionAvis{
     display: flex;
 }
+*/
+
 
 /* btn pouces */
 
+/*
 .conteneurPouces{
     display: flex;
     align-items: center;
@@ -389,6 +392,8 @@ th, td {
 .conteneurPouces .pouceDislike img{
     transform: translateY(2px);
 }
+
+*/
 
 /* animations de survol des pouces*/
 
