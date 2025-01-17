@@ -19,13 +19,18 @@ if (!isset($_SESSION["idCompte"])) {
 // binding pour l'id du compte (id_c <- idCompte(dans $_SESSION))
 $id_c = $_SESSION["idCompte"];
 
-if (key_exists("idCompte", $_SESSION))
-{
-    // reccuperation de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+if (key_exists("idCompte", $_SESSION)) {
+    // reccuperation de id_c de pro_prive
+    $result_query = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll();
+    if (!empty($result_query)) {
+        $idproprive = $result_query[0];
+    }
 
     // reccuperation de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $result_query = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll();
+    if (!empty($result_query)) {
+        $idpropublic = $result_query[0];
+    }
 }
 
 
