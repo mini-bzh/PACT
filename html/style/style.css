@@ -394,7 +394,6 @@ textarea {
     padding: 0 2%;
     font-size: var(--typescale-text);
     margin-top: 3%;
-
 }
 
 #mainConnexion form{
@@ -528,6 +527,240 @@ textarea {
     }
 }
 
+/*-------------/ gestion des offres /--------------*/
+#mainGestionOffres{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    margin-top: 50px;
+}
+
+#mainGestionOffres .conteneurSVGtexte{
+    display: flex;
+    align-items: center;
+}
+
+#mainGestionOffres .conteneurSVGtexte img{
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+#btnAjouterOffre{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    padding: 12px;
+    border-radius: 40px;
+    margin: 20px 0px;
+    order: 0;
+}
+
+#mainGestionOffres #conteneurBtnOffres{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 40%;
+}
+
+#mainGestionOffres h1{
+    margin: 30px;
+}
+
+#separateurOffreGestion{
+    height: 3px;
+    background-color: black;
+    margin: 40px 0px 20px;
+}
+
+.enLigne{
+    color: var(--accentDark);
+}
+
+.horsLigne{
+    color: var(--rouge);
+}
+
+.btnGestionOffre{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: fit-content;
+    padding: 8px;
+    margin-right: 40px;
+}
+
+
+.btnGestionOffre img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.btnGestionOffre p{
+    font-size: var(--typescale-large-text);
+}
+
+#mainGestionOffres .styleBtn {
+    text-decoration: none;
+    color: black;
+}
+
+#conteneurBtnGestion{
+    margin-top: 20px;
+    display: flex;
+}
+
+#btnEnHorsLigne{
+    cursor: pointer;
+}
+
+.btnModif{
+    color: black;
+    text-decoration: none;
+
+}
+
+.btnModifCache{
+    display: none;
+}
+
+#mainGestionOffres .conteneurGestion a{
+    color: black;
+    text-decoration: none;
+}
+
+#mainGestionOffres th, #mainGestionOffres td {
+    padding: 20px;
+    font-size: var(--typescale-small-text);
+    font-family: 'Archivo';
+}
+
+/* bouton facture */
+.btnAccesFacture a{
+    text-decoration: none;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    /* padding-top: 1%; */
+} 
+
+#mainGestionOffres #conteneurOffre{
+    order: 2;
+}
+
+#mainGestionOffres #conteneurDetailPrix{
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    order: 1;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width : 428px)
+{
+    #mainGestionOffres .conteneurBtnOffres{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+/*-------------/ détail offre /--------------*/
+.offre{
+    margin: 15px 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: var(--ombreNoire);
+    height: fit-content;
+    padding: 40px;
+    max-width: 1000px;
+}
+
+.offre p{
+    font-size: var(--typescale-text);
+}
+
+.offre h2+p{
+    font-weight: bold;
+}
+
+.offre .conteneurSVGtexte{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    flex-wrap: wrap;
+}
+.offre .conteneurSVGtexte img{
+    width: 40px;
+    height: 40px;
+}
+
+.offre .noteDetailOffre{
+    display: flex;
+}
+
+.offre .noteDetailOffre p{
+    margin-right: 20px;
+}
+
+.offre .imgResume img{
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+.offre .imgResume{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    padding: 0px;
+}
+
+.offre .resumePrixDetailOffre{
+    height: fit-content;
+    width: 100%;
+    border-radius: 0px 0px 15px 15px;
+    background-color: var(--primaryDark);
+    text-align: center;
+    padding: 10px;
+}
+
+.offre .resumePrixDetailOffre hr{
+    margin: 10px 15px;
+}
+
+.offre .resumePrixDetailOffre p{
+    font-size: var(--typescale-small-text);
+    color: white;
+}
+
+.offre #descriptionOffre{
+    margin: 30px 0px;
+}
+
+.offre #partieTags img{
+    margin-right: 10px;
+}
+
+.offre #partieTags #conteneurTagsOffre{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0px;
+}
+
+.offre #partieTags, .offre #partieAdresse{
+    width: 330px;
+}
 
 /*-------------/ affichage avis /--------------*/
 
