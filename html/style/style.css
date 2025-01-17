@@ -671,6 +671,79 @@ textarea {
     }
 }
 
+/*-------------/ liste facture /--------------*/
+
+/* Style pour la liste des factures */
+.divListeFacture {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5em;
+    margin-top: 1em;
+    
+}
+
+.divListeFacture{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 80%;
+    background-color: #f8f8f8;
+    max-width: 1000px;
+    margin: 8%;
+    padding: 5%;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.divListeFacture hr{
+    width: 80%;
+    align-self: center;
+}
+
+/* Style pour les lignes de factures */
+
+.divFacture{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    margin: 4% 0;
+}
+
+.divFacture > p{
+    color: black;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+/* css des boutons dans la liste des factures */
+.btnFacture {
+    background-color: lightslategray;
+    width: 30%;
+    height: 40px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:none;
+}
+
+.btnFacture:hover{
+    cursor: pointer;
+}
+
+.btnFacture a{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+
 /*-------------/ détail offre /--------------*/
 .offre{
     margin: 15px 0;
