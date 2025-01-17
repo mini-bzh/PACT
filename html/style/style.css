@@ -1030,11 +1030,10 @@ textarea {
 */
 /* Cas de mise en relief */
 .relief {
-    border: 10px solid;
+    border: 3px solid;
     border-image: linear-gradient(to right, #DDF289, #B9C549, #6C6E0F) 1;
-    /* border: #B9C549 solid 10px; */
     padding: 10px;
-    /* border-radius: 20px; */
+    border-radius: 0;
 }
 
 
