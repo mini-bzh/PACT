@@ -51,7 +51,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
         <!-- Favicon -->
         <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-        <link rel="stylesheet" href="/style/pages/listeFacture.css">
+        <link rel="stylesheet" href="/style/style.css">
     </head>
 
     <body class="fondPro">

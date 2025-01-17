@@ -470,7 +470,7 @@ textarea {
 }
 
 .btnConnexion:hover{
-    background-color: var(--primaryDark);
+    background-color: var(--primary);
 }
 
 #mainConnexion .zoneBtn{
