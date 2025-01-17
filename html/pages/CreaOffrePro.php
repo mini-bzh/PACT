@@ -555,7 +555,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div id="champsSpectacle">
                         <div class="InfoPerso">
                             <div class="champs">
-                                <label for="duree_s">Duree de la Spectacle <span class="required">*</span> :</label>
+                                <label for="duree_s">Durée du spectacle <span class="required">*</span> :</label>
                                 <input type="time" id="duree_s" name="duree_s" />
                             </div>
                             <div class="champs">

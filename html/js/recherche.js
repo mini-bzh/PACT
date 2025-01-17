@@ -13,7 +13,7 @@ function getData() {
         return [];
     }
 }
-  
+
 // Fonction pour transformer les données en dictionnaire avec les nomtag associés à chaque idoffre
 function transformDataToDictionary(data) {
     var dictionary = {}; // Initialisation du dictionnaire vide
