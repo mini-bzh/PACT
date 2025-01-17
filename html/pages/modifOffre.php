@@ -492,7 +492,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     foreach ($tags_cat as $cat) {
                         
 ?>
-                        <div id="tags<?php echo $cat; ?>">
+                        <div id="tags<?php echo $cat; ?>" class="listeTags">
                             <label>Tags :</label>
                             <div class="tags">
 <?php
