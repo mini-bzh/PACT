@@ -144,18 +144,19 @@ $offreALaUne = $stmt->fetchAll();
 
         <!-- cette partie là sera afficher quand le site sera en version téléphone     -->
         <div class="offreALaUne">
-            <h1>À La Une</h1>
+            <article>
                 <?php
 
                 foreach ($rows as $offre)          // parcourt les offres pour les afficher
                 {
-                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offreALaUne["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
                         <?php
                         af_offre($offre);
                         ?></a>
                         <?php
                     }
                         ?>
+            </article>
         </div>
 
         <h1>Autres offres</h1>

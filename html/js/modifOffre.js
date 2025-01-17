@@ -2,19 +2,19 @@
 
 if (categorie_offre == 'visite') {
     document.getElementById('champsVisite').style.display = 'block';
-    document.getElementById('tagsVisite').style.display = 'block';
+    document.getElementById('tagsVisite').style.display = 'flex';
 } else if (categorie_offre == 'restauration') {
     document.getElementById('champsRestauration').style.display = 'block';
-    document.getElementById('tagsRestauration').style.display = 'block';
+    document.getElementById('tagsRestauration').style.display = 'flex';
 } else if (categorie_offre ==  'parcattraction') {
     document.getElementById('champsPA').style.display = 'block';
-    document.getElementById('tagsPA').style.display = 'block';
+    document.getElementById('tagsPA').style.display = 'flex';
 } else if (categorie_offre == 'spectacle') {
     document.getElementById('champsSpectacle').style.display = 'block';
-    document.getElementById('tagsSpectacle').style.display = 'block';
+    document.getElementById('tagsSpectacle').style.display = 'flex';
 } else if (categorie_offre == 'activite') {
     document.getElementById('champsActivite').style.display = 'block';
-    document.getElementById('tagsActivite').style.display = 'block';
+    document.getElementById('tagsActivite').style.display = 'flex';
 }
 
 /* --------------------------------- partie horaires  --------------------------------- */
