@@ -5,7 +5,7 @@ session_start();
 $_SESSION['idCompte'] = null;       // met l'id de connextion a null pour eviter toute aproximation
 
 // recuperation des parametre de connection a la BdD
-include('../php/connection_params.php');
+include('../composants/bdd/connection_params.php');
 
 
 // connexion a la BdD

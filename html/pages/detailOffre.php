@@ -2,7 +2,7 @@
     session_start(); // recuperation de la sessions
 
     // recuperation des parametre de connection a la BdD
-    include('../php/connection_params.php');
+    include('../composants/bdd/connection_params.php');
 
     // contient fonction affichage_etoiles pour afficher les etoiles
     include('../php/etoiles.php'); 
@@ -12,12 +12,12 @@
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
     // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('../php/verif_compte_pro.php');
-    include('../php/verif_compte_membre.php');
+    include('../composants/verif/verif_compte_pro.php');
+    include('../composants/verif/verif_compte_membre.php');
 
-    include('../php/verif_categorie.php');
+    include('../composants/verif/verif_categorie.php');
     
-    include_once("../php/affichageAvis.php");
+    include_once("../composants/affichage/affichageAvis.php");
 
 
     $user = null;

@@ -4,7 +4,7 @@
     {
 
         // recuperation des parametre de connection a la BdD
-        include('../php/connection_params.php');
+        include('../composants/bdd/connection_params.php');
         
         // connexion a la BdD
         $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
@@ -101,7 +101,7 @@
                 }
                 else
                 {
-                    include('../php/verif_compte_pro.php');
+                    include('../composants/verif/verif_compte_pro.php');
                     
                     if($comptePro)
                     {

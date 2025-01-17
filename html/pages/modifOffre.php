@@ -4,14 +4,14 @@ use Sabberworm\CSS\CSSList\KeyFrame;
 session_start(); // Démarre la session pour récupérer les données de session
 
 // Récupération des paramètres de connexion à la base de données
-include('../php/connection_params.php');
+include('../composants/bdd/connection_params.php');
 
 // Connexion à la base de données
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
 // Inclusion du script pour vérifier si l'utilisateur a un compte pro
-include('../php/verif_compte_pro.php');
+include('../composants/verif/verif_compte_pro.php');
 
 if (!isset($_SESSION["idCompte"]))
 {

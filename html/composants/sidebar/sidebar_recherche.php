@@ -1,5 +1,5 @@
 <?php
-include('../php/connection_params.php');
+include('../composants/bdd/connection_params.php');
     
 // Inclue la fonction qui verifie la catégorie d'une offre
 // connexion a la BdD

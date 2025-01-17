@@ -1,8 +1,8 @@
 
 <?php
     // Inclusion du script pour vérifier si l'utilisateur a un compte pro
-    include('../php/verif_compte_pro.php');
-    include('../php/verif_compte_membre.php');
+    include('../composants/verif/verif_compte_pro.php');
+    include('../composants/verif/verif_compte_membre.php');
 
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
