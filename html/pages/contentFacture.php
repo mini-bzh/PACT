@@ -87,7 +87,7 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facture</title>
-    <link rel="stylesheet" href="../style/pages/contentFacture.css">
+    
 </head>
 
 <!-- Style ici pour génération pdf  -->
@@ -157,10 +157,6 @@ header h2 {
 .tableFacture tfoot td {
     font-weight: bold;
     background-color: #f9f9f9;
-}
-
-.tableFacture .espaceVide{
-    background-color: #555;
 }
 
 </style>
