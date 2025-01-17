@@ -21,11 +21,17 @@ if (!isset($_SESSION["idCompte"])) {
 $id_c = $_SESSION["idCompte"];
 
 if (key_exists("idCompte", $_SESSION)) {
-    // reccuperation de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    // reccuperation de id_c de pro_prive
+    $result_query = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll();
+    if (!empty($result_query)) {
+        $idproprive = $result_query[0];
+    }
 
     // reccuperation de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $result_query = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll();
+    if (!empty($result_query)) {
+        $idpropublic = $result_query[0];
+    }
 }
 
 
@@ -67,8 +73,8 @@ if (in_array($_SESSION["idCompte"], $idproprive)) {
                 <div class="divFacture">
                     <p>Facture N°<?php echo $row["id_facture"]; ?></p>
                     <p><?php echo $row["date_creation"]; ?></p>
-                    <div class="btnFacture"><a href="contentFacture.php?id_facture=<?php echo $row['id_facture']; ?>">Visualiser</a></div>
-                    <div class="btnFacture"><a href="telechargementFacture.php?id_facture=<?php echo $row['id_facture']; ?>">télécharger</a></div>
+                    <div class="btn btnListeFacture"><a href="contentFacture.php?id_facture=<?php echo $row['id_facture']; ?>">Visualiser</a></div>
+                    <div class="btn btnListeFacture"><a href="telechargementFacture.php?id_facture=<?php echo $row['id_facture']; ?>">télécharger</a></div>
                 </div>
                     <hr/>
                 <?php

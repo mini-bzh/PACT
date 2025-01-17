@@ -382,7 +382,6 @@ foreach ($jours as $jour => $horaires)
 ?>
 
 <?php
-print_r($_SESSION["idCompte"]);
 if (!is_null($idproprive) || !is_null($idpropublic)) {
 ?>
     <!DOCTYPE html>
@@ -569,12 +568,10 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <!-- ----------------- ACTIVITE ------------------- -->
 
                     <div id="champsActivite">
-                        <div class="TextAreaOffre">
-                            <div>
+                        <div class="HardToResize">
                                 <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
                                 <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
                             </div>
-                        </div>
                         <div class="InfoPerso">
                         <div class="champs">
                             <label for="duree_a">Durée de l'Activité <span class="required">*</span> :</label>

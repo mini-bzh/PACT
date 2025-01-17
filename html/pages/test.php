@@ -1,58 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulaire Dynamique avec Deux Checkbox</title>
-  <style>
-    .hidden {
-      display: none;
+<?php
+
+    // contient fonction affichage_etoiles pour afficher les etoiles
+    include('../php/connection_params.php');
+    
+    // connexion a la BdD
+    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+
+    $query = "SELECT * FROM TRIPSKELL.offre_visiteur";
+    $stmt = $dbh->prepare($query);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    echo "<br>résultat offre_visiteur<br>";
+    foreach ($result as $row) {
+        echo "<br>";
+        print_r($row);
+        echo "<br>";
     }
-  </style>
-</head>
-<body>
-  <h1>Formulaire Dynamique</h1>
-  <form>
-    <label>
-      <input type="checkbox" id="showCheckbox">
-      Afficher les champs supplémentaires
-    </label>
-    <br>
-    <label>
-      <input type="checkbox" id="hideCheckbox">
-      Cacher les champs supplémentaires
-    </label>
-
-    <!-- Champs supplémentaires -->
-    <div id="extraFields" class="hidden">
-      <label for="extraInput1">Champ supplémentaire 1 :</label>
-      <input type="text" id="extraInput1" name="extraInput1"><br><br>
-
-      <label for="extraInput2">Champ supplémentaire 2 :</label>
-      <input type="text" id="extraInput2" name="extraInput2"><br><br>
-    </div>
-  </form>
-
-  <script>
-    // Récupération des éléments
-    const showCheckbox = document.getElementById('showCheckbox');
-    const hideCheckbox = document.getElementById('hideCheckbox');
-    const extraFields = document.getElementById('extraFields');
-
-    // Gestionnaire d'événements pour les deux checkbox
-    showCheckbox.addEventListener('change', function() {
-      if (this.checked) {
-        extraFields.classList.remove('hidden');
-        hideCheckbox.checked = false; // Décoche la deuxième checkbox
-      }
-    });
-
-    hideCheckbox.addEventListener('change', function() {
-      if (this.checked) {
-        extraFields.classList.add('hidden');
-        showCheckbox.checked = false; // Décoche la première checkbox
-      }
-    });
-  </script>
-</body>
-</html>

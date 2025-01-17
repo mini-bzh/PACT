@@ -48,7 +48,7 @@
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/style/pages/detailOffre.css">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
     <body  class=<?php                          //met le bon fond en fonction de l'utilisateur
             if ($comptePro)
@@ -99,7 +99,15 @@
                             <div class="etoiles">
                                 <!-- affichage de la note -->
                                 <?php affichage_etoiles($contentOffre["note"]); ?>
-                                <p>(<?php echo $contentOffre["note"];?>)</p> 
+                                <p>(<?php if($contentFacture["note"])
+                                {
+                                    echo $contentOffre["note"];
+                                }
+                                else
+                                {
+                                    echo "aucun avis";
+                                }
+                                ?>)</p>
 
                             </div>
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
