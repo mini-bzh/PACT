@@ -187,12 +187,11 @@
                                     <img src="../icones/signalerSVG.svg" alt="icone signaler">
                                     <p>Signaler</p>
                                     <p hidden><?php echo $idCompteConnecte?></p>
-
+                                </div>
                             <a href="modifAvis.php">
                                 <div class="btnModifierAvis grossisQuandHover">
                                     <img src="../icones/modifierSVG.svg" alt="icone modifier">
                                     <p>Modifier</p>
-
                                     <p hidden><?php echo $avis["id_avis"]?></p>
                                 </div>
                             </a>
@@ -217,7 +216,6 @@
                             <img src="../icones/pouceBasSVG.svg" alt="pouce vers le bas">
                             <p><?php echo $avis["nbpoucesrouge"] ?></p>
                         </div>
-                        
                     </div>
                 </div>
             </section>

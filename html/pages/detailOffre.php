@@ -98,8 +98,9 @@
                         <div class="noteDetailOffre">
                             <div class="etoiles">
                                 <!-- affichage de la note -->
-                                <p><?php echo $contentOffre["note"];?></p> 
                                 <?php affichage_etoiles($contentOffre["note"]); ?>
+                                <p>(<?php echo $contentOffre["note"];?>)</p> 
+
                             </div>
                             <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
                         </div>

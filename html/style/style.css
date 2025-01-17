@@ -317,6 +317,43 @@ textarea {
     border: 4px solid var(--accentLight);
 }
 
+
+.mainDetail .conteneurAvis{
+    margin-top: 50px;
+}
+
+.mainDetail{
+    display: flex;
+    justify-content: center;
+}
+
+.mainDetail .conteneurOffreAvis{
+    display: block;
+}
+
+.mainDetail .conteneurOffre{
+    display: flex;  
+    justify-content: center;
+    padding: 0px;
+    margin-bottom: 50px;
+}
+
+.mainDetail #partieAdresse hr{
+    height: 3px;
+    background-color: black;
+    width: inherit;
+}
+
+.offre #partieCategorie img{
+    position: relative;
+    top: 50px;
+    margin-bottom: 10%;
+}
+
+.offre #partieCategorie p{
+    margin-top: 5%;
+}
+
 /*-----------------/ choix création compte /------------------*/
 #mainChoixCreaCompte .btnAnnuler{
     border-radius: 25px;
@@ -835,8 +872,128 @@ textarea {
     width: 330px;
 }
 
-/*-------------/ recherche /--------------*/
+.offre #conteneurTagsHoraires{
+    align-items: baseline;
+}
 
+.offre .conteneurSpaceBetween hr{
+    height: 3px;
+    background-color: black;
+}
+
+.offre .tagOffre{
+    padding: 10px 10px 7px;               /* ça rends moins bien si je mets juste 10px partout */
+    font-size: var(--typescale-small-text);
+    border: 1px solid black;
+    border-radius: 70px;
+    margin: 0px 10px 10px;
+}
+
+.offre #partieHoraires{
+    width: 400px;
+}
+.offre #conteneurJoursOffre{
+    display: block;
+    margin: 20px 0px;
+}
+
+.offre .jour{
+    margin: 0px 5px;
+}
+
+.offre .jourOuvert{
+    border-color: var(--primaryDark);
+    background-color: var(--primaryDark);
+    color: white;
+}
+
+.offre #conteneurPlagesHoraires{
+    margin: 30px 10px;
+}
+
+.offre #conteneurPlagesHoraires .horaireEncadre{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px 8px 7px;
+}
+
+.offre #itineraire{
+    width: fit-content;
+    color: black;
+    transition: transform 0.2s ease;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.offre #itineraire:hover{
+    transform: translateY(-2px);
+}
+
+.offre table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.offre thead{
+    background-color: var(--primaryDark);
+    color: white;
+}
+
+.offre th, .offre td {
+    font-size: var(--typescale-small-text);
+    font-family: 'Archivo';
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+.offre .plan{
+    width: 100%;
+    height: 100%;
+}
+
+.offre #partieCategorie img{
+    position: relative;
+    top: 50px;
+    margin-bottom: 10%;
+}
+
+.offre #partieCategorie p{
+    margin-top: 5%;
+}
+
+#btnAjouterAvis{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: black;
+    text-decoration: black;
+    border-radius: 5px;
+    box-shadow: var(--ombreVisiteur);
+    padding: 10px 0px;
+    margin: 20px 0px;
+}
+
+.btnAjouterAvisGrise{
+    color: var(--grisClair) !important;
+}
+
+.btnAjouterAvisGrise:hover{
+    cursor: pointer;
+}
+
+.btnAjouterAvisGrise img{
+    display: none;
+}
+
+#btnAjouterAvis img{
+    width: 60px;
+    margin-right: 20px;
+}
 
 /*-------------/ affichage avis /--------------*/
 
@@ -940,7 +1097,7 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -1063,6 +1220,16 @@ textarea {
 
 .avis .conteneurPouces .pouceDislike img {
     transform: translateY(2px);
+}
+
+.conteneurPouces .pouceLike img:hover{
+    transform: rotate(-20deg) translateY(-4px);
+    cursor: pointer;
+}
+
+.conteneurPouces .pouceDislike img:hover{
+    transform: rotate(-20deg) translateY(4px);
+    cursor: pointer;
 }
 
 
@@ -2809,6 +2976,193 @@ aside fieldset {
     width: 25px;
    }
 
+   /*-------------/ détail offre /--------------*/
 
+
+   .mainDetail .conteneurOffre{
+        margin-top: 2.4em;
+        padding-bottom: 30px;
+    }
+
+    .mainDetail .conteneurAvis{
+        margin-top: 2.4em;
+        padding-bottom: 30px;
+    }
+
+    .offre .conteneurSpaceBetween{
+        display: block;
+    }
+
+    .offre h1{
+        margin-bottom: 10px;
+    }
+
+    .offre{
+        margin: 0px;
+        padding: 10px;
+        border-radius: 40px;
+        width: 350px;
+    }
+
+    .mainDetail .avis{
+        margin: 20px;
+        padding: 10px;
+        border-radius: 40px;
+        width: 350px;
+    }
+
+
+    .offre h2{
+        font-size: var(--typescale-h4);
+    }
+
+    .offre .imgResume img{
+        width: 920px;
+        height: 150px;
+    }
+
+    .offre p{
+        font-size: 1em;
+    }
+
+    .offre p+.conteneurSpaceBetween{
+        display: block;
+    }
+
+    .offre .noteDetailOffre{
+        display: flex;
+        justify-content: start;
+    }
+
+    .offre .resumePrixDetailOffre{
+        margin: 0px;
+        width: 330px;
+        padding: 15px;
+        border-radius: 0px 0px 15px 15px;
+        background-color: var(--primaryDark);
+        text-align: center;
+    }
+
+    .offre .resumePrixDetailOffre hr{
+        margin: 10px 15px;
+    }
+
+    .offre .resumePrixDetailOffre p{
+        font-size: 1em;
+        color: white;
+    }
+
+
+    .offre #partieTags img{
+        margin-right: 10px;
+    }
+
+    .offre #partieTags #conteneurTagsOffre{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 0px;
+        max-height: 250px;
+    }
+
+    .offre #partieTags{
+        width: 330px;
+    }
+
+    .offre #conteneurTagsHoraires{
+        align-items: baseline;
+    }
+
+    .offre .conteneurSpaceBetween hr{
+        height: 3px;
+        background-color: black;
+    }
+
+    .offre .tagOffre{
+        padding: 10px 10px 7px;               /* ça rends moins bien si je mets juste 10px partout */
+        font-size: 18px;
+        border: 1px solid black;
+        border-radius: 70px;
+        margin: 0px 10px 10px;
+    }
+
+    .offre #partieHoraires{
+        width: 330px;
+    }
+    .offre #conteneurJoursOffre{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px 0px;
+    }
+
+    .offre .jour{
+        border: 2px solid black;
+        border-radius: 100px;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        padding: 8px 0px;
+        margin: 0px 3px;
+    }
+
+    .offre #conteneurPlagesHoraires .horaireEncadre{
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 5px 5px 3px;
+    }
+
+    .offre h4{
+        font-size: 24px;
+    }
+
+    .mainDetail .avis .titreAvis{
+        font-size: var(--typescale-h3);
+    }
+
+    .mainDetail .avis .texteAvis{
+        font-size: var(--typescale-small-text);
+    }
+
+    .mainDetail .avis .conteneurAvisImage{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .mainDetail th, .mainDetail td {
+        padding: 20px;
+        font-size: 0.8em;
+        font-family: 'Archivo';
+    }
+
+    .avis .conteneurSpaceBetween{
+        display: block;
+    }
+
+    .mainDetail .avis #btnSupprimerAvis{
+        margin: 20px 0px 0px;
+        padding: 5px;
+        width: 350px;
+    }
+
+    .mainDetail .avis #btnSupprimerAvis p{
+        font-size: 13px;
+    }
+
+    .mainDetail .avis #btnSupprimerAvis img{
+        width: 15px;
+        height: 15px;
+    }
+
+
+    #btnAjouterAvis h3{
+        font-size: var(--typescale-h2);
+        transform: translateY(-2px);
+    }
+
+    #btnAjouterAvis img{
+        width: 25px;
+        height: 25px;
+        margin-right: 15px;
+    }
 
 }
