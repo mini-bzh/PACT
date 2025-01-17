@@ -1461,7 +1461,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 330px;
+    width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -3041,7 +3041,7 @@ aside fieldset {
     }
 
     .offre .imgResume img{
-        width: 920px;
+        width: 330px;
         height: 150px;
     }
 
@@ -3153,7 +3153,7 @@ aside fieldset {
     }
 
     .mainDetail th, .mainDetail td {
-        padding: 20px;
+        padding: 5px 1px;
         font-size: 0.8em;
         font-family: 'Archivo';
     }

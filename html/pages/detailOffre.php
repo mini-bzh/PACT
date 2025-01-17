@@ -99,7 +99,7 @@
                             <div class="etoiles">
                                 <!-- affichage de la note -->
                                 <?php affichage_etoiles($contentOffre["note"]); ?>
-                                <p>(<?php if($contentFacture["note"])
+                                <p>(<?php if(isset($contentOffre["note"]))
                                 {
                                     echo $contentOffre["note"];
                                 }
@@ -193,7 +193,7 @@
                                 <div id="partieCategorie">
                                     <div class="conteneurSVGtexte">
                                         <!--<img src="/icones/.svg" alt="icone tag">-->
-                                        <h4>Information supplémentaire</h4>
+                                        <h4>Informations supplémentaires</h4>
                                     </div>
                                     <hr>
                                     <?php //print_r($contentOffre); ?>
