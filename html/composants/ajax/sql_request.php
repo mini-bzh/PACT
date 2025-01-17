@@ -5,7 +5,7 @@
     header('Access-Control-Allow-Headers: Content-Type');
     
     // Récupération des paramètres de connexion à la base de données
-    include('../composants/bdd/connection_params.php');
+    include('../bdd/connection_params.php');
 
     $request = $_POST["request"];
 

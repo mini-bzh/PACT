@@ -4,13 +4,13 @@ session_start();
 
 
 // recuperation des parametre de connection a la BdD
-include('../composants/bdd/connection_params.php');
+include('../bdd/connection_params.php');
 
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-include('../composants/verif/verif_compte_pro.php');
+include('../verif/verif_compte_pro.php');
 
 // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
-include('../composants/verif/verif_compte_membre.php');
+include('../verif/verif_compte_membre.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = $_POST['recupLogin'];  // Email saisi par l'utilisateur

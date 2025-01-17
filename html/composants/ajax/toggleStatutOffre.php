@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include('../composants/bdd/connection_params.php');
+include('../bdd/connection_params.php');
 
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -2,7 +2,7 @@
     print_r($_POST);
 
     // recuperation des parametre de connection a la BdD
-    include('../composants/bdd/connection_params.php');
+    include('../bdd/connection_params.php');
         
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
