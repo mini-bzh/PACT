@@ -64,14 +64,10 @@ $i = 0;
 // Gestion des fichiers
 $nom_img = null; // Initialiser le nom de l'image à null
 
-if ($_FILES['fichier1']['size'] != 0) { // Vérifie si un fichier a été envoyé
-    $extension = pathinfo($_FILES['fichier1']['name'], PATHINFO_EXTENSION); // Récupère l'extension
-    $nom_img = time() . "_" . uniqid() . "." . $extension; // Génère un nom unique
-    $upload_success = move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
-
-    if (!$upload_success) {
-        $error_message = "Erreur lors du téléchargement de l'image.";
-    }
+// Traitement de l'image si elle est envoyée
+if (!empty($_FILES['fichier1']) && $_FILES['fichier1']['size'] > 0) {
+    $nom_img = time() . "." . explode("/", $_FILES['fichier1']['type'])[1];
+    move_uploaded_file($_FILES['fichier1']['tmp_name'], "../images/pdp/" . $nom_img);
 }
 
 
@@ -92,9 +88,9 @@ if ($_FILES['fichier1']['size'] != 0) { // Vérifie si un fichier a été envoy�
         cryptogramme = :CryptoCB,
         nom_titulaire_carte = :TitulaireCB";
 
-        if ($nom_img !== null) { // Ajoute uniquement si une image a été uploadée
-        $requete .= ", pdp = :pdp";
-        }
+if ($nom_img) {
+    $requete .= ", pdp = :pdp";
+}
 
         $requete .= " WHERE id_c = :idCompte;";
 
@@ -171,7 +167,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
     <!-- Formulaire de modification de compte -->
 
-    <form id="form" name="creation" action="/pages/ModifComptemembre.php" method="post" enctype="multipart/form-data">
+    <form id="form" name="creation" action="/pages/ModifCompteProPrive.php" method="post" enctype="multipart/form-data">
     <p class="titreFrom">Modification d'un compte professionnel</p>
     <div class="LogetPdP">
         <!-- Login -->
