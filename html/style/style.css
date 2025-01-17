@@ -1,19 +1,21 @@
 @import "fonts/fonts.css";
 @import "abstract/_variables.css";
 
-* {     /*reset d'éventuelles mises en style appliquées par le navigateur */
+* {
+    /*reset d'éventuelles mises en style appliquées par le navigateur */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: "Archivo";
     margin: 0px;
 }
 
 main {
-    min-height: 90vh; /* Pour mettre le footer en bas de toutes les pages */
+    min-height: 90vh;
+    /* Pour mettre le footer en bas de toutes les pages */
     box-sizing: inherit;
 
     /* Pour quand la sidebar apparait */
@@ -22,142 +24,146 @@ main {
     padding: 0 10%;
 }
 
-h1{
+h1 {
     font-family: "Luciole";
     font-size: var(--typescale-h1);
 }
 
-h2{
+h2 {
     font-family: "Luciole";
     font-size: var(--typescale-h2);
 }
 
-h3{
+h3 {
     font-family: "Luciole";
     font-size: var(--typescale-h3);
 }
 
-h4{
+h4 {
     font-family: "Luciole";
     font-size: var(--typescale-h4);
 }
 
-h5{
+h5 {
     font-family: "Luciole";
     font-size: var(--typescale-h5);
 }
 
-p{
+p {
     font-size: var(--typescale-text);
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-label{
+label {
     font-size: var(--typescale-text);
 }
 
-input{
+input {
     font-size: var(--typescale-text);
 }
 
-textarea{
+textarea {
     font-size: var(--typescale-small-text);
     font-family: "Archivo";
 }
 
 
-.fondVisiteur{
+.fondVisiteur {
     background-color: var(--fondVisiteurMembre);
 }
 
-.displayNone{
+.displayNone {
     display: none !important;
 }
 
-.fondPro{
+.fondPro {
     background-color: var(--fondPro);
 }
 
 /* -------------/  CLASSES  /------------- */
 
 /* textes */
-.texteLarge{
+.texteLarge {
     font-size: var(--typescale-large-text);
 }
 
-.texteSmall{
+.texteSmall {
     font-size: var(--typescale-small-text);
 }
 
-.boldArchivo{
+.boldArchivo {
     font-family: "Archivo-bold";
 }
 
-.italicArchivo{
+.italicArchivo {
     font-family: "Archivo-italic";
 }
 
-.boldItalicArchivo{
+.boldItalicArchivo {
     font-family: "Archivo-bold-italic";
 }
 
-.boldLuciole{
+.boldLuciole {
     font-family: "Luciole-bold";
 }
 
-.centerText{
+.centerText {
     text-align: center;
 }
 
 
-.grossisQuandHover{
+.grossisQuandHover {
     transition: transform 0.3s ease;
 }
 
-.grossisQuandHover:hover{
+.grossisQuandHover:hover {
     transform: scale(1.03);
     cursor: pointer;
 }
 
 
 /* rectangle */
-.rectangleTitre{
+.rectangleTitre {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-left: 2%;
 }
 
-.rectangleTitre > h2{
+.rectangleTitre>h2 {
     margin-left: 1%;
 }
 
 
-.circular-image{
+.circular-image {
     border-radius: 50%;
-    overflow: hidden; /* Cache tout ce qui dépasse */
+    overflow: hidden;
+    /* Cache tout ce qui dépasse */
     object-fit: cover;
 }
 
 /* ------------/ boutons /------------ */
 
-.coMembre h4{
+.coMembre h4 {
     color: var(--primary);
 }
-.coPro h4{
+
+.coPro h4 {
     color: var(--secondary);
 }
-.coMembre svg{
+
+.coMembre svg {
     background-color: var(--primary);
-} 
-.coPro svg{
+}
+
+.coPro svg {
     background-color: var(--secondary);
 }
 
-.btnCo{
+.btnCo {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -175,49 +181,52 @@ textarea{
 
     transition: transform 0.2s ease;
 }
+
 .btnCo * {
     margin: 0 10px
 }
-.btnCo svg{
+
+.btnCo svg {
     width: 40px;
     height: 40px;
     stroke-width: 6px;
     border-radius: 100px;
 }
-.btnCo > div {
+
+.btnCo>div {
     display: flex;
     align-items: center;
 }
 
-.btnCo:hover{
+.btnCo:hover {
     transform: scale(1.05);
 }
 
 
 /*---------------------/ MAIN /---------------------*/
 
-.titrePortable{
+.titrePortable {
     display: none;
 }
 
 
 /* ------------/ page accueil /------------ */
 
-#mainAccueil h1{
+#mainAccueil h1 {
     margin: 20px;
 }
 
-#mainAccueil #conteneurOffres{
+#mainAccueil #conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 60px;
 }
 
-#mainAccueil #conteneurOffres .lienApercuOffre{
+#mainAccueil #conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#mainAccueil #conteneurOffres>article{
+#mainAccueil #conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -226,27 +235,27 @@ textarea{
 
 /*-------------/ page avis /--------------*/
 
-#mainAvis h1{
+#mainAvis h1 {
     padding: 20px;
 }
 
-#mainAvis .titreOffre{
+#mainAvis .titreOffre {
     color: black;
     width: fit-content;
     margin-bottom: 8px;
 }
 
-#mainAvis .titreOffre:hover{
+#mainAvis .titreOffre:hover {
     text-decoration: underline;
 }
 
-#mainAvis .mainAvis{
+#mainAvis .mainAvis {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-#mainAvis .mainAvisPro{
+#mainAvis .mainAvisPro {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -265,7 +274,7 @@ textarea{
     display: flex;
 }
 
-#mainAvis .conteneurBtnTitre{
+#mainAvis .conteneurBtnTitre {
     display: flex;
     margin-top: 40px;
     align-items: center;
@@ -274,17 +283,17 @@ textarea{
     border-bottom: 1px solid black;
 }
 
-#mainAvis .conteneurTitrePastille{
+#mainAvis .conteneurTitrePastille {
     position: relative;
 }
 
 
-#mainAvis .conteneurBtnTitre .pastilleCptAvisNonLus{
+#mainAvis .conteneurBtnTitre .pastilleCptAvisNonLus {
     right: -15px;
     top: -10px;
 }
 
-#mainAvis .conteneurBtnTitre img{
+#mainAvis .conteneurBtnTitre img {
     width: 40px;
     height: 40px;
     transition: transform 0.3s ease;
@@ -292,19 +301,19 @@ textarea{
     margin-right: 10px;
 }
 
-#mainAvis .conteneurBtnTitre img:hover{
+#mainAvis .conteneurBtnTitre img:hover {
     cursor: pointer;
 }
 
-.fondPro #mainAvis .conteneurAvisOffre{
+.fondPro #mainAvis .conteneurAvisOffre {
     width: 100%;
 }
 
-.fondPro #mainAvis .conteneurAvis{
+.fondPro #mainAvis .conteneurAvis {
     display: none;
 }
 
-.fondPro #mainAvis .nouvelAvis{
+.fondPro #mainAvis .nouvelAvis {
     border: 4px solid var(--accentLight);
 }
 
@@ -368,7 +377,7 @@ textarea{
 
 /*-------------/ affichage avis /--------------*/
 
-.conteneurAvis{
+.conteneurAvis {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -377,7 +386,7 @@ textarea{
     flex-wrap: wrap;
 }
 
-.avis{
+.avis {
     margin: 15px 0px;
     background-color: white;
     border-radius: 5px;
@@ -390,79 +399,78 @@ textarea{
 }
 
 
-.avis hr{
+.avis hr {
     margin-bottom: 10px;
 }
 
-.avis .conteneurSpaceBetween{
+.avis .conteneurSpaceBetween {
     align-items: end;
 }
 
-.avis .datesAvis{
+.avis .datesAvis {
     display: flex;
 }
 
-.avis .datesAvis p{
+.avis .datesAvis p {
     margin-right: 10px;
     font-size: var(--typescale-very-small-text);
 }
 
-.avis .conteneurTitreEtoiles h4{
+.avis .conteneurTitreEtoiles h4 {
     margin-right: 10px;
 }
 
 
 
-.avis .datePublication{
+.avis .datePublication {
     display: none;
 }
 
-.avis .conteneurMembreAvis{
+.avis .conteneurMembreAvis {
     display: flex;
     margin-bottom: 10px;
     flex-direction: column;
 }
 
 
-.avis .conteneurMembreAvis .infoMembreAvis{
+.avis .conteneurMembreAvis .infoMembreAvis {
     display: flex;
     align-items: center;
     width: 100%;
     margin-bottom: 5px;
 }
 
-.avis .conteneurMembreAvis .infoMembreAvis h3{
+.avis .conteneurMembreAvis .infoMembreAvis h3 {
     margin-left: 10px;
 }
 
-.avis .texteAvis{
+.avis .texteAvis {
     font-size: var(--typescale-small-text);
     margin: 7px 0px 16px;
     word-wrap: break-word;
     height: 60px;
 }
 
-.avis .conteneurAvisImage img{
+.avis .conteneurAvisImage img {
     width: 60px;
     height: 60px;
     object-fit: cover;
     display: block;
 }
 
-.avis .conteneurAvisImage .text-overlay-avis{
+.avis .conteneurAvisImage .text-overlay-avis {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
-.avis .conteneurAvisImage .imageAvis{
+.avis .conteneurAvisImage .imageAvis {
     border: 1px solid black;
     border-radius: 5px;
 }
 
-#overlay
-{
+#overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -476,31 +484,31 @@ textarea{
     flex-direction: column;
 }
 
-#overlay img{
+#overlay img {
     max-width: 80%;
     max-height: 80%;
 }
 
-#overlay #btnFermerOverlay:hover{
+#overlay #btnFermerOverlay:hover {
     cursor: pointer;
     text-decoration: underline;
     text-decoration-color: white;
 }
 
-#overlay #btnFermerOverlay p{
+#overlay #btnFermerOverlay p {
     color: white;
 }
 
-.avis .conteneurBtnGestionAvis{
+.avis .conteneurBtnGestionAvis {
     display: flex;
 }
 
-.avis .conteneurPouces{
+.avis .conteneurPouces {
     display: flex;
     align-items: center;
 }
 
-.avis .conteneurPouces div{
+.avis .conteneurPouces div {
     display: flex;
     align-items: center;
     margin-left: 7px;
@@ -511,7 +519,7 @@ textarea{
     height: 50px;
 }
 
-.avis .btnSupprimerAvis{
+.avis .btnSupprimerAvis {
     border: 1px solid red;
     width: fit-content;
     border-radius: 15px;
@@ -522,7 +530,7 @@ textarea{
 }
 
 
-.avis .btnSignalerAvis{
+.avis .btnSignalerAvis {
     border: 1px solid black;
     width: fit-content;
     border-radius: 15px;
@@ -532,7 +540,7 @@ textarea{
     align-items: center;
 }
 
-.avis .btnDejaSignaler{
+.avis .btnDejaSignaler {
     border: 1px solid black;
     width: fit-content;
     border-radius: 15px;
@@ -543,7 +551,7 @@ textarea{
     background-color: rgb(192, 192, 192);
 }
 
-.avis .btnModifierAvis{
+.avis .btnModifierAvis {
     border: 1px solid blue;
     width: fit-content;
     border-radius: 15px;
@@ -552,7 +560,8 @@ textarea{
     align-items: center;
 
 }
-.avis .conteneurPouces div img{
+
+.avis .conteneurPouces div img {
     width: 25px;
     height: 25px;
     margin-right: 3px;
@@ -560,7 +569,9 @@ textarea{
     transition: transform 0.2s ease;
 }
 
-.avis .btnSupprimerAvis img, .avis .btnSignalerAvis img, .avis .btnDejaSignaler img{
+.avis .btnSupprimerAvis img,
+.avis .btnSignalerAvis img,
+.avis .btnDejaSignaler img {
     width: 13px;
     height: 13px;
     margin-right: 2px;
@@ -569,30 +580,32 @@ textarea{
     pointer-events: none;
 }
 
-.avis .btnModifierAvis img{
+.avis .btnModifierAvis img {
     width: 13px;
     height: 13px;
     margin-right: 2px;
     transform: translateY(-1px);
 }
 
-.avis .btnModifierAvis img{
+.avis .btnModifierAvis img {
     width: 13px;
     height: 13px;
     margin-right: 2px;
     transform: translateY(-1px);
 }
 
-.avis .conteneurPouces .pouceLike img{
+.avis .conteneurPouces .pouceLike img {
     transform: translateY(-2px);
 }
 
-.avis .conteneurPouces .pouceDislike img{
+.avis .conteneurPouces .pouceDislike img {
     transform: translateY(2px);
 }
 
 
-.avis .btnSupprimerAvis p, .avis .btnSignalerAvis p, .avis .btnDejaSignaler p{
+.avis .btnSupprimerAvis p,
+.avis .btnSignalerAvis p,
+.avis .btnDejaSignaler p {
     font-size: var(--typescale-very-small-text);
     margin: 0px;
     padding: 0px;
@@ -600,13 +613,13 @@ textarea{
     pointer-events: none;
 }
 
-.avis .btnModifierAvis p{
+.avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
     padding: 0px;
     text-decoration: none;
 }
 
-.popUpSignaler{
+.popUpSignaler {
     display: none;
     z-index: 10;
     position: fixed;
@@ -619,7 +632,7 @@ textarea{
     justify-content: center;
 }
 
-.popUpSignaler > div{
+.popUpSignaler>div {
     width: 500px;
     height: 300px;
     border: black solid 1px;
@@ -642,38 +655,38 @@ textarea{
     cursor: pointer;
 }
 
-.popUpSignaler > div > div{
+.popUpSignaler>div>div {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.popUpSignaler textarea{
-    font-family:"Archivo";
+.popUpSignaler textarea {
+    font-family: "Archivo";
     padding-left: 2%;
     padding-top: 2%;
 }
 
-.reponse .proReponse{
+.reponse .proReponse {
     display: flex;
     align-items: center;
     height: fit-content;
 }
 
-.reponse .proReponse img{
+.reponse .proReponse img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     margin-right: 5px;
 }
 
-.reponse p{
+.reponse p {
     border-left: 2px solid var(--secondary);
     padding-left: 5px;
     margin: 5px 10px 15px;
 }
 
-.formReponse{
+.formReponse {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -681,7 +694,7 @@ textarea{
     margin-bottom: 10px;
 }
 
-.formReponse textarea{
+.formReponse textarea {
     color: black;
     width: 100%;
     padding: 5px;
@@ -691,7 +704,7 @@ textarea{
     resize: none;
 }
 
-.formReponse .btnRepondre{
+.formReponse .btnRepondre {
     background-color: var(--primary);
     padding: 5px;
     width: fit-content;
@@ -699,16 +712,16 @@ textarea{
     color: white;
 }
 
-.formReponse .btnRepondre p{
+.formReponse .btnRepondre p {
     font-size: var(--typescale-small-text);
 }
 
-.formReponse .erreurReponseVide{
+.formReponse .erreurReponseVide {
     font-size: var(--typescale-very-small-text);
     color: red;
 }
 
-.avis .btnModifierAvis p{
+.avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
     padding: 0px;
     text-decoration: none;
@@ -716,7 +729,7 @@ textarea{
 
 /*-------------/ apercu offre /--------------*/
 
-.lienApercuOffre{
+.lienApercuOffre {
     width: fit-content;
     height: fit-content;
     text-decoration: none;
@@ -724,7 +737,7 @@ textarea{
     display: block;
 }
 
-.apercuOffre{
+.apercuOffre {
     width: 350px;
     height: 400px;
 
@@ -737,79 +750,81 @@ textarea{
     padding: 10px;
 }
 
-.fondPro .apercuOffre{
+.fondPro .apercuOffre {
     box-shadow: var(--ombrePro);
 }
 
-.fondVisiteur .apercuOffre{
+.fondVisiteur .apercuOffre {
     box-shadow: var(--ombreVisiteur);
 }
 
 
-.apercuOffre h2{
+.apercuOffre h2 {
     margin: 0px;
 }
 
-.apercuOffre .conteneurSVGtexte{
+.apercuOffre .conteneurSVGtexte {
     display: flex;
     align-items: center;
     margin: 5px 0px;
     height: fit-content;
 }
 
-.apercuOffre .conteneurSpaceBetween{
+.apercuOffre .conteneurSpaceBetween {
     padding: 0px;
     margin: 0px;
 }
 
-.apercuOffre .conteneurSVGtexte img{
+.apercuOffre .conteneurSVGtexte img {
     width: 25px;
     height: 25px;
 }
 
 
-.apercuOffre .conteneurSVGtexte p{
+.apercuOffre .conteneurSVGtexte p {
     font-size: var(--typescale-text);
     margin-left: 5px;
 }
 
-.conteneurSpaceBetween{                         /* un conteneur pour mettre les éléments en space between */   
+.conteneurSpaceBetween {
+    /* un conteneur pour mettre les éléments en space between */
     display: flex;
     justify-content: space-between;
     align-items: center;
 
 }
 
-.conteneurSpaceBetween .ouvert{
+.conteneurSpaceBetween .ouvert {
     color: var(--accent);
 }
 
-.conteneurSpaceBetween .fermeBientot{
+.conteneurSpaceBetween .fermeBientot {
     color: var(--secondary);
 }
 
-.conteneurSpaceBetween .ferme{
+.conteneurSpaceBetween .ferme {
     color: var(--rouge);
 }
 
-.apercuOffre .conteneurImage img{
+.apercuOffre .conteneurImage img {
     width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
 }
 
-.apercuOffre .conteneurImage{
+.apercuOffre .conteneurImage {
     position: relative;
     display: inline-block;
     width: fit-content;
 }
 
-.apercuOffre .conteneurImage p{
+.apercuOffre .conteneurImage p {
     font-size: var(--typescale-small-text);
     text-align: right;
 }
-.apercuOffre .conteneurImage span{
+
+.apercuOffre .conteneurImage span {
     font-weight: bold;
     font-size: 1.25rem;
 }
@@ -821,7 +836,7 @@ textarea{
     right: 0px;
     padding: 5px;
     background-color: var(--primaryDark);
-    color: white; 
+    color: white;
     font-size: var(--typescale-text);
     width: fit-content;
     height: fit-content;
@@ -829,26 +844,26 @@ textarea{
 }
 
 
-.etoiles{
+.etoiles {
     display: flex;
 }
 
-.etoiles p{
+.etoiles p {
     margin-right: 5px;
     font-size: var(--typescale-small-text);
     transform: translateY(3px);
 }
 
-.etoiles img{
+.etoiles img {
     width: 15px;
     height: 15px;
 }
 
-.etoileMoitiePleine{
+.etoileMoitiePleine {
     position: relative;
 }
 
-.apercuOffre .resumeApercu{
+.apercuOffre .resumeApercu {
     font-size: var(--typescale-text);
     margin: 10px 0px;
     height: 55px;
@@ -860,7 +875,7 @@ textarea{
 }
 */
 /* Cas de mise en relief */
-.relief{
+.relief {
     border: 10px solid;
     border-image: linear-gradient(to right, #DDF289, #B9C549, #6C6E0F) 1;
     /* border: #B9C549 solid 10px; */
@@ -871,7 +886,7 @@ textarea{
 
 /*-------------/ HEADER PC-TAB /--------------*/
 
-#cptAvisNonLus{
+#cptAvisNonLus {
     width: fit-content;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--accent);
@@ -879,11 +894,11 @@ textarea{
     margin: 20px 0px;
 }
 
-#cptAvisNonLus span{
+#cptAvisNonLus span {
     color: var(--accentDark);
 }
 
-.pastilleCptAvisNonLus{
+.pastilleCptAvisNonLus {
 
     position: absolute;
     top: -5px;
@@ -901,129 +916,134 @@ textarea{
     font-size: var(--typescale-very-small-text);
 }
 
-@media screen and (min-width : 428px){
-.headerMobile{
-    display: none;
-}
+@media screen and (min-width : 428px) {
+    .headerMobile {
+        display: none;
+    }
 
-.headerPC-Tab{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid var(--grisClair);
-}
-/* cas spécial pour le bouton de connexion */
-#btCompte{
-  background-color: var(--primaryDark);
-  border-radius: 8px;
-  padding: 0;
-}
+    .headerPC-Tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--grisClair);
+    }
 
-#btCompte h3{
-    color: white;
-    margin: 10px;
-}
+    /* cas spécial pour le bouton de connexion */
+    #btCompte {
+        background-color: var(--primaryDark);
+        border-radius: 8px;
+        padding: 0;
+    }
 
-.navHeader,.ulHeader,.aHeader{
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
+    #btCompte h3 {
+        color: white;
+        margin: 10px;
+    }
 
-.navHeader{
-    width: 70%;
-    justify-content: space-between;
-    padding-right: 0;
-    padding: 10px;
-}
+    .navHeader,
+    .ulHeader,
+    .aHeader {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
 
-.logoHeader{
-    width: 80px;
-    height: 45px;
-    position: relative;
-    left: 30px;
-}
+    .navHeader {
+        width: 70%;
+        justify-content: space-between;
+        padding-right: 0;
+        padding: 10px;
+    }
 
-#textPro{
-    font-size: 1.2em;
-    margin-left: 28px;
-    margin-bottom: 2px;
-    color: black;
+    .logoHeader {
+        width: 80px;
+        height: 45px;
+        position: relative;
+        left: 30px;
+    }
 
-    font-family: "Luciole";
-}
+    #textPro {
+        font-size: 1.2em;
+        margin-left: 28px;
+        margin-bottom: 2px;
+        color: black;
 
-#logoEtPro{
-    display: flex;
-    align-items: end;
-    text-decoration: none;
-}
+        font-family: "Luciole";
+    }
 
-.aHeader > img {
-    width: 63px;
-    height: 63px;
-    display: none;
-}
+    #logoEtPro {
+        display: flex;
+        align-items: end;
+        text-decoration: none;
+    }
 
-.liHeader {
-    list-style: none;
-    padding: 0px;
-    margin-right: 40px;
-}
+    .aHeader>img {
+        width: 63px;
+        height: 63px;
+        display: none;
+    }
 
-#btAvis{
-    position: relative;
-}
+    .liHeader {
+        list-style: none;
+        padding: 0px;
+        margin-right: 40px;
+    }
 
-#test{
-    width: auto;
-    display: flex;
-    justify-content: center;
-}
-.fondVisiteur .li:hover{
-    background: linear-gradient(white, var(--primaryLight));
-}
+    #btAvis {
+        position: relative;
+    }
 
-.fondPro .li:hover{
-    background: linear-gradient(white, var(--secondaryLight));
-}
+    #test {
+        width: auto;
+        display: flex;
+        justify-content: center;
+    }
 
-.aHeader {
-    outline: none;
-    text-decoration: none;
-}
-  
-.aHeader:link {
-    color: black;
-}
-  
-.aHeader:visited {
-    color: black;
-}
+    .fondVisiteur .li:hover {
+        background: linear-gradient(white, var(--primaryLight));
+    }
 
-.aHeader > h3 {
-    margin: 0;
-}
+    .fondPro .li:hover {
+        background: linear-gradient(white, var(--secondaryLight));
+    }
 
-.ulHeader .aHeader, #logoEtPro{
-    transition: transform 0.2s ease;
-}
+    .aHeader {
+        outline: none;
+        text-decoration: none;
+    }
 
-.ulHeader .aHeader:hover{
-    /*background: linear-gradient(white, var(--primary));*/
-    transform: scale(0.95);
-}
+    .aHeader:link {
+        color: black;
+    }
 
-#logoEtPro:hover{
-    transform: scale(0.95);
-}
+    .aHeader:visited {
+        color: black;
+    }
 
-/*.navBarPro .ulHeader .aHeader:hover{
+    .aHeader>h3 {
+        margin: 0;
+    }
+
+    .ulHeader .aHeader,
+    #logoEtPro {
+        transition: transform 0.2s ease;
+    }
+
+    .ulHeader .aHeader:hover {
+        /*background: linear-gradient(white, var(--primary));*/
+        transform: scale(0.95);
+    }
+
+    #logoEtPro:hover {
+        transform: scale(0.95);
+    }
+
+    /*.navBarPro .ulHeader .aHeader:hover{
     background: linear-gradient(white, var(--secondary));
 }*/
 
@@ -1035,7 +1055,7 @@ textarea{
 /*-------------/ MAIN /-------------*/
 /*            ¯¯¯¯¯¯¯¯              */
 
-rect{
+rect {
     fill: var(--secondary);
 }
 
@@ -1074,11 +1094,12 @@ rect{
     list-style-type: none;
     padding: 0;
 }
+
 .footer-section p {
     font-size: 14px;
 }
 
-.footer-section ul li{
+.footer-section ul li {
     font-family: "Archivo";
 }
 
@@ -1114,12 +1135,12 @@ rect{
 /*-------------/ BOUTON DE TRIE /--------------*/
 /*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
 
-#conteneurTrie{
+#conteneurTrie {
     display: flex;
     width: 100%;
 }
 
-.btnTrie{
+.btnTrie {
     display: flex;
     background-color: white;
     width: 60px;
@@ -1131,11 +1152,11 @@ rect{
     padding: 5px;
 }
 
-.iconeTrie{
+.iconeTrie {
     width: 20px;
 }
 
-.txtBtnTrie{
+.txtBtnTrie {
     user-select: none;
 }
 
@@ -1143,17 +1164,18 @@ rect{
 /*-------------/ BAR DES FILTRES /--------------*/
 /*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
 aside {
-    
+
     height: 100%;
     padding: 1%;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-right: 1px solid var(--grisClair);
-    
+
     position: fixed;
     left: 0;
     top: 0;
 
-    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse */
+    overflow-y: auto;
+    /* Ajoute un défilement si le contenu dépasse */
 
     z-index: 1;
     background-color: #fff;
@@ -1166,7 +1188,7 @@ aside {
     padding: 0;
 }
 
-.main-for-menu-opened > * {
+.main-for-menu-opened>* {
     width: 60%;
 }
 
@@ -1180,27 +1202,30 @@ aside {
 
 #filtres-aside {
     width: 35%;
-    
+
 }
 
-aside > * {
-    margin-top: 80px;    /* Décale le contenu vers le bas pour ne pas qu'il soit sous la nav bar */
+aside>* {
+    margin-top: 80px;
+    /* Décale le contenu vers le bas pour ne pas qu'il soit sous la nav bar */
 }
 
-.content-aside{
+.content-aside {
     padding: 3%;
     box-sizing: initial
 }
 
 /* Style optionnel pour le contenu de la barre latérale */
 aside h2 {
-    font-size: 1.5rem; /* Taille de police adaptative */
+    font-size: 1.5rem;
+    /* Taille de police adaptative */
     margin-bottom: 1rem;
     color: var(--grisFonce);
 }
 
 aside ul {
-    list-style: none; /* Supprime les puces */
+    list-style: none;
+    /* Supprime les puces */
     padding: 0;
 }
 
@@ -1222,7 +1247,7 @@ aside ul li a:hover {
     color: #000;
 }
 
-aside svg > path {
+aside svg>path {
     stroke: var(--primaryDark);
     stroke-width: 6;
     stroke-linecap: round;
@@ -1238,11 +1263,13 @@ aside svg > path {
 
 /* Style pour l'input checkbox (caché) */
 .toggle-button input[type="checkbox"] {
-    display: none; /* Masque le checkbox natif */
+    display: none;
+    /* Masque le checkbox natif */
 }
 
 .toggle-button input[type="radio"] {
-    display: none; /* Masque le checkbox natif */
+    display: none;
+    /* Masque le checkbox natif */
 }
 
 /* Style pour le bouton */
@@ -1260,14 +1287,14 @@ aside svg > path {
 }
 
 /* Style quand le checkbox est coché */
-.toggle-button input[type="checkbox"]:checked + span {
+.toggle-button input[type="checkbox"]:checked+span {
     background-color: var(--primaryLight);
     color: white;
     border-color: var(--primaryLight);
 }
 
 /* Style quand le checkbox est coché */
-.toggle-button input[type="radio"]:checked + span {
+.toggle-button input[type="radio"]:checked+span {
     background-color: var(--primaryLight);
     color: white;
     border-color: var(--primaryLight);
@@ -1275,19 +1302,26 @@ aside svg > path {
 
 /* Style pour la légende */
 aside legend {
-    font-size: 1.2rem; /* Taille légèrement plus grande */
-    font-weight: bold; /* Texte en gras */
-    color: #555; /* Couleur douce pour le texte */
-    padding: 0.5rem; /* Espacement interne */
-    border-bottom: 2px solid var(--primaryLight); /* Ligne décorative */
-    margin-bottom: 1rem; /* Espacement avec le contenu en dessous */
-    display: inline-block; /* S'assure que la bordure n'occupe que la largeur du texte */
+    font-size: 1.2rem;
+    /* Taille légèrement plus grande */
+    font-weight: bold;
+    /* Texte en gras */
+    color: #555;
+    /* Couleur douce pour le texte */
+    padding: 0.5rem;
+    /* Espacement interne */
+    border-bottom: 2px solid var(--primaryLight);
+    /* Ligne décorative */
+    margin-bottom: 1rem;
+    /* Espacement avec le contenu en dessous */
+    display: inline-block;
+    /* S'assure que la bordure n'occupe que la largeur du texte */
 }
 
 aside fieldset {
     border: none;
     margin: auto;
-    
+
 }
 
 /*Style pour les double slide bar*/
@@ -1301,54 +1335,55 @@ aside fieldset {
     border-radius: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
-  }
-   
-  .double-range-slider {
+}
+
+.double-range-slider {
     width: 90%;
     height: 5px;
     position: relative;
     background-color: var(--grisClair);
     border-radius: 20px;
-  }
-  .range-bar {
+}
+
+.range-bar {
     height: 100%;
     position: absolute;
     border-radius: 20px;
-    background-color:  var(--primaryLight);
-  }
+    background-color: var(--primaryLight);
+}
 
-  .value-popup{
+.value-popup {
     display: flex;
     position: absolute;
     border: 1px solid var(--grisClair);
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
-  }
+}
 
-  .value-popupMin {
+.value-popupMin {
     bottom: 0;
     transform: translate(0, -100%);
     left: 0;
     will-change: left, transform;
-  }
-  
-  .value-popupMax {
+}
+
+.value-popupMax {
     top: 0;
     transform: translate(0, 100%);
     right: 0;
     will-change: right, transform;
-  }
+}
 
-  .value-popupMin img{
+.value-popupMin img {
     width: 12px;
-  }
+}
 
-  .value-popupMax img{
+.value-popupMax img {
     width: 12px;
-  }
+}
 
-  .double-range-slider-box input {
+.double-range-slider-box input {
     position: absolute;
     width: 100%;
     height: 5px;
@@ -1360,9 +1395,9 @@ aside fieldset {
     */
     top: 50%;
     transform: translateY(-50%);
-  }
+}
 
-  .double-range-slider-box input::-webkit-slider-thumb {
+.double-range-slider-box input::-webkit-slider-thumb {
     height: 18px;
     width: 18px;
     background-color: var(--primaryLight);
@@ -1372,8 +1407,9 @@ aside fieldset {
     -webkit-appearance: none;
     cursor: pointer;
     margin-bottom: 1px;
-  }
-  .double-range-slider-box input::-moz-range-thumb {
+}
+
+.double-range-slider-box input::-moz-range-thumb {
     height: 18px;
     width: 18px;
     background-color: var(--primaryLight);
@@ -1383,13 +1419,14 @@ aside fieldset {
     -moz-appearance: none;
     cursor: pointer;
     margin-top: 30%;
-  }
+}
 
 /* Style pour le groupe d'entrée */
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; /* Espacement entre le label et l'input */
+    gap: 0.5rem;
+    /* Espacement entre le label et l'input */
 }
 
 /* Style pour le label */
@@ -1415,7 +1452,7 @@ aside fieldset {
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
-.button{    
+.button {
     width: 40px;
     height: 40px;
 
@@ -1433,7 +1470,7 @@ aside fieldset {
     float: right;
 }
 
-.button:hover{
+.button:hover {
     background-color: #f1f1f1;
 }
 
@@ -1446,62 +1483,62 @@ aside fieldset {
 /*-------------/ PAGE RECHERCHE /--------------*/
 /*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
 
-.main-recherche h1{
+.main-recherche h1 {
     border-left: 20px solid var(--secondary);
     padding-left: 20px;
     margin: 20px;
 }
 
-#conteneurOffres{
+#conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-#conteneurOffres .lienApercuOffre{
+#conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#conteneurOffres>article{
+#conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 
-#conteneurBarre{
+#conteneurBarre {
     display: flex;
     justify-content: center;
     margin: 40px 15px;
 }
 
-#searchbar{
+#searchbar {
     width: 800px;
     height: 50px;
-    
+
     border: none;
     border-radius: 20px;
     font-size: var(--typescale-text);
     padding: 0px 55px;
 }
 
-#conteneurBarre label{
+#conteneurBarre label {
     position: relative;
 }
 
-#conteneurBarre label::before{
+#conteneurBarre label::before {
     content: "";
     position: absolute;
     left: 10px;
     top: 50%;
-    transform: translateY(-50%); 
-    width: 35px; 
+    transform: translateY(-50%);
+    width: 35px;
     height: 35px;
     background: url(../../icones/rechercherSVG.svg) no-repeat center;
-    background-size: contain; 
+    background-size: contain;
 }
 
-#conteneurBouton{
+#conteneurBouton {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-evenly;
@@ -1510,7 +1547,7 @@ aside fieldset {
 
 /*---------------------/ page chois création compte /-----------------------*/
 
-.btnAnnuler{
+.btnAnnuler {
     border-radius: 25px;
     width: 320px;
     height: 60px;
@@ -1526,7 +1563,7 @@ aside fieldset {
     background-color: red;
 }
 
-.textBulle{
+.textBulle {
     width: 450px;
     height: 120px;
     border: var(--primaryLight) solid 2px;
@@ -1539,24 +1576,24 @@ aside fieldset {
     position: relative;
 }
 
-.textBulle > p{
+.textBulle>p {
     font-size: var(--typescale-large-text);
 }
 
-.textBulle + div{
+.textBulle+div {
     display: flex;
     width: 100%;
     justify-content: space-around;
 }
 
 
-.btnAnnuler > svg{
+.btnAnnuler>svg {
     width: 40px;
     height: 40px;
 }
 
 
-.zoneBtn{
+.zoneBtn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1564,7 +1601,7 @@ aside fieldset {
 }
 
 
-.ChoixCrea{
+.ChoixCrea {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1572,7 +1609,7 @@ aside fieldset {
     padding: auto;
 }
 
-.TxtEntreBtn{
+.TxtEntreBtn {
     font-size: var(--typescale-large-text);
     width: 60px;
     height: 50px;
@@ -1594,55 +1631,62 @@ aside fieldset {
 /* container qui contenir tout les card du .carroussel */
 .carroussel {
     width: 100%;
-    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    overflow: hidden;
+    /* Cache les éléments en dehors du cadre */
     display: flex;
     height: 500px;
     margin: 2%;
-  }
+}
 
-  /* card du carroussel, représente une offre A La Une */
-  .card {
+/* card du carroussel, représente une offre A La Une */
+.card {
     display: flex;
     flex-direction: row;
     margin: 2%;
     width: 100%;
-    animation: scroll 15s linear infinite alternate; /* permet de mettre en mouvement les carroussels
+    animation: scroll 15s linear infinite alternate;
+    /* permet de mettre en mouvement les carroussels
     + de le faire tourner à l'infinie */
-  }
+}
 
-  .small-carousel .apercuOffre{
+.small-carousel .apercuOffre {
     margin: 0px 20px;
-  }
-  
+}
+
 /* Ici on gère l'animation, c'est à dire le mouvement que fait les offres de gauche à droite*/
-  @keyframes scroll {
+@keyframes scroll {
     0% {
-      transform: translateX(0%);
+        transform: translateX(0%);
     }
+
     25% {
         transform: translateX(-25%);
-      }
+    }
+
     50% {
         transform: translateX(-50%);
-      }
+    }
+
     75% {
         transform: translateX(-75%);
-      }
-    100% {
-      transform: translateX(-100%);
     }
-  }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 .small-carroussel {
-    width: 70%;
-    overflow: hidden; /* Cache les éléments en dehors du cadre */
+    width: 60%;
+    overflow: hidden;
+    /* Cache les éléments en dehors du cadre */
     display: flex;
     align-self: center;
     height: 500px;
     margin: 2%;
 }
 
-.offreALaUne{
+.offreALaUne {
     display: none;
 }
 
@@ -1653,25 +1697,26 @@ aside fieldset {
 #######################################################
 */
 
-@media screen and (max-width : 428px){
+@media screen and (max-width : 428px) {
 
     /*----------------/ boutons /------------------*/
 
-    #conteneurTitreMobile h1{
+    #conteneurTitreMobile h1 {
         border-left: none;
         padding: 0px;
         transform: translateY(-8px);
     }
 
-    #conteneurTitreMobile h4{
+    #conteneurTitreMobile h4 {
         transform: translateY(-8px);
     }
 
-    .popUp p{
+    .popUp p {
         font-size: var(--typescale-text) !important;
     }
 
-    .coMembre, .coPro{
+    .coMembre,
+    .coPro {
         width: 385.12px;
         height: 100px;
         margin-left: 0;
@@ -1679,63 +1724,77 @@ aside fieldset {
         border-width: 4px;
     }
 
-    .coMembre h3, .coPro h3{
+    .coMembre h3,
+    .coPro h3 {
         font-size: var(--typescale-h4);
     }
 
-    .coMembre p, .coPro p{
+    .coMembre p,
+    .coPro p {
         font-size: var(--typescale-small-text);
     }
 
-    .coMembre svg, .coPro svg{
+    .coMembre svg,
+    .coPro svg {
         width: 80px;
         height: 80px;
         stroke-width: 5px;
     }
 
-    .coMembre hr, .coPro hr{
+    .coMembre hr,
+    .coPro hr {
         display: none;
     }
 
     /*------------------/ MAIN /-------------------*/
 
-    .titrePortable{
+    .titrePortable {
         display: block;
     }
 
-    .titrePortable img{
+    .titrePortable div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        left: 1%;
+        top: 3.5%;
+    }
+
+    .titrePortable img {
         width: 85px;
         height: 85px;
     }
 
-    #conteneurTitreMobile #logoTitreMobile{
+    #conteneurTitreMobile #logoTitreMobile {
         width: 100px;
         height: auto;
         transform: translate(0px, -25px);
     }
 
-    #conteneurTitreMobile{
+    #conteneurTitreMobile {
         display: flex;
         align-items: flex-start;
     }
 
     /*----------------/ PAGE ACCUEIL /-----------------*/
 
-    #mainAccueil #conteneurOffres>article{
+    #mainAccueil #conteneurOffres>article {
         display: block;
     }
-    #mainAccueil #conteneurOffres .lienApercuOffre{
+
+    #mainAccueil #conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
-    #mainAccueil>h1{
+    #mainAccueil>h1 {
         font-size: 2em;
         border-left: 10px solid var(--secondary);
         padding-left: 10px;
         margin-left: 5px;
     }
 
-    #mainAccueil #logoTitreMobile{
+    #mainAccueil #logoTitreMobile {
         width: 200px;
         height: auto;
         transform: translate(30px, -25px);
@@ -1743,81 +1802,81 @@ aside fieldset {
 
     /*------------------/ PAGE AVIS /---------------------*/
 
-    #mainAvis .titrePrincipale{
+    #mainAvis .titrePrincipale {
         font-size: var(--typescale-h1);
     }
 
-    #mainAvis .mainAvis{
+    #mainAvis .mainAvis {
         display: flex;
         flex-direction: column;
     }
 
-    #mainAvis .btnTrie{
+    #mainAvis .btnTrie {
         margin-top: 0;
     }
 
-    #mainAvis .conteneurAvis{
+    #mainAvis .conteneurAvis {
         margin-top: 2.4em;
         padding-bottom: 30px;
     }
 
-    #mainAvis .avis{
+    #mainAvis .avis {
         margin: 20px;
         padding: 10px;
         border-radius: 40px;
         width: 350px;
     }
 
-    #mainAvis .avis .titreAvis{
+    #mainAvis .avis .titreAvis {
         font-size: var(--typescale-h5);
     }
 
-    #mainAvis .avis .conteneurAvisTexte p{
+    #mainAvis .avis .conteneurAvisTexte p {
         font-size: var(--typescale-small-text);
     }
 
-    #mainAvis .avis .conteneurAvisImage{
+    #mainAvis .avis .conteneurAvisImage {
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
     }
 
-    #mainAvis .titreOffre{
+    #mainAvis .titreOffre {
         font-size: var(--typescale-h2);
     }
 
 
     /*-----------------/ APERCU OFFRE /------------------*/
 
-    #conteneurOffres{
+    #conteneurOffres {
         margin-top: 30px;
     }
 
-    .apercuOffre{
+    .apercuOffre {
         width: 300px;
         height: fit-content;
-    
+
         border-radius: 20px;
         padding: 5px 10px;
     }
 
-    .apercuOffre .conteneurSVGtexte{
+    .apercuOffre .conteneurSVGtexte {
         margin: 5px 0px;
     }
 
 
-    .apercuOffre .conteneurSVGtexte img{
-        width: 25px; 
+    .apercuOffre .conteneurSVGtexte img {
+        width: 25px;
         height: 25px;
     }
 
-    .apercuOffre p{
-        font-size: var(--typescale-small-text); 
+    .apercuOffre p {
+        font-size: var(--typescale-small-text);
     }
 
-    .apercuOffre img{
-        width: 280px; 
-        height: 120px; 
+    .apercuOffre img {
+        width: 280px;
+        height: 120px;
         object-fit: cover;
         display: block;
     }
@@ -1829,28 +1888,28 @@ aside fieldset {
         right: 0px;
         padding: 5px;
         background-color: var(--primaryDark);
-        color: white; 
+        color: white;
         font-size: 0.7em;
         z-index: 2;
-      }
+    }
 
-      .etoiles img{
+    .etoiles img {
         width: 10px;
         height: 10px;
         transform: translateY(-2px);
     }
 
-    .apercuOffre .resumeApercu{
-        font-size: 1em; 
+    .apercuOffre .resumeApercu {
+        font-size: 1em;
     }
 
     /*-------------/ HEADER MOBILE /--------------*/
 
-    .headerPC-Tab{
+    .headerPC-Tab {
         display: none;
     }
 
-    .headerMobile{
+    .headerMobile {
         display: block;
         background-color: var(--primaryDark);
         position: fixed;
@@ -1860,17 +1919,17 @@ aside fieldset {
         z-index: 10;
     }
 
-    .ulHeaderMobile{
+    .ulHeaderMobile {
         display: flex;
         justify-content: space-around;
     }
 
-    .aHeaderMobile > img {
+    .aHeaderMobile>img {
         width: 69px;
         filter: brightness(0) invert(1);
     }
 
-    .trait{
+    .trait {
         display: none;
         background-color: white;
         width: 52px;
@@ -1880,7 +1939,7 @@ aside fieldset {
 
     /*----------------/ MAIN /------------------*/
 
-    main{
+    main {
         padding: 10px;
     }
 
@@ -1890,11 +1949,11 @@ aside fieldset {
         display: none;
     }
 
-    main{
+    main {
         padding-bottom: 110px;
     }
 
-    #logoTitreMobile{
+    #logoTitreMobile {
         width: 200px;
         height: auto;
         transform: translate(30px, -25px);
@@ -1902,48 +1961,49 @@ aside fieldset {
 
     /*-------------/ PAGE RECHERCHE /--------------*/
 
-    .main-recherche{
+    .main-recherche {
         padding: 10px;
     }
 
-    .btnTrie{
+    .btnTrie {
         margin-bottom: 5px;
     }
 
-    .filtrerBarre{
+    .filtrerBarre {
         margin-left: 0;
         margin-bottom: 5%;
     }
 
-    #conteneurOffres>article{
+    #conteneurOffres>article {
         display: flex;
         flex-direction: column;
     }
-    #conteneurOffres .lienApercuOffre{
+
+    #conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
-    .main-recherche>h1{
+    .main-recherche>h1 {
         font-size: 2em;
         border-left: 10px solid var(--secondary);
         padding-left: 10px;
         margin-left: 5px;
     }
 
-    #conteneurFiltres{
+    #conteneurFiltres {
         width: 100%;
         flex-direction: column;
     }
 
-    #conteneurBouton{
+    #conteneurBouton {
         flex-direction: column;
     }
 
-    #conteneurTrie{
+    #conteneurTrie {
         margin-bottom: 5%;
     }
 
-    .filtreDeplie{
+    .filtreDeplie {
         height: fit-content;
         width: 340px;
         flex-direction: column;
@@ -1951,36 +2011,36 @@ aside fieldset {
         border-radius: 0 0 48px 48px;
     }
 
-    .filtreDeplie > div{
+    .filtreDeplie>div {
         width: 100%;
     }
 
-    .prixFiltre{
+    .prixFiltre {
         display: flex;
         width: 100%;
         justify-content: space-between;
         flex-direction: column;
     }
 
-    .number-input{
+    .number-input {
         top: 40px;
         right: 65px;
     }
 
-    .prixFiltre > div{
+    .prixFiltre>div {
         margin: 4% 0;
     }
 
-    .prixFiltre > div > p{
+    .prixFiltre>div>p {
         top: 52px;
         right: 97px;
     }
 
-    .titreFiltre{
+    .titreFiltre {
         margin-top: 5%;
     }
 
-    .filtreTagDeplie label > p {
+    .filtreTagDeplie label>p {
         margin-left: 20%;
     }
 
@@ -1992,13 +2052,13 @@ aside fieldset {
         flex-wrap: wrap;
     }
 
-    .filtreTagDeplie > div {
+    .filtreTagDeplie>div {
         display: flex;
         flex-direction: column;
         width: 50%;
     }
 
-    .filtreTagDeplie label > p {
+    .filtreTagDeplie label>p {
         margin: 2% 0 0 20%;
     }
 
@@ -2012,96 +2072,139 @@ aside fieldset {
 
     /*----------------/ page choix création compte /------------------*/
 
-        /* GÉNÉRAL : corps de la page */
-        #body-choixCreaCompte {
-            margin: 0;
-            padding: 0;
-            width: 100%; /* Occupe toute la largeur de l'écran */
-            box-sizing: border-box; /* Gère les paddings dans les dimensions */
-        }
-    
-        /* Conteneurs principaux */
-        .pageChoixCo {
-            width: 100%; /* Prend 100% de la largeur disponible */
-            padding: 5%; /* Ajoute un peu d'espace intérieur */
-            box-sizing: border-box;
-        }
-    
-        /* Texte bulle */
-        .textBulle {
-            width: 90%; /* Réduit la largeur pour qu'elle reste centrée */
-            height: auto; /* Ajuste automatiquement la hauteur */
-            padding: 10px; /* Espace intérieur réduit pour mobile */
-            font-size: var(--typescale-body); /* Taille de police réduite */
-            margin: 10px auto; /* Centré avec marges automatiques */
-        }
-    
-        /* Conteneur ChoixCrea */
-        .ChoixCrea {
-            flex-direction: column; /* Aligne les éléments verticalement */
-            align-items: center; /* Centre les choix */
-            gap: 15px; /* Espace entre les éléments */
-        }
-    
-        /* Bouton entre les choix */
-        .TxtEntreBtn {
-            width: auto; /* S'adapte automatiquement */
-            padding: 5px 10px; /* Marges internes réduites */
-            font-size: var(--typescale-body); /* Taille de police adaptée */
-        }
-    
-        /* Bouton Annuler */
-        .btnAnnuler {
-            width: 90%; /* Réduction pour mobile */
-            max-width: 300px; /* Largeur maximale contrôlée */
-            height: auto; /* Ajustement dynamique */
-            padding: 10px; /* Espace intérieur réduit */
-            font-size: var(--typescale-body); /* Taille de police réduite */
-            justify-content: center; /* Centre le contenu */
-            gap: 10px; /* Espace entre texte et icône */
-        }
-    
-        /* Icônes SVG dans le bouton Annuler */
-        .btnAnnuler > svg {
-            width: 16px; /* Réduction de l'icône */
-            height: 16px;
-        }
-    
-        /* Zone des boutons */
-        .zoneBtn {
-            flex-direction: column; /* Organisation en colonne */
-            align-items: center; /* Centre les boutons */
-            width: 100%; /* Prend toute la largeur disponible */
-            gap: 15px; /* Espacement entre les boutons */
-        }
-    
-        /* Conteneur des éléments en général */
-        .textBulle {
-            flex-wrap: wrap; /* Permet d'aller à la ligne si nécessaire */
-            justify-content: center; /* Centre les éléments */
-        }
-    
-        /* Règles spécifiques pour éviter le débordement */
-        .zoneBtn, .ChoixCrea {
-            width: 100%; /* Toujours dans les limites de l'écran */
-            max-width: 428px; /* Limite stricte pour mobiles */
-        }
-    
-        /* Police générale */
-        #body-choixCreaCompte p {
-            font-size: var(--typescale-body); /* Taille de texte adaptée au mobile */
-            word-wrap: break-word; /* Coupe les mots longs */
-            margin: 5px 0; /* Marges réduites */
-        }
-    
-        /* SVG dans les conteneurs */
-        #body-choixCreaCompte svg {
-            width: 18px; /* Taille globale des icônes */
-            height: auto; /* Conserve le ratio */
-        }
-        #body-choixCreaCompte button{
+    /* GÉNÉRAL : corps de la page */
+    #body-choixCreaCompte {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        /* Occupe toute la largeur de l'écran */
+        box-sizing: border-box;
+        /* Gère les paddings dans les dimensions */
+    }
+
+    /* Conteneurs principaux */
+    .pageChoixCo {
+        width: 100%;
+        /* Prend 100% de la largeur disponible */
+        padding: 5%;
+        /* Ajoute un peu d'espace intérieur */
+        box-sizing: border-box;
+    }
+
+    /* Texte bulle */
+    .textBulle {
+        width: 90%;
+        /* Réduit la largeur pour qu'elle reste centrée */
+        height: auto;
+        /* Ajuste automatiquement la hauteur */
+        padding: 10px;
+        /* Espace intérieur réduit pour mobile */
+        font-size: var(--typescale-body);
+        /* Taille de police réduite */
+        margin: 10px auto;
+        /* Centré avec marges automatiques */
+    }
+
+    /* Conteneur ChoixCrea */
+    .ChoixCrea {
+        flex-direction: column;
+        /* Aligne les éléments verticalement */
+        align-items: center;
+        /* Centre les choix */
+        gap: 15px;
+        /* Espace entre les éléments */
+    }
+
+    /* Bouton entre les choix */
+    .TxtEntreBtn {
+        width: auto;
+        /* S'adapte automatiquement */
+        padding: 5px 10px;
+        /* Marges internes réduites */
+        font-size: var(--typescale-body);
+        /* Taille de police adaptée */
+    }
+
+    /* Bouton Annuler */
+    .btnAnnuler {
+        width: 90%;
+        /* Réduction pour mobile */
+        max-width: 300px;
+        /* Largeur maximale contrôlée */
+        height: auto;
+        /* Ajustement dynamique */
+        padding: 10px;
+        /* Espace intérieur réduit */
+        font-size: var(--typescale-body);
+        /* Taille de police réduite */
+        justify-content: center;
+        /* Centre le contenu */
+        gap: 10px;
+        /* Espace entre texte et icône */
+    }
+
+    /* Icônes SVG dans le bouton Annuler */
+    .btnAnnuler>svg {
+        width: 16px;
+        /* Réduction de l'icône */
+        height: 16px;
+    }
+
+    /* Zone des boutons */
+    .zoneBtn {
+        flex-direction: column;
+        /* Organisation en colonne */
+        align-items: center;
+        /* Centre les boutons */
+        width: 100%;
+        /* Prend toute la largeur disponible */
+        gap: 15px;
+        /* Espacement entre les boutons */
+    }
+
+    /* Conteneur des éléments en général */
+    .textBulle {
+        flex-wrap: wrap;
+        /* Permet d'aller à la ligne si nécessaire */
+        justify-content: center;
+        /* Centre les éléments */
+    }
+
+    /* Règles spécifiques pour éviter le débordement */
+    .zoneBtn,
+    .ChoixCrea {
+        width: 100%;
+        /* Toujours dans les limites de l'écran */
+        max-width: 428px;
+        /* Limite stricte pour mobiles */
+    }
+
+    /* Police générale */
+    #body-choixCreaCompte p {
+        font-size: var(--typescale-body);
+        /* Taille de texte adaptée au mobile */
+        word-wrap: break-word;
+        /* Coupe les mots longs */
+        margin: 5px 0;
+        /* Marges réduites */
+    }
+
+    /* SVG dans les conteneurs */
+    #body-choixCreaCompte svg {
+        width: 18px;
+        /* Taille globale des icônes */
+        height: auto;
+        /* Conserve le ratio */
+    }
+
+    #body-choixCreaCompte button {
         width: 25px;
        }
+    
+    
+       .titrePortable{
+        display: block;
+    }
     
     .titrePortable div{
         display: flex;
@@ -2111,24 +2214,24 @@ aside fieldset {
         left: 1%;
         top: 3.5%;
     }
-    
-    .titrePortable img{
+
+    .titrePortable img {
         width: 85px;
         height: 85px;
     }
-    
-    #conteneurTitreMobile #logoTitreMobile{
+
+    #conteneurTitreMobile #logoTitreMobile {
         width: 100px;
         height: auto;
         transform: translate(0px, -25px);
     }
-    
-    #conteneurTitreMobile{
+
+    #conteneurTitreMobile {
         display: flex;
         align-items: flex-start;
     }
-    
-    .titrePortable > svg{
+
+    .titrePortable>svg {
         width: 400px;
         height: 200px;
     }
@@ -2137,21 +2240,35 @@ aside fieldset {
     /*----------------/ Carroussel /------------------*/
 
 
-    .carroussel{
+    .carroussel {
         visibility: hidden;
     }
 
-    .card{
+    .card {
         visibility: hidden;
     }
 
-    .small-carroussel{
+    .small-carroussel {
         visibility: hidden;
     }
 
-    .offreALaUne{
-        display:initial;
+    .offreALaUne {
+        display: initial;
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+        flex-wrap: nowrap;
+        margin: 15px;
     }
+
+    .offreALaUne>article {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    
+
 
     /*----------------/ choix créa avis /------------------*/
     /* GÉNÉRAL : corps de la page */

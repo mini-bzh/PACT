@@ -144,7 +144,7 @@ $offreALaUne = $stmt->fetchAll();
 
         <!-- cette partie là sera afficher quand le site sera en version téléphone     -->
         <div class="offreALaUne">
-            <h1>À La Une</h1>
+            <article>
                 <?php
 
                 foreach ($rows as $offre)          // parcourt les offres pour les afficher
@@ -156,6 +156,7 @@ $offreALaUne = $stmt->fetchAll();
                         <?php
                     }
                         ?>
+            </article>
         </div>
 
         <h1>Autres offres</h1>
