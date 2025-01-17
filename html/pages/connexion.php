@@ -160,7 +160,7 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <!------ MAIN  ------>
 
-<main>
+<main id="mainConnexion">
 
 <!-- Formulaire de connexion -->
 <form action="" method="post">

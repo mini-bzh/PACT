@@ -184,7 +184,7 @@ if (isset($idCompte)) {
     ?>
 
         <!------ MAIN  ------>
-        <main>
+        <main id="mainCompte">
             <p class="texteLarge">Veuillez sélectionner une option de connexion</p>
             <div>
                 <?php
