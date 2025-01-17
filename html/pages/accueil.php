@@ -2,20 +2,20 @@
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
-include('../php/connection_params.php');
+include('../composants/bdd/connection_params.php');
 
 // connexion a la BdD
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
 // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-include('../php/verif_compte_pro.php');
+include('../composants/verif/verif_compte_pro.php');
 
 // cree $compteMembre qui est true quand on est sur un compte pro et false sinon
-include('../php/verif_compte_membre.php');
+include('../composants/verif/verif_compte_membre.php');
 
 // contient fonction caf_offre pour afficher les offres
-include('../php/affichage_offre.php');
+include('../composants/affichage/affichage_offre.php');
 
 if ($comptePro)      /* prépare la requête pour récupérer les offres à afficher : offres du pro si connecté en tant que pro, toutes les 
                          offres sinon */ {

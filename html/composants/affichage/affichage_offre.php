@@ -3,14 +3,14 @@
 
 
 // contient fonction caf_offre pour afficher les offres
-include('../php/verif_categorie.php');
+include('../composants/verif/verif_categorie.php');
 
 // contient fonction affichage_etoiles pour afficher les etoiles
 include('../php/etoiles.php');
 
 function af_offre($row) {
     // recuperation des parametre de connection a la BdD
-    include('../php/connection_params.php');
+    include('../composants/bdd/connection_params.php');
     
     
     // connexion a la BdD
