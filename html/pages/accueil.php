@@ -147,6 +147,7 @@ $offreALaUne = $stmt->fetchAll();
             <article>
                 <?php
 
+                print_r($offreALaUne);
                 foreach ($rows as $offre)          // parcourt les offres pour les afficher
                 {
                 ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offreALaUne["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
