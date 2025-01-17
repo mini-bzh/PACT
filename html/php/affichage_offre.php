@@ -22,8 +22,7 @@ function af_offre($row) {
     $enRelief = $stmt->fetchAll();
     $enRelief = array_column($enRelief, 'idoffre');
 ?>
-    <article class="apercuOffre
-<?php
+    <article class="apercuOffre <?php
     if (in_array($row["idoffre"], $enRelief)) {
         echo " relief";
     }
