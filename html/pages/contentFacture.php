@@ -73,15 +73,13 @@ FROM
 
     $date = new DateTime( $dateFacture['annee']. "-" . $dateFacture['mois'] . "-01");
  
-    //echo '<pre>' .  .'</pre>';
 }
 
 ?>
 
 <?php
 if (in_array($_SESSION["idCompte"], $idproprive)) {
-    //print_r($contentFacture);
-    //print_r($dateFacture);
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
