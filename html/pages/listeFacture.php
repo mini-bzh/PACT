@@ -22,10 +22,10 @@ $id_c = $_SESSION["idCompte"];
 
 if (key_exists("idCompte", $_SESSION)) {
     // reccuperation de id_c de pro_prive 
-    $idproprive = $dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idproprive = array_pop($dbh->query("select id_c from tripskell.pro_prive where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll());
 
     // reccuperation de id_c de pro_public
-    $idpropublic = $dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll()[0];
+    $idpropublic = array_pop($dbh->query("select id_c from tripskell.pro_public where id_c='" . $_SESSION["idCompte"] . "';")->fetchAll());
 }
 
 
