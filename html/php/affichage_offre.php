@@ -6,7 +6,7 @@
 include('../php/verif_categorie.php');
 
 // contient fonction affichage_etoiles pour afficher les etoiles
-include('../php/etoiles.php'); 
+include('../php/etoiles.php');
 
 function af_offre($row) {
     // recuperation des parametre de connection a la BdD
