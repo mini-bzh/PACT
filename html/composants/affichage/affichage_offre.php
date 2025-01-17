@@ -21,6 +21,8 @@ function af_offre($row) {
     $stmt->execute();
     $enRelief = $stmt->fetchAll();
     $enRelief = array_column($enRelief, 'idoffre');
+
+    $nb_avis = $dbh->query("select count(*) from tripskell.avis where idOffre=".$row['idoffre'].";")->fetchAll()[0]['count'];
 ?>
     <article class="apercuOffre <?php
     if (in_array($row["idoffre"], $enRelief)) {
@@ -55,7 +57,7 @@ function af_offre($row) {
                 <p id="note"><?php echo $row["note"]?></p>
                 <?php affichage_etoiles($row["note"]);?>
             </div>
-            <p>439 avis</p>
+            <p><?php echo $nb_avis; ?> avis</p>
         </div>
     </article>
 <?php
