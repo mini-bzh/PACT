@@ -1,5 +1,5 @@
 
-let btnDeconnexion = document.querySelector(".btnDeconnexion");
+let btnDeconnexion = document.getElementById("btnDeconnexion");
 console.log(btnDeconnexion);
 btnDeconnexion.addEventListener("click", ()=>{
     //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
