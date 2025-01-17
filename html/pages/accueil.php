@@ -147,18 +147,17 @@ $offreALaUne = $stmt->fetchAll();
             <article>
                 <?php
 
-                print_r($offreALaUne);
-                foreach ($rows as $offre)          // parcourt les offres pour les afficher
-                {
-                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offreALaUne["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
-                        <?php
-                        af_offre($offre);
-                        ?></a>
-                        <?php
+                    foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                    {
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offreALaUne["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <?php
+                            af_offre($offre);
+                            ?></a>
+                    <?php
                     }
-                        ?>
-            </article>
-        </div>
+                    ?>
+                </article>
+            </div>
 
         <h1>Autres offres</h1>
         <?php } ?>
@@ -173,8 +172,8 @@ $offreALaUne = $stmt->fetchAll();
                         <?php
                         af_offre($offre);
                         ?></a><?php
-                    }
-                        ?>
+                            }
+                                ?>
             </article>
         </section>
 
