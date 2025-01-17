@@ -339,7 +339,7 @@ if (!empty($_POST)) {
 
 ?>
 <?php
-if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
+if (!is_null($idproprive) || !is_null($idpropublic)) {
 ?>
 
 <!DOCTYPE html>
@@ -482,10 +482,13 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                     <label for="agemin">âge minimum :</label>
                     <input type="text" id="agemin" name="agemin" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["agemin"]; ?>">
                 </div>
+                </div>
             </div>
+
 
                 <!-- ----------------- TAGS ------------------- -->
                 <?php
+                
                     
                     $tags_cat = ['Visite','Restauration','PA','Spectacle','Activite'];
                     
