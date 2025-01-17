@@ -130,9 +130,9 @@ $offreALaUne = $stmt->fetchAll();
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
                         {
                         ?>
-                            <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover"> 
                                 <?php
-                                af_offre($offre);
+                                    af_offre($offre);
                                 ?>
                             </a>
                         <?php
@@ -149,7 +149,11 @@ $offreALaUne = $stmt->fetchAll();
 
                     foreach ($rows as $offre)          // parcourt les offres pour les afficher
                     {
+<<<<<<< Updated upstream
                     ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"] ?>" class="lienApercuOffre grossisQuandHover">
+=======
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offreALaUne["idoffre"]; ?>" class="lienApercuOffre">
+>>>>>>> Stashed changes
                             <?php
                             af_offre($offre);
                             ?></a>
