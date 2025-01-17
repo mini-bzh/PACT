@@ -10,7 +10,7 @@ function deconnexion()
 {
     // Permet de faire des requêtes sans recharger la page
     let xhr = new XMLHttpRequest(); // Initialisation
-    xhr.open("POST", "../php/gestionDeconnexion.php", true); // Via la méthode POST et transmet à gestionDeconnexion.php
+    xhr.open("POST", "../composants/ajax/gestionDeconnexion.php", true); // Via la méthode POST et transmet à gestionDeconnexion.php
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     // Gérer la réponse du serveur
     xhr.onload = function() {  // Quand la réponse du serveur est reçue, la fonction est lancée

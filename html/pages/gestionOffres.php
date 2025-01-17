@@ -12,7 +12,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 include('../composants/verif/verif_compte_pro.php');
 
 // contient fonction affichage_etoiles pour afficher les etoiles
-include('../php/etoiles.php'); 
+include('../composants/affichage/etoiles.php'); 
 
 // Creation requete pour recuperer les offres
 // du professionnel connecte

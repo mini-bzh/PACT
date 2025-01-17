@@ -5,7 +5,7 @@
     include('../composants/bdd/connection_params.php');
 
     // contient fonction affichage_etoiles pour afficher les etoiles
-    include('../php/etoiles.php'); 
+    include('../composants/affichage/etoiles.php'); 
     
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);

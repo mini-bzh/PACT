@@ -15,7 +15,7 @@ function supprimerAvis()
         let idAvis = document.querySelectorAll(".btnSupprimerAvis p")[1].textContent;
         
         $.ajax({
-            url: "../php/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            url: "..//composants/ajax/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
             data: {idAvis: idAvis},
             success: function(response) {
@@ -75,7 +75,7 @@ function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis,
 
     if(motifSignalement != ""){
         $.ajax({
-            url: "../php/signalerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+            url: "../composants/ajax/signalerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
             type: 'POST',                               // Type de la requête (pour transmettre
             data: {idCompte: idCompte, motifSignalement: motifSignalement, idAvis: idAvis},
             success: function(reponse){
@@ -316,7 +316,7 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
                                                         //changement vaut 1 ou -1 et indique s'il faut incrémenter ou décrémenter
 {
     $.ajax({
-        url: "../php/updatePoucesAvis.php",         // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "..//composants/ajax/updatePoucesAvis.php",         // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data:  {                                    // données transférées au script php
             idAvis: idAvis,
@@ -372,7 +372,7 @@ avis.forEach(av => {
 function envoyerReponse(idAvis, reponseAvis)
 {
     $.ajax({
-        url: "../php/reponseAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "../composants/ajax/reponseAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: {idAvis: idAvis, reponseAvis : reponseAvis},
         success: function(response)

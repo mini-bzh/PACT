@@ -49,7 +49,7 @@ function toggleEnLigne(idOffre)
 {
     ChangerBtnLigne(idOffre);                       //change les visuels de l'offre (ciblée avec idOffre)
     $.ajax({
-        url: "/php/toggleStatutOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "/composants/ajax/toggleStatutOffre.php",        // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: {idOffre: idOffre},
         success: function(response) {

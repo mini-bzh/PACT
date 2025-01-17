@@ -1,7 +1,7 @@
 // Fonction pour récupérer les données JSON depuis le fichier PHP
 function getData() {
     var xhr = new XMLHttpRequest(); // Création d'une instance XMLHttpRequest
-    xhr.open("GET", "../php/listeTagsOffres.php", false); // false rend la requête synchrone
+    xhr.open("GET", "..//composants/ajax/listeTagsOffres.php", false); // false rend la requête synchrone
     xhr.setRequestHeader("Content-Type", "application/json"); // Définition de l'en-tête Content-Type
     xhr.send(); // Envoi de la requête
     

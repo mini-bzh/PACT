@@ -208,7 +208,7 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <!-- Pop-up du formulaire de demande de réinitialisation -->
 <div id="resetForm" class="displayNone">
-    <form action="../php/reset_request.php" method="POST">
+    <form action="../composants/ajax/reset_request.php" method="POST">
         <div>
             <label for="recupLogin"><p>Login :</p></label>
             <input type="recupLogin" name="recupLogin" id="recupLogin" required>

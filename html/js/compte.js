@@ -28,7 +28,7 @@ function verif_pass() {
     let request = "_compte where mot_de_passe = '" + valeur + "' and id_c = '" + id_c + "';";
 
     $.ajax({
-        url: "../php/sql_request.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "../composants/ajax/sql_request.php",              // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: { request: request },
         success: function (response) {
@@ -78,7 +78,7 @@ function generateApiKey() {
 
     // permet de lié JS et PHP
     $.ajax({
-        url: "../php/genAPIkey.php",              // Le fichier PHP à appeler, qui met à jour la BDD 
+        url: "../composants/ajax/genAPIkey.php",              // Le fichier PHP à appeler, qui met à jour la BDD 
         type: 'POST',                               
         data: { apiKey: apiKey },
         success: function (response) { // en cas de réussite

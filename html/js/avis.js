@@ -314,7 +314,7 @@ function MettreAvisOffreLu(conteneurAvisOffre)
 function avisLuBDD(idAvis)
 {
     $.ajax({
-        url: "../php/avisLuParPro.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        url: "../composants/ajax/avisLuParPro.php",              // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
         data: {idAvis: idAvis},
         success: function(response)
