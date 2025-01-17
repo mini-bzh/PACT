@@ -2241,15 +2241,15 @@ aside fieldset {
 
 
     .carroussel {
-        visibility: hidden;
+        display: none;
     }
 
     .card {
-        visibility: hidden;
+       display: none;
     }
 
     .small-carroussel {
-        visibility: hidden;
+       display: none;
     }
 
     .offreALaUne {
