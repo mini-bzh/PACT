@@ -202,6 +202,39 @@ textarea {
     transform: scale(1.05);
 }
 
+.btn {
+    min-width: 300px;
+    border-radius: 48px;
+    padding: 0 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+
+.btn p{
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.btn svg{
+    width: 30px;
+    height: 30px;
+    margin-left: 3%;
+}
+
+.btn svg path{
+    stroke: white;
+    stroke-width: 8px;
+}
+
 
 /*---------------------/ MAIN /---------------------*/
 
@@ -756,23 +789,14 @@ textarea {
 }
 
 /* css des boutons dans la liste des factures */
-.btnFacture {
+.btnListeFacture {
     background-color: lightslategray;
+    min-width: 0;
     width: 30%;
     height: 40px;
-    border-radius: 48px;
-    padding: 0 1%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border:none;
 }
 
-.btnFacture:hover{
-    cursor: pointer;
-}
-
-.btnFacture a{
+.btnListeFacture a{
     width: 100%;
     color: white;
     text-align: center;
