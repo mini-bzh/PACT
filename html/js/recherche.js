@@ -806,12 +806,12 @@ function MaxVlaueBubbleStylePrix () {   // détermine la marge necessaire à dro
   
 function setMinValueOutputPrix () {     // remplie la bulle de droite
     minRangePrix = parseInt(rangeInputPrix[0].value);
-    minvalPrix.innerHTML = `${rangeInputPrix[0].value} €`;
+    minvalPrix.innerHTML = `${rangeInputPrix[0].value}€`;
   }
 
 function setMaxValueOutputPrix () {     // remplie la bulle de gauche
     maxRangePrix = parseInt(rangeInputPrix[1].value);
-    maxvalPrix.innerHTML = `${rangeInputPrix[1].value} €`;
+    maxvalPrix.innerHTML = `${rangeInputPrix[1].value}€`;
   }
 
   setMinValueOutputPrix()
