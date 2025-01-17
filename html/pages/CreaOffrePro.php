@@ -317,7 +317,7 @@ foreach ($keysToCheck as $key) {
         break; // Pas besoin de continuer, on a trouvé un champ présent
     }
 }
-if (in_array($_SESSION["idCompte"], $idproprive) && $hasFieldPresent) {
+if (!is_null($idproprive) && $hasFieldPresent) {
     $requete = "update tripskell.pro_prive set ";
     $requete .= "coordonnee_bancaire = :coordonnee_bancaire, date_exp = :date_exp, cryptogramme = :cryptogramme, nom_titulaire_carte = :nom_titulaire_carte,";
     $requete .= "addressmail_pp = :addressmail_pp, mdp_pp = :mdp_pp,";
@@ -382,7 +382,8 @@ foreach ($jours as $jour => $horaires)
 ?>
 
 <?php
-if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte"], $idpropublic)) {
+print_r($_SESSION["idCompte"]);
+if (!is_null($idproprive) || !is_null($idpropublic)) {
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -732,7 +733,7 @@ if (in_array($_SESSION["idCompte"], $idproprive) || in_array($_SESSION["idCompte
                 </div> -->
 
                 <?php
-                    if (in_array($_SESSION["idCompte"], $idproprive) &&  // permet de vérifier l'id_c
+                    if (!is_null($idproprive) &&  // permet de vérifier l'id_c
                     ( // verifie que les donnees banquaires ne sont pas deja dans la BDD
                         // verif info carte
                         (empty($info_banq["coordonnee_bancaire"]) ||
