@@ -43,6 +43,10 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn);  // Menu principa
 
 int menu_listePro(int cnx, int id, PGconn *conn);  // menu de la liste des pros à contacter (renvoie l'id du pro à contacter)
 
+int menu_conversation(int cnx, bool compte, int id_c, int id, PGconn *conn);
+
+int menu_envoyerMessage(int cnx, bool compte, int id_c, int id, PGconn *conn);
+
 // Fonction principale
 int main() {
 
@@ -352,6 +356,7 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
     char menu[500];
     char buff[50];
     int id_c = -1;
+    int ret;
 
     if (compte == 1) { // Utilisateur membre
         strcpy(menu,"+-------------------------------------+\n"
@@ -371,7 +376,7 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
                     "+-------------------------------------+\n"
                     "| [1] Voir les messages non lus       |\n"
                     "| [2] Voir ma conversation avec       |\n"
-                    "|     un professionnel                |\n"
+                    "|     un membre                       |\n"
                     "| [-1] Quitter                        |\n"
                     "+-------------------------------------+\n");
 
@@ -405,44 +410,103 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
             return -1;
         }
 
-        // Differents choix
+        // Liste des differents choix selon le compte :
         
         // Pour un membre
-        if (compte == 1)
-        {
-            if (strcmp(buff, "1") == 0) {
-                /* code */
-            } else if (strcmp(buff, "2") == 0) {
-                /* code */
-            } else if (strcmp(buff, "3") == 0) {
-                id_c = menu_listePro(cnx, id, conn);
+        if (compte == 1) {
 
-            } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
-                quitter = true;
-                close(cnx);
-            } else {
-                strcpy(affichage, menu);
-                strcat(affichage, "Choix non valide, réessayez : ");
+            switch (atoi(buff)) {
+                case 1:  // Si il choisit de voir ses messages non lus (membre)
+                    /* TODO voir les messages non lus (membre) */
+                    break;
+                
+                case 2:  // Si il choisit de voir une conversation déjà entamée (membre)
+                    /* TODO voir ma conversation avec un pro (membre) */
+                    break;
+
+                case 3:  // Si il choisit d'envoyer un message
+                    id_c = -1;
+                    id_c = menu_listePro(cnx, id, conn);
+                    
+                    ret = menu_conversation(cnx, compte, id_c, id, conn);
+                    if (ret == -1) {
+                        return -1;
+                    }
+                    break;
+
+                case -1:  // Se déconnecter
+                    quitter = true;
+                    close(cnx);
+                    break;
+                
+                default:  // Choix non valide
+                    strcpy(affichage, menu);
+                    strcat(affichage, "Choix non valide, réessayez : ");
+                    break;
             }
+
             strcpy(buff, "");
-        } else if (compte == 2) {
-            if (strcmp(buff, "-1") == 0) { // Se déconnecter
-                quitter = true;
-                close(cnx);
-            } else {
-                strcpy(affichage, menu);
-                strcat(affichage, "Choix non valide, réessayez : ");
-            }
-        } else if (compte == 3) {
+        }
 
-        }        
+        // Pour un professionnel
+        else if (compte == 2) {
+
+            switch (atoi(buff)) {
+                case 1:  // Si il choisit de voir ses messages non lus (pro)
+                    /* TODO voir les messages non lus (pro) */
+                    break;
+                
+                case 2:  // Si il choisit de voir une conversation déjà entamée (pro)
+                    /* TODO voir ma conversation avec un membre (pro) */
+                    break;
+
+                case -1:  // Se déconnecter
+                    quitter = true;
+                    close(cnx);
+                    break;
+                
+                default:  // Choix non valide
+                    strcpy(affichage, menu);
+                    strcat(affichage, "Choix non valide, réessayez : ");
+                    break;
+            }
+
+        }
         
+        // Pour un administrateur
+        else if (compte == 3) {
+
+            switch (atoi(buff)) {
+                case 1:  // Si il choisit de bloquer un utilisateur (admin)
+                    /* TODO bloquer un utilisateur (admin) */
+                    break;
+
+                case 2:  // Si il choisit de bannir un utilisateur (admin)
+                    /* TODO bannir un utilisateur (admin) */
+                    break;
+
+                case -1:  // Se déconnecter
+                    quitter = true;
+                    close(cnx);
+                    break;
+                
+                default:  // Choix non valide
+                    strcpy(affichage, menu);
+                    strcat(affichage, "Choix non valide, réessayez : ");
+                    break;
+            }
+
+        } else {
+            perror("Utilisateur non connecté sur le menu principal");
+            close(cnx);
+            return -1; // Utilisateur non connecté
+        }
     }
 
     return 0;
 }
 
-int menu_listePro(int cnx, int id, PGconn *conn){
+int menu_listePro(int cnx, int id, PGconn *conn) {
     PGresult *res;
     char query[512]; // Buffer statique de taille fixe pour la requête
     int rows;
@@ -494,10 +558,12 @@ int menu_listePro(int cnx, int id, PGconn *conn){
 
     while (quitter == false) {
         strcpy(liste,
-        "+-------------------------------------+\n"
-        "|          Tchatator Membre           |\n"
-        "+-------------------------------------+\n"
-        "|      Liste des professionnels       |\n");
+                    "+-------------------------------------+\n"
+                    "|          Tchatator Membre           |\n"
+                    "|                                     |\n"
+                    "| Liste des professionnels            |\n"
+                    "+-------------------------------------+\n"
+        );
 
         for (int i = 0; i < rows; i++)
         {
@@ -520,12 +586,13 @@ int menu_listePro(int cnx, int id, PGconn *conn){
             // Ajouter la ligne formatée à la liste
             strcat(liste, ligne);
         }
-        strcat(liste, "| [-1] Quitter                        |\n"
-                    "+-------------------------------------+\n");
+        strcat(liste, "| [-1] Retour                         |\n"
+                      "+-------------------------------------+\n");
 
         strcat(liste, demande);
         
         write(cnx, liste, strlen(liste));
+        
         int len = read(cnx, buff, sizeof(buff) - 1);
         if (len < 0) {
             perror("Erreur lors de la lecture");
@@ -534,7 +601,7 @@ int menu_listePro(int cnx, int id, PGconn *conn){
 
         buff[len] = '\0';
 
-        if (strcmp(buff, "-1") == 0) { // Quitter
+        if (strcmp(buff, "-1") == 0) { // Retour au menu principal
             return -1;
         }
         
@@ -552,4 +619,114 @@ int menu_listePro(int cnx, int id, PGconn *conn){
     PQclear(res);
 
     return atoi(ident);
+}
+
+int menu_envoyerMessage(int cnx, bool compte, int id_c, int id, PGconn *conn) {
+    // TODO
+    return -1;
+}
+
+int menu_conversation(int cnx, bool compte, int id_c, int id, PGconn *conn) {
+    PGresult *res;
+    int rais_soc_col;
+    char buff[10];
+    char query[512]; // Buffer statique pour la requête
+    char selec[50] = "> Entrez votre choix : ";
+    char menuChoix[500];
+    char menu[500] = "+-------------------------------------+\n"
+                     "|          Tchatator Membre           |\n"
+                     "|                                     |\n"
+                     "| Conversation avec ";
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "SELECT p.raison_social "
+        "FROM tripskell.pro_prive p "
+        "WHERE p.id_c = %d "
+        "UNION "
+        "SELECT p.raison_social "
+        "FROM tripskell.pro_public p "
+        "WHERE p.id_c = %d", id_c, id_c);
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+        return -1; // Retourner une erreur
+    }
+
+    rais_soc_col = PQfnumber(res, "raison_social");
+    
+    char *rais_soc = PQgetvalue(res, 0, rais_soc_col);
+
+    // Formater chaque ligne avec snprintf
+    char ligne[128]; // Tampon pour une ligne
+    snprintf(ligne, sizeof(ligne), "%s", rais_soc);
+
+    // Calculer l'espace vide pour aligner
+    int espace_vide = 18 - strlen(rais_soc);
+
+    // Ajouter des espaces
+    for (int j = 0; j < espace_vide; j++) {
+        strcat(ligne, " ");
+    }
+    strcat(ligne, "|\n");
+    strcat(menu, ligne);
+
+    strcat(menu,"+-------------------------------------+\n"
+                "| [1] Voir l'historique des messages  |\n"
+                "| [2] Envoyer un message              |\n"
+                "| [3] Supprimer un message            |\n"
+                "| [4] Modifier  un message            |\n"
+                "| [-1] Retour                         |\n"
+                "+-------------------------------------+\n"
+    );
+
+    bool quitter = false;
+
+    strcpy(menuChoix, menu);
+    strcat(menuChoix, selec);
+
+    while (!quitter) {
+        write(cnx, menuChoix, strlen(menuChoix));
+
+        int len = read(cnx, buff, sizeof(buff) - 1);
+        if (len < 0) {
+            perror("Erreur lors de la lecture");
+            return -1;
+        }
+
+        buff[len] = '\0';
+
+        switch (atoi(buff)) {
+            case 1:
+                // TODO : Afficher l'historique des messages
+                break;
+            case 2:
+                // TODO : Envoyer un message
+                break;
+            case 3:
+                // TODO : Supprimer un message
+                break;
+            case 4:
+                // TODO : Modifier un message
+                break;
+            case -1:
+                quitter = true;
+                break;
+            default:
+
+                strcpy(selec, "> Choix non valide, réessayez : ");
+
+                strcpy(menuChoix, menu);
+                strcat(menuChoix, selec);
+                break;
+        }
+    }
+    
+
+    return 0;
 }

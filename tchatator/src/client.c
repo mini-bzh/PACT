@@ -67,7 +67,7 @@ int main(int argc, char const *argv[])
             perror("Erreur lors de l'envoi du message");
             break;
         }
-
+        
         // Lire la réponse du serveur
         system("clear");
         read_size = read(sock, server_reply, sizeof(server_reply) - 1);
