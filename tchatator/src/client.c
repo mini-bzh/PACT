@@ -48,6 +48,8 @@ int main(int argc, char const *argv[])
 
     // Recevoir le message initial
     system("clear");
+
+    read(sock, server_reply, 1);
     read_size = read(sock, server_reply, sizeof(server_reply) - 1);
     if (read_size > 0) {
         server_reply[read_size] = '\0';
@@ -68,16 +70,39 @@ int main(int argc, char const *argv[])
             break;
         }
         
-        // Lire la réponse du serveur
         system("clear");
-        read_size = read(sock, server_reply, sizeof(server_reply) - 1);
+
+        // Lire la réponse du serveur
+        // read_size = read(sock, server_reply, sizeof(server_reply) - 1);
+        // if (read_size <= 0) {
+        //     printf("Le serveur a fermé la connexion.\n");
+        //     quitter = true;
+        //     return 0;
+        // }
+        // server_reply[read_size] = '\0';
+        // printf("%s", server_reply);
+
+
+        read_size = read(sock, server_reply, 1); // Lire combien de messages sont envoyés
+        server_reply[read_size] = '\0';
+
         if (read_size <= 0) {
             printf("Le serveur a fermé la connexion.\n");
             quitter = true;
             return 0;
         }
-        server_reply[read_size] = '\0';
-        printf("%s", server_reply);
+
+        if (!quitter) {
+        
+            int message_count = atoi(server_reply);
+
+            for (int i = 0; i < message_count; i++) {
+                read_size = read(sock, server_reply, sizeof(server_reply) - 1); // Lire chaque message
+                server_reply[read_size] = '\0';
+                printf("%s", server_reply);
+            }
+        }
+
     }
     
     // Fermer la socket
