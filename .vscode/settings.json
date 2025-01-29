@@ -10,6 +10,9 @@
         "stdbool.h": "c",
         "stdlib.h": "c",
         "libpq-fe.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "prototypes.h": "c",
+        "chrono": "c",
+        "functional": "c"
     }
 }

@@ -110,6 +110,7 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
     char buff[50];
     int id_c = -1;
     int ret;
+    char demandeRetour[50];
 
     if (compte == 1) { // Utilisateur membre
         strcpy(menu,"+-------------------------------------+\n"
@@ -155,6 +156,10 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
         write(cnx, affichage, strlen(affichage));
     
         int len = read(cnx, buff, sizeof(buff) - 1);
+        if (len < 0) {
+            perror("Erreur lors de la lecture");
+            return -1;
+        }
 
         buff[strcspn(buff, "\r\n")] = 0;
         buff[len] = '\0';
@@ -171,7 +176,21 @@ int menu_principal(int cnx, int compte, int id, PGconn *conn) {
 
             switch (atoi(buff)) {
                 case 1:  // Si il choisit de voir ses messages non lus (membre)
-                    /* TODO voir les messages non lus (membre) */
+                    strcpy(demandeRetour, "Saisissez -1 pour retour : ");
+                    do
+                    {
+                        write(cnx, "1", 1);
+                        afficher_message(1, conn, "CYIM", cnx);
+                        // write(cnx, demandeRetour, strlen(demandeRetour));
+                        int len = read(cnx, buff, sizeof(buff) -1);
+                        strcpy(demandeRetour, "Requête invalide, saisissez -1 pour retour : ");
+                        if (len < 0) {
+                            perror("Erreur lors de la lecture");
+                            return -1;
+                        }
+                        buff[len] = '\0';
+                    } while (strcmp("-1", buff) != 0);
+                    
                     break;
                 
                 case 2:  // Si il choisit de voir une conversation déjà entamée (membre)

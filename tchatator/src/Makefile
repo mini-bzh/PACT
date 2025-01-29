@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall
 LDFLAGS = -lpq
 SRC_SERVER = server.c fonctions.c menus.c
-SRC_CLIENT = client.c
+SRC_CLIENT = client.c fonctions.c
 OBJ_DIR = ../build
 OBJ_SERVER = $(SRC_SERVER:%.c=$(OBJ_DIR)/%.o)
 OBJ_CLIENT = $(SRC_CLIENT:%.c=$(OBJ_DIR)/%.o)
