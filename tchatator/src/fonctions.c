@@ -352,7 +352,7 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
     char query[256];
     char respToClient[256];
 
-    int id;
+    int id = -1;
 
     bool quitter = false;
 
@@ -642,11 +642,13 @@ void af_menu_principal(int type_compte) {
 }
 
 int menu_principal(int cnx, int compte, int id, int sock) {
-    char buff[50];
+    char buff[512];
     int id_c = -1;
     int ret;
     int reponse;
     int rep = -1;
+
+    af_menu_principal(compte);
     
     bool quitter = false;
     
@@ -685,11 +687,16 @@ int menu_principal(int cnx, int compte, int id, int sock) {
                 case -1:  // Se déconnecter
                     write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
                     
-                    int len = read(cnx, buff, sizeof(buff));
+                    int len = read(sock, buff, 17);
                     
                     if (len < 0) {
                         perror("Erreur lors de la lecture");
                         return -1;
+                    }
+
+                    if (atoi(get_json_value(buff, "reponse")) == DECO) {
+                        quitter = true;
+                        printf("Deconnexion ...");
                     }
                     
                     break;

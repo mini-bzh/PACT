@@ -59,19 +59,19 @@ int main(int argc, char const *argv[])
     ret = menu_connexion(sock, &type_compte);
     if (ret == -1)
     {
-        printf("Le Server a fermé la connexion\n");
+        printf("Deconnexion ...\n");
         close(sock);
         return 0;
     }
 
     sprintf(server_reply, "%d", ret);
     
-    while (atoi(server_reply) != DECO){
+    /*while (atoi(server_reply) != DECO){
         system("clear");
-        af_menu_principal(type_compte);
-        menu_principal(cnx, type_compte, -1, sock);
+        af_menu_principal(type_compte);*/
+    menu_principal(cnx, type_compte, -1, sock);
         // sprintf(server_reply, "%d", rep);
-    }
+    //}
 
     
     // Fermer la socket

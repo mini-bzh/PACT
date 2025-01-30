@@ -62,7 +62,7 @@ int main() {
         deco = true;
 
         // Acceptation de la connexion
-        printf("Acceptation de la connexion...\n");
+        printf("En attente de connexion...\n");
         int cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
         if (cnx < 0) {
             perror("Erreur lors de l'acceptation de la connexion");
@@ -71,24 +71,24 @@ int main() {
             return -1;
         }
 
-        printf("Connexion réussi au client : %d\n", cnx);
+        printf("Connexion réussi au CLIENT : %d\n", cnx);
 
         write(cnx, "200", 3); // envoie code 200
 
         id = identification(cnx, configSocket, &compte, conn);
         if (id != -1) {
             deco = false;
+        } else {
+            printf("Identification réussi type compte : %d\n", compte);
         }
         
-        printf("Identification réussi type compte : %d\n", compte);
-
         while (!deco) {  // Si l'utilisateur est connecté, on traite les requêtes jusqu'à la déconnexion
             read(cnx, buffer, sizeof(buffer));
             printf("requete: %s\n", get_json_value(buffer, "requete"));
             if(strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
                 reponse_liste_pro(cnx, configSocket, conn, id);
             } else if(strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
-                write(cnx,"{\"reponse\":\"402\"}", strlen("{\"reponse\":\"402\"}"));
+                write(cnx,"{\"reponse\":\"402\"}", utf8_strlen("{\"reponse\":\"402\"}"));
                 deco = true;
             }
             memset(buffer, 0, sizeof(buffer));
@@ -105,6 +105,7 @@ int main() {
         printf("\n");
 
         close(cnx);
+        printf("Deconnexion réussi du CLIENT : %d\n\n", cnx);
     }
     
 

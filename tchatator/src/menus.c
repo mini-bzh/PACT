@@ -56,10 +56,8 @@ int menu_connexion(int cnx, int *compte) {
             perror("Erreur lors de la lecture");
             return -1;
         }
-        printf("lu : %s\n", resp_serv);
 
         resp_serv[len] = '\0';
-        printf("%d\n", atoi(get_json_value(resp_serv, "reponse")));
         
         if (atoi(get_json_value(resp_serv, "reponse")) == OK) {
             quitter = true;
