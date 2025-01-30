@@ -722,14 +722,17 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
                 case -1:  // Se déconnecter
                     write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
-                    int len = read(cnx, buff, sizeof(buff));
+                    
+                    int len = read(sock, buff, 17);
+                    
                     if (len < 0) {
                         perror("Erreur lors de la lecture");
                         return -1;
                     }
+
                     if (atoi(get_json_value(buff, "reponse")) == DECO) {
                         quitter = true;
-                        printf("ok");
+                        printf("Deconnexion ...");
                     }
                     
                     break;
@@ -754,15 +757,19 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
                 case -1:  // Se déconnecter
                     write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
-                    int len = read(cnx, buff, sizeof(buff));
+                    
+                    int len = read(sock, buff, 17);
+                    
                     if (len < 0) {
                         perror("Erreur lors de la lecture");
                         return -1;
                     }
+
                     if (atoi(get_json_value(buff, "reponse")) == DECO) {
                         quitter = true;
+                        printf("Deconnexion ...");
                     }
-
+                    
                     break;
                 
                 default:  // Choix non valide
