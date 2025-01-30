@@ -49,7 +49,7 @@ int lirePort(const char *filename, int *numPort);
 //                                //
 ////////////////////////////////////
 
-int menu_connexion(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn);  // Menu de connexion
+int menu_connexion(int cnx, int *compte);  // Menu de connexion
 
 int menu_principal(int cnx, int compte, int id, PGconn *conn);  // Menu principal (choix des actions possibles)
 

@@ -12,10 +12,7 @@
 #include "types.h"
 #include "prototypes.h"
 
-const int MEMBRE = 1;
-const int PRO = 2;
-const int ADMIN = 3;
-
+// Fonction principale
 int main() {
 
     ConfigSocketMessages configSocket;
@@ -79,22 +76,27 @@ int main() {
 
         char type_comte_tosend[12];
         sprintf(type_comte_tosend, "%d", compte);
-        sleep(1);
-        // write(cnx, type_comte_tosend, 1); // on envoie le type de compte utilisé
 
-        // bool done = false;
-        // char buf[500];
-        // while(!done) {
-        //     read(cnx, buf, sizeof(buf) - 1);
-        //     printf("requete: %s\n", get_json_value(buf, "requete"));
-        //     if(strcmp(get_json_value(buf, "requete"), "liste_pro") == 0) {
-        //         reponse_liste_pro(cnx, configSocket, conn, id);
-        //     }
-        // }
+        write(cnx, type_comte_tosend, 1); // on envoie le type de compte utilisé
+
+        //id = menu_connexion(cnx, configSocket, &compte, conn);
+
+        /*if (compte != 0) {
+            menu_principal(cnx, compte, id, conn);
+        }*/
+        bool done = false;
+        char buf[500];
+        while(!done) {
+            read(cnx, buf, sizeof(buf) - 1);
+            printf("requete: %s\n", get_json_value(buf, "requete"));
+            if(strcmp(get_json_value(buf, "requete"), "liste_pro") == 0) {
+                reponse_liste_pro(cnx, configSocket, conn, id);
+            }
+        }
         
-        // printf("\n");
+        printf("\n");
 
-        // sleep(200);
+        sleep(200);
 
         close(cnx);
     }

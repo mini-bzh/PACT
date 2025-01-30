@@ -19,10 +19,13 @@
 //////////////////////////////
 
 // Fonction pour gérer le menu de connexion
-int menu_connexion(int cnx, int *compte) {
+int menu_connexion(int *compte) {
+    PGresult *res;
+    PGresult *res2;
+    PGresult *res3;
     char buff[50];
-    char resp_serv[150];
-    int len;
+    char query[256];
+
     int id;
 
     bool quitter = false;
@@ -35,41 +38,54 @@ int menu_connexion(int cnx, int *compte) {
         "| [-1] Quitter                        |\n"
         "+-------------------------------------+\n"
         "> Entrez votre clé API : ";
-        
+
     while ((*compte == 0) && (quitter == false)) {
         
-        printf("%s", menu);
 
-        memset(buff, 0, sizeof(buff));
-        fgets(buff, sizeof(buff), stdin);
         
-        buff[strcspn(buff, "\n")] = '\0'; // Supprimer le '\n' de fgets
-        
-        buff[strlen(buff)] = '\0';
-
-        if (write(cnx, buff, strlen(buff)) < 0) {
-            perror("Erreur lors de l'envoi du message");
-        }
-
-        len = read(cnx, resp_serv, sizeof(resp_serv));
         if (len < 0) {
             perror("Erreur lors de la lecture");
             return -1;
         }
 
-        resp_serv[len] = '\0';
+        buff[strcspn(buff, "\r\n")] = 0;
+        buff[len] = '\0';
+
+        // Construire la requête SQL avec une variable
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.membre WHERE membre.clefAPI = '%s';", buff);
+        res = PQexec(conn, query); // Exécuter la requête SQL d'un membre
+
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.pro_public WHERE pro_public.clefAPI = '%s';", buff);
+        res2 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel public
+
+        snprintf(query, sizeof(query), "SELECT * FROM tripskell.pro_prive WHERE pro_prive.clefAPI = '%s';", buff);
+        res3 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel privee
         
-        if (atoi(get_json_value(resp_serv, "reponse")) == 200) {
+        if ((PQresultStatus(res) != PGRES_TUPLES_OK) || (PQresultStatus(res2) != PGRES_TUPLES_OK) || (PQresultStatus(res3) != PGRES_TUPLES_OK)) {
+            fprintf(stderr, "Échec de l'exécution de la requête : %s\n", PQerrorMessage(conn));
+            PQclear(res);
+            PQclear(res2);
+            PQclear(res3);
+            return -1;
+        }
+
+
+        if (PQntuples(res) > 0)
+        {
+            *compte = 1; // Utilisateur membre
+            id = atoi(PQgetvalue(res, 0, PQfnumber(res, "id_c")));
+        } else if (PQntuples(res2) > 0) {
+            *compte = 2; // Utilisateur professionnel (public)
+            id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
+        } else if (PQntuples(res3) > 0) {
+            *compte = 2; // Utilisateur professionnel (privee)
+            id = atoi(PQgetvalue(res3, 0, PQfnumber(res, "id_c")));
+        } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
+            *compte = 3; // Utilisateur administrateur
+        } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             quitter = true;
-            printf("compte : %d\n", atoi(get_json_value(resp_serv, "compte")));
-            *compte = atoi(get_json_value(resp_serv, "compte"));
-            if (len < 0) {
-                perror("Erreur lors de la lecture");
-                return -1;
-            }
-            id = atoi(get_json_value(resp_serv, "id"));
-            printf("id : %d\n", id);
-        } else if (atoi(get_json_value(resp_serv, "reponse")) == 401) {  // Clé API incorrecte
+            
+        } else {  // Clé API incorrecte
             strcpy(menu,
             "+-------------------------------------+\n"
             "|            Se connecter             |\n"
@@ -77,13 +93,14 @@ int menu_connexion(int cnx, int *compte) {
             "| [-1] Quitter                        |\n"
             "+-------------------------------------+\n"
             "> Clé API incorrecte, réessayez : ");
-        } else if (atoi(get_json_value(resp_serv, "reponse")) == 402) {
-            return -1;
         }
-        system("clear");
     }
 
-    return 1;
+    PQclear(res);
+    PQclear(res2);
+    PQclear(res3);
+
+    return id;
 }
 
 // Fonction pour gérer le menu principal

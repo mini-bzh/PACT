@@ -350,12 +350,15 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
     PGresult *res3;
     char buff[50];
     char query[256];
+    char respToClient[256];
 
     int id;
 
     bool quitter = false;
 
     while ((*compte == 0) && (quitter == false)) {
+        
+        memset(buff, 0, sizeof(buff));
         int len = read(cnx, buff, sizeof(buff) - 1);
         if (len < 0) {
             perror("Erreur lors de la lecture");
@@ -388,7 +391,10 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
         {
             *compte = 1; // Utilisateur membre
             id = atoi(PQgetvalue(res, 0, PQfnumber(res, "id_c")));
-            write(cnx, "200", 3); // envoie code 200
+            snprintf(respToClient, sizeof(respToClient),  // envoie code 200
+                "{\"reponse\":\"200\","
+                "\"compte\":\"1\","
+                "\"id\":\"%d\"}", id);
         } else if (PQntuples(res2) > 0) {
             *compte = 2; // Utilisateur professionnel (public)
             id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
@@ -402,10 +408,12 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
             write(cnx, "200", 3); // envoie code 200
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             quitter = true;
-            
+            snprintf(respToClient, sizeof(respToClient), "{\"reponse\":\"402\"}");  // envoie de 402
         } else {  // Clé API incorrecte
-            write(cnx, "401", 3); // envoie code erreur
+            snprintf(respToClient, sizeof(respToClient), "{\"reponse\":\"401\"}");  // envoie de 401
         }
+        respToClient[strlen(respToClient)] = '\0';
+        write(cnx, respToClient, strlen(respToClient));
     }
 
     PQclear(res);
