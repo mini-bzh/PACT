@@ -398,14 +398,23 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
         } else if (PQntuples(res2) > 0) {
             *compte = 2; // Utilisateur professionnel (public)
             id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
-            write(cnx, "200", 3); // envoie code 200
+            snprintf(respToClient, sizeof(respToClient),  // envoie code 200
+                "{\"reponse\":\"200\","
+                "\"compte\":\"2\","
+                "\"id\":\"%d\"}", id);
         } else if (PQntuples(res3) > 0) {
             *compte = 2; // Utilisateur professionnel (privee)
             id = atoi(PQgetvalue(res3, 0, PQfnumber(res, "id_c")));
-            write(cnx, "200", 3); // envoie code 200
+            snprintf(respToClient, sizeof(respToClient),  // envoie code 200
+                "{\"reponse\":\"200\","
+                "\"compte\":\"2\","
+                "\"id\":\"%d\"}", id);
         } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
             *compte = 3; // Utilisateur administrateur
-            write(cnx, "200", 3); // envoie code 200
+            snprintf(respToClient, sizeof(respToClient),  // envoie code 200
+                "{\"reponse\":\"200\","
+                "\"compte\":\"2\","
+                "\"id\":\"%d\"}", id);
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             quitter = true;
             snprintf(respToClient, sizeof(respToClient), "{\"reponse\":\"402\"}");  // envoie de 402
