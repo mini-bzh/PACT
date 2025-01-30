@@ -16,10 +16,8 @@ int main(int argc, char const *argv[])
     int ret;
     int cnx;
     int numPort;
-    char message[1024], server_reply[1024];
+    char server_reply[1024];
     struct sockaddr_in addr;
-    bool quitter = false;
-    int read_size;
 
     int type_compte;
     
@@ -52,12 +50,12 @@ int main(int argc, char const *argv[])
 
     read(sock, server_reply, 3);
 
-    if (atoi(server_reply) != 200){
+    if (atoi(server_reply) != OK){
         printf("Erreur ou déconnexion lors de la réception du message initial.\n");
         close(sock);
         return -1;
     }
-
+    
     ret = menu_connexion(sock, &type_compte);
     if (ret == -1)
     {
@@ -65,38 +63,16 @@ int main(int argc, char const *argv[])
         close(sock);
         return 0;
     }
+
+    sprintf(server_reply, "%d", ret);
     
+    while (atoi(server_reply) != DECO){
+        system("clear");
+        af_menu_principal(type_compte);
+        menu_principal(cnx, type_compte, -1, sock);
+        // sprintf(server_reply, "%d", rep);
+    }
 
-    // Envoyer le message au serveur
-    // if (write(sock, message, strlen(message)) < 0) {
-    //     perror("Erreur lors de l'envoi du message");
-    // }
-
-    // read(sock, server_reply, 3);
-
-    // while (atoi(server_reply) == 401){
-    //     system("clear");
-    //     printf("MENU CONNECTION ( Cle incorrect )\n\n");
-    //     printf("cle API : ");
-
-    //     fgets(message, sizeof(message), stdin);
-    //     message[strcspn(message, "\n")] = '\0'; // Supprimer le '\n' de fgets
-
-    //     // Envoyer le message au serveur
-    //     if (write(sock, message, strlen(message)) < 0) {
-    //         perror("Erreur lors de l'envoi du message");
-    //         break;
-    //     }
-
-    //     read(sock, server_reply, 3);
-    // }
-
-    // read(sock, server_reply, 1);
-
-    // type_compte = (int)server_reply[0] - '0';
-
-    // af_menu_principal(type_compte);
-    // menu_principale(cnx, type_compte, -1, sock);
     
     // Fermer la socket
     close(sock);

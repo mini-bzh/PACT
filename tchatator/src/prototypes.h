@@ -51,7 +51,7 @@ int lirePort(const char *filename, int *numPort);
 
 int menu_connexion(int cnx, int *compte);  // Menu de connexion
 
-int menu_principal(int cnx, int compte, int id, PGconn *conn);  // Menu principal (choix des actions possibles)
+// int menu_principal(int cnx, int compte, int id, PGconn *conn);  // Menu principal (choix des actions possibles)
 
 int menu_listePro(int cnx, int id, PGconn *conn);  // menu de la liste des pros à contacter (renvoie l'id du pro à contacter)
 
@@ -65,6 +65,6 @@ void menu_liste_pro(int sock);
 
 void af_menu_principal(int type_compte);
 
-int menu_principale(int cnx, int compte, int id, int sock);
+int menu_principal(int cnx, int compte, int id, int sock);
 
 #endif // PROTOTYPES_H

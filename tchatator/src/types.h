@@ -28,4 +28,16 @@ typedef struct {
     char pass[30];
 } ConfigBDD;
 
+
+// Types de compte
+extern const int MEMBRE;
+extern const int PRO;
+extern const int ADMIN;
+
+// Réponses du serveur
+extern const int OK;
+extern const int CLEINC;
+extern const int DECO;
+extern const int ACKDECO;
+
 #endif // TYPES_H

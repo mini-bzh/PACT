@@ -12,10 +12,6 @@
 #include "types.h"
 #include "prototypes.h"
 
-const int MEMBRE = 1;
-const int PRO = 2;
-const int ADMIN = 3;
-
 int main() {
 
     ConfigSocketMessages configSocket;
@@ -23,6 +19,11 @@ int main() {
 
     int compte = 0;
     int id;
+    char buffer[500];
+
+    int len;
+
+    bool deco;
 
     system("clear");
 
@@ -58,6 +59,7 @@ int main() {
     while (true) {
         id = -1;
         compte = 0;
+        deco = true;
 
         // Acceptation de la connexion
         printf("Acceptation de la connexion...\n");
@@ -74,27 +76,33 @@ int main() {
         write(cnx, "200", 3); // envoie code 200
 
         id = identification(cnx, configSocket, &compte, conn);
-
+        if (id != -1) {
+            deco = false;
+        }
+        
         printf("Identification réussi type compte : %d\n", compte);
 
-        char type_comte_tosend[12];
-        sprintf(type_comte_tosend, "%d", compte);
-        sleep(1);
+        while (!deco) {  // Si l'utilisateur est connecté, on traite les requêtes jusqu'à la déconnexion
+            read(cnx, buffer, sizeof(buffer));
+            printf("requete: %s\n", get_json_value(buffer, "requete"));
+            if(strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
+                reponse_liste_pro(cnx, configSocket, conn, id);
+            } else if(strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
+                write(cnx,"{\"reponse\":\"402\"}", strlen("{\"reponse\":\"402\"}"));
+                deco = true;
+            }
+            memset(buffer, 0, sizeof(buffer));
+        }
+        
+        // char type_comte_tosend[12];
+        // sprintf(type_comte_tosend, "%d", compte);
+        // sleep(1);
         // write(cnx, type_comte_tosend, 1); // on envoie le type de compte utilisé
 
         // bool done = false;
         // char buf[500];
-        // while(!done) {
-        //     read(cnx, buf, sizeof(buf) - 1);
-        //     printf("requete: %s\n", get_json_value(buf, "requete"));
-        //     if(strcmp(get_json_value(buf, "requete"), "liste_pro") == 0) {
-        //         reponse_liste_pro(cnx, configSocket, conn, id);
-        //     }
-        // }
         
-        // printf("\n");
-
-        // sleep(200);
+        printf("\n");
 
         close(cnx);
     }

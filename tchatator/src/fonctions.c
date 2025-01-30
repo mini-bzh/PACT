@@ -392,29 +392,29 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
             *compte = 1; // Utilisateur membre
             id = atoi(PQgetvalue(res, 0, PQfnumber(res, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
-                "{\"reponse\":\"200\","
+                "{\"reponse\":\"%d\","
                 "\"compte\":\"1\","
-                "\"id\":\"%d\"}", id);
+                "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res2) > 0) {
             *compte = 2; // Utilisateur professionnel (public)
             id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
-                "{\"reponse\":\"200\","
+                "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
-                "\"id\":\"%d\"}", id);
+                "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res3) > 0) {
             *compte = 2; // Utilisateur professionnel (privee)
             id = atoi(PQgetvalue(res3, 0, PQfnumber(res, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
-                "{\"reponse\":\"200\","
+                "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
-                "\"id\":\"%d\"}", id);
+                "\"id\":\"%d\"}", OK, id);
         } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
             *compte = 3; // Utilisateur administrateur
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
-                "{\"reponse\":\"200\","
+                "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
-                "\"id\":\"%d\"}", id);
+                "\"id\":\"%d\"}", OK, id);
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             quitter = true;
             snprintf(respToClient, sizeof(respToClient), "{\"reponse\":\"402\"}");  // envoie de 402
@@ -605,7 +605,7 @@ void menu_liste_pro(int sock) {
 
 void af_menu_principal(int type_compte) {
     system("clear");
-    if (type_compte == 1) { // Utilisateur membre
+    if (type_compte == MEMBRE) { // Utilisateur membre
         printf("+-------------------------------------+\n"
                     "|          Tchatator Membre           |\n"
                     "+-------------------------------------+\n"
@@ -617,7 +617,7 @@ void af_menu_principal(int type_compte) {
                     "| [-1] Quitter                        |\n"
                     "+-------------------------------------+\n");
 
-    } else if (type_compte == 2) { // Utilisateur professionnel
+    } else if (type_compte == PRO) { // Utilisateur professionnel
         printf("+-------------------------------------+\n"
                     "|       Tchatator professionnel       |\n"
                     "+-------------------------------------+\n"
@@ -627,7 +627,7 @@ void af_menu_principal(int type_compte) {
                     "| [-1] Quitter                        |\n"
                     "+-------------------------------------+\n");
 
-    } else if (type_compte == 3) { // Utilisateur administrateur
+    } else if (type_compte == ADMIN) { // Utilisateur administrateur
         printf("+-------------------------------------+\n"
                     "|      Tchatator Administrateur       |\n"
                     "+-------------------------------------+\n"
@@ -641,11 +641,12 @@ void af_menu_principal(int type_compte) {
     
 }
 
-int menu_principale(int cnx, int compte, int id, int sock) {
+int menu_principal(int cnx, int compte, int id, int sock) {
     char buff[50];
     int id_c = -1;
     int ret;
     int reponse;
+    int rep = -1;
     
     bool quitter = false;
     
@@ -655,9 +656,8 @@ int menu_principale(int cnx, int compte, int id, int sock) {
         scanf("%d",&reponse);
 
         // Liste des differents choix selon le compte :
-        
         // Pour un membre
-        if (compte == 1) {
+        if (compte == MEMBRE) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de voir ses messages non lus (membre)
@@ -678,12 +678,19 @@ int menu_principale(int cnx, int compte, int id, int sock) {
                             return -1;
                         }
                     }*/
-                   menu_liste_pro(sock);
+                    menu_liste_pro(sock);
                     
                     break;
 
                 case -1:  // Se déconnecter
-                    quitter = true;
+                    write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
+                    
+                    int len = read(cnx, buff, sizeof(buff));
+                    
+                    if (len < 0) {
+                        perror("Erreur lors de la lecture");
+                        return -1;
+                    }
                     
                     break;
                 
@@ -691,11 +698,11 @@ int menu_principale(int cnx, int compte, int id, int sock) {
                     break;
             }
 
-            strcpy(buff, "");
+            memset(buff, 0, sizeof(buff));
         }
 
         // Pour un professionnel
-        else if (compte == 2) {
+        else if (compte == PRO) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de voir ses messages non lus (pro)
@@ -707,7 +714,16 @@ int menu_principale(int cnx, int compte, int id, int sock) {
                     break;
 
                 case -1:  // Se déconnecter
-                    quitter = true;
+                    write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
+                    int len = read(cnx, buff, sizeof(buff));
+                    if (len < 0) {
+                        perror("Erreur lors de la lecture");
+                        return -1;
+                    }
+                    if (atoi(get_json_value(buff, "reponse")) == DECO) {
+                        quitter = true;
+                        printf("ok");
+                    }
                     
                     break;
                 
@@ -718,9 +734,9 @@ int menu_principale(int cnx, int compte, int id, int sock) {
         }
         
         // Pour un administrateur
-        else if (reponse) {
+        else if (compte == ADMIN) {
 
-            switch (atoi(buff)) {
+            switch (reponse) {
                 case 1:  // Si il choisit de bloquer un utilisateur (admin)
                     /* TODO bloquer un utilisateur (admin) */
                     break;
@@ -730,8 +746,16 @@ int menu_principale(int cnx, int compte, int id, int sock) {
                     break;
 
                 case -1:  // Se déconnecter
-                    quitter = true;
-                    
+                    write(sock,"{\"requete\":\"deconnexion\"}", strlen("{\"requete\":\"deconnexion\"}"));
+                    int len = read(cnx, buff, sizeof(buff));
+                    if (len < 0) {
+                        perror("Erreur lors de la lecture");
+                        return -1;
+                    }
+                    if (atoi(get_json_value(buff, "reponse")) == DECO) {
+                        quitter = true;
+                    }
+
                     break;
                 
                 default:  // Choix non valide
@@ -745,7 +769,7 @@ int menu_principale(int cnx, int compte, int id, int sock) {
         }
     }
 
-    return 0;
+    return rep;
 }
 
 int lirePort(const char *filename, int *numPort) {
