@@ -600,7 +600,25 @@ void af_menu_liste_pro(int sock) {
 }
 
 void menu_liste_pro(int sock) {
+    int reponse;
+
     af_menu_liste_pro(sock);
+
+    bool quitter = false;
+    
+    while (!quitter) {
+    
+        printf("> Entrez votre choix : ");
+        scanf("%d",&reponse);
+
+        switch (reponse) {
+            case -1:
+                quitter = true;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 void af_menu_principal(int type_compte) {
@@ -647,12 +665,11 @@ int menu_principal(int cnx, int compte, int id, int sock) {
     int ret;
     int reponse;
     int rep = -1;
-
-    af_menu_principal(compte);
     
     bool quitter = false;
     
     while (quitter == false) {
+        af_menu_principal(compte);
     
         printf("> Entrez votre choix : ");
         scanf("%d",&reponse);
