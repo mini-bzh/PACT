@@ -507,6 +507,10 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
     write(cnx, response, strlen(response));
 }
 
+void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
+    write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
+}
+
 int count_json_array_elements(const char* json_array) {
     if (json_array == NULL || json_array[0] != '[' || json_array[strlen(json_array) - 1] != ']') {
         return -1; // Format invalide
@@ -571,9 +575,27 @@ char* get_json_array_element(const char* json_array, int index) {
     return NULL; // Index non trouvé
 }
 
+void request(int sock, char* request, char* response) {
+    write(sock, request, utf8_strlen(request));
+    read(sock, response, 512);
+}
+
+void menu_envoie_message(int sock) {
+    char mess[512] = {0};
+    char buf[512] = {0};
+    system("clear");
+    printf("Envoie message : \n\n");
+
+    printf(" > ");
+    scanf("%s", mess);
+
+    request(sock,"{\"requete\":\"send_mess\", \"from\":\"titoo\", \"to\":\"nov\"}", buf);
+    printf("Reponse : %s\n", buf);
+}
+
 void af_menu_liste_pro(int sock) {
-    char buf[512+1] = {0};
-    char data_array[512+1] = {0};
+    char buf[512] = {0};
+    char data_array[512] = {0};
 
     write(sock,"{\"requete\":\"liste_pro\"}", strlen("{\"requete\":\"liste_pro\"}"));
     read(sock, buf, 512); 
@@ -616,6 +638,7 @@ void menu_liste_pro(int sock) {
                 quitter = true;
                 break;
             default:
+                menu_envoie_message(sock);
                 break;
         }
     }
@@ -688,15 +711,7 @@ int menu_principal(int cnx, int compte, int id, int sock) {
                     break;
 
                 case 3:  // Si il choisit d'envoyer un message
-                    /*id_c = -1;
-                    id_c = menu_listePro(cnx, id, conn);
-                    
-                    if (id_c != -1) {
-                        ret = menu_conversation_membre(cnx, id_c, id, conn);
-                        if (ret == -1) {
-                            return -1;
-                        }
-                    }*/
+
                     menu_liste_pro(sock);
                     
                     break;

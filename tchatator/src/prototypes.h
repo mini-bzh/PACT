@@ -40,6 +40,8 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
 
 void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int id);
 
+void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
+
 int lirePort(const char *filename, int *numPort);
 
 

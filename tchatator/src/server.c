@@ -90,6 +90,8 @@ int main() {
             } else if(strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
                 write(cnx,"{\"reponse\":\"402\"}", utf8_strlen("{\"reponse\":\"402\"}"));
                 deco = true;
+            } else if (strcmp(get_json_value(buffer, "requete"), "send_mess") == 0) {
+                send_mess(cnx, configSocket, conn, id, buffer);
             }
             memset(buffer, 0, sizeof(buffer));
         }
