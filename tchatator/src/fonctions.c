@@ -397,14 +397,14 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
                 "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res2) > 0) {
             *compte = 2; // Utilisateur professionnel (public)
-            id = atoi(PQgetvalue(res2, 0, PQfnumber(res, "id_c")));
+            id = atoi(PQgetvalue(res2, 0, PQfnumber(res2, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
                 "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res3) > 0) {
             *compte = 2; // Utilisateur professionnel (privee)
-            id = atoi(PQgetvalue(res3, 0, PQfnumber(res, "id_c")));
+            id = atoi(PQgetvalue(res3, 0, PQfnumber(res3, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
@@ -413,7 +413,7 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
             *compte = 3; // Utilisateur administrateur
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
-                "\"compte\":\"2\","
+                "\"compte\":\"3\","
                 "\"id\":\"%d\"}", OK, id);
         } else if (strcmp(buff, "-1") == 0) { // Se déconnecter
             quitter = true;
@@ -604,6 +604,36 @@ void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char*
     write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
 }
 
+void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
+    printf("content : %s\n", requete);
+
+    PGresult *res;
+    char query[512]; // Buffer statique de taille fixe pour la requête
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "select * from tripskell._message where idenvoyeur = %s and idreceveur = %d order by idmes desc;"
+        , get_json_value(requete, "id_membre"), id);
+
+    res = PQexec(conn, query);
+
+    printf("query : %s\n", query);
+
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+    }
+
+    int content = PQfnumber(res, "contentmessage");
+
+    char *text = PQgetvalue(res, 0, content);
+
+    printf("contenu : %s\n", text);
+
+    write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
+}
+
 int count_json_array_elements(const char* json_array) {
     if (json_array == NULL || json_array[0] != '[' || json_array[strlen(json_array) - 1] != ']') {
         return -1; // Format invalide
@@ -707,8 +737,7 @@ void af_menu_liste_pro(int sock) {
     char data_array[512] = {0};
     char index_array[512] = {0};
 
-    write(sock,"{\"requete\":\"liste_pro\"}", strlen("{\"requete\":\"liste_pro\"}"));
-    read(sock, buf, 512); 
+    request(sock,"{\"requete\":\"liste_pro\"}", buf);
 
     strcpy(data_array, get_json_value(buf, "data"));
     strcpy(index_array, get_json_value(buf, "indexs"));
@@ -752,6 +781,47 @@ void menu_liste_pro(int sock) {
                 break;
         }
     }
+}
+
+void menu_historique_messages(int sock, int id_c){
+    /* Pas fini */
+    char buf[512] = {0};
+    char req[512] = {0};
+    char id_c_char[16] = {0};
+
+
+    sprintf(id_c_char, "%d", id_c);
+
+    strcpy(req, "{\"requete\":\"historique_mess\", \"id_membre\":\"");
+    strcat(req, id_c_char);
+    strcat(req, "\"}");
+
+    request(sock,req, buf);
+
+    printf("buf %s\n", buf);
+    
+
+/*
+    strcpy(data_array, get_json_value(buf, "data"));
+    strcpy(index_array, get_json_value(buf, "indexs"));
+
+    int nb_item = count_json_array_elements(data_array);
+
+    system("clear");
+    printf( "+-------------------------------------+\n"
+            "|       Tchatator professionnel       |\n"
+            "|                                     |\n"
+            "| Historique des messages             |\n"
+            "+-------------------------------------+\n");
+    for (int i = 0; i < nb_item; i++) {
+        printf("| %s - %s", get_json_array_element(index_array, i), get_json_array_element(data_array, i));
+        for (int j = 0; j < 32 - strlen(get_json_array_element(data_array, i)); j++) {
+            printf(" ");
+        }
+        printf("|\n");
+    }
+    printf( "| [-1] Retour                         |\n"
+            "+-------------------------------------+\n");*/
 }
 
 void af_menu_liste_membre(int sock) {
@@ -800,7 +870,8 @@ void menu_liste_membre(int sock) {
                 quitter = true;
                 break;
             default:
-                menu_envoie_message(sock, reponse);
+                menu_historique_messages(sock, reponse);
+                //menu_envoie_message(sock, reponse);
                 break;
         }
     }

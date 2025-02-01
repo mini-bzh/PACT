@@ -44,6 +44,8 @@ void reponse_liste_membre(int cnx, ConfigSocketMessages config, PGconn *conn, in
 
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
 
+void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
+
 int lirePort(const char *filename, int *numPort);
 
 

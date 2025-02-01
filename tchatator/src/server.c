@@ -78,8 +78,7 @@ int main() {
         id = identification(cnx, configSocket, &compte, conn);
         if (id != -1) {
             deco = false;
-        } else {
-            printf("Identification réussi type compte : %d\n", compte);
+            printf("Identification réussi : (id : %d, type compte : %d)\n", id, compte);
         }
         
         while (!deco) {  // Si l'utilisateur est connecté, on traite les requêtes jusqu'à la déconnexion
@@ -94,17 +93,11 @@ int main() {
                 deco = true;
             } else if (strcmp(get_json_value(buffer, "requete"), "send_mess") == 0) {
                 send_mess(cnx, configSocket, conn, id, buffer);
+            } else if (strcmp(get_json_value(buffer, "requete"), "historique_mess") == 0) {
+                historique_mess(cnx, configSocket, conn, id, buffer);
             }
             memset(buffer, 0, sizeof(buffer));
         }
-        
-        // char type_comte_tosend[12];
-        // sprintf(type_comte_tosend, "%d", compte);
-        // sleep(1);
-        // write(cnx, type_comte_tosend, 1); // on envoie le type de compte utilisé
-
-        // bool done = false;
-        // char buf[500];
         
         printf("\n");
 
