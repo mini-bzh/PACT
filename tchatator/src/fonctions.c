@@ -513,6 +513,26 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
 
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
     printf("content : %s\n", requete);
+
+    PGresult *res;
+    char query[512]; // Buffer statique de taille fixe pour la requête
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "insert into tripskell._message (contentMessage, idReceveur, idEnvoyeur) values "
+        "('%s', %s, %d);", get_json_value(requete, "message"),get_json_value(requete, "receiver"), id);
+
+    
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+    }
+
     write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
 }
 
