@@ -613,7 +613,12 @@ void menu_envoie_message(int sock, int id_c_pro) {
     printf("Envoie message : \n\n");
 
     printf(" > ");
-    scanf("%s", mess);
+    fgets(mess, sizeof(mess), stdin);
+
+    // Supprimer le saut de ligne (\n) ajouté par fgets
+    mess[strcspn(mess, "\n")] = '\0';
+
+    printf("mess : %s", mess);
 
     char id_c_pro_char[3] = {0};
     sprintf(id_c_pro_char, "%d", id_c_pro);
@@ -622,6 +627,8 @@ void menu_envoie_message(int sock, int id_c_pro) {
     strcat(req," \"message\":\"");strcat(req,mess);strcat(req,"\",");
     strcat(req," \"receiver\":\"");strcat(req,id_c_pro_char);strcat(req,"\"");
     strcat(req,"}");
+
+    
 
     request(sock,req, buf);
     printf("Reponse : %s\n", buf);
