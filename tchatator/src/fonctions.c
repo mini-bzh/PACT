@@ -436,7 +436,8 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
     PGresult *res;
     char query[512]; // Buffer statique de taille fixe pour la requête
     int rows;
-    char liste[2048] = {0};
+    char liste_rs[2048] = {0};
+    char liste_index[2048] = {0};
 
 
     // Construire la requête avec snprintf
@@ -469,6 +470,7 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
 
     // Récupérer les noms des colonnes pour les utiliser dans l'affichage
     int rais_soc_col = PQfnumber(res, "raison_social");
+    int id_c_col = PQfnumber(res, "id_c");
     if (rais_soc_col == -1) {
         fprintf(stderr, "Les colonnes 'id' ou 'nom' sont introuvables dans le résultat\n");
         
@@ -476,38 +478,41 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
 
     rows = PQntuples(res);
 
-    char *rais_soc = PQgetvalue(res, 0, rais_soc_col);
-
     // Formater chaque ligne avec snprintf
     char ligne[128]; // Tampon pour une ligne
-    snprintf(ligne, sizeof(ligne), "[\"%s\"",rais_soc);
+    snprintf(ligne, sizeof(ligne), "[\"%s\"",PQgetvalue(res, 0, rais_soc_col));
+    strcat(liste_rs, ligne);
 
-    // Ajouter la ligne formatée à la liste
-    strcat(liste, ligne);
+    snprintf(ligne, sizeof(ligne), "[\"%s\"",PQgetvalue(res, 0, id_c_col));
+    strcat(liste_index, ligne);
 
     for (int i = 1; i < rows; i++)
     {
-        char *rais_soc = PQgetvalue(res, i, rais_soc_col);
-
         // Formater chaque ligne avec snprintf
         char ligne[128]; // Tampon pour une ligne
-        snprintf(ligne, sizeof(ligne), ",\"%s\"",rais_soc);
+        snprintf(ligne, sizeof(ligne), ",\"%s\"", PQgetvalue(res, i, rais_soc_col));
+        strcat(liste_rs, ligne);
 
-        // Ajouter la ligne formatée à la liste
-        strcat(liste, ligne);
+        snprintf(ligne, sizeof(ligne), ",\"%s\"", PQgetvalue(res, i, id_c_col));
+        strcat(liste_index, ligne);
+        
     }
-    strcat(liste, "]");
+    strcat(liste_rs, "]");
+    strcat(liste_index, "]");
 
-    printf("liste %s\n", liste);
 
+    // Préparation et envoie de la réponse
     char response[512] = "{";
     strcat(response,"\"state\":\"200\"");
-    strcat(response,",\"data\":");strcat(response,liste);
+    strcat(response,",\"data\":");strcat(response,liste_rs);
+    strcat(response,",\"indexs\":");strcat(response,liste_index);
     strcat(response,"}");
+
     write(cnx, response, strlen(response));
 }
 
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
+    printf("content : %s\n", requete);
     write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
 }
 
@@ -580,8 +585,9 @@ void request(int sock, char* request, char* response) {
     read(sock, response, 512);
 }
 
-void menu_envoie_message(int sock) {
+void menu_envoie_message(int sock, int id_c_pro) {
     char mess[512] = {0};
+    char req[2048] = {0};
     char buf[512] = {0};
     system("clear");
     printf("Envoie message : \n\n");
@@ -589,18 +595,28 @@ void menu_envoie_message(int sock) {
     printf(" > ");
     scanf("%s", mess);
 
-    request(sock,"{\"requete\":\"send_mess\", \"from\":\"titoo\", \"to\":\"nov\"}", buf);
+    char id_c_pro_char[3] = {0};
+    sprintf(id_c_pro_char, "%d", id_c_pro);
+
+    strcpy(req,"{\"requete\":\"send_mess\",");
+    strcat(req," \"message\":\"");strcat(req,mess);strcat(req,"\",");
+    strcat(req," \"receiver\":\"");strcat(req,id_c_pro_char);strcat(req,"\"");
+    strcat(req,"}");
+
+    request(sock,req, buf);
     printf("Reponse : %s\n", buf);
 }
 
 void af_menu_liste_pro(int sock) {
     char buf[512] = {0};
     char data_array[512] = {0};
+    char index_array[512] = {0};
 
     write(sock,"{\"requete\":\"liste_pro\"}", strlen("{\"requete\":\"liste_pro\"}"));
     read(sock, buf, 512); 
 
     strcpy(data_array, get_json_value(buf, "data"));
+    strcpy(index_array, get_json_value(buf, "indexs"));
 
     int nb_item = count_json_array_elements(data_array);
 
@@ -611,7 +627,7 @@ void af_menu_liste_pro(int sock) {
             "| Liste des professionnels            |\n"
             "+-------------------------------------+\n");
     for (int i = 0; i < nb_item; i++) {
-        printf("| %d - %s", i+1, get_json_array_element(data_array, i));
+        printf("| %s - %s", get_json_array_element(index_array, i), get_json_array_element(data_array, i));
         for (int j = 0; j < 32 - strlen(get_json_array_element(data_array, i)); j++) {
             printf(" ");
         }
@@ -638,7 +654,7 @@ void menu_liste_pro(int sock) {
                 quitter = true;
                 break;
             default:
-                menu_envoie_message(sock);
+                menu_envoie_message(sock, reponse);
                 break;
         }
     }
