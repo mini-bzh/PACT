@@ -85,9 +85,11 @@ int main() {
         while (!deco) {  // Si l'utilisateur est connecté, on traite les requêtes jusqu'à la déconnexion
             read(cnx, buffer, sizeof(buffer));
             printf("requete: %s\n", get_json_value(buffer, "requete"));
-            if(strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
+            if (strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
                 reponse_liste_pro(cnx, configSocket, conn, id);
-            } else if(strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
+            } else if (strcmp(get_json_value(buffer, "requete"), "liste_membre") == 0) {
+                reponse_liste_membre(cnx, configSocket, conn, id);
+            } else if (strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
                 write(cnx,"{\"reponse\":\"402\"}", utf8_strlen("{\"reponse\":\"402\"}"));
                 deco = true;
             } else if (strcmp(get_json_value(buffer, "requete"), "send_mess") == 0) {

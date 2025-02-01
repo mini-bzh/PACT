@@ -511,6 +511,74 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
     write(cnx, response, strlen(response));
 }
 
+void reponse_liste_membre(int cnx, ConfigSocketMessages config, PGconn *conn, int id){
+    PGresult *res;
+    char query[512]; // Buffer statique de taille fixe pour la requête
+    int rows;
+    char liste_rs[2048] = {0};
+    char liste_index[2048] = {0};
+
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "SELECT m.id_c, m.login "
+        "FROM tripskell.membre m "
+        ";");
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+        
+    }
+
+    // Récupérer les noms des colonnes pour les utiliser dans l'affichage
+    int rais_soc_col = PQfnumber(res, "login");
+    int id_c_col = PQfnumber(res, "id_c");
+    if (rais_soc_col == -1) {
+        fprintf(stderr, "Les colonnes 'id' ou 'nom' sont introuvables dans le résultat\n");
+        
+    }
+
+    rows = PQntuples(res);
+
+    // Formater chaque ligne avec snprintf
+    char ligne[128]; // Tampon pour une ligne
+    snprintf(ligne, sizeof(ligne), "[\"%s\"",PQgetvalue(res, 0, rais_soc_col));
+    strcat(liste_rs, ligne);
+
+    snprintf(ligne, sizeof(ligne), "[\"%s\"",PQgetvalue(res, 0, id_c_col));
+    strcat(liste_index, ligne);
+
+    for (int i = 1; i < rows; i++)
+    {
+        // Formater chaque ligne avec snprintf
+        char ligne[128]; // Tampon pour une ligne
+        snprintf(ligne, sizeof(ligne), ",\"%s\"", PQgetvalue(res, i, rais_soc_col));
+        strcat(liste_rs, ligne);
+
+        snprintf(ligne, sizeof(ligne), ",\"%s\"", PQgetvalue(res, i, id_c_col));
+        strcat(liste_index, ligne);
+        
+    }
+    strcat(liste_rs, "]");
+    strcat(liste_index, "]");
+
+
+    // Préparation et envoie de la réponse
+    char response[512] = "{";
+    strcat(response,"\"state\":\"200\"");
+    strcat(response,",\"data\":");strcat(response,liste_rs);
+    strcat(response,",\"indexs\":");strcat(response,liste_index);
+    strcat(response,"}");
+
+    write(cnx, response, strlen(response));
+}
+
+
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
     printf("content : %s\n", requete);
 
@@ -686,6 +754,58 @@ void menu_liste_pro(int sock) {
     }
 }
 
+void af_menu_liste_membre(int sock) {
+    char buf[512] = {0};
+    char data_array[512] = {0};
+    char index_array[512] = {0};
+
+    write(sock,"{\"requete\":\"liste_membre\"}", strlen("{\"requete\":\"liste_membre\"}"));
+    read(sock, buf, 512); 
+
+    strcpy(data_array, get_json_value(buf, "data"));
+    strcpy(index_array, get_json_value(buf, "indexs"));
+
+    int nb_item = count_json_array_elements(data_array);
+
+    system("clear");
+    printf( "+-------------------------------------+\n"
+            "|       Tchatator professionnel       |\n"
+            "|                                     |\n"
+            "| Liste des professionnels            |\n"
+            "+-------------------------------------+\n");
+    for (int i = 0; i < nb_item; i++) {
+        printf("| %s - %s", get_json_array_element(index_array, i), get_json_array_element(data_array, i));
+        for (int j = 0; j < 32 - strlen(get_json_array_element(data_array, i)); j++) {
+            printf(" ");
+        }
+        printf("|\n");
+    }
+    printf( "| [-1] Retour                         |\n"
+            "+-------------------------------------+\n");
+}
+
+void menu_liste_membre(int sock) {
+    int reponse;
+
+    bool quitter = false;
+    
+    while (!quitter) {
+        af_menu_liste_membre(sock);
+    
+        printf("> Entrez votre choix : ");
+        scanf("%d",&reponse);
+
+        switch (reponse) {
+            case -1:
+                quitter = true;
+                break;
+            default:
+                menu_envoie_message(sock, reponse);
+                break;
+        }
+    }
+}
+
 void af_menu_principal(int type_compte) {
     system("clear");
     if (type_compte == MEMBRE) { // Utilisateur membre
@@ -791,7 +911,9 @@ int menu_principal(int cnx, int compte, int id, int sock) {
                     break;
                 
                 case 2:  // Si il choisit de voir une conversation déjà entamée (pro)
-                    /* TODO voir ma conversation avec un membre (pro) */
+                    
+                    menu_liste_membre(sock);
+
                     break;
 
                 case -1:  // Se déconnecter
