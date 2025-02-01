@@ -612,13 +612,15 @@ void menu_envoie_message(int sock, int id_c_pro) {
     system("clear");
     printf("Envoie message : \n\n");
 
+    // Vider le tampon d'entrée avant d'utiliser fgets
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
     printf(" > ");
     fgets(mess, sizeof(mess), stdin);
 
     // Supprimer le saut de ligne (\n) ajouté par fgets
     mess[strcspn(mess, "\n")] = '\0';
-
-    printf("mess : %s", mess);
 
     char id_c_pro_char[3] = {0};
     sprintf(id_c_pro_char, "%d", id_c_pro);
@@ -628,10 +630,8 @@ void menu_envoie_message(int sock, int id_c_pro) {
     strcat(req," \"receiver\":\"");strcat(req,id_c_pro_char);strcat(req,"\"");
     strcat(req,"}");
 
-    
-
     request(sock,req, buf);
-    printf("Reponse : %s\n", buf);
+    //printf("Reponse : %s\n", buf);
 }
 
 void af_menu_liste_pro(int sock) {
@@ -667,11 +667,10 @@ void af_menu_liste_pro(int sock) {
 void menu_liste_pro(int sock) {
     int reponse;
 
-    af_menu_liste_pro(sock);
-
     bool quitter = false;
     
     while (!quitter) {
+        af_menu_liste_pro(sock);
     
         printf("> Entrez votre choix : ");
         scanf("%d",&reponse);
