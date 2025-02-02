@@ -927,9 +927,18 @@ void af_menu_historique_messages(int sock, int id_c){
         //printf("\n");
     }
     
+<<<<<<< Updated upstream
     printf(" [ 1] Envoyer un message             \n"
             " [ 2] Modifier un message            \n"
             " [-1] Retour                         \n\n");
+=======
+    printf( "+-------------------------------------+\n"
+            "| [ 1] Envoyer un message             |\n"
+            "| [ 2] Modifier un message            |\n"
+            "| [ 3] Supprimer un message           |\n"
+            "| [-1] Retour                         |\n"
+            "+-------------------------------------+\n");
+>>>>>>> Stashed changes
 
 }
 
@@ -955,13 +964,16 @@ void menu_historique_messages(int sock, int id_c){
             case 2:
                 menu_modif_message(sock, id_c);
                 break;
+            case 3:
+                menu_sup_message(sock, id_c);
+                break;
             default:
                 break;
         }
     }
 }
 
-void aff_modif_messages(int sock, int id_c) {
+void aff_modif_sup_messages(int sock, int id_c) {
     char buf[32768] = {0};
     char req[512] = {0};
     char id_c_char[16] = {0};
@@ -1017,7 +1029,7 @@ int menu_modif_message(int sock, int id_c) {
 
     while (!quitter)
     {
-        aff_modif_messages(sock, id_c);
+        aff_modif_sup_messages(sock, id_c);
         printf("%s", buf);
         scanf("%d",&reponse);
         if (reponse == -1)
@@ -1110,6 +1122,103 @@ int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
         fprintf(stderr, "Erreur lors de la mise à jour du message : %s\n", PQerrorMessage(conn));
     } else {
         printf("Message mis à jour avec succès !\n");
+    }
+
+    PQclear(res);
+    
+    return 1;
+
+}
+
+int menu_sup_message(int sock, int id_c) {
+    bool quitter = false;
+    int reponse;
+    char buf[100];
+    char req[100];
+    char resp_serv[500];
+    char id_c_char[16];
+    char id_mess_char[16];
+
+    strcpy(buf, "Saisissez le numéro du message à supprimer (-1 pour quitter) : ");
+
+    while (!quitter)
+    {
+        aff_modif_sup_messages(sock, id_c);
+        printf("%s", buf);
+        scanf("%d",&reponse);
+        if (reponse == -1)
+        {
+            quitter = true;
+            return 0;
+        }
+        
+        sprintf(id_c_char, "%d", id_c);
+        sprintf(id_mess_char, "%d", reponse);
+        strcpy(req, "{\"requete\":\"sup_mess\", \"id_compte\":\"");
+        strcat(req, id_c_char);
+        strcat(req, "\", \"id_message\":\"");
+        strcat(req, id_mess_char);
+        strcat(req, "\"}");
+
+        write(sock, req, strlen(req));
+        read(sock, resp_serv, sizeof(resp_serv));
+
+        if (atoi(get_json_value(resp_serv, "reponse")) == 200) {
+            quitter = true;
+        } else if (atoi(get_json_value(resp_serv, "reponse")) == 419)
+        {
+            strcpy(buf, "Le numéro du message n'existe pas, réessayez (-1 pour quitter) : ");
+        }
+        
+    }
+
+    system("clear");
+
+    return 1;
+}
+
+int sup_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
+    PGresult *res;
+
+    char query[100];
+
+    char rep[60];
+
+    sprintf(query, "SELECT * FROM tripskell._message WHERE idmes = %d AND idreceveur = %d AND idenvoyeur = %d;", id_mess, id_c, mon_id);
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+    
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+    }
+
+    int rows = PQntuples(res);
+
+    PQclear(res);
+
+    if (rows > 0)
+    {
+        strcpy(rep, "{\"reponse\":\"200\"}");
+        write(cnx, rep, strlen(rep));
+    } else
+    {
+        strcpy(rep, "{\"reponse\":\"419\"}");
+        write(cnx, rep, strlen(rep));
+        return -1;
+    }
+
+    snprintf(query, sizeof(query),
+             "DELETE FROM tripskell._message WHERE idmes = %d;", id_mess);
+
+    res = PQexec(conn, query);
+
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        fprintf(stderr, "Erreur lors de la mise à jour du message : %s\n", PQerrorMessage(conn));
+    } else {
+        printf("Message supprimé avec succès !\n");
     }
 
     PQclear(res);

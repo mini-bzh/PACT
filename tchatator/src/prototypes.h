@@ -81,8 +81,12 @@ int menu_nouv_mess(int sock); // menu des messages non lus
 
 int menu_modif_message(int sock, int id_c);
 
-void aff_modif_messages(int sock, int id_c);
+int menu_sup_message(int sock, int id_c);
+
+void aff_modif_sup_messages(int sock, int id_c);
 
 int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess);
+
+int sup_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess);
 
 #endif // PROTOTYPES_H

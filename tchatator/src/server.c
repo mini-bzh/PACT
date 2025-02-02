@@ -99,6 +99,8 @@ int main() {
                 envoie_mess_non_lu(cnx, id, conn);
             } else if (strcmp(get_json_value(buffer, "requete"), "modif_mess") == 0) {
                 modif_mess(cnx, conn, atoi(get_json_value(buffer, "id_compte")), id, atoi(get_json_value(buffer, "id_message")));
+            } else if (strcmp(get_json_value(buffer, "requete"), "sup_mess") == 0) {
+                sup_mess(cnx, conn, atoi(get_json_value(buffer, "id_compte")), id, atoi(get_json_value(buffer, "id_message")));
             }
             memset(buffer, 0, sizeof(buffer));
         }
