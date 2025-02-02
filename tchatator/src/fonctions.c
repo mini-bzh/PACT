@@ -411,7 +411,7 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
     return id;
 }
 
-void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int id){
+void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
     PGresult *res;
     char query[512]; // Buffer statique de taille fixe pour la requête
     int rows;
@@ -420,22 +420,43 @@ void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int i
 
 
     // Construire la requête avec snprintf
-    snprintf(query, sizeof(query),
-        "SELECT p.id_c, p.raison_social "
-        "FROM tripskell.pro_prive p "
-        "WHERE p.id_c NOT IN ("
-        "    SELECT m.idreceveur "
-        "    FROM tripskell._message m "
-        "    WHERE m.idenvoyeur = %d"
-        ") "
-        "UNION "
-        "SELECT p.id_c, p.raison_social "
-        "FROM tripskell.pro_public p "
-        "WHERE p.id_c NOT IN ("
-        "    SELECT m.idreceveur "
-        "    FROM tripskell._message m "
-        "    WHERE m.idenvoyeur = %d"
-        ");", id, id);
+    if (strcmp(get_json_value(requete, "new_discussion"), "true") == 0) {
+        
+        snprintf(query, sizeof(query),
+            "SELECT p.id_c, p.raison_social "
+            "FROM tripskell.pro_prive p "
+            "WHERE p.id_c NOT IN ("
+            "    SELECT m.idreceveur "
+            "    FROM tripskell._message m "
+            "    WHERE m.idenvoyeur = %d"
+            ") "
+            "UNION "
+            "SELECT p.id_c, p.raison_social "
+            "FROM tripskell.pro_public p "
+            "WHERE p.id_c NOT IN ("
+            "    SELECT m.idreceveur "
+            "    FROM tripskell._message m "
+            "    WHERE m.idenvoyeur = %d"
+            ");", id, id);
+    } else {
+            
+        snprintf(query, sizeof(query),
+            "SELECT p.id_c, p.raison_social "
+            "FROM tripskell.pro_prive p "
+            "WHERE p.id_c IN ("
+            "    SELECT m.idreceveur "
+            "    FROM tripskell._message m "
+            "    WHERE m.idenvoyeur = %d"
+            ") "
+            "UNION "
+            "SELECT p.id_c, p.raison_social "
+            "FROM tripskell.pro_public p "
+            "WHERE p.id_c IN ("
+            "    SELECT m.idreceveur "
+            "    FROM tripskell._message m "
+            "    WHERE m.idenvoyeur = %d"
+            ");", id, id);
+    }
 
     // Exécuter la requête
     res = PQexec(conn, query);
@@ -594,7 +615,7 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
         "join tripskell._compte sen on mes.idenvoyeur = sen.id_c "
         "where idenvoyeur = %s and idreceveur = %d "
         "or idenvoyeur = %d and idreceveur = %s order by idmes asc;"
-        , get_json_value(requete, "id_membre"), id, id, get_json_value(requete, "id_membre"));
+        , get_json_value(requete, "id_compte"), id, id, get_json_value(requete, "id_compte"));
 
     res = PQexec(conn, query);
 
@@ -746,12 +767,16 @@ void menu_envoie_message(int sock, int id_c_pro) {
     //printf("Reponse : %s\n", buf);
 }
 
-void af_menu_liste_pro(int sock) {
+void af_menu_liste_pro(int sock, bool nouv) {
     char buf[512] = {0};
     char data_array[512] = {0};
     char index_array[512] = {0};
 
-    request(sock,"{\"requete\":\"liste_pro\"}", buf);
+    if(nouv) {
+        request(sock,"{\"requete\":\"liste_pro\", \"new_discussion\":\"true\"}", buf);
+    } else {
+        request(sock,"{\"requete\":\"liste_pro\", \"new_discussion\":\"false\"}", buf);
+    }
 
     strcpy(data_array, get_json_value(buf, "data"));
     strcpy(index_array, get_json_value(buf, "indexs"));
@@ -775,13 +800,13 @@ void af_menu_liste_pro(int sock) {
             "+-------------------------------------+\n");
 }
 
-void menu_liste_pro(int sock) {
+void menu_liste_pro(int sock, bool nouv) {
     int reponse;
 
     bool quitter = false;
     
     while (!quitter) {
-        af_menu_liste_pro(sock);
+        af_menu_liste_pro(sock, nouv);
     
         printf("> Entrez votre choix : ");
         scanf("%d",&reponse);
@@ -791,7 +816,11 @@ void menu_liste_pro(int sock) {
                 quitter = true;
                 break;
             default:
-                menu_envoie_message(sock, reponse);
+                if(nouv) {
+                    menu_envoie_message(sock, reponse);
+                } else {
+                    menu_historique_messages(sock,reponse);
+                }
                 break;
         }
     }
@@ -810,13 +839,11 @@ void af_menu_historique_messages(int sock, int id_c){
 
     sprintf(id_c_char, "%d", id_c);
 
-    strcpy(req, "{\"requete\":\"historique_mess\", \"id_membre\":\"");
+    strcpy(req, "{\"requete\":\"historique_mess\", \"id_compte\":\"");
     strcat(req, id_c_char);
     strcat(req, "\"}");
 
     request(sock,req, buf);
-
-    //printf("buf %s\n", buf);
     
     strcpy(data_array, get_json_value(buf, "data"));
     strcpy(sender_array, get_json_value(buf, "envoyeur"));
@@ -827,13 +854,11 @@ void af_menu_historique_messages(int sock, int id_c){
 
 
     printf( "+-------------------------------------+\n"
-            "|       Tchatator professionnel       |\n"
-            "|                                     |\n"
             "| Historique des messages             |\n"
             "+-------------------------------------+\n");
 
     for (int i = 0; i < nb_item; i++) {
-        printf("%s - %s", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
+        printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
         
         printf("\n");
     }
@@ -987,12 +1012,13 @@ int menu_principal(int cnx, int compte, int id, int sock) {
                     break;
                 
                 case 2:  // Si il choisit de voir une conversation déjà entamée (membre)
-                    /* TODO voir ma conversation avec un pro (membre) */
+                    
+                    menu_liste_pro(sock, false);
                     break;
 
                 case 3:  // Si il choisit d'envoyer un message
 
-                    menu_liste_pro(sock);
+                    menu_liste_pro(sock, true);
                     
                     break;
 

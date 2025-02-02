@@ -38,13 +38,15 @@ char* get_json_array_element(const char* json_array, int index);
 
 int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn);
 
-void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int id);
+void reponse_liste_pro(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
 
 void reponse_liste_membre(int cnx, ConfigSocketMessages config, PGconn *conn, int id);
 
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
 
 void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete);
+
+void menu_historique_messages(int sock, int id_c);
 
 int lirePort(const char *filename, int *numPort);
 
@@ -67,9 +69,9 @@ int menu_conversation_membre(int cnx, int id_c, int id, PGconn *conn);
 
 int menu_envoyerMessage(int cnx, bool compte, int id_c, int id, PGconn *conn);
 
-void af_menu_liste_pro(int sock);
+void af_menu_liste_pro(int sock, bool nouv);
 
-void menu_liste_pro(int sock);
+void menu_liste_pro(int sock, bool nouv);
 
 void af_menu_principal(int type_compte);
 

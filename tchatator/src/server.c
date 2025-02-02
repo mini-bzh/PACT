@@ -85,7 +85,7 @@ int main() {
             read(cnx, buffer, sizeof(buffer));
             printf("requete: %s\n", get_json_value(buffer, "requete"));
             if (strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
-                reponse_liste_pro(cnx, configSocket, conn, id);
+                reponse_liste_pro(cnx, configSocket, conn, id, buffer);
             } else if (strcmp(get_json_value(buffer, "requete"), "liste_membre") == 0) {
                 reponse_liste_membre(cnx, configSocket, conn, id);
             } else if (strcmp(get_json_value(buffer, "requete"), "deconnexion") == 0) {
