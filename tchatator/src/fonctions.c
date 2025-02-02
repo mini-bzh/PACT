@@ -162,7 +162,13 @@ int afficher_message(char *nom, char *date, char *modif, char *mess, int num) {
 
     
     strcpy(blocMessage, "");
-    snprintf(blocMessage, sizeof(blocMessage), "Message %d : %s - %s\n", num, nom, date);
+
+    if (strcmp(modif, "NULL") == 0) {
+        snprintf(blocMessage, sizeof(blocMessage), "Message %d : %s - %s\n", num, nom, date);
+    } else {
+        snprintf(blocMessage, sizeof(blocMessage), "Message %d : %s - %s (modifié le : %s)\n", num, nom, date, modif);
+    }
+    
 
     strcat(blocMessage, mess);
 
@@ -1058,9 +1064,7 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de bloquer un utilisateur (admin)
-
-                    system("clear");
-                    menu_nouv_mess(sock);
+                    /* TODO bloquer un utilisateur (admin) */
                     break;
 
                 case 2:  // Si il choisit de bannir un utilisateur (admin)
