@@ -605,15 +605,17 @@ void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char*
 }
 
 void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
-    printf("content : %s\n", requete);
-
     PGresult *res;
     char query[512]; // Buffer statique de taille fixe pour la requête
+    char reponse[32768]; // Réponse a la requete
 
     // Construire la requête avec snprintf
     snprintf(query, sizeof(query),
-        "select * from tripskell._message where idenvoyeur = %s and idreceveur = %d order by idmes desc;"
-        , get_json_value(requete, "id_membre"), id);
+        "select *, sen.login from tripskell._message mes " 
+        "join tripskell._compte sen on mes.idenvoyeur = sen.id_c "
+        "where idenvoyeur = %s and idreceveur = %d "
+        "or idenvoyeur = %d and idreceveur = %s order by idmes desc;"
+        , get_json_value(requete, "id_membre"), id, id, get_json_value(requete, "id_membre"));
 
     res = PQexec(conn, query);
 
@@ -626,12 +628,45 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
     }
 
     int content = PQfnumber(res, "contentmessage");
+    int col_envoyeur = PQfnumber(res, "login");
 
-    char *text = PQgetvalue(res, 0, content);
+    int nb_rows = PQntuples(res);
 
-    printf("contenu : %s\n", text);
+    strcpy(reponse, "{\"reponse\":\"200\"");
 
-    write(cnx, "{\"reponse\":\"200\"}", utf8_strlen("{\"reponse\":\"200\"}"));
+    // envoie des messages
+    strcat(reponse, ",\"data\":[");
+    for ( int i = 0; i < nb_rows; i++ ) {
+        char *text = PQgetvalue(res, i, content);
+        
+        if(i!=0) {
+            strcat(reponse, ",");
+        }
+        strcat(reponse, "\"");
+        strcat(reponse, text);
+        strcat(reponse, "\"");
+    }
+    strcat(reponse, "]");
+
+    // envoie des envoyeurs
+    strcat(reponse, ",\"envoyeur\":[");
+    for ( int i = 0; i < nb_rows; i++ ) {
+        char *envoyeur = PQgetvalue(res, i, col_envoyeur);
+        
+        if(i!=0) {
+            strcat(reponse, ",");
+        }
+        strcat(reponse, "\"");
+        strcat(reponse, envoyeur);
+        strcat(reponse, "\"");
+    }
+    strcat(reponse, "]");
+
+    strcat(reponse,"}");
+
+    printf("response : %s\n", reponse);
+
+    write(cnx, reponse, utf8_strlen(reponse));
 }
 
 int count_json_array_elements(const char* json_array) {
@@ -700,7 +735,7 @@ char* get_json_array_element(const char* json_array, int index) {
 
 void request(int sock, char* request, char* response) {
     write(sock, request, utf8_strlen(request));
-    read(sock, response, 512);
+    read(sock, response, 32768);
 }
 
 void menu_envoie_message(int sock, int id_c_pro) {
@@ -784,10 +819,13 @@ void menu_liste_pro(int sock) {
 }
 
 void menu_historique_messages(int sock, int id_c){
-    /* Pas fini */
-    char buf[512] = {0};
+    char buf[32768] = {0};
     char req[512] = {0};
     char id_c_char[16] = {0};
+
+    char data_array[32768] = {0};
+    char sender_array[512] = {0};
+    char receiver_array[512] = {0};
 
 
     sprintf(id_c_char, "%d", id_c);
@@ -798,30 +836,33 @@ void menu_historique_messages(int sock, int id_c){
 
     request(sock,req, buf);
 
-    printf("buf %s\n", buf);
+    //printf("buf %s\n", buf);
     
-
-/*
     strcpy(data_array, get_json_value(buf, "data"));
-    strcpy(index_array, get_json_value(buf, "indexs"));
+    strcpy(sender_array, get_json_value(buf, "envoyeur"));
 
-    int nb_item = count_json_array_elements(data_array);
+    int nb_item = count_json_array_elements(sender_array);
 
     system("clear");
+
+
     printf( "+-------------------------------------+\n"
             "|       Tchatator professionnel       |\n"
             "|                                     |\n"
             "| Historique des messages             |\n"
             "+-------------------------------------+\n");
+
     for (int i = 0; i < nb_item; i++) {
-        printf("| %s - %s", get_json_array_element(index_array, i), get_json_array_element(data_array, i));
-        for (int j = 0; j < 32 - strlen(get_json_array_element(data_array, i)); j++) {
-            printf(" ");
-        }
-        printf("|\n");
+        printf("%s - %s", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
+        
+        printf("\n");
     }
-    printf( "| [-1] Retour                         |\n"
-            "+-------------------------------------+\n");*/
+    
+    printf( "+-------------------------------------+\n"
+            "| [-1] Retour                         |\n"
+            "+-------------------------------------+\n");
+
+    scanf("%s",NULL);
 }
 
 void af_menu_liste_membre(int sock) {
