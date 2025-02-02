@@ -636,8 +636,6 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
 
     res = PQexec(conn, query);
 
-    printf("query : %s\n", query);
-
     // Vérifier si la requête a réussi
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
@@ -645,6 +643,8 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
     }
 
     int content = PQfnumber(res, "contentmessage");
+    int col_date = PQfnumber(res, "datecreation");
+    int col_idmes = PQfnumber(res, "idmes");
     int col_envoyeur = PQfnumber(res, "login");
 
     int nb_rows = PQntuples(res);
@@ -679,9 +679,35 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
     }
     strcat(reponse, "]");
 
-    strcat(reponse,"}");
+    // envoie des dates
+    strcat(reponse, ",\"dates_crea\":[");
+    for ( int i = 0; i < nb_rows; i++ ) {
+        char *date_crea = PQgetvalue(res, i, col_date);
+        
+        if(i!=0) {
+            strcat(reponse, ",");
+        }
+        strcat(reponse, "\"");
+        strcat(reponse, date_crea);
+        strcat(reponse, "\"");
+    }
+    strcat(reponse, "]");
 
-    printf("response : %s\n", reponse);
+    // envoie des id des messages
+    strcat(reponse, ",\"id_mess\":[");
+    for ( int i = 0; i < nb_rows; i++ ) {
+        char *id_mess = PQgetvalue(res, i, col_idmes);
+        
+        if(i!=0) {
+            strcat(reponse, ",");
+        }
+        strcat(reponse, "\"");
+        strcat(reponse, id_mess);
+        strcat(reponse, "\"");
+    }
+    strcat(reponse, "]");
+
+    strcat(reponse,"}");
 
     write(cnx, reponse, utf8_strlen(reponse));
 }
@@ -857,10 +883,11 @@ void af_menu_historique_messages(int sock, int id_c){
 
     char data_array[32768] = {0};
     char sender_array[512] = {0};
-    char receiver_array[512] = {0};
+    char dates_array[512] = {0};
+    char id_mes_array[512] = {0};
 
     char nom[50], date[50], modif[50], mess[2050];
-    int num = 0;
+    int id_mess;
 
     sprintf(id_c_char, "%d", id_c);
 
@@ -872,32 +899,22 @@ void af_menu_historique_messages(int sock, int id_c){
     
     strcpy(data_array, get_json_value(buf, "data"));
     strcpy(sender_array, get_json_value(buf, "envoyeur"));
+    strcpy(dates_array, get_json_value(buf, "dates_crea"));
+    strcpy(id_mes_array, get_json_value(buf, "id_mess"));
+    
 
     int nb_item = count_json_array_elements(sender_array);
 
     system("clear");
-
-
-    printf( "+-------------------------------------+\n"
-            "| Historique des messages             |\n"
-            "+-------------------------------------+\n");
+    
 
     for (int i = 0; i < nb_item; i++) {
-        //printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
-        /*afficher_message(
-            get_json_array_element(sender_array, i), 
-            "13/13/1313",
-            "NULL",
-            get_json_array_element(data_array, i),
-            1
-        );*/
-
 
         strncpy(nom, get_json_array_element(sender_array, i), sizeof(nom) - 1);
-        strncpy(date, "date", sizeof(date) - 1);
+        strncpy(date, get_json_array_element(dates_array, i), sizeof(nom) - 1);
         strncpy(modif, "NULL", sizeof(modif) - 1);
         strncpy(mess, get_json_array_element(data_array, i), sizeof(mess) - 1);
-        num++;
+        id_mess = atoi(get_json_array_element(id_mes_array, i));
 
         // Assurer que toutes les chaînes sont bien terminées
         nom[sizeof(nom) - 1] = '\0';
@@ -906,15 +923,13 @@ void af_menu_historique_messages(int sock, int id_c){
         mess[sizeof(mess) - 1] = '\0';
 
         // Afficher le message
-        afficher_message(nom, date, modif, mess, num);
+        afficher_message(nom, date, modif, mess, id_mess);
         //printf("\n");
     }
     
-    printf( "+-------------------------------------+\n"
-            "| [ 1] Envoyer un message             |\n"
-            "| [ 2] Modifier un message            |\n"
-            "| [-1] Retour                         |\n"
-            "+-------------------------------------+\n");
+    printf(" [ 1] Envoyer un message             \n"
+            " [ 2] Modifier un message            \n"
+            " [-1] Retour                         \n\n");
 
 }
 
