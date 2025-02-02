@@ -793,7 +793,7 @@ void menu_envoie_message(int sock, int id_c_pro) {
     char req[2048] = {0};
     char buf[512] = {0};
     system("clear");
-    printf("Envoie message : \n\n");
+    printf("Envoi message : \n\n");
 
     // Vider le tampon d'entrée avant d'utiliser fgets
     int c;
@@ -927,18 +927,13 @@ void af_menu_historique_messages(int sock, int id_c){
         //printf("\n");
     }
     
-<<<<<<< Updated upstream
-    printf(" [ 1] Envoyer un message             \n"
-            " [ 2] Modifier un message            \n"
-            " [-1] Retour                         \n\n");
-=======
+
     printf( "+-------------------------------------+\n"
             "| [ 1] Envoyer un message             |\n"
             "| [ 2] Modifier un message            |\n"
             "| [ 3] Supprimer un message           |\n"
             "| [-1] Retour                         |\n"
             "+-------------------------------------+\n");
->>>>>>> Stashed changes
 
 }
 
@@ -980,9 +975,11 @@ void aff_modif_sup_messages(int sock, int id_c) {
 
     char data_array[32768] = {0};
     char sender_array[512] = {0};
-    char receiver_array[512] = {0};
+    char dates_array[512] = {0};
+    char id_mes_array[512] = {0};
 
-
+    char nom[50], date[50], modif[50], mess[2050];
+    int id_mess;
 
     sprintf(id_c_char, "%d", id_c);
 
@@ -994,20 +991,32 @@ void aff_modif_sup_messages(int sock, int id_c) {
     
     strcpy(data_array, get_json_value(buf, "data"));
     strcpy(sender_array, get_json_value(buf, "envoyeur"));
+    strcpy(dates_array, get_json_value(buf, "dates_crea"));
+    strcpy(id_mes_array, get_json_value(buf, "id_mess"));
+    
 
     int nb_item = count_json_array_elements(sender_array);
 
     system("clear");
-
-
-    printf( "+-------------------------------------+\n"
-            "| Historique des messages             |\n"
-            "+-------------------------------------+\n");
+    
 
     for (int i = 0; i < nb_item; i++) {
-        printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
-        
-        printf("\n");
+
+        strncpy(nom, get_json_array_element(sender_array, i), sizeof(nom) - 1);
+        strncpy(date, get_json_array_element(dates_array, i), sizeof(nom) - 1);
+        strncpy(modif, "NULL", sizeof(modif) - 1);
+        strncpy(mess, get_json_array_element(data_array, i), sizeof(mess) - 1);
+        id_mess = atoi(get_json_array_element(id_mes_array, i));
+
+        // Assurer que toutes les chaînes sont bien terminées
+        nom[sizeof(nom) - 1] = '\0';
+        date[sizeof(date) - 1] = '\0';
+        modif[sizeof(modif) - 1] = '\0';
+        mess[sizeof(mess) - 1] = '\0';
+
+        // Afficher le message
+        afficher_message(nom, date, modif, mess, id_mess);
+        //printf("\n");
     }
     
     printf( "+-------------------------------------+\n");
