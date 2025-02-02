@@ -1019,58 +1019,68 @@ void aff_modif_sup_messages(int sock, int id_c) {
     
     printf( "+-------------------------------------+\n");
 }
-
 int menu_modif_message(int sock, int id_c) {
-    
     bool quitter = false;
     int reponse;
     char buf[100];
-    char req[100];
+    char req[256];
     char resp_serv[500];
     char nouv_mess[2500];
-    char send_nouv_mess[2500];
+    char send_nouv_mess[2560];
     char id_c_char[16];
     char id_mess_char[16];
 
     strcpy(buf, "Saisissez le numéro du message à modifier (-1 pour quitter) : ");
 
-    while (!quitter)
-    {
+    while (!quitter) {
         aff_modif_sup_messages(sock, id_c);
         printf("%s", buf);
-        scanf("%d",&reponse);
-        if (reponse == -1)
-        {
+        if (scanf("%d", &reponse) != 1) {
+            printf("Entrée invalide. Veuillez saisir un nombre.\n");
+            while (getchar() != '\n'); // Vide le buffer d'entrée
+            continue;
+        }
+
+        if (reponse == -1) {
             quitter = true;
             return 0;
         }
-        
-        sprintf(id_c_char, "%d", id_c);
-        sprintf(id_mess_char, "%d", reponse);
-        strcpy(req, "{\"requete\":\"modif_mess\", \"id_compte\":\"");
-        strcat(req, id_c_char);
-        strcat(req, "\", \"id_message\":\"");
-        strcat(req, id_mess_char);
-        strcat(req, "\"}");
+
+        // Convertir les entiers en chaînes de caractères
+        snprintf(id_c_char, sizeof(id_c_char), "%d", id_c);
+        snprintf(id_mess_char, sizeof(id_mess_char), "%d", reponse);
+
+        // Construction de la requête
+        snprintf(req, sizeof(req), "{\"requete\":\"modif_mess\", \"id_compte\":\"%s\", \"id_message\":\"%s\"}",
+                 id_c_char, id_mess_char);
 
         write(sock, req, strlen(req));
-        read(sock, resp_serv, sizeof(resp_serv));
 
-        if (atoi(get_json_value(resp_serv, "reponse")) == 200) {
-            quitter = true;
-        } else if (atoi(get_json_value(resp_serv, "reponse")) == 419)
-        {
-            strcpy(buf, "Le numéro du message n'existe pas, réessayez (-1 pour quitter) : ");
+        int bytes_read = read(sock, resp_serv, sizeof(resp_serv) - 1);
+        if (bytes_read > 0) {
+            resp_serv[bytes_read] = '\0';
+
+            if (atoi(get_json_value(resp_serv, "reponse")) == 200) {
+                quitter = true;
+            } else if (atoi(get_json_value(resp_serv, "reponse")) == 419) {
+                strcpy(buf, "Le numéro du message n'existe pas, réessayez (-1 pour quitter) : ");
+            }
+        } else {
+            printf("Erreur de lecture du serveur.\n");
+            return -1;
         }
-        
     }
 
     printf("Entrez votre nouveau message : ");
-    scanf("%s", nouv_mess);
+    getchar(); // Consommer le '\n' laissé par le précédent scanf
+    if (fgets(nouv_mess, sizeof(nouv_mess), stdin) == NULL) {
+        printf("Erreur lors de la lecture du message.\n");
+        return -1;
+    }
 
-    strcpy(send_nouv_mess, "{\"nouv_mess\":\"");
-    strcat(send_nouv_mess, nouv_mess);
-    strcat(send_nouv_mess, "\"}");
+    nouv_mess[strcspn(nouv_mess, "\n")] = '\0';
+
+    snprintf(send_nouv_mess, sizeof(send_nouv_mess), "{\"nouv_mess\":\"%s\"}", nouv_mess);
 
     write(sock, send_nouv_mess, strlen(send_nouv_mess));
 
@@ -1127,8 +1137,6 @@ int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         fprintf(stderr, "Erreur lors de la mise à jour du message : %s\n", PQerrorMessage(conn));
-    } else {
-        printf("Message mis à jour avec succès !\n");
     }
 
     PQclear(res);
@@ -1224,8 +1232,6 @@ int sup_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
         fprintf(stderr, "Erreur lors de la mise à jour du message : %s\n", PQerrorMessage(conn));
-    } else {
-        printf("Message supprimé avec succès !\n");
     }
 
     PQclear(res);
