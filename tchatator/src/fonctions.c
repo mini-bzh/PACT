@@ -993,6 +993,8 @@ int menu_modif_message(int sock, int id_c) {
     char buf[100];
     char req[100];
     char resp_serv[500];
+    char nouv_mess[2500];
+    char send_nouv_mess[2500];
     char id_c_char[16];
     char id_mess_char[16];
 
@@ -1006,7 +1008,7 @@ int menu_modif_message(int sock, int id_c) {
         if (reponse == -1)
         {
             quitter = true;
-            break;
+            return 0;
         }
         
         sprintf(id_c_char, "%d", id_c);
@@ -1019,24 +1021,35 @@ int menu_modif_message(int sock, int id_c) {
 
         write(sock, req, strlen(req));
         read(sock, resp_serv, sizeof(resp_serv));
-        printf("ok\n");
 
-        if (atoi(get_json_value(buf, "reponse")) == 200) {
-            printf("Message modifié avec succès.\n");
+        if (atoi(get_json_value(resp_serv, "reponse")) == 200) {
             quitter = true;
-        } else if (atoi(get_json_value(buf, "reponse")) == 419)
+        } else if (atoi(get_json_value(resp_serv, "reponse")) == 419)
         {
-            strcpy(buf, "Le numéro du message n'existe pas réessayez (-1 pour quitter) : ");
+            strcpy(buf, "Le numéro du message n'existe pas, réessayez (-1 pour quitter) : ");
         }
         
     }
+
+    printf("Entrez votre nouveau message : ");
+    scanf("%s", nouv_mess);
+
+    strcpy(send_nouv_mess, "{\"nouv_mess\":\"");
+    strcat(send_nouv_mess, nouv_mess);
+    strcat(send_nouv_mess, "\"}");
+
+    write(sock, send_nouv_mess, strlen(send_nouv_mess));
+
+    system("clear");
+
     return 1;
 }
 
 int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
     PGresult *res;
 
-    char query[500];
+    char query[2600];
+    char nouv_mess[2500];
 
     char rep[60];
 
@@ -1065,6 +1078,26 @@ int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
         write(cnx, rep, strlen(rep));
         return -1;
     }
+
+    int len = read(cnx, nouv_mess, sizeof(nouv_mess));
+    if (len < 0) {
+        perror("read");
+        return -1;
+    }
+
+    snprintf(query, sizeof(query),
+             "UPDATE tripskell._message SET contentmessage = '%s' WHERE idmes = %d;", 
+             get_json_value(nouv_mess, "nouv_mess"), id_mess);
+
+    res = PQexec(conn, query);
+
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        fprintf(stderr, "Erreur lors de la mise à jour du message : %s\n", PQerrorMessage(conn));
+    } else {
+        printf("Message mis à jour avec succès !\n");
+    }
+
+    PQclear(res);
     
     return 1;
 
