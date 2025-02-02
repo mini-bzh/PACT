@@ -159,7 +159,7 @@ int afficher_message(int idMess, PGconn *conn, char *rais_soc, int cnx) {
     char query[256];
     char blocMessage[556];
 
-    snprintf(query, sizeof(query), "SELECT * FROM tripskell._message WHERE idmes = %d ORDER BY datecreation ASC;", idMess);
+    snprintf(query, sizeof(query), "SELECT * FROM tripskell._message WHERE idmes = %d ORDER BY datecreation asc;", idMess);
 
     res = PQexec(conn, query);
     if (PQresultStatus(res)!= PGRES_TUPLES_OK) {
@@ -614,7 +614,7 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
         "select *, sen.login from tripskell._message mes " 
         "join tripskell._compte sen on mes.idenvoyeur = sen.id_c "
         "where idenvoyeur = %s and idreceveur = %d "
-        "or idenvoyeur = %d and idreceveur = %s order by idmes desc;"
+        "or idenvoyeur = %d and idreceveur = %s order by idmes asc;"
         , get_json_value(requete, "id_membre"), id, id, get_json_value(requete, "id_membre"));
 
     res = PQexec(conn, query);
@@ -818,7 +818,7 @@ void menu_liste_pro(int sock) {
     }
 }
 
-void menu_historique_messages(int sock, int id_c){
+void af_menu_historique_messages(int sock, int id_c){
     char buf[32768] = {0};
     char req[512] = {0};
     char id_c_char[16] = {0};
@@ -826,6 +826,7 @@ void menu_historique_messages(int sock, int id_c){
     char data_array[32768] = {0};
     char sender_array[512] = {0};
     char receiver_array[512] = {0};
+
 
 
     sprintf(id_c_char, "%d", id_c);
@@ -859,10 +860,34 @@ void menu_historique_messages(int sock, int id_c){
     }
     
     printf( "+-------------------------------------+\n"
+            "| [ 1] Envoyer un message             |\n"
             "| [-1] Retour                         |\n"
             "+-------------------------------------+\n");
 
-    scanf("%s",NULL);
+}
+
+
+void menu_historique_messages(int sock, int id_c){
+    int reponse;
+
+    bool quitter = false;
+    
+    while (!quitter) {
+        af_menu_historique_messages(sock, id_c);
+    
+        printf("> Entrez votre choix : ");
+        scanf("%d",&reponse);
+
+        switch (reponse) {
+            case -1:
+                quitter = true;
+                break;
+            case 1:
+                menu_envoie_message(sock, id_c);
+            default:
+                break;
+        }
+    }
 }
 
 void af_menu_liste_membre(int sock) {
@@ -912,7 +937,6 @@ void menu_liste_membre(int sock) {
                 break;
             default:
                 menu_historique_messages(sock, reponse);
-                //menu_envoie_message(sock, reponse);
                 break;
         }
     }
