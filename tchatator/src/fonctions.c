@@ -187,45 +187,53 @@ void wrap_text(char *input, int line_length) {
     bool finForme = false;
     
     strcpy(text, "+----------------------------------------------------------------+\n");
-    while (finForme == false) {
+    while (!finForme) {
 
-        end = start + line_length-1;
+        end = start + line_length - 1;
         
-        utf8_strncpy(line, &input[start], line_length);
-        
-        line[utf8_strlen(line)] = '\0';
-
-        if (end < lenInput) {
-            while (line[end] != ' ') {
+        if (end >= lenInput) {
+            // Si on dépasse la longueur de l'input, on prend la fin
+            end = lenInput - 1;
+            finForme = true;
+        } else {
+            // Revenir en arrière pour trouver le dernier espace dans la limite de la ligne
+            while (end > start && input[end] != ' ') {
                 end--;
             }
-            line[end] = '\0'; // Remplacer le caractère de fin de ligne par '\0' pour couper la chaîne
-            
-        } else {
-            finForme = true;
-            end = utf8_strlen(line);
+            if (end == start) {
+                // Si aucun espace n'est trouvé, on coupe au maximum de la ligne
+                end = start + line_length - 1;
+            }
         }
-        
+
+        // Copier la portion de texte dans la ligne
+        utf8_strncpy(line, &input[start], end - start + 1);
+        line[end - start + 1] = '\0'; // Assurer la fin de la chaîne
+
+        // Ajouter la ligne au texte final
         strcat(text, "| ");
         strcat(text, line);
 
-        for (int i = 0; i < line_length - utf8_strlen(line); i++)
-        {
-            
+        // Ajouter les espaces manquants pour aligner à droite
+        for (int i = 0; i < line_length - utf8_strlen(line); i++) {
             strcat(text, " ");
         }
         
         strcat(text, " |\n");
 
-        start += strlen(line)+1;
+        // Passer à la portion suivante du texte
+        start = end + 1;
         
-        
+        // Vérifier si on a atteint la fin de l'input
+        if (start >= lenInput) {
+            finForme = true;
+        }
     }
     
+    // Ajouter la ligne de fin
     strcat(text, "+----------------------------------------------------------------+\n\n");
 
-    text[strlen(text)] = '\0';
-
+    // Copier le résultat dans l'input
     strcpy(input, text);
 }
 
@@ -851,7 +859,8 @@ void af_menu_historique_messages(int sock, int id_c){
     char sender_array[512] = {0};
     char receiver_array[512] = {0};
 
-
+    char nom[50], date[50], modif[50], mess[2050];
+    int num = 0;
 
     sprintf(id_c_char, "%d", id_c);
 
@@ -874,9 +883,31 @@ void af_menu_historique_messages(int sock, int id_c){
             "+-------------------------------------+\n");
 
     for (int i = 0; i < nb_item; i++) {
-        printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
-        
-        printf("\n");
+        //printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
+        /*afficher_message(
+            get_json_array_element(sender_array, i), 
+            "13/13/1313",
+            "NULL",
+            get_json_array_element(data_array, i),
+            1
+        );*/
+
+
+        strncpy(nom, get_json_array_element(sender_array, i), sizeof(nom) - 1);
+        strncpy(date, "date", sizeof(date) - 1);
+        strncpy(modif, "NULL", sizeof(modif) - 1);
+        strncpy(mess, get_json_array_element(data_array, i), sizeof(mess) - 1);
+        num++;
+
+        // Assurer que toutes les chaînes sont bien terminées
+        nom[sizeof(nom) - 1] = '\0';
+        date[sizeof(date) - 1] = '\0';
+        modif[sizeof(modif) - 1] = '\0';
+        mess[sizeof(mess) - 1] = '\0';
+
+        // Afficher le message
+        afficher_message(nom, date, modif, mess, num);
+        //printf("\n");
     }
     
     printf( "+-------------------------------------+\n"
