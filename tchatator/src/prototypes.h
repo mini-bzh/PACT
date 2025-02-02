@@ -79,4 +79,10 @@ int menu_principal(int cnx, int compte, int id, int sock);
 
 int menu_nouv_mess(int sock); // menu des messages non lus
 
+int menu_modif_message(int sock, int id_c);
+
+void aff_modif_messages(int sock, int id_c);
+
+int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess);
+
 #endif // PROTOTYPES_H

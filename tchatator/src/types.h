@@ -41,5 +41,6 @@ extern const int DECO;
 extern const int ACKDECO;
 extern const int FMESSNVU;
 extern const int ACKVU;
+extern const int MESSNOFO;
 
 #endif // TYPES_H

@@ -881,6 +881,7 @@ void af_menu_historique_messages(int sock, int id_c){
     
     printf( "+-------------------------------------+\n"
             "| [ 1] Envoyer un message             |\n"
+            "| [ 2] Modifier un message            |\n"
             "| [-1] Retour                         |\n"
             "+-------------------------------------+\n");
 
@@ -904,10 +905,138 @@ void menu_historique_messages(int sock, int id_c){
                 break;
             case 1:
                 menu_envoie_message(sock, id_c);
+                break;
+            case 2:
+                menu_modif_message(sock, id_c);
+                break;
             default:
                 break;
         }
     }
+}
+
+void aff_modif_messages(int sock, int id_c) {
+    char buf[32768] = {0};
+    char req[512] = {0};
+    char id_c_char[16] = {0};
+
+    char data_array[32768] = {0};
+    char sender_array[512] = {0};
+    char receiver_array[512] = {0};
+
+
+
+    sprintf(id_c_char, "%d", id_c);
+
+    strcpy(req, "{\"requete\":\"historique_mess\", \"id_compte\":\"");
+    strcat(req, id_c_char);
+    strcat(req, "\"}");
+
+    request(sock,req, buf);
+    
+    strcpy(data_array, get_json_value(buf, "data"));
+    strcpy(sender_array, get_json_value(buf, "envoyeur"));
+
+    int nb_item = count_json_array_elements(sender_array);
+
+    system("clear");
+
+
+    printf( "+-------------------------------------+\n"
+            "| Historique des messages             |\n"
+            "+-------------------------------------+\n");
+
+    for (int i = 0; i < nb_item; i++) {
+        printf("[%s] - %s\n", get_json_array_element(sender_array, i), get_json_array_element(data_array, i));
+        
+        printf("\n");
+    }
+    
+    printf( "+-------------------------------------+\n");
+}
+
+int menu_modif_message(int sock, int id_c) {
+    
+    bool quitter = false;
+    int reponse;
+    char buf[100];
+    char req[100];
+    char resp_serv[500];
+    char id_c_char[16];
+    char id_mess_char[16];
+
+    strcpy(buf, "Saisissez le numéro du message à modifier (-1 pour quitter) : ");
+
+    while (!quitter)
+    {
+        aff_modif_messages(sock, id_c);
+        printf("%s", buf);
+        scanf("%d",&reponse);
+        if (reponse == -1)
+        {
+            quitter = true;
+            break;
+        }
+        
+        sprintf(id_c_char, "%d", id_c);
+        sprintf(id_mess_char, "%d", reponse);
+        strcpy(req, "{\"requete\":\"modif_mess\", \"id_compte\":\"");
+        strcat(req, id_c_char);
+        strcat(req, "\", \"id_message\":\"");
+        strcat(req, id_mess_char);
+        strcat(req, "\"}");
+
+        write(sock, req, strlen(req));
+        read(sock, resp_serv, sizeof(resp_serv));
+        printf("ok\n");
+
+        if (atoi(get_json_value(buf, "reponse")) == 200) {
+            printf("Message modifié avec succès.\n");
+            quitter = true;
+        } else if (atoi(get_json_value(buf, "reponse")) == 419)
+        {
+            strcpy(buf, "Le numéro du message n'existe pas réessayez (-1 pour quitter) : ");
+        }
+        
+    }
+    return 1;
+}
+
+int modif_mess(int cnx, PGconn *conn, int id_c, int mon_id, int id_mess) {
+    PGresult *res;
+
+    char query[500];
+
+    char rep[60];
+
+    sprintf(query, "SELECT * FROM tripskell._message WHERE idmes = %d AND idreceveur = %d AND idenvoyeur = %d;", id_mess, id_c, mon_id);
+
+    // Exécuter la requête
+    res = PQexec(conn, query);
+    
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+    }
+
+    int rows = PQntuples(res);
+
+    PQclear(res);
+
+    if (rows > 0)
+    {
+        strcpy(rep, "{\"reponse\":\"200\"}");
+        write(cnx, rep, strlen(rep));
+    } else
+    {
+        strcpy(rep, "{\"reponse\":\"419\"}");
+        write(cnx, rep, strlen(rep));
+        return -1;
+    }
+    
+    return 1;
+
 }
 
 void af_menu_liste_membre(int sock) {
@@ -939,6 +1068,7 @@ void af_menu_liste_membre(int sock) {
     printf( "| [-1] Retour                         |\n"
             "+-------------------------------------+\n");
 }
+
 
 void menu_liste_membre(int sock) {
     int reponse;

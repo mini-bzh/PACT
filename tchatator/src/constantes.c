@@ -12,3 +12,4 @@ const int DECO = 402;
 const int ACKDECO = 416;
 const int FMESSNVU = 417;
 const int ACKVU = 418;
+const int MESSNOFO = 419;
