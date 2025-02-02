@@ -20,7 +20,7 @@ int create_socket(ConfigSocketMessages *configSocket);  // Crée un socket
 
 void afficher_tout(PGresult *res);  // Fonction de debug pour afficher le resultat d'une requête
 
-int afficher_message(int intMess, PGconn *conn, char *rais_soc, int cnx);  // Fonction pour afficher un message
+int afficher_message(char *nom, char *date, char *modif, char *mess, int num);  // Fonction pour afficher un message
 
 void wrap_text(char *input, int line_length);  // Fonction qui permet de formater un message
 
@@ -48,6 +48,8 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
 
 int lirePort(const char *filename, int *numPort);
 
+int envoie_mess_non_lu(int cnx, int id, PGconn *conn);
+
 
 ////////////////////////////////////
 //                                //
@@ -72,5 +74,7 @@ void menu_liste_pro(int sock);
 void af_menu_principal(int type_compte);
 
 int menu_principal(int cnx, int compte, int id, int sock);
+
+int menu_nouv_mess(int sock); // menu des messages non lus
 
 #endif // PROTOTYPES_H

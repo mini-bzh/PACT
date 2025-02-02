@@ -10,3 +10,5 @@ const int OK = 200;
 const int CLEINC = 401;
 const int DECO = 402;
 const int ACKDECO = 416;
+const int FMESSNVU = 417;
+const int ACKVU = 418;

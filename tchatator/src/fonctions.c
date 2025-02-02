@@ -154,46 +154,19 @@ void afficher_tout(PGresult *res) {
     printf("\n");
 }
 
-int afficher_message(int idMess, PGconn *conn, char *rais_soc, int cnx) {
-    PGresult *res;
-    char query[256];
-    char blocMessage[556];
+int afficher_message(char *nom, char *date, char *modif, char *mess, int num) {
 
-    snprintf(query, sizeof(query), "SELECT * FROM tripskell._message WHERE idmes = %d ORDER BY datecreation asc;", idMess);
+    char blocMessage[2500];
 
-    res = PQexec(conn, query);
-    if (PQresultStatus(res)!= PGRES_TUPLES_OK) {
-        fprintf(stderr, "Échec de la requête : %s\n", PQerrorMessage(conn));
-        PQclear(res);
-        return -1;
-    }
+    wrap_text(mess, 62);
 
-    int ind_date = PQfnumber(res, "datecreation");
-    int ind_mess = PQfnumber(res, "contentmessage");
-
-    char *dateMess = PQgetvalue(res, 0, ind_date);
-
-    char *messContent = PQgetvalue(res, 0, ind_mess);
-    messContent[strlen(messContent)] = '\0';
     
-    wrap_text(messContent, 62);
-
-    // Trouver le premier espace dans la chaîne
-    char *spacePos = strchr(dateMess, ' ');
-    if (spacePos != NULL) {
-        *spacePos = '\0'; // Remplacer l'espace par '\0' pour couper la chaîne
-    }
-
-    changer_format_date(dateMess);
-
     strcpy(blocMessage, "");
-    snprintf(blocMessage, sizeof(blocMessage), "Message %d : %s - %s\n", 1, rais_soc, dateMess);
+    snprintf(blocMessage, sizeof(blocMessage), "Message %d : %s - %s\n", num, nom, date);
 
-    strcat(blocMessage, messContent);
+    strcat(blocMessage, mess);
 
-    write(cnx, blocMessage, strlen(blocMessage));
-    
-    PQclear(res);
+    printf("%s", blocMessage);
 
     return 1;
 }
@@ -243,7 +216,7 @@ void wrap_text(char *input, int line_length) {
         
     }
     
-    strcat(text, "+----------------------------------------------------------------+\n");
+    strcat(text, "+----------------------------------------------------------------+\n\n");
 
     text[strlen(text)] = '\0';
 
@@ -389,28 +362,28 @@ int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *co
 
         if (PQntuples(res) > 0)
         {
-            *compte = 1; // Utilisateur membre
+            *compte = MEMBRE; // Utilisateur membre
             id = atoi(PQgetvalue(res, 0, PQfnumber(res, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"1\","
                 "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res2) > 0) {
-            *compte = 2; // Utilisateur professionnel (public)
+            *compte = PRO; // Utilisateur professionnel (public)
             id = atoi(PQgetvalue(res2, 0, PQfnumber(res2, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
                 "\"id\":\"%d\"}", OK, id);
         } else if (PQntuples(res3) > 0) {
-            *compte = 2; // Utilisateur professionnel (privee)
+            *compte = PRO; // Utilisateur professionnel (privee)
             id = atoi(PQgetvalue(res3, 0, PQfnumber(res3, "id_c")));
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"2\","
                 "\"id\":\"%d\"}", OK, id);
         } else if (strcmp(buff, config.cle_api_admin) == 0) { // Se connecter en tant qu'administrateur
-            *compte = 3; // Utilisateur administrateur
+            *compte = ADMIN; // Utilisateur administrateur
             snprintf(respToClient, sizeof(respToClient),  // envoie code 200
                 "{\"reponse\":\"%d\","
                 "\"compte\":\"3\","
@@ -1001,7 +974,10 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de voir ses messages non lus (membre)
-                    /* TODO voir les messages non lus (membre) */
+
+                    system("clear");
+                    menu_nouv_mess(sock);
+
                     break;
                 
                 case 2:  // Si il choisit de voir une conversation déjà entamée (membre)
@@ -1026,7 +1002,7 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
                     if (atoi(get_json_value(buff, "reponse")) == DECO) {
                         quitter = true;
-                        printf("Deconnexion ...");
+                        printf("Deconnexion ...\n");
                     }
                     
                     break;
@@ -1043,7 +1019,9 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de voir ses messages non lus (pro)
-                    /* TODO voir les messages non lus (pro) */
+
+                    system("clear");
+                    menu_nouv_mess(sock);
                     break;
                 
                 case 2:  // Si il choisit de voir une conversation déjà entamée (pro)
@@ -1064,7 +1042,7 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
                     if (atoi(get_json_value(buff, "reponse")) == DECO) {
                         quitter = true;
-                        printf("Deconnexion ...");
+                        printf("Deconnexion ...\n");
                     }
                     
                     break;
@@ -1080,7 +1058,9 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
             switch (reponse) {
                 case 1:  // Si il choisit de bloquer un utilisateur (admin)
-                    /* TODO bloquer un utilisateur (admin) */
+
+                    system("clear");
+                    menu_nouv_mess(sock);
                     break;
 
                 case 2:  // Si il choisit de bannir un utilisateur (admin)
@@ -1099,7 +1079,7 @@ int menu_principal(int cnx, int compte, int id, int sock) {
 
                     if (atoi(get_json_value(buff, "reponse")) == DECO) {
                         quitter = true;
-                        printf("Deconnexion ...");
+                        printf("Deconnexion ...\n");
                     }
                     
                     break;
@@ -1116,6 +1096,151 @@ int menu_principal(int cnx, int compte, int id, int sock) {
     }
 
     return rep;
+}
+
+int envoie_mess_non_lu(int cnx, int id, PGconn *conn) {
+
+    write(cnx, "200", strlen("200")); // envoie code 200
+
+    PGresult *res;
+    PGresult *res2;
+    PGresult *res3;
+    PGresult *res4;
+
+    PGresult *resUpd;
+
+    char query[512]; // Buffer statique de taille fixe pour la requête
+    char buff[2300];
+    char ack[10];
+
+    // Construire la requête avec snprintf
+    snprintf(query, sizeof(query),
+        "select * from tripskell._message where idReceveur = %d AND lu = false ORDER BY datecreation ASC;", id);
+    
+    // Exécuter la requête
+    res = PQexec(conn, query);
+    
+    // Vérifier si la requête a réussi
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        fprintf(stderr, "Query execution failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+    }
+
+    int rows = PQntuples(res);
+
+    if (rows != 0) {
+
+        for (int i = 0; i < rows; i++)
+        {
+            int ind_id_c = PQfnumber(res, "idenvoyeur");
+            int id_c = atoi(PQgetvalue(res, i, ind_id_c));
+            // Construire la requête SQL avec une variable
+            snprintf(query, sizeof(query), "SELECT login FROM tripskell.membre WHERE id_c = %d;", id_c);
+            res2 = PQexec(conn, query); // Exécuter la requête SQL d'un membre
+
+            snprintf(query, sizeof(query), "SELECT raison_social FROM tripskell.pro_public WHERE id_c = %d;", id_c);
+            res3 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel public
+
+            snprintf(query, sizeof(query), "SELECT raison_social FROM tripskell.pro_prive WHERE id_c = %d;", id_c);
+            res4 = PQexec(conn, query); // Exécuter la requête SQL d'un professionnel privee
+        
+            char nom[30];
+            if (PQntuples(res2) > 0) {
+                int ind_nom = PQfnumber(res2, "login");
+                strcpy(nom, PQgetvalue(res2, 0, ind_nom));
+            } else if (PQntuples(res3) > 0) {
+                int ind_rs = PQfnumber(res3, "raison_social");
+                strcpy(nom, PQgetvalue(res3, 0, ind_rs));
+            } else if (PQntuples(res4) > 0) {
+                int ind_rs = PQfnumber(res4, "raison_social");
+                strcpy(nom, PQgetvalue(res4, 0, ind_rs));
+            }
+
+            nom[strlen(nom)] = '\0';
+
+            int ind_date = PQfnumber(res, "datecreation");
+            int ind_modif = PQfnumber(res, "datemodification");
+            int ind_mess = PQfnumber(res, "contentmessage");
+
+            char *dateMess = PQgetvalue(res, i, ind_date);
+            char *dateModif = PQgetvalue(res, i, ind_modif);
+            if (PQgetisnull(res, i, ind_modif)) {
+                strcpy(dateModif, "NULL");
+            } else {
+                dateModif = PQgetvalue(res, i, ind_modif);
+            }
+            char *messContent = PQgetvalue(res, i, ind_mess);
+            
+            messContent[strlen(messContent)] = '\0';
+
+            // Trouver le premier espace dans la chaîne
+            char *spacePos = strchr(dateMess, ' ');
+            if (spacePos != NULL) {
+                *spacePos = '\0'; // Remplacer l'espace par '\0' pour couper la chaîne
+            }
+            changer_format_date(dateMess);
+
+            if (strcmp(dateModif, "NULL") != 0) {
+                // Trouver le premier espace dans la chaîne
+                char *spacePos2 = strchr(dateModif, ' ');
+                if (spacePos2 != NULL) {
+                    *spacePos2 = '\0'; // Remplacer l'espace par '\0' pour couper la chaîne
+                }
+
+                changer_format_date(dateModif);
+            }
+
+            // afficher_message(nom, dateMess, NULL, messContent);
+            strcpy(buff, "{\"reponse\":\"200\",");
+            strcat(buff, "\"message\":\"");strcat(buff, messContent);strcat(buff, "\",");
+            strcat(buff, "\"date\":\"");strcat(buff, dateMess);strcat(buff, "\",");
+            strcat(buff, "\"modif\":\"");strcat(buff, dateModif);strcat(buff, "\",");
+            strcat(buff, "\"nom\":\"");strcat(buff, nom);strcat(buff, "\"");
+            strcat(buff, "}");
+
+            write(cnx, buff, strlen(buff));
+
+            int len = read(cnx, ack, sizeof(ack));
+            ack[len] = '\0';
+            if ((len < 0) || (atoi(ack) != ACKVU)) {
+                printf("Erreur lors de la lecture, ack : %s\n", ack);
+                return -1;
+            }
+
+            int ind_id_mess = PQfnumber(res, "idmes");
+            int id_mess = atoi(PQgetvalue(res, i, ind_id_mess));
+            snprintf(query, sizeof(query), 
+                "UPDATE tripskell._message SET lu = TRUE WHERE idmes = %d;", id_mess);
+
+            resUpd = PQexec(conn, query);
+            if (PQresultStatus(resUpd) != PGRES_COMMAND_OK) {
+                fprintf(stderr, "Erreur lors de la mise à jour: %s\n", PQerrorMessage(conn));
+            }
+
+            memset(buff, 0, sizeof(buff));
+            memset(nom, 0, sizeof(nom));
+            memset(ack, 0, sizeof(ack));
+
+
+            strcpy(messContent, "");
+            strcpy(dateMess, "");
+            strcpy(dateModif, "");
+
+
+        }
+        PQclear(res2);
+        PQclear(res3);
+        PQclear(res4);
+        PQclear(resUpd);
+    }
+
+    strcpy(buff, "{\"reponse\":\"417\"}");
+    write(cnx, buff, strlen(buff));
+
+    PQclear(res);
+
+
+    return 0;
 }
 
 int lirePort(const char *filename, int *numPort) {
@@ -1152,4 +1277,87 @@ int lirePort(const char *filename, int *numPort) {
     
 
     return 0;
+}
+
+
+int menu_nouv_mess(int sock) {
+
+    char resp[2100];
+    char req[50];
+
+    strcpy(req,"{\"requete\":\"mess_non_vu\"}");
+
+    write(sock, req, strlen(req));
+
+    memset(resp, 0, sizeof(resp));
+    read(sock, resp, sizeof(resp));
+    
+    if (atoi(resp) != 200)
+    {
+        printf("Vous n'avez pas la permission\n");
+        return -1;
+    }
+    
+
+    int len = read(sock, resp, sizeof(resp));
+    if (len < 0) {
+        perror("Erreur lors de la lecture");
+        return -1;
+    }
+    resp[len] = '\0';
+
+    char nom[50], date[50], modif[50], mess[2050];
+    int num = 0;
+
+    while (atoi(get_json_value(resp, "reponse")) != FMESSNVU) {
+
+        // Copier les valeurs dans des buffers locaux
+        strncpy(nom, get_json_value(resp, "nom"), sizeof(nom) - 1);
+        strncpy(date, get_json_value(resp, "date"), sizeof(date) - 1);
+        strncpy(modif, get_json_value(resp, "modif"), sizeof(modif) - 1);
+        strncpy(mess, get_json_value(resp, "message"), sizeof(mess) - 1);
+        num++;
+
+        // Assurer que toutes les chaînes sont bien terminées
+        nom[sizeof(nom) - 1] = '\0';
+        date[sizeof(date) - 1] = '\0';
+        modif[sizeof(modif) - 1] = '\0';
+        mess[sizeof(mess) - 1] = '\0';
+
+        // Afficher le message
+        afficher_message(nom, date, modif, mess, num);
+        write(sock, "418", strlen("418"));
+        
+        len = read(sock, resp, sizeof(resp));
+        if (len < 0) {
+            perror("Erreur lors de la lecture");
+            return -1;
+        }
+        resp[len] = '\0';
+
+
+    }
+
+    if (num == 0)
+    {
+        printf("Auncun message non lu\n");
+    }
+    
+
+    bool quitter = false;
+    int val = 0;
+    printf("Saisissez -1 pour quitter : ");
+    while (!quitter)
+    {
+        scanf("%d", &val);
+        if (val == -1)
+        {
+            quitter = true;
+        }
+        
+    }
+    
+
+    return 0;
+
 }

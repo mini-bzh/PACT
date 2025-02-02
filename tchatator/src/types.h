@@ -39,5 +39,7 @@ extern const int OK;
 extern const int CLEINC;
 extern const int DECO;
 extern const int ACKDECO;
+extern const int FMESSNVU;
+extern const int ACKVU;
 
 #endif // TYPES_H

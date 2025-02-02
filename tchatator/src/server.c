@@ -95,6 +95,8 @@ int main() {
                 send_mess(cnx, configSocket, conn, id, buffer);
             } else if (strcmp(get_json_value(buffer, "requete"), "historique_mess") == 0) {
                 historique_mess(cnx, configSocket, conn, id, buffer);
+            } else if (strcmp(get_json_value(buffer, "requete"), "mess_non_vu") == 0) {
+                envoie_mess_non_lu(cnx, id, conn);
             }
             memset(buffer, 0, sizeof(buffer));
         }

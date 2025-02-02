@@ -13,6 +13,18 @@
         "types.h": "c",
         "prototypes.h": "c",
         "chrono": "c",
-        "functional": "c"
+        "functional": "c",
+        "unistd.h": "c",
+        "stdio.h": "c",
+        "system_error": "c",
+        "sstream": "c",
+        "charconv": "c",
+        "optional": "c",
+        "format": "c",
+        "ratio": "c",
+        "array": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }

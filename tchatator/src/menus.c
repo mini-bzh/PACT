@@ -489,8 +489,3 @@ int menu_conversation_membre(int cnx, int id_c, int id, PGconn *conn) {
     return 0;
 }
 
-// Fonction pour gérer le menu d'envoie de messages
-int menu_envoyerMessage(int cnx, bool compte, int id_c, int id, PGconn *conn) {
-    // TODO
-    return -1;
-}
