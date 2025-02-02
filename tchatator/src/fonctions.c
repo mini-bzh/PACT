@@ -286,7 +286,7 @@ void changer_format_date(char *date) {
 }
 
 // Fonction pour extraire la valeur associée à une clé dans un JSON
-char* get_json_value(const char* json, const char* key) {
+char* get_json_value(char* json, char* key) {
     char* key_pattern = (char*)malloc(strlen(key) + 4); // +4 pour les guillemets et le ":"
     sprintf(key_pattern, "\"%s\":", key); // Format: "key":
 
@@ -597,8 +597,6 @@ void reponse_liste_membre(int cnx, ConfigSocketMessages config, PGconn *conn, in
 
 
 void send_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id, char* requete){
-    printf("content : %s\n", requete);
-
     PGresult *res;
     char query[512]; // Buffer statique de taille fixe pour la requête
 
@@ -712,13 +710,13 @@ void historique_mess(int cnx, ConfigSocketMessages config, PGconn *conn, int id,
     write(cnx, reponse, utf8_strlen(reponse));
 }
 
-int count_json_array_elements(const char* json_array) {
+int count_json_array_elements(char* json_array) {
     if (json_array == NULL || json_array[0] != '[' || json_array[strlen(json_array) - 1] != ']') {
         return -1; // Format invalide
     }
 
     int count = 0;
-    const char* ptr = json_array + 1; // Ignore le '['
+    char* ptr = json_array + 1; // Ignore le '['
 
     while (*ptr != ']') {
 
@@ -743,13 +741,13 @@ int count_json_array_elements(const char* json_array) {
     return count;
 }
 
-char* get_json_array_element(const char* json_array, int index) {
+char* get_json_array_element(char* json_array, int index) {
     if (json_array == NULL || json_array[0] != '[' || json_array[strlen(json_array) - 1] != ']') {
         return NULL; // Format invalide
     }
 
     int current_index = 0;
-    const char* ptr = json_array + 1; // Ignore le '['
+    char* ptr = json_array + 1; // Ignore le '['
 
     while (*ptr != ']') {
         if (*ptr == '"') { // Début d'un élément de type chaîne
@@ -1329,8 +1327,6 @@ void af_menu_principal(int type_compte) {
 
 int menu_principal(int cnx, int compte, int id, int sock) {
     char buff[512];
-    int id_c = -1;
-    int ret;
     int reponse;
     int rep = -1;
     

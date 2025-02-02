@@ -12,7 +12,33 @@
 #include "types.h"
 #include "prototypes.h"
 
-int main() {
+bool verbose = false;
+
+void push_log(char* mess) {
+    char commande[512];
+    if (verbose) {
+        printf("%s", mess);
+    }
+    sprintf(commande, "echo '%s' >> ../.logs/server.log", mess);
+    system(commande);
+}
+
+int main( int argc, char **argv ) {
+
+    if (argc==2) {
+        if (strcmp(argv[1], "--help") == 0) {
+            printf("Utilisation: %s [--help]\n", argv[0]);
+            printf("Options:\n");
+            printf("  --help : affiche cette aide\n");
+            printf("  --verbose : affiche les logs\n");
+            return 0;
+        } else if (strcmp(argv[1], "--verbose") == 0) {
+            verbose = true;
+        } else {
+            printf("Option inconnue: %s\n", argv[1]);
+            return 1;
+        }
+    }
 
     ConfigSocketMessages configSocket;
     ConfigBDD configBDD;
@@ -21,19 +47,19 @@ int main() {
     int id;
     char buffer[500];
 
-    int len;
-
     bool deco;
 
     system("clear");
 
-    printf("Lecture de la configuration...\n");
+    push_log("Lecture de la configuration...\n");
+    
     if (lire_config("../.config/config.txt", &configSocket, &configBDD) != 0) {
         return -1;
     }
 
     // Connection à la BDD
-    printf("Connexion à la base de données...\n");
+    push_log("Connexion à la base de données...\n");
+
     PGconn *conn = connect_to_db(&configBDD);
     if (PQstatus(conn) != CONNECTION_OK) {
         fprintf(stderr, "Connection failed: %s\n", PQerrorMessage(conn));
@@ -42,7 +68,8 @@ int main() {
     }
 
     // Création du socket
-    printf("Création du socket...\n");
+    push_log("Création du socket...\n");
+
     int sock = create_socket(&configSocket);
     if (sock < 0) {
         PQfinish(conn);
@@ -50,7 +77,10 @@ int main() {
     }
 
     char *dbname = PQdb(conn);
-    printf("Connecté à la base de données : %s\n", dbname);
+
+    push_log("Connecté à la base de données :");
+    push_log(dbname);
+    push_log("\n");
 
     struct sockaddr_in conn_addr;
     int size = sizeof(conn_addr);
@@ -62,7 +92,7 @@ int main() {
         deco = true;
 
         // Acceptation de la connexion
-        printf("En attente de connexion...\n");
+        push_log("En attente de connexion...\n");
         int cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
         if (cnx < 0) {
             perror("Erreur lors de l'acceptation de la connexion");
@@ -71,19 +101,35 @@ int main() {
             return -1;
         }
 
-        printf("Connexion réussi au CLIENT : %d\n", cnx);
+        char cnx_char[12];
+        sprintf(cnx_char, "%d", cnx);
+        push_log("Connexion réussi au CLIENT : ");
+        push_log(cnx_char);
+        push_log("\n");
 
         write(cnx, "200", 3); // envoie code 200
 
         id = identification(cnx, configSocket, &compte, conn);
         if (id != -1) {
             deco = false;
-            printf("Identification réussi : (id : %d, type compte : %d)\n", id, compte);
+            char id_char[12];
+            char compte_char[12];
+            sprintf(id_char, "%d", id);
+            sprintf(compte_char, "%d", compte);
+            push_log("Identification réussi : (id : ");
+            push_log(id_char);
+            push_log(",type compte : ");
+            push_log(compte_char);
+            push_log(")\n");
         }
         
         while (!deco) {  // Si l'utilisateur est connecté, on traite les requêtes jusqu'à la déconnexion
             read(cnx, buffer, sizeof(buffer));
-            printf("requete: %s\n", get_json_value(buffer, "requete"));
+            if(verbose) {
+                push_log("requete: ");
+                push_log(get_json_value(buffer, "requete"));
+                push_log("\n");
+            }
             if (strcmp(get_json_value(buffer, "requete"), "liste_pro") == 0) {
                 reponse_liste_pro(cnx, configSocket, conn, id, buffer);
             } else if (strcmp(get_json_value(buffer, "requete"), "liste_membre") == 0) {
@@ -104,11 +150,12 @@ int main() {
             }
             memset(buffer, 0, sizeof(buffer));
         }
-        
-        printf("\n");
+        push_log("\n");
 
         close(cnx);
-        printf("Deconnexion réussi du CLIENT : %d\n\n", cnx);
+        if(verbose) {
+            printf("Deconnexion réussi du CLIENT : %d\n\n", cnx);
+        }
     }
     
 

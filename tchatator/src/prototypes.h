@@ -30,11 +30,11 @@ void utf8_strncpy(char *dest, const char *src, size_t n);  // Fonction qui copie
 
 void changer_format_date(char *date); // Changer le format de la date (de 2024-12-01 à 01/12/2024 par exemple)
 
-char* get_json_value(const char* json, const char* key);  // Fonction pour extraire la valeur associée à une clé dans un JSON
+char* get_json_value(char* json, char* key);  // Fonction pour extraire la valeur associée à une clé dans un JSON
 
-int count_json_array_elements(const char* json_array);
+int count_json_array_elements(char* json_array);
 
-char* get_json_array_element(const char* json_array, int index);
+char* get_json_array_element(char* json_array, int index);
 
 int identification(int cnx, ConfigSocketMessages config, int *compte, PGconn *conn);
 
