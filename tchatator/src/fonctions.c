@@ -290,32 +290,41 @@ char* get_json_value(const char* json, const char* key) {
         return NULL; // Clé non trouvée
     }
 
-    // Pointeur vers le début de la valeur
     char* value_start = key_pos + strlen(key) + 3; // Déplace le pointeur après la clé et les ":"
-    while (*value_start == ' ' || *value_start == '\t' || *value_start == '\n') {
+    while (*value_start == ' ') {
         value_start++; // Ignore les espaces blancs
     }
 
     // Déterminer si la valeur est une chaîne ou un tableau
     if (*value_start == '"') { // Valeur est une chaîne
-        value_start++; // Déplace le pointeur après le guillemet
-        char* value_end = strchr(value_start, '"'); // Trouve le guillemet de fin
+
+        value_start++;
+        char* value_end = strchr(value_start, '"');
+
         if (!value_end) {
-            return NULL; // Format invalide
+            return NULL;
         }
-        size_t length = value_end - value_start;
+
+        int length = value_end - value_start;
         char* value = (char*)malloc(length + 1); // +1 pour le caractère nul
+
         strncpy(value, value_start, length);
         value[length] = '\0';
+
         return value;
+
     } else if (*value_start == '[') { // Valeur est un tableau
-        value_start++; // Déplace le pointeur après le '['
-        char* value_end = strchr(value_start, ']'); // Trouve le ']' de fin
+
+        value_start++;
+        char* value_end = strchr(value_start, ']'); 
+
         if (!value_end) {
             return NULL; // Format invalide
         }
-        size_t length = value_end - value_start;
+
+        int length = value_end - value_start;
         char* value = (char*)malloc(length + 3); // +3 pour les crochets et le caractère nul
+        
         sprintf(value, "[%.*s]", (int)length, value_start);
         return value;
     }
@@ -678,15 +687,18 @@ int count_json_array_elements(const char* json_array) {
     const char* ptr = json_array + 1; // Ignore le '['
 
     while (*ptr != ']') {
+
         if (*ptr == '"') { // Début d'un élément de type chaîne
             ptr++;
             while (*ptr != '"' && *ptr != '\0') {
                 ptr++; // Ignore le contenu de la chaîne
             }
+
             if (*ptr == '"') {
-                count++;
+                count++; // +1 element
                 ptr++;
             }
+
         } else if (*ptr == ',') {
             ptr++;
         } else {
@@ -708,16 +720,20 @@ char* get_json_array_element(const char* json_array, int index) {
     while (*ptr != ']') {
         if (*ptr == '"') { // Début d'un élément de type chaîne
             ptr++;
-            const char* start = ptr;
+            char* start = ptr;
+
             while (*ptr != '"' && *ptr != '\0') {
                 ptr++; // Ignore le contenu de la chaîne
             }
+
             if (*ptr == '"') {
                 if (current_index == index) {
-                    size_t length = ptr - start;
+                    int length = ptr - start;
                     char* element = (char*)malloc(length + 1); // +1 pour le caractère nul
+
                     strncpy(element, start, length);
                     element[length] = '\0';
+                    
                     return element;
                 }
                 current_index++;
