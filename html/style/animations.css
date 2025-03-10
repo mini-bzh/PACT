@@ -1,0 +1,64 @@
+/* animation utilisée à plusieurs endroits, lors du hover des offres par exemple*/
+.grossisQuandHover {
+    transition: transform 0.3s ease;
+}
+
+.grossisQuandHover:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+/* boutons de connexion */
+
+.btnCo{
+    transition: transform 0.2s ease;
+}
+
+.btnCo:hover {
+    transform: scale(1.05);
+}
+
+
+/* adresse détail offre */
+.offre #itineraire{
+    transition: transform 0.2s ease;
+}
+
+.offre #itineraire:hover{
+    transform: translateY(-2px);
+}
+
+/* input dans sidebar page rechercher */
+.input-group input{
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au focus de l'input */
+.input-group input:focus {
+    border-color: var(--primaryLight);
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+
+/* pouces dans avis */
+.avis .conteneurPouces div img{
+    transition: transform 0.2s ease;
+}
+
+.avis .conteneurPouces .pouceLike img {
+    transform: translateY(-2px);
+}
+
+.avis .conteneurPouces .pouceDislike img {
+    transform: translateY(2px);
+}
+
+.conteneurPouces .pouceLike img:hover{
+    transform: rotate(-20deg) translateY(-4px);
+    cursor: pointer;
+}
+
+.conteneurPouces .pouceDislike img:hover{
+    transform: rotate(-20deg) translateY(4px);
+    cursor: pointer;
+}
