@@ -71,8 +71,11 @@ if (!empty($_POST)) { // Vérification si le formulaire est soumis
         ':idAvis' => $idAvis,
     ]);
 
+
+
+
     // Redirection vers une autre page après succès
-    header("Location: /pages/accueil.php");
+    header("Location: /pages/detailOffre.php?idOffre=" . $avis["idoffre"]);
     exit();
 }
 ?>
