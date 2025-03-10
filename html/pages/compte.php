@@ -127,6 +127,7 @@ if (isset($idCompte)) {
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/compte.css">
     <script src="../js/deconnexion.js" defer></script>
+    <script src="../js/suppressionCompte.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
 
     <script>let id_c = <?php echo $idCompte;?>; // donne l'id_c au javascript</script> 
@@ -514,19 +515,25 @@ if (isset($idCompte)) {
 
                         <!-- Bouton de deconnexion -->
                         <button id="btnDeconnexion" class="btn" onclick="confDeco()">
-                            <?php
+<?php
                             include '../icones/deconnexionSVG.svg';
-                            ?>
+?>
                             <p class="boldArchivo texteSmall">Déconnexion</p>
                         </button>
 
+<?php
+                    if ($compteMembre) {
+?>
                         <!-- Bouton de suppression compte -->
-                        <!-- <button class="btnSupCompte">
-            <?php
-            // include '../icones/supprimerSVG.svg';
-            ?>
-                <p class="boldArchivo">Supprimer le compte</p>
-            </button> -->
+                        <button id="btnSupCompte" class="btn" onclick="confSup()">
+<?php
+                            include '../icones/supprimerSVG.svg';
+?>
+                            <p class="boldArchivo texteSmall">Supprimer le compte</p>
+                        </button>
+<?php
+                    }
+?>
 
                     </div>
 
@@ -546,6 +553,39 @@ if (isset($idCompte)) {
                     <div>
                         <button class="btnAnnulerDeco" onclick="fermeConfDeco()">Non</button>
                         <button class="btnValiderDeco" onclick="deconnexion()">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POP-UP de suppression de compte -->
+            <div class="popUpSup popUp">
+                <div class="popup-content">
+                    <p class="ajoutBorder">Pour valider la suppression du compte veuillez entrer votre mot de passe :</p>
+
+                    <!-- <div class="popup-align">
+                        <label for="nomUserSupCompte">Nom d'utilisateur :</label>
+                        <input id="nomUserSupCompte" name="nomUserSupCompte" type="text" placeholder="Nom d'utilisateur">
+                    </div> -->
+
+                    <div class="popup-align">
+                        <label for="pswSupCompte">Mot de passe :</label>
+                        <input id="pswSupCompte" name="pswSupCompte" type="password" placeholder="Mot de passe">
+                    </div>
+                    <p id="textNonValide" class="displayNone texteSmall remplirChampsError" style="color: red">Mot de passe incorrect !</p>
+                    <p class="boldArchivo" style="color: red">Cette action est irréversible !</p>
+                    <div class="btnSup">
+                        <button class="btnValiderSup" onclick="suppressionCompte()" disabled>
+                            Confirmer
+<?php
+                            include '../icones/supprimerSVG.svg';
+?>
+                        </button>
+                        <button class="btnAnnulerSup" onclick="fermeConfSup()">
+                            Annuler
+<?php
+                            include '../icones/croixSVG.svg';
+?>
+                        </button>
                     </div>
                 </div>
             </div>

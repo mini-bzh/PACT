@@ -112,7 +112,7 @@ div:has(> .fakeDiv){
 
 /* Bouton de suppression de compte */
 
-.btnSupCompte{
+#btnSupCompte{
     background-color: #D80303;
 }
 
@@ -223,7 +223,7 @@ body.no-scroll {
     justify-content: center;
 }
 
-.popUpDeco > div{
+.popUpDeco > div {
     height: 120px;
     display: flex;
     flex-direction: column;
@@ -253,6 +253,73 @@ body.no-scroll {
 
 #popUpModif .btnValider:hover, #popUpModifBancaire .btnValider:hover{
     background-color: var(--accentDark);
+}
+
+/* Bouton de suppression de compte */
+.popUpSup > .popup-content {
+    height: 425px;
+    width: 381px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2%;
+}
+
+.remplirChampsError {
+    position: absolute;
+    bottom: 150px;
+    left: 25px;
+}
+
+.popup-align {
+    text-align: left;
+}
+
+.btnValiderSup svg {
+    width: 20px;
+    height: 20px;
+}
+
+.popUpSup button svg path {
+    stroke: white;
+    stroke-width: 9px;
+}
+
+.btnAnnulerSup svg {
+    width: 17px;
+    height: 17px;
+}
+
+.popUpSup button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 140px;
+}
+
+.btnAnnulerSup {
+    background-color: #7c7c7c;
+}
+
+.btnValiderSup {
+    background-color: #b9b9b9;
+    cursor: default;
+}
+
+.btnSup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.ajoutBorder {
+    border: black 1px solid;
+    padding: 4%;
+    border-radius: 5px;
+}
+
+.popUpSup input {
+    border: 2px solid #444;
 }
 
 /* Génération Clé API */
@@ -363,7 +430,7 @@ body.no-scroll {
         stroke: black;
     }
 
-    .btnDataBanc, .btnModifCompte, .btnSupCompte, .btnFacture{
+    .btnDataBanc, .btnModifCompte, #btnSupCompte, .btnFacture{
         display: none;
     }
 

@@ -11,7 +11,6 @@ function deconnexion()
 
             console.log(document.cookie);
             
-            console.log("cc");
             document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 
             console.log("Déconnexion réussie");
