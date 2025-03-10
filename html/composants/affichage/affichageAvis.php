@@ -53,8 +53,9 @@
 
                 $resultReponse = $stmt->fetch();
 
-                if($resultReponse != [])                //si il y a une réponse à l'avis
-                {                    
+
+                if($resultReponse)                //si il y a une réponse à l'avis (un fetch renvoie false si rien n'a été trouvé)
+                {       
                     $idPro = $resultReponse["id_c"];
                     
                     $nomPro = "professionnel";
@@ -68,25 +69,28 @@
                     $stmt->execute();
                     $result = $stmt->fetch();
 
-                    if($result != [])           //affiche la réponse
+                    if($result)           //affiche la réponse
                     {
                         $nomPro = $result["raison_social"];
                         $pdpPro = $result["pdp"];
                     }
                     else
                     {
-                        $query = "SELECT raison_social, pdp FROM tripskell.pro_public WHERE id_c = 3";
+                        $query = "SELECT raison_social, pdp FROM tripskell.pro_public WHERE id_c = :idPro";
+                        $stmt->bindParam(":idPro", $idPro);
+
                         $stmt = $dbh->prepare($query);
 
                         $stmt->execute();
                         $result = $stmt->fetch();
 
-                        if($result != [])
+                        if($result)
                         {
                             $nomPro = $result["raison_social"];
                             $pdpPro = $result["pdp"];
                         }
                     }
+
                     ?>
                     <div class="reponse">
                         <div class="proReponse">
@@ -114,7 +118,7 @@
                         $stmt->execute();
 
                         $offreDuPro = $stmt->fetch()["count"];
-                        
+
                         if($offreDuPro)
                         {
                             ?>
@@ -131,7 +135,7 @@
                             <?php
                         }
                     }
-                }    
+                }
             ?>
             <!-- Image de l'avis -->
             <section class="conteneurSpaceBetween">
@@ -215,12 +219,3 @@
         </article>
         <?php
     }
-
-
-    function test($val)
-    {
-        ?>
-            <p>val : <?php echo $val?></p>
-        <?php
-    }
-

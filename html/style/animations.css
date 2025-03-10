@@ -62,3 +62,12 @@
     transform: rotate(-20deg) translateY(4px);
     cursor: pointer;
 }
+
+/* chevrons page avis pro */
+#mainAvis .conteneurBtnTitre img{
+    transition: transform 0.2s ease;
+}
+
+#mainAvis .conteneurBtnTitre img:hover{
+    cursor: pointer;
+}

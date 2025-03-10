@@ -10,26 +10,24 @@ $dbname = "postgres";
 $user = "sae";
 $pass = "ashton-izzY-c0mplet";
 
-echo "cc";
-
 // Connexion à la base de données
 
 $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-echo "cv";
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'utilisation d'un tableau associatif
 
 
-$query = "SELECT idoffre FROM tripskell._avis WHERE id_avis = 5";
-$sth = $dbh->prepare($query);
+$query1 = "SELECT * FROM tripskell._reponseavis";
+$query2 = "SELECT * FROM tripskell._compte";
+
+$sth = $dbh->prepare($query1);
 
 $sth->execute();
-echo "oe";
-
 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($result as $row) {
-    echo($row["idoffre"]);
+    print_r($row);
     echo "<br><br>";
 }
+

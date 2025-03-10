@@ -34,8 +34,6 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 
 let mapAvisInfos = initAvis();
 
-console.log(mapAvisInfos);
-
 function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
 
     // Rajoute une bordure bleu sur le bouton
@@ -310,7 +308,6 @@ function MettreAvisOffreLu(conteneurAvisOffre)
 }
 
 //mettre les avis en lu
-
 function avisLuBDD(idAvis)
 {
     $.ajax({

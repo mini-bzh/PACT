@@ -16,7 +16,7 @@
 
     if($comptePro)
     {
-        $offre = $dbh->query("select * from tripskell.offre_pro where id_c='" . $idCompte . "';")->fetchAll();
+        $offres = $dbh->query("select * from tripskell.offre_pro where id_c='" . $idCompte . "';")->fetchAll();
     }
     else{
         $membre = $dbh->query("select * from tripskell.membre where id_c='" . $idCompte . "';")->fetchAll()[0];
@@ -27,7 +27,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" lang="fr">
     <title>Avis</title>
 
     <!-- Favicon -->
@@ -88,6 +88,7 @@
             <section class="mainAvis">
             
               <section class="mainAvisPro">
+                <p hidden id="idPro"><?php echo $_SESSION["idCompte"] ?></p>
                 <?php
                     $query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
                     WHERE tripskell._offre.id_c = :idCompte AND luparpro = false"; //compte le nombre d'avis déposés sur les offres du pro qu'il n'a pas encore lu
@@ -131,25 +132,25 @@
                         <p id="txtBtnNote" class="txtBtnTrie" >note</p>
                     </div>
                 </section>
+
                 <?php
-                    foreach($offre as $of)
+                    foreach($offres as $offre)  
                     {
                         $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
                         $stmt = $dbh->prepare($query);
 
-                        $stmt->bindParam(":idOffre", $of['idoffre']);
+                        $stmt->bindParam(":idOffre", $offre['idoffre']);
 
                         $stmt->execute();
 
                         $nbAvisNonLusOffre = $stmt->fetch()["count"];
 
-
                         ?>
                             <section class="conteneurAvisOffre">
-                                <div class="conteneurBtnTitre" id="offre<?php echo $of["idoffre"];?>">
+                                <div class="conteneurBtnTitre" id="offre<?php echo $offre["idoffre"];?>">
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
                                     <div class="conteneurTitrePastille">
-                                        <h3><?php echo $of["titreoffre"] ?></h3>
+                                        <h3><?php echo $offre["titreoffre"] ?></h3>
                                         <?php
                                             if($nbAvisNonLusOffre > 0)
                                             {
@@ -158,31 +159,23 @@
                                                 <?php
                                             }
                                         ?>
-                                    </div>
-                                    
-                                    
+
+                                    </div>                                    
                                 </div>
                                 <div class="conteneurAvis">
-                                    <p hidden id="idOffreCache"><?php echo $of['idoffre']?></p>
                                     <?php
+
                                         $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
                                         $stmt = $dbh->prepare($query);
-                                        
-                                        $stmt->bindParam(":idOffre", $of[""]);
+                                        $stmt->bindParam(":idOffre", $offre[""]);
                                         
                                         $stmt->execute();
                                         
                                         $nbAvisNonLusOffre = $stmt->fetch()["count"];
 
-                                        if($nbAvisNonLus)
-                                        {
+                                        $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre['idoffre'] . ";")->fetchAll();
+                   
 
-                                        }
-                                    ?>  
-
-                                        <?php
-
-                                        $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $of['idoffre'] . ";")->fetchAll();
                                         if($avis != null)
                                         {
                                             foreach ($avis as $value)
@@ -193,17 +186,16 @@
                                         else
                                         {
                                             ?>
-                                                <h3>Aucun avis déposé pour <?php echo $of["titreoffre"]?></h3>
+                                                <h3>Aucun avis déposé pour <?php echo $offre["titreoffre"]?></h3>
                                             <?php
                                         }
                                     ?>
                                 </div>
+
                             </section>
                         <?php
                     }
                 ?>
-                </section>
-                </section>
             <?php
             }
             else

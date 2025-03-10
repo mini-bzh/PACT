@@ -1,3 +1,4 @@
+
 /* ------------------------ supprimer avis ------------------------*/
 
 let btnSupprimerAvis = document.querySelector(".btnSupprimerAvis");
@@ -50,13 +51,11 @@ let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
 
 function confSignaler(event){ //fonction pour afficher une pop up
     let idAvis = event.target.id; // on récupère l'id de l'avis
-    console.log(idAvis);
     let pop = document.querySelector('.popUpSignaler');
     pop.style.display = 'flex';
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
     document.body.classList.add('no-scroll');
     btnValider.id = idAvis;  //l'id de l'avis est mis dans le bouton bouton valider
-    console.log(btnValider);
 }
 
 function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulation
@@ -67,11 +66,9 @@ function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulati
 
 function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis, le motif du signalement et l'id de la personne qui signal
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
-    console.log(btnValider);
     let motifSignalement = document.getElementById("motifSignalement").value;
     let idCompte = document.querySelectorAll(".btnSignalerAvis p")[1].textContent;
     let idAvis = btnValider.id;
-    console.log(idAvis);
 
     if(motifSignalement != ""){
         $.ajax({
@@ -325,7 +322,7 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
         },
         success: function(response) {
 
-            //console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
         },
         error: function(jqXHR, textStatus, errorThrown) 
         {
@@ -336,7 +333,6 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
 }
 
 /* ------------------------ repondre avis ------------------------*/
-
 avis.forEach(av => {
     let btnRepondre = av.querySelector(".formReponse .btnRepondre");
 
@@ -346,8 +342,7 @@ avis.forEach(av => {
         let erreurReponseVide = av.querySelector(".formReponse .erreurReponseVide");
     
         let idAvis = av.id.slice(4);
-    
-        console.log(btnRepondre, reponseAvis, idAvis, erreurReponseVide);
+        let idCompte = document.getElementById("idPro").innerText
     
         btnRepondre.addEventListener("click", ()=>{
             if(reponseAvis.value.length == 0)
@@ -355,8 +350,8 @@ avis.forEach(av => {
                 erreurReponseVide.hidden = false;
             }
             else
-            { 
-                envoyerReponse(idAvis, reponseAvis.value);
+            {
+                envoyerReponse(reponseAvis.value, idAvis, idCompte);
             }
         });
     
@@ -369,12 +364,12 @@ avis.forEach(av => {
     }
 })
 
-function envoyerReponse(idAvis, reponseAvis)
+function envoyerReponse(reponseAvis, idAvis, idCompte)
 {
     $.ajax({
         url: "../composants/ajax/reponseAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
         type: 'POST',                               // Type de la requête (pour transmettre idOffre au fichier PHP)
-        data: {idAvis: idAvis, reponseAvis : reponseAvis},
+        data: {reponseAvis : reponseAvis, idAvis : idAvis, idCompte : idCompte},
         success: function(response)
         {
             console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
