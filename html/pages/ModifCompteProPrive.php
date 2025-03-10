@@ -223,7 +223,7 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
         <div class="champs">
         <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
-        <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" required> 
+        <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
         </div>
         </div>
 
@@ -281,7 +281,6 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
            <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" >
            <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" >
            <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" >
-           <input type="text" id="codePostal" name="codePostal" value="<?php echo $infos['codepostal'];?>" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
        </div>
        </div>
 
