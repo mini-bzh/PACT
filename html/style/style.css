@@ -1423,7 +1423,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 100%;
+    width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
