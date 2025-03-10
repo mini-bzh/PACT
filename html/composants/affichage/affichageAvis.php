@@ -161,7 +161,6 @@
                         {
                             $idCompteConnecte = null;
                         }
-                                                
                         if($avis["id_c"] == $idCompteConnecte)            //si cet avis a été publié par l'utilisateur connecté
                         {
                             ?>
@@ -188,13 +187,7 @@
                                     <p>Signaler</p>
                                     <p hidden><?php echo $idCompteConnecte?></p>
                                 </div>
-                            <a href="modifAvis.php">
-                                <div class="btnModifierAvis grossisQuandHover">
-                                    <img src="../icones/modifierSVG.svg" alt="icone modifier">
-                                    <p>Modifier</p>
-                                    <p hidden><?php echo $avis["id_avis"]?></p>
-                                </div>
-                            </a>
+                            
                             <?php
                             }
                             else if($avisSignaler != null){ // bouton déjà signaler
