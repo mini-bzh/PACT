@@ -262,8 +262,11 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
                 <!-- Telephone -->
                 <div class="champs">
                 <label for="Telephone">Téléphone :</label>
-                <input type="text" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10" pattern="^^\d{10}$">
-            </div>
+                    <input type="text" id="Telephone" name="Telephone" 
+                    placeholder="0123456789" minlength="10" maxlength="10" 
+                    pattern="^0[1-9]([0-9]{8})$" required 
+                    title="Le numéro doit commencer par 0 et contenir 10 chiffres">
+                </div>
         </div>
         
         <!-- Adresse Mail -->
@@ -313,24 +316,26 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
         ?>
 
         <div class="champs">
-            <label for="codeSiren">Code SIREN  <span class="required"></span> :</label>
-            <input type="text" id="codeSiren" name="codeSiren" placeholder="CodeSiren" minlength="9" maxlength="9" pattern="^^\d{9}$"> 
+            <label for="codeSiren">Code SIREN <span class="required"></span> :</label>
+            <input type="text" id="codeSiren" name="codeSiren" 
+                placeholder="Code SIREN" minlength="9" maxlength="9" 
+                pattern="^\d{9}$" required 
+                title="Le Code SIREN doit être composé de 9 chiffres">
         </div>
 
+        <!-- Adresse -->
+        <div class="champs">
+            <div class="labelAdresse">
+                <label for="adresse">Adresse :</label>
+            </div>
+            <div class="champsAdresse">
+                <input type="text" id="num" name="num" placeholder="Num" minlength="1" maxlength="5" pattern="^[1-9]\d{1,5}$" title="Le numéro doit être composé uniquement de chiffres" required>
+                <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
+                <input type="text" id="ville" name="ville" placeholder="Ville" required>
+                <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^\d{5}$" required title="Le code postal doit être composé de 5 chiffres">
+            </div>
+        </div>
 
-         <!-- Adresse -->
-         <div class="champs">
-         <div class="labelAdresse">
-                        <label for="adresse">Adresse :</label>
-                    </div>
-                <div class="champsAdresse">
-                    
-                    <input type="text" id="num" name="num" placeholder="Numéro" minlength="1" maxlength="3" >
-                    <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" >
-                    <input type="text" id="ville" name="ville" placeholder="Ville" >
-                    <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$" >
-                </div>
-                </div>
 
         <div id="extraFields" class="hidden">
         <div class="pageChoixCo">
@@ -342,29 +347,38 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
             </div>
         </div>
 
+            <div class="champs">
+        <label for="NumeroCB">Numéro de carte : <span class="required"></span> </label>
+        <input type="text" id="NumeroCB" name="NumeroCB" placeholder="Numéro de votre carte" 
+            minlength="16" maxlength="16" pattern="^\d{16}$" 
+            inputmode="numeric" required 
+            title="Le numéro de carte doit contenir 16 chiffres">
+    </div>
+
+    <div class="InfoCB">
         <div class="champs">
-            <label for="NumeroCB">Numéro de carte :  <span class="required"></span> </label>
-            <input type="text" id="NumeroCB" name="NumeroCB" placeholder="Numero de votre carte" minlength="16" maxlength="16" pattern="^^\d{16}$"> 
-        </div>
-    
-        <div class="InfoCB">
-            <div class="champs">
-                <label for="DateCB">Date d'expiration :  <span class="required"></span> </label>
-                <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$"> 
-            </div>
-
-            <div class="champs">
-                <label for="CryptoCB">Cryptogramme :  <span class="required"></span> </label>
-                <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" minlength="3" maxlength="" pattern="^^\d{3}$"> 
-            </div>
+            <label for="DateCB">Date d'expiration : <span class="required"></span> </label>
+            <input type="text" id="DateCB" name="DateCB" placeholder="MM/AA" 
+                minlength="5" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$" 
+                required title="La date doit être au format MM/AA">
         </div>
 
-            <div class="champs">
-            <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
-            <input type="text" id="TitulaireCB" name="TitulaireCB">
-
-           
+        <div class="champs">
+            <label for="CryptoCB">Cryptogramme : <span class="required"></span> </label>
+            <input type="text" id="CryptoCB" name="CryptoCB" placeholder="123" 
+                minlength="3" maxlength="3" pattern="^\d{3}$" 
+                inputmode="numeric" required 
+                title="Le cryptogramme doit contenir 3 chiffres">
         </div>
+    </div>
+
+    <div class="champs">
+        <label for="TitulaireCB">Titulaire de la carte <span class="required"></span> :</label>
+        <input type="text" id="TitulaireCB" name="TitulaireCB" placeholder="Nom du titulaire"
+            pattern="^[A-Za-zÀ-ÿ\s]+$" required 
+            title="Le nom du titulaire ne doit contenir que des lettres et des espaces">
+    </div>
+
     </div> 
         <hr>
 

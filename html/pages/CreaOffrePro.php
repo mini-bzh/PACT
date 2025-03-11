@@ -240,7 +240,7 @@ $date_option = $_POST["date_debut_opt"]!==""?$_POST["date_debut_opt"]:null;
 
 
 // On definit des variables a traiter
-$tarif = !isset($_POST["prix-minimal"])?$_POST["prix-minimal"]:"0";
+$tarif = isset($_POST["prix-minimal"]) ? $_POST["prix-minimal"] : "0";
 
 
 // Traitement pour id_option
@@ -269,6 +269,7 @@ $guidee      = $_POST["categorie"]=="visite"?$_POST["guidee"]:null;
 $duree_a    = $_POST["categorie"]=="activite"?$_POST["duree_a"]:null;
 $ageminimum  = $_POST["categorie"]=="activite"?$_POST["agemin"]:null;
 $prestation  = $_POST["categorie"]=="activite"?$_POST["prestation"]:null;
+
 
 // on execute tout ce qui a été fait précèdement
 $stmt->execute();

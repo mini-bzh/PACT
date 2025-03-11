@@ -174,10 +174,14 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
 
         <div class="InfoPerso">
                 <!-- Telephone -->
-            <div class="champs">
-                <label for="Telephone">Téléphone :</label>
-                <input type="number" id="Telephone" name="Telephone" placeholder="0123456789" minlength="10" maxlength="10">
-            </div>
+                <div class="champs">
+                    
+    <label for="Telephone">Téléphone :</label>
+            <input type="text" id="Telephone" name="Telephone" 
+           placeholder="0123456789" minlength="10" maxlength="10" 
+           pattern="^0[1-9]([0-9]{8})$" required 
+           title="Le numéro doit commencer par 0 et contenir 10 chiffres">
+</div>
 
             <div class="champs">
             <label for="codePostal">Code Postal  <span class="required">*</span> :</label>
@@ -204,7 +208,11 @@ header("Location: ../pages/connexion.php?user-tempo=membre"); // on redirige ver
                 <li>1 caractère spécial</li>
             </ul>    
         </div>   
-    </div>        
+
+
+    </div>  
+    
+    
         <!-- Mot de Passe -->
         <div class="champs">
             <label for="Confirm_Mot_de_P">Confirmation du mot de passe <span class="required">*</span> :</label>
