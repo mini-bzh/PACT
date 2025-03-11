@@ -299,6 +299,7 @@ textarea {
     margin-top: 40px;
     align-items: center;
     padding-bottom: 5px;
+    margin-bottom: 5px;
 
     border-bottom: 1px solid black;
 }
