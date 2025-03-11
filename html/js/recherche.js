@@ -54,6 +54,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("titre", document.querySelectorAll("#" + element.id + " .apercuOffre h3")[0].textContent);     //titre de l'offre
         mapTempo.set("categorie", document.querySelector("#" + element.id + " #cat").textContent);
         mapTempo.set("ville", document.querySelector("#" + element.id + " #ville").textContent);
+        mapTempo.set("adresse", document.querySelector("#" + element.id + " #adresse").textContent);
         mapTempo.set("note", parseFloat(document.querySelector("#" + element.id + " #note").textContent));
         // mapTempo.set("date", document.querySelector("#" + element.id + " #date").textContent);
 
