@@ -216,9 +216,13 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
 
         <div class="InfoPerso">
             <!-- Telephone -->
+            
         <div class="champs">
-            <label for="Telephone">Téléphone :</label>
-            <input type="number" id="Telephone" name="Telephone" value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" pattern="^0[0-9]{9}$">
+        <label for="Telephone">Téléphone :</label>
+            <input type="text" id="Telephone" name="Telephone" 
+            value="<?php echo $infos['numero_tel'];?>" minlength="10" maxlength="10" 
+           pattern="^0[1-9]([0-9]{8})$" required 
+           title="Le numéro doit commencer par 0 et contenir 10 chiffres">
         </div>
 
         <div class="champs">
@@ -276,12 +280,13 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
            <div class="labelAdresse">
                <label for="adresse">Adresse :</label>
            </div>
-       <div class="champsAdresse">
+            <div class="champsAdresse">
            
-           <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" >
-           <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" >
-           <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" >
-       </div>
+            <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" pattern="[0-9]+" required>
+<input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
+<input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
+
+        </div>
        </div>
 
 

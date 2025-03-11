@@ -43,6 +43,12 @@ $stmt = $dbh->prepare("select * from tripskell.offre_visiteur as p  where p.id_o
 $stmt->execute();
 $offreALaUne = $stmt->fetchAll();
 
+// On recherche les 10 dernières offres
+$stmt = $dbh->prepare("SELECT * FROM tripskell.offre_visiteur ORDER BY datepublication DESC LIMIT 10;");
+
+$stmt->execute();
+$nouvellesOffres = $stmt->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -99,12 +105,12 @@ $offreALaUne = $stmt->fetchAll();
         if ($comptePro)                  //change le titre de la page
         {
         ?>
-            <h1>Mes offres en ligne</h1>
+            <h1 class="displayNone">Mes offres en ligne</h1>
             
         <?php
         } else {
         ?>
-            <h1>À la Une</h1>
+            <h1 class="displayNone">À la Une</h1>
             <!-- ici on va vérifier qu'il y a plus de 3 offres A La Une sinon le carroussel ne s'affichera pas -->
             <?php if ($nbOffreALaUne['count'] > 4) { ?>
                 <div class="carroussel">
@@ -156,8 +162,24 @@ $offreALaUne = $stmt->fetchAll();
                     <?php
                     }
                     ?>
-                </article>
-            </div>
+            </article>
+        </div>
+
+        <h1>Nouveautés</h1>
+        <section id="conteneurOffres">
+            <article>
+                <?php
+
+                foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
+                {
+                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                        <?php
+                        af_offre($offre);
+                        ?></a><?php
+                            }
+                                ?>
+            </article>
+        </section>
 
         <h1>Autres offres</h1>
         <?php } ?>
@@ -171,9 +193,10 @@ $offreALaUne = $stmt->fetchAll();
                 ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
                         <?php
                         af_offre($offre);
-                        ?></a><?php
-                            }
-                                ?>
+                        ?></a>
+<?php
+                }
+?>
             </article>
         </section>
 

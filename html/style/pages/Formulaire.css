@@ -897,3 +897,19 @@ align-items: center;}
     margin-top: 1%;
     border-radius: 5px;
 }
+
+.champs input:valid{
+    background-image: url("../../icones/check.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    background-position: left 10px center;
+}
+
+.champs input:invalid{
+    background-image: url("../../icones/croix.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    background-position: left 10px center;
+}
