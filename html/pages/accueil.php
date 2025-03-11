@@ -218,10 +218,12 @@ $nouvellesOffres = $stmt->fetchAll();
                         <?php
                         af_offre($offre);
                         ?></a>
+<?php
+                }
+?>
             </article>
         </section>
 <?php
-                }
             if ($comptePro) {
 ?>
                 <h1>Nouveautés</h1>
