@@ -261,3 +261,17 @@ if(btnAjouterAvis != null)
 
 
 
+/* cookies offres récentes */
+function cookieContientCle(cle)
+{
+    const cookies = document.cookie.split("; ");
+    for(let cookie of cookies)
+    {
+        const [key, value] = cookie.split("=");
+        if(key == cle)
+        {
+            return true
+        }
+    }
+    return false;
+}

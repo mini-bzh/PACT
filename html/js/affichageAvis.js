@@ -108,10 +108,6 @@ function cookieContientCle(cle)
     return false;
 }
 
-function getCookie()
-{
-    const cookies = document.cookie.split("; ");
-}
 
 function supprimerCookiePouces() 
 {

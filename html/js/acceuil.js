@@ -15,3 +15,6 @@ if(carousel != undefined)
         isPaused = false;
     });
 }
+
+
+/* cookies offres récentes */
