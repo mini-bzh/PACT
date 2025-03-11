@@ -110,60 +110,84 @@ $nouvellesOffres = $stmt->fetchAll();
         <?php
         } else {
         ?>
-            <h1 class="displayNone">À la Une</h1>
-            <!-- ici on va vérifier qu'il y a plus de 3 offres A La Une sinon le carroussel ne s'affichera pas -->
-            <?php if ($nbOffreALaUne['count'] > 4) { ?>
-                <div class="carroussel">
+            <h1>À la Une</h1>
+            <?php if ($nbOffreALaUne['count'] >= 5) { ?>
+                <div class="carrousel">
                     <div class="card">
                         <?php
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
                         {
                         ?>
-                            <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
-                                <?php
-                                af_offre($offre);
-                                ?>
-                            </a>
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
+                                    af_offre($offre);
+                                    ?>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?>
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
+                                    af_offre($offre);
+                                    ?>
+                                </a>
+                            </div>
                         <?php
                         }
                         ?>
                     </div>
                 </div>
             <?php } else { ?>
-                <div class="small-carroussel">
+                <div class="carrousel">
                     <div class="card">
                         <?php
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
                         {
                         ?>
-                            <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover"> 
-                                <?php
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
                                     af_offre($offre);
-                                ?>
-                            </a>
+                                    ?>
+                                </a>
+                            </div>
                         <?php
                         }
                         ?>
+                        <div class="card-body">
+                        <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
+                            <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                        </a>
+                        </div>
+                        <?php
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?>
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
+                                    af_offre($offre);
+                                    ?>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="card-body">
+                        <a href="/pages/CreaComptrePro.php" class="grossisQuandHover">
+                            <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                        </a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
-
-        <!-- cette partie là sera afficher quand le site sera en version téléphone     -->
-        <div class="offreALaUne">
-            <article>
-                <?php
-
-                    foreach ($rows as $offre)          // parcourt les offres pour les afficher
-                    {
-                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"] ?>" class="lienApercuOffre grossisQuandHover">
-                            <?php
-                            af_offre($offre);
-                            ?></a>
-                    <?php
-                    }
-                    ?>
-            </article>
-        </div>
 
         <h1>Nouveautés</h1>
         <section id="conteneurOffres">
