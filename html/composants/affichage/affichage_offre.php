@@ -53,6 +53,7 @@ function af_offre($row) {
         <div class="conteneurSVGtexte">
             <img src="/icones/adresseSVG.svg" alt="adresse">
             <p id="ville"><?php echo $row["ville"]?></p>
+            <p id="adresse"><?php $adresse = $row["numero"] . " " . $row["rue"];echo $adresse;?></p>
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
