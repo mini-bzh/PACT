@@ -21,120 +21,143 @@
             <!-- Date de publication-->
             <p class="datePublication"><?php echo $avis['datepublication']?></p>
             <!-- Information du membre -->
-             <div class="conteneurCorpsAvis">
-                <div class="conteneurMembreAvis">
-                    <div class="infoMembreAvis">
-                    <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
-                        <h3><?php echo $membre['login'] ?></h3>
-                    </div>
+            <div class="headerAvis">
+                <div class="infoMembreAvis">
+                <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
+                    <h3><?php echo $membre['login'] ?></h3>
+                </div>
+                <div class="contexte">
                     <p>Contexte de la visite : <?php echo $avis['cadreexperience']?></p>
                     <div class="datesAvis">
                         <p>Visité le : <?php echo implode("-",array_reverse(explode("-",$avis['dateexperience'])))?></p>
                         <p>Posté le : <?php echo implode("-",array_reverse(explode("-",$avis['datepublication'])))?></p>
                     </div>
+                </div>
             </div>
             <hr>
-            <!-- Titre de l'avis -->
-            <h4 class="titreAvis"><?php echo $avis['titreavis'] ?></h4>
-            <div class="etoiles">
-            <?php
-                    include_once("etoiles.php");
-                    echo affichage_etoiles($avis["note"]);
-                ?>
-                <p>(<?php echo $avis["note"] ?>)</p>
-            </div>
-            <!-- Commentaire -->
-            <p class="texteAvis"><?php echo $avis['commentaire'] ?></p>
-            <hr>
-            <?php
-                $query = "SELECT * FROM tripskell._reponseAvis WHERE id_avis = :idAvis";
-                $stmt = $dbh->prepare($query);
-                $stmt->bindParam(":idAvis", $avis["id_avis"]);
-                $stmt->execute();
-
-                $resultReponse = $stmt->fetch();
-
-
-                if($resultReponse)                //si il y a une réponse à l'avis (un fetch renvoie false si rien n'a été trouvé)
-                {       
-
-                    $idPro = $resultReponse["id_c"];
-                    
-                    $nomPro = "professionnel";
-                    $pdpPro = "compteSVG.svg";
-
-
-                    $query = "SELECT raison_social, pdp FROM tripskell.pro_prive WHERE id_c = :idPro";
+            <div class="bodyAvis">
+                <div class="conteneurAvisGauche">
+                <!-- Titre de l'avis -->
+                <h4 class="titreAvis"><?php echo $avis['titreavis'] ?></h4>
+                <div class="etoiles">
+                <?php
+                        include_once("etoiles.php");
+                        echo affichage_etoiles($avis["note"]);
+                    ?>
+                    <p>(<?php echo $avis["note"] ?>)</p>
+                </div>
+                <!-- Commentaire -->
+                <p class="texteAvis"><?php echo $avis['commentaire'] ?></p>
+                <?php
+                    $query = "SELECT * FROM tripskell._reponseAvis WHERE id_avis = :idAvis";
                     $stmt = $dbh->prepare($query);
-                    $stmt->bindParam(":idPro", $idPro);
-
+                    $stmt->bindParam(":idAvis", $avis["id_avis"]);
                     $stmt->execute();
-                    $result = $stmt->fetch();
+
+                    $resultReponse = $stmt->fetch();
 
 
-                    if($result)           //affiche la réponse
-                    {
+                    if($resultReponse)                //si il y a une réponse à l'avis (un fetch renvoie false si rien n'a été trouvé)
+                    {       
 
-                        $nomPro = $result["raison_social"];
-                        $pdpPro = $result["pdp"];
+                        $idPro = $resultReponse["id_c"];
+                        
+                        $nomPro = "professionnel";
+                        $pdpPro = "compteSVG.svg";
+
+
+                        $query = "SELECT raison_social, pdp FROM tripskell.pro_prive WHERE id_c = :idPro";
+                        $stmt = $dbh->prepare($query);
+                        $stmt->bindParam(":idPro", $idPro);
+
+                        $stmt->execute();
+                        $result = $stmt->fetch();
+
+
+                        if($result)           //affiche la réponse
+                        {
+
+                            $nomPro = $result["raison_social"];
+                            $pdpPro = $result["pdp"];
+                        }
+                        else
+                        {
+                            $query = "SELECT raison_social, pdp FROM tripskell.pro_public WHERE id_c = :idPro";
+                            $stmt = $dbh->prepare($query);
+                            $stmt->bindParam(":idPro", $idPro);
+                            $stmt->execute();
+
+                            $result = $stmt->fetch();
+                        }
+                        ?>
+
+                        <div class="reponse">
+                            <hr>
+                            <div class="proReponse">
+                                <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo du pro">
+
+                                <h4>Réponse de <?php echo $nomPro?></h4>
+                            </div>
+                            <p><?php echo $resultReponse["textereponseavis"];?></p>
+                        </div>
+                        <?php
                     }
                     else
                     {
-                        $query = "SELECT raison_social, pdp FROM tripskell.pro_public WHERE id_c = :idPro";
-                        $stmt = $dbh->prepare($query);
-                        $stmt->bindParam(":idPro", $idPro);
-                        $stmt->execute();
-
-                        $result = $stmt->fetch();
-                    }
-                    ?>
-
-                    <div class="reponse">
-                        <div class="proReponse">
-                            <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo du pro">
-
-                            <h4>Réponse de <?php echo $nomPro?></h4>
-                        </div>
-                        <p><?php echo $resultReponse["textereponseavis"];?></p>
-                    </div>
-                    <hr>
-                    <?php
-                }
-                else
-                {
-                    include('../composants/verif/verif_compte_pro.php');
-                    
-                    if($comptePro)
-                    {
-                        $query =    "SELECT count(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
-                        WHERE tripskell._offre.id_c = :idCompte AND tripskell._avis.id_avis = :idAvis";         //regarde si le pro connecté possède l'offre sur laquelle on a déposé una vis
-
-                        $stmt = $dbh->prepare($query);
-                        $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
-                        $stmt->bindParam(":idAvis", $avis["id_avis"]);
-                        $stmt->execute();
-
-                        $offreDuPro = $stmt->fetch()["count"];
-
-                        if($offreDuPro)
+                        include('../composants/verif/verif_compte_pro.php');
+                        
+                        if($comptePro)
                         {
-                            ?>
-                            <h5>Voulez-vous répondre à cet avis ?</h5>
-                            <div class="formReponse">
-                                <textarea type=""text name="reponseAvis" maxlength="200" class="reponseAvis" placeholder="Répondez à l'avis de <?php echo $membre["login"];?> !"></textarea>
-                                
-                                <p class="erreurReponseVide" hidden>Veuillez écrire votre réponse !</p>
-                                <div class="btnRepondre grossisQuandHover">
-                                    <p>répondre</p>
-                                </div> 
-                            </div>
-                            <hr>
-                            <?php
+                            $query =    "SELECT count(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
+                            WHERE tripskell._offre.id_c = :idCompte AND tripskell._avis.id_avis = :idAvis";         //regarde si le pro connecté possède l'offre sur laquelle on a déposé una vis
+
+                            $stmt = $dbh->prepare($query);
+                            $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
+                            $stmt->bindParam(":idAvis", $avis["id_avis"]);
+                            $stmt->execute();
+
+                            $offreDuPro = $stmt->fetch()["count"];
+
+                            if($offreDuPro)
+                            {
+                                ?>
+                                <h5>Voulez-vous répondre à cet avis ?</h5>
+                                <div class="formReponse">
+                                    <textarea type=""text name="reponseAvis" maxlength="200" class="reponseAvis" placeholder="Répondez à l'avis de <?php echo $membre["login"];?> !"></textarea>
+                                    
+                                    <p class="erreurReponseVide" hidden>Veuillez écrire votre réponse !</p>
+                                    <div class="btnRepondre grossisQuandHover">
+                                        <p>répondre</p>
+                                    </div> 
+                                </div>
+                                <?php
+                            }
                         }
                     }
-                }
-            ?>
-            <div class="conteneurBtnGestionAvis">
+                ?>
+            </div>
+            <div class="conteneurAvisDroite">
+                <div class="conteneurAvisImage">
+                    <?php
+                        if($avis["imageavis"] != null)
+                        {
+                        ?>
+                            <img src="../images/imagesAvis/<?php echo $avis['imageavis'] ?>" class="imageAvis" alt="image de l'avis">
+                        <?php
+                        }
+                        else
+                        {
+                            ?>
+                                <img src="../icones/noImageSVG.svg" alt="pas d'image">
+                            <?php
+                        }
+                    ?>
+                </div>
+             </div>
+            </div>
+            <div class="footerAvis">
+                <hr>
+                <div class="conteneurBtnGestionAvis">
                     <?php                                               //bouton supprimer avis
                         if(array_key_exists("idCompte", $_SESSION))
                         {
@@ -194,25 +217,9 @@
                         </div>
                     </div>
                 </div>
-             </div>
-             <div class="conteneurImage">
-                <div class="conteneurAvisImage">
-                    <?php
-                        if($avis["imageavis"] != null)
-                        {
-                        ?>
-                            <img src="../images/imagesAvis/<?php echo $avis['imageavis'] ?>" class="imageAvis" alt="image de l'avis">
-                        <?php
-                        }
-                        else
-                        {
-                            ?>
-                                <img src="../icones/noImageSVG.svg" alt="pas d'image">
-                            <?php
-                        }
-                    ?>
-                </div>
-             </div>
+            </div>
+            
+             
         </article>
         <?php
     }

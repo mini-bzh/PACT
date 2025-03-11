@@ -264,7 +264,7 @@ function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
 
     if(window.getComputedStyle(conteneurAvis).display == "none")
     {
-        conteneurAvis.style.display = "flex";
+        conteneurAvis.style.display = "block";
         event.target.style.transform = "rotate(180deg)";
 
         MettreAvisOffreLu(conteneurAvisOffre);

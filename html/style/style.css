@@ -1001,29 +1001,54 @@ textarea {
 /*-------------/ affichage avis /--------------*/
 
 .conteneurAvis {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 0px;
     width: 100%;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
 }
 
 .avis {
+    display: block;
+    width: 60%;
     margin: 15px 0px;
     background-color: white;
     border-radius: 5px;
     box-shadow: var(--ombreNoire);
     height: fit-content;
     padding: 10px;
-    width: 45%;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
+.bodyAvis{
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+
+.conteneurAvisGauche{
+    display: block;
+    padding: 5px;
+}
+
+.conteneurAvisDroite{
+    min-width: 200px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+
 
 .avis hr {
-    margin-bottom: 10px;
+    margin: 10px 0px;
+}
+
+.avis .conteneurAvisGauche hr {
+    margin: 20px 0px;
 }
 
 .avis .conteneurSpaceBetween {
@@ -1035,7 +1060,6 @@ textarea {
 }
 
 .avis .datesAvis p {
-    margin-right: 10px;
     font-size: var(--typescale-very-small-text);
 }
 
@@ -1049,36 +1073,41 @@ textarea {
     display: none;
 }
 
-.avis .conteneurMembreAvis {
+.avis .headerAvis {
     display: flex;
     margin-bottom: 10px;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
-.avis .conteneurMembreAvis .infoMembreAvis {
+.avis .headerAvis .infoMembreAvis {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: fit-content;
     margin-bottom: 5px;
 }
 
-.avis .conteneurMembreAvis .infoMembreAvis h3 {
+
+.avis .headerAvis .infoMembreAvis h3 {
     margin-left: 10px;
 }
 
 .avis .texteAvis {
-    font-size: var(--typescale-small-text);
-    margin: 7px 0px 16px;
     word-wrap: break-word;
-    height: 60px;
 }
 
+
 .avis .conteneurAvisImage img {
-    width: 60px;
-    height: 60px;
+    min-width: 160px;
+    min-height: 160px;
+    max-width: 500px;
     object-fit: cover;
     display: block;
+}
+
+.avis .conteneurAvisImage img:hover{
+    cursor: pointer;
 }
 
 .avis .conteneurAvisImage .text-overlay-avis {

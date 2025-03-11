@@ -19,9 +19,9 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
 $query1 = "SELECT * FROM tripskell._reponseavis";
 $query2 = "SELECT * FROM tripskell._compte";
-$query3 = "DELETE FROM tripskell._reponseavis WHERE id_reponseavis = 7";
+$query3 = "DELETE FROM tripskell._reponseavis WHERE id_reponseavis = 9";
 
-$sth = $dbh->prepare($query1);
+$sth = $dbh->prepare($query2);
 
 $sth->execute();
 
