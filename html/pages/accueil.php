@@ -105,7 +105,7 @@ $nouvellesOffres = $stmt->fetchAll();
         if ($comptePro)                  //change le titre de la page
         {
         ?>
-            <h1 class="displayNone">Mes offres en ligne</h1>
+            <h1>Mes offres en ligne</h1>
             
         <?php
         } else {
@@ -218,11 +218,30 @@ $nouvellesOffres = $stmt->fetchAll();
                         <?php
                         af_offre($offre);
                         ?></a>
-<?php
-                }
-?>
             </article>
         </section>
+<?php
+                }
+            if ($comptePro) {
+?>
+                <h1>Nouveautés</h1>
+                <section id="conteneurOffres">
+                    <article>
+                        <?php
+
+                        foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                <?php
+                                af_offre($offre);
+                                ?></a><?php
+                                    }
+                                        ?>
+                    </article>
+                </section>
+<?php
+            }
+?>
 
     </main>
     <?php
