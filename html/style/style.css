@@ -252,6 +252,12 @@ textarea {
     justify-content: center;
 }
 
+#logoNew {
+    position: absolute;
+    width: 200px;
+    top: -30px;
+    right: -92px;
+}
 
 /*-------------/ page avis /--------------*/
 
@@ -1402,11 +1408,12 @@ textarea {
 
     background-color: white;
 
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-bottom: 30px;
 
     border-radius: 5px;
     padding: 10px;
+    position: relative;
 }
 
 .fondPro .apercuOffre {
@@ -2200,7 +2207,7 @@ aside fieldset {
 }
 
 
-/*---------------------/ page chois création compte /-----------------------*/
+/*---------------------/ page choix création compte /-----------------------*/
 
 .btnAnnuler {
     border-radius: 25px;

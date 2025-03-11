@@ -8,14 +8,16 @@ include('../composants/verif/verif_categorie.php');
 // contient fonction affichage_etoiles pour afficher les etoiles
 include('../composants/affichage/etoiles.php');
 
+
 function af_offre($row) {
     // recuperation des parametre de connection a la BdD
     include('../composants/bdd/connection_params.php');
     
-    
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+    
+    include('../composants/verif/verif_nouv_offre.php');
     
     $stmt = $dbh->prepare("select idoffre from tripskell.offre_pro as p where p.id_option='En relief';");
     $stmt->execute();
@@ -59,6 +61,13 @@ function af_offre($row) {
             </div>
             <p><?php echo $nb_avis; ?> avis</p>
         </div>
+<?php
+        if (in_array($row["idoffre"], $nouvellesOffresId)) {
+?>
+        <img src="../../icones/logoNew.png" alt="Logo nouvelle offre" name="Logo nouvelle offre" id="logoNew">
+<?php
+        }
+?>
     </article>
 <?php
 }
