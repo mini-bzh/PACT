@@ -1039,12 +1039,13 @@ textarea {
     align-items: center;
     justify-content: center;
     padding: 5px;
+    margin-left: 15px;
 }
 
 
 
 .avis hr {
-    margin: 10px 0px;
+    margin: 15px 0px;
 }
 
 .avis .conteneurAvisGauche hr {
@@ -1056,18 +1057,22 @@ textarea {
 }
 
 .avis .datesAvis {
-    display: flex;
+    display: block;
 }
 
 .avis .datesAvis p {
     font-size: var(--typescale-very-small-text);
 }
 
+.contexte{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
 .avis .conteneurTitreEtoiles h4 {
     margin-right: 10px;
 }
-
-
 
 .avis .datePublication {
     display: none;
@@ -1093,8 +1098,17 @@ textarea {
     margin-left: 10px;
 }
 
+.avis .footerAvis{
+    display: flex;
+    justify-content: space-between;
+}
+
 .avis .texteAvis {
     word-wrap: break-word;
+}
+
+.avis .etoiles{
+    margin-bottom: 12px;
 }
 
 

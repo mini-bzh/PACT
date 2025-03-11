@@ -23,6 +23,7 @@ $query3 = "DELETE FROM tripskell._reponseavis WHERE id_reponseavis = 9";
 
 $sth = $dbh->prepare($query2);
 
+
 $sth->execute();
 
 $result = $sth->fetchAll(PDO::FETCH_ASSOC);

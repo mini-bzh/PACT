@@ -94,7 +94,7 @@
                         <div class="reponse">
                             <hr>
                             <div class="proReponse">
-                                <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo du pro">
+                                <img src="../images/pdp/<?php echo $pdpPro?>" alt="pp pro">
 
                                 <h4>Réponse de <?php echo $nomPro?></h4>
                             </div>
@@ -155,8 +155,8 @@
                 </div>
              </div>
             </div>
+            <hr>
             <div class="footerAvis">
-                <hr>
                 <div class="conteneurBtnGestionAvis">
                     <?php                                               //bouton supprimer avis
                         if(array_key_exists("idCompte", $_SESSION))
@@ -206,7 +206,8 @@
                             }
                         }
                     ?>
-                    <div class="conteneurPouces">
+                </div>
+                <div class="conteneurPouces">
                         <div class="pouceLike">
                             <img src="../icones/pouceHautSVG.svg" alt="pouce vers le haut">
                             <p><?php echo $avis["nbpoucesbleu"] ?></p>
@@ -215,11 +216,8 @@
                             <img src="../icones/pouceBasSVG.svg" alt="pouce vers le bas">
                             <p><?php echo $avis["nbpoucesrouge"] ?></p>
                         </div>
-                    </div>
                 </div>
             </div>
-            
-             
         </article>
         <?php
     }
