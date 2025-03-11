@@ -21,7 +21,8 @@
             <!-- Date de publication-->
             <p class="datePublication"><?php echo $avis['datepublication']?></p>
             <!-- Information du membre -->
-            <div class="conteneurMembreAvis">
+             <div class="conteneurCorpsAvis">
+                <div class="conteneurMembreAvis">
                     <div class="infoMembreAvis">
                     <img class="circular-image" src="../images/pdp/<?php echo $membre['pdp'] ?>" alt="Photo de profil" title="Photo de profil">
                         <h3><?php echo $membre['login'] ?></h3>
@@ -87,7 +88,7 @@
                         $result = $stmt->fetch();
                     }
                     ?>
-                    
+
                     <div class="reponse">
                         <div class="proReponse">
                             <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo du pro">
@@ -133,25 +134,7 @@
                     }
                 }
             ?>
-            <!-- Image de l'avis -->
-            <section class="conteneurSpaceBetween">
-                <div class="conteneurAvisImage">
-                    <?php
-                        if($avis["imageavis"] != null)
-                        {
-                        ?>
-                            <img src="../images/imagesAvis/<?php echo $avis['imageavis'] ?>" class="imageAvis" alt="image de l'avis">
-                        <?php
-                        }
-                        else
-                        {
-                            ?>
-                                <img src="../icones/noImageSVG.svg" alt="pas d'image">
-                            <?php
-                        }
-                    ?>
-                </div>
-                <div class="conteneurBtnGestionAvis">
+            <div class="conteneurBtnGestionAvis">
                     <?php                                               //bouton supprimer avis
                         if(array_key_exists("idCompte", $_SESSION))
                         {
@@ -211,7 +194,25 @@
                         </div>
                     </div>
                 </div>
-            </section>
+             </div>
+             <div class="conteneurImage">
+                <div class="conteneurAvisImage">
+                    <?php
+                        if($avis["imageavis"] != null)
+                        {
+                        ?>
+                            <img src="../images/imagesAvis/<?php echo $avis['imageavis'] ?>" class="imageAvis" alt="image de l'avis">
+                        <?php
+                        }
+                        else
+                        {
+                            ?>
+                                <img src="../icones/noImageSVG.svg" alt="pas d'image">
+                            <?php
+                        }
+                    ?>
+                </div>
+             </div>
         </article>
         <?php
     }
