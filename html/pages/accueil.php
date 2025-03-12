@@ -207,7 +207,7 @@ $nouvellesOffres = $stmt->fetchAll();
             <?php } ?>
 
             <h1>Nouveautés</h1>
-            <section id="conteneurOffres">
+            <section id="conteneurOffres" class="conteneurOffres">
                 <article>
                     <?php
 
