@@ -236,17 +236,21 @@ textarea {
     margin: 20px;
 }
 
+.titreOffre {
+    width: 85%;
+}
+
 #mainAccueil #conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 60px;
 }
 
-#mainAccueil #conteneurOffres .lienApercuOffre {
+#mainAccueil .conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#mainAccueil #conteneurOffres>article {
+#mainAccueil .conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -300,14 +304,21 @@ textarea {
     display: flex;
 }
 
-#mainAvis .conteneurBtnTitre {
+#mainAvis .conteneurBtnAndBlacklist{
     display: flex;
+    justify-content: space-between;
+
     margin-top: 40px;
     align-items: center;
     padding-bottom: 5px;
     margin-bottom: 5px;
 
     border-bottom: 1px solid black;
+}
+
+#mainAvis .conteneurBtnTitre {
+    display: flex;
+    align-items: center;
 }
 
 #mainAvis .conteneurTitrePastille {
@@ -1405,7 +1416,7 @@ textarea {
 
 .apercuOffre {
     width: 350px;
-    height: 400px;
+    height: 440px;
 
     background-color: white;
 
@@ -1415,6 +1426,10 @@ textarea {
     border-radius: 5px;
     padding: 10px;
     position: relative;
+}
+
+.conteneurAdresse p {
+    padding-top: 5px;
 }
 
 .fondPro .apercuOffre {
@@ -1433,7 +1448,7 @@ textarea {
 .apercuOffre .conteneurSVGtexte {
     display: flex;
     align-items: center;
-    margin: 5px 0px;
+    margin: 5px 0;
     height: fit-content;
 }
 
@@ -1449,8 +1464,8 @@ textarea {
 
 
 .apercuOffre .conteneurSVGtexte p {
-    font-size: var(--typescale-text);
     margin-left: 5px;
+    margin-top: 3px;
 }
 
 .conteneurSpaceBetween {
@@ -1517,13 +1532,13 @@ textarea {
 
 .etoiles p {
     margin-right: 5px;
-    font-size: var(--typescale-small-text);
+    font-size: var(--typescale-text);
     transform: translateY(3px);
 }
 
 .etoiles img {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
 }
 
 .etoileMoitiePleine {
@@ -1531,9 +1546,9 @@ textarea {
 }
 
 .apercuOffre .resumeApercu {
-    font-size: var(--typescale-text);
+    font-size: var(--typescale-small-text);
     margin: 10px 0px;
-    height: 55px;
+    height: 75px;
 }
 
 /*
@@ -2152,17 +2167,17 @@ aside fieldset {
     margin: 20px;
 }
 
-#conteneurOffres {
+.conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-#conteneurOffres .lienApercuOffre {
+.conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#conteneurOffres>article {
+.conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2311,10 +2326,22 @@ aside fieldset {
 
 .card-body > a > img{
     width: 400px;
-    height: 400px;
+    height: 440px;
     border-radius: 5px;
     margin-right: 20px;
     border-radius: 5%;
+}
+
+/* Pour affiche le nombre de token pour le blacklist d'une offre */
+
+.tokenBlacklist{
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTokenBlacklist{
+    display: flex;
+    justify-content: end;
 }
 
 /*
@@ -2405,11 +2432,11 @@ aside fieldset {
 
     /*----------------/ PAGE ACCUEIL /-----------------*/
 
-    #mainAccueil #conteneurOffres>article {
+    #mainAccueil .conteneurOffres>article {
         display: block;
     }
 
-    #mainAccueil #conteneurOffres .lienApercuOffre {
+    #mainAccueil .conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
@@ -2474,7 +2501,7 @@ aside fieldset {
 
     /*-----------------/ APERCU OFFRE /------------------*/
 
-    #conteneurOffres {
+    .conteneurOffres {
         margin-top: 30px;
     }
 
@@ -2600,12 +2627,12 @@ aside fieldset {
         margin-bottom: 5%;
     }
 
-    #conteneurOffres>article {
+    .conteneurOffres>article {
         display: flex;
         flex-direction: column;
     }
 
-    #conteneurOffres .lienApercuOffre {
+    .conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
@@ -3170,4 +3197,8 @@ aside fieldset {
         margin-right: 15px;
     }
 
+}
+
+.btnSupprimerOffre{
+    color: #000;
 }

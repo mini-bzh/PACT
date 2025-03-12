@@ -106,7 +106,7 @@ $nouvellesOffres = $stmt->fetchAll();
         {
         ?>
             <h1 class="displayNone">Mes offres en ligne</h1>
-            
+
         <?php
         } else {
         ?>
@@ -144,6 +144,23 @@ $nouvellesOffres = $stmt->fetchAll();
                         ?>
                     </div>
                 </div>
+            <?php } elseif ($nbOffreALaUne['count'] == 0) { ?>
+                <div class="carrousel">
+                    <div class="card">
+                        <?php
+                        for ($i = 0; $i < 5; $i++)          // parcourt les offres pour les afficher
+                        {
+                        ?>
+                            <div class="card-body">
+                                <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
+                                    <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
             <?php } else { ?>
                 <div class="carrousel">
                     <div class="card">
@@ -162,9 +179,9 @@ $nouvellesOffres = $stmt->fetchAll();
                         }
                         ?>
                         <div class="card-body">
-                        <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
-                            <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
-                        </a>
+                            <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
+                                <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                            </a>
                         </div>
                         <?php
                         foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
@@ -181,34 +198,34 @@ $nouvellesOffres = $stmt->fetchAll();
                         }
                         ?>
                         <div class="card-body">
-                        <a href="/pages/CreaComptrePro.php" class="grossisQuandHover">
-                            <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
-                        </a>
+                            <a href="/pages/CreaComptrePro.php" class="grossisQuandHover">
+                                <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                            </a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
 
-        <h1>Nouveautés</h1>
-        <section id="conteneurOffres">
-            <article>
-                <?php
+            <h1>Nouveautés</h1>
+            <section id="conteneurOffres" class="conteneurOffres">
+                <article>
+                    <?php
 
-                foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
-                {
-                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
-                        <?php
-                        af_offre($offre);
-                        ?></a><?php
+                    foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
+                    {
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <?php
+                            af_offre($offre);
+                            ?></a><?php
                             }
                                 ?>
-            </article>
-        </section>
+                </article>
+            </section>
 
-        <h1>Autres offres</h1>
+            <h1>Autres offres</h1>
         <?php } ?>
 
-        <section id="conteneurOffres">
+        <section class="conteneurOffres">
             <article>
                 <?php
 
@@ -218,11 +235,32 @@ $nouvellesOffres = $stmt->fetchAll();
                         <?php
                         af_offre($offre);
                         ?></a>
-<?php
+                <?php
                 }
-?>
+                ?>
             </article>
         </section>
+<?php
+            if ($comptePro) {
+?>
+                <h1>Nouveautés</h1>
+                <section class="conteneurOffres">
+                    <article>
+                        <?php
+
+                        foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                <?php
+                                af_offre($offre);
+                                ?></a><?php
+                                    }
+                                        ?>
+                    </article>
+                </section>
+<?php
+            }
+?>
 
     </main>
     <?php

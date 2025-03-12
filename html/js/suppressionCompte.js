@@ -8,6 +8,7 @@ function suppressionCompte() {
         },
         body: "password=" + encodeURIComponent(password)
     })
+    
     .then(response => response.json()) // Convertir la réponse en JSON
     .then(data => {
         if (data.success) {

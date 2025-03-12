@@ -261,8 +261,9 @@ if(btnAjouterAvis != null)
 
 
 
-/* cookies offres récentes */
-function cookieContientCle(cle)
+/* ------------------ cookies offres récentes ------------------ */
+
+function cookieContientCle(cle)         //renvoie true si les cookies contiennent une valeur pour la clé cle
 {
     const cookies = document.cookie.split("; ");
     for(let cookie of cookies)
@@ -275,3 +276,45 @@ function cookieContientCle(cle)
     }
     return false;
 }
+
+function getCookieCle(cle)              // renvoie la valeur associée à la clé cle si elle existe dans les cookies, null sinon
+{
+    if(cookieContientCle(cle))
+    {
+        const cookies = document.cookie.split("; ")
+
+        for(let cookie of cookies)
+        {
+            const [key, value] = cookie.split("=");
+            if(key == cle)
+            {
+                return JSON.parse(value)
+            }
+        }
+    }
+    return null
+}
+
+function ajouteOffreCookie()                // ajoute dans les cookies l'id de l'offre dont le détail est affiché. Seul 5 id peuvent être stockés en même temps
+{
+    let idOffre = document.getElementById("idOffreCache").textContent       // récupération de l'id de l'offre
+    if(cookieContientCle("offresVues"))
+    {
+        let offresVues = getCookieCle("offresVues")
+        if(!offresVues.includes(idOffre))               // si l'id n'est pas déjà dans le tableau d'ids
+        {
+            if(offresVues.unshift(idOffre) >= 5)        // ajoute l'id de l'offre
+            {
+                offresVues.pop()                        // supprime l'id le plus ancien si limite d'ids dépassée
+            }
+            document.cookie=`offresVues=${JSON.stringify(offresVues)};path=/;SameSite=Lax`      // met à jour les cookies
+        }
+    }
+    else                                // si le cookie pour stocker les ids n'est pas encore crée
+    {
+        let offresVues = [idOffre]
+        document.cookie=`offresVues=${JSON.stringify(offresVues)};path=/;SameSite=Lax`          // crée le cookie, contenant l'id de l'offre affichée
+    }
+}
+
+document.addEventListener("DOMContentLoaded", ajouteOffreCookie)            // exécute ajouteOffreCookie au chargement d'une page détailoffre

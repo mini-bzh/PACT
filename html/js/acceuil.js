@@ -12,5 +12,3 @@ if(carousel != undefined)
     });
 }
 
-
-/* cookies offres récentes */

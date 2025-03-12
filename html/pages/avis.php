@@ -1,30 +1,29 @@
 <?php
-    session_start(); // recuperation de la sessions
+session_start(); // recuperation de la sessions
 
-    // recuperation des parametre de connection a la BdD
-    include('../composants/bdd/connection_params.php');
-    
-    // connexion a la BdD
-    $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
+// recuperation des parametre de connection a la BdD
+include('../composants/bdd/connection_params.php');
 
-    // cree $comptePro qui est true quand on est sur un compte pro et false sinon
-    include('../composants/verif/verif_compte_pro.php');
-    include_once("../composants/affichage/affichageAvis.php");
+// connexion a la BdD
+$dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
-    $idCompte = $_SESSION["idCompte"];
+// cree $comptePro qui est true quand on est sur un compte pro et false sinon
+include('../composants/verif/verif_compte_pro.php');
+include_once("../composants/affichage/affichageAvis.php");
 
-    if($comptePro)
-    {
-        $offres = $dbh->query("select * from tripskell.offre_pro where id_c='" . $idCompte . "';")->fetchAll();
-    }
-    else{
-        $membre = $dbh->query("select * from tripskell.membre where id_c='" . $idCompte . "';")->fetchAll()[0];
-        $avis = $dbh->query("select * from tripskell._avis where id_c='" . $idCompte . "';")->fetchAll();
-    }
+$idCompte = $_SESSION["idCompte"];
+
+if ($comptePro) {
+    $offres = $dbh->query("select * from tripskell.offre_pro where id_c='" . $idCompte . "';")->fetchAll();
+} else {
+    $membre = $dbh->query("select * from tripskell.membre where id_c='" . $idCompte . "';")->fetchAll()[0];
+    $avis = $dbh->query("select * from tripskell._avis where id_c='" . $idCompte . "';")->fetchAll();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" lang="fr">
@@ -35,37 +34,35 @@
 
     <link rel="stylesheet" href="/style/style.css">
 </head>
+
 <body class=<?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
+            if ($comptePro) {
                 echo "fondPro";
-            }
-            else
-            {
+            } else {
                 echo "fondVisiteur";
             }
-    ?>>
-        
+            ?>>
+
     <?php include "../composants/header/header.php";        //import header (navbar)
     ?>
     <div class="titrePortable">
 
         <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_169_4380)">
-        <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white"/>
-        </g>
-        <defs>
-        <filter id="filter0_d_169_4380" x="-66" y="-28" width="471" height="186" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset dy="4"/>
-        <feGaussianBlur stdDeviation="2"/>
-        <feComposite in2="hardAlpha" operator="out"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_169_4380"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_169_4380" result="shape"/>
-        </filter>
-        </defs>
+            <g filter="url(#filter0_d_169_4380)">
+                <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white" />
+            </g>
+            <defs>
+                <filter id="filter0_d_169_4380" x="-66" y="-28" width="471" height="186" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feOffset dy="4" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_169_4380" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_169_4380" result="shape" />
+                </filter>
+            </defs>
         </svg>
 
         <div id="conteneurTitreMobile">
@@ -75,67 +72,60 @@
         </div>
     </div>
     <main id="mainAvis">
-    <div id="overlay">
-        <img src="" alt="image overlay">
-        <div id="btnFermerOverlay">
-            <p>Fermer</p>
+        <div id="overlay">
+            <img src="" alt="image overlay">
+            <div id="btnFermerOverlay">
+                <p>Fermer</p>
+            </div>
         </div>
-    </div>
-    <?php                          //met le bon fond en fonction de l'utilisateur
-            if ($comptePro)
-            {
-            ?>
+        <?php                          //met le bon fond en fonction de l'utilisateur
+        if ($comptePro) {
+        ?>
             <section class="mainAvis">
-            
-              <section class="mainAvisPro">
-                <p hidden id="idPro"><?php echo $_SESSION["idCompte"] ?></p>
-                <?php
+
+                <section class="mainAvisPro">
+                    <p hidden id="idPro"><?php echo $_SESSION["idCompte"] ?></p>
+                    <?php
                     $query =    "SELECT COUNT(*) from tripskell._offre JOIN tripskell._avis ON tripskell._offre.idoffre = tripskell._avis.idoffre 
                     WHERE tripskell._offre.id_c = :idCompte AND luparpro = false"; //compte le nombre d'avis déposés sur les offres du pro qu'il n'a pas encore lu
-        
+
                     $stmt = $dbh->prepare($query);
                     $stmt->bindParam(":idCompte", $_SESSION["idCompte"]);
                     $stmt->execute();
 
                     $nbAvisNonLus = $stmt->fetch()["count"];
 
-                    if($nbAvisNonLus == 0)
-                    {
-                        ?>
-                            <h3 id="cptAvisNonLus">Vous n'avez pas de nouvel avis</h3>
-                        <?php
-                    }
-                    else if($nbAvisNonLus == 1)
-                    {
-                        ?>
+                    if ($nbAvisNonLus == 0) {
+                    ?>
+                        <h3 id="cptAvisNonLus">Vous n'avez pas de nouvel avis</h3>
+                    <?php
+                    } else if ($nbAvisNonLus == 1) {
+                    ?>
                         <h3 id="cptAvisNonLus">Vous avec <span>1</span> nouvel avis</h3>
-                        <?php
+                    <?php
+                    } else {
+                    ?>
+                        <h3 id="cptAvisNonLus">Vous avec <span><?php echo $nbAvisNonLus ?></span> nouveaux avis !</h3>
+                    <?php
                     }
-                    else
-                    {
-                        ?>
-                            <h3 id="cptAvisNonLus">Vous avec <span><?php echo $nbAvisNonLus ?></span> nouveaux avis !</h3>
-                        <?php
-                    }
-                ?>
-                <section class="conteneurBtn">
-                    <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
-                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieDate" class="iconeTrie">
-                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
-                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
-                        <p id="txtBtnDate" class="txtBtnTrie">date</p>
-                    </div> 
-                    <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
-                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
-                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
-                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
-                        <p id="txtBtnNote" class="txtBtnTrie" >note</p>
-                    </div>
-                </section>
+                    ?>
+                    <section class="conteneurBtn">
+                        <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                            <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieDate" class="iconeTrie">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
+                            <p id="txtBtnDate" class="txtBtnTrie">date</p>
+                        </div>
+                        <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
+                            <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
+                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
+                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
+                            <p id="txtBtnNote" class="txtBtnTrie">note</p>
+                        </div>
+                    </section>
 
-                <?php
-                    foreach($offres as $offre)  
-                    {
+                    <?php
+                    foreach ($offres as $offre) {
                         $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
                         $stmt = $dbh->prepare($query);
 
@@ -145,109 +135,123 @@
 
                         $nbAvisNonLusOffre = $stmt->fetch()["count"];
 
-                        ?>
-                            <section class="conteneurAvisOffre">
-                                <div class="conteneurBtnTitre" id="offre<?php echo $offre["idoffre"];?>">
+                    ?>
+                        <section class="conteneurAvisOffre">
+                            <div class="conteneurBtnAndBlacklist" >
+                                <div class="conteneurBtnTitre" id="offre<?php echo $offre["idoffre"]; ?>">
                                     <img src="../icones/chevronUpSVG.svg" alt="chevron ouvrir/fermer">
-                                    <div class="conteneurTitrePastille">
-                                        <h3><?php echo $offre["titreoffre"] ?></h3>
-                                        <?php
-                                            if($nbAvisNonLusOffre > 0)
-                                            {
-                                                ?>
-                                                <p class="pastilleCptAvisNonLus"></p>
-                                                <?php
-                                            }
-                                        ?>
-
-                                    </div>                                    
-                                </div>
-                                <div class="conteneurAvis">
-                                    <?php
-
-                                        $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
-                                        $stmt = $dbh->prepare($query);
-                                        $stmt->bindParam(":idOffre", $offre[""]);
-                                        
-                                        $stmt->execute();
-                                        
-                                        $nbAvisNonLusOffre = $stmt->fetch()["count"];
-
-                                        $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre['idoffre'] . ";")->fetchAll();
-                   
-
-                                        if($avis != null)
-                                        {
-                                            foreach ($avis as $value)
-                                            {
-                                                afficheAvis($value);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                                <h3>Aucun avis déposé pour <?php echo $offre["titreoffre"]?></h3>
+                                        <div class="conteneurTitrePastille">
+                                            <h3><?php echo $offre["titreoffre"] ?></h3>
                                             <?php
-                                        }
-                                    ?>
+                                            if ($nbAvisNonLusOffre > 0) {
+                                            ?>
+                                                <p class="pastilleCptAvisNonLus"></p>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
                                 </div>
+                                <?php if ($offre['id_abo'] == 'Premium') {
+                                    /* On récupère les tokens pour le blacklistage */
+                                    $stmt = $dbh->prepare("select count(*) as nbToken from tripskell._avis where idoffre = " . $offre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
+                                    $stmt->execute();   // execution de la requete
+                                    $nbTokenBlacklist = $stmt->fetchAll()[0];
+                                    //print_r($nbTokenBlacklist); 
+                                ?>
+                                    <h4>Blacklistage restant :<?php
+                                                                if ($nbTokenBlacklist['nbToken'] == 0) {
+                                                                    echo " 3";
+                                                                } elseif ($nbTokenBlacklist['nbToken'] == 1) {
+                                                                    echo " 2";
+                                                                } elseif ($nbTokenBlacklist['nbToken'] == 2) {
+                                                                    echo " 1";
+                                                                } elseif ($nbTokenBlacklist['nbToken'] >= 3) {
+                                                                    echo " 0";
+                                                                } ?>/3</h4>
+                                <?php } ?>
+                            </div>
 
-                            </section>
-                        <?php
+                            </div>
+                            <div class="conteneurAvis">
+                                <?php
+
+                                $query =    "SELECT COUNT(*) from tripskell._avis WHERE idoffre = :idOffre AND luparpro = false";
+                                $stmt = $dbh->prepare($query);
+                                $stmt->bindParam(":idOffre", $offre[""]);
+
+                                $stmt->execute();
+
+                                $nbAvisNonLusOffre = $stmt->fetch()["count"];
+
+                                $avis = $dbh->query("select * from tripskell._avis where idOffre=" . $offre['idoffre'] . ";")->fetchAll();
+
+
+                                if ($avis != null) {
+                                    foreach ($avis as $value) {
+                                        afficheAvis($value);
+                                    }
+                                } else {
+                                ?>
+                                    <h3>Aucun avis déposé pour <?php echo $offre["titreoffre"] ?></h3>
+                                <?php
+                                }
+                                ?>
+                            </div>
+
+                        </section>
+                    <?php
                     }
-                ?>
-            <?php
-            }
-            else
-            {
-            ?>
-               <h1>Mes avis</h1>
-
-                <section class="mainAvis">
-                <section id="conteneurTrie">
-                        <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
-                            <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
-                            <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
-                            <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
-                            <p id="txtBtnDate" class="txtBtnTrie">date</p>
-                        </div>
-                    <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
-                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
-                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
-                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
-                        <p id="txtBtnNote" class="txtBtnTrie" >note</p>
-                    </div>
-                </section>
-
-                <section class="conteneurAvis">
-
+                    ?>
                 <?php
-                foreach ($avis as $value)
-                {
-                    afficheAvis($value);
-                }
+            } else {
                 ?>
-                </section>
-                </section>
-            <?php
+                    <h1>Mes avis</h1>
+
+                    <section class="mainAvis">
+                        <section id="conteneurTrie">
+                            <div id="btnTrieDate" class="btnTrie grossisQuandHover" onclick="trierDate()">
+                                <img src="/icones/trierSVG.svg" alt="iconeDate" id="iconeTrieDate" class="iconeTrie">
+                                <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieDate1" class="iconeTrie displayNone">
+                                <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieDate2" class="iconeTrie displayNone">
+                                <p id="txtBtnDate" class="txtBtnTrie">date</p>
+                            </div>
+                            <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
+                                <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
+                                <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
+                                <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
+                                <p id="txtBtnNote" class="txtBtnTrie">note</p>
+                            </div>
+                        </section>
+
+                        <section class="conteneurAvis">
+
+                            <?php
+                            foreach ($avis as $value) {
+                                afficheAvis($value);
+                            }
+                            ?>
+                        </section>
+                    </section>
+                <?php
             }
-    ?>
-    <!-- Pop-up Signaler un avis -->
-<div class="popUpSignaler">
-    <div>
-        <textarea name="motifSignalement" id="motifSignalement" cols="30" rows="10" placeholder="Entrez un motif de signalement"></textarea>
-        <div>
-            <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
-            <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
-        <div>
-    </div>
-</div>
+                ?>
+                <!-- Pop-up Signaler un avis -->
+                <div class="popUpSignaler">
+                    <div>
+                        <textarea name="motifSignalement" id="motifSignalement" cols="30" rows="10" placeholder="Entrez un motif de signalement"></textarea>
+                        <div>
+                            <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
+                            <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
+                            <div>
+                            </div>
+                        </div>
     </main>
     <?php                                                   //import footer
-            include "../composants/footer/footer.php";
+    include "../composants/footer/footer.php";
     ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/avis.js"></script>
     <script src="../js/affichageAvis.js"></script>
 </body>
+
 </html>

@@ -283,8 +283,8 @@ header("Location: ../pages/accueil.php"); // on redirige vers la page de l'offre
             <div class="champsAdresse">
            
             <input type="text" id="num" name="num" value="<?php echo $infos['numero'];?>" minlength="1" maxlength="3" pattern="[0-9]+" required>
-<input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
-<input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
+            <input type="text" id="nomRue" name="nomRue" value="<?php echo $infos['rue'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
+            <input type="text" id="ville" name="ville" value="<?php echo $infos['ville'];?>" pattern="[A-Za-zÀ-ÿ\s\-]+" required>
 
         </div>
        </div>
