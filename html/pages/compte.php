@@ -134,6 +134,7 @@ if (isset($idCompte)) {
     <script src="../js/compte.js" defer></script>
 </head>
 
+
 <body class=<?php echo ($comptePro) ? "fondPro" : "fondVisiteur"; //met le bon fond en fonction de l'utilisateur 
             ?>>
 
