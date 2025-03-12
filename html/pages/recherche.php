@@ -268,7 +268,7 @@
             
             <div id="map"></div>
 
-            <section id="conteneurOffres">
+            <section class="conteneurOffres">
                 <article>
                     
                     <?php

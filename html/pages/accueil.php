@@ -190,7 +190,7 @@ $nouvellesOffres = $stmt->fetchAll();
             <?php } ?>
 
         <h1>Nouveautés</h1>
-        <section id="conteneurOffres">
+        <section class="conteneurOffres">
             <article>
                 <?php
 
@@ -201,14 +201,39 @@ $nouvellesOffres = $stmt->fetchAll();
                         af_offre($offre);
                         ?></a><?php
                             }
-                                ?>
+                        ?>
             </article>
         </section>
+        <?php
+            if(key_exists("offresVues", $_COOKIE))
+            {
+                ?>
+                <h1>Offres consultées récemment</h1>
+                <section class="conteneurOffres">
+                    <?php
+                        foreach (json_decode($_COOKIE["offresVues"]) as $idOffre) 
+                        {
+                            $query = "SELECT * FROM tripskell.offre_visiteur WHERE idoffre = :idOffre";
+                            $stmt = $dbh->prepare($query);
+                            $stmt->bindParam(":idOffre", $idOffre);
+                            $stmt->execute();
+                            $offre = $stmt->fetch();
+                            ?>
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php af_offre($offre); ?>
+                                </a>
+                            <?php
+                        }
+                    ?>
+        </section>
+                <?php
+            }
+        ?>
 
         <h1>Autres offres</h1>
         <?php } ?>
 
-        <section id="conteneurOffres">
+        <section class="conteneurOffres">
             <article>
                 <?php
 
@@ -227,7 +252,7 @@ $nouvellesOffres = $stmt->fetchAll();
             if ($comptePro) {
 ?>
                 <h1>Nouveautés</h1>
-                <section id="conteneurOffres">
+                <section class="conteneurOffres">
                     <article>
                         <?php
 

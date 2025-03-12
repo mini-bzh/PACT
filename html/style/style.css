@@ -236,17 +236,17 @@ textarea {
     margin: 20px;
 }
 
-#mainAccueil #conteneurOffres {
+#mainAccueil .conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 60px;
 }
 
-#mainAccueil #conteneurOffres .lienApercuOffre {
+#mainAccueil .conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#mainAccueil #conteneurOffres>article {
+#mainAccueil .conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2152,17 +2152,17 @@ aside fieldset {
     margin: 20px;
 }
 
-#conteneurOffres {
+.conteneurOffres {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-#conteneurOffres .lienApercuOffre {
+.conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#conteneurOffres>article {
+.conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2405,11 +2405,11 @@ aside fieldset {
 
     /*----------------/ PAGE ACCUEIL /-----------------*/
 
-    #mainAccueil #conteneurOffres>article {
+    #mainAccueil .conteneurOffres>article {
         display: block;
     }
 
-    #mainAccueil #conteneurOffres .lienApercuOffre {
+    #mainAccueil .conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
@@ -2474,7 +2474,7 @@ aside fieldset {
 
     /*-----------------/ APERCU OFFRE /------------------*/
 
-    #conteneurOffres {
+    .conteneurOffres {
         margin-top: 30px;
     }
 
@@ -2600,12 +2600,12 @@ aside fieldset {
         margin-bottom: 5%;
     }
 
-    #conteneurOffres>article {
+    .conteneurOffres>article {
         display: flex;
         flex-direction: column;
     }
 
-    #conteneurOffres .lienApercuOffre {
+    .conteneurOffres .lienApercuOffre {
         margin: 10px;
     }
 
