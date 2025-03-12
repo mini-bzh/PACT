@@ -34,7 +34,7 @@ mapOffresInfos.forEach(element => {
             var myArr = JSON.parse(this.responseText);
             try {
                 var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).addTo(map).bindPopup(customPopup,popupStyle); 
-                listeMarker[element.get("id")] = marker;
+                listeMarker[element.get("id")] = [marker,true];
             } catch (error) {
             var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("ville");
                 xmlhttp.onreadystatechange = function()
@@ -47,7 +47,7 @@ mapOffresInfos.forEach(element => {
                         //}else{
                             marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).addTo(map).bindPopup(customPopup,popupStyle); 
                         //}
-                        listeMarker[element.get("id")] = marker;
+                        listeMarker[element.get("id")] = [marker,true];
                     }
                 };
                 xmlhttp.open("GET", url, true);
@@ -62,9 +62,22 @@ mapOffresInfos.forEach(element => {
 });
 
 
+function updateMap() {
+
+    // mapOffresInfos.forEach((map, key, value)=>{
+    //     mapOffresInfos.get(key).set("visibilite", true);
+    //     if (document.getElementById(key).classList.contains("displayNone")) { 
+    //         mapOffresInfos.get(key).set("visibilite", false);
+    //     }
+    // });
+
+    for(elem in listeMarker){
+        listeMarker[elem][0].remove();
+        if (mapOffresInfos.get(elem).get("visibilite")) {
+            //console.log(mapOffresInfos.get(elem).get("visibilite"));
+            listeMarker[elem][0].addTo(map);
+        }
+    }
+}
+
 console.log(listeMarker);
-
-
-mapOffresInfos.addEvenListener("click", function (e) {
-  console.log("coucou")
-});

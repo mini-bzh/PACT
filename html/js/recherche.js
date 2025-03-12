@@ -99,56 +99,9 @@ function updateAffichageOffres()
     });
 }
 
-function verifConpatibilite(idOffre)
-{
-    let tab = mapOffresInfos.get(idOffre).get("visibilite");
-
-    let i = 0;
-    compatible = true;
-
-    while((compatible) && (i < tab.length))
-    {
-        if(tab["i"] == "recherche")
-        {
-            let verifRecherche;
-            let texte = barreRecherche.value.toLowerCase();
-            verifRecherche = mapOffresInfos.get(idOffre).get("titre").toLowerCase().includes(texte);
-
-            compatible = compatible && verifRecherche;
-        }
-
-
-
-        i++;
-    }
-
-
-    return compatible;
-}
-
-function retireElement(array, valeur)
-{
-    let i = 0;
-    let trouve = false;
-
-    while((i < array.length) && (!trouve))
-    {
-        if(array[i] == valeur)
-        {
-            array.splice(i, 1);
-            trouve = true;
-        }
-
-        i++;
-    }
-
-    return array;
-}
-
-
-
 let mapOffresInfos = initOffres();
 
+// ============================ RECHERCHER ===========================
 
 
 let barreRecherche = document.getElementById("searchbar");      //récupère la barre de recherche dans le DOM
@@ -180,139 +133,11 @@ function rechercher()
     });
     
     updateAffichageOffres();                                    //met à jour l'affichage des offres
+    updateMap();
 }
 
 
 // ================== FILTRER ========================
-
-// let dateInput1 = document.querySelector("#dateDeb");
-// let dateInput2 = document.querySelector("#dateFin");
-// let calendarIcon1 = document.querySelector("#dateDeb + svg");
-// let calendarIcon2 = document.querySelector("#dateFin + svg");
-
-// calendarIcon1.addEventListener("click", () => {
-//     dateInput1.showPicker();
-// });
-
-// calendarIcon2.addEventListener("click", () => {
-//     dateInput2.showPicker();
-// });
-
-function adjustValue(increment, prix) {
-    // Trouver l'élément 'input' associé au bouton cliqué via l'ID
-    let inputElement = document.getElementById(prix);
-
-    let min = document.getElementById("prixMin").value;
-    let max = document.getElementById("prixMax").value;
-    
-    // Récupérer la valeur actuelle et la convertir en nombre entier
-    let currentValue = parseInt(inputElement.value, 10) || 0;
-
-    // Si currentValue est NaN ou null, définir à 0
-    if (isNaN(currentValue) || currentValue == "") {
-        if ((prix == "prixMax") && (min != "")) {
-            currentValue = parseInt(min, 10);
-        } else {
-            currentValue = 0;
-        }
-    }
-    
-    // Ajuster la valeur en fonction de l'incrément
-    if ((prix == "prixMin") && ((currentValue + increment <= max) || (max == "") || (isNaN(max)))) {
-        currentValue += increment;
-        critPrixMin = parseInt(currentValue, 10);
-    } else if ((prix == "prixMax") && ((currentValue + increment >= min) || (min == ""))) {
-        currentValue += increment;
-        critPrixMax = parseInt(currentValue, 10);
-    }
-    
-    // Empêcher les valeurs négatives
-    inputElement.value = Math.max(0, currentValue);
-
-
-    updateAffichageOffres();
-}
-
-
-// Récupérer les éléments des champs de date
-// let dateDeb = document.getElementById('dateDeb');
-// let dateFin = document.getElementById('dateFin');
-
-// Fonction pour ajuster les dates
-// function adjustDates(event) {
-//     let minDate = new Date(dateDeb.value);
-//     let maxDate = new Date(dateFin.value);
-
-//     // Si la date de fin est antérieure à la date de début, ajuster la date de fin
-//     if ((maxDate < minDate) && (event.target == dateFin)) {
-//         dateFin.value = dateDeb.value; // Réinitialiser la date de fin pour correspondre à la date de début
-//     }
-
-//     // Si la date de début est postérieure à la date de fin, ajuster la date de début
-//     if ((minDate > maxDate) && (event.target == dateDeb)) {
-//         dateDeb.value = dateFin.value; // Réinitialiser la date de début pour correspondre à la date de fin
-//     }
-//     updateAffichageOffres();
-// }
-
-// Ajouter des écouteurs d'événements pour les changements de valeur
-// dateDeb.addEventListener('change', adjustDates);
-// dateFin.addEventListener('change', adjustDates);
-
-
-// let etoileMin = document.getElementById('etoileMin');
-// let etoileMax = document.getElementById('etoileMax');
-
-// Fonction pour ajuster les valeurs possibles du filtre des étoiles
-// function adjustOptions(event) {
-//     let min = parseInt(etoileMin.value, 10);
-//     let max = parseInt(etoileMax.value, 10);
-
-//     // Empêcher que max soit inférieur à min
-//     if ((event.target == etoileMax) && (max < min)) {
-//         etoileMax.value = etoileMin.value; // Réinitialiser max pour correspondre à min
-//     }
-
-//     // Empêcher que min soit supérieur à max
-//     if ((event.target == etoileMin) && (min > max)) {
-//         etoileMin.value = etoileMax.value; // Réinitialiser min pour correspondre à max
-//     }
-//     updateAffichageOffres();
-// }
-
-// Écouter les changements de valeur dans les deux sélecteurs
-// etoileMin.addEventListener('change', adjustOptions);
-// etoileMax.addEventListener('change', adjustOptions);
-
-
-
-let prixMin = document.getElementById('prixMin');
-let prixMax = document.getElementById('prixMax');
-
-// Fonction pour ajuster les valeurs possibles du filtre des étoiles
-function ajustePrix(event) {
-    let min = parseInt(prixMin.value, 10);
-    let max = parseInt(prixMax.value, 10);
-
-    // Empêcher que max soit inférieur à min
-    if (event.target == prixMax) {
-        if (max < min) {
-            prixMax.value = prixMin.value; // Réinitialiser max pour correspondre à min
-        }
-    }
-
-    // Empêcher que min soit supérieur à max
-    if (event.target == prixMin) {
-        if (min > max) {
-            prixMin.value = prixMax.value; // Réinitialiser min pour correspondre à max
-        }
-    }
-    updateAffichageOffres();
-}
-
-// Écouter les changements de valeur dans les deux sélecteurs
-prixMin.addEventListener('change', ajustePrix);
-prixMax.addEventListener('change', ajustePrix);
 
 
 // VERIFIE SI UNE OFFRE CORRESPOND AUX CRITERES
@@ -320,10 +145,8 @@ prixMax.addEventListener('change', ajustePrix);
 let critCategorie = [];
 let critOuverture = [];
 let critLieu = "";
-// let critDateDeb = null;
-// let critDateFin = null;
-let critPrixMin = null;
-let critPrixMax = null;
+
+// ============================ FILTRE PAR CATEGORIE ===========================
 
 // liste des cases de catégories cochées
 document.querySelectorAll('#categorie input[type="checkbox"]').forEach((cat) => {
@@ -349,6 +172,8 @@ function listeCategorie(event) {
     updateAffichageOffres();
 }
 
+// ============================ FILTRE OUVERT FERME ===========================
+
 // liste des cases d'ouverture cochées
 document.querySelectorAll('#ouverture input[type="checkbox"]').forEach((ouv) => {
     ouv.addEventListener('change', listeOuverture);
@@ -373,53 +198,16 @@ function listeOuverture(event) {
     updateAffichageOffres();
 }
 
+// ============================ RECHERCHE LIEU ===========================
+
 // lieu rentrée en paramètre
 document.getElementById("lieu").addEventListener("keyup", (event) => {
 
     critLieu = event.target.value;
     updateAffichageOffres();
-
 });
 
-// date de début / fin entrée
-// document.getElementById("dateDeb").addEventListener("change", (event) => {
-
-//     critDateDeb = new Date(event.target.value);
-//     updateAffichageOffres();
-
-// });
-
-// document.getElementById("dateFin").addEventListener("change", (event) => {
-
-//     critDateFin = new Date(event.target.value);
-//     updateAffichageOffres();
-
-// });
-
-
-// Prix min / max
-document.getElementById("prixMin").addEventListener("change", (event) => {
-
-    if (event.target.value == "") {
-        critPrixMin = null;
-    } else {
-        critPrixMin = event.target.value;
-    }
-    updateAffichageOffres();
-
-});
-
-document.getElementById("prixMax").addEventListener("change", (event) => {
-
-    if (event.target.value == "") {
-        critPrixMax = null;
-    } else {
-        critPrixMax = event.target.value;
-    }
-    updateAffichageOffres();
-
-});
-
+// ========================= VERIFICATION FILTRES ========================
 
 // Fonction qui retourne true si une offre correspond au critères sélectionnés
 function verifFiltre(idOffre)
@@ -435,7 +223,7 @@ function verifFiltre(idOffre)
     let offre = mapOffresInfos.get(idOffre);
 
     // Si aucun critère n'a été sélectionné
-    if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "") && (critPrixMin == null) && (critPrixMax == null)){
+    if ((critCategorie.length == 0) && (critOuverture.length == 0) && (critLieu == "")){
         valide = true;
     // Si au moins 1 critère a été sélectionné
     } else {
@@ -470,46 +258,12 @@ function verifFiltre(idOffre)
             valideOuv = true;
         }
 
-        // On traite le cas du filtre par date
-        // if ((critDateDeb != null) || (critDateFin != null)) {
-        //     if ((critDateDeb != null) && (critDateFin != null)) {
-                
-        //     } else if (critDateDeb != null) {
-                
-        //     } else if (critDateFin != null) {
-                
-        //     }
-        // } else {
-        //     valideDate = true;
-        // }
-
-        // On traite le cas du filtre par fourchette de prix
-        if (((critPrixMin != null)) || ((critPrixMax != null))) {
-            if (((critPrixMin != null) && (critPrixMax != null))) {
-                if ((critPrixMin <= parseInt(offre.get("prix"), 10)) && (critPrixMax >= parseInt(offre.get("prix"), 10))) {
-                    validePrix = true;
-                }
-            } else if (critPrixMin != null) {
-                if (critPrixMin <= parseInt(offre.get("prix"), 10)) {
-                    validePrix = true;
-                }
-            } else if (critPrixMax != null) {
-                if (critPrixMax >= parseInt(offre.get("prix"), 10)) {
-                    validePrix = true;
-                }
-            }
-        } else {
-            validePrix = true;
-        }
-
-
         // Si l'offre correspond à tout les critères, elle peut être affichées
-        if ((valideCat) && (valideLieu) && (valideOuv) && (validePrix)) {
+        if ((valideCat) && (valideLieu) && (valideOuv)) {
             valide = true;
         }
         
     }
-
     return valide;
 }
 
@@ -539,6 +293,7 @@ document.querySelectorAll('#fieldsetTag input[type="checkbox"]').forEach((tag) =
         }
 
         updateAffichageOffres();
+        updateMap();
     });
 });
 
@@ -762,7 +517,7 @@ rangeInputNote.forEach((input) => {
                 }
             }
         });
-
+        updateMap();
     });
 });
 
@@ -876,7 +631,7 @@ rangeInputPrix.forEach((input) => {
                 }
             }
         });
-
+        updateMap();
     });
 });
 

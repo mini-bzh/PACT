@@ -265,9 +265,9 @@
                     </section>   
                 </section>
             </div>
-            
-            <div id="map"></div>
 
+            <div>
+            <div id="map"></div>
             <section id="conteneurOffres">
                 <article>
                     
@@ -285,6 +285,7 @@
                     ?>
                 </article>
             </section>
+            </div>
         </main>
         <?php
             include "../composants/footer/footer.php";
@@ -293,6 +294,7 @@
             #map{
                 width: 90%;
                 height: 500px;
+                z-index: 0;
             }
         </style>
         <script src="../js/recherche.js" ></script>
