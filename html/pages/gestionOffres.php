@@ -45,6 +45,7 @@ $contentMesOffres = $stmt->fetchAll();
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/pages/compte.css">
 </head>
 
 <body class=<?php echo "fondPro"; ?>> <!-- met le bon fond en fonction de l'utilisateur -->
@@ -57,7 +58,6 @@ $contentMesOffres = $stmt->fetchAll();
         // Un tableau pour stocker les données sur le prix des offres et des option
         $donneePrix = [];
         ?>
-
         <section id="conteneurBtnOffres">
             <a href="CreaOffrePro.php" id="btnAjouterOffre" class="grossisQuandHover">
                 <div class="conteneurSVGtexte">
@@ -140,7 +140,44 @@ $contentMesOffres = $stmt->fetchAll();
 
                                 </div>
                             </a>
-                        </div>
+
+                            <a href="#" class="btnSupprimerOffre <?php
+    if ($contentOffre["enligne"]) {
+        echo "btnModifCache"; // Masquer le bouton si l'offre est en ligne
+    }
+?>">
+    <div class="btnGestionOffre grossisQuandHover" onclick="confSupOffre(<?php echo $contentOffre['idoffre']; ?>)">
+        <img src="/icones/supprimerSVG.svg" alt=""/>
+        <p>Supprimer l'offre</p>
+    </div>
+</a>
+
+<!-- POP-UP de suppression d'offre -->
+<div class="popUpSupOffre popUp">
+    <div class="popup-content">
+        <p class="ajoutBorder">Pour valider la suppression de l'offre, veuillez entrer votre mot de passe :</p>
+
+        <div class="popup-align">
+            <label for="pswSupOffre">Mot de passe :</label>
+            <input id="pswSupOffre" name="pswSupOffre" type="password" placeholder="Mot de passe">
+        </div>
+        <p id="textNonValideOffre" class="displayNone texteSmall remplirChampsError" style="color: red">Mot de passe incorrect !</p>
+        <p class="boldArchivo" style="color: red">Cette action est irréversible !</p>
+        <div class="btnSup">
+            <button class="btnValiderSupOffre" onclick="suppressionOffre()" disabled>
+                Confirmer
+                <!-- Ajouter une icône de suppression -->
+            </button>
+            <button class="btnAnnulerSupOffre" onclick="fermeConfSupOffre()">
+                Annuler
+                <!-- Ajouter une icône de fermeture -->
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Champ caché pour l'ID de l'offre à supprimer -->
+<input type="hidden" id="idOffre" name="idOffre" value="">
 
                     </article>
                 <?php }
@@ -176,6 +213,8 @@ $contentMesOffres = $stmt->fetchAll();
 
             </section>-->
         </section>
+
+
     </main>
     <?php                                                   //footer
     include "../composants/footer/footer.php";
@@ -184,5 +223,8 @@ $contentMesOffres = $stmt->fetchAll();
 <!--<script src="../js/scriptImageChangeante.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/gestionOffre.js"></script>
+<script src="/js/suppressionOffre.js"></script>
+
+
 
 </html>
