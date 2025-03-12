@@ -100,19 +100,19 @@ $contentMesOffres = $stmt->fetchAll();
                             <div class="tokenBlacklist">
                                 <?php
                                     /* On récupère les tokens pour le blacklistage */
-                                    $stmt = $dbh->prepare("select count(*) as nbToken from tripskell._avis where idoffre = " . $contentOffre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
+                                    $stmt = $dbh->prepare("select count(*) as nbtoken from tripskell._avis where idoffre = " . $contentOffre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
                                     $stmt->execute();   // execution de la requete
                                     $nbTokenBlacklist = $stmt->fetchAll()[0];
                                     //print_r($nbTokenBlacklist);
                                     ?>
                                     <h4>Blacklistage restant :<?php
-                                                                if ($nbTokenBlacklist['nbToken'] == 0) {
+                                                                if ($nbTokenBlacklist['nbtoken'] == 0) {
                                                                     echo " 3";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] == 1) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 1) {
                                                                     echo " 2";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] == 2) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 2) {
                                                                     echo " 1";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] >= 3) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] >= 3) {
                                                                     echo " 0";
                                                                 } ?>/3</h4>
                             
@@ -184,14 +184,15 @@ $contentMesOffres = $stmt->fetchAll();
                             <div class="popUpSupOffre popUp">
                                 <div class="popup-content">
                                     <p class="ajoutBorder">Pour valider la suppression de l'offre, veuillez entrer votre mot de passe :</p>
+                                    <p id="textNonValideOffre" class="displayNone remplirChampsError" style="color: red">Mot de passe incorrect !</p>
 
                                     <div class="popup-suppr">
                                         <label for="pswSupOffre">Mot de passe :</label>
                                         <input id="pswSupOffre" name="pswSupOffre" type="password" placeholder="Mot de passe">
                                     </div>
                                     <p class="boldArchivo" style="color: red">Cette action est irréversible !</p>
-                                    <p id="textNonValideOffre" class="displayNone texteSmall remplirChampsError" style="color: red">Mot de passe incorrect !</p>
                                     <div class="btnSup">
+
                                         <button class="btnValiderSupOffre" onclick="suppressionOffre()" disabled>
                                             Confirmer
                                             <!-- Ajouter une icône de suppression -->
