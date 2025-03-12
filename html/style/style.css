@@ -300,14 +300,21 @@ textarea {
     display: flex;
 }
 
-#mainAvis .conteneurBtnTitre {
+#mainAvis .conteneurBtnAndBlacklist{
     display: flex;
+    justify-content: space-between;
+
     margin-top: 40px;
     align-items: center;
     padding-bottom: 5px;
     margin-bottom: 5px;
 
     border-bottom: 1px solid black;
+}
+
+#mainAvis .conteneurBtnTitre {
+    display: flex;
+    align-items: center;
 }
 
 #mainAvis .conteneurTitrePastille {
@@ -2315,6 +2322,18 @@ aside fieldset {
     border-radius: 5px;
     margin-right: 20px;
     border-radius: 5%;
+}
+
+/* Pour affiche le nombre de token pour le blacklist d'une offre */
+
+.tokenBlacklist{
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTokenBlacklist{
+    display: flex;
+    justify-content: end;
 }
 
 /*
