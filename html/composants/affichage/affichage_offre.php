@@ -32,7 +32,7 @@ function af_offre($row) {
     }
 ?>
     ">
-        <h3><?php echo $row["titreoffre"];?></h3>
+        <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
         <div class="conteneurSVGtexte">
             <img src="/icones/logoUserSVG.svg" alt="pro">
             <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
@@ -50,10 +50,10 @@ function af_offre($row) {
         
         <p class="resumeApercu"><?php echo $row["resume"]?></p>
 
-        <div class="conteneurSVGtexte">
+        <div class="conteneurSVGtexte conteneurAdresse">
             <img src="/icones/adresseSVG.svg" alt="adresse">
-            <p id="ville"><?php echo $row["ville"]?></p>
-            <p id="adresse"><?php $adresse = $row["numero"] . " " . $row["rue"];echo $adresse;?></p>
+            <p id="ville" class="texteSmall"><?php echo $row["ville"]?></p>
+            <p id="adresse" class="texteSmall"><?php $adresse = $row["numero"] . " " . $row["rue"];echo $adresse;?></p>
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">

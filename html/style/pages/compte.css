@@ -174,7 +174,7 @@ body.no-scroll {
 }
 
 
-/* Style pour les pop-up */
+/* Style pour les up-up */
 .popUp {
     display: none;
     position: fixed;
@@ -646,3 +646,20 @@ body.no-scroll {
 }
 
 
+.btnAnnulerSupOffre{
+    background-color: #444;
+}
+
+.btnSup{
+    margin-top: 4%;
+}
+
+.popup-suppr{
+    margin-top: 5%;
+    text-align: left;
+}
+
+#textNonValideOffre{
+    margin-bottom: 3%;
+    text-align: left;
+}

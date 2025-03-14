@@ -12,7 +12,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'u
 include('../composants/verif/verif_compte_pro.php');
 
 // contient fonction affichage_etoiles pour afficher les etoiles
-include('../composants/affichage/etoiles.php'); 
+include('../composants/affichage/etoiles.php');
 
 // Creation requete pour recuperer les offres
 // du professionnel connecte
@@ -30,6 +30,8 @@ $contentMesOffres = $stmt->fetchAll();
 // $stmt = $dbh->query("SELECT * FROM tripskell.facture WHERE idoffre=" . $contentMesOffres['idoffre'] . ";");
 // $stmt->execute();
 // $contentOffre = $stmt->fetchAll()[0];
+
+
 
 ?>
 
@@ -83,24 +85,54 @@ $contentMesOffres = $stmt->fetchAll();
                         <div class="conteneurSpaceBetween">
                             <h2><?php echo $contentOffre["titreoffre"] ?></h2>
                             <h4>Statut :
-                                    <?php
-                                    if ($contentOffre["enligne"])    // définit l'affichage du statut de l'offre en fonction de en ligne / hors ligne
-                                    { ?>
-                                        <span class="enLigne" id="txtEnLigne">En ligne</span></h4>
-                                    <?php } else { ?>
-                                        <span class="horsLigne" id="txtEnLigne">Hors ligne</span></h4>
-                                    <?php } ?>
+                                <?php
+                                if ($contentOffre["enligne"])    // définit l'affichage du statut de l'offre en fonction de en ligne / hors ligne
+                                { ?>
+                                    <span class="enLigne" id="txtEnLigne">En ligne</span>
+                            </h4>
+                        <?php } else { ?>
+                            <span class="horsLigne" id="txtEnLigne">Hors ligne</span></h4>
+                        <?php } ?>
                         </div>
-                        
-                        <div class="etoiles">
-                            <?php affichage_etoiles($contentOffre["note"]); ?>
-                        </div>
+
+
+                        <?php if($contentOffre['id_abo'] == 'Premium'){ ?> 
+                            <div class="tokenBlacklist">
+                                <?php
+                                    /* On récupère les tokens pour le blacklistage */
+                                    $stmt = $dbh->prepare("select count(*) as nbtoken from tripskell._avis where idoffre = " . $contentOffre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
+                                    $stmt->execute();   // execution de la requete
+                                    $nbTokenBlacklist = $stmt->fetchAll()[0];
+                                    //print_r($nbTokenBlacklist);
+                                    ?>
+                                    <h4>Blacklistage restant :<?php
+                                                                if ($nbTokenBlacklist['nbtoken'] == 0) {
+                                                                    echo " 3";
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 1) {
+                                                                    echo " 2";
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 2) {
+                                                                    echo " 1";
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] >= 3) {
+                                                                    echo " 0";
+                                                                } ?>/3</h4>
+                            
+                                <div class="etoiles">
+                                    <?php affichage_etoiles($contentOffre["note"]); ?>
+                                </div>
+                            </div>
+                        <?php }else{?>
+                            <div class="noTokenBlacklist">            
+                                <div class="etoiles">
+                                    <?php affichage_etoiles($contentOffre["note"]); ?>
+                                </div>
+                            </div>
+                        <?php } ?>
 
                         <!--gestion du bouton de mise en/hors ligne-->
                         <div id="conteneurBtnGestion">
                             <div class="btnGestionOffre grossisQuandHover" id="btnEnHorsLigne" onclick="toggleEnLigne(<?php echo $contentOffre['idoffre'] ?>)">
                                 <?php
-                               
+
                                 if ($contentOffre["enligne"])    // définit l'affichage du bouton de mise en/hors ligne
                                 {
                                 ?>
@@ -129,11 +161,11 @@ $contentMesOffres = $stmt->fetchAll();
                                 </p>
                             </div>
                             <a href="modifOffre.php?idOffre=<?php echo $contentOffre['idoffre'] ?>" class="<?php
-                                if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
-                                {
-                                    echo "btnModifCache";
-                                }
-                                ?> btnModif">
+                                                                                                            if ($contentOffre["enligne"])    // cache le bouton modifier si l'offre est en ligne
+                                                                                                            {
+                                                                                                                echo "btnModifCache";
+                                                                                                            }
+                                                                                                            ?> btnModif">
                                 <div class="btnGestionOffre grossisQuandHover">
                                     <img src="/icones/crayonSVG.svg" alt="">
                                     <p>Modifier l'offre </p>
@@ -141,40 +173,37 @@ $contentMesOffres = $stmt->fetchAll();
                                 </div>
                             </a>
 
-                            <a href="#" class="btnSupprimerOffre <?php
-    if ($contentOffre["enligne"]) {
-        echo "btnModifCache"; // Masquer le bouton si l'offre est en ligne
-    }
-?>">
-    <div class="btnGestionOffre grossisQuandHover" onclick="confSupOffre(<?php echo $contentOffre['idoffre']; ?>)">
-        <img src="/icones/supprimerSVG.svg" alt=""/>
-        <p>Supprimer l'offre</p>
-    </div>
-</a>
+                            <a href="#" class="btnSupprimerOffre <?php if ($contentOffre["enligne"]) { echo "btnModifCache"; } ?>">
+                                <div class="btnGestionOffre grossisQuandHover" onclick="confSupOffre(<?php echo $contentOffre['idoffre']; ?>)">
+                                    <img src="/icones/supprimerSVG.svg" alt=""/>
+                                    <p>Supprimer l'offre</p>
+                                </div>
+                            </a>
 
-<!-- POP-UP de suppression d'offre -->
-<div class="popUpSupOffre popUp">
-    <div class="popup-content">
-        <p class="ajoutBorder">Pour valider la suppression de l'offre, veuillez entrer votre mot de passe :</p>
+                            <!-- POP-UP de suppression d'offre -->
+                            <div class="popUpSupOffre popUp">
+                                <div class="popup-content">
+                                    <p class="ajoutBorder">Pour valider la suppression de l'offre, veuillez entrer votre mot de passe :</p>
+                                    <p id="textNonValideOffre" class="displayNone remplirChampsError" style="color: red">Mot de passe incorrect !</p>
 
-        <div class="popup-align">
-            <label for="pswSupOffre">Mot de passe :</label>
-            <input id="pswSupOffre" name="pswSupOffre" type="password" placeholder="Mot de passe">
-        </div>
-        <p id="textNonValideOffre" class="displayNone texteSmall remplirChampsError" style="color: red">Mot de passe incorrect !</p>
-        <p class="boldArchivo" style="color: red">Cette action est irréversible !</p>
-        <div class="btnSup">
-            <button class="btnValiderSupOffre" onclick="suppressionOffre()" disabled>
-                Confirmer
-                <!-- Ajouter une icône de suppression -->
-            </button>
-            <button class="btnAnnulerSupOffre" onclick="fermeConfSupOffre()">
-                Annuler
-                <!-- Ajouter une icône de fermeture -->
-            </button>
-        </div>
-    </div>
-</div>
+                                    <div class="popup-suppr">
+                                        <label for="pswSupOffre">Mot de passe :</label>
+                                        <input id="pswSupOffre" name="pswSupOffre" type="password" placeholder="Mot de passe">
+                                    </div>
+                                    <p class="boldArchivo" style="color: red">Cette action est irréversible !</p>
+                                    <div class="btnSup">
+
+                                        <button class="btnValiderSupOffre" onclick="suppressionOffre()" disabled>
+                                            Confirmer
+                                            <!-- Ajouter une icône de suppression -->
+                                        </button>
+                                        <button class="btnAnnulerSupOffre" onclick="fermeConfSupOffre()">
+                                            Annuler
+                                            <!-- Ajouter une icône de fermeture -->
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
 <!-- Champ caché pour l'ID de l'offre à supprimer -->
 <input type="hidden" id="idOffre" name="idOffre" value="">
@@ -196,9 +225,9 @@ $contentMesOffres = $stmt->fetchAll();
                     echo $total;
                     ?> €
                 </p>
-            </section>
-        
-<!--
+        </section>
+
+        <!--
         <setion id="conteneurDetailPrix">
 
             <p>Total à payer :

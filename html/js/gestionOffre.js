@@ -41,7 +41,8 @@ function ChangerBtnLigne(idOffre)
     let boutonModif = document.querySelector("#offre" + idOffre + " #conteneurBtnGestion a");
     boutonModif.classList.toggle("btnModifCache");
 
-    
+    let boutonSuppr = document.querySelector("#offre" + idOffre + " .btnSupprimerOffre");
+    boutonSuppr.classList.toggle("btnModifCache");
 }
 
 function toggleEnLigne(idOffre)
