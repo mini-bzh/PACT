@@ -379,6 +379,10 @@ textarea {
     width: inherit;
 }
 
+.offre #partieCategorie{
+    margin-top: 40px;
+}
+
 .offre #partieCategorie img{
     position: relative;
     top: 50px;
@@ -908,6 +912,8 @@ textarea {
 
 .offre #bodyOffre{
     align-items: baseline;
+    display: flex;
+    justify-content: space-between;
 }
 
 .offre .conteneurSpaceBetween hr{
@@ -1537,12 +1543,12 @@ textarea {
 
 .etoiles {
     display: flex;
+    align-items: center;
 }
 
 .etoiles p {
     margin-right: 5px;
     font-size: var(--typescale-text);
-    transform: translateY(3px);
 }
 
 .etoiles img {
@@ -2485,7 +2491,7 @@ aside fieldset {
     #mainAvis .avis {
         margin: 20px;
         padding: 10px;
-        border-radius: 40px;
+        border-radius: 5px;
         width: 350px;
     }
 
@@ -3030,7 +3036,8 @@ aside fieldset {
         padding-bottom: 30px;
     }
 
-    .offre .conteneurSpaceBetween{
+
+    .offre #bodyOffre, .offre #headerOffre{
         display: block;
     }
 
@@ -3041,14 +3048,14 @@ aside fieldset {
     .offre{
         margin: 0px;
         padding: 10px;
-        border-radius: 40px;
+        border-radius: 5px;
         width: 350px;
     }
 
     .mainDetail .avis{
         margin: 20px;
         padding: 10px;
-        border-radius: 40px;
+        border-radius: 5px;
         width: 350px;
     }
 
