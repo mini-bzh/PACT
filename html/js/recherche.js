@@ -88,15 +88,18 @@ function updateAffichageOffres()
 /*masque les offres qui doivent être affichées par la recherche et les filtrer, masque les autres*/
 {
     mapOffresInfos.forEach((map, key, value)=>{
-        if((mapOffresInfos.get(key).get("visibilite")) && (verifFiltre(key)) && (verifTags(key)))
+        if((verifFiltre(key)) && (verifTags(key)))
         {
             mapOffresInfos.get(key).get("element").classList.remove("displayNone");
+            mapOffresInfos.get(key).set("visibilite",true);
         }
         else
         {
             mapOffresInfos.get(key).get("element").classList.add("displayNone");
+            mapOffresInfos.get(key).set("visibilite",false);
         }
     });
+    updateMap();
 }
 
 let mapOffresInfos = initOffres();
@@ -120,19 +123,22 @@ function rechercher()
             if(mapOffresInfos.get(key).get("titre").toLowerCase().includes(texte))      //si le titre de l'offre contient le texte de la barre
             {
                 mapOffresInfos.get(key).set("visibilite", true);
+                mapOffresInfos.get(key).get("element").classList.remove("displayNone");
             }
             else
             {
                 mapOffresInfos.get(key).set("visibilite", false);
+                mapOffresInfos.get(key).get("element").classList.add("displayNone");
             }
         }
         else                                                    //si la barre est vide, affiche toutes les offres
         {
             mapOffresInfos.get(key).set("visibilite", true);
+            mapOffresInfos.get(key).get("element").classList.remove("displayNone");
         }
     });
     
-    updateAffichageOffres();                                    //met à jour l'affichage des offres
+    // updateAffichageOffres();                                    //met à jour l'affichage des offres
     updateMap();
 }
 
@@ -507,6 +513,7 @@ rangeInputNote.forEach((input) => {
                 // si ceux qui doivent être affiché ne le sont pas on les affiches
                 if (document.getElementById(key).classList.contains("displayNone")) { 
                     document.getElementById(key).classList.toggle("displayNone");
+                    mapOffresInfos.get(key).set("visibilite",true);
                 }
             }
             else
@@ -514,6 +521,7 @@ rangeInputNote.forEach((input) => {
                 // si ceux qui ne doivent pas être affiché le sont on les caches
                 if (!document.getElementById(key).classList.contains("displayNone")) {
                     document.getElementById(key).classList.toggle("displayNone");
+                    mapOffresInfos.get(key).set("visibilite",false);
                 }
             }
         });
@@ -621,6 +629,7 @@ rangeInputPrix.forEach((input) => {
                 // si ceux qui doivent être affiché ne le sont pas on les affiches
                 if (document.getElementById(key).classList.contains("displayNone")) { 
                     document.getElementById(key).classList.toggle("displayNone");
+                    mapOffresInfos.get(key).set("visibilite",true);
                 }
             }
             else
@@ -628,6 +637,7 @@ rangeInputPrix.forEach((input) => {
                 // si ceux qui ne doivent pas être affiché le sont on les caches
                 if (!document.getElementById(key).classList.contains("displayNone")) {
                     document.getElementById(key).classList.toggle("displayNone");
+                    mapOffresInfos.get(key).set("visibilite",false);
                 }
             }
         });
