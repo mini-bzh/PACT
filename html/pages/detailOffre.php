@@ -137,7 +137,7 @@
                         <!-- Offre detaille -->
                         <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                     
-                        <div class="conteneurSpaceBetween" id="bodyOffre">
+                        <div id="bodyOffre">
                             <div class="gaucheBodyOffre">
                                 <div id="partieTags">
                                 <!-- tag -->

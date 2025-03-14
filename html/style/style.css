@@ -908,6 +908,8 @@ textarea {
 
 .offre #bodyOffre{
     align-items: baseline;
+    display: flex;
+    justify-content: space-between;
 }
 
 .offre .conteneurSpaceBetween hr{
