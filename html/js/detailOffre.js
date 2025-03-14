@@ -303,7 +303,7 @@ function ajouteOffreCookie()                // ajoute dans les cookies l'id de l
         let offresVues = getCookieCle("offresVues")
         if(!offresVues.includes(idOffre))               // si l'id n'est pas déjà dans le tableau d'ids
         {
-            if(offresVues.unshift(idOffre) >= 5)        // ajoute l'id de l'offre
+            if(offresVues.unshift(idOffre) >= 4)        // ajoute l'id de l'offre
             {
                 offresVues.pop()                        // supprime l'id le plus ancien si limite d'ids dépassée
             }

@@ -93,28 +93,34 @@
                 <section class="conteneurOffre">
                     <article class="offre">
                         <p hidden id="idOffreCache"><?php echo $idOffre?></p>
-                        <h1><?php echo $contentOffre["titreoffre"];?></h1>
-                        <!-- <p>Visite</p> future categorie -->
-                        <div class="noteDetailOffre">
-                            <div class="etoiles">
-                                <!-- affichage de la note -->
-                                <?php affichage_etoiles($contentOffre["note"]); ?>
-                                <p>(<?php if(isset($contentOffre["note"]))
-                                {
-                                    echo $contentOffre["note"];
-                                }
-                                else
-                                {
-                                    echo "aucun avis";
-                                }
-                                ?>)</p>
+                        
+                        <div id="headerOffre">
+                            <div>
+                                <h1><?php echo $contentOffre["titreoffre"];?></h1>
+                                <!-- <p>Visite</p> future categorie -->
+                                <div class="noteDetailOffre">
+                                    <div class="etoiles">
+                                        <!-- affichage de la note -->
+                                        <?php affichage_etoiles($contentOffre["note"]); ?>
+                                        <p>(<?php if(isset($contentOffre["note"]))
+                                        {
+                                            echo $contentOffre["note"];
+                                        }
+                                        else
+                                        {
+                                            echo "aucun avis";
+                                        }
+                                        ?>)</p>
 
+                                    </div>
+                                    <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
+                                </div>
                             </div>
-                            <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
-                        </div>
-                        <div class="conteneurSVGtexte">
-                            <img src="/icones/logoUserSVG.svg" alt="pro">
-                            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            
+                            <div class="conteneurSVGtexte">
+                                <img src="/icones/logoUserSVG.svg" alt="pro">
+                                <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $contentOffre["id_c"] . "';")->fetchAll()[0]["raison_social"]; ?></p>
+                            </div>
                         </div>
                         
                         <div class="imgResume">
@@ -131,24 +137,44 @@
                         <!-- Offre detaille -->
                         <p id="descriptionOffre"><?php echo $contentOffre["description_detaille"]; ?></p>
                     
-                        <div class="conteneurSpaceBetween" id="conteneurTagsHoraires">
-                            <div id="partieTags">
+                        <div class="conteneurSpaceBetween" id="bodyOffre">
+                            <div class="gaucheBodyOffre">
+                                <div id="partieTags">
+                                <!-- tag -->
 
-                            <!-- tag -->
+                                    <div class="conteneurSVGtexte">
+                                        <img src="/icones/tagSVG.svg" alt="icone tag">
+                                        <h4>Tags</h4>
+                                    </div>
+                                    <hr> 
+                                    <div id="conteneurTagsOffre">
+                                        <?php
+                                        foreach($tags as $key => $tag){
+                                            echo "<p class='tagOffre'>" . $tag["nomtag"] . "</p>";
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div id="partieAdresse">
+                                    <div class="conteneurSVGtexte">
+                                        <img src="/icones/adresseSVG.svg" alt="icone tag">
+                                        <h4>Adresse</h4>
+                                    </div>
+                                    <hr>
+                                    <a href="https://www.google.fr/maps/place/<?php 
+                                        $adresse = $contentOffre["numero"] . " rue " . $contentOffre["rue"] . ", " . $contentOffre["ville"];
 
-                                <div class="conteneurSVGtexte">
-                                    <img src="/icones/tagSVG.svg" alt="icone tag">
-                                    <h4>Tags</h4>
+                                        echo $adresse;
+                                    ?>"
+                                    class="conteneurSVGtexte" id="itineraire" target="_blank">
+                                        <p><?php
+                                            echo($adresse);
+                                        ?></p>
+                                    </a>
+                                    
                                 </div>
-                                <hr> 
-                                <div id="conteneurTagsOffre">
-                                    <?php
-                                    foreach($tags as $key => $tag){
-                                        echo "<p class='tagOffre'>" . $tag["nomtag"] . "</p>";
-                                    }
-                                    ?>
-                                </div>
-                            </div> 
+                            </div>
+                            <div class="droiteBodyOffre">
                             <div id="partieHoraires">
                                 <div class="conteneurSVGtexte">
                                     <img src="/icones/horairesSVG.svg" alt="icone horaires">
@@ -190,88 +216,71 @@
                                     </tbody>
                                     </table>
                                 </div>
-                                <div id="partieCategorie">
-                                    <div class="conteneurSVGtexte">
-                                        <!--<img src="/icones/.svg" alt="icone tag">-->
-                                        <h4>Informations supplémentaires</h4>
+                                    <div id="partieCategorie">
+                                        <div class="conteneurSVGtexte">
+                                            <!--<img src="/icones/.svg" alt="icone tag">-->
+                                            <h4>Informations supplémentaires</h4>
+                                        </div>
+                                        <hr>
+                                        <?php //print_r($contentOffre); ?>
+                                        <section id="secRestaurant" class="displayNone">
+                                            <p>Gamme de prix :<span class="boldArchivo"> <?php echo $contentOffre['gammeprix']; ?></span></p>
+                                            <a href="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" target="_blank"><img src="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" alt="Menu"></a>
+                                        </section>
+
+                                        <section id="secParcAttr" class="displayNone">
+                                            <p>Nombre d'attraction : <span class="boldArchivo"><?php echo $contentOffre['nbattraction']; ?></span></p>
+                                            <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['agemin']; ?> ans</span></p>
+                                            <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan" class="plan"></a>
+                                        </section>
+
+                                        <section id="secSpec" class="displayNone">
+                                            <p>Nombre de places maximum : <span class="boldArchivo"><?php echo $contentOffre['capacite']; ?></span></p>
+                                            <?php
+                                                $parts = explode(':', $contentOffre['duree_s']); // Divise en parties (hh, mm, ss)
+                                                $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                            ?>
+                                            <p>Durée du spectacle : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                        </section>
+
+    <?php
+
+                                        $stmt = $dbh->prepare("select * from tripskell._possedeLangue where idoffre='" . $idOffre . "';");
+                                        $stmt->execute();
+                                        $result = $stmt->fetchAll();
+
+                                        // Extraire les valeurs de la colonne "nomlangue"
+                                        $langues = array_column($result, 'nomlangue');
+
+                                        // Combiner les éléments en une seule chaîne séparée par des virgules
+                                        $languesStr = implode(', ', $langues);
+    ?>
+                                        <section id="secVisite" class="displayNone">
+                                            <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
+                                            <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
+                                            <?php
+                                                $parts = explode(':', $contentOffre['duree_v']); // Divise en parties (hh, mm, ss)
+                                                $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                            ?>
+                                            <p>Durée de la visite : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                        </section>
+
+                                        <section id="secAct" class="displayNone">
+                                            <p><span class="boldArchivo">Prestation(s) proposée(s) :</span><br><?php echo $contentOffre['prestation']; ?></p>
+                                            <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['ageminimum']; ?> ans</span></p>
+                                            <?php
+                                                $parts = explode(':', $contentOffre['duree_a']); // Divise en parties (hh, mm, ss)
+                                                $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
+                                            ?>
+                                            <p>Durée de l'activité : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
+                                        </section>
+
                                     </div>
-                                    <hr>
-                                    <?php //print_r($contentOffre); ?>
-                                    <section id="secRestaurant" class="displayNone">
-                                        <p>Gamme de prix :<span class="boldArchivo"> <?php echo $contentOffre['gammeprix']; ?></span></p>
-                                        <a href="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" target="_blank"><img src="../images/imagesCarte/<?php echo $contentOffre['carte']; ?>" alt="Menu"></a>
-                                    </section>
-
-                                    <section id="secParcAttr" class="displayNone">
-                                        <p>Nombre d'attraction : <span class="boldArchivo"><?php echo $contentOffre['nbattraction']; ?></span></p>
-                                        <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['agemin']; ?> ans</span></p>
-                                        <a href="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" target="_blank"><img src="../images/imagesPlan/<?php echo $contentOffre['plans']; ?>" alt="Plan" class="plan"></a>
-                                    </section>
-
-                                    <section id="secSpec" class="displayNone">
-                                        <p>Nombre de places maximum : <span class="boldArchivo"><?php echo $contentOffre['capacite']; ?></span></p>
-                                        <?php
-                                            $parts = explode(':', $contentOffre['duree_s']); // Divise en parties (hh, mm, ss)
-                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
-                                        ?>
-                                        <p>Durée du spectacle : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
-                                    </section>
-
-<?php
-
-                                    $stmt = $dbh->prepare("select * from tripskell._possedeLangue where idoffre='" . $idOffre . "';");
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-
-                                    // Extraire les valeurs de la colonne "nomlangue"
-                                    $langues = array_column($result, 'nomlangue');
-
-                                    // Combiner les éléments en une seule chaîne séparée par des virgules
-                                    $languesStr = implode(', ', $langues);
-?>
-                                    <section id="secVisite" class="displayNone">
-                                        <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
-                                        <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
-                                        <?php
-                                            $parts = explode(':', $contentOffre['duree_v']); // Divise en parties (hh, mm, ss)
-                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
-                                        ?>
-                                        <p>Durée de la visite : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
-                                    </section>
-
-                                    <section id="secAct" class="displayNone">
-                                        <p><span class="boldArchivo">Prestation(s) proposée(s) :</span><br><?php echo $contentOffre['prestation']; ?></p>
-                                        <p>Âge minimal : <span class="boldArchivo"><?php echo $contentOffre['ageminimum']; ?> ans</span></p>
-                                        <?php
-                                            $parts = explode(':', $contentOffre['duree_a']); // Divise en parties (hh, mm, ss)
-                                            $formattedTime = $parts[0] . 'h ' . $parts[1] . 'm'; // Reformate
-                                        ?>
-                                        <p>Durée de l'activité : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
-                                    </section>
-
                                 </div>
                             </div>
-                        </div>
-                        <div id="partieAdresse">
-                            <div class="conteneurSVGtexte">
-                                <img src="/icones/adresseSVG.svg" alt="icone tag">
-                                <h4>Adresse</h4>
-                            </div>
-                            <hr>
-                            <a href="https://www.google.fr/maps/place/<?php 
-                                $adresse = $contentOffre["numero"] . " rue " . $contentOffre["rue"] . ", " . $contentOffre["ville"];
-
-                                echo $adresse;
-                            ?>"
-                            class="conteneurSVGtexte" id="itineraire" target="_blank">
-                                <p><?php
-                                    echo($adresse);
-                                ?></p>
-                            </a>
+                            
                             
                         </div>
-                
-                        
                     </article>
                 </section>
                 <!-- Avis -->

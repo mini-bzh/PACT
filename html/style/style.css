@@ -821,6 +821,13 @@ textarea {
     margin: 10px 0px;
     flex-wrap: wrap;
 }
+
+.offre #headerOffre{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 .offre .conteneurSVGtexte img{
     width: 40px;
     height: 40px;
@@ -876,6 +883,8 @@ textarea {
     margin-right: 10px;
 }
 
+
+
 .offre #partieTags #conteneurTagsOffre{
     display: flex;
     flex-wrap: wrap;
@@ -886,7 +895,7 @@ textarea {
     width: 330px;
 }
 
-.offre #conteneurTagsHoraires{
+.offre #bodyOffre{
     align-items: baseline;
 }
 
@@ -3073,7 +3082,7 @@ aside fieldset {
         width: 330px;
     }
 
-    .offre #conteneurTagsHoraires{
+    .offre #bodyAvis{
         align-items: baseline;
     }
 
