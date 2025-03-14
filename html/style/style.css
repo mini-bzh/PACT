@@ -8,7 +8,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.liHeaderMobile{
+    list-style-type: none;
+}
 body {
     font-family: "Archivo";
     margin: 0px;
@@ -1689,6 +1691,7 @@ textarea {
         margin-right: 40px;
     }
 
+
     #btAvis {
         position: relative;
     }
@@ -1730,9 +1733,7 @@ textarea {
         transition: transform 0.2s ease;
     }
 
-    .liHeaderMobile{
-        list-style: none;
-    }
+
 
     .ulHeader .aHeader:hover {
         /*background: linear-gradient(white, var(--primary));*/
