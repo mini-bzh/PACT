@@ -379,6 +379,10 @@ textarea {
     width: inherit;
 }
 
+.offre #partieCategorie{
+    margin-top: 40px;
+}
+
 .offre #partieCategorie img{
     position: relative;
     top: 50px;
