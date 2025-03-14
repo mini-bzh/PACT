@@ -1147,7 +1147,6 @@ textarea {
 
 .avis .conteneurAvisImage img {
     min-width: 160px;
-    min-height: 160px;
     max-width: 500px;
     object-fit: cover;
     display: block;
@@ -1299,15 +1298,15 @@ textarea {
 .avis .btnSignalerAvis p,
 .avis .btnDejaSignaler p {
     font-size: var(--typescale-very-small-text);
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     user-select: none;
     pointer-events: none;
 }
 
 .avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
-    padding: 0px;
+    padding: 0;
     text-decoration: none;
 }
 
@@ -1391,7 +1390,7 @@ textarea {
     width: 100%;
     padding: 5px;
     height: 75px;
-    margin: 5px 0px;
+    margin: 5px 0;
     border-radius: 5px;
     resize: none;
 }
@@ -1415,7 +1414,7 @@ textarea {
 
 .avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
-    padding: 0px;
+    padding: 0;
     text-decoration: none;
 }
 
@@ -1457,7 +1456,7 @@ textarea {
 
 
 .apercuOffre h2 {
-    margin: 0px;
+    margin: 0;
 }
 
 .apercuOffre .conteneurSVGtexte {
@@ -1468,8 +1467,8 @@ textarea {
 }
 
 .apercuOffre .conteneurSpaceBetween {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 .apercuOffre .conteneurSVGtexte img {
@@ -1529,8 +1528,8 @@ textarea {
 .text-overlay {
     font-family: "Archivo";
     position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0;
+    right: 0;
     padding: 5px;
     background-color: var(--primaryDark);
     color: white;
@@ -1562,7 +1561,7 @@ textarea {
 
 .apercuOffre .resumeApercu {
     font-size: var(--typescale-small-text);
-    margin: 10px 0px;
+    margin: 10px 0;
     height: 75px;
 }
 
@@ -1587,7 +1586,7 @@ textarea {
     padding-bottom: 10px;
     border-bottom: 2px solid var(--accent);
 
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 #cptAvisNonLus span {
@@ -1686,7 +1685,7 @@ textarea {
 
     .liHeader {
         list-style: none;
-        padding: 0px;
+        padding: 0;
         margin-right: 40px;
     }
 
@@ -2212,7 +2211,7 @@ aside fieldset {
     border: none;
     border-radius: 20px;
     font-size: var(--typescale-text);
-    padding: 0px 55px;
+    padding: 0 55px;
 }
 
 #conteneurBarre label {
@@ -2488,30 +2487,57 @@ aside fieldset {
         padding-bottom: 30px;
     }
 
-    #mainAvis .avis {
+    #mainAvis .titreOffre {
+        font-size: var(--typescale-h2);
+    }
+
+    /*-------------/ affichage avis /--------------*/
+
+
+    .avis {
         margin: 20px;
         padding: 10px;
         border-radius: 5px;
         width: 350px;
     }
 
-    #mainAvis .avis .titreAvis {
+    .avis .headerAvis{
+        display: block;
+    }
+    .avis .bodyAvis{
+        display: block;
+    }
+
+    .avis .titreAvis {
         font-size: var(--typescale-h5);
     }
 
-    #mainAvis .avis .conteneurAvisTexte p {
+    .avis .conteneurAvisTexte p {
         font-size: var(--typescale-small-text);
     }
 
-    #mainAvis .avis .conteneurAvisImage {
+    .avis .conteneurAvisDroite{
+        width: 100%;
+        margin-left: 0;
+    }
+    .avis .conteneurAvisImage {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;
     }
 
-    #mainAvis .titreOffre {
-        font-size: var(--typescale-h2);
+    .avis .conteneurAvisImage img{
+        max-width: 250px;
+        margin: 20px 0;
     }
+
+    .avis .conteneurAvisImage .noImage{
+        object-fit: contain;
+        min-width: 100px;
+        max-width: 100px;
+        margin: 0;
+    }
+
+
 
 
     /*-----------------/ APERCU OFFRE /------------------*/
@@ -2529,7 +2555,7 @@ aside fieldset {
     }
 
     .apercuOffre .conteneurSVGtexte {
-        margin: 5px 0px;
+        margin: 5px 0;
     }
 
 
@@ -2552,8 +2578,8 @@ aside fieldset {
     .text-overlay {
         font-family: "Archivo";
         position: absolute;
-        bottom: 0px;
-        right: 0px;
+        bottom: 0;
+        right: 0;
         padding: 5px;
         background-color: var(--primaryDark);
         color: white;
@@ -3046,7 +3072,7 @@ aside fieldset {
     }
 
     .offre{
-        margin: 0px;
+        margin: 0;
         padding: 10px;
         border-radius: 5px;
         width: 350px;
@@ -3086,7 +3112,7 @@ aside fieldset {
         margin: 0px;
         width: 330px;
         padding: 15px;
-        border-radius: 0px 0px 15px 15px;
+        border-radius: 0 0 15px 15px;
         background-color: var(--primaryDark);
         text-align: center;
     }
@@ -3108,7 +3134,7 @@ aside fieldset {
     .offre #partieTags #conteneurTagsOffre{
         display: flex;
         flex-wrap: wrap;
-        padding: 20px 0px;
+        padding: 20px 0;
         max-height: 250px;
     }
 
@@ -3149,7 +3175,7 @@ aside fieldset {
         height: 35px;
         text-align: center;
         padding: 8px 0px;
-        margin: 0px 3px;
+        margin: 0 3px;
     }
 
     .offre #conteneurPlagesHoraires .horaireEncadre{
@@ -3187,7 +3213,7 @@ aside fieldset {
     }
 
     .mainDetail .avis #btnSupprimerAvis{
-        margin: 20px 0px 0px;
+        margin: 20px 0 0;
         padding: 5px;
         width: 350px;
     }

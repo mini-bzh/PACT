@@ -148,7 +148,7 @@
                         else
                         {
                             ?>
-                                <img src="../icones/noImageSVG.svg" alt="pas d'image">
+                                <img src="../icones/noImage.png" class="noImage" alt="pas d'image">
                             <?php
                         }
                     ?>
