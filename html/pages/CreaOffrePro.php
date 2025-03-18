@@ -536,19 +536,32 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
                     <div id="champsPA">
                         <div class="InfoPerso">
-                        <div class="champs">
-                            <label for="nbAttraction">Nombre Attraction :</label>
-                            <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
-                        </div>
-                        <div class="champs">
-                            <label for="ageminimum">âge minimum :</label>
-                            <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
-                        </div>
+                            <div class="champs">
+                                <label for="nbAttraction">Nombre Attraction :</label>
+                                <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3">
+                            </div>
+                            <div class="champs">
+                                <label for="ageminimum">âge minimum :</label>
+                                <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
+                            </div>
                         </div>
                         <div class="champs">
                             <label for="plan">Selectionner un plan :</label>
-                            <input type="file" id="plan" name="plan">
+                            <!-- Champs pour sélectionner les images -->
+                            <div class="champs">
+                            <div class ="PhotoOffre">
+                            <img id="previewImage" src="../images/logo/ajoutimage.png" 
+                            alt="Cliquez pour ajouter une image"
+                            style="cursor: pointer;" 
+                            onclick="document.getElementById('fichier1').click()">
+                            <input type="file" id="fichier1" name="fichier1" 
+                            accept="image/png, image/jpeg" 
+                            style="display: none;" 
+                            onchange="updatePreview()"
+                            required>
+                        </div>                          
                         </div>
+                </div>
                     </div>
 
                     <!-- ----------------- SPECTACLE ------------------- -->

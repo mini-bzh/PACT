@@ -54,7 +54,6 @@ form {
     outline: none;
 }
 
-/* Bouton stylé pour ajouter une photo */
 .champs input[type="file"] {
     display: none; /* Cache le champ de fichier par défaut */
 }

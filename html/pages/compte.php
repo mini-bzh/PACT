@@ -298,7 +298,7 @@ if (isset($idCompte)) {
                         }
                         ?>
 
-                        <button class="resizeShow btnDeplie btn">
+                        <button class="resizeShow btnDeplie ">
                             <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M75 62.5L50 37.5L25 62.5" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>

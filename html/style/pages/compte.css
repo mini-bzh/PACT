@@ -188,7 +188,6 @@ body.no-scroll {
 
 .popup-content {
     padding: 20px;
-    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -436,8 +435,8 @@ body.no-scroll {
 
     .btnDataCompte{
         background-color: white;
-        width: 411px;
-        height: 73px;
+        width: 100px;
+        height: 100px;
     }
 
     .btnDataCompte p{
@@ -449,10 +448,12 @@ body.no-scroll {
     }
 
     .informationsCompte{
+        margin-top: 10%;
+        margin-bottom: 2%;
         background-color: transparent;
         flex-direction: column;
         width: fit-content;
-        height: 610px;
+        height: 100%;
         margin: 0 auto;
     }
 
@@ -529,7 +530,6 @@ body.no-scroll {
 
     .menuDeplie{
         display: flex;
-        position: absolute;
         top: 330px;
         z-index: 1;
         width: 415px;
@@ -548,9 +548,8 @@ body.no-scroll {
     }
 
     .btnDeplie{
-        border-radius: 50%;
         width: 60px;
-        height: 60px;
+        height: 20px;
         background-color: black;
         display: flex;
         flex-direction: column;
@@ -572,6 +571,7 @@ body.no-scroll {
     }
 
     .zoneInfosPort{
+        margin-top: 3%;
         padding: 0 0 0 5%;
         flex-grow: 1;
         width: 100%;
