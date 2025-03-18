@@ -265,6 +265,18 @@ textarea {
     right: -92px;
 }
 
+#logo_cat {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 5px;
+    right: 35px;
+}
+
+#conteneur_mini_carte {
+    margin-top: 20px;
+}
+
 /*-------------/ page avis /--------------*/
 
 #mainAvis h1 {
@@ -2370,7 +2382,7 @@ aside fieldset {
     margin-right: 20px;
 }
 
-.card-body > a > img{
+.card-body #pubBanniere{
     width: 400px;
     height: 440px;
     border-radius: 5px;
