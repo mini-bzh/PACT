@@ -1511,6 +1511,10 @@ textarea {
     display: block;
 }
 
+.apercuOffre p{
+    word-wrap: break-word;
+}
+
 .apercuOffre .conteneurImage {
     position: relative;
     display: inline-block;
