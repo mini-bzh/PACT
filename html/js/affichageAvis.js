@@ -93,6 +93,25 @@ function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis,
 function confBlacklister(event, id_avis){ //fonction pour afficher une pop up
     let pop = document.getElementById('popUpBlacklister');
 
+    $.ajax({
+        url: "../composants/ajax/nbToken.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre
+        data: {idAvis: _id_avis},
+        success: function(nb_token) {
+            if (nb_token >= 3 && pop.firstElementChild) { 
+                
+                pop.firstElementChild.firstElementChild.textContent = "Impossible de blacklister un avis";
+                pop.firstElementChild.children[1].textContent = "Vous n'avez plus de token disponible";
+                pop.firstElementChild.children[2].children[1].remove();
+                
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Erreur AJAX : ", textStatus, errorThrown);
+            alert("Erreur lors de l'appel du script PHP : " + textStatus);
+        }
+    });
+
     pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 
@@ -109,7 +128,7 @@ function fermeConfBlacklister(){ //fonction pour fermer la pop up en cas d'annul
 
 function blacklisterAvis(){
     let pop = document.getElementById('popUpBlacklister');
-    let btn = document.getElementById('btnBlacklister');
+    let btn = document.getElementById('btnBlacklisterAvis'+_id_avis);
     pop.style.cursor = 'wait';                              // Le curseur passe en wait pour indiqué que la requete est en cour
 
     $.ajax({

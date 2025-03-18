@@ -12,9 +12,12 @@
 
         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis['id_c'] . ";")->fetchAll()[0];
 
-        $id_abo = $dbh->query("select id_abo from tripskell.offre_pro where idoffre=".
+        $info_offre = $dbh->query("select id_abo, id_c from tripskell.offre_pro where idoffre=".
                               "(select idoffre from tripskell._avis where id_avis=" . 
-                              $avis["id_avis"] .");")->fetch()["id_abo"];
+                              $avis["id_avis"] .");")->fetch();
+        
+        $id_abo = $info_offre["id_abo"];
+        $id_propri_offre = $info_offre["id_c"];
         ?>
         <article id="Avis<?php echo $avis["id_avis"]?>" class="avis <?php 
             if(!$avis["luparpro"])                              //ajoute la classe nouvelAvis si l'avis n'a pas encore été vu par le pro"
@@ -209,9 +212,9 @@
                                 <?php
                             }
                         }
-                        if ($id_abo == "Premium") {
+                        if ($id_abo == "Premium" && $idCompteConnecte == $id_propri_offre) {
                     ?>
-                        <div id="btnBlacklister" class="<?php echo (is_null($avis["date_recup_token_blacklist"]))?'btnSignalerAvis grossisQuandHover" onclick="confBlacklister(event, 8)"':'btnDejaSignaler"';?>>     
+                        <div id="btnBlacklisterAvis<?php echo $avis['id_avis'];?>" class="<?php echo (is_null($avis["date_recup_token_blacklist"]))?'btnSignalerAvis grossisQuandHover" onclick="confBlacklister(event, ' .$avis['id_avis'].')"':'btnDejaSignaler"';?>>     
                             <img src="../icones/<?php echo (is_null($avis["date_recup_token_blacklist"]))?'signalerSVG.svg':'okSVG.svg';?>" alt="icone signaler">
                             <p>Blacklister</p>
                             <p hidden><?php echo $idCompteConnecte?></p>
