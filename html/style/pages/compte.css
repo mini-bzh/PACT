@@ -559,6 +559,8 @@ body.no-scroll {
         position: absolute;
         right: 6%;
         bottom: 6%;
+        border-radius: 5px;
+
     }
 
     .fleche2{
