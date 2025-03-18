@@ -180,7 +180,9 @@ $nouvellesOffres = $stmt->fetchAll();
                         ?>
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
-                                <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                                <article>
+                                    <img src="/images/baniere/pubBaniere.png" alt="pubBaniere" id="pubBanniere">
+                                </article>
                             </a>
                         </div>
                         <?php

@@ -2346,7 +2346,7 @@ aside fieldset {
     margin-right: 20px;
 }
 
-.card-body > a > img{
+.card-body #pubBanniere{
     width: 400px;
     height: 440px;
     border-radius: 5px;
