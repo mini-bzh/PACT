@@ -181,7 +181,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/baniere/pubBaniere.png" alt="pubBaniere" id="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" id="pubBanniere">
                                 </article>
                             </a>
                         </div>
