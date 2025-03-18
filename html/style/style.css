@@ -265,6 +265,18 @@ textarea {
     right: -92px;
 }
 
+#logo_cat {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 5px;
+    right: 35px;
+}
+
+#conteneur_mini_carte {
+    margin-top: 20px;
+}
+
 /*-------------/ page avis /--------------*/
 
 #mainAvis h1 {
@@ -2033,7 +2045,7 @@ aside fieldset {
 /*Style pour les double slide bar*/
 .double-range-slider-box {
     position: relative;
-    width: 300px;
+    width: 100%;
     background: white;
     display: flex;
     justify-content: center;
@@ -2676,6 +2688,11 @@ aside fieldset {
         margin-bottom: 5%;
     }
 
+    #filtres-aside {
+        width: 50%;
+    
+    }
+
     .conteneurOffres>article {
         display: flex;
         flex-direction: column;
@@ -2770,6 +2787,10 @@ aside fieldset {
         align-items: center;
         margin: 9% 0;
         width: 20%;
+    }
+
+    #map{
+        height: 200px;
     }
 
     /*----------------/ page choix création compte /------------------*/
