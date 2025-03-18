@@ -1508,7 +1508,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 330px;
+    width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -1521,7 +1521,7 @@ textarea {
 .apercuOffre .conteneurImage {
     position: relative;
     display: inline-block;
-    width: fit-content;
+    width: 100%;
 }
 
 .apercuOffre .conteneurImage p {
@@ -2242,6 +2242,30 @@ aside fieldset {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-evenly;
+}
+
+#map{
+    width: 90%;
+    height: 500px;
+    z-index: 0;
+}
+
+.leaflet-popup-content-wrapper .apercuOffre{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content p{
+    margin : 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content{
+    margin : 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content a{
+    color: black;
 }
 
 
