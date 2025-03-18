@@ -36,22 +36,20 @@ function supprimerAvis()
     }
 }
 
+/* 
+################################## POP UP ##################################
+*/
+
+let _id_avis;
+
+
 /* ------------------------ Signaler avis ------------------------*/
 
-let btnSignalerAvis = document.querySelectorAll(".btnSignalerAvis");
-
-
-// btnSignalerAvis.forEach(btn =>{
-//     if(typeof(btnSignalerAvis) !== 'undefined' && btnSignalerAvis !== null)
-//         {
-//             btn.addEventListener("click", confSignaler);
-//         }
-// })
 
 
 function confSignaler(event){ //fonction pour afficher une pop up
     let idAvis = event.target.id; // on récupère l'id de l'avis
-    let pop = document.querySelector('.popUpSignaler');
+    let pop = document.getElementById('popUpSignaler');
     pop.style.display = 'flex';
     let btnValider = document.querySelectorAll(".btnValiderId")[0];
     document.body.classList.add('no-scroll');
@@ -59,7 +57,7 @@ function confSignaler(event){ //fonction pour afficher une pop up
 }
 
 function fermeConfSignaler(){ //fonction pour fermer la pop up en cas d'annulation
-    let pop = document.querySelector('.popUpSignaler');
+    let pop = document.getElementById('popUpSignaler');
     pop.style.display = 'none';
     document.body.classList.remove('no-scroll');
 }
@@ -88,6 +86,55 @@ function signalerAvis(){ //fonction pour signaler. On récupère l'id de l'avis,
     else{
         alert("Veuillez renseigner un motif de signalement");
     }
+}
+
+/* ------------------------ blacklist avis ------------------------*/
+
+function confBlacklister(event, id_avis){ //fonction pour afficher une pop up
+    let pop = document.getElementById('popUpBlacklister');
+
+    pop.style.display = 'flex';
+    document.body.classList.add('no-scroll');
+
+    let btnValider = document.querySelectorAll(".btnValiderId")[0];
+    
+    _id_avis = id_avis;  //l'id de l'avis est mis dans le bouton bouton valider
+}
+
+function fermeConfBlacklister(){ //fonction pour fermer la pop up en cas d'annulation
+    let pop = document.getElementById('popUpBlacklister');
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+}
+
+function blacklisterAvis(){
+    let pop = document.getElementById('popUpBlacklister');
+    let btn = document.getElementById('btnBlacklister');
+    pop.style.cursor = 'wait';                              // Le curseur passe en wait pour indiqué que la requete est en cour
+
+    $.ajax({
+        url: "../composants/ajax/blacklisterAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD
+        type: 'POST',                               // Type de la requête (pour transmettre
+        data: {idAvis: _id_avis},
+        success: function(reponse){
+            
+
+            pop.style.cursor = 'default';   // Fin du chargement
+            fermeConfBlacklister();         // fermeture de la pop up
+
+            // 
+            btn.classList.remove('btnSignalerAvis');
+            btn.classList.remove('grossisQuandHover');
+            btn.classList.add('btnDejaSignaler');
+            btn.querySelector('img').src= '../icones/okSVG.svg';
+            btn.removeAttribute('onclick');
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Erreur AJAX : ", textStatus, errorThrown);
+            alert("Erreur lors de l'appel du script PHP : " + textStatus);
+        }
+    });
 }
 
 /* ------------------------ like/dislike avis ------------------------*/

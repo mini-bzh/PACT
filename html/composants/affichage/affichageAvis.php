@@ -11,6 +11,10 @@
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
 
         $membre = $dbh->query("select * from tripskell.membre where id_c=" . $avis['id_c'] . ";")->fetchAll()[0];
+
+        $id_abo = $dbh->query("select id_abo from tripskell.offre_pro where idoffre=".
+                              "(select idoffre from tripskell._avis where id_avis=" . 
+                              $avis["id_avis"] .");")->fetch()["id_abo"];
         ?>
         <article id="Avis<?php echo $avis["id_avis"]?>" class="avis <?php 
             if(!$avis["luparpro"])                              //ajoute la classe nouvelAvis si l'avis n'a pas encore été vu par le pro"
@@ -205,6 +209,15 @@
                                 <?php
                             }
                         }
+                        if ($id_abo == "Premium") {
+                    ?>
+                        <div id="btnBlacklister" class="<?php echo (is_null($avis["date_recup_token_blacklist"]))?'btnSignalerAvis grossisQuandHover" onclick="confBlacklister(event, 8)"':'btnDejaSignaler"';?>>     
+                            <img src="../icones/<?php echo (is_null($avis["date_recup_token_blacklist"]))?'signalerSVG.svg':'okSVG.svg';?>" alt="icone signaler">
+                            <p>Blacklister</p>
+                            <p hidden><?php echo $idCompteConnecte?></p>
+                        </div>
+                    <?php
+                        }
                     ?>
                 </div>
                 <div class="conteneurPouces">
@@ -221,3 +234,32 @@
         </article>
         <?php
     }
+
+
+function dependances_avis() {
+    ?>
+        <!-- Pop-up Blacklister un avis -->
+    <div class="filtePopUp" id="popUpBlacklister">
+        <div class="popUpAvis">
+            <p class="texteLarge">Êtes-vous sur de vouloir blacklister cet avis</p>
+            <p>Cette opération est irréversible</p>
+            <div class="boutonPopUp">
+                <button class="btnAnnulerSignalement" onclick="fermeConfBlacklister()">Annuler</button>
+                <button class="btnValiderId btnValiderSignalement" onclick="blacklisterAvis()">Valider</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Pop-up Signaler un avis -->
+    <div class="filtePopUp" id="popUpSignaler">
+        <div class="popUpAvis">
+            <textarea name="motifSignalement" id="motifSignalement" cols="30" rows="10" placeholder="Entrez un motif de signalement"></textarea>
+            <div class="boutonPopUp">
+                <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
+                <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
+            <div>
+        </div>
+    </div>
+
+    <?php
+}
