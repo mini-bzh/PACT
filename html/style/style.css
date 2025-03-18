@@ -1504,7 +1504,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 330px;
+    width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -1513,7 +1513,7 @@ textarea {
 .apercuOffre .conteneurImage {
     position: relative;
     display: inline-block;
-    width: fit-content;
+    width: 100%;
 }
 
 .apercuOffre .conteneurImage p {
