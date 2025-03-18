@@ -356,16 +356,7 @@
                     ?>
                 </section>
             </section>
-            <!-- Pop-up Signaler un avis -->
-<div class="popUpSignaler">
-    <div>
-        <textarea name="motifSignalement" id="motifSignalement" cols="30" rows="10" placeholder="Entrez un motif de signalement"></textarea>
-        <div>
-            <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
-            <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
-        <div>
-    </div>
-</div>
+        <?php dependances_avis(); ?>
         </main>
         <?php                                                   
             // ajout du footer
