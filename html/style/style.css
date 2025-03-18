@@ -1083,6 +1083,10 @@ textarea {
     margin: 15px 0px;
 }
 
+.avis .conteneurAvisImage .noImage{
+    width: 160px;
+}
+
 .avis .conteneurAvisGauche hr {
     margin: 20px 0px;
 }
@@ -1150,6 +1154,7 @@ textarea {
 .avis .conteneurAvisImage img {
     min-width: 160px;
     max-width: 500px;
+    max-height: 200px;
     object-fit: cover;
     display: block;
 }
