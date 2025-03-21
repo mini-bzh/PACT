@@ -2445,13 +2445,13 @@ aside fieldset {
         font-size: var(--typescale-text) !important;
     }
 
-    .coMembre,
-    .coPro {
-        width: 385.12px;
+    .coMembre, .coPro {
+        width: 90%;
         height: 100px;
         margin-left: 0;
         border-radius: 10px;
         border-width: 4px;
+        margin-left: 8%;
     }
 
     .coMembre h3,
