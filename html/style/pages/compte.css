@@ -231,6 +231,7 @@ body.no-scroll {
 
 .popUpDeco > div {
     height: 120px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -305,11 +306,13 @@ body.no-scroll {
 
 .btnAnnulerSup {
     background-color: #7c7c7c;
+    margin-left: 2%;
 }
 
 .btnValiderSup {
     background-color: #b9b9b9;
     cursor: default;
+    margin-right: 2%;
 }
 
 .btnSup {
@@ -366,6 +369,30 @@ body.no-scroll {
 
 .btnAuthent svg path {
     stroke-width: 2px;
+}
+
+.popQRcode {
+    align-items: center;
+    justify-content: center;
+}
+
+.popQRcode > div {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2%;
+}
+
+.popQRcode svg {
+    width: 40px;
+    position: absolute;
+    top: 3%;
+    right: 6%;
+}
+
+.popQRcode svg:hover {
+    cursor: pointer;
 }
 
 
@@ -685,4 +712,15 @@ body.no-scroll {
 #textNonValideOffre{
     margin-bottom: 3%;
     text-align: left;
+}
+
+.popUpSup > .popup-content {
+    height: 50%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 15%;
+    /* padding: 0 2%; */
+    margin-right: 15%;
 }

@@ -164,7 +164,7 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <!-- Formulaire de connexion -->
 <form action="" method="post">
-    <p class="texteLarge centerText"> Se connecter à un compte 
+    <p class="texteLarge centerText"> Se connecter à un compte
 <?php
     if ($_GET["user-tempo"] === 'pro') {
         echo 'professionnel';
