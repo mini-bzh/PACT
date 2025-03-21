@@ -89,17 +89,19 @@ setTimeout(() => {
 }, 2000);
 
 function updateMap() {
+    markersCluster.clearLayers();
     for(elem in listeMarker){
         listeMarker[elem][0].remove();
         if (mapOffresInfos.get(elem).get("visibilite")) {
-            listeMarker[elem][0].addTo(map);
+            markersCluster.addLayer(listeMarker[elem][0]);
         }
     }
+    map.addLayer(markersCluster);
 }
 
 document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-1">
     
-        <title>124</title>
+        <title>Agandir</title>
         
         <defs>
 
@@ -124,7 +126,7 @@ function resizeMap(e) {
         document.getElementById("map").style.height="80vh";
         document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-3">
     
-        <title>125</title>
+        <title>Rétrécir</title>
         
         <defs>
 
@@ -147,7 +149,7 @@ function resizeMap(e) {
         document.getElementById("map").style.height="20vh";
         document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-1">
     
-        <title>124</title>
+        <title>Agandir</title>
         
         <defs>
 
