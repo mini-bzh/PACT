@@ -92,8 +92,7 @@ let grandir = true;
 function resizeMap(e) {
     if (grandir) {
         grandir = false;
-        document.getElementById("map").style.width="100%";
-        document.getElementById("map").style.height="500px";
+        document.getElementById("map").style.height="80vh";
         document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-3">
     
         <title>125</title>
@@ -113,11 +112,11 @@ function resizeMap(e) {
             </g>
         </svg></div>`;
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
     }else{
         grandir = true;
-        document.getElementById("map").style.width="90%";
-        document.getElementById("map").style.height="200px";
+        document.getElementById("map").style.height="20vh";
         document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-1">
     
         <title>124</title>
@@ -137,6 +136,7 @@ function resizeMap(e) {
             </g>
         </svg></div>`;
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
     }
   
