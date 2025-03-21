@@ -9,12 +9,36 @@ function sleep(milliseconds) {
 
 var map = L.map('map', {
     center: [48.2640845, -2.9202408],
-    zoom: 7
+    zoom: 7,
+    preferCanvas: true
 });
+
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    detectRetina: true
 }).addTo(map);
+
+map.on('load', function() {
+    preloadTiles();
+});
+
+function preloadTiles() {
+    let bounds = map.getBounds();
+    let zoom = map.getZoom();
+
+    for (let x = bounds.getWest(); x < bounds.getEast(); x += 0.5) {
+        for (let y = bounds.getSouth(); y < bounds.getNorth(); y += 0.5) {
+            tileLayer._tileCoordsToKey({ x, y, z: zoom });
+        }
+    }
+}
+
+var markersCluster = L.markerClusterGroup({
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true
+});
 
 var listeMarker={};
 
@@ -33,8 +57,9 @@ mapOffresInfos.forEach(element => {
         {
             var myArr = JSON.parse(this.responseText);
             try {
-                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).addTo(map).bindPopup(customPopup,popupStyle); 
+                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup,popupStyle); 
                 listeMarker[element.get("id")] = [marker,true];
+                markersCluster.addLayer(marker);
             } catch (error) {
             var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("ville");
                 xmlhttp.onreadystatechange = function()
@@ -43,8 +68,9 @@ mapOffresInfos.forEach(element => {
                     {
                         var marker;
                         var myArr = JSON.parse(this.responseText);
-                        marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).addTo(map).bindPopup(customPopup,popupStyle); 
+                        marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup,popupStyle); 
                         listeMarker[element.get("id")] = [marker,true];
+                        markersCluster.addLayer(marker);
                     }
                 };
                 xmlhttp.open("GET", url, true);
@@ -58,6 +84,9 @@ mapOffresInfos.forEach(element => {
     sleep(100); 
 });
 
+setTimeout(() => {
+    map.addLayer(markersCluster);
+}, 2000);
 
 function updateMap() {
     for(elem in listeMarker){
@@ -112,7 +141,6 @@ function resizeMap(e) {
             </g>
         </svg></div>`;
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
-        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
     }else{
         grandir = true;
@@ -136,10 +164,27 @@ function resizeMap(e) {
             </g>
         </svg></div>`;
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
-        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
     }
-  
+    setTimeout(() => {
+        map.invalidateSize();
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    }, 100);
 }
 
 document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
+
+// Désactiver le scroll de la page quand on commence à drag la carte
+map.on('mousedown', function () {
+    document.body.style.overflow = 'hidden'; // Empêche le scroll de la page
+});
+
+// Réactiver le scroll quand on relâche la souris
+map.on('mouseup', function () {
+    document.body.style.overflow = ''; // Rétablit le scroll normal
+});
+
+// Réactiver le scroll aussi si la souris quitte la fenêtre
+document.addEventListener('mouseleave', function () {
+    document.body.style.overflow = '';
+});
