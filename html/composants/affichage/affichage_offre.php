@@ -69,7 +69,36 @@ function af_offre($row) {
 <?php
         }
 ?>
-        <img src="../../icones/logo_activite.png" alt="logo_activite" name="logo_activite" id="logo_cat">
+        <img src="../../icones/
+<?php
+        $cat = categorie($row["idoffre"]);
+        switch ($cat) {
+            case 'activité':
+                echo "logo_activite.png";
+                break;
+
+            case 'spectacle':
+                echo "logo_spec.png";
+                break;
+
+            case "parc d'attraction":
+                echo "logo_parc_attr.png";
+                break;
+
+            case 'restauration':
+                echo "logo_resto.png";
+                break;
+
+            case 'visite':
+                echo "logo_visite.png";
+                break;
+                        
+            default:
+                echo "croixSVG.svg";
+                break;
+        }
+?>
+        " alt="logo_categorie" name="logo_categorie" id="logo_cat">
     </article>
 <?php
 }
