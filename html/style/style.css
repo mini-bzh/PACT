@@ -2256,6 +2256,41 @@ aside fieldset {
     justify-content: space-evenly;
 }
 
+#map{
+    width: 90%;
+    height: 200px;
+    z-index: 0;
+}
+
+#btnAgrandir{
+    background-color: white;
+    padding: 5px;
+    height: 34px;
+}
+
+#btnAgrandir svg{
+    width: 20px;
+    height: 20px;
+}
+
+.leaflet-popup-content-wrapper .apercuOffre{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content p{
+    margin : 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content{
+    margin : 0;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content a{
+    color: black;
+}
+
 
 /*---------------------/ page choix création compte /-----------------------*/
 
