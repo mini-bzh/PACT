@@ -503,6 +503,14 @@ if (isset($idCompte)) {
                             <p class="boldArchivo texteSmall">Génerer une clé API</p>
                         </button>
 
+                        <!-- On affiche le bouton qui génère des clés API -->
+                        <button class="btnAuthent btn">
+                            <?php
+                                    include '../icones/qr-code.svg';
+                            ?>
+                            <p class="boldArchivo texteSmall">Activer Authenticator</p>
+                        </button>
+
                     </div>
 
                     <div class="générationAPI">
