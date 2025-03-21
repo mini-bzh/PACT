@@ -2258,8 +2258,19 @@ aside fieldset {
 
 #map{
     width: 90%;
-    height: 500px;
+    height: 200px;
     z-index: 0;
+}
+
+#btnAgrandir{
+    background-color: white;
+    padding: 5px;
+    height: 34px;
+}
+
+#btnAgrandir svg{
+    width: 20px;
+    height: 20px;
 }
 
 .leaflet-popup-content-wrapper .apercuOffre{
