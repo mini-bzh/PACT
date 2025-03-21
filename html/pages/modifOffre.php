@@ -438,7 +438,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
             <!-- ----------------- PARC ATTRACTION ------------------- -->
 
-            <div id="champsPA">
+            <div class="InfoPerso">
                 <div class="champs">
                     <label for="nbAttraction">Nombre Attraction :</label>
                     <input type="text" id="nbAttraction" name="nbAttraction" placeholder="Entrez le nombre d'attraction" minlength="1" maxlength="3" value="<?php echo $contentOffre["nbattraction"]; ?>">
@@ -447,6 +447,8 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <label for="ageminimum">âge minimum :</label>
                     <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3" value="<?php echo $contentOffre["ageminimum"]; ?>">
                 </div>
+                </div>
+                <div id="champsPA">
                 <div class="champs">
                     <label for="plan">Selectionner un plan :</label>
                     <input type="file" id="plan" name="plan">

@@ -29,7 +29,11 @@
         // recuperation du contenu de l offre
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
-        $avis           = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "';")->fetchAll();
+        if ($comptePro) {
+            $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "';")->fetchAll();    
+        } else {
+            $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "' and date_recup_token_blacklist ISNULL;")->fetchAll();
+        }
         $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 
         $categorie = categorie($idOffre);
