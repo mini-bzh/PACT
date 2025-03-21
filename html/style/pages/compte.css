@@ -231,6 +231,7 @@ body.no-scroll {
 
 .popUpDeco > div {
     height: 120px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -305,11 +306,13 @@ body.no-scroll {
 
 .btnAnnulerSup {
     background-color: #7c7c7c;
+    margin-left: 2%;
 }
 
 .btnValiderSup {
     background-color: #b9b9b9;
     cursor: default;
+    margin-right: 2%;
 }
 
 .btnSup {
@@ -685,4 +688,15 @@ body.no-scroll {
 #textNonValideOffre{
     margin-bottom: 3%;
     text-align: left;
+}
+
+.popUpSup > .popup-content {
+    height: 50%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 15%;
+    /* padding: 0 2%; */
+    margin-right: 15%;
 }
