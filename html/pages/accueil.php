@@ -153,7 +153,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         ?>
                             <div class="card-body">
                                 <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
-                                    <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                                    <img src="/images/baniere/pubBaniere1.png" alt="pubBaniere" class="pubBanniere">
                                 </a>
                             </div>
                         <?php
@@ -181,7 +181,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" id="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
@@ -200,8 +200,10 @@ $nouvellesOffres = $stmt->fetchAll();
                         }
                         ?>
                         <div class="card-body">
-                            <a href="/pages/CreaComptrePro.php" class="grossisQuandHover">
-                                <img src="/images/baniere/pubBaniere.png" alt="pubBaniere">
+                            <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
+                                <article>
+                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                </article>
                             </a>
                         </div>
                     </div>

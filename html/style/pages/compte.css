@@ -190,11 +190,18 @@ body.no-scroll {
     padding: 20px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     background: white;
     border-radius: 8px;
     text-align: center;
+    align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    height: 20%;
+    align-self: center;
+    align-items: center;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .popup-content h2 {
