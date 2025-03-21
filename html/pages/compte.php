@@ -552,7 +552,19 @@ if (isset($idCompte)) {
 
 
 
-
+            <!-- POP-UP d'Authenticator -->
+            <div class="popQRcode popUp">
+                <div class="popup-content">
+                    <div id="annulerQRcode">
+<?php
+                       include '../icones/croixSVG.svg';
+?>
+                    </div>
+                    <div>
+                        <img src="../icones/qr-code.svg" alt="QRcode">
+                    </div>
+                </div>
+            </div>
 
 
             <!-- POP-UP de deconnexion -->

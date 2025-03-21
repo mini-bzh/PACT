@@ -371,6 +371,51 @@ body.no-scroll {
     stroke-width: 2px;
 }
 
+.popQRcode {
+    align-items: center;
+    justify-content: center;
+}
+
+.popQRcode > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 2%;
+    position: relative;
+}
+
+.popQRcode .popup-content > div {
+    height: 70%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#annulerQRcode {
+    width: 30px;
+    height: fit-content;
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
+
+#annulerQRcode:hover {
+    cursor: pointer;
+}
+
+.popQRcode .popup-content {
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 0;
+}
+
+.popQRcode .popup-content img {
+    width: 100%;
+    height: 100%;
+}
+
 
 @media screen and (max-width : 428px){
 

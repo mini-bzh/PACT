@@ -109,3 +109,23 @@ document.getElementById('bn-modif-exit').addEventListener("click", function() {
 document.getElementById('bn-modifBanc-exit').addEventListener("click", function() {
     document.getElementById('popUpModifBancaire').style.display = "none";
 });
+
+
+// on récupère le clique sur le bouton btnAuthenticator
+let btnAuthenticator = document.getElementsByClassName("btnAuthent")[0];
+
+// afin de pouvoir executer la fonction generateAPIkey au moment du clique et éviter que le membre ou pro spam clique le bouton
+// il est griser après le déclachement de la fonction
+btnAuthenticator.addEventListener("click", () => {
+    let pop = document.getElementsByClassName('popQRcode')[0];
+    pop.style.display = 'flex';
+    document.body.classList.add('no-scroll');
+})
+
+let croix = document.getElementById("annulerQRcode");
+
+croix.addEventListener("click", () => {
+    let pop = document.getElementsByClassName('popQRcode')[0];
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+})

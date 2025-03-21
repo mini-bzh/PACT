@@ -239,7 +239,7 @@ textarea {
 }
 
 .titreOffre {
-    width: 85%;
+    width: 70%;
 }
 
 #mainAccueil #conteneurOffres {
@@ -266,11 +266,11 @@ textarea {
 }
 
 #logo_cat {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     top: 5px;
-    right: 35px;
+    right: 45px;
 }
 
 #conteneur_mini_carte {
@@ -2280,6 +2280,10 @@ aside fieldset {
     height: 34px;
 }
 
+#btnAgrandir:hover{
+    background-color: #f5f5f5;
+}
+
 #btnAgrandir svg{
     width: 20px;
     height: 20px;
@@ -2450,13 +2454,13 @@ aside fieldset {
         font-size: var(--typescale-text) !important;
     }
 
-    .coMembre,
-    .coPro {
-        width: 385.12px;
+    .coMembre, .coPro {
+        width: 90%;
         height: 100px;
         margin-left: 0;
         border-radius: 10px;
         border-width: 4px;
+        margin-left: 8%;
     }
 
     .coMembre h3,
