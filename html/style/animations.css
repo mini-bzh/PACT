@@ -75,7 +75,7 @@
 /* pour le carroussel */
 
 .card {
-    animation: slide 30s linear infinite;
+    animation: slide 5s linear infinite;
 }
 
 @keyframes slide {
