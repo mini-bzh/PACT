@@ -5,14 +5,18 @@
     // connexion a la BdD
     $dbh = new PDO("$driver:host=$server;dbname=$dbname", $user, $pass);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // force l'utilisation unique d'un tableau associat
-    
-    $query = "UPDATE tripskell._avis SET luparpro = true WHERE id_avis = :idAvis";
+
+   /* $query = "";
 
     $stmt = $dbh->prepare($query);
 
     $stmt->bindParam(":idAvis", $_POST["idAvis"]);
 
-    $stmt->execute();
+    $stmt->execute();*/
 
-    echo "avis " . $_POST["idAvis"] . " lu";
-?>
+    if($_POST["otp"] == "valide"){
+        echo 1;
+    }
+    else{
+        echo 0;
+    }

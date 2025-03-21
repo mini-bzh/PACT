@@ -498,6 +498,13 @@ textarea {
 
 #mainConnexion form div p{
     font-size: var(--typescale-small-text);
+    margin-top: 1%;
+    padding-left: 1%;
+    color: red;
+}
+
+#mainConnexion #msgErreurOtp{
+    display: none;
 }
 
 #mainConnexion form > div + a{
@@ -521,6 +528,8 @@ textarea {
     cursor: pointer;
     border: none;
 }
+
+
 
 .btnConnexion:hover{
     background-color: var(--primary);
