@@ -2845,6 +2845,25 @@ aside fieldset {
         height: 200px;
     }
 
+    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper #logo_cat{
+        display: none;
+    }
+
+    .leaflet-popup-content-wrapper #conteneur_mini_carte{
+        margin: 0;
+    }
+
+    .leaflet-popup-content-wrapper #ouvertFerme{
+        margin-right: 20px;
+    }
+
+    .leaflet-popup-content-wrapper .resumeApercu{
+        height: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    
     /*----------------/ page choix création compte /------------------*/
 
     /* GÉNÉRAL : corps de la page */
