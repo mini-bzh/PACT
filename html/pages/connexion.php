@@ -81,19 +81,19 @@ $message2 = "";
 // Affiche un message d'erreur à l'utilisateur selon son erreur
 if ($_GET['user-tempo'] === 'pro') {
     if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-        $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
+        $message1 = "<p>Ce login n'existe pas.</p>";
     }
 
     if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
-        $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+        $message2 = "<p>Mot de passe incorrect.</p>";
     }
 } else {
     if (($correspond === false) && (count($result) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-        $message1 = "<p style='color:red;'>Ce login n'existe pas.</p>";
+        $message1 = "<p>Ce login n'existe pas.</p>";
     }
 
     if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1))){
-        $message2 = "<p style='color:red;'>Mot de passe incorrect.</p>";
+        $message2 = "<p>Mot de passe incorrect.</p>";
     }
 }
 
@@ -111,7 +111,6 @@ if ($_GET['user-tempo'] === 'pro') {
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/pages/connexion.css">
 
     <!-- <script src="../js/popUpmdpOublie.js" defer></script> -->
 </head>
@@ -193,6 +192,21 @@ if ($_GET['user-tempo'] === 'pro') {
 
         <!--<label for="userPSW"><p class="texteLarge"></p></label>-->
         <input type="password" id="userPSW" name="userPSW" minlength="12" placeholder="Mot de passe" required>
+
+        <?php
+            $besoinOtp = true;
+            if($besoinOtp)
+            {
+                ?>  
+                    <div id="inputOtp">
+                        <input type="text" id="userOTP" name="userOTP" placeholder="One Time Password">
+                        <p class="erreurReponseVide" id="msgErreurOtp">OTP incorrect</p>
+                    </div>
+                <?php
+            }
+        ?>
+
+
     </div>
 
 <!-- Ecrit le message "mot de passe incorrect" si nécessaire -->
@@ -202,40 +216,12 @@ if ($_GET['user-tempo'] === 'pro') {
         <button type="submit" href="#" class="btnConnexion">
             <p class="texteLarge boldArchivo">Se connecter</p>
         </button>
-    </div>
 
 </form>
-
-<!-- Pop-up du formulaire de demande de réinitialisation -->
-<div id="resetForm" class="displayNone">
-    <form action="../composants/ajax/reset_request.php" method="POST">
-        <div>
-            <label for="recupLogin"><p>Login :</p></label>
-            <input type="recupLogin" name="recupLogin" id="recupLogin" required>
-        </div>
-        <div>
-            <label for="recupMail"><p>Adresse email :</p></label>
-            <input type="recupMail" name="recupMail" id="recupMail" required>
-        </div>
-        <button type="submit"><p class="boldArchivo">Envoyer un email de<br>réinitialisation</p></button>
-    </form>
-</div>
-
 </main>
 
 </body>
-<script>
-        let btnConnexion =document.querySelector(".btnConnexion");
-        console.log(btnConnexion);
-        if(btnConnexion != undefined)
-        {
-            btnConnexion.addEventListener("click", ()=>{
-                //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
-                document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
-                console.log(document.cookie);
-            })
-        }
-
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../js/connexion.js"></script>
 
 </html>

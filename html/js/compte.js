@@ -121,3 +121,11 @@ btnAuthenticator.addEventListener("click", () => {
     pop.style.display = 'flex';
     document.body.classList.add('no-scroll');
 })
+
+let croix = document.getElementById("annulerQRcode");
+
+croix.addEventListener("click", () => {
+    let pop = document.getElementsByClassName('popQRcode')[0];
+    pop.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+})

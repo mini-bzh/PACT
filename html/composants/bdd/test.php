@@ -32,4 +32,3 @@ foreach ($result as $row) {
     print_r($row);
     echo "<br><br>";
 }
-

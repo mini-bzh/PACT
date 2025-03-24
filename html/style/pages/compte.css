@@ -377,22 +377,43 @@ body.no-scroll {
 }
 
 .popQRcode > div {
-    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 0 2%;
+    position: relative;
 }
 
-.popQRcode svg {
-    width: 40px;
+.popQRcode .popup-content > div {
+    height: 70%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#annulerQRcode {
+    width: 30px;
+    height: fit-content;
     position: absolute;
-    top: 3%;
-    right: 6%;
+    top: 2%;
+    right: 5%;
 }
 
-.popQRcode svg:hover {
+#annulerQRcode:hover {
     cursor: pointer;
+}
+
+.popQRcode .popup-content {
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 0;
+}
+
+.popQRcode .popup-content img {
+    width: 100%;
+    height: 100%;
 }
 
 

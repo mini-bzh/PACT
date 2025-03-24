@@ -239,7 +239,7 @@ textarea {
 }
 
 .titreOffre {
-    width: 85%;
+    width: 70%;
 }
 
 #mainAccueil #conteneurOffres {
@@ -498,6 +498,13 @@ textarea {
 
 #mainConnexion form div p{
     font-size: var(--typescale-small-text);
+    margin-top: 1%;
+    padding-left: 1%;
+    color: red;
+}
+
+#mainConnexion #msgErreurOtp{
+    display: none;
 }
 
 #mainConnexion form > div + a{
@@ -521,6 +528,8 @@ textarea {
     cursor: pointer;
     border: none;
 }
+
+
 
 .btnConnexion:hover{
     background-color: var(--primary);
@@ -2445,13 +2454,13 @@ aside fieldset {
         font-size: var(--typescale-text) !important;
     }
 
-    .coMembre,
-    .coPro {
-        width: 385.12px;
+    .coMembre, .coPro {
+        width: 90%;
         height: 100px;
         margin-left: 0;
         border-radius: 10px;
         border-width: 4px;
+        margin-left: 8%;
     }
 
     .coMembre h3,
