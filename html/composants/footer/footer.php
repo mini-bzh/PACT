@@ -41,9 +41,9 @@
             
             <div class="footer-section">
                 <h4>Suivez-nous</h4>
-                <a href="https://www.facebook.com"> <img src="/images/Réseaux/facebook.png" /> </a>
-                <a href="https://www.instagram.com"> <img src="/images/Réseaux/instagram.png" /> </a>
-                <a href="https://www.youtube.com"><img src="/images/Réseaux/youtube.png" /> </a>
+                <a href="https://www.facebook.com"> <img src="/images/Réseaux/facebook.png" alt="logo facebook"/> </a>
+                <a href="https://www.instagram.com"> <img src="/images/Réseaux/instagram.png"  alt="logo instagram"/> </a>
+                <a href="https://www.youtube.com"><img src="/images/Réseaux/youtube.png"  alt="logo youtube"/> </a>
             </div>
         </div>
 
