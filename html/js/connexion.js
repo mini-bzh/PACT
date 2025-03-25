@@ -40,7 +40,11 @@ form.addEventListener("submit", async (event) => {
     }
 });
 
-btnConfirmOTP.addEventListener("click", async ()=>{
+btnConfirmOTP.addEventListener("click", ()=>{validationConnexionOTP})
+
+
+async function validationConnexionOTP()
+{
     try{
         let valide = await otpValide(userNameInput.value, otpInput.value);
         console.log(valide)
@@ -57,7 +61,7 @@ btnConfirmOTP.addEventListener("click", async ()=>{
     } catch(error) {
         console.log("erreur lors de la validation otp : ", error);
     }
-})
+}
 
 function otpActif(login)               // renvoie true si le compte [login] a activé l'authentification à 2 facteurs (TOTP), false sinon
 {
@@ -98,3 +102,18 @@ function otpValide(login, otp) {
         });
     });
 }
+
+
+document.addEventListener("keydown", (event) => {
+    if(overlayOTP.style.display == "flex")
+    {
+        if(event.key === "Escape")
+        {
+            overlayOTP.style.display = "none"
+        }
+        if(event.key === "Enter")
+        {
+            validationConnexionOTP()
+        }  
+    }
+})
