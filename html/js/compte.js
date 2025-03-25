@@ -111,16 +111,85 @@ document.getElementById('bn-modifBanc-exit').addEventListener("click", function(
 });
 
 
-// on récupère le clique sur le bouton btnAuthenticator
-let btnAuthenticator = document.getElementsByClassName("btnAuthent")[0];
+$(document).ready(function() {
+    $(".btnAuthent").click(function() {
+        $.ajax({
+            url: '../composants/ajax/generateur_qrcode.php',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                if (response.qr_url) {
+                    let qrDiv = document.getElementById("imgQRcode");
 
-// afin de pouvoir executer la fonction generateAPIkey au moment du clique et éviter que le membre ou pro spam clique le bouton
-// il est griser après le déclachement de la fonction
-btnAuthenticator.addEventListener("click", () => {
-    let pop = document.getElementsByClassName('popQRcode')[0];
-    pop.style.display = 'flex';
-    document.body.classList.add('no-scroll');
-})
+                    if (!qrDiv) {
+                        console.error("Erreur : Élément imgQRcode introuvable !");
+                        return;
+                    }
+
+                    // Vider l'ancien QR Code
+                    $('#imgQRcode').html('');
+
+                    // Générer le QR Code
+                    new QRCode(qrDiv, {
+                        text: response.qr_url,
+                        width: 256,
+                        height: 256
+                    });
+
+                    // Afficher la pop-up (si nécessaire)
+                    let pop = document.getElementsByClassName('popQRcode')[0];
+                    if (pop) {
+                        pop.style.display = 'flex';
+                        document.body.classList.add('no-scroll');
+                    }
+                }
+            },
+            error: function() {
+                alert('Erreur lors de la génération du QR Code.');
+            }
+        });
+    });
+
+    $(".btnAffQRcode").click(function() {
+        $.ajax({
+            url: '../composants/ajax/affichage_qrcode.php',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                if (response.qr_url) {
+                    let qrDiv = document.getElementById("imgQRcode");
+
+                    if (!qrDiv) {
+                        console.error("Erreur : Élément imgQRcode introuvable !");
+                        return;
+                    }
+
+                    // Vider l'ancien QR Code
+                    $('#imgQRcode').html('');
+
+                    // Générer le QR Code
+                    new QRCode(qrDiv, {
+                        text: response.qr_url,
+                        width: 256,
+                        height: 256
+                    });
+
+                    // Afficher la pop-up (si nécessaire)
+                    let pop = document.getElementsByClassName('popQRcode')[0];
+                    if (pop) {
+                        pop.style.display = 'flex';
+                        document.body.classList.add('no-scroll');
+                    }
+                }
+            },
+            error: function() {
+                alert('Erreur lors de la génération du QR Code.');
+            }
+        });
+    });
+});
+
+
 
 let croix = document.getElementById("annulerQRcode");
 

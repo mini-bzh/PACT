@@ -18,8 +18,8 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
 
 $query1 = "SELECT * FROM tripskell._reponseavis";
-$query2 = "SELECT * FROM tripskell._compte";
-$query3 = "DELETE FROM tripskell._reponseavis WHERE id_reponseavis = 9";
+$query2 = "SELECT secretotp FROM tripskell._compte";
+$query4 = "SELECT * FROM tripskell._compte WHERE login = 'RocheJagu'";
 
 $sth = $dbh->prepare($query2);
 
@@ -30,5 +30,6 @@ $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($result as $row) {
     print_r($row);
+    //echo $row["secretotp"] == null;
     echo "<br><br>";
 }

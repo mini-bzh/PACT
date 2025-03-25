@@ -371,6 +371,20 @@ body.no-scroll {
     stroke-width: 2px;
 }
 
+/* Bouton d'affichage du QRcode */
+.btnAffQRcode {
+    background-color: var(--accentLight);
+}
+
+.btnAffQRcode svg rect {
+    fill: none;
+    stroke: white;
+}
+
+.btnAffQRcode svg path {
+    stroke-width: 2px;
+}
+
 .popQRcode {
     align-items: center;
     justify-content: center;

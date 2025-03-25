@@ -161,6 +161,19 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <main id="mainConnexion">
 
+<div id="overlayOTP">
+    <div id="fenetreOTP">
+        <p>Entrez votre OTP</p>
+        <input type="text" id="userOTP" name="userOTP" minlength="6" placeholder="One Time Passord">
+        <button id="btnConfirmerOTP">
+            <p>Confirmer</p>
+        </button>
+        <button id="btnAnnulerOTP">
+            <p>Annuler</p>
+        </button>
+    </div>
+</div>
+
 <!-- Formulaire de connexion -->
 <form action="" method="post">
     <p class="texteLarge centerText"> Se connecter à un compte
@@ -193,19 +206,6 @@ if ($_GET['user-tempo'] === 'pro') {
         <!--<label for="userPSW"><p class="texteLarge"></p></label>-->
         <input type="password" id="userPSW" name="userPSW" minlength="12" placeholder="Mot de passe" required>
 
-        <?php
-            $besoinOtp = true;
-            if($besoinOtp)
-            {
-                ?>  
-                    <div id="inputOtp">
-                        <input type="text" id="userOTP" name="userOTP" placeholder="One Time Password">
-                        <p class="erreurReponseVide" id="msgErreurOtp">OTP incorrect</p>
-                    </div>
-                <?php
-            }
-        ?>
-
 
     </div>
 
@@ -213,7 +213,7 @@ if ($_GET['user-tempo'] === 'pro') {
 <?php
     echo $message2;
 ?>
-        <button type="submit" href="#" class="btnConnexion">
+        <button type="submit" href="#" class="btnConnexion" id="btnConnexionForm">
             <p class="texteLarge boldArchivo">Se connecter</p>
         </button>
 

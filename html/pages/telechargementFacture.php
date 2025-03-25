@@ -21,6 +21,5 @@
                 
                 // Envoyer le document PDF à la sortie
                 $dompdf->stream('Facture.pdf');
-                
-
+            
                 ?>

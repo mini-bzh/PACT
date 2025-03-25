@@ -476,7 +476,7 @@ textarea {
     margin: 0 0 50px 0;
 }
 
-#mainConnexion form input{
+#mainConnexion form input, #fenetreOTP input{
     width: 100%;
     height: 45px;
     border: solid 1px var(--grisClair);
@@ -528,6 +528,7 @@ textarea {
     cursor: pointer;
     border: none;
 }
+
 
 
 
@@ -593,9 +594,47 @@ textarea {
     align-self: flex-end;
 }
 
-#resetForm button:hover{
-    background-color: var(--accentDark);
+/* pop-up confirmation OTP */
+
+#fenetreOTP{
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 2%;
 }
+
+#btnConfirmerOTP, #btnAnnulerOTP{
+    border-radius: 25px;
+    width: 100%;
+    height: 35px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+
+    color: white;
+    background-color: var(--primary);
+
+    transition: transform 0.2s ease;
+}
+
+#btnAnnulerOTP{
+    color: black;
+    background-color: var(--grisClair);
+}
+
+#btnConfirmerOTP:hover, #btnAnnulerOTP:hover {
+    transform: scale(0.98);
+}
+
 
 @media screen and (max-width : 428px){
     #mainConnexion header div h4{
@@ -760,6 +799,18 @@ textarea {
     order: 1;
     display: flex;
     justify-content: center;
+}
+
+/* Pour affiche le nombre de token pour le blacklist d'une offre */
+
+.tokenBlacklist{
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTokenBlacklist{
+    display: flex;
+    justify-content: end;
 }
 
 @media screen and (max-width : 428px)
@@ -1196,7 +1247,7 @@ textarea {
     border-radius: 5px;
 }
 
-#overlay {
+#overlay, #overlayOTP {
     display: none;
     position: fixed;
     top: 0;
@@ -2393,7 +2444,6 @@ aside fieldset {
 */
 
 .carrousel {
-    margin-top: 4%;
     margin-bottom: 4%;
     overflow: hidden;
     width: 100%;
@@ -2417,18 +2467,19 @@ aside fieldset {
     margin-right: 20px;
     border-radius: 5px;
     padding: 10px;
-}
+} 
 
-/* Pour affiche le nombre de token pour le blacklist d'une offre */
 
-.tokenBlacklist{
-    display: flex;
-    justify-content: space-between;
-}
 
-.noTokenBlacklist{
-    display: flex;
-    justify-content: end;
+
+
+/*              _________________              */
+/*-------------/ accessibilite  /--------------*/
+/*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
+
+.hideForGraphic {
+    display: none;
+    visibility: hidden;
 }
 
 /*

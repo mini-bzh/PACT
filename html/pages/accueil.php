@@ -96,7 +96,7 @@ $nouvellesOffres = $stmt->fetchAll();
         </svg>
 
         <div>
-            <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
+            <img src="/images/logo/logo_grand.png" alt="logo PACT" id="logoTitreMobile">
         </div>
     </div>
     <main>
@@ -110,7 +110,7 @@ $nouvellesOffres = $stmt->fetchAll();
         <?php
         } else {
         ?>
-            <h1>À la Une</h1>
+            <h1 class="hideForGraphic">À la Une</h1>
             <?php if ($nbOffreALaUne['count'] >= 5) { ?>
                 <div class="carrousel">
                     <div class="card">

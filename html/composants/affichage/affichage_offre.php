@@ -32,14 +32,18 @@ function af_offre($row) {
     }
 ?>
     ">
+        <p class="hideForGraphic">Titre offre :</p>
         <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
         <div class="conteneurSpaceBetween" id="conteneur_mini_carte">
             <div class="conteneurSVGtexte">
-                <img src="/icones/logoUserSVG.svg" alt="pro">
+                <img src="/icones/logoUserSVG.svg" alt="photo profil professionnel">
+                <p class="hideForGraphic">Professionnel :</p>
                 <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
             </div>
+            <p class="hideForGraphic">Categorie :</p>
             <p id="cat" class="displayNone"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
+            <p class="hideForGraphic">Actuellement :</p>
             <p id ="ouvertFerme" class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
         </div>
 
@@ -47,7 +51,8 @@ function af_offre($row) {
             <img src="/images/imagesOffres/<?php echo $row["img1"]?>" alt="illustration offre">
             <p class="text-overlay">dès <span><?php echo $row["tarifminimal"]?>€</span> /pers</p>
         </div>
-        
+
+        <p class="hideForGraphic">Description :</p>
         <p class="resumeApercu"><?php echo $row["resume"]?></p>
 
         <div class="conteneurSVGtexte conteneurAdresse">
@@ -57,6 +62,7 @@ function af_offre($row) {
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
+                <p class="hideForGraphic">Note /5 :</p>
                 <p id="note"><?php echo $row["note"]?></p>
                 <?php affichage_etoiles($row["note"]);?>
             </div>

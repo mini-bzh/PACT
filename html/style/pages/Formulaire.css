@@ -24,7 +24,7 @@ form {
     margin-bottom: 25px; /* Plus d'espace entre les champs */
 }
 
-.champs label {
+.champs label, .ChoixJours > label, .TextAreaOffre > div > label {
     font-weight: bold;
     margin-bottom: 10px;
     color: #333;
@@ -269,7 +269,14 @@ form > .zoneBtn{
 .champsAdresse{
     margin-top: 2%;
     display: flex;
+    flex-direction: column;
 }
+
+/* .champsAdresse > div{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+} */
 
 .champsAdresse>input{
     margin-bottom: 10px;
@@ -284,15 +291,15 @@ form > .zoneBtn{
 }
 
 #nomRue{
-    width: 35%; 
+    width: 50%; 
 }
 
 #ville{
-    width: 25%; 
+    width: 35%; 
 }
 
 #codePostal{
-    width: 32%; 
+    width: 15%; 
 }
 
 .labelAdresse{
@@ -588,56 +595,7 @@ form {
    Style Crea Offre
    ================================================================= */
 
-   .SelecHoraires{
-    margin: 5%;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    }
 
-    .ChoixJours{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 6%;
-    }
-   
-
-
-.jours button {
-    background-color: #fff;
-    border: 2px solid #000;
-    padding: 15px;
-    width: 60px; 
-    height: 60px;
-    border-radius: 50%;
-    text-align: center;
-    font-size: var(--typescale-small-text); 
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.jours button:hover {
-    background-color: #f0f0f0;
-}
-
-.heures {
-    display: flex;
-    align-items: center;
-    /*justify-content: space-between;
-    max-width: 30%;*/
-}
-
-.heures label {
-    font-size: var(--typescale-small-text);
-}
-
-.heures input {
-    width: auto;
-    padding: 8px;
-    font-size: var(--typescale-small-text); 
-}
 
 /* GESTION DES CATEGORIES AFFICHER OU NON */
 
@@ -671,7 +629,6 @@ form {
 }
 
 #tagsVisite{
-    
     display: none;
 }
 
@@ -724,41 +681,122 @@ form {
     padding-bottom: 10px;
 }
 
-/* partie horaires */
-
-.jours .jourOuvert{
-    background-color: var(--primaryDark);
-    color: white;
-}
-
-.jours .jourOuvert:hover{
-    background-color: var(--primaryDark);
-}
-
-.jours .jourSelectionne{
-    background-color: var(--primaryDark);
-}
-
-.heures{
-    display: none;
-}
-
-.horairesVisibles{
+.champsCategorie{
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.heures > label:first-child{
-    text-align: start;
-}
-
-#btnAjoutHoraire{
-    font-weight: bold;
+.champsCategorie > label{
     margin: 0px;
     padding: 0px;
 }
 
-#btnAjoutHoraire:hover{
+/* GESTION DES HORAIRES */
+
+.ChoixJours{
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+    padding: 0% 5%;
+    width: 100%;
+    align-self: center;
+    justify-content: flex-start;
+}
+
+.jours{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 1% 0%;
+}
+
+.ouvert, .fermer{
+    padding: 0 1.5%;
+}
+
+.ChoixJours > label{
+    text-align: center;
+    padding: 0.5% 0;
+    font-size: var(--typescale-text); 
+}
+
+.jours button {
+    background-color: var(--primaryDark);
+    color: white;
+    border: 2px solid #000;
+    padding: 5px;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: var(--typescale-small-text); 
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.jours button:hover {
+    background-color: lightgray;
+    color: var(--primaryDark);
+}
+
+.jours .jourOuvert{
+    background-color: white;
+    color: #000;
+}
+
+.jours .jourOuvert:hover{
+    background-color: lightgray;
+}
+
+.jours .jourSelectionne{
+    background-color: white;
+}
+
+.ouvert{
+    display: flex;
+    align-items: center;
+}
+
+.fermer{
+    display: none;
+}
+
+.horairesAfficher{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.horairesCacher{
+    display: none;
+}
+
+.heures1 label, .heures2 label{
+    margin: 0px 10px;
+}
+
+.btnAjoutHoraire{
+    background-color: var(--primaryDark);
+    color: white;
+    border: 2px solid #000;
+    width: 30px; 
+    height: 30px;
+    margin: 0px 10px; 
+    font-size: var(--typescale-large-text);
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnAjoutHoraire:hover{
+    background-color: white;
+    color: var(--primaryDark);
+}
+
+.ouvert > label:first-child, .fermer > label:first-child{
+    text-align: start;
 }
 
 .parentVisite{
@@ -882,6 +920,12 @@ select{
     margin-left: 2%;
     margin-right: 2%;
     resize: none;
+}
+
+.TextAreaOffre > div{
+   margin-top: 2.5%;
+   display: flex;
+   flex-direction: column;
 }
 
 .Dureeoption{
