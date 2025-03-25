@@ -72,144 +72,89 @@ inputImg.forEach(element => {
     });
 });
 
+//afficher les messages d'erreur si besoin
+let btnConfirm = document.querySelectorAll(".btnConfirmer"); // Sélectionne tous les boutons avec la classe "btnConfirmer"
 
-/* --------------------------------- partie horaires  --------------------------------- */
-
-
-//création et initialisation d'une map associant à chaque id d'un bouton jour l'élément du DOM correspondant
-const mapJoursElements = new Map();
-["btnL", "btnMa", "btnMe", "btnJ", "btnV", "btnS", "btnD"].forEach(btnJour => {
-    mapJoursElements.set(btnJour, document.getElementById(btnJour));
+btnConfirm.forEach(btn => {
+    btn.addEventListener("click", function(event) {
+        imageVide(event);
+    });
 });
 
-//création et initialisation d'une map associant à chaque id d'un bouton jour le nom complet du jour 
-const mapNomsJours = new Map([
-    ["btnL", "lundi"],
-    ["btnMa", "mardi"],
-    ["btnMe", "mercredi"],
-    ["btnJ", "jeudi"],
-    ["btnV", "vendredi"],
-    ["btnS", "samedi"],
-    ["btnD", "dimanche"]
-]);
+function imageVide(event) {
+    let isEmpty = true;
+
+    inputImg.forEach(input => {
+        if (input.files.length > 0) {
+            isEmpty = false; // Si au moins un fichier est sélectionné, on valide
+        }
+    });
+
+    if (isEmpty) {
+        alert("Veuillez enregistrer une image pour votre offre");
+        event.preventDefault(); // Empêche l'action si aucune image n'est sélectionnée
+    }
+}
 
 
+/* --------------------------------- partie horaires  --------------------------------- */ 
 
-//récupération des éléments nécéssaires pour les horaires
-let champJours1 = document.getElementById("heures1");
-let champJours2 = document.getElementById("heures2");
+ChampsHeures1 = document.querySelectorAll(".heures1");
+ChampsHeures2 = document.querySelectorAll(".heures2");
 
-let btnAjoutHoraire = document.getElementById("btnAjoutHoraire");   
+function jourClique(event) {
+    let boutonClique = event.currentTarget; // Récupère le bouton cliqué
+    let parent = boutonClique.parentElement; 
+    let texteOuvert = parent.querySelector(".ouvert"); // Sélectionne l'élément interne
+    let texteFermer = parent.querySelector(".fermer"); // Sélectionne l'élément interne
+    heures1 = texteOuvert.querySelector(".heures1");
+    heures2 = texteOuvert.querySelector(".heures2");
+    //let texteBouton = boutonClique.querySelector("button"); // Sélectionne l'élément interne
 
-let heureDebut1 = document.querySelector("#heures1 .heure-debut");
-let heureFin1 = document.querySelector("#heures1 .heure-fin");
+    if (texteOuvert) {
+        texteOuvert.classList.toggle("horairesCacher"); // Ajoute ou enlève la classe pour cacher/afficher
+        texteFermer.classList.toggle("horairesAfficher"); // Ajoute ou enlève la classe pour cacher/afficher
+        boutonClique.classList.toggle("jourOuvert");
 
-let heureDebut2 = document.querySelector("#heures2 .heure-debut");
-let heureFin2 = document.querySelector("#heures2 .heure-fin");
+        if (texteFermer.classList.contains("horairesAfficher")) {
+            heures1.querySelector(".heure-debut").value = "";
+            heures1.querySelector(".heure-fin").value = "";
+            heures2.querySelector(".heure-debut").value = "";
+            heures2.querySelector(".heure-fin").value = "";
+        }
 
-let nomJour1 = document.getElementById("nomJour1");
+    }
+}
 
-// variable qui contiendra l'id du bouton du jour séléctionné
-let jourSelectionne;
-
-let tabInputsJour = document.getElementsByClassName("inputJour");   //récupère les input cachés dans le formulaire qui contiendront les horaires des jours
-
-
-
-//création et initialisation d'une map associant à chaque id d'un bouton jour les horaires qui lui sont associées
-const mapJoursHoraires = new Map();
-["btnL", "btnMa", "btnMe", "btnJ", "btnV", "btnS", "btnD"].forEach(jour => {
-    mapJoursHoraires.set(jour, ["", "", "", ""]);
+// Ajout des event listeners aux boutons
+document.querySelectorAll(".btnHoraire").forEach(bouton => {
+    bouton.addEventListener("click", jourClique);
 });
 
-//appelle la fonction jourClique quand l'utilisateur clique sur un bouton jour
-mapJoursElements.forEach((value, key, map) => {
-    mapJoursElements.get(key).addEventListener("click", jourClique);
-})
+/* --------------------------------- ajout deuxième horaire  --------------------------------- */
 
-heureDebut1.addEventListener("keyup", () => { horaireEntree(heureDebut1)});
-heureFin1.addEventListener("keyup", () => { horaireEntree(heureFin1) });
+function toggleHoraire2(event)                       //toggle l'affichage des champs pour ajouter un 2e couple d'horaires
+{
+    let boutonClique = event.currentTarget;
+    let parent = boutonClique.parentElement;
+    let grandParent = parent.parentElement;
+    let heureCacher = grandParent.querySelector(".heures2");
 
-heureDebut2.addEventListener("keyup", () => { horaireEntree(heureDebut2) });
-heureFin2.addEventListener("keyup", () => { horaireEntree(heureFin2) });
-
-
-function aDeuxHoraires(idJour) {
-    let horairesjour = mapJoursHoraires.get(idJour);
-    return horairesjour[2].length != 0 && horairesjour[3].length != 0;
-}
-
-function jourClique() {
-    element = event.currentTarget;
-    element.classList.toggle("jourOuvert");
-
-    jourSelectionne = element.id;
-
-
-    if (element.classList.contains("jourOuvert")) {
-        champJours1.classList.add("horairesVisibles");
-        nomJour1.innerText = mapNomsJours.get(element.id);
-
-        heureDebut1.value = mapJoursHoraires.get(jourSelectionne)[0];
-        heureFin1.value = mapJoursHoraires.get(jourSelectionne)[1];
-        heureDebut2.value = mapJoursHoraires.get(jourSelectionne)[2];
-        heureFin2.value = mapJoursHoraires.get(jourSelectionne)[3];
-
-        if (aDeuxHoraires(jourSelectionne)) {
-            champJours2.classList.add("horairesVisibles");
-            btnAjoutHoraire.textContent = "-"
-        }
-        else {
-            champJours2.classList.remove("horairesVisibles");
-            btnAjoutHoraire.textContent = "+";
-        }
+    heureCacher.classList.toggle("horairesAfficher");
+    heureCacher.classList.toggle("horairesCacher");
+    if (boutonClique.textContent == "+") {
+        boutonClique.textContent = "-";
     }
     else {
-        champJours1.classList.remove("horairesVisibles");
-        champJours2.classList.remove("horairesVisibles");
+        boutonClique.textContent = "+";
+        heureCacher.querySelector(".heure-debut").value = "";
+        heureCacher.querySelector(".heure-fin").value = "";
     }
 }
 
-
-function horaireEntree(element)                 //met à jour la map mapJoursHoraires
-{
-    let horairesJour;
-    horairesJour = mapJoursHoraires.get(jourSelectionne);
-
-    if (element == heureDebut1) {
-        horairesJour[0] = heureDebut1.value;
-    }
-    else if (element == heureFin1) {
-        horairesJour[1] = heureFin1.value;
-    }
-    else if (element == heureDebut2) {
-        horairesJour[2] = heureDebut2.value;
-    }
-    else if (element == heureFin2) {
-        horairesJour[3] = heureFin2.value;
-    }
-    mapJoursHoraires.set(jourSelectionne, horairesJour);
-}
-
-/* ----------------------------------------------- ajout 2e horaire ----------------------------------------------- */
-
-btnAjoutHoraire.addEventListener("click", toggleHoraire2);
-
-
-function toggleHoraire2()                       //toggle l'affichage des champs pour ajouter un 2e couple d'horaires
-{
-    champJours2.classList.toggle("horairesVisibles");
-    if (btnAjoutHoraire.textContent == "+") {
-        btnAjoutHoraire.textContent = "-";
-    }
-    else {
-        btnAjoutHoraire.textContent = "+";
-        heureDebut2.value = "";
-        heureFin2.value = "";
-
-        mapJoursHoraires.set(jourSelectionne, [mapJoursHoraires.get()])
-    }
-}
+document.querySelectorAll(".btnAjoutHoraire").forEach(bouton => {
+    bouton.addEventListener("click", toggleHoraire2);
+});
 
 
 /* ----------------------------------------------- vérifications avant submit ----------------------------------------------- */
@@ -410,4 +355,4 @@ function getLastMonday() {
 }
 
 document.getElementById("date_debut_opt").min = getLastMonday();
-document.getElementById("date_fin_abo").min = new Date().toISOString().split("T")[0];
+// document.getElementById("date_fin_abo").min = new Date().toISOString().split("T")[0];
