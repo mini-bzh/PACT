@@ -126,6 +126,9 @@ if (isset($idCompte)) {
 
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="../style/pages/compte.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/suppressionCompte.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
@@ -503,16 +506,35 @@ if (isset($idCompte)) {
                             <p class="boldArchivo texteSmall">Génerer une clé API</p>
                         </button>
 
-                        <!-- On affiche le bouton qui génère des clés API -->
-                        <button class="btnAuthent btn">
+<?php
+            $stmt = $dbh->prepare("SELECT secretotp from tripskell._compte where id_c = :id");
+
+            $stmt->bindParam(':id', $_SESSION["idCompte"], PDO::PARAM_STR);
+        
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && $result['secretotp'] !== null) {
+                $cleSecrete = true;
+            } else {
+                $cleSecrete = false;
+            }
+?>
+
+                        <!-- On affiche le bouton qui génère / affiche le QRcode authentikator  -->
+                        <button class="btn 
+                        <?php if ($cleSecrete) { ?> btnAffQRcode <?php } else { ?> btnAuthent <?php } ?>
+                        ">
+                        
                             <?php
                                     include '../icones/qr-code.svg';
                             ?>
-                            <p class="boldArchivo texteSmall">Activer Authenticator</p>
+                            <p class="boldArchivo texteSmall"><?php if ($cleSecrete) { ?> Afficher <?php } else { ?> Activer <?php } ?> Authenticator</p>
                         </button>
 
                     </div>
 
+                    <!-- Clé API -->
                     <div class="générationAPI">
                         
                     <strong><p id="apiKeyTexte"></p></strong>
@@ -561,7 +583,7 @@ if (isset($idCompte)) {
 ?>
                     </div>
                     <div>
-                        <img src="../icones/qr-code.svg" alt="QRcode">
+                        <div id="imgQRcode"></div>
                     </div>
                 </div>
             </div>
