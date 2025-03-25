@@ -111,6 +111,8 @@ document.getElementById('bn-modifBanc-exit').addEventListener("click", function(
 });
 
 
+let secretOTP = "";
+
 $(document).ready(function() {
     $(".btnAuthent").click(function() {
         $.ajax({
@@ -118,8 +120,9 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             success: function(response) {
-                if (response.qr_url) {
+                if (response.qr_url && response.secret) {
                     let qrDiv = document.getElementById("imgQRcode");
+                    secretOTP = response.secret;
 
                     if (!qrDiv) {
                         console.error("Erreur : Élément imgQRcode introuvable !");
@@ -198,3 +201,62 @@ croix.addEventListener("click", () => {
     pop.style.display = 'none';
     document.body.classList.remove('no-scroll');
 })
+
+
+// Formulaire de submition OTP
+let otpInput = document.getElementById('codeOTP');
+let errorMessage = document.getElementById('error-message');
+let submitBtn = document.getElementById('submit-btn-otp');
+
+otpInput.addEventListener('input', function(e) {
+    let value = otpInput.value.replace(/\s/g, ''); // Supprime les espaces existants
+    value = value.replace(/\D/g, ''); // Supprime tout sauf les chiffres
+
+    if (value.length > 6) {
+        value = value.slice(0, 6); // Limite à 6 chiffres
+    }
+
+    if (value.length > 3) {
+        value = value.slice(0, 3) + ' ' + value.slice(3); // Ajoute l'espace après le 3e chiffre
+    }
+
+    otpInput.value = value;
+
+    // Vérifier si l'OTP contient exactement 6 chiffres (sans espace)
+    if (/^\d{6}$/.test(value.replace(/\s/g, ''))) {
+        submitBtn.disabled = false;
+        errorMessage.textContent = '';
+    } else {
+        submitBtn.disabled = true;
+        errorMessage.textContent = 'Le code doit contenir 6 chiffres.';
+    }
+});
+
+submitBtn.addEventListener('click', function() {
+    const otpCode = otpInput.value.replace(/\s/g, ''); // Enlever les espaces avant d'envoyer
+
+    $.ajax({
+        url: '../ajax/verifier_otp_correct.php',
+        type: 'POST',
+        data: { otp: otpCode, secret: secretOTP },
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                let pop = document.getElementsByClassName('popQRcode')[0];
+                pop.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+
+                secretOTP = "";
+
+                alert("code OTP correct");
+            } else {
+                errorMessage.textContent = 'code OTP incorrect';
+                alert("code OTP incorrect");
+            }
+        },
+        error: function() {
+            errorMessage.textContent = 'Erreur serveur, réessayez.';
+            successMessage.textContent = '';
+        }
+    });
+});
