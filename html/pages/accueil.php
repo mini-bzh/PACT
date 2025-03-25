@@ -110,7 +110,7 @@ $nouvellesOffres = $stmt->fetchAll();
         <?php
         } else {
         ?>
-            <h1>À la Une</h1>
+            <h1 class="hideForGraphic">À la Une</h1>
             <?php if ($nbOffreALaUne['count'] >= 5) { ?>
                 <div class="carrousel">
                     <div class="card">

@@ -801,6 +801,18 @@ textarea {
     justify-content: center;
 }
 
+/* Pour affiche le nombre de token pour le blacklist d'une offre */
+
+.tokenBlacklist{
+    display: flex;
+    justify-content: space-between;
+}
+
+.noTokenBlacklist{
+    display: flex;
+    justify-content: end;
+}
+
 @media screen and (max-width : 428px)
 {
     #mainGestionOffres .conteneurBtnOffres{
@@ -2432,7 +2444,6 @@ aside fieldset {
 */
 
 .carrousel {
-    margin-top: 4%;
     margin-bottom: 4%;
     overflow: hidden;
     width: 100%;
@@ -2456,19 +2467,9 @@ aside fieldset {
     margin-right: 20px;
     border-radius: 5px;
     padding: 10px;
-}
+} 
 
-/* Pour affiche le nombre de token pour le blacklist d'une offre */
 
-.tokenBlacklist{
-    display: flex;
-    justify-content: space-between;
-}
-
-.noTokenBlacklist{
-    display: flex;
-    justify-content: end;
-}
 
 
 

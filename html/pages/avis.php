@@ -153,19 +153,19 @@ if ($comptePro) {
                                 </div>
                                 <?php if ($offre['id_abo'] == 'Premium') {
                                     /* On récupère les tokens pour le blacklistage */
-                                    $stmt = $dbh->prepare("select count(*) as nbToken from tripskell._avis where idoffre = " . $offre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
+                                    $stmt = $dbh->prepare("select count(*) as nbtoken from tripskell._avis where idoffre = " . $offre['idoffre'] . " and date_recup_token_blacklist is not NULL and date_recup_token_blacklist>now();");
                                     $stmt->execute();   // execution de la requete
                                     $nbTokenBlacklist = $stmt->fetchAll()[0];
                                     //print_r($nbTokenBlacklist); 
                                 ?>
                                     <h4>Blacklistage restant :<?php
-                                                                if ($nbTokenBlacklist['nbToken'] == 0) {
+                                                                if ($nbTokenBlacklist['nbtoken'] == 0) {
                                                                     echo " 3";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] == 1) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 1) {
                                                                     echo " 2";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] == 2) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] == 2) {
                                                                     echo " 1";
-                                                                } elseif ($nbTokenBlacklist['nbToken'] >= 3) {
+                                                                } elseif ($nbTokenBlacklist['nbtoken'] >= 3) {
                                                                     echo " 0";
                                                                 } ?>/3</h4>
                                 <?php } ?>
