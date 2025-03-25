@@ -32,7 +32,6 @@ function af_offre($row) {
     }
 ?>
     ">
-<<<<<<< Updated upstream
         <p class="hideForGraphic">Titre offre :</p>
         <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
         <div class="conteneurSpaceBetween" id="conteneur_mini_carte">
@@ -43,15 +42,6 @@ function af_offre($row) {
             </div>
             <p class="hideForGraphic">Categorie :</p>
             <p id="cat" class="displayNone"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
-=======
-        <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
-        <div class="conteneurSVGtexte">
-            <img src="/icones/logoUserSVG.svg" alt="pro">
-            <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
-        </div>
-        <div class="conteneurSpaceBetween">
-            <p id="cat"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
->>>>>>> Stashed changes
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
             <p class="hideForGraphic">Actuellement :</p>
             <p id ="ouvertFerme" class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
