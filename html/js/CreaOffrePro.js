@@ -99,24 +99,25 @@ function imageVide(event) {
 
 /* --------------------------------- partie horaires  --------------------------------- */ 
 
-ChampsHeures1 = document.querySelectorAll(".heures1");
-ChampsHeures2 = document.querySelectorAll(".heures2");
 
+/* fonction qui permet de changer le bouton au moment de cliquer dessus*/
 function jourClique(event) {
     let boutonClique = event.currentTarget; // Récupère le bouton cliqué
-    let parent = boutonClique.parentElement; 
+    let parent = boutonClique.parentElement; // On récupère le parent du bouton cliqué
     let texteOuvert = parent.querySelector(".ouvert"); // Sélectionne l'élément interne
     let texteFermer = parent.querySelector(".fermer"); // Sélectionne l'élément interne
-    heures1 = texteOuvert.querySelector(".heures1");
-    heures2 = texteOuvert.querySelector(".heures2");
+    heures1 = texteOuvert.querySelector(".heures1"); // Sélectionne l'élement heures1
+    heures2 = texteOuvert.querySelector(".heures2"); // Sélectionne l'élement heures2
     //let texteBouton = boutonClique.querySelector("button"); // Sélectionne l'élément interne
 
-    if (texteOuvert) {
+    if (texteOuvert) { 
         texteOuvert.classList.toggle("horairesCacher"); // Ajoute ou enlève la classe pour cacher/afficher
         texteFermer.classList.toggle("horairesAfficher"); // Ajoute ou enlève la classe pour cacher/afficher
-        boutonClique.classList.toggle("jourOuvert");
+        boutonClique.classList.toggle("jourOuvert"); // On change le bouton
 
         if (texteFermer.classList.contains("horairesAfficher")) {
+            // si la partie  fermer (.fermer) est afficher alors
+            // tout les champs de saisies sont vides
             heures1.querySelector(".heure-debut").value = "";
             heures1.querySelector(".heure-fin").value = "";
             heures2.querySelector(".heure-debut").value = "";
@@ -138,20 +139,21 @@ function toggleHoraire2(event)                       //toggle l'affichage des ch
     let boutonClique = event.currentTarget;
     let parent = boutonClique.parentElement;
     let grandParent = parent.parentElement;
-    let heureCacher = grandParent.querySelector(".heures2");
+    let heureCacher = grandParent.querySelector(".heures2"); // On récupère les heures cacher 
 
-    heureCacher.classList.toggle("horairesAfficher");
-    heureCacher.classList.toggle("horairesCacher");
-    if (boutonClique.textContent == "+") {
+    heureCacher.classList.toggle("horairesAfficher"); // on affiche la zone cacher 
+    heureCacher.classList.toggle("horairesCacher"); // on enlève ce qui la cache
+    if (boutonClique.textContent == "+") { // si le contenue du bouton est "+" on le change de + à - 
         boutonClique.textContent = "-";
     }
-    else {
-        boutonClique.textContent = "+";
+    else { // ici on recache le champs de saisie d'heure ne plus 
+        boutonClique.textContent = "+"; // on remplace le contenue par "+" et on met les valeurs à vide
         heureCacher.querySelector(".heure-debut").value = "";
         heureCacher.querySelector(".heure-fin").value = "";
     }
 }
 
+// Ajout des event listeners aux boutons
 document.querySelectorAll(".btnAjoutHoraire").forEach(bouton => {
     bouton.addEventListener("click", toggleHoraire2);
 });
