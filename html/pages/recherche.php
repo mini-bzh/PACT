@@ -68,7 +68,7 @@
         ?>
         <div class="titrePortable">
 
-            <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="384" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_169_4380)">
             <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white"/>
             </g>
