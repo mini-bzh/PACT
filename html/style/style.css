@@ -2921,6 +2921,11 @@ aside fieldset {
         margin-bottom: 10px;
     }
 
+    .leaflet-popup-content-wrapper .lienApercuOffre{
+        height: 30vh;
+    }
+
+
     
     /*----------------/ page choix création compte /------------------*/
 
