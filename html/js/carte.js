@@ -24,6 +24,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(map);
 
+var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
+imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
+
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
 // Préchargement de la carte
 map.on('load', function() {
     preloadTiles();
@@ -60,19 +65,18 @@ mapOffresInfos.forEach(element => {
         {
             var myArr = JSON.parse(this.responseText);
             try {
-                element.get('element').innerHTML += 
+                var content = element.get('element');
+                content.innerHTML += 
                 `
-                <br>
-                <button onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                             Itinéraire
                 </button>
                 `;
                 
-                var customPopup = element.get("element");
+                var customPopup = content;
                 console.log(customPopup);
 
                 var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
-                //marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                 listeMarker[element.get("id")] = [marker,true];
                 markersCluster.addLayer(marker);
             } catch (error) {
@@ -84,19 +88,18 @@ mapOffresInfos.forEach(element => {
                         var marker;
                         var myArr = JSON.parse(this.responseText);
 
-                        element.get('element').innerHTML += 
+                        var content = element.get('element');
+                        content.innerHTML += 
                         `
-                        <br>
-                        <button onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                                     Itinéraire
                         </button>
                         `;
                         
-                        var customPopup = element.get("element");
+                        var customPopup = content;
                         console.log(customPopup);
 
                         marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
-                        //marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                         listeMarker[element.get("id")] = [marker,true];
                         markersCluster.addLayer(marker);
                     }
