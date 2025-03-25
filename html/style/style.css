@@ -2431,6 +2431,17 @@ aside fieldset {
     justify-content: end;
 }
 
+
+
+/*              _________________              */
+/*-------------/ accessibilite  /--------------*/
+/*            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯               */
+
+.hideForGraphic {
+    display: none;
+    visibility: hidden;
+}
+
 /*
 #######################################################
 ############        MEDIA QUERY        ################

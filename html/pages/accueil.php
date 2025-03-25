@@ -96,7 +96,7 @@ $nouvellesOffres = $stmt->fetchAll();
         </svg>
 
         <div>
-            <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
+            <img src="/images/logo/logo_grand.png" alt="logo PACT" id="logoTitreMobile">
         </div>
     </div>
     <main>
