@@ -609,7 +609,7 @@ textarea {
 }
 
 #btnConfirmerOTP, #btnAnnulerOTP{
-    border-radius: 25px;
+    border-radius: 8px;
     width: 100%;
     height: 35px;
     text-decoration: none;
