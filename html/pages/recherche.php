@@ -102,16 +102,16 @@
             <section id="conteneurBouton">
                 <section id="conteneurTrie">
                     <div id="btnTriePrix" class="btnTrie grossisQuandHover" onclick="trierPrix()">
-                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTriePrix" class="iconeTrie">
-                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTriePrix1" class="iconeTrie displayNone">
-                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTriePrix2" class="iconeTrie displayNone">
+                        <img src="/icones/trierSVG.svg" alt="icone non trié" id="iconeTriePrix" class="iconeTrie">
+                        <img src="/icones/trier1SVG.svg" alt="icone tri décroissant" id="iconeTriePrix1" class="iconeTrie displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="icone tri croissant" id="iconeTriePrix2" class="iconeTrie displayNone">
                         <p id="txtBtnPrix" class="txtBtnTrie" >prix</p>
                     </div>
 
                     <div id="btnTrieNote" class="btnTrie grossisQuandHover" onclick="trierNote()">
-                        <img src="/icones/trierSVG.svg" alt="iconeTrie" id="iconeTrieNote" class="iconeTrie">
-                        <img src="/icones/trier1SVG.svg" alt="iconeTrie" id="iconeTrieNote1" class="iconeTrie displayNone">
-                        <img src="/icones/trier2SVG.svg" alt="iconeTrie" id="iconeTrieNote2" class="iconeTrie displayNone">
+                        <img src="/icones/trierSVG.svg" alt="icone non trié" id="iconeTrieNote" class="iconeTrie">
+                        <img src="/icones/trier1SVG.svg" alt="icone tri décroissant" id="iconeTrieNote1" class="iconeTrie displayNone">
+                        <img src="/icones/trier2SVG.svg" alt="icone tri croissant" id="iconeTrieNote2" class="iconeTrie displayNone">
                         <p id="txtBtnNote" class="txtBtnTrie" >note</p>
                     </div>
                 </section>
