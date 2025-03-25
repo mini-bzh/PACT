@@ -3,6 +3,8 @@ let btnAnnulerOTP = document.getElementById("btnAnnulerOTP");
 let btnConfirmOTP = document.getElementById("btnConfirmerOTP");
 let overlayOTP = document.getElementById("overlayOTP");
 
+let texteErreurOTP = document.getElementById("texteErreurOTP");
+
 if(btnConnexion != undefined)
 {
     btnConnexion.addEventListener("click", ()=>{
@@ -40,7 +42,7 @@ form.addEventListener("submit", async (event) => {
     }
 });
 
-btnConfirmOTP.addEventListener("click", ()=>{validationConnexionOTP})
+btnConfirmOTP.addEventListener("click", validationConnexionOTP)
 
 
 async function validationConnexionOTP()
@@ -51,12 +53,11 @@ async function validationConnexionOTP()
 
         if(valide)
         {
-            console.log("valide")
             form.submit()
         }
         else
         {
-            console.log("invalide")
+            texteErreurOTP.style.display = "flex"
         }
     } catch(error) {
         console.log("erreur lors de la validation otp : ", error);
@@ -103,8 +104,9 @@ function otpValide(login, otp) {
     });
 }
 
-
+/* raccourcis clavier */
 document.addEventListener("keydown", (event) => {
+    texteErreurOTP.style.display = "none"
     if(overlayOTP.style.display == "flex")
     {
         if(event.key === "Escape")

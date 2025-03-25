@@ -165,6 +165,7 @@ if ($_GET['user-tempo'] === 'pro') {
     <div id="fenetreOTP">
         <p>Entrez votre OTP</p>
         <input type="text" id="userOTP" name="userOTP" minlength="6" placeholder="One Time Passord">
+        <p id="texteErreurOTP">OTP invalide</p>
         <button id="btnConfirmerOTP">
             <p>Confirmer</p>
         </button>
