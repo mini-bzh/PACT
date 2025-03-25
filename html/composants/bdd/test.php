@@ -18,7 +18,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Force l'u
 
 
 $query1 = "SELECT * FROM tripskell._reponseavis";
-$query2 = "SELECT secretotp FROM tripskell._compte";
+$query2 = "SELECT * FROM tripskell._compte";
 $query4 = "SELECT * FROM tripskell._compte WHERE login = 'RocheJagu'";
 
 $sth = $dbh->prepare($query2);

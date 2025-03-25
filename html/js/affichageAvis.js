@@ -384,7 +384,7 @@ function updatePoucesAvis(idAvis, pouce, changement)    //met à jour le compteu
         },
         success: function(response) {
 
-            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            //console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
         },
         error: function(jqXHR, textStatus, errorThrown) 
         {
@@ -434,7 +434,7 @@ function envoyerReponse(reponseAvis, idAvis, idCompte)
         data: {reponseAvis : reponseAvis, idAvis : idAvis, idCompte : idCompte},
         success: function(response)
         {
-            console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
+            //console.log(response);                        // Affiche la réponse du script PHP si appelé correctement
             location.reload();
         },
         error: function(jqXHR, textStatus, errorThrown) {
