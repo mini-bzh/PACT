@@ -1635,6 +1635,7 @@ textarea {
 .etoiles p {
     margin-right: 5px;
     font-size: var(--typescale-text);
+    transform: translateY(3px);
 }
 
 .etoiles img {

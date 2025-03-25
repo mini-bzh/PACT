@@ -529,7 +529,7 @@ if (isset($idCompte)) {
                             <?php
                                     include '../icones/qr-code.svg';
                             ?>
-                            <p class="boldArchivo texteSmall"><?php if ($cleSecrete) { ?> Afficher <?php } else { ?> Activer <?php } ?> Authenticator</p>
+                            <p class="boldArchivo texteSmall"><?php if ($cleSecrete) { ?> Afficher <?php } else { ?> Activer <?php } ?> Authentikator</p>
                         </button>
 
                     </div>
@@ -584,6 +584,12 @@ if (isset($idCompte)) {
                     </div>
                     <div>
                         <div id="imgQRcode"></div>
+                        <div>
+                            <label for="codeOTP">Vérifier le code OTP :</label>
+                            <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="000 000">
+                            <p id="error-message" class="texteSmall"></p>
+                            <button id="submit-btn-otp" disabled>Vérifier</button>
+                        </div>
                     </div>
                 </div>
             </div>
