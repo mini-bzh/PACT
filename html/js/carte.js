@@ -31,6 +31,8 @@ map.on('load', function() {
 
 /*
 Fonction pour précharger la carte 
+
+
 */
 function preloadTiles() {
     let bounds = map.getBounds();
@@ -53,10 +55,7 @@ var listeMarker={};
 
 mapOffresInfos.forEach(element => {
     var customPopup = element.get("element");
-
-    var popupStyle = {
-        'className' : 'grossisQuandHover popup'+ element.get("id")
-    };
+    console.log(customPopup);
         
     var xmlhttp = new XMLHttpRequest();
     var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("adresse")+" "+ element.get("ville");
@@ -66,7 +65,8 @@ mapOffresInfos.forEach(element => {
         {
             var myArr = JSON.parse(this.responseText);
             try {
-                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup,popupStyle); 
+                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup); 
+                marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                 listeMarker[element.get("id")] = [marker,true];
                 markersCluster.addLayer(marker);
             } catch (error) {
@@ -77,7 +77,8 @@ mapOffresInfos.forEach(element => {
                     {
                         var marker;
                         var myArr = JSON.parse(this.responseText);
-                        marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup,popupStyle); 
+                        marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                        marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                         listeMarker[element.get("id")] = [marker,true];
                         markersCluster.addLayer(marker);
                     }
@@ -92,6 +93,18 @@ mapOffresInfos.forEach(element => {
     xmlhttp.send();
     sleep(100); 
 });
+
+function addButton(e,lat,lon) {
+    document.querySelector(".leaflet-popup-content-wrapper #btnItineraire").innerHTML = 
+    `
+    <br>
+    <button onclick="openNavigation(${lat}, ${lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                                Itinéraire
+    </button>
+    `;
+}
+
+
 
 // Pour laisser du temps pour que les points apparaîssent puis les ajouter à la carte
 setTimeout(() => {
@@ -159,3 +172,21 @@ map.on('mouseup', function () {
 document.addEventListener('mouseleave', function () {
     document.body.style.overflow = '';
 });
+
+function openNavigation(lat, lon) {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var url = "";
+
+    if (/iPad|iPhone|iPod/.test(userAgent)) {
+        // iOS → Apple Maps
+        url = `https://maps.apple.com/?daddr=${lat},${lon}`;
+    } else if (/android/i.test(userAgent)) {
+        // Android → Google Maps
+        url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
+    } else {
+        // PC → Google Maps par défaut
+        url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
+    }
+
+    window.open(url, "_blank"); // Ouvre le lien dans un nouvel onglet
+}

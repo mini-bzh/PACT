@@ -99,6 +99,7 @@ function af_offre($row) {
         }
 ?>
         " alt="logo_categorie" name="logo_categorie" id="logo_cat">
+        <div id="btnItineraire"></div>
     </article>
 <?php
 }
