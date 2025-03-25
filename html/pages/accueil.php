@@ -75,32 +75,13 @@ $nouvellesOffres = $stmt->fetchAll();
 
     ?>
 
-    <div class="titrePortable">
-
-        <svg width="401" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg"> <!-- SVG pour  -->
-            <g filter="url(#filter0_d_169_4380)">
-                <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white" />
-            </g>
-            <defs>
-                <filter id="filter0_d_169_4380" x="-66" y="-28" width="471" height="186" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                    <feOffset dy="4" />
-                    <feGaussianBlur stdDeviation="2" />
-                    <feComposite in2="hardAlpha" operator="out" />
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_169_4380" />
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_169_4380" result="shape" />
-                </filter>
-            </defs>
-        </svg>
-
-        <div>
-            <img src="/images/logo/logo_grand.png" alt="logo PACT" id="logoTitreMobile">
+    <header>
+        <div class="titrePortable">
+                <img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">
         </div>
-    </div>
+    </header>
     <main>
-
+        
         <?php
         if ($comptePro)                  //change le titre de la page
         {

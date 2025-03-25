@@ -161,10 +161,10 @@ if ($_GET['user-tempo'] === 'pro') {
 
 <main id="mainConnexion">
 
-<div id="overlayOTP">
+<div id="overlayOTP">                               <!-- pop-up qui demande l'OTP si nécéssaire -->
     <div id="fenetreOTP">
         <p>Entrez votre OTP</p>
-        <input type="text" id="userOTP" name="userOTP" minlength="6" placeholder="One Time Passord">
+        <input type="text" inputmode="numeric" id="userOTP" name="userOTP" maxlength="6" placeholder="One Time Passord">
         <p id="texteErreurOTP">OTP invalide</p>
         <button id="btnConfirmerOTP">
             <p>Confirmer</p>
@@ -206,7 +206,6 @@ if ($_GET['user-tempo'] === 'pro') {
 
         <!--<label for="userPSW"><p class="texteLarge"></p></label>-->
         <input type="password" id="userPSW" name="userPSW" minlength="12" placeholder="Mot de passe" required>
-
 
     </div>
 

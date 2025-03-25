@@ -20,18 +20,12 @@ $totp->setIssuer('tripskell');
 $totp->setPeriod(30);
 $secret = $totp->getSecret();
 
-$stmt = $dbh->prepare("UPDATE tripskell._compte SET secretotp = :secret WHERE id_c = :id");
-
-$stmt->bindParam(':secret', $secret, PDO::PARAM_STR);
-$stmt->bindParam(':id', $_SESSION["idCompte"], PDO::PARAM_STR);
-
-$stmt->execute();
-
 $qrcodeUrl = $totp->getProvisioningUri();
 
 header('Content-Type: application/json');
 echo json_encode([
-    'qr_url' => $qrcodeUrl
+    'qr_url' => $qrcodeUrl,
+    'secret' => $secret
 ]);
 
 ?>

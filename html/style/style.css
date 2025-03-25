@@ -609,7 +609,7 @@ textarea {
 }
 
 #btnConfirmerOTP, #btnAnnulerOTP{
-    border-radius: 25px;
+    border-radius: 8px;
     width: 100%;
     height: 35px;
     text-decoration: none;
@@ -1637,6 +1637,7 @@ textarea {
 .etoiles p {
     margin-right: 5px;
     font-size: var(--typescale-text);
+    transform: translateY(3px);
 }
 
 .etoiles img {
@@ -2553,6 +2554,14 @@ aside fieldset {
         display: none;
     }
 
+    header{
+        background-color: white;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+        padding-top: 0;
+    }
+
     /*------------------/ MAIN /-------------------*/
 
     .titrePortable {
@@ -2573,10 +2582,10 @@ aside fieldset {
         height: 85px;
     }
 
-    #conteneurTitreMobile #logoTitreMobile {
-        width: 100px;
-        height: auto;
-        transform: translate(0px, -25px);
+    #logoTitreMobile img {
+        width: 100%;
+        height: 100%;
+        right: -8.5px;
     }
 
     #conteneurTitreMobile {
@@ -2585,6 +2594,15 @@ aside fieldset {
     }
 
     /*----------------/ PAGE ACCUEIL /-----------------*/
+    .titrePortable{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .titrePortable img{
+        margin: 10px;
+    }
 
     #mainAccueil .conteneurOffres>article {
         display: block;
@@ -2601,12 +2619,16 @@ aside fieldset {
         margin-left: 5px;
     }
 
-    #mainAccueil #logoTitreMobile {
-        width: 200px;
-        height: auto;
-        transform: translate(30px, -25px);
+    #logoTitreMobile img {
+        width: 100%;
+        height: 100%;
+        right: -8.5px;
     }
 
+    body {
+        margin-top: 0;
+        padding-top: 0;
+    }
     /*------------------/ PAGE AVIS /---------------------*/
 
     #mainAvis .titrePrincipale {
@@ -2737,6 +2759,23 @@ aside fieldset {
         font-size: 1em;
     }
 
+    .apercuOffre .conteneurImage {
+        width: 100%;
+        height: 100%;
+    }
+
+    .apercuOffre .conteneurImage img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #logoNew {
+        position: absolute;
+        width: 15%;
+        top: -7px;
+        right: -8.5px;
+        height: 15%;
+    }
     /*-------------/ HEADER MOBILE /--------------*/
 
     .headerPC-Tab {
@@ -2751,6 +2790,7 @@ aside fieldset {
         right: 0;
         bottom: 0;
         z-index: 10;
+        width: 100%;
     }
 
     .ulHeaderMobile {
@@ -2787,10 +2827,10 @@ aside fieldset {
         padding-bottom: 110px;
     }
 
-    #logoTitreMobile {
-        width: 200px;
-        height: auto;
-        transform: translate(30px, -25px);
+    #logoTitreMobile img {
+        width: 100%;
+        height: 100%;
+        right: -8.5px;
     }
 
     /*-------------/ PAGE RECHERCHE /--------------*/
@@ -3066,11 +3106,6 @@ aside fieldset {
 
     #body-choixCreaCompte button {
         width: 25px;
-       }
-    
-    
-       .titrePortable{
-        display: block;
     }
     
     .titrePortable div{
@@ -3083,14 +3118,16 @@ aside fieldset {
     }
 
     .titrePortable img {
-        width: 85px;
-        height: 85px;
+        width: 20%;
+        height: 20%;
     }
 
-    #conteneurTitreMobile #logoTitreMobile {
-        width: 100px;
-        height: auto;
-        transform: translate(0px, -25px);
+    #logoTitreMobile img {
+        width: 50%;
+        height: 50%;
+        right: -8.5px;
+        align-items: center;
+        justify-content: center;
     }
 
     #conteneurTitreMobile {

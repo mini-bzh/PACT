@@ -2,7 +2,6 @@
 let triggerAffichage = document.querySelectorAll(".imageAvis");
 let overlay = document.getElementById("overlay");
 let imageOverlay = document.querySelector("#overlay img");
-console.log
 let btnfermerOverlay = document.getElementById("btnFermerOverlay");
 
 triggerAffichage.forEach(element => {
@@ -147,8 +146,6 @@ function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
 
 
 //--------- trie note ------------
-
-console.log(mapAvisInfos);
 
 function toogleTrie(paramTrie,icone1,icone2,idBouton,sens){
 
