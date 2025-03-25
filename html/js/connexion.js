@@ -3,6 +3,8 @@ let btnAnnulerOTP = document.getElementById("btnAnnulerOTP");
 let btnConfirmOTP = document.getElementById("btnConfirmerOTP");
 let overlayOTP = document.getElementById("overlayOTP");
 
+let texteErreurOTP = document.getElementById("texteErreurOTP");
+
 if(btnConnexion != undefined)
 {
     btnConnexion.addEventListener("click", ()=>{
@@ -22,17 +24,15 @@ let userNameInput = document.getElementById("userName");
 
 let otpInput = document.getElementById("userOTP");
 
-form.addEventListener("submit", async (event) => {
+form.addEventListener("submit", async (event) => {                  // lorsque le formulaire de connexion est soumis
     event.preventDefault(); // Empêche la soumission immédiate
     try {
         let besoinOTP = await otpActif(userNameInput.value);
         if (besoinOTP) {                                        // si l'utilisateur a activé la 2FA, ouvre la pop-up pour entrer l'OTP
 
-            console.log("besoin !")
-            overlayOTP.style.display = "flex"
+            overlayOTP.style.display = "flex"                   // affiche la pop-up de demande d'OTP
 
         } else {
-            console.log("pas besoin !");
             form.submit(); // Envoie le formulaire manuellement
         }
     } catch (error) {
@@ -40,10 +40,11 @@ form.addEventListener("submit", async (event) => {
     }
 });
 
-btnConfirmOTP.addEventListener("click", ()=>{validationConnexionOTP})
+
+btnConfirmOTP.addEventListener("click", validationConnexionOTP)
 
 
-async function validationConnexionOTP()
+async function validationConnexionOTP()                             // vérifie si l'OTP entré est correct, et soumet le formulaire si c'est le cas
 {
     try{
         let valide = await otpValide(userNameInput.value, otpInput.value);
@@ -51,12 +52,11 @@ async function validationConnexionOTP()
 
         if(valide)
         {
-            console.log("valide")
-            form.submit()
+            form.submit()           // soumet le formulaire
         }
         else
         {
-            console.log("invalide")
+            texteErreurOTP.style.display = "flex"           // affiche un message d'erreur
         }
     } catch(error) {
         console.log("erreur lors de la validation otp : ", error);
@@ -65,15 +65,14 @@ async function validationConnexionOTP()
 
 function otpActif(login)               // renvoie true si le compte [login] a activé l'authentification à 2 facteurs (TOTP), false sinon
 {
-    console.log()
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: "../composants/ajax/besoinOTP.php",
+            url: "../composants/ajax/besoinOTP.php",                // script qui va consulter la BDD
             type: 'POST',
             data: { login: login },
             success: function (response) {
                 console.log("Réponse AJAX :", response);
-                resolve(response == 1); // Vérifier si la réponse est bien "true"
+                resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Erreur AJAX :", textStatus, errorThrown);
@@ -87,12 +86,12 @@ function otpActif(login)               // renvoie true si le compte [login] a ac
 function otpValide(login, otp) {
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: "../composants/ajax/otpValide.php",
+            url: "../composants/ajax/otpValide.php",                    // script qui va consulter la BDD
             type: 'POST',
             data: { login: login, otp: otp },
             success: function (response) {
                 console.log("Réponse AJAX :", response);
-                resolve(response == 1); // Vérifier si la réponse est bien "true"
+                resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error("Erreur AJAX :", textStatus, errorThrown);
@@ -103,8 +102,9 @@ function otpValide(login, otp) {
     });
 }
 
-
+/* raccourcis clavier */
 document.addEventListener("keydown", (event) => {
+    texteErreurOTP.style.display = "none"
     if(overlayOTP.style.display == "flex")
     {
         if(event.key === "Escape")
