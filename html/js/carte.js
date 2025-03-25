@@ -31,8 +31,6 @@ map.on('load', function() {
 
 /*
 Fonction pour précharger la carte 
-
-
 */
 function preloadTiles() {
     let bounds = map.getBounds();
@@ -53,10 +51,7 @@ var markersCluster = L.markerClusterGroup({
 
 var listeMarker={};
 
-mapOffresInfos.forEach(element => {
-    var customPopup = element.get("element");
-    console.log(customPopup);
-        
+mapOffresInfos.forEach(element => {    
     var xmlhttp = new XMLHttpRequest();
     var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("adresse")+" "+ element.get("ville");
     xmlhttp.onreadystatechange = function()
@@ -65,8 +60,19 @@ mapOffresInfos.forEach(element => {
         {
             var myArr = JSON.parse(this.responseText);
             try {
-                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup); 
-                marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
+                element.get('element').innerHTML += 
+                `
+                <br>
+                <button onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                                            Itinéraire
+                </button>
+                `;
+                
+                var customPopup = element.get("element");
+                console.log(customPopup);
+
+                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                //marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                 listeMarker[element.get("id")] = [marker,true];
                 markersCluster.addLayer(marker);
             } catch (error) {
@@ -77,8 +83,20 @@ mapOffresInfos.forEach(element => {
                     {
                         var marker;
                         var myArr = JSON.parse(this.responseText);
+
+                        element.get('element').innerHTML += 
+                        `
+                        <br>
+                        <button onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                                                    Itinéraire
+                        </button>
+                        `;
+                        
+                        var customPopup = element.get("element");
+                        console.log(customPopup);
+
                         marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
-                        marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
+                        //marker.addEventListener("click",function(){addButton(myArr[0].lat,myArr[0].lon)});
                         listeMarker[element.get("id")] = [marker,true];
                         markersCluster.addLayer(marker);
                     }
@@ -93,18 +111,6 @@ mapOffresInfos.forEach(element => {
     xmlhttp.send();
     sleep(100); 
 });
-
-function addButton(e,lat,lon) {
-    document.querySelector(".leaflet-popup-content-wrapper #btnItineraire").innerHTML = 
-    `
-    <br>
-    <button onclick="openNavigation(${lat}, ${lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
-                                Itinéraire
-    </button>
-    `;
-}
-
-
 
 // Pour laisser du temps pour que les points apparaîssent puis les ajouter à la carte
 setTimeout(() => {

@@ -115,11 +115,11 @@
                         <p id="txtBtnNote" class="txtBtnTrie" >note</p>
                     </div>
                 </section>
-            </div>
+            </section>
+                
 
             <div>
             <div id="map"></div>
-            <section id="conteneurOffres">
             <section class="conteneurOffres">
                 <article>
                     
