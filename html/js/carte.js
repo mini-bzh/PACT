@@ -1,3 +1,6 @@
+/*
+Fonction sleep
+*/
 function sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -7,22 +10,28 @@ function sleep(milliseconds) {
     }
 }
 
+// Définition de la carte
 var map = L.map('map', {
     center: [48.2640845, -2.9202408],
     zoom: 7,
     preferCanvas: true
 });
 
+// Définition du fond puis ajout à la carte
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     detectRetina: true
 }).addTo(map);
 
+// Préchargement de la carte
 map.on('load', function() {
     preloadTiles();
 });
 
+/*
+Fonction pour précharger la carte 
+*/
 function preloadTiles() {
     let bounds = map.getBounds();
     let zoom = map.getZoom();
@@ -84,10 +93,16 @@ mapOffresInfos.forEach(element => {
     sleep(100); 
 });
 
+// Pour laisser du temps pour que les points apparaîssent puis les ajouter à la carte
 setTimeout(() => {
     map.addLayer(markersCluster);
 }, 2000);
 
+/*
+
+Fonction pour mettre à jour les points dans les clusters
+
+*/
 function updateMap() {
     markersCluster.clearLayers();
     for(elem in listeMarker){
@@ -99,81 +114,35 @@ function updateMap() {
     map.addLayer(markersCluster);
 }
 
-document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-1">
-    
-        <title>Agandir</title>
-        
-        <defs>
+// Booleen pour afficher/cacher la carte
+let aff = true;
 
-        </defs>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g fill="#434343">
-                    <path d="M6.995,10.852 L5.133,9.008 L2.107,11.988 L0.062,9.972 L0.062,15.875 L6.049,15.875 L3.973,13.828 L6.995,10.852 Z" class="si-glyph-fill">
+/*
 
-        </path>
-                    <path d="M9.961,0.00800000003 L12.058,2.095 L9.005,5.128 L10.885,7.008 L13.942,3.97 L15.909,5.966 L15.909,0.00800000003 L9.961,0.00800000003 Z" class="si-glyph-fill">
+Fonction pour cacher la carte si elle est afficher et l'afficher si ielle est cacher
 
-        </path>
-                </g>
-            </g>
-        </svg></div>`;
-
-let grandir = true;
-
+*/
 function resizeMap(e) {
-    if (grandir) {
-        grandir = false;
+    if (aff) { // si la carte est cacher
+        aff = false;
+        document.getElementById("map").style.display="block";  // afficher la carte
         document.getElementById("map").style.height="80vh";
-        document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-3">
-    
-        <title>Rétrécir</title>
-        
-        <defs>
-
-        </defs>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g fill="#434343">
-                    <path d="M15.995,1.852 L14.133,0.00800000003 L11.107,2.988 L9.062,0.972 L9.062,6.875 L15.049,6.875 L12.973,4.828 L15.995,1.852 Z" class="si-glyph-fill">
-
-        </path>
-                    <path d="M0.961,9.008 L3.058,11.095 L0.005,14.128 L1.885,16.008 L4.942,12.97 L6.909,14.966 L6.909,9.008 L0.961,9.008 Z" class="si-glyph-fill">
-
-        </path>
-                </g>
-            </g>
-        </svg></div>`;
-        map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
-        document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
-    }else{
-        grandir = true;
-        document.getElementById("map").style.height="20vh";
-        document.getElementsByClassName("leaflet-top leaflet-right")[0].innerHTML = `<div id="btnAgrandir" class="leaflet-control leaflet-bar"><svg width="100px" height="100px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-resize-1">
-    
-        <title>Agandir</title>
-        
-        <defs>
-
-        </defs>
-            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g fill="#434343">
-                    <path d="M6.995,10.852 L5.133,9.008 L2.107,11.988 L0.062,9.972 L0.062,15.875 L6.049,15.875 L3.973,13.828 L6.995,10.852 Z" class="si-glyph-fill">
-
-        </path>
-                    <path d="M9.961,0.00800000003 L12.058,2.095 L9.005,5.128 L10.885,7.008 L13.942,3.97 L15.909,5.966 L15.909,0.00800000003 L9.961,0.00800000003 Z" class="si-glyph-fill">
-
-        </path>
-                </g>
-            </g>
-        </svg></div>`;
-        map.setView(new L.LatLng(48.2640845, -2.9202408), 7);
-        document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
+        map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
+        document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
+    }else{ // si la carte est affiché
+        aff = true;
+        document.getElementById("map").style.display="none";  // cacher la carte
+        map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
+        document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }
-    setTimeout(() => {
+    setTimeout(() => { // pour laisser le temps à la carte de s'afficher
         map.invalidateSize();
-        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        // Écouteur pour le bouton pour faire aparaitre/disparaitre la carte
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
     }, 100);
 }
 
+// Écouteur pour le bouton pour faire aparaitre/disparaitre la carte
 document.getElementById("btnAgrandir").addEventListener("click", resizeMap)
 
 // Désactiver le scroll de la page quand on commence à drag la carte

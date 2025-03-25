@@ -118,5 +118,9 @@ $tags = array_column($tags, 'nomtag');
                     <path d="M86.3333 3H3L36.3333 42.4167V69.6667L53 78V42.4167L86.3333 3Z">
                 </svg>
             </div>
+
+            <div id="btnAgrandir" class="button">
+                <img src="../../icones/logo_visite.png" width="20px" alt="logo_carte" name="logo_carte" id="logo_carte">
+            </div>
         </aside>
         
