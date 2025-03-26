@@ -78,7 +78,27 @@
     animation: slide 30s linear infinite;
 }
 
+.appearing{
+    animation: apparition 0.5s ease;
+}
+
+
 @keyframes slide {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
+}
+
+
+
+
+@keyframes apparition{
+    0%{
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
 }

@@ -1541,8 +1541,6 @@ textarea {
     text-decoration: none;
     color: black;
     display: block;
-    background-color: white;
-    border-radius: 5px;
 }
 
 .apercuOffre {
@@ -1620,7 +1618,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 100%;
+    width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -2783,7 +2781,7 @@ aside fieldset {
     }
 
     .apercuOffre .conteneurImage img {
-        width: 100%;
+        width: 280px;
         height: 100%;
     }
 
