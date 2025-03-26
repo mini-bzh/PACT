@@ -234,25 +234,55 @@ textarea {
 
 /* ------------/ page accueil /------------ */
 
-#mainAccueil h1 {
-    margin: 20px;
+.conteneurOffres {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 5%;
+}
+
+.conteneurOffres > h1 {
+    margin-left: 5%;
+    margin-bottom: 20px;
+    font-size: var(--typescale-h3);
+}
+
+#mainAccueil > h1 {
+    font-size: 2em;
+    border-left: 10px solid var(--secondary);
+    padding-left: 10px;
+    margin-left: 5px;
+}
+
+#mainAccueil .conteneurOffres > article{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-recherche  .conteneurOffres > article {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
+    margin: 0px 10px 10px 10px;
+}
+
+#mainAccueil #logoTitreMobile {
+    width: 200px;
+    height: auto;
+    transform: translate(30px, -25px);
 }
 
 .titreOffre {
     width: 70%;
 }
 
-#mainAccueil #conteneurOffres {
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
-}
-
-#mainAccueil .conteneurOffres .lienApercuOffre {
+#mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
-#mainAccueil .conteneurOffres>article {
+#mainAccueil .conteneurOffres>article, #main-recherche .conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -276,6 +306,8 @@ textarea {
 #conteneur_mini_carte {
     margin-top: 20px;
 }
+
+
 
 /*-------------/ page avis /--------------*/
 
@@ -1586,7 +1618,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 100%;
+    width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -2268,22 +2300,6 @@ aside fieldset {
     margin: 20px;
 }
 
-.conteneurOffres {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.conteneurOffres .lienApercuOffre {
-    margin: 15px;
-}
-
-.conteneurOffres>article {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 
 #conteneurBarre {
     display: flex;
@@ -2487,7 +2503,7 @@ aside fieldset {
 
 /*
 #######################################################
-########         CARROUSSEL ACCEUIL       #############
+########         CARROUSSEL ACCUEIL       #############
 #######################################################
 */
 
@@ -2504,18 +2520,19 @@ aside fieldset {
     width: max-content;
 }
 
-.apercuOffre{
-    margin-right: 20px;
+.card-body {
+    margin-right: 30px;
 }
 
 .card-body .pubBanniere{
     width: 350px;
     height: 440px;
     border-radius: 5px;
-    margin-right: 20px;
     border-radius: 5px;
     padding: 10px;
 } 
+
+
 
 
 
@@ -2796,7 +2813,7 @@ aside fieldset {
     }
 
     .apercuOffre .conteneurImage img {
-        width: 100%;
+        width: 280px;
         height: 100%;
     }
 
@@ -3124,6 +3141,11 @@ aside fieldset {
 
     #body-choixCreaCompte button {
         width: 25px;
+       }
+    
+    
+    .titrePortable{
+        display: block;
     }
     
     .titrePortable div{
@@ -3273,9 +3295,10 @@ aside fieldset {
         width: 18px; /* Taille globale des icônes */
         height: auto; /* Conserve le ratio */
     }
+
     #body-choixCreaCompte button{
-    width: 25px;
-   }
+        width: 25px;
+    }
 
    /*-------------/ détail offre /--------------*/
 

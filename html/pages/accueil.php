@@ -190,9 +190,8 @@ $nouvellesOffres = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } ?>
-
-            <h1>Nouveautés</h1>
-            <section id="conteneurOffres" class="conteneurOffres">
+            <section class="conteneurOffres">
+                <h1>Les 10 dernières nouveautés</h1>
                 <article>
                     <?php
 
@@ -202,56 +201,72 @@ $nouvellesOffres = $stmt->fetchAll();
                             <?php
                             af_offre($offre);
                             ?></a><?php
-                            }
-                                ?>
+                                }
+                                    ?>
+                </article>
+            </section>
+            <section class="conteneurOffres">
+                <h1>Toutes les publications</h1>
+                <article>
+                    <?php
+
+                    foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                    {
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <?php
+                            af_offre($offre);
+                            ?></a>
+                    <?php
+                    }
+                    ?>
                 </article>
             </section>
 
-            <h1>Autres offres</h1>
         <?php } ?>
+        <?php
+        if ($comptePro) {
+        ?>
 
-        <section class="conteneurOffres">
-            <article>
-                <?php
+            <section class="conteneurOffres">
+                <h1>Vos offres</h1>
+                <article>
+                    <?php
+                    foreach ($rows as $offre)          // parcourt les offres pour les afficher
+                    {
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <?php
+                            af_offre($offre);
+                            ?></a>
+                    <?php
+                    }
+                    ?>
+                </article>
+            </section>
+            <section class="conteneurOffres">
+                <h1>Les 10 dernières nouveautés</h1>
+                <article>
+                    <?php
 
-                foreach ($rows as $offre)          // parcourt les offres pour les afficher
-                {
-                ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
-                        <?php
-                        af_offre($offre);
-                        ?></a>
-                <?php
-                }
-                ?>
-            </article>
-        </section>
-<?php
-            if ($comptePro) {
-?>
-                <h1>Nouveautés</h1>
-                <section class="conteneurOffres">
-                    <article>
-                        <?php
-
-                        foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
-                        {
-                        ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
-                                <?php
-                                af_offre($offre);
-                                ?></a><?php
-                                    }
-                                        ?>
-                    </article>
-                </section>
-<?php
-            }
-?>
+                    foreach ($nouvellesOffres as $offre)          // parcourt les offres pour les afficher
+                    {
+                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                            <?php
+                            af_offre($offre);
+                            ?></a><?php
+                                }
+                                    ?>
+                </article>
+            </section>
+        <?php
+        }
+        ?>
 
     </main>
     <?php
     include "../composants/footer/footer.php";
     ?>
     <script src="../js/acceuil.js"></script>
+    <script src="../js/apparitionOffres.js"></script>
 </body>
 
 </html>
