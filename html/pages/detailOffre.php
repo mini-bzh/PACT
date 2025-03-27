@@ -168,9 +168,8 @@
                                     <a href="https://www.google.fr/maps/place/<?php 
                                         $adresse = $contentOffre["numero"] . " rue " . $contentOffre["rue"] . ", " . $contentOffre["ville"];
 
-                                        echo $adresse;
-                                    ?>"
-                                    class="conteneurSVGtexte" id="itineraire" target="_blank">
+                                        echo urlencode($adresse);
+                                    ?>" class="conteneurSVGtexte" id="itineraire" target="_blank">
                                         <p><?php
                                             echo($adresse);
                                         ?></p>

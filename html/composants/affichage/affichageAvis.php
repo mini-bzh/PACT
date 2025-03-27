@@ -101,7 +101,7 @@
                         <div class="reponse">
                             <hr>
                             <div class="proReponse">
-                                <img src="../images/pdp/<?php echo $pdpPro?>" alt="pp pro">
+                                <img src="../images/pdp/<?php echo $pdpPro?>" alt="photo de profil professionnel">
 
                                 <h4>Réponse de <?php echo $nomPro?></h4>
                             </div>
@@ -155,7 +155,7 @@
                         else
                         {
                             ?>
-                                <img src="../icones/noImage.png" class="noImage" alt="pas d'image">
+                                <img src="../icones/noImage.png" class="noImage" alt="pas d'image pour cet avis">
                             <?php
                         }
                     ?>
