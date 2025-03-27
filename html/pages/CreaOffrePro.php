@@ -554,12 +554,11 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                             <img id="previewImage" src="../images/logo/ajoutimage.png"
                                 alt="Cliquez pour ajouter une image"
                                 style="cursor: pointer;"
-                                onclick="document.getElementById('fichier1').click()">
-                            <input type="file" id="fichier1" name="fichier1"
+                                onclick="document.getElementById('fichierAttraction').click()">
+                            <input type="file" id="fichierAttraction" name="fichierAttraction"
                                 accept="image/png, image/jpeg"
                                 style="display: none;"
-                                onchange="updatePreview()"
-                                required>
+                                onchange="updatePreview()">
                         </div>
                     </div>
                 </div>

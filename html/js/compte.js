@@ -234,29 +234,43 @@ otpInput.addEventListener('input', function(e) {
 
 submitBtn.addEventListener('click', function() {
     const otpCode = otpInput.value.replace(/\s/g, ''); // Enlever les espaces avant d'envoyer
+    console.log("Envoi AJAX - OTP :", otpCode);
+    console.log("Envoi AJAX - Secret :", secretOTP);
 
     $.ajax({
-        url: '../ajax/verifier_otp_correct.php',
+        url: '../composants/ajax/verifier_otp_correct.php',
         type: 'POST',
         data: { otp: otpCode, secret: secretOTP },
         dataType: 'json',
         success: function(response) {
+            console.log("Réponse JSON :", response.success);
+    
             if (response.success) {
+                
+                let btnAuth = document.getElementsByClassName('btnAuthent')[0];
+                
+                // Change le bouton activer en afficher
+                btnAuth.classList.remove("btnAuthent");
+                btnAuth.classList.add("btnAffQRcode");
+                
+                document.querySelector('.btnAffQRcode p').textContent = "Afficher Authentikator";
+                
+                secretOTP = "";
+                alert("code OTP correct");
+
+                // Fait disparaitre la pop up
                 let pop = document.getElementsByClassName('popQRcode')[0];
                 pop.style.display = 'none';
                 document.body.classList.remove('no-scroll');
-
-                secretOTP = "";
-
-                alert("code OTP correct");
             } else {
                 errorMessage.textContent = 'code OTP incorrect';
                 alert("code OTP incorrect");
             }
         },
-        error: function() {
-            errorMessage.textContent = 'Erreur serveur, réessayez.';
-            successMessage.textContent = '';
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Erreur AJAX :", textStatus, errorThrown);
+            console.error("Réponse serveur brute :", jqXHR.responseText);
         }
     });
+    
 });

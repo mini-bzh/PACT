@@ -187,6 +187,48 @@ $nouvellesOffres = $stmt->fetchAll();
                                 </article>
                             </a>
                         </div>
+                        <?php
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?>
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
+                                    af_offre($offre);
+                                    ?>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="card-body">
+                            <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
+                                <article>
+                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                </article>
+                            </a>
+                        </div>
+                        <?php
+                        foreach ($offreALaUne as $offre)          // parcourt les offres pour les afficher
+                        {
+                        ?>
+                            <div class="card-body">
+                                <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                    <?php
+                                    af_offre($offre);
+                                    ?>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <div class="card-body">
+                            <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
+                                <article>
+                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                </article>
+                            </a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
