@@ -32,9 +32,19 @@ function af_offre($row) {
     }
 ?>
     ">
-        <p class="hideForGraphic">Titre offre :</p>
+    <div class="headerResumeOffre">
+    <p class="hideForGraphic">Titre offre :</p>
         <div class="debutOffre">
-            <img src="../../icones/<?php
+            <?php
+            if (in_array($row["idoffre"], $nouvellesOffresId)) {
+            ?>
+                <img src="../../icones/logoNew.png" alt="Logo nouvelle offre" name="Logo nouvelle offre" id="logoNew">
+            <?php
+            }
+            ?>
+            <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
+        </div>
+        <img src="../../icones/<?php
             $cat = categorie($row["idoffre"]);
             switch ($cat) {
                 case 'activité':
@@ -63,8 +73,10 @@ function af_offre($row) {
             }
     ?>
             " alt="logo_categorie" name="logo_categorie" id="logo_cat">
-            <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
-        </div>
+    </div>
+
+
+
         <div class="conteneurSpaceBetween" id="conteneur_mini_carte">
             <div class="conteneurSVGtexte">
                 <img src="/icones/logoUserSVG.svg" alt="photo profil professionnel">
@@ -99,13 +111,6 @@ function af_offre($row) {
             </div>
             <p><?php echo $nb_avis; ?> avis</p>
         </div>
-<?php
-        if (in_array($row["idoffre"], $nouvellesOffresId)) {
-?>
-        <img src="../../icones/logoNew.png" alt="Logo nouvelle offre" name="Logo nouvelle offre" id="logoNew">
-<?php
-        }
-?>
     </article>
 <?php
 }

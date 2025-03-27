@@ -275,7 +275,7 @@ textarea {
 }
 
 .titreOffre {
-    width: 70%;
+    width: fit-content;
 }
 
 #mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
@@ -288,12 +288,17 @@ textarea {
     justify-content: center;
 }
 
+
+
+.headerResumeOffre{
+    display: flex;
+    justify-content: space-between;
+}
+
+
 #logoNew {
-    position: absolute;
-    width: 15%;
-    top: -13px;
-    right: -10.5px;
-    height: 15%;
+    width: 10%;
+    margin-right: 5px;
 }
 
 .debutOffre{
@@ -304,7 +309,6 @@ textarea {
 #logo_cat{
     width: 30px;
     height: 30px;
-    margin-right: 5px;
 }
 
 #conteneur_mini_carte {
@@ -2839,11 +2843,7 @@ aside fieldset {
     }
 
     #logoNew {
-        position: absolute;
-        width: 15%;
-        top: -7px;
-        right: -8.5px;
-        height: 15%;
+        width: 10%;
     }
     /*-------------/ HEADER MOBILE /--------------*/
 
