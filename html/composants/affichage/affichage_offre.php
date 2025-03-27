@@ -84,10 +84,10 @@ function af_offre($row) {
                 <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
             </div>
             <p class="hideForGraphic">Categorie :</p>
-            <p id="cat" class="displayNone"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
+            <p class="displayNone"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
             <p class="hideForGraphic">Actuellement :</p>
-            <p id ="ouvertFerme" class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
+            <p class="<?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
         </div>
 
         <div class="conteneurImage">
@@ -100,13 +100,13 @@ function af_offre($row) {
 
         <div class="conteneurSVGtexte conteneurAdresse">
             <img src="/icones/adresseSVG.svg" alt="adresse">
-            <p id="ville" class="texteSmall"><?php echo $row["ville"]?></p>
-            <p id="adresse" class="texteSmall"><?php $adresse = $row["numero"] . " " . $row["rue"];echo $adresse;?></p>
+            <p class="texteSmall"><?php echo $row["ville"]?></p>
+            <p class="texteSmall"><?php $adresse = $row["numero"] . " " . $row["rue"];echo $adresse;?></p>
         </div>
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
                 <p class="hideForGraphic">Note /5 :</p>
-                <p id="note"><?php echo $row["note"]?></p>
+                <p><?php echo $row["note"]?></p>
                 <?php affichage_etoiles($row["note"]);?>
             </div>
             <p><?php echo $nb_avis; ?> avis</p>

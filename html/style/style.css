@@ -296,9 +296,17 @@ textarea {
 }
 
 
-#logoNew {
+
+
+.headerResumeOffre{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.logoNew {
     width: 10%;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .debutOffre{
@@ -306,12 +314,12 @@ textarea {
     align-items: center;
 }
 
-#logo_cat{
+.logo_cat{
     width: 30px;
     height: 30px;
 }
 
-#conteneur_mini_carte {
+.conteneur_mini_carte {
     margin-top: 20px;
 }
 
@@ -1402,6 +1410,13 @@ textarea {
     pointer-events: none;
 }
 
+.avis .btnModifierAvis img{
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    transform: translateY(-1px);
+}
+
 .avis .btnModifierAvis img {
     width: 13px;
     height: 13px;
@@ -1538,6 +1553,12 @@ textarea {
 .avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
     padding: 0;
+    text-decoration: none;
+}
+
+.avis .btnModifierAvis p{
+    font-size: var(--typescale-very-small-text);
+    padding: 0px;
     text-decoration: none;
 }
 
@@ -2377,7 +2398,7 @@ aside fieldset {
 }
 
 
-.leaflet-popup-content-wrapper #conteneur_mini_carte{
+.leaflet-popup-content-wrapper .conteneur_mini_carte{
     margin-top: 0;
 }
 
@@ -2416,7 +2437,7 @@ aside fieldset {
     margin-bottom: 3%;
 }
 
-.leaflet-popup-content-wrapper #logoNew{
+.leaflet-popup-content-wrapper .logoNew{
     display: none;
 }
 
@@ -2843,7 +2864,7 @@ aside fieldset {
     }
 
     #logoNew {
-        width: 10%;
+
     }
     /*-------------/ HEADER MOBILE /--------------*/
 
@@ -3022,11 +3043,11 @@ aside fieldset {
         display: none;
     }
 
-    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper #logo_cat{
+    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper .logo_cat{
         display: none;
     }
 
-    .leaflet-popup-content-wrapper #conteneur_mini_carte{
+    .leaflet-popup-content-wrapper .conteneur_mini_carte{
         margin: 0;
     }
 
@@ -3136,7 +3157,7 @@ aside fieldset {
     /* Règles spécifiques pour éviter le débordement */
     .zoneBtn,
     .ChoixCrea {
-        width: 100%;
+        width: 85%;
         /* Toujours dans les limites de l'écran */
         max-width: 428px;
         /* Limite stricte pour mobiles */
@@ -3298,11 +3319,7 @@ aside fieldset {
         gap: 15px; /* Espacement entre les boutons */
     }
 
-    /* Règles spécifiques pour éviter le débordement */
-    .zoneBtn, .ChoixCrea {
-        width: 100%; /* Toujours dans les limites de l'écran */
-        max-width: 428px; /* Limite stricte pour mobiles */
-    }
+
 
     /* Police générale */
     #body-choixCreaCompte p {
