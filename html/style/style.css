@@ -290,17 +290,21 @@ textarea {
 
 #logoNew {
     position: absolute;
-    width: 78.5px;
-    top: -27px;
-    right: -28.5px;
+    width: 15%;
+    top: -13px;
+    right: -10.5px;
+    height: 15%;
 }
 
-#logo_cat {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 5px;
-    right: 45px;
+.debutOffre{
+    display: flex;
+    align-items: center;
+}
+
+#logo_cat{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
 }
 
 #conteneur_mini_carte {
@@ -1554,8 +1558,6 @@ textarea {
     text-decoration: none;
     color: black;
     display: block;
-    background-color: white;
-    border-radius: 5px;
 }
 
 .apercuOffre {
@@ -1576,11 +1578,11 @@ textarea {
     padding-top: 5px;
 }
 
-.fondPro .lienApercuOffre {
+.fondPro .apercuOffre {
     box-shadow: var(--ombrePro);
 }
 
-.fondVisiteur .lienApercuOffre {
+.fondVisiteur .apercuOffre {
     box-shadow: var(--ombreVisiteur);
 }
 
@@ -1633,7 +1635,7 @@ textarea {
 }
 
 .apercuOffre .conteneurImage img {
-    width: 100%;
+    width: 330px;
     height: 180px;
     object-fit: cover;
     display: block;
@@ -2355,12 +2357,12 @@ aside fieldset {
 }
 
 #map{
-    display: none;
+    height: 0;
     width: 100%;
     z-index: 0;
     border-radius: 5px;
     margin-top: 5vh;
-    transition: all .1s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 #btnAgrandir{
@@ -2383,10 +2385,24 @@ aside fieldset {
     display: none;
 }
 
+
+.leaflet-popup-content-wrapper #conteneur_mini_carte{
+    margin-top: 0;
+}
+
+.leaflet-popup-content-wrapper{
+    padding: 0;
+}
+
 .leaflet-popup-content-wrapper .apercuOffre{
     width: 100%;
     height: 100%;
     margin: 0;
+}
+
+.leaflet-popup-content-wrapper .conteneurImage img,.leaflet-popup-content-wrapper .conteneurImage{
+    width: 100%;
+    height: 100px;
 }
 
 .leaflet-popup-content-wrapper .leaflet-popup-content p{
@@ -2399,10 +2415,45 @@ aside fieldset {
 
 .leaflet-popup-content-wrapper .leaflet-popup-content a{
     color: black;
+    padding-bottom: 1px;
+    width: 100%;
 }
 
 .leaflet-popup-content-wrapper .btnItineraire{
     display: block;
+    margin-left: 3%;
+    margin-bottom: 3%;
+}
+
+.leaflet-popup-content-wrapper #logoNew{
+    display: none;
+}
+
+.leaflet-popup-content-wrapper .resumeApercu{
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.leaflet-popup-content-wrapper .lienApercuOffre {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.fondPro .leaflet-popup-content-wrapper .apercuOffre {
+    box-shadow: none;
+}
+
+.fondVisiteur .leaflet-popup-content-wrapper .apercuOffre {
+    box-shadow: none;
+}
+
+.fondPro .leaflet-popup-content-wrapper .lienApercuOffre {
+    box-shadow: var(--ombrePro);
+}
+
+.fondVisiteur .leaflet-popup-content-wrapper .lienApercuOffre {
+    box-shadow: var(--ombreVisiteur);
 }
 
 
@@ -2502,15 +2553,14 @@ aside fieldset {
     width: max-content;
 }
 
-.apercuOffre{
-    margin-right: 20px;
+.card-body {
+    margin-right: 30px;
 }
 
 .card-body .pubBanniere{
     width: 350px;
     height: 440px;
     border-radius: 5px;
-    margin-right: 20px;
     border-radius: 5px;
     padding: 10px;
 } 
@@ -2796,8 +2846,9 @@ aside fieldset {
     }
 
     .apercuOffre .conteneurImage img {
-        width: 100%;
+        width: 280px;
         height: 100%;
+        min-height: 150px;
     }
 
     #logoNew {
@@ -2881,7 +2932,7 @@ aside fieldset {
 
     #filtres-aside {
         width: 50%;
-    
+        
     }
 
     .conteneurOffres>article {
@@ -2992,22 +3043,9 @@ aside fieldset {
         margin: 0;
     }
 
-    .leaflet-popup-content-wrapper #ouvertFerme{
-        margin-right: 20px;
+    .leaflet-popup-content-wrapper .titreOffre{
+        width: 100%;
     }
-
-    .leaflet-popup-content-wrapper .resumeApercu{
-        height: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .leaflet-popup-content-wrapper .lienApercuOffre{
-        height: 30vh;
-    }
-
-
-    
     /*----------------/ page choix création compte /------------------*/
 
     /* GÉNÉRAL : corps de la page */
@@ -3137,7 +3175,7 @@ aside fieldset {
 
     #body-choixCreaCompte button {
         width: 25px;
-       }
+    }
     
     
     .titrePortable{

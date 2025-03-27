@@ -53,14 +53,16 @@ let btnAPIkey = document.getElementsByClassName("btnCreaAPI")[0];
 
 // afin de pouvoir executer la fonction generateAPIkey au moment du clique et éviter que le membre ou pro spam clique le bouton
 // il est griser après le déclachement de la fonction
-btnAPIkey.addEventListener("click", () => {
-    if (btnAPIkey.classList.contains("btnCreaAPIgris")) {
-        alert("Vous avez déjà générer une clé API");
-    } else {
-        generateApiKey();
-        btnAPIkey.classList.add("btnCreaAPIgris");
-    }
-})
+if (btnAPIkey) {
+    btnAPIkey.addEventListener("click", () => {
+        if (btnAPIkey.classList.contains("btnCreaAPIgris")) {
+            alert("Vous avez déjà générer une clé API");
+        } else {
+            generateApiKey();
+            btnAPIkey.classList.add("btnCreaAPIgris");
+        }
+    })
+}
 
 // fonction qui permet de générer des clé API et de les envoyer
 function generateApiKey() {
@@ -102,13 +104,21 @@ const correctPassword = <?php echo $infos['mot_de_passe'];?> ;
 */
 
 /* Pour la fermeture des pop Up */
-document.getElementById('bn-modif-exit').addEventListener("click", function() {
-    document.getElementById('popUpModif').style.display = "none";
-});
+let btnModifExit = document.getElementById('bn-modif-exit');
 
-document.getElementById('bn-modifBanc-exit').addEventListener("click", function() {
-    document.getElementById('popUpModifBancaire').style.display = "none";
-});
+if (btnModifExit) {
+    btnModifExit.addEventListener("click", function() {
+        document.getElementById('popUpModif').style.display = "none";
+    });
+}
+
+let btnModifBancExit = document.getElementById('bn-modifBanc-exit');
+
+if (btnModifBancExit) {
+    btnModifBancExit.addEventListener("click", function() {
+        document.getElementById('popUpModifBancaire').style.display = "none";
+    });
+}
 
 
 let secretOTP = "";
@@ -196,67 +206,86 @@ $(document).ready(function() {
 
 let croix = document.getElementById("annulerQRcode");
 
-croix.addEventListener("click", () => {
-    let pop = document.getElementsByClassName('popQRcode')[0];
-    pop.style.display = 'none';
-    document.body.classList.remove('no-scroll');
-})
-
+if (croix) {
+    croix.addEventListener("click", () => {
+        let pop = document.getElementsByClassName('popQRcode')[0];
+        pop.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    })
+}
 
 // Formulaire de submition OTP
 let otpInput = document.getElementById('codeOTP');
 let errorMessage = document.getElementById('error-message');
 let submitBtn = document.getElementById('submit-btn-otp');
 
-otpInput.addEventListener('input', function(e) {
-    let value = otpInput.value.replace(/\s/g, ''); // Supprime les espaces existants
-    value = value.replace(/\D/g, ''); // Supprime tout sauf les chiffres
+if (otpInput) {
+    otpInput.addEventListener('input', function(e) {
+        let value = otpInput.value.replace(/\s/g, ''); // Supprime les espaces existants
+        value = value.replace(/\D/g, ''); // Supprime tout sauf les chiffres
 
-    if (value.length > 6) {
-        value = value.slice(0, 6); // Limite à 6 chiffres
-    }
+        if (value.length > 6) {
+            value = value.slice(0, 6); // Limite à 6 chiffres
+        }
 
-    if (value.length > 3) {
-        value = value.slice(0, 3) + ' ' + value.slice(3); // Ajoute l'espace après le 3e chiffre
-    }
+        if (value.length > 3) {
+            value = value.slice(0, 3) + ' ' + value.slice(3); // Ajoute l'espace après le 3e chiffre
+        }
 
-    otpInput.value = value;
+        otpInput.value = value;
 
-    // Vérifier si l'OTP contient exactement 6 chiffres (sans espace)
-    if (/^\d{6}$/.test(value.replace(/\s/g, ''))) {
-        submitBtn.disabled = false;
-        errorMessage.textContent = '';
-    } else {
-        submitBtn.disabled = true;
-        errorMessage.textContent = 'Le code doit contenir 6 chiffres.';
-    }
-});
-
-submitBtn.addEventListener('click', function() {
-    const otpCode = otpInput.value.replace(/\s/g, ''); // Enlever les espaces avant d'envoyer
-
-    $.ajax({
-        url: '../ajax/verifier_otp_correct.php',
-        type: 'POST',
-        data: { otp: otpCode, secret: secretOTP },
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                let pop = document.getElementsByClassName('popQRcode')[0];
-                pop.style.display = 'none';
-                document.body.classList.remove('no-scroll');
-
-                secretOTP = "";
-
-                alert("code OTP correct");
-            } else {
-                errorMessage.textContent = 'code OTP incorrect';
-                alert("code OTP incorrect");
-            }
-        },
-        error: function() {
-            errorMessage.textContent = 'Erreur serveur, réessayez.';
-            successMessage.textContent = '';
+        // Vérifier si l'OTP contient exactement 6 chiffres (sans espace)
+        if (/^\d{6}$/.test(value.replace(/\s/g, ''))) {
+            submitBtn.disabled = false;
+            errorMessage.textContent = '';
+        } else {
+            submitBtn.disabled = true;
+            errorMessage.textContent = 'Le code doit contenir 6 chiffres.';
         }
     });
-});
+}
+
+if (submitBtn) {
+    submitBtn.addEventListener('click', function() {
+        const otpCode = otpInput.value.replace(/\s/g, ''); // Enlever les espaces avant d'envoyer
+        console.log("Envoi AJAX - OTP :", otpCode);
+        console.log("Envoi AJAX - Secret :", secretOTP);
+
+        $.ajax({
+            url: '../composants/ajax/verifier_otp_correct.php',
+            type: 'POST',
+            data: { otp: otpCode, secret: secretOTP },
+            dataType: 'json',
+            success: function(response) {
+                console.log("Réponse JSON :", response.success);
+        
+                if (response.success) {
+                    
+                    let btnAuth = document.getElementsByClassName('btnAuthent')[0];
+                    
+                    // Change le bouton activer en afficher
+                    btnAuth.classList.remove("btnAuthent");
+                    btnAuth.classList.add("btnAffQRcode");
+                    
+                    document.querySelector('.btnAffQRcode p').textContent = "Afficher Authentikator";
+                    
+                    secretOTP = "";
+                    alert("code OTP correct");
+
+                    // Fait disparaitre la pop up
+                    let pop = document.getElementsByClassName('popQRcode')[0];
+                    pop.style.display = 'none';
+                    document.body.classList.remove('no-scroll');
+                } else {
+                    errorMessage.textContent = 'code OTP incorrect';
+                    alert("code OTP incorrect");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Erreur AJAX :", textStatus, errorThrown);
+                console.error("Réponse serveur brute :", jqXHR.responseText);
+            }
+        });
+        
+    });
+}

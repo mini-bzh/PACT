@@ -7,17 +7,19 @@ let fleche2 = document.getElementsByClassName("fleche2")[0];
 let lesParg = document.querySelectorAll("#menuDeroule p, #menuDeroule button");
 
 // Ajouter un événement au clic sur le bouton
-btnDer.addEventListener('click', () => {
-    menu.classList.toggle('deroulement');
-    der.classList.toggle('displayNone');
-    der.classList.toggle('menuDeplie');
-    fleche.classList.toggle('rotate180');
-    fleche2.classList.toggle('displayNone');
+if (btnDer) {
+    btnDer.addEventListener('click', () => {
+        menu.classList.toggle('deroulement');
+        der.classList.toggle('displayNone');
+        der.classList.toggle('menuDeplie');
+        fleche.classList.toggle('rotate180');
+        fleche2.classList.toggle('displayNone');
 
-    lesParg.forEach(el => {
-        el.classList.toggle('displayNone');
+        lesParg.forEach(el => {
+            el.classList.toggle('displayNone');
+        });
     });
-});
+}
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 428) {

@@ -24,10 +24,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(map);
 
-var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
-imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
-
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
+//LISTENBOURG
+// var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
+// imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
+// L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 // Préchargement de la carte
 map.on('load', function() {
@@ -68,7 +68,7 @@ mapOffresInfos.forEach(element => {
                 var content = element.get('element');
                 content.innerHTML += 
                 `
-                <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon}) ;" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                             Itinéraire
                 </button>
                 `;
@@ -77,7 +77,11 @@ mapOffresInfos.forEach(element => {
                 console.log(customPopup);
 
                 var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                console.log(marker);
                 listeMarker[element.get("id")] = [marker,true];
+                marker.on('mouseover', function() {
+                    marker.openPopup();
+                });
                 markersCluster.addLayer(marker);
             } catch (error) {
             var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("ville");
@@ -91,7 +95,7 @@ mapOffresInfos.forEach(element => {
                         var content = element.get('element');
                         content.innerHTML += 
                         `
-                        <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon});" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                                     Itinéraire
                         </button>
                         `;
@@ -101,6 +105,9 @@ mapOffresInfos.forEach(element => {
 
                         marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
                         listeMarker[element.get("id")] = [marker,true];
+                        marker.on('mouseover', function() {
+                            marker.openPopup();
+                        });
                         markersCluster.addLayer(marker);
                     }
                 };
@@ -147,13 +154,12 @@ Fonction pour cacher la carte si elle est afficher et l'afficher si ielle est ca
 function resizeMap(e) {
     if (aff) { // si la carte est cacher
         aff = false;
-        document.getElementById("map").style.display="block";  // afficher la carte
         document.getElementById("map").style.height="80vh";
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }else{ // si la carte est affiché
         aff = true;
-        document.getElementById("map").style.display="none";  // cacher la carte
+        document.getElementById("map").style.height="0";  // cacher la carte
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }
@@ -161,7 +167,7 @@ function resizeMap(e) {
         map.invalidateSize();
         // Écouteur pour le bouton pour faire aparaitre/disparaitre la carte
         document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-    }, 100);
+    }, 200);
 }
 
 // Écouteur pour le bouton pour faire aparaitre/disparaitre la carte
