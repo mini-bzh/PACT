@@ -147,13 +147,12 @@ Fonction pour cacher la carte si elle est afficher et l'afficher si ielle est ca
 function resizeMap(e) {
     if (aff) { // si la carte est cacher
         aff = false;
-        document.getElementById("map").style.display="block";  // afficher la carte
         document.getElementById("map").style.height="80vh";
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }else{ // si la carte est affiché
         aff = true;
-        document.getElementById("map").style.display="none";  // cacher la carte
+        document.getElementById("map").style.height="0";  // cacher la carte
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }
@@ -161,7 +160,7 @@ function resizeMap(e) {
         map.invalidateSize();
         // Écouteur pour le bouton pour faire aparaitre/disparaitre la carte
         document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-    }, 100);
+    }, 200);
 }
 
 // Écouteur pour le bouton pour faire aparaitre/disparaitre la carte

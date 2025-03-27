@@ -2340,12 +2340,12 @@ aside fieldset {
 }
 
 #map{
-    display: none;
+    height: 0;
     width: 100%;
     z-index: 0;
     border-radius: 5px;
     margin-top: 5vh;
-    transition: all .1s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 #btnAgrandir{
@@ -2915,7 +2915,7 @@ aside fieldset {
 
     #filtres-aside {
         width: 50%;
-    
+        
     }
 
     .conteneurOffres>article {
