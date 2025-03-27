@@ -41,7 +41,6 @@
     }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -106,16 +105,7 @@
                                     <div class="etoiles">
                                         <!-- affichage de la note -->
                                         <?php affichage_etoiles($contentOffre["note"]); ?>
-                                        <p>(<?php if(isset($contentOffre["note"]))
-                                        {
-                                            echo $contentOffre["note"];
-                                        }
-                                        else
-                                        {
-                                            echo "aucun avis";
-                                        }
-                                        ?>)</p>
-
+                                        <p>(<?php echo (isset($contentOffre["note"]))? $contentOffre["note"]:"aucun avis";?>)</p>
                                     </div>
                                     <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
                                 </div>
@@ -311,7 +301,7 @@
                                 $avisDejaAjoute = false;
                                 $stmt = $dbh->prepare("select * from tripskell._avis where id_c = " . $_SESSION["idCompte"] . 
                                 " and idOffre = " . $_GET["idOffre"]);
-                                
+
                                 $stmt->execute();
                                 $result = $stmt->fetchAll();
 
@@ -367,11 +357,10 @@
             // ajout du footer
             include "../composants/footer/footer.php";
         ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="../js/detailOffre.js"></script>
+        <script src="../js/affichageAvis.js"></script>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/detailOffre.js"></script>
-    <script src="../js/affichageAvis.js"></script>
-    <!-- <script src="/js/scriptImageChangeante.js"></script> future carrousel d'image -->
 </html>
 
 <?php $dbh = null; // on ferme la connexion  ?>

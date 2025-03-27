@@ -260,7 +260,7 @@ function dependances_avis() {
             <div class="boutonPopUp">
                 <button class="btnAnnulerSignalement" onclick="fermeConfSignaler()">Annuler</button>
                 <button class="btnValiderId btnValiderSignalement" onclick="signalerAvis()">Valider</button>
-            <div>
+            </div>
         </div>
     </div>
 
