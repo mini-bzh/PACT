@@ -288,7 +288,7 @@ textarea {
     justify-content: center;
 }
 
-#logoNew {
+.logoNew {
     position: absolute;
     width: 15%;
     top: -13px;
@@ -301,13 +301,13 @@ textarea {
     align-items: center;
 }
 
-#logo_cat{
+.logo_cat{
     width: 30px;
     height: 30px;
     margin-right: 5px;
 }
 
-#conteneur_mini_carte {
+.conteneur_mini_carte {
     margin-top: 20px;
 }
 
@@ -2386,7 +2386,7 @@ aside fieldset {
 }
 
 
-.leaflet-popup-content-wrapper #conteneur_mini_carte{
+.leaflet-popup-content-wrapper .conteneur_mini_carte{
     margin-top: 0;
 }
 
@@ -2425,7 +2425,7 @@ aside fieldset {
     margin-bottom: 3%;
 }
 
-.leaflet-popup-content-wrapper #logoNew{
+.leaflet-popup-content-wrapper .logoNew{
     display: none;
 }
 
@@ -2851,7 +2851,7 @@ aside fieldset {
         min-height: 150px;
     }
 
-    #logoNew {
+    .logoNew {
         position: absolute;
         width: 15%;
         top: -7px;
@@ -3035,11 +3035,11 @@ aside fieldset {
         display: none;
     }
 
-    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper #logo_cat{
+    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper .logo_cat{
         display: none;
     }
 
-    .leaflet-popup-content-wrapper #conteneur_mini_carte{
+    .leaflet-popup-content-wrapper .conteneur_mini_carte{
         margin: 0;
     }
 
