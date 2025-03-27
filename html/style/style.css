@@ -2399,7 +2399,7 @@ aside fieldset {
 .leaflet-popup-content-wrapper .leaflet-popup-content a{
     color: black;
     padding-bottom: 1px;
-    min-width: 252px;
+    width: 100%;
 }
 
 .leaflet-popup-content-wrapper .btnItineraire{

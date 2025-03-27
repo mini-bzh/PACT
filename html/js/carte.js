@@ -24,10 +24,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(map);
 
-var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
-imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
-
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
+//LISTENBOURG
+// var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
+// imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
+// L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 // Préchargement de la carte
 map.on('load', function() {
