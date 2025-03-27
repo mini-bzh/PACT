@@ -33,7 +33,38 @@ function af_offre($row) {
 ?>
     ">
         <p class="hideForGraphic">Titre offre :</p>
-        <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
+        <div class="debutOffre">
+            <img src="../../icones/<?php
+            $cat = categorie($row["idoffre"]);
+            switch ($cat) {
+                case 'activité':
+                    echo "logo_activite.png";
+                    break;
+
+                case 'spectacle':
+                    echo "logo_spec.png";
+                    break;
+
+                case "parc d'attraction":
+                    echo "logo_parc_attr.png";
+                    break;
+
+                case 'restauration':
+                    echo "logo_resto.png";
+                    break;
+
+                case 'visite':
+                    echo "logo_visite.png";
+                    break;
+                            
+                default:
+                    echo "croixSVG.svg";
+                    break;
+            }
+    ?>
+            " alt="logo_categorie" name="logo_categorie" id="logo_cat">
+            <h3 class="titreOffre"><?php echo $row["titreoffre"];?></h3>
+        </div>
         <div class="conteneurSpaceBetween" id="conteneur_mini_carte">
             <div class="conteneurSVGtexte">
                 <img src="/icones/logoUserSVG.svg" alt="photo profil professionnel">
@@ -75,36 +106,6 @@ function af_offre($row) {
 <?php
         }
 ?>
-        <img src="../../icones/
-<?php
-        $cat = categorie($row["idoffre"]);
-        switch ($cat) {
-            case 'activité':
-                echo "logo_activite.png";
-                break;
-
-            case 'spectacle':
-                echo "logo_spec.png";
-                break;
-
-            case "parc d'attraction":
-                echo "logo_parc_attr.png";
-                break;
-
-            case 'restauration':
-                echo "logo_resto.png";
-                break;
-
-            case 'visite':
-                echo "logo_visite.png";
-                break;
-                        
-            default:
-                echo "croixSVG.svg";
-                break;
-        }
-?>
-        " alt="logo_categorie" name="logo_categorie" id="logo_cat">
     </article>
 <?php
 }

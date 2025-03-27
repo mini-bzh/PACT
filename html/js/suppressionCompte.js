@@ -73,4 +73,6 @@ function checkInputs() {
     }
 }
 
-mdp.addEventListener("input", checkInputs);
+if (mdp) {
+    mdp.addEventListener("input", checkInputs);
+}
