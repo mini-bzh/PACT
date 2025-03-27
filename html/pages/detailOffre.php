@@ -188,34 +188,35 @@
                                 <div id="conteneurJoursOffre">
                                     <table>
                                     <thead>
-                                        <th>Jour</th>
-                                        <th>Ouverture</th>
-                                        <th>Fermeture</th>
-                                        <th>Ouverture</th>
-                                        <th>Fermeture</th>
-
+                                        <tr>
+                                            <th>Jour</th>
+                                            <th>Ouverture</th>
+                                            <th>Fermeture</th>
+                                            <th>Ouverture</th>
+                                            <th>Fermeture</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                        foreach($ouverture as $value){
-                                            $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $value["id_hor"] ." where o.idOffre=". $idOffre." and o.id_hor=". $value["id_hor"] ." and o.id_jour='". $value["id_jour"] ."';")->fetchAll();
-                                    ?>
-                                    <tr>
-                                        <th><?php echo $value["id_jour"]; ?></th>
-                                        <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
-                                        <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
                                         <?php
-                                        if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
+                                            foreach($ouverture as $value){
+                                                $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $value["id_hor"] ." where o.idOffre=". $idOffre." and o.id_hor=". $value["id_hor"] ." and o.id_jour='". $value["id_jour"] ."';")->fetchAll();
                                         ?>
-                                        <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
-                                        <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                        <tr>
+                                            <th><?php echo $value["id_jour"]; ?></th>
+                                            <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
+                                            <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
+                                            <?php
+                                            if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
+                                            ?>
+                                            <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
+                                            <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tr>
                                         <?php
-                                        }
+                                            }
                                         ?>
-                                    </tr>
-                                    <?php
-                                        }
-                                    ?>
                                     </tbody>
                                     </table>
                                 </div>
@@ -246,7 +247,7 @@
                                             <p>Durée du spectacle : <span class="boldArchivo"><?php echo $formattedTime; ?></span></p>
                                         </section>
 
-    <?php
+                                        <?php
 
                                         $stmt = $dbh->prepare("select * from tripskell._possedeLangue where idoffre='" . $idOffre . "';");
                                         $stmt->execute();
@@ -257,7 +258,7 @@
 
                                         // Combiner les éléments en une seule chaîne séparée par des virgules
                                         $languesStr = implode(', ', $langues);
-    ?>
+                                        ?>
                                         <section id="secVisite" class="displayNone">
                                             <p>Langue(s) de la visite :<br><span class="boldArchivo"><?php echo $languesStr; ?></span></p>
                                             <p>La visite <span class="boldArchivo"><?php ($contentOffre['guidee']) ? "" : "n'" ?>est <?php ($contentOffre['guidee']) ? "" : "pas" ?><?php echo $contentOffre['capacite']; ?> guidée</span>.</p>
@@ -304,15 +305,15 @@
                             <p id="txtBtnNote" class="txtBtnTrie" >note</p>
                         </div>
                     </section>
-                    <?php
-                        if(isset($_SESSION["idCompte"]) && $_SESSION["idCompte"] !== null && $compteMembre)
-                        {   
-                            //reagrde si le membre a déjà publié un avis pour l'offre
-                            $avisDejaAjoute = false;
-                            $stmt = $dbh->prepare("select * from tripskell._avis where id_c = " . $_SESSION["idCompte"] . 
-                            " and idOffre = " . $_GET["idOffre"]);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
+                        <?php
+                            if(isset($_SESSION["idCompte"]) && $_SESSION["idCompte"] !== null && $compteMembre) {   
+                                //reagrde si le membre a déjà publié un avis pour l'offre
+                                $avisDejaAjoute = false;
+                                $stmt = $dbh->prepare("select * from tripskell._avis where id_c = " . $_SESSION["idCompte"] . 
+                                " and idOffre = " . $_GET["idOffre"]);
+                                
+                                $stmt->execute();
+                                $result = $stmt->fetchAll();
 
                                 if(sizeof($result) > 0)
                                 {
@@ -340,23 +341,24 @@
                                 <?php
                             }
                         ?>
-                <section class="conteneurAvis">
-                    
+                    <section class="conteneurAvis">
                         
-                    <!-- Code pour un avis -->
-                    <div id="overlay">
-                        <img src="" alt="image overlay">
-                        <div id="btnFermerOverlay">
-                            <p>Fermer</p>
+                            
+                        <!-- Code pour un avis -->
+                        <div id="overlay">
+                            <img src="" alt="image overlay"> <!-- src vide tant que aucune image n'est selectionnée -->
+                            <div id="btnFermerOverlay">
+                                <p>Fermer</p>
+                            </div>
                         </div>
-                    </div>
-                    <?php
+                        <?php
 
-                    foreach ($avis as $avisM) 
-                    {
-                        afficheAvis($avisM);
-                    }
-                    ?>
+                        foreach ($avis as $avisM) 
+                        {
+                            afficheAvis($avisM);
+                        }
+                        ?>
+                    </section>
                 </section>
             </section>
         <?php dependances_avis(); ?>
