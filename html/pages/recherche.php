@@ -146,10 +146,15 @@
             include "../composants/footer/footer.php";
         ?>
         <script src="../js/recherche.js" ></script>
+        <script src="../js/apparitionOffres.js"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <!-- Leaflet.markercluster JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
         
         <script src="../js/carte.js" ></script>
+        <script src="../js/apparitionOffres.js"></script>
+
     </body>
 </html>
