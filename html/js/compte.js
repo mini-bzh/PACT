@@ -120,11 +120,16 @@ if (btnModifBancExit) {
     });
 }
 
+function ouvrirPopupQuit() {
+    let popUPQuit = document.getElementsByClassName("popUpQuitOTP")[0];
+    popUPQuit.style.display = "flex";
+}
+
 
 let secretOTP = "";
 
 $(document).ready(function() {
-    $(".btnAuthent").click(function() {
+    $(document).on("click", ".btnAuthent", function() {
         $.ajax({
             url: '../composants/ajax/generateur_qrcode.php',
             type: 'POST',
@@ -149,11 +154,40 @@ $(document).ready(function() {
                         height: 256
                     });
 
-                    // Afficher la pop-up (si nécessaire)
+                    // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
                     if (pop) {
                         pop.style.display = 'flex';
                         document.body.classList.add('no-scroll');
+
+                        let croix = document.getElementById("annulerQRcode");
+
+                        if (croix) {
+                            // Si on clique sur la croix lors de l'activation sans valider le code OTP, on met une pop up pour le signaler
+                            croix.addEventListener("click", ouvrirPopupQuit);
+                        }
+
+                        // Boutons pour la pop up
+                        let popUpQuitOTP = document.querySelector(".popUpQuitOTP");
+
+                        let btnQuitOTP = document.querySelector(".btnQuit");
+                        let btnValQuitOTP = document.querySelector(".btnValiderQuit");
+
+                        if (btnQuitOTP) {
+                            btnQuitOTP.addEventListener("click", () => {
+                                popUpQuitOTP.style.display = "none";
+                            });
+                        }
+
+                        if (btnValQuitOTP) {
+                            btnValQuitOTP.addEventListener("click", () => {
+                                popUpQuitOTP.style.display = "none";
+
+                                let pop = document.getElementsByClassName('popQRcode')[0];
+                                pop.style.display = 'none';
+                                document.body.classList.remove('no-scroll');
+                            });
+                        }
                     }
                 }
             },
@@ -163,7 +197,7 @@ $(document).ready(function() {
         });
     });
 
-    $(".btnAffQRcode").click(function() {
+    $(document).on("click", ".btnAffQRcode", function() {
         $.ajax({
             url: '../composants/ajax/affichage_qrcode.php',
             type: 'POST',
@@ -187,11 +221,28 @@ $(document).ready(function() {
                         height: 256
                     });
 
-                    // Afficher la pop-up (si nécessaire)
+                    // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
                     if (pop) {
                         pop.style.display = 'flex';
                         document.body.classList.add('no-scroll');
+
+                        let messInfo = document.querySelector("#imgQRcode ~ p");
+                        messInfo.style.display = "none";
+
+                        let aster = document.querySelector("#imgQRcode + div span");
+                        aster.style.display = "none";
+
+                        let croix = document.getElementById("annulerQRcode");
+
+                        if (croix) {
+                            // Si on clique sur la croix lors de l'affichage sans valider le code OTP, on ferme directement
+                            croix.addEventListener("click", () => {
+                                let pop = document.getElementsByClassName('popQRcode')[0];
+                                pop.style.display = 'none';
+                                document.body.classList.remove('no-scroll');
+                            })
+                        }
                     }
                 }
             },
@@ -202,17 +253,6 @@ $(document).ready(function() {
     });
 });
 
-
-
-let croix = document.getElementById("annulerQRcode");
-
-if (croix) {
-    croix.addEventListener("click", () => {
-        let pop = document.getElementsByClassName('popQRcode')[0];
-        pop.style.display = 'none';
-        document.body.classList.remove('no-scroll');
-    })
-}
 
 // Formulaire de submition OTP
 let otpInput = document.getElementById('codeOTP');
@@ -264,8 +304,13 @@ if (submitBtn) {
                     let btnAuth = document.getElementsByClassName('btnAuthent')[0];
                     
                     // Change le bouton activer en afficher
-                    btnAuth.classList.remove("btnAuthent");
-                    btnAuth.classList.add("btnAffQRcode");
+                    if (btnAuth) {
+                        btnAuth.classList.remove("btnAuthent");
+                        btnAuth.classList.add("btnAffQRcode");
+
+                        let croix = document.getElementById("annulerQRcode");
+                        croix.removeEventListener("click", ouvrirPopupQuit);
+                    }
                     
                     document.querySelector('.btnAffQRcode p').textContent = "Afficher Authentikator";
                     
@@ -278,7 +323,6 @@ if (submitBtn) {
                     document.body.classList.remove('no-scroll');
                 } else {
                     errorMessage.textContent = 'code OTP incorrect';
-                    alert("code OTP incorrect");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -289,3 +333,4 @@ if (submitBtn) {
         
     });
 }
+

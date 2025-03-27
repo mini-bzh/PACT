@@ -590,15 +590,26 @@ if (isset($idCompte)) {
                     <div>
                         <div id="imgQRcode"></div>
                         <div>
-                            <label for="codeOTP">Vérifier le code OTP :</label>
+                            <label for="codeOTP">Vérifier le code OTP<span> *</span> :</label>
                             <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="000 000">
                             <p id="error-message" class="texteSmall"></p>
                             <button id="submit-btn-otp" disabled>Vérifier</button>
                         </div>
+                        <p>* Obligatoire uniquement lors de l'activation</p>
                     </div>
                 </div>
             </div>
 
+            <!-- POP-UP confirmation quitter sans OTP -->
+            <div class="popUpQuitOTP popUp">
+                <div class="popup-content">
+                    <p>Êtes vous sur de vouloir vous fermer la fenêtre sans valider le code OTP ?<br><span>Le QRcode partagé ne sera plus valide après ça.</span></p>
+                    <div>
+                        <button class="btnQuit">Non</button>
+                        <button class="btnValiderQuit">Oui</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- POP-UP de deconnexion -->
             <div class="popUpDeco popUp">

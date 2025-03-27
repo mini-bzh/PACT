@@ -400,6 +400,13 @@ body.no-scroll {
     color: red;
 }
 
+#imgQRcode ~ p {
+    color: red;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+
 .otp-input {
     font-size: 18px;
     width: 100%;
@@ -420,6 +427,53 @@ body.no-scroll {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.btnQuit {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btnQuit:hover {
+    background-color: var(--accentDark);
+}
+
+.btnValiderQuit {
+    background-color: var(--rouge);
+    color: white;
+}
+
+.btnValiderQuit:hover {
+    background-color: #c0392b;
+}
+
+.popUpQuitOTP .popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.popUpQuitOTP .popup-content button {
+    width: 40%;
+}
+
+.popUpQuitOTP .popup-content div {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.popUpQuitOTP .popup-content p {
+    line-height: 1.5;
+    margin-bottom: 1%;
+}
+
+.popUpQuitOTP .popup-content span {
+    color: red;
+}
+
+#imgQRcode + div span {
+    color: red;
 }
 
 #imgQRcode + div button:disabled {
