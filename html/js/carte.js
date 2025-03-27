@@ -68,7 +68,7 @@ mapOffresInfos.forEach(element => {
                 var content = element.get('element');
                 content.innerHTML += 
                 `
-                <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon}) ;" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                             Itinéraire
                 </button>
                 `;
@@ -91,7 +91,7 @@ mapOffresInfos.forEach(element => {
                         var content = element.get('element');
                         content.innerHTML += 
                         `
-                        <button class="btnItineraire" onclick="openNavigation(${myArr[0].lat}, ${myArr[0].lon})" style="margin-top:5px;padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon});" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
                                                     Itinéraire
                         </button>
                         `;
