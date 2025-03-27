@@ -77,7 +77,11 @@ mapOffresInfos.forEach(element => {
                 console.log(customPopup);
 
                 var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                console.log(marker);
                 listeMarker[element.get("id")] = [marker,true];
+                marker.on('mouseover', function() {
+                    marker.openPopup();
+                });
                 markersCluster.addLayer(marker);
             } catch (error) {
             var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("ville");
@@ -101,6 +105,9 @@ mapOffresInfos.forEach(element => {
 
                         marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
                         listeMarker[element.get("id")] = [marker,true];
+                        marker.on('mouseover', function() {
+                            marker.openPopup();
+                        });
                         markersCluster.addLayer(marker);
                     }
                 };
