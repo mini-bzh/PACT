@@ -132,8 +132,13 @@ if (isset($idCompte)) {
     <script src="../js/deconnexion.js" defer></script>
     <script src="../js/suppressionCompte.js" defer></script>
     <script src="../js/menuDeroulant.js" defer></script>
-
-    <script>let id_c = <?php echo $idCompte;?>; // donne l'id_c au javascript</script> 
+<?php
+    if (isset($idCompte)) {
+?>
+    <script>let id_c = <?php echo $idCompte;?>; // donne l'id_c au javascript</script>
+<?php
+    }
+?>
     <script src="../js/compte.js" defer></script>
 </head>
 
