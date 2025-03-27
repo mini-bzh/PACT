@@ -38,7 +38,7 @@ function af_offre($row) {
             <?php
             if (in_array($row["idoffre"], $nouvellesOffresId)) {
             ?>
-                <img src="../../icones/logoNew.png" alt="Logo nouvelle offre" name="Logo nouvelle offre" id="logoNew">
+                <img src="../../icones/logoNew.png" alt="Logo nouvelle offre" name="Logo nouvelle offre" class="logoNew">
             <?php
             }
             ?>
@@ -72,7 +72,7 @@ function af_offre($row) {
                     break;
             }
     ?>
-            " alt="logo_categorie" name="logo_categorie" id="logo_cat">
+            " alt="logo_categorie" name="logo_categorie" class="logo_cat">
     </div>
 
 
