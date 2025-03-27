@@ -26,7 +26,7 @@ function af_offre($row) {
 
     $nb_avis = $dbh->query("select count(*) from tripskell.avis where idOffre=".$row['idoffre'].";")->fetchAll()[0]['count'];
 ?>
-    <article class="apercuOffre <?php
+    <article class="apercuOffre<?php
     if (in_array($row["idoffre"], $enRelief)) {
         echo " relief";
     }
