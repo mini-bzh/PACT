@@ -1,4 +1,3 @@
-console.log("cc")
 let observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if(entry.isIntersecting){

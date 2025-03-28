@@ -2569,6 +2569,7 @@ aside fieldset {
     border-radius: 5px;
     border-radius: 5px;
     padding: 10px;
+    box-shadow: var(--ombreVisiteur);
 } 
 
 
