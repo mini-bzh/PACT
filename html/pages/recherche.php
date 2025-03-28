@@ -135,6 +135,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
         
         <script src="../js/carte.js" ></script>
-        <script src="../js/apparitionOffres.js"></script>
-    </body>
+        <script src="../js/animationApparition.js"></script>
+        </body>
 </html>

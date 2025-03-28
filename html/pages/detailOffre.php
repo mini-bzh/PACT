@@ -46,7 +46,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>détail offre</title>
+    <title>Détail de l'offre</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
@@ -341,6 +341,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="../js/detailOffre.js"></script>
         <script src="../js/affichageAvis.js"></script>
+        <script src="../js/animationApparition.js"></script>
     </body>
 </html>
 

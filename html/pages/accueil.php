@@ -308,7 +308,7 @@ $nouvellesOffres = $stmt->fetchAll();
     include "../composants/footer/footer.php";
     ?>
     <script src="../js/acceuil.js"></script>
-    <script src="../js/apparitionOffres.js"></script>
+    <script src="../js/animationApparition.js"></script>
 </body>
 
 </html>
