@@ -702,14 +702,16 @@ textarea {
         font-family: "Archivo-bold";
     }
 
-    #mainConnexion form input{
-        width: 385.12px;
-        height: 61px;
-        padding: 0 2%;
+    #mainConnexion form{
+        width: 100%;
     }
-
+    
     #mainConnexion .zoneBtn{
         margin: 10% auto 3% auto;
+    }
+
+    #mainConnexion form input{
+        width: 100%;
     }
 }
 
@@ -2688,8 +2690,8 @@ aside fieldset {
     }
 
     .titrePortable img {
-        width: 85px;
-        height: 85px;
+        width: 20%;
+        height: 20%;
     }
 
     #logoTitreMobile img {
@@ -3217,7 +3219,7 @@ aside fieldset {
     }
 
     .titrePortable img {
-        height: 30%;
+        height: 20%;
     }
 
     #logoTitreMobile img {
