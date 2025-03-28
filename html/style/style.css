@@ -308,7 +308,7 @@ textarea {
     align-items: center;
 }
 
-.logo_cat{
+.apercuOffre .logo_cat{
     width: 30px;
     height: 30px;
 }
@@ -2841,7 +2841,6 @@ aside fieldset {
     .apercuOffre img {
         width: 280px;
         height: 120px;
-        object-fit: cover;
         display: block;
     }
 
@@ -2878,8 +2877,9 @@ aside fieldset {
         min-height: 150px;
     }
 
-    #logoNew {
-
+    .apercuOffre .logoNew{
+        width: 25px;
+        height: 30px;
     }
     /*-------------/ HEADER MOBILE /--------------*/
 
