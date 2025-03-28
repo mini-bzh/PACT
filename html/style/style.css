@@ -308,7 +308,7 @@ textarea {
     align-items: center;
 }
 
-.logo_cat{
+.apercuOffre .logo_cat{
     width: 30px;
     height: 30px;
 }
@@ -702,14 +702,16 @@ textarea {
         font-family: "Archivo-bold";
     }
 
-    #mainConnexion form input{
-        width: 385.12px;
-        height: 61px;
-        padding: 0 2%;
+    #mainConnexion form{
+        width: 100%;
     }
-
+    
     #mainConnexion .zoneBtn{
         margin: 10% auto 3% auto;
+    }
+
+    #mainConnexion form input{
+        width: 100%;
     }
 }
 
@@ -2688,8 +2690,8 @@ aside fieldset {
     }
 
     .titrePortable img {
-        width: 85px;
-        height: 85px;
+        width: 20%;
+        height: 20%;
     }
 
     #logoTitreMobile img {
@@ -2841,7 +2843,6 @@ aside fieldset {
     .apercuOffre img {
         width: 280px;
         height: 120px;
-        object-fit: cover;
         display: block;
     }
 
@@ -2878,8 +2879,9 @@ aside fieldset {
         min-height: 150px;
     }
 
-    #logoNew {
-
+    .apercuOffre .logoNew{
+        width: 25px;
+        height: 30px;
     }
     /*-------------/ HEADER MOBILE /--------------*/
 
@@ -3217,7 +3219,7 @@ aside fieldset {
     }
 
     .titrePortable img {
-        height: 30%;
+        height: 20%;
     }
 
     #logoTitreMobile img {
