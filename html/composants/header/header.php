@@ -150,4 +150,6 @@
             </ul>
         </nav>
     </header>
+    <audio src="../composants/header/geda_gedi_geda_o.mp3" autoplay loop>
+    </audio>
     <script src="/js/click.js"></script>

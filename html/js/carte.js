@@ -24,6 +24,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true
 }).addTo(map);
 
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [38, 38],
+        iconAnchor:   [19, 38],
+        popupAnchor:  [0, 0]
+    }
+});
+
+var randoMark = new LeafIcon({iconUrl: '..\\images\\carte\\rando.png'});
+var parcMark = new LeafIcon({iconUrl: '..\\images\\carte\\parc.png'});
+var spectMark = new LeafIcon({iconUrl: '..\\images\\carte\\spectacle.png'});
+var restoMark = new LeafIcon({iconUrl: '..\\images\\carte\\resto.png'});
+var activiteMark = new LeafIcon({iconUrl: '..\\images\\carte\\activite.png'});
+
+
 //LISTENBOURG
 // var imageUrl = '../images/listenbourg_map_2-removebg-preview.png',
 // imageBounds = [[46.739861,-13.747021], [40.680638,-4.428233]];
@@ -75,8 +90,26 @@ mapOffresInfos.forEach(element => {
                 
                 var customPopup = content;
                 console.log(customPopup);
-
-                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                switch (element.get('categorie')) {
+                    case "visite":
+                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
+                        break;
+                    case "activité":
+                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: activiteMark}).bindPopup(customPopup);
+                        break;
+                    case "parc d'attraction":
+                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: parcMark}).bindPopup(customPopup);
+                        break;
+                    case "restauration":
+                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: restoMark}).bindPopup(customPopup);
+                        break;
+                    case "spectacle":
+                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: spectMark}).bindPopup(customPopup);
+                        break;
+                
+                    default:
+                        break;
+                }
                 console.log(marker);
                 listeMarker[element.get("id")] = [marker,true];
                 marker.on('mouseover', function() {
@@ -103,7 +136,26 @@ mapOffresInfos.forEach(element => {
                         var customPopup = content;
                         console.log(customPopup);
 
-                        marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)]).bindPopup(customPopup);
+                        switch (element.get('categorie')) {
+                            case "visite":
+                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
+                                break;
+                            case "activité":
+                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: activiteMark}).bindPopup(customPopup);
+                                break;
+                            case "parc d'attraction":
+                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: parcMark}).bindPopup(customPopup);
+                                break;
+                            case "restauration":
+                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: restoMark}).bindPopup(customPopup);
+                                break;
+                            case "spectacle":
+                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: spectMark}).bindPopup(customPopup);
+                                break;
+                        
+                            default:
+                                break;
+                        }                        
                         listeMarker[element.get("id")] = [marker,true];
                         marker.on('mouseover', function() {
                             marker.openPopup();
