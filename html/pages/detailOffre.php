@@ -19,7 +19,7 @@
     
     include_once("../composants/affichage/affichageAvis.php");
 
-
+        
     $user = null;
     if(key_exists("idOffre", $_GET))
     {
@@ -29,10 +29,12 @@
         // recuperation du contenu de l offre
         $contentOffre   = $dbh->query("select * from tripskell.offre_visiteur where idoffre='" . $idOffre . "';")->fetchAll()[0];
         $ouverture      = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
-        if ($comptePro) {
+        if ($comptePro && $dbh->query("select count(*) from tripskell._offre  where idoffre='" . $idOffre . "' and id_c='". $_SESSION["idCompte"] ."';")->fetchAll()[0]["count"] == 1  ) {
             $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "';")->fetchAll();    
+        } elseif ($compteMembre) { 
+            $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "' and (date_recup_token_blacklist ISNULL or id_c='". $_SESSION["idCompte"] ."');")->fetchAll();
         } else {
-            $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "' and date_recup_token_blacklist ISNULL;")->fetchAll();
+            $avis       = $dbh->query("select * from tripskell._avis where idoffre='" . $idOffre . "' and (date_recup_token_blacklist ISNULL);")->fetchAll();
         }
         $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 

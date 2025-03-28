@@ -539,7 +539,8 @@ body.no-scroll {
     }
 
     #imgQRcode {
-        width: 65%;
+        width: 50%;
+        max-width: 145px;
     }
 
     .popQRcode .popup-content {
@@ -593,6 +594,10 @@ body.no-scroll {
         width: fit-content;
         margin-right: 10%;
         margin-left: 10%;
+    }
+
+    #imgQRcode + div p {
+        font-size: var(--typescale-small-text) !important;
     }
     
     .textBulle + div{

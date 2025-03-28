@@ -3,6 +3,9 @@ let btnAnnulerOTP = document.getElementById("btnAnnulerOTP");
 let btnConfirmOTP = document.getElementById("btnConfirmerOTP");
 let overlayOTP = document.getElementById("overlayOTP");
 
+let loader = document.querySelector(".loader")
+let textBtnConfirmer = btnConfirmOTP.querySelector("p")
+
 let texteErreurOTP = document.getElementById("texteErreurOTP");
 
 if(btnConnexion != undefined)
@@ -47,8 +50,17 @@ btnConfirmOTP.addEventListener("click", validationConnexionOTP)
 async function validationConnexionOTP()                             // vérifie si l'OTP entré est correct, et soumet le formulaire si c'est le cas
 {
     try{
+        textBtnConfirmer.style.display = "none"                     // désactive le bouton le temps de la réponse d'ajax
+        loader.style.display = "inline-block"
+        btnConfirmOTP.disabled = true
+        btnAnnulerOTP.disabled = true
+
         let valide = await otpValide(userNameInput.value, otpInput.value);
-        console.log(valide)
+
+        textBtnConfirmer.style.display = "block"                    // réactive le bouton après la réponse d'ajax
+        loader.style.display = "none"
+        btnConfirmOTP.disabled = false
+        btnAnnulerOTP.disabled = false
 
         if(valide)
         {
