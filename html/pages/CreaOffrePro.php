@@ -1,4 +1,7 @@
 <?php
+
+use FontLib\Table\Type\post;
+
 session_start(); // recuperation de la sessions
 
 // recuperation des parametre de connection a la BdD
@@ -340,39 +343,79 @@ if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
 
     /* -------------------------------- ajout horaires dans l'offre -------------------------------- */
 
+
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = [
-        "Lundi" => json_decode($_POST['lundi']),
-        "Mardi" => json_decode($_POST["mardi"]),
-        "Mercredi" => json_decode($_POST["mercredi"]),
-        "Jeudi" => json_decode($_POST["jeudi"]),
-        "Vendredi" => json_decode($_POST["vendredi"]),
-        "Samedi" => json_decode($_POST["samedi"]),
-        "Dimanche" => json_decode($_POST["dimanche"])
+        "Lundi" => [
+            "debut-matin" => $_POST['debut-matin-L'] ?? null,
+            "fin-matin" => $_POST['fin-matin-L'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-L'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-L'] ?? null
+        ],
+        "Mardi" => [
+            "debut-matin" => $_POST['debut-matin-Ma'] ?? null,
+            "fin-matin" => $_POST['fin-matin-Ma'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-Ma'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-Ma'] ?? null
+        ],
+        "Mercredi" => [
+            "debut-matin" => $_POST['debut-matin-Me'] ?? null,
+            "fin-matin" => $_POST['fin-matin-Me'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-Me'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-Me'] ?? null
+        ],
+        "Jeudi" => [
+            "debut-matin" => $_POST['debut-matin-J'] ?? null,
+            "fin-matin" => $_POST['fin-matin-J'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-J'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-J'] ?? null
+        ],
+        "Vendredi" => [
+            "debut-matin" => $_POST['debut-matin-V'] ?? null,
+            "fin-matin" => $_POST['fin-matin-V'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-V'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-V'] ?? null
+        ],
+        "Samedi" => [
+            "debut-matin" => $_POST['debut-matin-S'] ?? null,
+            "fin-matin" => $_POST['fin-matin-S'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-S'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-S'] ?? null
+        ],
+        "Dimanche" => [
+            "debut-matin" => $_POST['debut-matin-D'] ?? null,
+            "fin-matin" => $_POST['fin-matin-D'] ?? null,
+            "debut-aprem" => $_POST['debut-aprem-D'] ?? null,
+            "fin-aprem" => $_POST['fin-aprem-D'] ?? null
+        ]
     ];
 
-    foreach ($jours as $jour => $horaires) {
-        // Remplacez les valeurs vides par NULL
-        $debMatin = !empty($horaires[0]) ? $horaires[0] : null;
-        $finMatin = !empty($horaires[1]) ? $horaires[1] : null;
-        $debAprem = !empty($horaires[2]) ? $horaires[2] : null;
-        $finAprem = !empty($horaires[3]) ? $horaires[3] : null;
 
-        if ($debMatin != null && $finMatin != null)      //si le jour est ouvert
-        {
+    foreach ($jours as $jour => $horaires) {
+
+        // Remplace les valeurs vides par NULL
+        $debMatin = !empty($horaires["debut-matin"]) ? $horaires["debut-matin"] : null;
+        $finMatin = !empty($horaires["fin-matin"]) ? $horaires["fin-matin"] : null;
+        $debAprem = !empty($horaires["debut-aprem"]) ? $horaires["debut-aprem"] : null;
+        $finAprem = !empty($horaires["fin-aprem"]) ? $horaires["fin-aprem"] : null;
+
+        if ($debMatin !== null && $finMatin !== null) {  // Si le jour est ouvert
             $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
             $stmt = $dbh->prepare($query);
 
             // Lier les variables aux paramètres
             $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
-            $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $stmt->bindValue(':debMatin', $debMatin, PDO::PARAM_STR);
+            $stmt->bindValue(':finMatin', $finMatin, PDO::PARAM_STR);
             $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
             $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
             $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
+
             $stmt->execute();
         }
     }
+
+
 
     /* --------------------------------------------------------------------------------------------- */
 
@@ -497,7 +540,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <?php } ?>
                     </div>
                 </div>
-                
+
                 <div class="champsCategorie">
                     <label>La visite est guidée <span class="required">*</span> :</label>
                     <div class="parentVisite">
@@ -551,14 +594,14 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <!-- Champs pour sélectionner les images -->
                     <div class="champs">
                         <div class="PhotoOffre">
-                            <img id="previewImage" src="../images/logo/ajoutimage.png"
+                            <img id="previewImageAttraction" src="../images/logo/ajoutimage.png"
                                 alt="Cliquez pour ajouter une image"
                                 style="cursor: pointer;"
-                                onclick="document.getElementById('fichierAttraction').click()">
-                            <input type="file" id="fichierAttraction" name="fichierAttraction"
+                                onclick="document.getElementById('plan').click()">
+                            <input type="file" id="plan" name="plan"
                                 accept="image/png, image/jpeg"
                                 style="display: none;"
-                                onchange="updatePreview()">
+                                onchange="updatePreviewAttraction()">
                         </div>
                     </div>
                 </div>
@@ -646,182 +689,172 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             </div>
 
 
-
-
-
-
-
-
-
             <!-- jours ouvertures et heures d'ouverture -->
-                <div class="ChoixJours">
-                    <label for="horaires">Horaires d'ouverture :</label>
-                    <div class="jours" id="lundi">
-                        <button type="button" id="btnL" class="btnHoraire">L</button>
-                        <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Lundi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
+            <div class="ChoixJours">
+                <label for="horaires">Horaires d'ouverture :</label>
+                <div class="jours">
+                    <button type="button" id="btnL" class="btnHoraire">L</button>
+                    <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Lundi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-L">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-L">
 
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
+                            <h4 class="btnAjoutHoraire">+</h4>
                         </div>
-                        <div class="fermer">
-                            <p>Fermer le Lundi</p>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-L">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-L">
                         </div>
                     </div>
-
-                    <div class="jours" id="mardi">
-                        <button type="button" id="btnMa" class="btnHoraire">Ma</button>
-                        <input type="hidden" name="mardi" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Mardi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Mardi</p>
-                        </div>
-                    </div>
-                    <div class="jours" id="mercredi">
-                        <button type="button" id="btnMe" class="btnHoraire">Me</button>
-                        <input type="hidden" name="mercredi" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Mercredi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Mercredi</p>
-                        </div>
-                    </div>
-                    <div class="jours" id="jeudi">
-                        <button type="button" id="btnJ" class="btnHoraire">J</button>
-                        <input type="hidden" name="jeudi" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Jeudi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Jeudi</p>
-                        </div>
-                    </div>
-                    <div class="jours" id="vendredi">
-                        <button type="button" id="btnV" class="btnHoraire">V</button>
-                        <input type="hidden" name="vendredi" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Vendredi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Vendredi</p>
-                        </div>
-                    </div>
-                    <div class="jours" id="samedi">
-                        <button type="button" id="btnS" class="btnHoraire">S</button>
-                        <input type="hidden" name="samedi" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Samedi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Samedi</p>
-                        </div>
-                    </div>
-                    <div class="jours" id="dimanche">
-                        <button type="button" id="btnD" class="btnHoraire">D</button>
-                        <input type="hidden" name="dimanche" class="inputJour">
-                        <div class="ouvert">
-                            <div class="heures1 horairesAfficher">
-                                <label for="heure-debut">Le Dimanche, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-
-                                <h4 class="btnAjoutHoraire">+</h4>
-                            </div>
-                            <div class="heures2 horairesCacher">
-                                <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="heure-debut">
-                                <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="heure-fin">
-                            </div>
-                        </div>
-                        <div class="fermer">
-                            <p>Fermer le Dimanche</p>
-                        </div>
+                    <div class="fermer">
+                        <label>Vous êtes fermer le Lundi</label>
                     </div>
                 </div>
 
+                <div class="jours">
+                    <button type="button" id="btnMa" class="btnHoraire">Ma</button>
+                    <input type="hidden" name="mardi" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Mardi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-Ma">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-Ma">
 
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-Ma">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-Ma">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                    <label>Vous êtes fermer le Mardi</label>
+                    </div>
+                </div>
+                <div class="jours">
+                    <button type="button" id="btnMe" class="btnHoraire">Me</button>
+                    <input type="hidden" name="mercredi" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Mercredi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-Me">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-Me">
 
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-Me">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-Me">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                    <label>Vous êtes fermer le Mercredi</label>
+                    </div>
+                </div>
+                <div class="jours">
+                    <button type="button" id="btnJ" class="btnHoraire">J</button>
+                    <input type="hidden" name="jeudi" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Jeudi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-J">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-J">
+
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-J">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-J">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                    <label>Vous êtes fermer le Jeudi</label>
+                    </div>
+                </div>
+                <div class="jours">
+                    <button type="button" id="btnV" class="btnHoraire">V</button>
+                    <input type="hidden" name="vendredi" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Vendredi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-V">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-V">
+
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-V">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-V">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                        <label>Vous êtes fermer le Vendredi</label>
+                    </div>
+                </div>
+                <div class="jours">
+                    <button type="button" id="btnS" class="btnHoraire">S</button>
+                    <input type="hidden" name="samedi" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Samedi, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-S">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-S">
+
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-S">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-S">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                        <label>Vous êtes fermer le Samedi</label>
+                    </div>
+                </div>
+                <div class="jours">
+                    <button type="button" id="btnD" class="btnHoraire">D</button>
+                    <input type="hidden" name="dimanche" class="inputJour">
+                    <div class="ouvert">
+                        <div class="heures1 horairesAfficher">
+                            <label for="heure-debut">Le Dimanche, vous êtes ouvert de </label>
+                            <input type="time" class="heure-debut" name="debut-matin-D">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-matin-D">
+
+                            <h4 class="btnAjoutHoraire">+</h4>
+                        </div>
+                        <div class="heures2 horairesCacher">
+                            <label for="heure-debut">et de </label>
+                            <input type="time" class="heure-debut" name="debut-aprem-D">
+                            <label for="heure-fin"> à </label>
+                            <input type="time" class="heure-fin" name="fin-aprem-D">
+                        </div>
+                    </div>
+                    <div class="fermer">
+                    <label>Vous êtes fermer le Dimanche</label>
+                    </div>
+                </div>
+            </div>
 
             <!-- Adresse -->
             <div class="champs">
@@ -960,6 +993,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 function updatePreview() {
                     const input = document.getElementById('fichier1');
                     const previewImage = document.getElementById('previewImage');
+                    const fileName = document.getElementById('fileName');
+
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                        fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+                    }
+                }
+
+                function updatePreviewAttraction() {
+                    const input = document.getElementById('plan');
+                    const previewImage = document.getElementById('previewImageAttraction');
                     const fileName = document.getElementById('fileName');
 
                     if (input.files && input.files[0]) {
