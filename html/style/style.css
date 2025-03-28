@@ -1673,6 +1673,7 @@ textarea {
     height: 180px;
     object-fit: cover;
     display: block;
+    border-radius: 5px;
 }
 
 .apercuOffre p{
@@ -1707,6 +1708,8 @@ textarea {
     width: fit-content;
     height: fit-content;
     margin: 0px;
+    outline: solid 1px white;
+    border-radius: 5px 0;
 }
 
 
