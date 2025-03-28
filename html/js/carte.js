@@ -28,7 +28,7 @@ var LeafIcon = L.Icon.extend({
     options: {
         iconSize:     [38, 38],
         iconAnchor:   [19, 38],
-        popupAnchor:  [0, 0]
+        popupAnchor:  [0, -38]
     }
 });
 
@@ -87,7 +87,7 @@ mapOffresInfos.forEach(element => {
                                             Itinéraire
                 </button>
                 `;
-                
+                console.log(element.get('categorie'));
                 var customPopup = content;
                 console.log(customPopup);
                 switch (element.get('categorie')) {
@@ -132,7 +132,7 @@ mapOffresInfos.forEach(element => {
                                                     Itinéraire
                         </button>
                         `;
-                        
+                        console.log(element.get('categorie'));
                         var customPopup = content;
                         console.log(customPopup);
 
