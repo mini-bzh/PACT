@@ -69,32 +69,14 @@
         ?>>
         <?php include "../composants/header/header.php";        //import navbar
         ?>
-        <div class="titrePortable">
-
-            <svg width="384" height="158" viewBox="0 0 401 158" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g filter="url(#filter0_d_169_4380)">
-            <ellipse cx="169.5" cy="61" rx="231.5" ry="89" fill="white"/>
-            </g>
-            <defs>
-            <filter id="filter0_d_169_4380" x="-66" y="-28" width="471" height="186" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset dy="4"/>
-            <feGaussianBlur stdDeviation="2"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_169_4380"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_169_4380" result="shape"/>
-            </filter>
-            </defs>
-            </svg>
-
-            <div id="conteneurTitreMobile">
-                <!--<img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">-->
-                <img src="/images/logo/logo_petit.png" alt="logo petit" id="logoTitreMobile">
-                <h1>Rechercher</h1>
+        <header>
+            <div class="titrePortable">
+                    <!--<img src="/images/logo/logo_grand.png" alt="logo grand" id="logoTitreMobile">-->
+                    <img src="/images/logo/logo_petit.png" alt="logo petit" id="logoTitreMobile">
+                    <h1>Rechercher</h1>
             </div>
-        </div>
+        </header>
+        
 <?php include "../composants/sidebar/sidebar_recherche.php"; ?>
         <main class="main-recherche">
             <section id="conteneurBarre">
@@ -146,7 +128,6 @@
             include "../composants/footer/footer.php";
         ?>
         <script src="../js/recherche.js" ></script>
-        <script src="../js/apparitionOffres.js"></script>
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -154,7 +135,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
         
         <script src="../js/carte.js" ></script>
-        <script src="../js/apparitionOffres.js"></script>
-
-    </body>
+        <script src="../js/animationApparition.js"></script>
+        </body>
 </html>

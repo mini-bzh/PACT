@@ -162,7 +162,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere1<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
@@ -308,7 +308,7 @@ $nouvellesOffres = $stmt->fetchAll();
     include "../composants/footer/footer.php";
     ?>
     <script src="../js/acceuil.js"></script>
-    <script src="../js/apparitionOffres.js"></script>
+    <script src="../js/animationApparition.js"></script>
 </body>
 
 </html>

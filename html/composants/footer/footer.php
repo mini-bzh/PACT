@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page avec Footer Fixé</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Assurez-vous de lier votre fichier CSS -->
-</head>
-<body>
+
 
     <footer class="footer">
         <div class="footer-container">
@@ -41,9 +33,9 @@
             
             <div class="footer-section">
                 <h4>Suivez-nous</h4>
-                <a href="https://www.facebook.com"> <img src="/images/Réseaux/facebook.png" alt="logo facebook"/> </a>
-                <a href="https://www.instagram.com"> <img src="/images/Réseaux/instagram.png"  alt="logo instagram"/> </a>
-                <a href="https://www.youtube.com"><img src="/images/Réseaux/youtube.png"  alt="logo youtube"/> </a>
+                <a href="https://www.facebook.com"> <img src="/images/Réseaux/facebook.png" alt="logo facebook"> </a>
+                <a href="https://www.instagram.com"> <img src="/images/Réseaux/instagram.png"  alt="logo instagram"> </a>
+                <a href="https://www.youtube.com"><img src="/images/Réseaux/youtube.png"  alt="logo youtube"> </a>
             </div>
         </div>
 
@@ -51,5 +43,3 @@
             <p>&copy; 2024 PACT. Tous droits réservés.</p>
         </div>
     </footer>
-</body>
-</html>

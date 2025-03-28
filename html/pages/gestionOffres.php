@@ -41,7 +41,7 @@ $contentMesOffres = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gestion des offre</title>
+    <title>Gestion des offres</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../icones/favicon.svg" type="image/svg+xml">
@@ -252,6 +252,7 @@ $contentMesOffres = $stmt->fetchAll();
 <!--<script src="../js/scriptImageChangeante.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/gestionOffre.js"></script>
+<script src="../js/animationApparition.js"></script>
 <script src="/js/suppressionOffre.js"></script>
 
 

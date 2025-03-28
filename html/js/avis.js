@@ -203,12 +203,6 @@ function trierNote() {
 
 
 
-
-
-
-
-
-
 /*---------------------------- preview image ----------------------------*/
 let triggerAffichage = document.querySelectorAll(".imageAvis");
 let overlay = document.getElementById("overlay");
@@ -265,6 +259,7 @@ function toggleAvisOffre()      //toggle l'affichage des avis d'une offre
     if(window.getComputedStyle(conteneurAvis).display == "none")
     {
         conteneurAvis.style.display = "block";
+        
         event.target.style.transform = "rotate(180deg)";
 
         MettreAvisOffreLu(conteneurAvisOffre);

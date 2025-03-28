@@ -268,14 +268,8 @@ textarea {
     margin: 0px 10px 10px 10px;
 }
 
-#mainAccueil #logoTitreMobile {
-    width: 200px;
-    height: auto;
-    transform: translate(30px, -25px);
-}
-
 .titreOffre {
-    width: 70%;
+    width: fit-content;
 }
 
 #mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
@@ -288,22 +282,38 @@ textarea {
     justify-content: center;
 }
 
-#logoNew {
-    position: absolute;
-    width: 78.5px;
-    top: -27px;
-    right: -28.5px;
+
+
+.headerResumeOffre{
+    display: flex;
+    justify-content: space-between;
 }
 
-#logo_cat {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 5px;
-    right: 45px;
+
+
+
+.headerResumeOffre{
+    display: flex;
+    justify-content: space-between;
 }
 
-#conteneur_mini_carte {
+
+.logoNew {
+    width: 10%;
+    margin-right: 5px;
+}
+
+.debutOffre{
+    display: flex;
+    align-items: center;
+}
+
+.apercuOffre .logo_cat{
+    width: 30px;
+    height: 30px;
+}
+
+.conteneur_mini_carte {
     margin-top: 20px;
 }
 
@@ -692,14 +702,16 @@ textarea {
         font-family: "Archivo-bold";
     }
 
-    #mainConnexion form input{
-        width: 385.12px;
-        height: 61px;
-        padding: 0 2%;
+    #mainConnexion form{
+        width: 100%;
     }
-
+    
     #mainConnexion .zoneBtn{
         margin: 10% auto 3% auto;
+    }
+
+    #mainConnexion form input{
+        width: 100%;
     }
 }
 
@@ -1344,6 +1356,15 @@ textarea {
     align-items: center;
 }
 
+.avis .btnModifierAvis{
+    border: 1px solid blue;
+    width: fit-content;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+}
 
 .avis .btnSignalerAvis {
     border: 1px solid black;
@@ -1392,6 +1413,20 @@ textarea {
     transform: translateY(-1px);
     user-select: none;
     pointer-events: none;
+}
+
+.avis .btnModifierAvis img{
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    transform: translateY(-1px);
+}
+
+.avis .btnModifierAvis img{
+    width: 13px;
+    height: 13px;
+    margin-right: 2px;
+    transform: translateY(-1px);
 }
 
 .avis .btnModifierAvis img {
@@ -1530,6 +1565,18 @@ textarea {
 .avis .btnModifierAvis p {
     font-size: var(--typescale-very-small-text);
     padding: 0;
+    text-decoration: none;
+}
+
+.avis .btnModifierAvis p{
+    font-size: var(--typescale-very-small-text);
+    padding: 0px;
+    text-decoration: none;
+}
+
+.avis .btnModifierAvis p{
+    font-size: var(--typescale-very-small-text);
+    padding: 0px;
     text-decoration: none;
 }
 
@@ -2369,7 +2416,7 @@ aside fieldset {
 }
 
 
-.leaflet-popup-content-wrapper #conteneur_mini_carte{
+.leaflet-popup-content-wrapper .conteneur_mini_carte{
     margin-top: 0;
 }
 
@@ -2408,7 +2455,7 @@ aside fieldset {
     margin-bottom: 3%;
 }
 
-.leaflet-popup-content-wrapper #logoNew{
+.leaflet-popup-content-wrapper .logoNew{
     display: none;
 }
 
@@ -2546,6 +2593,7 @@ aside fieldset {
     border-radius: 5px;
     border-radius: 5px;
     padding: 10px;
+    box-shadow: var(--ombreVisiteur);
 } 
 
 
@@ -2642,14 +2690,13 @@ aside fieldset {
     }
 
     .titrePortable img {
-        width: 85px;
-        height: 85px;
+        width: 20%;
+        height: 20%;
     }
 
     #logoTitreMobile img {
-        width: 100%;
-        height: 100%;
-        right: -8.5px;
+        width: 30%;
+        height: 30%;
     }
 
     #conteneurTitreMobile {
@@ -2684,9 +2731,8 @@ aside fieldset {
     }
 
     #logoTitreMobile img {
-        width: 100%;
-        height: 100%;
-        right: -8.5px;
+        width: 30%;
+        height: 30%;
     }
 
     body {
@@ -2797,7 +2843,6 @@ aside fieldset {
     .apercuOffre img {
         width: 280px;
         height: 120px;
-        object-fit: cover;
         display: block;
     }
 
@@ -2834,12 +2879,9 @@ aside fieldset {
         min-height: 150px;
     }
 
-    #logoNew {
-        position: absolute;
-        width: 15%;
-        top: -7px;
-        right: -8.5px;
-        height: 15%;
+    .apercuOffre .logoNew{
+        width: 25px;
+        height: 30px;
     }
     /*-------------/ HEADER MOBILE /--------------*/
 
@@ -2893,9 +2935,8 @@ aside fieldset {
     }
 
     #logoTitreMobile img {
-        width: 100%;
-        height: 100%;
-        right: -8.5px;
+        width: 30%;
+        height: 30%;
     }
 
     /*-------------/ PAGE RECHERCHE /--------------*/
@@ -3018,11 +3059,11 @@ aside fieldset {
         display: none;
     }
 
-    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper #logo_cat{
+    .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper .logo_cat{
         display: none;
     }
 
-    .leaflet-popup-content-wrapper #conteneur_mini_carte{
+    .leaflet-popup-content-wrapper .conteneur_mini_carte{
         margin: 0;
     }
 
@@ -3132,7 +3173,7 @@ aside fieldset {
     /* Règles spécifiques pour éviter le débordement */
     .zoneBtn,
     .ChoixCrea {
-        width: 100%;
+        width: 85%;
         /* Toujours dans les limites de l'écran */
         max-width: 428px;
         /* Limite stricte pour mobiles */
@@ -3162,7 +3203,10 @@ aside fieldset {
     
     
     .titrePortable{
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
     }
     
     .titrePortable div{
@@ -3175,14 +3219,12 @@ aside fieldset {
     }
 
     .titrePortable img {
-        width: 20%;
         height: 20%;
     }
 
     #logoTitreMobile img {
-        width: 50%;
-        height: 50%;
-        right: -8.5px;
+        width: 25%;
+        height: 25%;
         align-items: center;
         justify-content: center;
     }
@@ -3294,11 +3336,7 @@ aside fieldset {
         gap: 15px; /* Espacement entre les boutons */
     }
 
-    /* Règles spécifiques pour éviter le débordement */
-    .zoneBtn, .ChoixCrea {
-        width: 100%; /* Toujours dans les limites de l'écran */
-        max-width: 428px; /* Limite stricte pour mobiles */
-    }
+
 
     /* Police générale */
     #body-choixCreaCompte p {

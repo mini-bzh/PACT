@@ -400,6 +400,13 @@ body.no-scroll {
     color: red;
 }
 
+#imgQRcode ~ p {
+    color: red;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+
 .otp-input {
     font-size: 18px;
     width: 100%;
@@ -420,6 +427,53 @@ body.no-scroll {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.btnQuit {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btnQuit:hover {
+    background-color: var(--accentDark);
+}
+
+.btnValiderQuit {
+    background-color: var(--rouge);
+    color: white;
+}
+
+.btnValiderQuit:hover {
+    background-color: #c0392b;
+}
+
+.popUpQuitOTP .popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.popUpQuitOTP .popup-content button {
+    width: 40%;
+}
+
+.popUpQuitOTP .popup-content div {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.popUpQuitOTP .popup-content p {
+    line-height: 1.5;
+    margin-bottom: 1%;
+}
+
+.popUpQuitOTP .popup-content span {
+    color: red;
+}
+
+#imgQRcode + div span {
+    color: red;
 }
 
 #imgQRcode + div button:disabled {
@@ -475,12 +529,78 @@ body.no-scroll {
 
 @media screen and (max-width : 428px){
 
-    #conteneurTitreMobile{
-        margin: 3% 0 0 2%;
+    #annulerQRcode {
+        width: 30px;
+        top: 0;
+    }
+
+    #annulerQRcode svg {
+        width: 100%;
+    }
+
+    #imgQRcode {
+        width: 65%;
+    }
+
+    .popQRcode .popup-content {
+        width: 80%;
+        height: 50%;
+        top: 0;
+        left: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #imgQRcode + div {
+        flex-direction: column;
+        width: 80%;
+        align-items: center;
+    }
+
+    #imgQRcode ~ p {
+        bottom: 1%;
+        left: 1%;
+        font-size: var(--typescale-small-text) !important;
+    }
+
+    .popQRcode label {
+        font-size: var(--typescale-small-text);
+    }
+
+    .popQRcode .popup-content > div {
+        flex-direction: column;
+        height: 75%;
+    }
+
+    .popUpQuitOTP .popup-content {
+        height: 50%;
+        width: fit-content;
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+    .popUpQuitOTP .popup-content button {
+        width: 40%;
+    }
+
+    .popUpQuitOTP .popup-content div {
+        width: 100%;
+        height: 10%;
+    }
+
+    .popUpQuitOTP .popup-content {
+        height: 50%;
+        width: fit-content;
+        margin-right: 10%;
+        margin-left: 10%;
     }
     
     .textBulle + div{
         flex-direction: column;
+    }
+
+    #conteneurTitreMobile{
+        margin: 3% 0 0 2%;
     }
     
     .pageChoixCo > hr{
@@ -533,7 +653,7 @@ body.no-scroll {
     /* Si professionel */
 
     #btnDeconnexion{
-        width: 413px;
+        width: 100%;
         height: 74px;
         padding: 0 7%;
         margin: 2% auto;
@@ -577,13 +697,12 @@ body.no-scroll {
         margin-bottom: 2%;
         background-color: transparent;
         flex-direction: column;
-        width: fit-content;
         height: 100%;
         margin: 0 auto;
     }
 
     .informationsCompte > div{
-        width: 415px;
+        width: 100%;
         margin: 3% auto;
     }
 
@@ -597,7 +716,7 @@ body.no-scroll {
         width: 80%;
     }
 
-    .infoId{
+    .infoId {
         background-color: white;
         border-radius: 48px;
         height: 164px;
@@ -628,8 +747,8 @@ body.no-scroll {
     }
 
     .circular-image {
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
     }
 
     .zoneBtn{
@@ -657,7 +776,7 @@ body.no-scroll {
         display: flex;
         top: 330px;
         z-index: 1;
-        width: 415px;
+        width: 100%;
         height: 450px;
         background-color: white;
         border-radius: 0 0 48px 48px;
@@ -708,7 +827,7 @@ body.no-scroll {
     }
 
     .btnModifPort{
-        width: 393px;
+        width: 85%;
         height: 42px;
         background-color: #E1E1E1;
         border: black solid 2px;
