@@ -75,7 +75,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         prix = prix.substring(0, prix.length-1);
         mapTempo.set("prix", parseInt(prix));   //prix
 
-        let ouv = document.querySelector("#" + element.id + " #ouvertFerme");
+        let ouv = document.querySelector("#" + element.id + " .ouvertFerme");
         mapTempo.set("ouverture", ouv.classList.contains("ouvert"));        //si l'offre est ouverte ou non
         mapTempo.set("image",document.querySelector("#" + element.id + " .conteneurImage img"));
 
