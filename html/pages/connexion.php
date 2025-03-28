@@ -150,6 +150,7 @@ if ($_GET['user-tempo'] === 'pro') {
         <p id="texteErreurOTP">OTP invalide</p>
         <button id="btnConfirmerOTP">
             <p>Confirmer</p>
+            <span class="loader"></span>
         </button>
         <button id="btnAnnulerOTP">
             <p>Annuler</p>
