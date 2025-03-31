@@ -106,7 +106,7 @@ function af_offre($row) {
         <div class="conteneurSpaceBetween">
             <div class="etoiles">
                 <p class="hideForGraphic">Note /5 :</p>
-                <p class="note"><?php echo $row["note"]?></p>
+                <p class="note"><?php printf("%.1f", $row["note"]);?></p>
                 <?php affichage_etoiles($row["note"]);?>
             </div>
             <p><?php echo $nb_avis; ?> avis</p>
