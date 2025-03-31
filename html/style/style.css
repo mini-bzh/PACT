@@ -3063,10 +3063,6 @@ aside fieldset {
         width: 20%;
     }
 
-    #map{
-        display: none;
-    }
-
     .leaflet-popup-content-wrapper .conteneurImage , .leaflet-popup-content-wrapper .logo_cat{
         display: none;
     }
