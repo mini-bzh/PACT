@@ -149,9 +149,7 @@ $(document).ready(function() {
 
                     // Générer le QR Code
                     new QRCode(qrDiv, {
-                        text: response.qr_url,
-                        width: 256,
-                        height: 256
+                        text: response.qr_url
                     });
 
                     // Afficher la pop-up

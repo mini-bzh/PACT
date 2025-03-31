@@ -539,8 +539,7 @@ body.no-scroll {
     }
 
     #imgQRcode {
-        width: 50%;
-        max-width: 145px;
+        width: 60%;
     }
 
     .popQRcode .popup-content {
