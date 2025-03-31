@@ -726,7 +726,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Lundi</label>
+                        <label>Vous êtes fermés le Lundi</label>
                     </div>
                 </div>
 
@@ -750,7 +750,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Mardi</label>
+                        <label>Vous ête fermés le Mardi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -773,7 +773,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Mercredi</label>
+                        <label>Vous ête fermés le Mercredi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -796,7 +796,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Jeudi</label>
+                        <label>Vous ête fermés le Jeudi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -819,7 +819,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Vendredi</label>
+                        <label>Vous ête fermés le Vendredi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -842,7 +842,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Samedi</label>
+                        <label>Vous ête fermés le Samedi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -865,7 +865,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Dimanche</label>
+                        <label>Vous ête fermés le Dimanche</label>
                     </div>
                 </div>
             </div>
