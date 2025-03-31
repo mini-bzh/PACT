@@ -63,14 +63,17 @@ function preloadTiles() {
     }
 }
 
+// créé les clusters
 var markersCluster = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     zoomToBoundsOnClick: true
 });
 
-var listeMarker={};
+var listeMarker={}; // la liste des markers
 
+
+// envoie des requêtes pour récupérer les lat et long des adresses et place les points
 mapOffresInfos.forEach(element => {    
     var xmlhttp = new XMLHttpRequest();
     var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("adresse")+" "+ element.get("ville");
@@ -90,7 +93,7 @@ mapOffresInfos.forEach(element => {
                 console.log(element.get('categorie'));
                 var customPopup = content;
                 console.log(customPopup);
-                switch (element.get('categorie')) {
+                switch (element.get('categorie')) { // switch pour changer le marker par rapport au categorie
                     case "visite":
                         var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
                         break;
@@ -136,7 +139,7 @@ mapOffresInfos.forEach(element => {
                         var customPopup = content;
                         console.log(customPopup);
 
-                        switch (element.get('categorie')) {
+                        switch (element.get('categorie')) { // switch pour changer le marker par rapport au categorie
                             case "visite":
                                 var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
                                 break;
