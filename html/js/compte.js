@@ -129,15 +129,15 @@ function ouvrirPopupQuit() {
 let secretOTP = "";
 
 $(document).ready(function() {
-    $(document).on("click", ".btnAuthent", function() {
+    $(document).on("click", ".btnAuthent", function() {     // Si Authentikator n'est pas encore activé
         $.ajax({
             url: '../composants/ajax/generateur_qrcode.php',
             type: 'POST',
             dataType: 'json',
             success: function(response) {
-                if (response.qr_url && response.secret) {
+                if ((response.qr_url) && (response.secret)) {
                     let qrDiv = document.getElementById("imgQRcode");
-                    secretOTP = response.secret;
+                    secretOTP = response.secret;    // On stock le secret dans une variable tant que l'utilisateur n'a pas valider le bon code OTP
 
                     if (!qrDiv) {
                         console.error("Erreur : Élément imgQRcode introuvable !");
@@ -149,9 +149,7 @@ $(document).ready(function() {
 
                     // Générer le QR Code
                     new QRCode(qrDiv, {
-                        text: response.qr_url,
-                        width: 256,
-                        height: 256
+                        text: response.qr_url
                     });
 
                     // Afficher la pop-up
@@ -197,7 +195,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", ".btnAffQRcode", function() {
+    $(document).on("click", ".btnAffQRcode", function() {       // Si Authentikator est déjà activé
         $.ajax({
             url: '../composants/ajax/affichage_qrcode.php',
             type: 'POST',
@@ -216,9 +214,7 @@ $(document).ready(function() {
 
                     // Générer le QR Code
                     new QRCode(qrDiv, {
-                        text: response.qr_url,
-                        width: 256,
-                        height: 256
+                        text: response.qr_url
                     });
 
                     // Afficher la pop-up
@@ -299,7 +295,7 @@ if (submitBtn) {
             success: function(response) {
                 console.log("Réponse JSON :", response.success);
         
-                if (response.success) {
+                if (response.success) {     // Si le code OTP est correct on change 
                     
                     let btnAuth = document.getElementsByClassName('btnAuthent')[0];
                     
@@ -309,7 +305,7 @@ if (submitBtn) {
                         btnAuth.classList.add("btnAffQRcode");
 
                         let croix = document.getElementById("annulerQRcode");
-                        croix.removeEventListener("click", ouvrirPopupQuit);
+                        croix.removeEventListener("click", ouvrirPopupQuit);    // On enlève la pop up de confirmation si le code OTP n'a pas été entré
                     }
                     
                     document.querySelector('.btnAffQRcode p').textContent = "Afficher Authentikator";

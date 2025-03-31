@@ -20,15 +20,15 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $secret = $result['secretotp'];
 
-$totp = TOTP::create($secret);
+$totp = TOTP::create($secret); // On créer l'OTP à partir du secret déjà existant
 $totp->setLabel('PACT');
 $totp->setIssuer('tripskell');
-$totp->setPeriod(30);
+$totp->setPeriod(30);   // période de 30s
 
 $qrcodeUrl = $totp->getProvisioningUri();
 
 header('Content-Type: application/json');
-echo json_encode([
+echo json_encode([  // Envoie du qrcode
     'qr_url' => $qrcodeUrl
 ]);
 

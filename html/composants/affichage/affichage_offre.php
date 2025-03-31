@@ -83,8 +83,8 @@ function af_offre($row) {
                 <p class="hideForGraphic">Professionnel :</p>
                 <p><?php echo $dbh->query("select raison_social from tripskell._professionnel as p where p.id_c='" . $row["id_c"] . "';")->fetchAll()[0]["raison_social"];?></p>
             </div>
-            <p class="hideForGraphic cat">Categorie :</p>
-            <p class="displayNone"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
+            <p class="hideForGraphic">Categorie :</p>
+            <p class="displayNone cat"><?php echo categorie($row["idoffre"]); ?></p> <!-- catégorie -->
             <?php $ouvert=$dbh->query("SELECT tripskell.ouvert(".$row["idoffre"].");")->fetchAll()[0]["ouvert"]; ?>
             <p class="hideForGraphic">Actuellement :</p>
             <p class="ouvertFerme <?php echo ($ouvert ? "ouvert" : "ferme"); ?>"><?php echo ($ouvert ? "Ouvert" : "Fermé"); ?></p>
