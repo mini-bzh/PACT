@@ -2957,6 +2957,10 @@ aside fieldset {
         margin-bottom: 5px;
     }
 
+    #menu-aside{
+        width: 6%;
+    }
+
     .filtrerBarre {
         margin-left: 0;
         margin-bottom: 5%;
