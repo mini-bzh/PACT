@@ -26,36 +26,36 @@ $tags = array_column($tags, 'nomtag');
                 <fieldset id="ouverture">
                     <legend>Ouverture du site</legend>
                     <label class="toggle-button">
-                        <span>Ouvert</span>
                         <input type="checkbox" name="ouverture" value="ouvert">
+                        <span>Ouvert</span>
                     </label>
                     <label class="toggle-button">
-                        <span>Fermer</span>
                         <input type="checkbox" name="ouverture" value="ferme">
+                        <span>Fermer</span>
                     </label>
                 </fieldset>
 
                 <fieldset id="categorie">
                     <legend>Categorie</legend>
                     <label class="toggle-button">
-                        <span>Restauration</span>
                         <input type="checkbox" name="ouverture" value="restauration">
+                        <span>Restauration</span>
                     </label>
                     <label class="toggle-button">
-                        <span>Parcs</span>
                         <input type="checkbox" name="ouverture" value="parc d'attraction">
+                        <span>Parcs</span>
                     </label>
                     <label class="toggle-button">
-                        <span>Spectacles</span>
                         <input type="checkbox" name="ouverture" value="spectacle">
+                        <span>Spectacles</span>
                     </label>
                     <label class="toggle-button">
-                        <span>Activités</span>
                         <input type="checkbox" name="ouverture" value="activité">
+                        <span>Activités</span>
                     </label>
                     <label class="toggle-button">
-                        <span>Visites</span>
                         <input type="checkbox" name="ouverture" value="visite">
+                        <span>Visites</span>
                     </label>
                 </fieldset>
 
@@ -102,8 +102,8 @@ $tags = array_column($tags, 'nomtag');
                     <?php 
                     foreach ($tags as $tag) {?>
                         <label class="toggle-button">
-                            <span><?php echo $tag; ?></span>
                             <input type="checkbox" name="ouverture" value="<?php echo $tag; ?>">
+                            <span><?php echo $tag; ?></span>
                         </label>
                     <?php }
                     ?>
