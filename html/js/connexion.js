@@ -3,8 +3,11 @@ let btnAnnulerOTP = document.getElementById("btnAnnulerOTP");
 let btnConfirmOTP = document.getElementById("btnConfirmerOTP");
 let overlayOTP = document.getElementById("overlayOTP");
 
-let loader = document.querySelector(".loader")
+let loaderOTP = btnConfirmOTP.querySelector(".loader")
 let textBtnConfirmer = btnConfirmOTP.querySelector("p")
+
+let loaderCon = btnConnexion.querySelector(".loader")
+let textBtnConnexion = btnConnexion.querySelector("p")
 
 let texteErreurOTP = document.getElementById("texteErreurOTP");
 
@@ -13,6 +16,7 @@ if(btnConnexion != undefined)
     btnConnexion.addEventListener("click", ()=>{
         //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
         document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+        //btnConnexion.disabled = "true"
     })
 }
 

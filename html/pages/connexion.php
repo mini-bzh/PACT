@@ -198,6 +198,7 @@ if ($_GET['user-tempo'] === 'pro') {
 ?>
         <button type="submit" href="#" class="btnConnexion" id="btnConnexionForm">
             <p class="texteLarge boldArchivo">Se connecter</p>
+            <span class="loader"></span>
         </button>
 
 </form>

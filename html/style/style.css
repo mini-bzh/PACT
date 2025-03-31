@@ -578,6 +578,10 @@ textarea {
     background-color: var(--primary);
 }
 
+.btnConnexion:disabled{
+    background-color: var(--primaryLight);
+}
+
 #mainConnexion .zoneBtn{
     display: flex;
     flex-direction: row;
