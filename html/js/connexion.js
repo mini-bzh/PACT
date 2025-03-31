@@ -54,15 +54,16 @@ btnConfirmOTP.addEventListener("click", validationConnexionOTP)
 async function validationConnexionOTP()                             // vérifie si l'OTP entré est correct, et soumet le formulaire si c'est le cas
 {
     try{
+        texteErreurOTP.style.animation = "none"
         textBtnConfirmer.style.display = "none"                     // désactive le bouton le temps de la réponse d'ajax
-        loader.style.display = "inline-block"
+        loaderOTP.style.display = "inline-block"
         btnConfirmOTP.disabled = true
         btnAnnulerOTP.disabled = true
 
         let valide = await otpValide(userNameInput.value, otpInput.value);
 
         textBtnConfirmer.style.display = "block"                    // réactive le bouton après la réponse d'ajax
-        loader.style.display = "none"
+        loaderOTP.style.display = "none"
         btnConfirmOTP.disabled = false
         btnAnnulerOTP.disabled = false
 
@@ -73,6 +74,7 @@ async function validationConnexionOTP()                             // vérifie 
         else
         {
             texteErreurOTP.style.display = "flex"           // affiche un message d'erreur
+            texteErreurOTP.style.animation = "error 0.7s linear"
         }
     } catch(error) {
         console.log("erreur lors de la validation otp : ", error);

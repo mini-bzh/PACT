@@ -81,19 +81,19 @@ $message2 = "";
 // Affiche un message d'erreur à l'utilisateur selon son erreur
 if ($_GET['user-tempo'] === 'pro') {
     if (($correspond === false) && (count($result) === 0) && (count($result2) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-        $message1 = "<p>Ce login n'existe pas.</p>";
+        $message1 = "<p class='msgErreur'>Ce login n'existe pas.</p>";
     }
 
     if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1) || (count($result2) === 1))){
-        $message2 = "<p>Mot de passe incorrect.</p>";
+        $message2 = "<p class='msgErreur'>Mot de passe incorrect.</p>";
     }
 } else {
     if (($correspond === false) && (count($result) === 0) && ((isset($_POST['userName'])) && (isset($_POST['userPSW'])))) {
-        $message1 = "<p>Ce login n'existe pas.</p>";
+        $message1 = "<p class='msgErreur'>Ce login n'existe pas.</p>";
     }
 
     if (($correspond === false) && ((isset($_POST['userName'])) && (isset($_POST['userPSW']))) && ((count($result) === 1))){
-        $message2 = "<p>Mot de passe incorrect.</p>";
+        $message2 = "<p class='msgErreur'>Mot de passe incorrect.</p>";
     }
 }
 
@@ -162,9 +162,11 @@ if ($_GET['user-tempo'] === 'pro') {
 <form action="" method="post">
     <p class="texteLarge centerText"> Se connecter à un compte
 <?php
-    if ($_GET["user-tempo"] === 'pro') {
+    if ($_GET["user-tempo"] === 'pro') 
+    {
         echo 'professionnel';
-    } else {
+    } else 
+    {
         echo 'membre';
     }
 ?>
