@@ -62,10 +62,7 @@ async function validationConnexionOTP()                             // vérifie 
 
         let valide = await otpValide(userNameInput.value, otpInput.value);
 
-        textBtnConfirmer.style.display = "block"                    // réactive le bouton après la réponse d'ajax
-        loaderOTP.style.display = "none"
-        btnConfirmOTP.disabled = false
-        btnAnnulerOTP.disabled = false
+
 
         if(valide)
         {
@@ -73,6 +70,11 @@ async function validationConnexionOTP()                             // vérifie 
         }
         else
         {
+            textBtnConfirmer.style.display = "block"                    // réactive le bouton si otp incorrect
+            loaderOTP.style.display = "none"
+            btnConfirmOTP.disabled = false
+            btnAnnulerOTP.disabled = false
+
             texteErreurOTP.style.display = "flex"           // affiche un message d'erreur
             texteErreurOTP.style.animation = "error 0.7s linear"
         }
