@@ -458,7 +458,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
         }
         ?>
         <div class=FirstSentence>
-            <p>Les champs qui possède une </p>
+            <p>Les champs qui possèdent une </p>
             <div class="Asterisque"> * </div>
             <p>sont obligatoires.</p>
         </div>
@@ -575,8 +575,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                             <input type="file" id="carte" name="carte"
                                 accept="image/png, image/jpeg"
                                 style="display: none;"
-                                onchange="updatePreviewCarte()"
-                                required>
+                                onchange="updatePreviewCarte()">
                         </div>
                     </div>
                 </div>
@@ -637,7 +636,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <!-- ----------------- ACTIVITE ------------------- -->
 
             <div id="champsActivite">
-                <div class="HardToResize">
+                <div class="texteAreaActivite">
                     <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
                     <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
                 </div>
@@ -712,17 +711,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Lundi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-L">
+                            <input type="time" class="heure-debut" name="debut-matin-L" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-L">
+                            <input type="time" class="heure-fin" name="fin-matin-L" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-L">
+                            <input type="time" class="heure-debut" name="debut-aprem-L" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-L">
+                            <input type="time" class="heure-fin" name="fin-aprem-L" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -736,17 +735,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Mardi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-Ma">
+                            <input type="time" class="heure-debut" name="debut-matin-Ma" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-Ma">
+                            <input type="time" class="heure-fin" name="fin-matin-Ma" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-Ma">
+                            <input type="time" class="heure-debut" name="debut-aprem-Ma" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-Ma">
+                            <input type="time" class="heure-fin" name="fin-aprem-Ma" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -759,17 +758,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Mercredi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-Me">
+                            <input type="time" class="heure-debut" name="debut-matin-Me" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-Me">
+                            <input type="time" class="heure-fin" name="fin-matin-Me" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-Me">
+                            <input type="time" class="heure-debut" name="debut-aprem-Me" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-Me">
+                            <input type="time" class="heure-fin" name="fin-aprem-Me" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -782,17 +781,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Jeudi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-J">
+                            <input type="time" class="heure-debut" name="debut-matin-J" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-J">
+                            <input type="time" class="heure-fin" name="fin-matin-J" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-J">
+                            <input type="time" class="heure-debut" name="debut-aprem-J" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-J">
+                            <input type="time" class="heure-fin" name="fin-aprem-J" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -805,17 +804,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Vendredi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-V">
+                            <input type="time" class="heure-debut" name="debut-matin-V" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-V">
+                            <input type="time" class="heure-fin" name="fin-matin-V" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-V">
+                            <input type="time" class="heure-debut" name="debut-aprem-V" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-V">
+                            <input type="time" class="heure-fin" name="fin-aprem-V" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -828,17 +827,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Samedi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-S">
+                            <input type="time" class="heure-debut" name="debut-matin-S" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-S">
+                            <input type="time" class="heure-fin" name="fin-matin-S" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-S">
+                            <input type="time" class="heure-debut" name="debut-aprem-S" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-S">
+                            <input type="time" class="heure-fin" name="fin-aprem-S" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -851,17 +850,17 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Dimanche, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-D">
+                            <input type="time" class="heure-debut" name="debut-matin-D" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-D">
+                            <input type="time" class="heure-fin" name="fin-matin-D" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-D">
+                            <input type="time" class="heure-debut" name="debut-aprem-D" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-D">
+                            <input type="time" class="heure-fin" name="fin-aprem-D" step="60">
                         </div>
                     </div>
                     <div class="fermer">
@@ -886,7 +885,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <div class="InfoPerso">
                 <!-- Abonnement -->
                 <div class="champs champsValid">
-                    <label for="offre">Type offre :</label>
+                    <label for="offre">Type offre <span class="required">*</span>:</label>
                     <select id="offre" name="offre" required>
                         <option value="">Sélectionnez un type d'offre</option>
                         <option value="Standard">Standard</option>
@@ -896,7 +895,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
                 <!-- accessibilité -->
                 <div class="champs champsValid">
-                    <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
+                    <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite <span class="required">*</span>:</label>
                     <select id="choixAccessible" name="choixAccessible" required>
                         <option value="">Sélectionnez un choix</option>
                         <option value="Accessible">Accessible</option>

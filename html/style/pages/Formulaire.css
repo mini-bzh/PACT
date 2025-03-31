@@ -1007,13 +1007,24 @@ select{
     width: 20%;
 }
 
-.HardToResize > textarea{
-    width: 950px !important; 
+.texteAreaActivite{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+
+}
+
+.texteAreaActivite > textarea{
     resize: none;
     height: 100px;
     margin-bottom: 3%;
     margin-top: 1%;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: var(--typescale-small-text); 
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .champsValid input:valid{
