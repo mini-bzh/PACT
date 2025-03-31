@@ -2158,14 +2158,14 @@ aside svg>path {
 }
 
 /* Style quand le checkbox est coché */
-.toggle-button input[type="checkbox"]:checked+span {
+.toggle-button input[type="checkbox"]:checked + span {
     background-color: var(--primaryLight);
     color: white;
     border-color: var(--primaryLight);
 }
 
 /* Style quand le checkbox est coché */
-.toggle-button input[type="radio"]:checked+span {
+.toggle-button input[type="radio"]:checked + span {
     background-color: var(--primaryLight);
     color: white;
     border-color: var(--primaryLight);
