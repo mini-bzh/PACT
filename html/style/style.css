@@ -2133,6 +2133,11 @@ aside svg>path {
     user-select: none;
 }
 
+#previewImage {
+    overflow: hidden;
+    object-fit: cover;
+}
+
 /* Style pour l'input checkbox (caché) */
 .toggle-button input[type="checkbox"] {
     display: none;
