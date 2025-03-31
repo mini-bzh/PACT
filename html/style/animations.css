@@ -94,7 +94,7 @@
 }
 
 #mainConnexion .msgErreur{
-    animation: error 0.7s linear;
+    animation: error 0.7s ease-in-out;
 }
 
 @keyframes rotation {
@@ -130,13 +130,13 @@
         transform: translateX(0px);
     }
     25%{
-        transform: translateX(10px);
+        transform: translateX(5px);
     }
     50%{
-        transform: translateX(-10px);
+        transform: translateX(-5px);
     }
     75%{
-        transform: translateX(10px);
+        transform: translateX(5px);
     }
     100%{
         transform: translateX(0px);

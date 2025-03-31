@@ -194,7 +194,7 @@ textarea {
 .btn {
     min-width: 300px;
     border-radius: 48px;
-    padding: 0 1%;
+    padding: 1px 1%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -526,6 +526,10 @@ textarea {
     padding: 0 2%;
     font-size: var(--typescale-text);
     margin-top: 3%;
+}
+
+#fenetreOTP input{
+    text-align: center;
 }
 
 #mainConnexion form{

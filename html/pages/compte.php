@@ -591,7 +591,7 @@ if (isset($idCompte)) {
                         <div id="imgQRcode"></div>
                         <div>
                             <label for="codeOTP">Vérifier le code OTP<span> *</span> :</label>
-                            <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="000 000">
+                            <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="--- ---">
                             <p id="error-message" class="texteSmall"></p>
                             <button id="submit-btn-otp" disabled>Vérifier</button>
                         </div>

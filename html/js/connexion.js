@@ -89,7 +89,7 @@ function otpActif(login)               // renvoie true si le compte [login] a ac
             type: 'POST',
             data: { login: login },
             success: function (response) {
-                console.log("Réponse AJAX :", response);
+                //console.log("Réponse AJAX :", response);
                 resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -108,7 +108,7 @@ function otpValide(login, otp) {
             type: 'POST',
             data: { login: login, otp: otp },
             success: function (response) {
-                console.log("Réponse AJAX :", response);
+                //console.log("Réponse AJAX :", response);
                 resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
