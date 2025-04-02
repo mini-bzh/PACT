@@ -3,8 +3,11 @@ let btnAnnulerOTP = document.getElementById("btnAnnulerOTP");
 let btnConfirmOTP = document.getElementById("btnConfirmerOTP");
 let overlayOTP = document.getElementById("overlayOTP");
 
-let loader = document.querySelector(".loader")
+let loaderOTP = btnConfirmOTP.querySelector(".loader")
 let textBtnConfirmer = btnConfirmOTP.querySelector("p")
+
+let loaderCon = btnConnexion.querySelector(".loader")
+let textBtnConnexion = btnConnexion.querySelector("p")
 
 let texteErreurOTP = document.getElementById("texteErreurOTP");
 
@@ -13,6 +16,7 @@ if(btnConnexion != undefined)
     btnConnexion.addEventListener("click", ()=>{
         //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
         document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+        //btnConnexion.disabled = "true"
     })
 }
 
@@ -50,17 +54,15 @@ btnConfirmOTP.addEventListener("click", validationConnexionOTP)
 async function validationConnexionOTP()                             // vérifie si l'OTP entré est correct, et soumet le formulaire si c'est le cas
 {
     try{
+        texteErreurOTP.style.animation = "none"
         textBtnConfirmer.style.display = "none"                     // désactive le bouton le temps de la réponse d'ajax
-        loader.style.display = "inline-block"
+        loaderOTP.style.display = "inline-block"
         btnConfirmOTP.disabled = true
         btnAnnulerOTP.disabled = true
 
         let valide = await otpValide(userNameInput.value, otpInput.value);
 
-        textBtnConfirmer.style.display = "block"                    // réactive le bouton après la réponse d'ajax
-        loader.style.display = "none"
-        btnConfirmOTP.disabled = false
-        btnAnnulerOTP.disabled = false
+
 
         if(valide)
         {
@@ -68,7 +70,13 @@ async function validationConnexionOTP()                             // vérifie 
         }
         else
         {
+            textBtnConfirmer.style.display = "block"                    // réactive le bouton si otp incorrect
+            loaderOTP.style.display = "none"
+            btnConfirmOTP.disabled = false
+            btnAnnulerOTP.disabled = false
+
             texteErreurOTP.style.display = "flex"           // affiche un message d'erreur
+            texteErreurOTP.style.animation = "error 0.7s linear"
         }
     } catch(error) {
         console.log("erreur lors de la validation otp : ", error);
@@ -83,7 +91,7 @@ function otpActif(login)               // renvoie true si le compte [login] a ac
             type: 'POST',
             data: { login: login },
             success: function (response) {
-                console.log("Réponse AJAX :", response);
+                //console.log("Réponse AJAX :", response);
                 resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -102,7 +110,7 @@ function otpValide(login, otp) {
             type: 'POST',
             data: { login: login, otp: otp },
             success: function (response) {
-                console.log("Réponse AJAX :", response);
+                //console.log("Réponse AJAX :", response);
                 resolve(response == 1);                         // Vérifier si la réponse est bien "true"
             },
             error: function (jqXHR, textStatus, errorThrown) {

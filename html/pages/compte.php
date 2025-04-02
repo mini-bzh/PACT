@@ -488,17 +488,17 @@ if (isset($idCompte)) {
                         // On affiche le bouton de données bancaires si c'est un pro
                         if (isset($idproprive)) {
                         ?>
-                            <a href="listeFacture.php">
-                                <!-- Bouton direction page facture -->
-                                <button class="btnFacture btn">
+                            <!-- <a href="listeFacture.php"> -->
+                            <!-- Bouton direction page facture -->
+                            <button class="btnFacture btn" onclick="goToListeFacture()">
 
-                                    <?php
-                                    include '../icones/infoSVG.svg';
-                                    ?>
-                                    <p class="boldArchivo texteSmall">Gérer mes factures</p>
+                                <?php
+                                include '../icones/infoSVG.svg';
+                                ?>
+                                <p class="boldArchivo texteSmall">Gérer mes factures</p>
 
-                                </button>
-                            </a>
+                            </button>
+                            <!-- </a> -->
                         <?php
                         }
                         ?>
@@ -591,7 +591,7 @@ if (isset($idCompte)) {
                         <div id="imgQRcode"></div>
                         <div>
                             <label for="codeOTP">Vérifier le code OTP<span> *</span> :</label>
-                            <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="000 000">
+                            <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="--- ---">
                             <p id="error-message" class="texteSmall"></p>
                             <button id="submit-btn-otp" disabled>Vérifier</button>
                         </div>

@@ -458,7 +458,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
         }
         ?>
         <div class=FirstSentence>
-            <p>Les champs qui possède une </p>
+            <p>Les champs qui possèdent une </p>
             <div class="Asterisque"> * </div>
             <p>sont obligatoires.</p>
         </div>
@@ -468,13 +468,13 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <p class="titreFrom">Creation d'une offre</p>
             <div class="InfoPerso">
                 <!-- titre -->
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="titre">Titre <span class="required">*</span> :</label>
                     <input type="text" id="titre" name="titre" placeholder="Entrez le titre de l'offre" maxlength="40" required>
                 </div>
 
                 <!-- Champs pour sélectionner les images -->
-                <div class="champs">
+                <div class="champs champsValid">
                     <div class="PhotoOffre">
                         <img id="previewImage" src="../images/logo/ajoutimage.png"
                             alt="Cliquez pour ajouter une image"
@@ -511,7 +511,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 </div>
 
                 <!-- prix minimum -->
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="prix-minimal">Prix minimal (euro) :</label>
                     <input type="text" id="prix-minimal" name="prix-minimal" placeholder="Entrez le prix minimal (euro)" minlength="1" maxlength="3" required>
                 </div>
@@ -524,37 +524,38 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <label for="duree_v">Durée de la visite :</label>
                     <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>" />
                 </div>
+                <div class="zoneChoixVisite">
+                    <div class="champsCategorie">
+                        <label>Langue(s) de la visite :</label>
+                        <div class="parentVisite">
+                            <?php
+                            foreach ($langues as $langue) { ?>
+                                <div>
+                                    <label class="toggle-button">
+                                        <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $langue; ?>" />
+                                        <span><?php echo $langue; ?></span>
+                                    </label>
+                                </div>
 
-                <div class="champsCategorie">
-                    <label>Langue(s) de la visite :</label>
-                    <div class="parentVisite">
-                        <?php
-                        foreach ($langues as $langue) { ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <div class="champsCategorie">
+                        <label>La visite est guidée <span class="required">*</span> :</label>
+                        <div class="parentVisite">
                             <div>
                                 <label class="toggle-button">
-                                    <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $langue; ?>" />
-                                    <span><?php echo $langue; ?></span>
+                                    <input type="radio" id="guidee" name="guidee" value="true" />
+                                    <span>Oui</span>
                                 </label>
                             </div>
-
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div class="champsCategorie">
-                    <label>La visite est guidée <span class="required">*</span> :</label>
-                    <div class="parentVisite">
-                        <div>
-                            <label class="toggle-button">
-                                <input type="radio" id="guidee" name="guidee" value="true" />
-                                <span>Oui</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="toggle-button">
-                                <input type="radio" id="guidee" name="guidee" value="false" /> <!-- a enlever et utilisation de checkbox -->
-                                <span>Non</span>
-                            </label>
+                            <div>
+                                <label class="toggle-button">
+                                    <input type="radio" id="guidee" name="guidee" value="false" /> <!-- a enlever et utilisation de checkbox -->
+                                    <span>Non</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -562,11 +563,23 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <!-- ----------------- RESTAURATION ------------------- -->
 
             <div id="champsRestauration">
-                <div class="champs">
-                    <label for="carte">Selectionner un scan de la carte des repas :</label>
-                    <input type="file" id="carte" name="carte">
+                <!-- Champs pour sélectionner les images -->
+                <div class="imgRestorant">
+                    <label for="plan">Selectionner une carte :</label>
+                    <div class="champs">
+                        <div class="carteResto">
+                            <img id="previewImageCarte" src="../images/logo/ajoutimage.png"
+                                alt="Cliquez pour ajouter une image"
+                                style="cursor: pointer;"
+                                onclick="document.getElementById('carte').click()">
+                            <input type="file" id="carte" name="carte"
+                                accept="image/png, image/jpeg"
+                                style="display: none;"
+                                onchange="updatePreviewCarte()">
+                        </div>
+                    </div>
                 </div>
-                <div class="champs">
+                <div class="champs champsGammeprix">
                     <label for="gammeprix">Gamme de Prix <span class="required">*</span> :</label>
                     <select id="gammeprix" name="gammeprix">
                         <option value="$">$</option>
@@ -589,20 +602,18 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <input type="text" id="ageminimum" name="ageminimum" placeholder="Entrez l'âge minimum" minlength="1" maxlength="3">
                     </div>
                 </div>
-                <div class="champs">
+                <div class="imgAttraction">
                     <label for="plan">Selectionner un plan :</label>
                     <!-- Champs pour sélectionner les images -->
-                    <div class="champs">
-                        <div class="PhotoOffre">
-                            <img id="previewImageAttraction" src="../images/logo/ajoutimage.png"
-                                alt="Cliquez pour ajouter une image"
-                                style="cursor: pointer;"
-                                onclick="document.getElementById('plan').click()">
-                            <input type="file" id="plan" name="plan"
-                                accept="image/png, image/jpeg"
-                                style="display: none;"
-                                onchange="updatePreviewAttraction()">
-                        </div>
+                    <div class="PlanAttraction">
+                        <img id="previewImageAttraction" src="../images/logo/ajoutimage.png"
+                            alt="Cliquez pour ajouter une image"
+                            style="cursor: pointer;"
+                            onclick="document.getElementById('plan').click()">
+                        <input type="file" id="plan" name="plan"
+                            accept="image/png, image/jpeg"
+                            style="display: none;"
+                            onchange="updatePreviewAttraction()">
                     </div>
                 </div>
             </div>
@@ -625,7 +636,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <!-- ----------------- ACTIVITE ------------------- -->
 
             <div id="champsActivite">
-                <div class="HardToResize">
+                <div class="texteAreaActivite">
                     <label for="prestation">Prestation(s) proposée(s) <span class="required">*</span> :</label>
                     <textarea id="prestation" name="prestation" placeholder="Écrivez la/les prestation(s) proposée(s) (< 100 caractères)" maxlength="100"></textarea>
                 </div>
@@ -654,18 +665,20 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
             ?>
                 <div id="tags<?php echo $cat; ?>">
-                    <label>Tags :</label>
-                    <div class="tags">
-                        <?php
-                        foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
-                        ?>
-                            <label class="toggle-button">
-                                <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
-                                <span><?php echo $tag; ?></span>
-                            </label>
-                        <?php
-                        }
-                        ?>
+                    <div id="inTag">
+                        <label>Tags :</label>
+                        <div class="tags">
+                            <?php
+                            foreach (array_column($liste_tags, "nomtag") as $key => $tag) {
+                            ?>
+                                <label class="toggle-button">
+                                    <input type="checkbox" name="<?php echo $tag; ?>" value="<?php echo $tag; ?>" />
+                                    <span><?php echo $tag; ?></span>
+                                </label>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             <?php
@@ -676,7 +689,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
             <div class="TextAreaOffre">
                 <!-- résumé -->
-                <div>
+                <div class="champs champsValid">
                     <label for="resume">Résumé <span class="required">*</span> :</label>
                     <textarea id="resume" name="resume" placeholder="Écrivez une description rapide (< 140 caractères)" maxlength="140" required></textarea>
                 </div>
@@ -698,21 +711,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Lundi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-L">
+                            <input type="time" class="heure-debut" name="debut-matin-L" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-L">
+                            <input type="time" class="heure-fin" name="fin-matin-L" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-L">
+                            <input type="time" class="heure-debut" name="debut-aprem-L" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-L">
+                            <input type="time" class="heure-fin" name="fin-aprem-L" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Lundi</label>
+                        <label>Vous êtes fermés le Lundi</label>
                     </div>
                 </div>
 
@@ -722,21 +735,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Mardi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-Ma">
+                            <input type="time" class="heure-debut" name="debut-matin-Ma" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-Ma">
+                            <input type="time" class="heure-fin" name="fin-matin-Ma" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-Ma">
+                            <input type="time" class="heure-debut" name="debut-aprem-Ma" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-Ma">
+                            <input type="time" class="heure-fin" name="fin-aprem-Ma" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                    <label>Vous êtes fermer le Mardi</label>
+                        <label>Vous ête fermés le Mardi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -745,21 +758,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Mercredi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-Me">
+                            <input type="time" class="heure-debut" name="debut-matin-Me" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-Me">
+                            <input type="time" class="heure-fin" name="fin-matin-Me" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-Me">
+                            <input type="time" class="heure-debut" name="debut-aprem-Me" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-Me">
+                            <input type="time" class="heure-fin" name="fin-aprem-Me" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                    <label>Vous êtes fermer le Mercredi</label>
+                        <label>Vous ête fermés le Mercredi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -768,21 +781,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Jeudi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-J">
+                            <input type="time" class="heure-debut" name="debut-matin-J" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-J">
+                            <input type="time" class="heure-fin" name="fin-matin-J" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-J">
+                            <input type="time" class="heure-debut" name="debut-aprem-J" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-J">
+                            <input type="time" class="heure-fin" name="fin-aprem-J" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                    <label>Vous êtes fermer le Jeudi</label>
+                        <label>Vous ête fermés le Jeudi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -791,21 +804,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Vendredi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-V">
+                            <input type="time" class="heure-debut" name="debut-matin-V" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-V">
+                            <input type="time" class="heure-fin" name="fin-matin-V" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-V">
+                            <input type="time" class="heure-debut" name="debut-aprem-V" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-V">
+                            <input type="time" class="heure-fin" name="fin-aprem-V" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Vendredi</label>
+                        <label>Vous ête fermés le Vendredi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -814,21 +827,21 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Samedi, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-S">
+                            <input type="time" class="heure-debut" name="debut-matin-S" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-S">
+                            <input type="time" class="heure-fin" name="fin-matin-S" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-S">
+                            <input type="time" class="heure-debut" name="debut-aprem-S" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-S">
+                            <input type="time" class="heure-fin" name="fin-aprem-S" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                        <label>Vous êtes fermer le Samedi</label>
+                        <label>Vous ête fermés le Samedi</label>
                     </div>
                 </div>
                 <div class="jours">
@@ -837,27 +850,27 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="ouvert">
                         <div class="heures1 horairesAfficher">
                             <label for="heure-debut">Le Dimanche, vous êtes ouvert de </label>
-                            <input type="time" class="heure-debut" name="debut-matin-D">
+                            <input type="time" class="heure-debut" name="debut-matin-D" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-matin-D">
+                            <input type="time" class="heure-fin" name="fin-matin-D" step="60">
 
                             <h4 class="btnAjoutHoraire">+</h4>
                         </div>
                         <div class="heures2 horairesCacher">
                             <label for="heure-debut">et de </label>
-                            <input type="time" class="heure-debut" name="debut-aprem-D">
+                            <input type="time" class="heure-debut" name="debut-aprem-D" step="60">
                             <label for="heure-fin"> à </label>
-                            <input type="time" class="heure-fin" name="fin-aprem-D">
+                            <input type="time" class="heure-fin" name="fin-aprem-D" step="60">
                         </div>
                     </div>
                     <div class="fermer">
-                    <label>Vous êtes fermer le Dimanche</label>
+                        <label>Vous ête fermés le Dimanche</label>
                     </div>
                 </div>
             </div>
 
             <!-- Adresse -->
-            <div class="champs">
+            <div class="champs champsValid">
                 <div class="champsAdresse">
                     <label for="adresse">Adresse <span class="required">*</span> :</label>
                     <div>
@@ -871,8 +884,8 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
             <div class="InfoPerso">
                 <!-- Abonnement -->
-                <div class="champs">
-                    <label for="offre">Type offre :</label>
+                <div class="champs champsValid">
+                    <label for="offre">Type offre <span class="required">*</span>:</label>
                     <select id="offre" name="offre" required>
                         <option value="">Sélectionnez un type d'offre</option>
                         <option value="Standard">Standard</option>
@@ -881,8 +894,8 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 </div>
 
                 <!-- accessibilité -->
-                <div class="champs">
-                    <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite :</label>
+                <div class="champs champsValid">
+                    <label for="choixAccessible">Accessibilité aux personnes à mobilité reduite <span class="required">*</span>:</label>
                     <select id="choixAccessible" name="choixAccessible" required>
                         <option value="">Sélectionnez un choix</option>
                         <option value="Accessible">Accessible</option>
@@ -892,23 +905,33 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             </div>
 
             <!-- Option -->
-            <div class="champs">
-                <label for="option">Option :</label>
-                <select id="option" name="option">
-                    <option value="">Aucune</option>
-                    <option value="AlaUne">A la une</option>
-                    <option value="EnRelief">En relief</option>
-                </select>
+            <div class="champsOption">
+
+                <div class="choixOption">
+                    <label for="option">Option :</label>
+                    <select id="option" name="option">
+                        <option value="">Aucune</option>
+                        <option value="AlaUne">A la une</option>
+                        <option value="EnRelief">En relief</option>
+                    </select>
+                </div>
+
+                <div id="dateOption">
+                    <div class="saisieDate">
+                        <div>
+                            <label for="date_debut_opt">Date de lancement(l'option débutera à cette date) :</label>
+                            <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA" step=7>
+                        </div>
+
+                        <div>
+                            <label for="duree_opt">Durée de l'option (en semaine) :</label>
+                            <input type="number" id="duree_opt" name="duree_opt" value="1" min=1 max=4>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
 
-            <div class="champs" id="dateOption">
-                <label for="date_debut_opt">Date de lancement(l'option débutera à cette date) :</label>
-                <input type="date" id="date_debut_opt" name="date_debut_opt" placeholder="JJ/MM/AAAA" step=7>
-                <label for="duree_opt">Durée de l'option (en semaine) :</label>
-                <div class="Dureeoption">
-                    <input type="number" id="duree_opt" name="duree_opt" value="1" min=1 max=4>
-                </div>
-            </div>
 
 
             <!-- <div class="champs">
@@ -942,37 +965,37 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 </div>
                 <!-- paiement carte bancaire -->
                 <h4>Paiement carte bancaire</h4>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="cb">coordonnée bancaire :</label>
                     <input type="text" id="cb" name="cb" placeholder="Entrez vos coordonnées bancaires">
                 </div>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="DE">Date expiration :</label>
                     <input type="text" id="DE" name="DE" placeholder="MM/AA">
                 </div>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="crypto">Cryptogramme :</label>
                     <input type="text" id="crypto" name="crypto" placeholder="Ex: 123">
                 </div>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="TC">Titulaire de la carte :-</label>
                     <input type="text" id="TC" name="TC" placeholder="Prenom NOM">
                 </div>
 
                 <!-- paiement paypal -->
                 <h4>Paiement par paypal</h4>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="AdM_PP">Adresse mail :</label>
                     <input type="text" id="AdM_PP" name="AdM_PP">
                 </div>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="MDP_PP">Mot de Passe :</label>
                     <input type="text" id="MDP_PP" name="MDP_PP">
                 </div>
 
                 <!-- paiement prélèvement bancaire -->
                 <h4>Paiement par prélèvement bancaire</h4>
-                <div class="champs">
+                <div class="champs champsValid">
                     <label for="iban">Iban :</label>
                     <input type="text" id="iban" name="iban">
                 </div>
@@ -982,7 +1005,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
 
             <!-- Bouton de confirmation d'ajout d'offre ou d'annulation -->
-
+            
             <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                 <p class="texteLarge boldArchivo">Valider</p>
             </button>
@@ -993,7 +1016,6 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 function updatePreview() {
                     const input = document.getElementById('fichier1');
                     const previewImage = document.getElementById('previewImage');
-                    const fileName = document.getElementById('fileName');
 
                     if (input.files && input.files[0]) {
                         const reader = new FileReader();
@@ -1001,14 +1023,12 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                             previewImage.src = e.target.result;
                         };
                         reader.readAsDataURL(input.files[0]);
-                        fileName.textContent = "Image sélectionnée : " + input.files[0].name;
                     }
                 }
 
                 function updatePreviewAttraction() {
                     const input = document.getElementById('plan');
                     const previewImage = document.getElementById('previewImageAttraction');
-                    const fileName = document.getElementById('fileName');
 
                     if (input.files && input.files[0]) {
                         const reader = new FileReader();
@@ -1016,7 +1036,19 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                             previewImage.src = e.target.result;
                         };
                         reader.readAsDataURL(input.files[0]);
-                        fileName.textContent = "Image sélectionnée : " + input.files[0].name;
+                    }
+                }
+
+                function updatePreviewCarte() {
+                    const input = document.getElementById('carte');
+                    const previewImage = document.getElementById('previewImageCarte');
+
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                        };
+                        reader.readAsDataURL(input.files[0]);
                     }
                 }
             </script>

@@ -88,7 +88,7 @@
                                     <div class="etoiles">
                                         <!-- affichage de la note -->
                                         <?php affichage_etoiles($contentOffre["note"]); ?>
-                                        <p>(<?php echo (isset($contentOffre["note"]))? $contentOffre["note"]:"aucun avis";?>)</p>
+                                        <p>(<?php if (isset($contentOffre["note"])) { printf("%.1f", $contentOffre["note"]);} else {echo "aucun avis";}?>)</p>
                                     </div>
                                     <p> Catégorie : <span id="nomCat"><?php echo $categorie ; ?></span></p>
                                 </div>

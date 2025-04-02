@@ -91,16 +91,20 @@
     display: none;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    }
+}
 
-    @keyframes rotation {
+#mainConnexion .msgErreur{
+    animation: error 0.7s ease-in-out;
+}
+
+@keyframes rotation {
     0% {
         transform: rotate(0deg);
     }
     100% {
         transform: rotate(360deg);
     }
-    } 
+} 
 
 @keyframes slide {
     0% { transform: translateX(0%); }
@@ -118,5 +122,23 @@
     100%{
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+@keyframes error {
+    0%{
+        transform: translateX(0px);
+    }
+    25%{
+        transform: translateX(5px);
+    }
+    50%{
+        transform: translateX(-5px);
+    }
+    75%{
+        transform: translateX(5px);
+    }
+    100%{
+        transform: translateX(0px);
     }
 }

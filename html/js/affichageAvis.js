@@ -1,19 +1,21 @@
-
 /* ------------------------ supprimer avis ------------------------*/
 
-let btnSupprimerAvis = document.querySelector(".btnSupprimerAvis");
+let btnSupprimerAvis = document.querySelectorAll(".btnSupprimerAvis")
+
+btnSupprimerAvis.forEach(btn => {
+    if(typeof(btn) !== 'undefined' && btn !== null)
+    {
+        btn.addEventListener("click", supprimerAvis);
+    }
+})
 
 
-if(typeof(btnSupprimerAvis) !== 'undefined' && btnSupprimerAvis !== null)
-{
-    btnSupprimerAvis.addEventListener("click", supprimerAvis);
-}
 
 function supprimerAvis()
 {
     if(confirm("Voulez-vous supprimer votre avis ?\nVous pourrez en déposer un autre."))
     {
-        let idAvis = document.querySelectorAll(".btnSupprimerAvis p")[1].textContent;
+        let idAvis = event.target.querySelectorAll(".btnSupprimerAvis p")[1].textContent
         
         $.ajax({
             url: "..//composants/ajax/supprimerAvis.php",              // Le fichier PHP à appeler, qui met à jour la BDD

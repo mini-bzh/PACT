@@ -21,6 +21,10 @@ function confModifBanc() {
     document.body.classList.add('no-scroll');
 }
 
+function goToListeFacture() {
+    window.location.href = "../pages/listeFacture.php";
+}
+
 function verif_pass() {
     let passwordInput = document.getElementById('password_for_banc');
     let valeur = passwordInput.value;

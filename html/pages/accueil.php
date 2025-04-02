@@ -162,7 +162,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere1<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub1 = rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
@@ -183,7 +183,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub2 = rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
@@ -204,7 +204,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub1; ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
@@ -225,7 +225,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         <div class="card-body">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub2; ?>.png" alt="pubBanniere" class="pubBanniere">
                                 </article>
                             </a>
                         </div>
