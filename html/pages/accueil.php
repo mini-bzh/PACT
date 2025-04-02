@@ -252,7 +252,7 @@ $nouvellesOffres = $stmt->fetchAll();
                         else
                         {
                             ?>
-                                <h3>Vous n'avez pas encore consulté d'offre</h3>
+                                <p>Vous n'avez pas encore consulté d'offre</p>
                             <?php
                         }
                     ?>
