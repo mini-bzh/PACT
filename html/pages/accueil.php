@@ -126,24 +126,13 @@ $nouvellesOffres = $stmt->fetchAll();
                     </div>
                 </div>
             <?php } elseif ($nbOffreALaUne['count'] == 0) { ?>
-                <div class="carrousel">
-                    <div class="card">
-                        <?php
-                        for ($i = 0; $i < 10; $i++)          // parcourt les offres pour les afficher
-                        {
-                        ?>
-                            <div class="card-body">
+                    <div class="aucuneOffre">
                             <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
                                 <article>
-                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub1 = rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                    <img src="/images/banniere/pubBanniereLongue.png" alt="pubBanniere">
                                 </article>
                             </a>
-                        </div>
-                        <?php
-                        }
-                        ?>
                     </div>
-                </div>
             <?php } else { ?>
                 <div class="carrousel">
                     <div class="card">
