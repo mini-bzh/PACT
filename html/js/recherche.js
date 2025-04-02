@@ -508,21 +508,24 @@ rangeInputNote.forEach((input) => {
 
 
         mapOffresInfos.forEach((map, key, value)=>{
-            // si la note de l'offre est dans l'interval de la slide bar
-            if(mapOffresInfos.get(key).get("note") >=rangeInputNote[0].value && mapOffresInfos.get(key).get("note")<=rangeInputNote[1].value)
-            {
-                // si ceux qui doivent être affiché ne le sont pas on les affiches
-                if (document.getElementById(key).classList.contains("displayNone")) { 
-                    document.getElementById(key).classList.toggle("displayNone");
-                    mapOffresInfos.get(key).set("visibilite",true);
+            if (mapOffresInfos.get(key).get("visibilite")==true) {
+                
+                // si la note de l'offre est dans l'interval de la slide bar
+                if(mapOffresInfos.get(key).get("note") >=rangeInputNote[0].value && mapOffresInfos.get(key).get("note")<=rangeInputNote[1].value)
+                {
+                    // si ceux qui doivent être affiché ne le sont pas on les affiches
+                    if (document.getElementById(key).classList.contains("displayNone")) { 
+                        document.getElementById(key).classList.toggle("displayNone");
+                        mapOffresInfos.get(key).set("visibilite",true);
+                    }
                 }
-            }
-            else
-            {
-                // si ceux qui ne doivent pas être affiché le sont on les caches
-                if (!document.getElementById(key).classList.contains("displayNone")) {
-                    document.getElementById(key).classList.toggle("displayNone");
-                    mapOffresInfos.get(key).set("visibilite",false);
+                else
+                {
+                    // si ceux qui ne doivent pas être affiché le sont on les caches
+                    if (!document.getElementById(key).classList.contains("displayNone")) {
+                        document.getElementById(key).classList.toggle("displayNone");
+                        mapOffresInfos.get(key).set("visibilite",false);
+                    }
                 }
             }
         });
@@ -624,21 +627,23 @@ rangeInputPrix.forEach((input) => {
 
 
         mapOffresInfos.forEach((map, key, value)=>{
-            // si le prix de l'offre est dans l'interval de la slide bar
-            if(mapOffresInfos.get(key).get("prix") >=rangeInputPrix[0].value && mapOffresInfos.get(key).get("prix")<=rangeInputPrix[1].value)
-            {
-                // si ceux qui doivent être affiché ne le sont pas on les affiches
-                if (document.getElementById(key).classList.contains("displayNone")) { 
-                    document.getElementById(key).classList.toggle("displayNone");
-                    mapOffresInfos.get(key).set("visibilite",true);
+            if (mapOffresInfos.get(key).get("visibilite")) {
+                // si le prix de l'offre est dans l'interval de la slide bar
+                if(mapOffresInfos.get(key).get("prix") >=rangeInputPrix[0].value && mapOffresInfos.get(key).get("prix")<=rangeInputPrix[1].value)
+                {
+                    // si ceux qui doivent être affiché ne le sont pas on les affiches
+                    if (document.getElementById(key).classList.contains("displayNone")) { 
+                        document.getElementById(key).classList.toggle("displayNone");
+                        mapOffresInfos.get(key).set("visibilite",true);
+                    }
                 }
-            }
-            else
-            {
-                // si ceux qui ne doivent pas être affiché le sont on les caches
-                if (!document.getElementById(key).classList.contains("displayNone")) {
-                    document.getElementById(key).classList.toggle("displayNone");
-                    mapOffresInfos.get(key).set("visibilite",false);
+                else
+                {
+                    // si ceux qui ne doivent pas être affiché le sont on les caches
+                    if (!document.getElementById(key).classList.contains("displayNone")) {
+                        document.getElementById(key).classList.toggle("displayNone");
+                        mapOffresInfos.get(key).set("visibilite",false);
+                    }
                 }
             }
         });

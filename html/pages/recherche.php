@@ -102,7 +102,7 @@
             </section>
                 
 
-            <div>
+            <div style="margin-right: 2.5%;">
             <div id="map"></div>
             <section class="conteneurOffres">
                 <article>
