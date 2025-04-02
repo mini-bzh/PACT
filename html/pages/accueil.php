@@ -224,6 +224,42 @@ $nouvellesOffres = $stmt->fetchAll();
                 </div>
             <?php } ?>
             <section class="conteneurOffres">
+                <h1>Offres vues récemment</h1>
+                <article>
+                    <?php
+
+                        if(key_exists("offresVues", $_COOKIE) && sizeof(json_decode($_COOKIE["offresVues"])) > 0)
+                        {
+
+                            foreach (json_decode($_COOKIE["offresVues"]) as $idOffre) 
+                            {
+                                $query = "SELECT * FROM tripskell.offre_visiteur WHERE idoffre = :idOffre";
+                                $stmt = $dbh->prepare($query);
+                                $stmt->bindParam(":idOffre", $idOffre);
+                                $stmt->execute();
+                                $offre = $stmt->fetch();
+
+                                //print_r($idOffre);
+                               ?>
+                                    <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                                        <?php
+                                        af_offre($offre);
+                                        ?>
+                                    </a>
+                                <?php
+                            }
+                        }
+                        else
+                        {
+                            ?>
+                                <h3>Vous n'avez pas encore consulté d'offre</h3>
+                            <?php
+                        }
+                    ?>
+                </article>
+            </section>
+
+            <section class="conteneurOffres">
                 <h1>Les 10 dernières nouveautés</h1>
                 <article>
                     <?php
@@ -238,6 +274,8 @@ $nouvellesOffres = $stmt->fetchAll();
                                     ?>
                 </article>
             </section>
+
+    
             <section class="conteneurOffres">
                 <h1>Toutes les publications</h1>
                 <article>
@@ -245,10 +283,12 @@ $nouvellesOffres = $stmt->fetchAll();
 
                     foreach ($rows as $offre)          // parcourt les offres pour les afficher
                     {
-                    ?><a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
+                    ?>
+                        <a href="/pages/detailOffre.php?idOffre=<?php echo $offre["idoffre"]; ?>" class="lienApercuOffre grossisQuandHover">
                             <?php
                             af_offre($offre);
-                            ?></a>
+                            ?>
+                        </a>
                     <?php
                     }
                     ?>

@@ -241,7 +241,6 @@ textarea {
 }
 
 .conteneurOffres > h1 {
-    margin-left: 5%;
     margin-bottom: 20px;
     font-size: var(--typescale-h3);
 }
@@ -264,7 +263,7 @@ textarea {
     justify-content: center;
 }
 
-#mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
+.main-recherche .conteneurOffres .lienApercuOffre {
     margin: 0px 10px 10px 10px;
 }
 
@@ -272,14 +271,14 @@ textarea {
     width: fit-content;
 }
 
-#mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
+.main-recherche .conteneurOffres .lienApercuOffre {
     margin: 15px;
 }
 
 #mainAccueil .conteneurOffres>article, #main-recherche .conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 
@@ -2622,12 +2621,10 @@ aside fieldset {
 }
 
 .aucuneOffre img{
-    height: 440px;
     width: 100%;
     border-radius: 5px;
     border-radius: 5px;
     padding: 10px;
-    box-shadow: var(--ombreVisiteur);
 }
 
 
