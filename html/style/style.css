@@ -2617,10 +2617,18 @@ aside fieldset {
     box-shadow: var(--ombreVisiteur);
 } 
 
+.aucuneOffre {
+    margin-top: 4%;
+}
 
-
-
-
+.aucuneOffre img{
+    height: 440px;
+    width: 100%;
+    border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: var(--ombreVisiteur);
+}
 
 
 /*              _________________              */
