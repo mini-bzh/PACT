@@ -73,109 +73,63 @@ var markersCluster = L.markerClusterGroup({
 var listeMarker={}; // la liste des markers
 
 
-// envoie des requêtes pour récupérer les lat et long des adresses et place les points
-mapOffresInfos.forEach(element => {    
-    var xmlhttp = new XMLHttpRequest();
-    var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("adresse")+" "+ element.get("ville");
-    xmlhttp.onreadystatechange = function()
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            var myArr = JSON.parse(this.responseText);
-            try {
-                var content = element.get('element');
-                content.innerHTML += 
-                `
-                <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon}) ;" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
-                                            Itinéraire
-                </button>
-                `;
-                console.log(element.get('categorie'));
-                var customPopup = content;
-                console.log(customPopup);
-                switch (element.get('categorie')) { // switch pour changer le marker par rapport au categorie
-                    case "visite":
-                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
-                        break;
-                    case "activité":
-                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: activiteMark}).bindPopup(customPopup);
-                        break;
-                    case "parc d'attraction":
-                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: parcMark}).bindPopup(customPopup);
-                        break;
-                    case "restauration":
-                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: restoMark}).bindPopup(customPopup);
-                        break;
-                    case "spectacle":
-                        var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: spectMark}).bindPopup(customPopup);
-                        break;
-                
-                    default:
-                        break;
-                }
-                console.log(marker);
-                listeMarker[element.get("id")] = [marker,true];
-                marker.on('mouseover', function() {
-                    marker.openPopup();
-                });
-                markersCluster.addLayer(marker);
-            } catch (error) {
-            var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + element.get("ville");
-                xmlhttp.onreadystatechange = function()
-                {
-                    if (this.readyState == 4 && this.status == 200)
-                    {
-                        var marker;
-                        var myArr = JSON.parse(this.responseText);
+let getCoordinates = async (element) => {
+    let baseUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=";
+    let url = `${baseUrl}${element.get("adresse")} ${element.get("ville")}`;
+    
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
 
-                        var content = element.get('element');
-                        content.innerHTML += 
-                        `
-                        <button class="btnItineraire grossisQuandHover" onclick="event.preventDefault();openNavigation(${myArr[0].lat}, ${myArr[0].lon});" style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
-                                                    Itinéraire
-                        </button>
-                        `;
-                        console.log(element.get('categorie'));
-                        var customPopup = content;
-                        console.log(customPopup);
-
-                        switch (element.get('categorie')) { // switch pour changer le marker par rapport au categorie
-                            case "visite":
-                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: randoMark}).bindPopup(customPopup);
-                                break;
-                            case "activité":
-                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: activiteMark}).bindPopup(customPopup);
-                                break;
-                            case "parc d'attraction":
-                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: parcMark}).bindPopup(customPopup);
-                                break;
-                            case "restauration":
-                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: restoMark}).bindPopup(customPopup);
-                                break;
-                            case "spectacle":
-                                var marker = L.marker([parseFloat(myArr[0].lat),parseFloat(myArr[0].lon)], {icon: spectMark}).bindPopup(customPopup);
-                                break;
-                        
-                            default:
-                                break;
-                        }                        
-                        listeMarker[element.get("id")] = [marker,true];
-                        marker.on('mouseover', function() {
-                            marker.openPopup();
-                        });
-                        markersCluster.addLayer(marker);
-                    }
-                };
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
-            }
-            
+        if (data.length === 0) {
+            url = `${baseUrl}${element.get("ville")}`;
+            response = await fetch(url);
+            data = await response.json();
         }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-    sleep(100); 
+
+        if (data.length > 0) {
+            let lat = parseFloat(data[0].lat);
+            let lon = parseFloat(data[0].lon);
+            let content = element.get('element');
+
+            content.innerHTML += `
+                <button class="btnItineraire grossisQuandHover" 
+                    onclick="event.preventDefault();openNavigation(${lat}, ${lon});" 
+                    style="padding:5px 10px; background:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;">
+                    Itinéraire
+                </button>
+            `;
+
+            let icon;
+            switch (element.get('categorie')) {
+                case "visite": icon = randoMark; break;
+                case "activité": icon = activiteMark; break;
+                case "parc d'attraction": icon = parcMark; break;
+                case "restauration": icon = restoMark; break;
+                case "spectacle": icon = spectMark; break;
+                default: icon = defaultMark; break;
+            }
+
+            let marker = L.marker([lat, lon], { icon }).bindPopup(content);
+            listeMarker[element.get("id")] = [marker, true];
+            marker.on('mouseover', () => marker.openPopup());
+            markersCluster.addLayer(marker);
+        }
+    } catch (error) {
+        console.error(`Erreur lors de la récupération des coordonnées pour ${element.get("adresse")}:`, error);
+    }
+};
+
+// Exécuter toutes les requêtes en parallèle
+let promises = [];
+mapOffresInfos.forEach((element) => {
+    promises.push(getCoordinates(element));
 });
+
+Promise.all(promises).then(() => {
+    console.log("ok");
+});
+
 
 // Pour laisser du temps pour que les points apparaîssent puis les ajouter à la carte
 setTimeout(() => {
