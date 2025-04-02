@@ -520,11 +520,12 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
             <!-- ----------------- VISITE ------------------- -->
 
             <div id="champsVisite">
-                <div class="champs">
-                    <label for="duree_v">Durée de la visite :</label>
-                    <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>" />
-                </div>
+
                 <div class="zoneChoixVisite">
+                    <div class="champs dureeVisite">
+                        <label for="duree_v">Durée de la visite :</label>
+                        <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>" />
+                    </div>
                     <div class="champsCategorie">
                         <label>Langue(s) de la visite :</label>
                         <div class="parentVisite">
@@ -929,7 +930,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
 
@@ -1005,7 +1006,7 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
 
             <!-- Bouton de confirmation d'ajout d'offre ou d'annulation -->
-            
+
             <button type="submit" href="gestionOffres.php" class="btnConfirmer">
                 <p class="texteLarge boldArchivo">Valider</p>
             </button>

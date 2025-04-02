@@ -2,9 +2,6 @@
 @import "../style.css";
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 70%; /* Formulaire plus large */
     margin-left: 15%;
     margin-right: 15%;
@@ -279,27 +276,31 @@ form > .zoneBtn{
 } */
 
 .champsAdresse>input{
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     margin-left: 5px;
     border-radius: 5%;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
 
+.champsAccessibilite{
+    width: 40%;
+}
+
 #num{
-    width: 10%; 
+    width: 15%; 
 }
 
 #nomRue{
-    width: 50%; 
-}
-
-#ville{
     width: 35%; 
 }
 
+#ville{
+    width: 30%; 
+}
+
 #codePostal{
-    width: 25%; 
+    width: 15%; 
 }
 
 .labelAdresse{
@@ -647,8 +648,9 @@ form {
 }
 
 .listeTags {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 25px;
 }
 
 #inTag{
@@ -725,39 +727,19 @@ form {
     display: flex;
 }
 
-
-#tagsVisite > label{
-    padding-bottom: 10px;
-}
-
-#tagsActivite > label{
-    padding-bottom: 10px;
-}
-
-#tagsPA > label{
-    padding-bottom: 10px;
-}
-
-#tagsSpectacle > label{
-    padding-bottom: 10px;
-}
-
 .zoneChoixVisite{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     margin-bottom: 25px;
+    justify-content: space-between;
 }
 
 .champsCategorie{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    margin-right: 5%;
-}
-
-.champsCategorie > label{
-    margin: 0px;
-    padding: 0px;
+    margin-right: 10px;
 }
 
 /* GESTION DES HORAIRES */
@@ -781,12 +763,6 @@ form {
 
 .ouvert, .fermer{
     padding: 0 1.5%;
-}
-
-.ChoixJours > label{
-    text-align: center;
-    padding: 0.5% 0;
-    font-size: var(--typescale-text); 
 }
 
 .jours button {
@@ -874,6 +850,11 @@ form {
 .parentVisite > div{
     display: flex;
     flex-direction: row;
+}
+
+.dureeVisite{
+    width: 20%;
+    margin-right: 10px;
 }
 
 input[type="checkbox"] {
@@ -968,24 +949,10 @@ select{
     display: flex;
 }
 
-
-#num{
-    width: 10%; 
-}
-
-#nomRue{
-    width: 35%; 
-}
-
-#ville{
-    width: 25%; 
-}
-
 .TextAreaOffre{
     width: 100%;
-    margin-left: 2%;
-    margin-right: 2%;
     resize: none;
+    margin-bottom: 25px;
 }
 
 .TextAreaOffre > div{

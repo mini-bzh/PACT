@@ -129,14 +129,16 @@ $nouvellesOffres = $stmt->fetchAll();
                 <div class="carrousel">
                     <div class="card">
                         <?php
-                        for ($i = 0; $i < 5; $i++)          // parcourt les offres pour les afficher
+                        for ($i = 0; $i < 10; $i++)          // parcourt les offres pour les afficher
                         {
                         ?>
                             <div class="card-body">
-                                <a href="/pages/CreaComptePro.php" class="grossisQuandHover">
-                                    <img src="/images/baniere/pubBaniere1.png" alt="pubBaniere" class="pubBanniere">
-                                </a>
-                            </div>
+                            <a href="/pages/CreaComptePro.php?user-tempo=pro" class="grossisQuandHover">
+                                <article>
+                                    <img src="/images/banniere/pubBanniere<?php echo $imgPub1 = rand(1, 3); ?>.png" alt="pubBanniere" class="pubBanniere">
+                                </article>
+                            </a>
+                        </div>
                         <?php
                         }
                         ?>
