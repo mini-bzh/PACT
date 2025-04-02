@@ -724,6 +724,14 @@ textarea {
     #mainConnexion form input{
         width: 100%;
     }
+
+    div .coMembre {
+        width: 80%;
+    }
+
+    div .coPro {
+        width: 80%;
+    }
 }
 
 /*-------------/ gestion des offres /--------------*/
@@ -2842,6 +2850,7 @@ aside fieldset {
 
     .conteneurOffres {
         margin-top: 30px;
+        align-items: center;
     }
 
     .apercuOffre {
@@ -2850,6 +2859,11 @@ aside fieldset {
 
         border-radius: 20px;
         padding: 5px 10px;
+    }
+
+    .card-body .pubBanniere{
+        width: 300px;
+        height: 365px;
     }
 
     .apercuOffre .conteneurSVGtexte {
@@ -3268,14 +3282,6 @@ aside fieldset {
 
     /*----------------/ Carroussel /------------------*/
 
-
-    .carroussel {
-        display: none;
-    }
-
-    .card {
-       display: none;
-    }
 
     /* .small-carroussel {
        display: none;
