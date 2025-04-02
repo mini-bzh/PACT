@@ -2282,25 +2282,25 @@ aside fieldset {
 }
 
 .double-range-slider-box input::-webkit-slider-thumb {
+    -webkit-appearance: none;
     height: 18px;
     width: 18px;
     background-color: var(--primaryLight);
     border: none;
     border-radius: 50%;
     pointer-events: auto;
-    -webkit-appearance: none;
     cursor: pointer;
     margin-bottom: 1px;
 }
 
 .double-range-slider-box input::-moz-range-thumb {
+    -moz-appearance: none;
     height: 18px;
     width: 18px;
     background-color: var(--primaryLight);
     border: none;
     border-radius: 50%;
     pointer-events: auto;
-    -moz-appearance: none;
     cursor: pointer;
     margin-top: 30%;
 }
