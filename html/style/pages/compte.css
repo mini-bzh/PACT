@@ -664,7 +664,6 @@ body.no-scroll {
     }
 
     #btnDeconnexion p{
-        color: black;
         padding-right: 8%;
         padding-top: 0.5%;
     }
@@ -672,10 +671,6 @@ body.no-scroll {
     #btnDeconnexion svg{
         width: 60px;
         height: 55px;
-    }
-
-    #btnDeconnexion svg path{
-        stroke: black;
     }
 
     .btnDataBanc, .btnModifCompte, #btnSupCompte, .btnFacture{
