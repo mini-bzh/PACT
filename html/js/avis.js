@@ -165,7 +165,6 @@ let trieNote ="";
 let trieDate ="";
 
 function trierDate() {
-    clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
     if(trieDate == "desc"){
         toogleTrieDate("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
         trieDate="";
@@ -176,6 +175,7 @@ function trierDate() {
     }
     else if(trieDate == "asc"){
         trieNote="";
+        clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
         toogleTrieDate("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
         trieDate = "desc";  // Modifie l'état du trie
     }
