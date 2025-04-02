@@ -6,7 +6,7 @@ let overlayOTP = document.getElementById("overlayOTP");
 let loaderOTP = btnConfirmOTP.querySelector(".loader")
 let textBtnConfirmer = btnConfirmOTP.querySelector("p")
 
-let loaderCon = btnConnexion.querySelector(".loader")
+let loaderConnexion = btnConnexion.querySelector(".loader")
 let textBtnConnexion = btnConnexion.querySelector("p")
 
 let texteErreurOTP = document.getElementById("texteErreurOTP");
@@ -14,14 +14,18 @@ let texteErreurOTP = document.getElementById("texteErreurOTP");
 if(btnConnexion != undefined)
 {
     btnConnexion.addEventListener("click", ()=>{
-        //supprime les cookies des pouces pour éviter qu'ils se conservent entre les comptes
+        //supprime les cookies pour éviter qu'ils se conservent entre les comptes
         document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
-        //btnConnexion.disabled = "true"
+        document.cookie = "offresVues=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
     })
 }
 
 btnAnnulerOTP.addEventListener("click", ()=>{
     overlayOTP.style.display = "none"
+    
+    loaderConnexion.style.display = "inline-block"
+    textBtnConnexion.style.display = "none"
+    btnConnexion.disabled = "true"  
 })
 
 
@@ -32,6 +36,10 @@ let userNameInput = document.getElementById("userName");
 let otpInput = document.getElementById("userOTP");
 
 form.addEventListener("submit", async (event) => {                  // lorsque le formulaire de connexion est soumis
+    loaderConnexion.style.display = "inline-block"
+    textBtnConnexion.style.display = "none"
+    btnConnexion.disabled = "true"  
+
     event.preventDefault(); // Empêche la soumission immédiate
     try {
         let besoinOTP = await otpActif(userNameInput.value);
@@ -61,8 +69,6 @@ async function validationConnexionOTP()                             // vérifie 
         btnAnnulerOTP.disabled = true
 
         let valide = await otpValide(userNameInput.value, otpInput.value);
-
-
 
         if(valide)
         {
