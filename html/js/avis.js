@@ -23,7 +23,7 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
         mapTempo.set("date", date);   //date
 
         mapTempo.set("note", [
-            parseFloat(document.querySelector("#" + element.id + " .etoiles p").textContent.slice(1, -1))
+            parseFloat(document.querySelector("#" + element.id + " .etoiles p:last-child").textContent.slice(1, -1))
         ]);
 
         mapAvisInfos.set(element.id, mapTempo);
@@ -33,6 +33,8 @@ la valeur de l'information (exemple : "titre" => "Fort la Latte", "prix" => 15)*
 }
 
 let mapAvisInfos = initAvis();
+
+console.log(mapAvisInfos);
 
 function toogleTrieDate(paramTrie,icone1,icone2,idBouton,sens){
 
@@ -163,6 +165,7 @@ let trieNote ="";
 let trieDate ="";
 
 function trierDate() {
+    clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
     if(trieDate == "desc"){
         toogleTrieDate("date","iconeTrieDate2","iconeTrieDate","btnTrieDate","default");
         trieDate="";
@@ -172,7 +175,6 @@ function trierDate() {
         trieDate = "asc";   // Modifie l'état du trie
     }
     else if(trieDate == "asc"){
-        clearBouton("iconeTrieNote","iconeTrieNote1","iconeTrieNote2","btnTrieNote");
         trieNote="";
         toogleTrieDate("date","iconeTrieDate1","iconeTrieDate2","btnTrieDate","decs");
         trieDate = "desc";  // Modifie l'état du trie
@@ -185,12 +187,10 @@ function trierNote() {
     clearBouton("iconeTrieDate","iconeTrieDate1","iconeTrieDate2","btnTrieDate");
     trieDate="";
     if (trieNote == "") {
-        trierDate();
         toogleTrie("note","iconeTrieNote1","iconeTrieNote","btnTrieNote","asc");
         trieNote = "asc";   // Modifie l'état du trie
     }
     else if(trieNote == "asc") {
-        trierDate();
         toogleTrie("note","iconeTrieNote1","iconeTrieNote2","btnTrieNote","decs");
         trieNote = "decs";  // Modifie l'état du trie
     }
