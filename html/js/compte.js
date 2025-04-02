@@ -141,7 +141,9 @@ $(document).ready(function() {
             success: function(response) {
                 if ((response.qr_url) && (response.secret)) {
                     let qrDiv = document.getElementById("imgQRcode");
-                    secretOTP = response.secret;    // On stock le secret dans une variable tant que l'utilisateur n'a pas valider le bon code OTP
+                    let textOTP = document.getElementById("textSecretOTP");
+
+                    secretOTP = response.secret;    // On stock le secret dans une variable
 
                     if (!qrDiv) {
                         console.error("Erreur : Élément imgQRcode introuvable !");
@@ -151,10 +153,16 @@ $(document).ready(function() {
                     // Vider l'ancien QR Code
                     $('#imgQRcode').html('');
 
+                    // et le texte secret
+                    // $('#textSecretOTP').textContent = "";
+
                     // Générer le QR Code
                     new QRCode(qrDiv, {
                         text: response.qr_url
                     });
+
+                    // et le texte
+                    // textOTP.textContent = secretOTP;
 
                     // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
@@ -207,19 +215,28 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.qr_url) {
                     let qrDiv = document.getElementById("imgQRcode");
+                    let textOTP = document.getElementById("textSecretOTP");
 
                     if (!qrDiv) {
                         console.error("Erreur : Élément imgQRcode introuvable !");
                         return;
                     }
 
+                    secretOTP = response.secret;
+
                     // Vider l'ancien QR Code
                     $('#imgQRcode').html('');
+
+                    // et le texte secret
+                    // $('#textSecretOTP').textContent = "";
 
                     // Générer le QR Code
                     new QRCode(qrDiv, {
                         text: response.qr_url
                     });
+
+                    // et le texte
+                    // textOTP.textContent = response.secret;
 
                     // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
@@ -227,10 +244,10 @@ $(document).ready(function() {
                         pop.style.display = 'flex';
                         document.body.classList.add('no-scroll');
 
-                        let messInfo = document.querySelector("#imgQRcode ~ p");
+                        let messInfo = document.querySelector("#qrcodeDiv ~ p");
                         messInfo.style.display = "none";
 
-                        let aster = document.querySelector("#imgQRcode + div span");
+                        let aster = document.querySelector("#qrcodeDiv + div span");
                         aster.style.display = "none";
 
                         let croix = document.getElementById("annulerQRcode");
@@ -252,6 +269,29 @@ $(document).ready(function() {
         });
     });
 });
+
+
+document.getElementById("copyButton").addEventListener("click", function() {
+    navigator.clipboard.writeText(secretOTP).then(() => {
+        let copyButton = document.getElementById("copyButton");
+        let copyContainer = document.querySelector(".conteneur-copie");
+        let okContainer = document.querySelector(".conteneur-ok");
+
+        copyButton.classList.add("success");
+
+        // Changer l'icône en check
+        copyContainer.style.display = "none";
+        okContainer.style.display = "flex";
+
+        // Remettre l'icône et la couleur après 2 secondes
+        setTimeout(() => {
+            copyButton.classList.remove("success");
+            copyContainer.style.display = "flex";
+            okContainer.style.display = "none";
+        }, 2000);
+    });
+});
+
 
 
 // Formulaire de submition OTP

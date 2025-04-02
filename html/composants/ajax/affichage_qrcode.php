@@ -29,7 +29,8 @@ $qrcodeUrl = $totp->getProvisioningUri();
 
 header('Content-Type: application/json');
 echo json_encode([  // Envoie du qrcode
-    'qr_url' => $qrcodeUrl
+    'qr_url' => $qrcodeUrl,
+    'secret' => $secret
 ]);
 
 ?>
