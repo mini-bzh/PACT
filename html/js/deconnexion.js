@@ -12,6 +12,7 @@ function deconnexion()
             console.log(document.cookie);
             
             document.cookie = "poucesAvis=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
+            document.cookie = "offresVues=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 
             console.log("Déconnexion réussie");
             window.location.href = "../pages/accueil.php";
