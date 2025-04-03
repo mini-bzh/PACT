@@ -130,7 +130,7 @@ body.no-scroll {
 /* Bouton de modification profil */
 
 .btnModifCompte{
-    background-color: var(--accent);
+    background-color: var(--primaryLight);
 }
 
 
@@ -338,7 +338,7 @@ body.no-scroll {
 }
 
 .btnCreaAPI {
-    background-color: var(--accentLight);
+    background-color: var(--primaryLight);
 }
 
 .btnCreaAPI svg path{
@@ -359,7 +359,7 @@ body.no-scroll {
 
 /* Bouton d'authentificator */
 .btnAuthent {
-    background-color: var(--accentLight);
+    background-color: var(--primaryLight);
 }
 
 .btnAuthent svg rect {
