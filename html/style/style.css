@@ -960,6 +960,7 @@ textarea {
     height: fit-content;
     padding: 40px;
     width: 100%;
+    max-width: 1000px;
 }
 
 .offre p{
