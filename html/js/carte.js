@@ -163,7 +163,7 @@ Fonction pour cacher la carte si elle est afficher et l'afficher si ielle est ca
 function resizeMap(e) {
     if (aff) { // si la carte est cacher
         aff = false;
-        document.getElementById("map").style.height="80vh";
+        document.getElementById("map").style.height="60vh";
         map.setView(new L.LatLng(48.2640845, -2.9202408), 7);  // recentrer la carte
         document.getElementById("btnAgrandir").addEventListener("click", resizeMap)  // on remet l'écouteur
     }else{ // si la carte est affiché
