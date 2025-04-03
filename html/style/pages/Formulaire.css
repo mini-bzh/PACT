@@ -269,12 +269,6 @@ form > .zoneBtn{
     flex-direction: column;
 }
 
-/* .champsAdresse > div{
-    margin-top: 2%;
-    display: flex;
-    flex-direction: column;
-} */
-
 .champsAdresse>input{
     margin-bottom: 25px;
     margin-left: 5px;
@@ -942,11 +936,6 @@ select{
     margin-bottom: 20px;
     border: red ridge 5px;
     border-radius: 10px;
-}
-
-.champsAdresse{
-    margin-top: 2%;
-    display: flex;
 }
 
 .TextAreaOffre{

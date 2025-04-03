@@ -260,25 +260,22 @@ textarea {
 .main-recherche  .conteneurOffres > article {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-.main-recherche .conteneurOffres .lienApercuOffre {
-    margin: 0px 10px 10px 10px;
+#mainAccueil .conteneurOffres .lienApercuOffre, .main-recherche .conteneurOffres .lienApercuOffre {
+    margin: 0px 6% 6% 0px;
 }
 
 .titreOffre {
     width: fit-content;
 }
 
-.main-recherche .conteneurOffres .lienApercuOffre {
-    margin: 15px;
-}
 
 #mainAccueil .conteneurOffres>article, #main-recherche .conteneurOffres>article {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 
@@ -1225,7 +1222,7 @@ textarea {
 }
 
 .avis .conteneurAvisImage .noImage{
-    width: 160px;
+    width: 50px;
 }
 
 .avis .conteneurAvisGauche hr {
@@ -1293,7 +1290,7 @@ textarea {
 
 
 .avis .conteneurAvisImage img {
-    min-width: 160px;
+    min-width: 50px;
     max-width: 500px;
     max-height: 200px;
     object-fit: cover;
@@ -2750,7 +2747,8 @@ aside fieldset {
     }
 
     #mainAccueil .conteneurOffres>article {
-        display: block;
+        display: flex;
+        align-content: center;
     }
 
     #mainAccueil .conteneurOffres .lienApercuOffre {

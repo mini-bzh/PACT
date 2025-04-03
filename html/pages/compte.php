@@ -568,7 +568,24 @@ if (isset($idCompte)) {
 ?>
                     </div>
                     <div>
-                        <div id="imgQRcode"></div>
+                        <div id="qrcodeDiv">
+                            <div id="imgQRcode"></div>
+                            <button class="copy-btn" id="copyButton">
+                                <p>Secret OTP</p>
+                                <div class="separateur"></div>
+                                <div class="conteneur-copie">
+<?php
+                                    include '../icones/copierSVG.svg';
+?>
+                                </div>
+                                <div class="conteneur-ok" style="display: none;">
+<?php
+                                    include '../icones/okSVG.svg';
+?>
+                                </div>
+                            </button>
+                            <!-- <p id="textSecretOTP"></p> -->
+                        </div>
                         <div>
                             <label for="codeOTP">Vérifier le code OTP<span> *</span> :</label>
                             <input id="codeOTP" class="otp-input" name="codeOTP" type="text" placeholder="--- ---">

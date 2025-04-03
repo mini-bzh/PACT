@@ -176,13 +176,14 @@
                                         ?>
                                         <tr>
                                             <th><?php echo $value["id_jour"]; ?></th>
-                                            <td><?php echo $horaire[0]['horaire_matin_debut']; ?></td>
-                                            <td><?php echo $horaire[0]['horaire_matin_fin']; ?></td>
+                                            <td><?php echo substr($horaire[0]['horaire_matin_debut'], 0, 5); ?></td>
+                                            <td><?php echo substr($horaire[0]['horaire_matin_fin'], 0, 5); ?></td>
+
                                             <?php
                                             if(($horaire[0]['horaire_aprem_debut'] != NULL)&&($horaire[0]['horaire_aprem_fin'] != NULL)){
                                             ?>
-                                            <td><?php echo $horaire[0]['horaire_aprem_debut']; ?></td>
-                                            <td><?php echo $horaire[0]['horaire_aprem_fin']; ?></td>
+                                            <td><?php echo substr($horaire[0]['horaire_aprem_debut'], 0, 5); ?></td>
+                                            <td><?php echo substr($horaire[0]['horaire_aprem_fin'], 0, 5); ?></td>
                                             <?php
                                             }
                                             ?>

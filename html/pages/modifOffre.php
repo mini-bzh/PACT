@@ -207,8 +207,6 @@ if (!empty($_POST)) {
     $resume = $_POST["resume"];
     $description = $_POST["description"];
     $tarif = $_POST["prix-minimal"];
-    $heuresDebut = $_POST["heure-debut"];
-    $heuresFin = $_POST["heure-fin"];
     $accessible = $_POST["choixAccessible"];
     $numero = $_POST["num"];
     $rue = $_POST["nomRue"];
@@ -260,74 +258,110 @@ if (!empty($_POST)) {
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = [
         "Lundi" => [
-            "debut-matin" => $_POST['debut-matin-L'] ?? null,
-            "fin-matin" => $_POST['fin-matin-L'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-L'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-L'] ?? null
+            "debut-matin" => $_POST['debut-matin-L'],
+            "fin-matin" => $_POST['fin-matin-L'],
+            "debut-aprem" => $_POST['debut-aprem-L'],
+            "fin-aprem" => $_POST['fin-aprem-L']
         ],
         "Mardi" => [
-            "debut-matin" => $_POST['debut-matin-Ma'] ?? null,
-            "fin-matin" => $_POST['fin-matin-Ma'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-Ma'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-Ma'] ?? null
+            "debut-matin" => $_POST['debut-matin-Ma'],
+            "fin-matin" => $_POST['fin-matin-Ma'],
+            "debut-aprem" => $_POST['debut-aprem-Ma'],
+            "fin-aprem" => $_POST['fin-aprem-Ma']
         ],
         "Mercredi" => [
-            "debut-matin" => $_POST['debut-matin-Me'] ?? null,
-            "fin-matin" => $_POST['fin-matin-Me'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-Me'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-Me'] ?? null
+            "debut-matin" => $_POST['debut-matin-Me'],
+            "fin-matin" => $_POST['fin-matin-Me'],
+            "debut-aprem" => $_POST['debut-aprem-Me'],
+            "fin-aprem" => $_POST['fin-aprem-Me']
         ],
         "Jeudi" => [
-            "debut-matin" => $_POST['debut-matin-J'] ?? null,
-            "fin-matin" => $_POST['fin-matin-J'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-J'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-J'] ?? null
+            "debut-matin" => $_POST['debut-matin-J'],
+            "fin-matin" => $_POST['fin-matin-J'],
+            "debut-aprem" => $_POST['debut-aprem-J'],
+            "fin-aprem" => $_POST['fin-aprem-J']
         ],
         "Vendredi" => [
-            "debut-matin" => $_POST['debut-matin-V'] ?? null,
-            "fin-matin" => $_POST['fin-matin-V'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-V'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-V'] ?? null
+            "debut-matin" => $_POST['debut-matin-V'],
+            "fin-matin" => $_POST['fin-matin-V'],
+            "debut-aprem" => $_POST['debut-aprem-V'],
+            "fin-aprem" => $_POST['fin-aprem-V']
         ],
         "Samedi" => [
-            "debut-matin" => $_POST['debut-matin-S'] ?? null,
-            "fin-matin" => $_POST['fin-matin-S'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-S'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-S'] ?? null
+            "debut-matin" => $_POST['debut-matin-S'],
+            "fin-matin" => $_POST['fin-matin-S'],
+            "debut-aprem" => $_POST['debut-aprem-S'],
+            "fin-aprem" => $_POST['fin-aprem-S']
         ],
         "Dimanche" => [
-            "debut-matin" => $_POST['debut-matin-D'] ?? null,
-            "fin-matin" => $_POST['fin-matin-D'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-D'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-D'] ?? null
+            "debut-matin" => $_POST['debut-matin-D'],
+            "fin-matin" => $_POST['fin-matin-D'],
+            "debut-aprem" => $_POST['debut-aprem-D'],
+            "fin-aprem" => $_POST['fin-aprem-D']
         ]
     ];
 
 
     foreach ($jours as $jour => $horaires) {
-
         // Remplace les valeurs vides par NULL
         $debMatin = !empty($horaires["debut-matin"]) ? $horaires["debut-matin"] : null;
         $finMatin = !empty($horaires["fin-matin"]) ? $horaires["fin-matin"] : null;
         $debAprem = !empty($horaires["debut-aprem"]) ? $horaires["debut-aprem"] : null;
         $finAprem = !empty($horaires["fin-aprem"]) ? $horaires["fin-aprem"] : null;
 
-        if ($debMatin !== null && $finMatin !== null) {  // Si le jour est ouvert
-
-            $query = "UPDATE tripskell._horaire
-                            SET horaire_matin_debut = :debMatin, horaire_matin_fin = :finMatin, horaire_aprem_debut = :debAprem, horaire_aprem_fin = :finAprem
-                            WHERE id_hor = :id_hor ;";
+        // Vérification que les horaires sont valides (matin et après-midi)
+        if ($debMatin != null && $finMatin != null) {
+            // Vérifier si l'horaire existe déjà pour ce jour et cette offre
+            $query = "SELECT * FROM tripskell._ouverture WHERE idoffre = :idOffre AND id_jour = :id_jour";
             $stmt = $dbh->prepare($query);
-
-            // Lier les variables aux paramètres
             $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
-            $stmt->bindValue(':debMatin', $debMatin, PDO::PARAM_STR);
-            $stmt->bindValue(':finMatin', $finMatin, PDO::PARAM_STR);
-            $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-            $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
-
+            $stmt->bindValue(':id_jour', $jour, PDO::PARAM_STR);
             $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            if (count($result) > 0) {
+                // Horaire existe, mettre à jour les données
+                foreach ($result as $row) {
+                    $updateQuery = "UPDATE tripskell._horaire 
+                                    SET horaire_matin_debut = :debMatin, horaire_matin_fin = :finMatin,
+                                        horaire_aprem_debut = :debAprem, horaire_aprem_fin = :finAprem
+                                    WHERE id_hor = :id_hor";
+
+                    $stmt = $dbh->prepare($updateQuery);
+
+                    $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                    $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                    $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                    $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                    $stmt->bindValue(':id_hor', $row["id_hor"], PDO::PARAM_INT);
+
+                    $stmt->execute();
+                }
+            } 
+            //  else if ($result) {
+            //     $idHor = $result['id_hor'];
+
+            //     // Suppression de l'horaire correspondant
+            //     $deleteQuery = "DELETE FROM tripskell._horaire WHERE id_hor = :id_hor";
+            //     $stmt = $dbh->prepare($deleteQuery);
+            //     $stmt->bindValue(':id_hor', $idHor, PDO::PARAM_INT);
+            //     $stmt->execute();
+            // }
+            else {
+                $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
+                $stmt = $dbh->prepare($query);
+
+                // Lier les variables aux paramètres
+                $stmt->bindValue(':idOffre', $idOffre, PDO::PARAM_INT);
+                $stmt->bindValue(':debMatin', $debMatin, PDO::PARAM_STR);
+                $stmt->bindValue(':finMatin', $finMatin, PDO::PARAM_STR);
+                $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':finAprem', $finAprem, $finAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                $stmt->bindValue(':jour', $jour, PDO::PARAM_STR);
+
+                $stmt->execute();
+            }
         }
     }
 
@@ -415,7 +449,9 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                     <div class="zoneChoixVisite">
                         <div class="champs dureeVisite">
                             <label for="duree_v">Duree de la visite :</label>
-                            <input type="time" id="duree_v" name="duree_v" value="<?php echo substr($contentOffre["duree_v"], 0, 5); ?>" />
+                            <input type="time" id="duree_v" name="duree_v" value="<?php if ($contentOffre["duree_v"] != null) {
+                                                                                        echo substr($contentOffre["duree_v"], 0, 5);
+                                                                                    } ?>" />
                         </div>
                         <div class="champsCategorie">
                             <label>Langue(s) de la visite :</label>
@@ -488,7 +524,9 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 <div id="champsSpectacle">
                     <div class="champs">
                         <label for="duree_s">Duree de la Spectacle :</label>
-                        <input type="time" id="duree_s" name="duree_s" value="<?php echo substr($contentOffre["duree_s"], 0, 5); ?>" />
+                        <input type="time" id="duree_s" name="duree_s" value="<?php if ($contentOffre["duree_s"] != null) {
+                                                                                    echo substr($contentOffre["duree_s"], 0, 5);
+                                                                                } ?>" />
                     </div>
                     <div class="champs">
                         <label for="capacite">Capacité :</label>
@@ -499,14 +537,16 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                 <!-- ----------------- ACTIVITE ------------------- -->
 
                 <div id="champsActivite">
-                    <div class="HardToResize">
+                    <div class="texteAreaActivite">
                         <label for="prestation">Prestation proposée :</label>
                         <textarea id="prestation" name="prestation" placeholder="Écrivez les prestations proposer (> 100 caractères)" maxlength="100"><?php echo $contentOffre["prestation"]; ?></textarea>
                     </div>
                     <div class="InfoPerso">
                         <div class="champs">
                             <label for="duree_a">Duree de l'Activité :</label>
-                            <input type="time" id="duree_a" name="duree_a" value="<?php echo substr($contentOffre["duree_a"], 0, 5); ?>" />
+                            <input type="time" id="duree_a" name="duree_a" value="<?php if ($contentOffre["duree_a"] != null) {
+                                                                                        echo substr($contentOffre["duree_a"], 0, 5);
+                                                                                    } ?>" />
                         </div>
                         <div class="champs">
                             <label for="agemin">âge minimum :</label>
@@ -567,24 +607,48 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
 
                 <!-- jours ouvertures et heures d'ouverture -->
                 <label class="labelHoraire">Horaires d'ouverture :</label>
-                <div class="ChoixJours"> 
+                <div class="ChoixJours">
+                    <?php       //préremplis les champs cachés des jours avec les horaires de la base de données
+                    $ouverture = $dbh->query("select * from tripskell._ouverture where idoffre='" . $idOffre . "';")->fetchAll();
+                    $tabJours = [];
+                    foreach ($ouverture as $key => $value) {
+                        $horaire = $dbh->query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=" . $ouverture[$key]["id_hor"] . " where o.idOffre='" . $idOffre . "' and o.id_hor=" . $ouverture[$key]["id_hor"] . " and o.id_jour='" . $ouverture[$key]["id_jour"] . "';")->fetchAll()[0];
+
+                        $tabJours[$horaire['id_jour']] = json_encode([
+                            $horaire["horaire_matin_debut"],
+                            $horaire["horaire_matin_fin"],
+                            $horaire["horaire_aprem_debut"],
+                            $horaire["horaire_aprem_fin"]
+                        ]);
+                    }
+                    echo json_decode($tabJours["Lundi"], true)[0];
+                    ?>
+
                     <div class="jours">
                         <button type="button" id="btnL" class="btnHoraire">L</button>
-                        <input type="hidden" name="lundi" class="inputJour" value="<?php ?>">
+                        <input type="hidden" name="lundi" class="inputJour">
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Lundi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-L" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-L" step="60" <?php
+                                                                                                        if (array_key_exists("Lundi", $tabJours)) { ?>value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Lundi"], true)[0], 0, 5);  ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-L" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-L" step="60" <?php
+                                                                                                    if (array_key_exists("Lundi", $tabJours)) { ?>value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Lundi"], true)[1], 0, 5);  ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-L" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-L" step="60" <?php
+                                                                                                        if (array_key_exists("Lundi", $tabJours)) { ?>value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Lundi"], true)[2], 0, 5);  ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-L" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-L" step="60" <?php
+                                                                                                    if (array_key_exists("Lundi", $tabJours)) { ?>value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Lundi"], true)[3], 0, 5);  ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -598,17 +662,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Mardi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-Ma" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-Ma" step="60" <?php
+                                                                                                        if (array_key_exists("Mardi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mardi"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-Ma" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-Ma" step="60" <?php
+                                                                                                    if (array_key_exists("Mardi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mardi"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-Ma" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-Ma" step="60" <?php
+                                                                                                        if (array_key_exists("Mardi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mardi"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-Ma" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-Ma" step="60" <?php
+                                                                                                    if (array_key_exists("Mardi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mardi"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -621,17 +693,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Mercredi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-Me" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-Me" step="60" <?php
+                                                                                                        if (array_key_exists("Mercredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mercredi"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-Me" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-Me" step="60" <?php
+                                                                                                    if (array_key_exists("Mercredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mercredi"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-Me" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-Me" step="60" <?php
+                                                                                                        if (array_key_exists("Mercredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mercredi"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-Me" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-Me" step="60" <?php
+                                                                                                    if (array_key_exists("Mercredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Mercredi"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -644,17 +724,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Jeudi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-J" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-J" step="60" <?php
+                                                                                                        if (array_key_exists("Jeudi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Jeudi"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-J" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-J" step="60" <?php
+                                                                                                    if (array_key_exists("Jeudi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Jeudi"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-J" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-J" step="60" <?php
+                                                                                                        if (array_key_exists("Jeudi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Jeudi"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-J" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-J" step="60" <?php
+                                                                                                    if (array_key_exists("Jeudi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Jeudi"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -667,17 +755,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Vendredi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-V" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-V" step="60" <?php
+                                                                                                        if (array_key_exists("Vendredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Vendredi"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-V" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-V" step="60" <?php
+                                                                                                    if (array_key_exists("Vendredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Vendredi"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-V" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-V" step="60" <?php
+                                                                                                        if (array_key_exists("Vendredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Vendredi"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-V" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-V" step="60" <?php
+                                                                                                    if (array_key_exists("Vendredi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Vendredi"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -690,17 +786,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Samedi, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-S" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-S" step="60" <?php
+                                                                                                        if (array_key_exists("Samedi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Samedi"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-S" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-S" step="60" <?php
+                                                                                                    if (array_key_exists("Samedi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Samedi"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-S" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-S" step="60" <?php
+                                                                                                        if (array_key_exists("Samedi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Samedi"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-S" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-S" step="60" <?php
+                                                                                                    if (array_key_exists("Samedi", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Samedi"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
@@ -713,17 +817,25 @@ if (!is_null($idproprive) || !is_null($idpropublic)) {
                         <div class="ouvert">
                             <div class="heures1 horairesAfficher">
                                 <label for="heure-debut">Le Dimanche, vous êtes ouvert de </label>
-                                <input type="time" class="heure-debut" name="debut-matin-D" step="60">
+                                <input type="time" class="heure-debut" name="debut-matin-D" step="60" <?php
+                                                                                                        if (array_key_exists("Dimanche", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Dimanche"], true)[0], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-matin-D" step="60">
+                                <input type="time" class="heure-fin" name="fin-matin-D" step="60" <?php
+                                                                                                    if (array_key_exists("Dimanche", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Dimanche"], true)[1], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
 
                                 <h4 class="btnAjoutHoraire">+</h4>
                             </div>
-                            <div class="heures2 horairesCacher">
+                            <div class="heures2 horairesAfficher">
                                 <label for="heure-debut">et de </label>
-                                <input type="time" class="heure-debut" name="debut-aprem-D" step="60">
+                                <input type="time" class="heure-debut" name="debut-aprem-D" step="60" <?php
+                                                                                                        if (array_key_exists("Dimanche", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Dimanche"], true)[2], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                                 <label for="heure-fin"> à </label>
-                                <input type="time" class="heure-fin" name="fin-aprem-D" step="60">
+                                <input type="time" class="heure-fin" name="fin-aprem-D" step="60" <?php
+                                                                                                    if (array_key_exists("Dimanche", $tabJours)) { ?> value="<?php
+                                                                                                                                        echo substr(json_decode($tabJours["Dimanche"], true)[3], 0, 5); ?>" <?php } else { ?> value="" <?php } ?>>
                             </div>
                         </div>
                         <div class="fermer">
