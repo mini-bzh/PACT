@@ -325,14 +325,14 @@ header("Location: ../pages/connexion.php?user-tempo=pro"); // on redirige vers l
 
         <!-- Adresse -->
         <div class="champs">
-            <div class="labelAdresse">
+        <div class="champsAdresse">
                 <label for="adresse">Adresse :</label>
-            </div>
-            <div class="champsAdresse">
+            <div>
                 <input type="text" id="num" name="num" placeholder="Num" minlength="1" maxlength="5" pattern="^[1-9]\d{1,5}$" title="Le numéro doit être composé uniquement de chiffres" required>
                 <input type="text" id="nomRue" name="nomRue" placeholder="Nom de rue" required>
                 <input type="text" id="ville" name="ville" placeholder="Ville" required>
                 <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" minlength="5" maxlength="5" pattern="^\d{5}$" required title="Le code postal doit être composé de 5 chiffres">
+            </div>
             </div>
         </div>
 

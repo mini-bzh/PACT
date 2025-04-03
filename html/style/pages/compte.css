@@ -130,7 +130,7 @@ body.no-scroll {
 /* Bouton de modification profil */
 
 .btnModifCompte{
-    background-color: var(--accent);
+    background-color: var(--primaryLight);
 }
 
 
@@ -274,8 +274,8 @@ body.no-scroll {
 
 .remplirChampsError {
     position: absolute;
-    bottom: 150px;
-    left: 25px;
+    bottom: 180px;
+    left: 210px;
 }
 
 .popup-align {
@@ -338,7 +338,7 @@ body.no-scroll {
 }
 
 .btnCreaAPI {
-    background-color: var(--accentLight);
+    background-color: var(--primaryLight);
 }
 
 .btnCreaAPI svg path{
@@ -359,7 +359,7 @@ body.no-scroll {
 
 /* Bouton d'authentificator */
 .btnAuthent {
-    background-color: var(--accentLight);
+    background-color: var(--primaryLight);
 }
 
 .btnAuthent svg rect {
@@ -386,21 +386,30 @@ body.no-scroll {
 }
 
 #imgQRcode {
-    width: 50%;
+    width: 70%;
 }
 
-#imgQRcode + div {
+#qrcodeDiv {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#qrcodeDiv + div {
     display: flex;
     flex-direction: column;
     width: 40%;
     align-items: start;
 }
 
-#imgQRcode + div p {
+#qrcodeDiv + div p {
     color: red;
 }
 
-#imgQRcode ~ p {
+#qrcodeDiv ~ p {
     color: red;
     position: absolute;
     bottom: 5%;
@@ -418,7 +427,7 @@ body.no-scroll {
     letter-spacing: 5px;
 }
 
-#imgQRcode + div button {
+#qrcodeDiv + div button {
     margin-top: 10px;
     padding: 10px 15px;
     background-color: #007bff;
@@ -427,6 +436,57 @@ body.no-scroll {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: fit-content;
+}
+
+.copy-btn:hover {
+    background-color: #0056b3;
+}
+
+.success {
+    background-color: #28a745;
+}
+
+.copy-btn.success:hover {
+    background-color: #218838;
+}
+
+.separateur {
+    width: 1px;
+    height: 20px;
+    background-color: white;
+}
+
+.conteneur-copie svg, .conteneur-ok svg {
+    width: 100%;
+    height: 100%;
+}
+
+.conteneur-copie, .conteneur-ok {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}
+
+.conteneur-copie path, .conteneur-ok path {
+    stroke: white;
+    stroke-width: 6px;
 }
 
 .btnQuit {
@@ -472,11 +532,11 @@ body.no-scroll {
     color: red;
 }
 
-#imgQRcode + div span {
+#qrcodeDiv + div span {
     color: red;
 }
 
-#imgQRcode + div button:disabled {
+#qrcodeDiv + div button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -515,8 +575,8 @@ body.no-scroll {
 }
 
 .popQRcode .popup-content {
-    width: 40%;
-    height: 50%;
+    width: 35%;
+    height: 40%;
     top: 0;
     left: 0;
 }
@@ -529,6 +589,20 @@ body.no-scroll {
 
 @media screen and (max-width : 428px){
 
+    .conteneur-copie, .conteneur-ok {
+        width: 20px;
+        height: 20px;
+    }
+
+    .copy-btn {
+        padding: 5px 5px !important;
+        width: 100%;
+    }
+
+    .copy-btn p {
+        font-size: var(--typescale-very-small-text) !important;
+    }
+
     #annulerQRcode {
         width: 30px;
         top: 0;
@@ -539,7 +613,7 @@ body.no-scroll {
     }
 
     #imgQRcode {
-        width: 60%;
+        width: 100%;
     }
 
     .popQRcode .popup-content {
@@ -549,15 +623,16 @@ body.no-scroll {
         left: 0;
         margin-left: 0;
         margin-right: 0;
+        padding-bottom: 10%;
     }
 
-    #imgQRcode + div {
+    #qrcodeDiv + div {
         flex-direction: column;
         width: 80%;
         align-items: center;
     }
 
-    #imgQRcode ~ p {
+    #qrcodeDiv ~ p {
         bottom: 1%;
         left: 1%;
         font-size: var(--typescale-small-text) !important;
@@ -569,7 +644,7 @@ body.no-scroll {
 
     .popQRcode .popup-content > div {
         flex-direction: column;
-        height: 75%;
+        height: 90%;
     }
 
     .popUpQuitOTP .popup-content {
@@ -595,7 +670,7 @@ body.no-scroll {
         margin-left: 10%;
     }
 
-    #imgQRcode + div p {
+    #qrcodeDiv + div p {
         font-size: var(--typescale-small-text) !important;
     }
     
@@ -918,4 +993,7 @@ body.no-scroll {
     margin-left: 15%;
     /* padding: 0 2%; */
     margin-right: 15%;
+    position: relative;
+    top: 0;
+    left: 0;
 }
