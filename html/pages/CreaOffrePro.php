@@ -347,46 +347,46 @@ if (!empty($_POST)) { // On vérifie si le formulaire est compléter ou non.
     //récupère les horaires des jours à partir de $_POST, qui avaient été transformées en string avec json
     $jours = [
         "Lundi" => [
-            "debut-matin" => $_POST['debut-matin-L'] ?? null,
-            "fin-matin" => $_POST['fin-matin-L'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-L'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-L'] ?? null
+            "debut-matin" => $_POST['debut-matin-L'],
+            "fin-matin" => $_POST['fin-matin-L'],
+            "debut-aprem" => $_POST['debut-aprem-L'],
+            "fin-aprem" => $_POST['fin-aprem-L']
         ],
         "Mardi" => [
-            "debut-matin" => $_POST['debut-matin-Ma'] ?? null,
-            "fin-matin" => $_POST['fin-matin-Ma'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-Ma'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-Ma'] ?? null
+            "debut-matin" => $_POST['debut-matin-Ma'],
+            "fin-matin" => $_POST['fin-matin-Ma'],
+            "debut-aprem" => $_POST['debut-aprem-Ma'],
+            "fin-aprem" => $_POST['fin-aprem-Ma']
         ],
         "Mercredi" => [
-            "debut-matin" => $_POST['debut-matin-Me'] ?? null,
-            "fin-matin" => $_POST['fin-matin-Me'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-Me'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-Me'] ?? null
+            "debut-matin" => $_POST['debut-matin-Me'],
+            "fin-matin" => $_POST['fin-matin-Me'],
+            "debut-aprem" => $_POST['debut-aprem-Me'],
+            "fin-aprem" => $_POST['fin-aprem-Me']
         ],
         "Jeudi" => [
-            "debut-matin" => $_POST['debut-matin-J'] ?? null,
-            "fin-matin" => $_POST['fin-matin-J'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-J'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-J'] ?? null
+            "debut-matin" => $_POST['debut-matin-J'],
+            "fin-matin" => $_POST['fin-matin-J'],
+            "debut-aprem" => $_POST['debut-aprem-J'],
+            "fin-aprem" => $_POST['fin-aprem-J']
         ],
         "Vendredi" => [
-            "debut-matin" => $_POST['debut-matin-V'] ?? null,
-            "fin-matin" => $_POST['fin-matin-V'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-V'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-V'] ?? null
+            "debut-matin" => $_POST['debut-matin-V'],
+            "fin-matin" => $_POST['fin-matin-V'],
+            "debut-aprem" => $_POST['debut-aprem-V'],
+            "fin-aprem" => $_POST['fin-aprem-V']
         ],
         "Samedi" => [
-            "debut-matin" => $_POST['debut-matin-S'] ?? null,
-            "fin-matin" => $_POST['fin-matin-S'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-S'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-S'] ?? null
+            "debut-matin" => $_POST['debut-matin-S'],
+            "fin-matin" => $_POST['fin-matin-S'],
+            "debut-aprem" => $_POST['debut-aprem-S'],
+            "fin-aprem" => $_POST['fin-aprem-S']
         ],
         "Dimanche" => [
-            "debut-matin" => $_POST['debut-matin-D'] ?? null,
-            "fin-matin" => $_POST['fin-matin-D'] ?? null,
-            "debut-aprem" => $_POST['debut-aprem-D'] ?? null,
-            "fin-aprem" => $_POST['fin-aprem-D'] ?? null
+            "debut-matin" => $_POST['debut-matin-D'],
+            "fin-matin" => $_POST['fin-matin-D'],
+            "debut-aprem" => $_POST['debut-aprem-D'],
+            "fin-aprem" => $_POST['fin-aprem-D']
         ]
     ];
 
