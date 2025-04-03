@@ -373,7 +373,7 @@ body.no-scroll {
 
 /* Bouton d'affichage du QRcode */
 .btnAffQRcode {
-    background-color: var(--accentLight);
+    background-color: var(--primaryLight);
 }
 
 .btnAffQRcode svg rect {
