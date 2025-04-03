@@ -1225,7 +1225,7 @@ textarea {
 }
 
 .avis .conteneurAvisImage .noImage{
-    width: 160px;
+    width: 50px;
 }
 
 .avis .conteneurAvisGauche hr {
@@ -1293,7 +1293,7 @@ textarea {
 
 
 .avis .conteneurAvisImage img {
-    min-width: 160px;
+    min-width: 50px;
     max-width: 500px;
     max-height: 200px;
     object-fit: cover;
