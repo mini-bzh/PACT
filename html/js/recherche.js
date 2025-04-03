@@ -508,8 +508,6 @@ rangeInputNote.forEach((input) => {
 
 
         mapOffresInfos.forEach((map, key, value)=>{
-            if (mapOffresInfos.get(key).get("visibilite")==true) {
-                
                 // si la note de l'offre est dans l'interval de la slide bar
                 if(mapOffresInfos.get(key).get("note") >=rangeInputNote[0].value && mapOffresInfos.get(key).get("note")<=rangeInputNote[1].value)
                 {
@@ -527,7 +525,6 @@ rangeInputNote.forEach((input) => {
                         mapOffresInfos.get(key).set("visibilite",false);
                     }
                 }
-            }
         });
         updateMap();
     });
@@ -627,7 +624,6 @@ rangeInputPrix.forEach((input) => {
 
 
         mapOffresInfos.forEach((map, key, value)=>{
-            if (mapOffresInfos.get(key).get("visibilite")) {
                 // si le prix de l'offre est dans l'interval de la slide bar
                 if(mapOffresInfos.get(key).get("prix") >=rangeInputPrix[0].value && mapOffresInfos.get(key).get("prix")<=rangeInputPrix[1].value)
                 {
@@ -645,7 +641,6 @@ rangeInputPrix.forEach((input) => {
                         mapOffresInfos.get(key).set("visibilite",false);
                     }
                 }
-            }
         });
         updateMap();
     });
