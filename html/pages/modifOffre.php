@@ -330,7 +330,6 @@ if (!empty($_POST)) {
 
                     $stmt = $dbh->prepare($updateQuery);
 
-                    // Lier les valeurs aux paramètres
                     $stmt->bindValue(':debMatin', $debMatin, $debMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                     $stmt->bindValue(':finMatin', $finMatin, $finMatin !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                     $stmt->bindValue(':debAprem', $debAprem, $debAprem !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
@@ -339,15 +338,17 @@ if (!empty($_POST)) {
 
                     $stmt->execute();
                 }
-            } else if ($result) {
-                $idHor = $result['id_hor'];
+            } 
+            //  else if ($result) {
+            //     $idHor = $result['id_hor'];
 
-                // Suppression de l'horaire correspondant
-                $deleteQuery = "DELETE FROM tripskell._horaire WHERE id_hor = :id_hor";
-                $stmt = $dbh->prepare($deleteQuery);
-                $stmt->bindValue(':id_hor', $idHor, PDO::PARAM_INT);
-                $stmt->execute();
-            }else {
+            //     // Suppression de l'horaire correspondant
+            //     $deleteQuery = "DELETE FROM tripskell._horaire WHERE id_hor = :id_hor";
+            //     $stmt = $dbh->prepare($deleteQuery);
+            //     $stmt->bindValue(':id_hor', $idHor, PDO::PARAM_INT);
+            //     $stmt->execute();
+            // }
+            else {
                 $query = "SELECT tripskell.add_horaire(:idOffre, :debMatin, :finMatin, :debAprem, :finAprem, :jour);";
                 $stmt = $dbh->prepare($query);
 
