@@ -38,7 +38,7 @@
         }
         $tags           = $dbh->query("select * from tripskell._possede where idoffre='" . $idOffre . "';")->fetchAll();
 
-        $categorie = categorie($idOffre);
+        $categorie = 'visite';
         
     }
 
@@ -172,7 +172,7 @@
                                     <tbody>
                                         <?php
                                             foreach($ouverture as $value){
-                                                $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $value["id_hor"] ." where o.idOffre=". $idOffre." and o.id_hor=". $value["id_hor"] ." and o.id_jour='". $value["id_jour"] ."';")->fetchAll();
+                                                $horaire = $dbh -> query("select * from tripskell._horaire as h join tripskell._ouverture as o on h.id_hor=". $value["id_hor"] ." where o.idOffre='". $idOffre."' and o.id_hor=". $value["id_hor"] ." and o.id_jour='". $value["id_jour"] ."';")->fetchAll();
                                         ?>
                                         <tr>
                                             <th><?php echo $value["id_jour"]; ?></th>
