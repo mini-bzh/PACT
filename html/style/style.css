@@ -959,7 +959,7 @@ textarea {
     box-shadow: var(--ombreNoire);
     height: fit-content;
     padding: 40px;
-    max-width: 100px;
+    width: 100%;
 }
 
 .offre p{
