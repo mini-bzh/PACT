@@ -31,7 +31,7 @@ $tags = array_column($tags, 'nomtag');
                     </label>
                     <label class="toggle-button">
                         <input type="checkbox" name="ouverture" value="ferme">
-                        <span>Fermer</span>
+                        <span>Fermé</span>
                     </label>
                 </fieldset>
 
