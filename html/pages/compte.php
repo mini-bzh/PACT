@@ -559,7 +559,7 @@ if (isset($idCompte)) {
 
 
 
-            <!-- POP-UP d'Authenticator -->
+            <!-- POP-UP d'Authentikator -->
             <div class="popQRcode popUp">
                 <div class="popup-content">
                     <div id="annulerQRcode">

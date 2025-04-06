@@ -124,6 +124,15 @@ if (btnModifBancExit) {
     });
 }
 
+
+
+/////////////////////////////////////////////////////////
+//////                                             //////
+//////           ACTIVER / AFFICHER OTP            //////
+//////                                             //////
+///////////////////////////////////////////////////////// 
+
+
 function ouvrirPopupQuit() {
     let popUPQuit = document.getElementsByClassName("popUpQuitOTP")[0];
     popUPQuit.style.display = "flex";
@@ -141,7 +150,6 @@ $(document).ready(function() {
             success: function(response) {
                 if ((response.qr_url) && (response.secret)) {
                     let qrDiv = document.getElementById("imgQRcode");
-                    let textOTP = document.getElementById("textSecretOTP");
 
                     secretOTP = response.secret;    // On stock le secret dans une variable
 
@@ -160,9 +168,6 @@ $(document).ready(function() {
                     new QRCode(qrDiv, {
                         text: response.qr_url
                     });
-
-                    // et le texte
-                    // textOTP.textContent = secretOTP;
 
                     // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
@@ -215,7 +220,6 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.qr_url) {
                     let qrDiv = document.getElementById("imgQRcode");
-                    let textOTP = document.getElementById("textSecretOTP");
 
                     if (!qrDiv) {
                         console.error("Erreur : Élément imgQRcode introuvable !");
@@ -227,16 +231,10 @@ $(document).ready(function() {
                     // Vider l'ancien QR Code
                     $('#imgQRcode').html('');
 
-                    // et le texte secret
-                    // $('#textSecretOTP').textContent = "";
-
                     // Générer le QR Code
                     new QRCode(qrDiv, {
                         text: response.qr_url
                     });
-
-                    // et le texte
-                    // textOTP.textContent = response.secret;
 
                     // Afficher la pop-up
                     let pop = document.getElementsByClassName('popQRcode')[0];
@@ -328,8 +326,6 @@ if (otpInput) {
 if (submitBtn) {
     submitBtn.addEventListener('click', function() {
         const otpCode = otpInput.value.replace(/\s/g, ''); // Enlever les espaces avant d'envoyer
-        console.log("Envoi AJAX - OTP :", otpCode);
-        console.log("Envoi AJAX - Secret :", secretOTP);
 
         $.ajax({
             url: '../composants/ajax/verifier_otp_correct.php',
